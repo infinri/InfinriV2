@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
 use Exception;
 use Throwable;

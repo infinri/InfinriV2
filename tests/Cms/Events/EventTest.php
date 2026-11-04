@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\ImmutableMemoryStorage;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Content\ImmutableMemoryStorage;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Event::class)]

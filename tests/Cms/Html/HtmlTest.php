@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\Dir;
-use Kirby\Plugin\Plugin;
+use Infinri\Filesystem\Dir;
+use Infinri\Plugin\Plugin;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Html::class)]

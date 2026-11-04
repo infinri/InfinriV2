@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\F;
-use Kirby\Filesystem\Mime;
-use Kirby\Toolkit\Str;
+use Infinri\Filesystem\F;
+use Infinri\Filesystem\Mime;
+use Infinri\Toolkit\Str;
 
 class FileBlueprint extends Blueprint
 {

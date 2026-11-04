@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Panel\Collector;
+namespace Infinri\Panel\Collector;
 
-use Kirby\Cms\Files;
-use Kirby\Cms\Page;
-use Kirby\Cms\Pages;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
-use Kirby\Cms\Users;
+use Infinri\Cms\Files;
+use Infinri\Cms\Page;
+use Infinri\Cms\Pages;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
+use Infinri\Cms\Users;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class ModelsCollectorMock extends ModelsCollector

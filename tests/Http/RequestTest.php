@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\App;
-use Kirby\Http\Request\Auth\BasicAuth;
-use Kirby\Http\Request\Auth\BearerAuth;
-use Kirby\Http\Request\Body;
-use Kirby\Http\Request\Files;
-use Kirby\Http\Request\Query;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Http\Request\Auth\BasicAuth;
+use Infinri\Http\Request\Auth\BearerAuth;
+use Infinri\Http\Request\Body;
+use Infinri\Http\Request\Files;
+use Infinri\Http\Request\Query;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

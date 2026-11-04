@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Sane;
+namespace Infinri\Sane;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 
 class Svgz extends Svg
 {
@@ -12,7 +12,7 @@ class Svgz extends Svg
 	 * @param bool $isExternal Whether the string is from an external file
 	 *                         that may be accessed directly
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed or recompressed
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file couldn't be parsed or recompressed
 	 */
 	public static function sanitize(
 		string $string,
@@ -35,8 +35,8 @@ class Svgz extends Svg
 	 * @param bool $isExternal Whether the string is from an external file
 	 *                         that may be accessed directly
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file didn't pass validation
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file couldn't be parsed
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file didn't pass validation
 	 */
 	public static function validate(
 		string $string,

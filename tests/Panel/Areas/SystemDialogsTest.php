@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 class SystemDialogsTest extends AreaTestCase
 {

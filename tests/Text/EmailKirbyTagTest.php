@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Text;
+namespace Infinri\Text;
 
-use Kirby\Cms\App;
-use Kirby\TestCase;
-use Kirby\Toolkit\Html;
+use Infinri\Cms\App;
+use Infinri\TestCase;
+use Infinri\Toolkit\Html;
 
 class EmailKirbyTagTest extends TestCase
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Blueprint;
-use Kirby\Cms\User;
-use Kirby\Filesystem\Dir;
-use Kirby\Http\Response;
-use Kirby\Panel\Panel;
-use Kirby\TestCase;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Blueprint;
+use Infinri\Cms\User;
+use Infinri\Filesystem\Dir;
+use Infinri\Http\Response;
+use Infinri\Panel\Panel;
+use Infinri\TestCase;
+use Infinri\Toolkit\Str;
 
 abstract class AreaTestCase extends TestCase
 {

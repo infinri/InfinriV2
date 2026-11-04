@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
 use Exception;
 

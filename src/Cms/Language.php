@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Data;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Locale;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Data;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Locale;
+use Infinri\Toolkit\Str;
 use Stringable;
 
 class Language implements Stringable
@@ -198,7 +198,7 @@ class Language implements Stringable
 	 * Delete the current language and
 	 * all its translation files
 	 *
-	 * @throws \Kirby\Exception\Exception
+	 * @throws \Infinri\Exception\Exception
 	 */
 	#[BlockCollectionAccess]
 	public function delete(): bool
@@ -253,7 +253,7 @@ class Language implements Stringable
 	/**
 	 * Converts a "user-facing" language code to a `Language` object
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the language does not exist
+	 * @throws \Infinri\Exception\NotFoundException If the language does not exist
 	 * @unstable
 	 */
 	public static function ensure(self|string|null $code = null): static

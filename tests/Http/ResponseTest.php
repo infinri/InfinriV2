@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Exception\LogicException;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Exception\LogicException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunInSeparateProcess;

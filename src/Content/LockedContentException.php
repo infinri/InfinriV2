@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Exception\LogicException;
+use Infinri\Exception\LogicException;
 
 class LockedContentException extends LogicException
 {

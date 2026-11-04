@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Cms\User;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Image\QrCode;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Totp;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Cms\User;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Image\QrCode;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Totp;
 
 class UserTotpEnableDialog
 {

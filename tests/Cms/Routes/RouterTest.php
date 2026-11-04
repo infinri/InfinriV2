@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\F;
-use Kirby\Http\Response;
-use Kirby\Toolkit\I18n;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\F;
+use Infinri\Http\Response;
+use Infinri\Toolkit\I18n;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class RouterTest extends TestCase

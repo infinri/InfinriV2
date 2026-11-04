@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
-class TestCase extends \Kirby\TestCase
+class TestCase extends \Infinri\TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
 }

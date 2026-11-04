@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Api;
+namespace Infinri\Api;
 
 use Exception;
-use Kirby\Cms\Page;
-use Kirby\Cms\Pages;
-use Kirby\TestCase;
+use Infinri\Cms\Page;
+use Infinri\Cms\Pages;
+use Infinri\TestCase;
 
 class CollectionTest extends TestCase
 {

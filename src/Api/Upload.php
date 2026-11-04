@@ -1,21 +1,21 @@
 <?php
 
-namespace Kirby\Api;
+namespace Infinri\Api;
 
 use Closure;
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\FileRules;
-use Kirby\Cms\Page;
-use Kirby\Data\Json;
-use Kirby\Exception\DuplicateException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\FileRules;
+use Infinri\Cms\Page;
+use Infinri\Data\Json;
+use Infinri\Exception\DuplicateException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 readonly class Upload
 {
@@ -31,7 +31,7 @@ readonly class Upload
 	/**
 	 * Ensures a clean chunk ID by stripping forbidden characters
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException Too short ID string
+	 * @throws \Infinri\Exception\InvalidArgumentException Too short ID string
 	 */
 	public static function chunkId(string $id): string
 	{
@@ -215,10 +215,10 @@ readonly class Upload
 	 * in the tmp directory and only returning the new
 	 * $source path to the tmp file once complete
 	 *
-	 * @throws \Kirby\Exception\DuplicateException Duplicate first chunk (same filename and id)
-	 * @throws \Kirby\Exception\Exception Chunk offset does not match existing tmp file
-	 * @throws \Kirby\Exception\InvalidArgumentException Too short ID string
-	 * @throws \Kirby\Exception\NotFoundException Subsequent chunk has no  existing tmp file
+	 * @throws \Infinri\Exception\DuplicateException Duplicate first chunk (same filename and id)
+	 * @throws \Infinri\Exception\Exception Chunk offset does not match existing tmp file
+	 * @throws \Infinri\Exception\InvalidArgumentException Too short ID string
+	 * @throws \Infinri\Exception\NotFoundException Subsequent chunk has no  existing tmp file
 	 */
 	public function processChunk(
 		string $source,
@@ -369,11 +369,11 @@ readonly class Upload
 	/**
 	 * Ensures the sent chunk is valid
 	 *
-	 * @throws \Kirby\Exception\DuplicateException Duplicate first chunk (same filename and id)
-	 * @throws \Kirby\Exception\InvalidArgumentException Chunk offset does not match existing tmp file
-	 * @throws \Kirby\Exception\InvalidArgumentException The maximum file size for this blueprint was exceeded
-	 * @throws \Kirby\Exception\InvalidArgumentException Template or total length changed between chunks
-	 * @throws \Kirby\Exception\NotFoundException Subsequent chunk has no  existing tmp file
+	 * @throws \Infinri\Exception\DuplicateException Duplicate first chunk (same filename and id)
+	 * @throws \Infinri\Exception\InvalidArgumentException Chunk offset does not match existing tmp file
+	 * @throws \Infinri\Exception\InvalidArgumentException The maximum file size for this blueprint was exceeded
+	 * @throws \Infinri\Exception\InvalidArgumentException Template or total length changed between chunks
+	 * @throws \Infinri\Exception\NotFoundException Subsequent chunk has no  existing tmp file
 	 */
 	protected static function validateChunk(
 		string $source,

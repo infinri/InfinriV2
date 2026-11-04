@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Content\Field;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Content\Field;
+use Infinri\Exception\InvalidArgumentException;
 
 class Items extends Collection
 {
@@ -20,7 +20,7 @@ class Items extends Collection
 	protected array $options;
 
 	/**
-	 * @var \Kirby\Cms\ModelWithContent
+	 * @var \Infinri\Cms\ModelWithContent
 	 */
 	protected object|null $parent = null;
 

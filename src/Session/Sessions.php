@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Http\Cookie;
-use Kirby\Http\Request;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Http\Cookie;
+use Infinri\Http\Request;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Sessions
@@ -22,7 +22,7 @@ class Sessions
 	/**
 	 * Creates a new Sessions instance
 	 *
-	 * @param \Kirby\Session\SessionStore|string $store SessionStore object or a path to the storage directory (uses the FileSessionStore)
+	 * @param \Infinri\Session\SessionStore|string $store SessionStore object or a path to the storage directory (uses the FileSessionStore)
 	 * @param array $options Optional additional options:
 	 *                       - `mode`: Default token transmission mode (cookie, header or manual); defaults to `cookie`
 	 *                       - `cookieDomain`: Domain to set the cookie to (this disables the cookie path restriction); defaults to none (default browser behavior)
@@ -116,9 +116,9 @@ class Sessions
 	 * - In `header` mode: Gets the session from the `Authorization` request header
 	 * - In `manual` mode: Fails and throws an Exception
 	 *
-	 * @return \Kirby\Session\Session|null Either the current session or null in case there isn't one
-	 * @throws \Kirby\Exception\Exception
-	 * @throws \Kirby\Exception\LogicException
+	 * @return \Infinri\Session\Session|null Either the current session or null in case there isn't one
+	 * @throws \Infinri\Exception\Exception
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	public function current(): Session|null
 	{
@@ -154,7 +154,7 @@ class Sessions
 	 * - Tries to get the session from the cookie
 	 * - Otherwise returns null
 	 *
-	 * @return \Kirby\Session\Session|null Either the current session or null in case there isn't one
+	 * @return \Infinri\Session\Session|null Either the current session or null in case there isn't one
 	 */
 	public function currentDetected(): Session|null
 	{
@@ -220,7 +220,7 @@ class Sessions
 	 * session or a session with a regenerated token
 	 *
 	 * @internal
-	 * @param \Kirby\Session\Session $session Session instance to push to the cache
+	 * @param \Infinri\Session\Session $session Session instance to push to the cache
 	 */
 	public function updateCache(Session $session): void
 	{

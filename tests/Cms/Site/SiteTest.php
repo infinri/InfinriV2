@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Panel\Site as Panel;
+use Infinri\Panel\Site as Panel;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Site::class)]

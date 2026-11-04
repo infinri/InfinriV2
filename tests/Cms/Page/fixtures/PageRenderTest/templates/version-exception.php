@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Content\VersionId;
-use Kirby\Exception\Exception;
+use Infinri\Content\VersionId;
+use Infinri\Exception\Exception;
 use PHPUnit\Framework\AssertionFailedError;
 
 // validate the correct test scenario

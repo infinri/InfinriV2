@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Cache;
+namespace Infinri\Cache;
 
 class NullCache extends Cache
 {

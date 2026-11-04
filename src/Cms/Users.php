@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
-use Kirby\Uuid\HasUuids;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
+use Infinri\Uuid\HasUuids;
 
 class Users extends LazyCollection
 {
@@ -46,9 +46,9 @@ class Users extends LazyCollection
 	 * an entire second collection to the
 	 * current collection
 	 *
-	 * @param \Kirby\Cms\Users<TUser>|TUser|string $object
+	 * @param \Infinri\Cms\Users<TUser>|TUser|string $object
 	 * @return $this
-	 * @throws \Kirby\Exception\InvalidArgumentException When no `User` or `Users` object or an ID of an existing user is passed
+	 * @throws \Infinri\Exception\InvalidArgumentException When no `User` or `Users` object or an ID of an existing user is passed
 	 */
 	public function add($object): static
 	{

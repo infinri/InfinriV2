@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\PermissionException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\PermissionException;
 
 class PagePicker extends Picker
 {
@@ -153,7 +153,7 @@ class PagePicker extends Picker
 	/**
 	 * Search for pages by query string
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function itemsForQuery(): Pages
 	{
@@ -188,7 +188,7 @@ class PagePicker extends Picker
 	 * site root when the requested parent is missing or not
 	 * accessible for the current user.
 	 *
-	 * @throws \Kirby\Exception\PermissionException if neither the requested parent
+	 * @throws \Infinri\Exception\PermissionException if neither the requested parent
 	 *                                              nor the site are accessible
 	 */
 	public function parent(): Page|Site

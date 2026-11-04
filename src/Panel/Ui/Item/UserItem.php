@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Panel\Ui\Item;
+namespace Infinri\Panel\Ui\Item;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\User;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\User;
 
 class UserItem extends ModelItem
 {
 	/**
-	 * @var \Kirby\Cms\User
+	 * @var \Infinri\Cms\User
 	 */
 	protected ModelWithContent $model;
 

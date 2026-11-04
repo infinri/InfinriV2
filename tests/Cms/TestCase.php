@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\TestCase as BaseTestCase;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\TestCase as BaseTestCase;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 class TestCase extends BaseTestCase
 {

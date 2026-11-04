@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\MemoryStorage;
-use Kirby\Data\Data;
+use Infinri\Content\MemoryStorage;
+use Infinri\Data\Data;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Page::class)]

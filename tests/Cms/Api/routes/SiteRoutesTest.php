@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 
 class SiteRoutesTest extends TestCase
 {

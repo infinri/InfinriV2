@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cms\System\UpdateStatus;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
+use Infinri\Cms\System\UpdateStatus;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

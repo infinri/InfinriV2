@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Http\Visitor as BaseVisitor;
-use Kirby\Toolkit\Facade;
+use Infinri\Http\Visitor as BaseVisitor;
+use Infinri\Toolkit\Facade;
 
 class Visitor extends Facade
 {

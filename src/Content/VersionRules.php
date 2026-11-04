@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Language;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
+use Infinri\Cms\Language;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
 
 class VersionRules
 {
@@ -39,7 +39,7 @@ class VersionRules
 	 * Checks if a version/language combination exists and otherwise
 	 * will throw a `NotFoundException`
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the version does not exist
+	 * @throws \Infinri\Exception\NotFoundException If the version does not exist
 	 */
 	public static function ensure(Version $version, Language $language): void
 	{

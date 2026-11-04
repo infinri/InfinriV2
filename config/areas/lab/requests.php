@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Panel\Lab\Responses;
+use Infinri\Panel\Lab\Responses;
 
 return [
 	'lab.errors' => [

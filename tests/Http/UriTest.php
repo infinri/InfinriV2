@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use TypeError;

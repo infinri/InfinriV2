@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Menu::class)]

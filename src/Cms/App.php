@@ -1,42 +1,42 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
 use Exception as GlobalException;
 use Generator;
-use Kirby\Content\Storage;
-use Kirby\Content\VersionCache;
-use Kirby\Data\Data;
-use Kirby\Email\Email as BaseEmail;
-use Kirby\Exception\ErrorPageException;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Http\Environment;
-use Kirby\Http\Request;
-use Kirby\Http\Response;
-use Kirby\Http\Route;
-use Kirby\Http\Router;
-use Kirby\Http\Uri;
-use Kirby\Http\Visitor;
-use Kirby\Session\AutoSession;
-use Kirby\Session\Session;
-use Kirby\Template\Snippet;
-use Kirby\Template\Template;
-use Kirby\Text\KirbyTag;
-use Kirby\Text\KirbyTags;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Config;
-use Kirby\Toolkit\Controller;
-use Kirby\Toolkit\LazyValue;
-use Kirby\Toolkit\Locale;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuid;
-use Kirby\Uuid\Uuids;
+use Infinri\Content\Storage;
+use Infinri\Content\VersionCache;
+use Infinri\Data\Data;
+use Infinri\Email\Email as BaseEmail;
+use Infinri\Exception\ErrorPageException;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Http\Environment;
+use Infinri\Http\Request;
+use Infinri\Http\Response;
+use Infinri\Http\Route;
+use Infinri\Http\Router;
+use Infinri\Http\Uri;
+use Infinri\Http\Visitor;
+use Infinri\Session\AutoSession;
+use Infinri\Session\Session;
+use Infinri\Template\Snippet;
+use Infinri\Template\Template;
+use Infinri\Text\KirbyTag;
+use Infinri\Text\KirbyTags;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Config;
+use Infinri\Toolkit\Controller;
+use Infinri\Toolkit\LazyValue;
+use Infinri\Toolkit\Locale;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Uuid;
+use Infinri\Uuid\Uuids;
 use Throwable;
 
 class App
@@ -354,7 +354,7 @@ class App
 	 * by name. All relevant dependencies are
 	 * automatically injected
 	 *
-	 * @return \Kirby\Toolkit\Collection|null
+	 * @return \Infinri\Toolkit\Collection|null
 	 * @todo 6.0 Add return type declaration
 	 */
 	public function collection(string $name, array $options = [])
@@ -966,7 +966,7 @@ class App
 	 * Yields all models (site, pages, files and users) of this site
 	 * @since 4.0.0
 	 *
-	 * @return \Generator|\Kirby\Cms\ModelWithContent[]
+	 * @return \Generator|\Infinri\Cms\ModelWithContent[]
 	 */
 	public function models(): Generator
 	{
@@ -1158,7 +1158,7 @@ class App
 		if ($page = $parent->find($id)) {
 			/**
 			 * We passed a single $id, we can be sure that the result is
-			 * @var \Kirby\Cms\Page $page
+			 * @var \Infinri\Cms\Page $page
 			 */
 			return $page;
 		}
@@ -1222,7 +1222,7 @@ class App
 	 * Path resolver for the router
 	 *
 	 * @unstable
-	 * @throws \Kirby\Exception\NotFoundException if the home page cannot be found
+	 * @throws \Infinri\Exception\NotFoundException if the home page cannot be found
 	 */
 	public function resolve(
 		string|null $path = null,
@@ -1683,7 +1683,7 @@ class App
 	 * Returns a system url
 	 *
 	 * @param bool $object If set to `true`, the URL is converted to an object
-	 * @psalm-return ($object is false ? string|null : \Kirby\Http\Uri)
+	 * @psalm-return ($object is false ? string|null : \Infinri\Http\Uri)
 	 */
 	public function url(
 		string $type = 'index',
@@ -1718,7 +1718,7 @@ class App
 	 * Returns the current version number from
 	 * the composer.json (Keep that up to date! :))
 	 *
-	 * @throws \Kirby\Exception\LogicException if the Kirby version cannot be detected
+	 * @throws \Infinri\Exception\LogicException if the Kirby version cannot be detected
 	 */
 	public static function version(): string|null
 	{

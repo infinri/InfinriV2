@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Content\PlainTextStorage;
-use Kirby\Content\VersionId;
-use Kirby\Data\Data;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\F;
+use Infinri\Content\PlainTextStorage;
+use Infinri\Content\VersionId;
+use Infinri\Data\Data;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(File::class)]

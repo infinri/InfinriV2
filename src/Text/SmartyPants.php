@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Text;
+namespace Infinri\Text;
 
 use Michelf\SmartyPantsTypographer;
 

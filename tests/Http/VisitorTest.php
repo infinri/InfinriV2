@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\TestCase;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Obj;
+use Infinri\TestCase;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Obj;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Visitor::class)]

@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
-use Kirby\Cms\App;
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Image\Image;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Image\Image;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class AFile

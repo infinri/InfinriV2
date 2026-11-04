@@ -1,23 +1,23 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Block;
-use Kirby\Cms\Blocks as BlocksCollection;
-use Kirby\Cms\Fieldset;
-use Kirby\Cms\Fieldsets;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Data\Json;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Form\FieldClass;
-use Kirby\Form\Form;
-use Kirby\Form\Mixin\EmptyState;
-use Kirby\Form\Mixin\Max;
-use Kirby\Form\Mixin\Min;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Block;
+use Infinri\Cms\Blocks as BlocksCollection;
+use Infinri\Cms\Fieldset;
+use Infinri\Cms\Fieldsets;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Data\Json;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Form\FieldClass;
+use Infinri\Form\Form;
+use Infinri\Form\Mixin\EmptyState;
+use Infinri\Form\Mixin\Max;
+use Infinri\Form\Mixin\Min;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class BlocksField extends FieldClass

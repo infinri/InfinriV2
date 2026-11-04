@@ -1,20 +1,20 @@
 <?php
 
-namespace Kirby\Panel\Ui\Item;
+namespace Infinri\Panel\Ui\Item;
 
-use Kirby\Cms\File;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Panel\Model;
+use Infinri\Cms\File;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Panel\Model;
 
 class FileItem extends ModelItem
 {
 	/**
-	 * @var \Kirby\Cms\File
+	 * @var \Infinri\Cms\File
 	 */
 	protected ModelWithContent $model;
 
 	/**
-	 * @var \Kirby\Panel\File
+	 * @var \Infinri\Panel\File
 	 */
 	protected Model $panel;
 

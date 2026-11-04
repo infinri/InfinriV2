@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Ui;
+namespace Infinri\Panel\Ui;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Exception\InvalidArgumentException;
 
 class Stats extends Component
 {

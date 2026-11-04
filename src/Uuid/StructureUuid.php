@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
-use Kirby\Cms\Structure;
-use Kirby\Content\Field;
+use Infinri\Cms\Structure;
+use Infinri\Content\Field;
 
 class StructureUuid extends FieldUuid
 {

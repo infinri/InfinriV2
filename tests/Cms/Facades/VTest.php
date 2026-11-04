@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Toolkit\V;
+use Infinri\Toolkit\V;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class VTest extends TestCase

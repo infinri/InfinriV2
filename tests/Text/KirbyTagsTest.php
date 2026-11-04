@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Text;
+namespace Infinri\Text;
 
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Cms\Helpers;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\Helpers;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -114,7 +114,7 @@ class KirbyTagsTest extends TestCase
 
 		ErrorLog::$log = '';
 		$this->assertSame('(invalidargument: foo)', KirbyTags::parse('(invalidargument: foo)'));
-		$this->assertStringContainsString('Kirby\Exception\InvalidArgumentException: Just for fun', ErrorLog::$log);
+		$this->assertStringContainsString('Infinri\Exception\InvalidArgumentException: Just for fun', ErrorLog::$log);
 
 		ErrorLog::$log = '';
 		$this->assertSame('(undefined: foo)', KirbyTags::parse('(undefined: foo)'));

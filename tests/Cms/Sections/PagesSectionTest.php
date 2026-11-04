@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Panel\Model;
-use Kirby\TestCase;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Panel\Model;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class PagesSectionTest extends TestCase

@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class TestUuid extends Uuid

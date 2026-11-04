@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuids;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Uuids;
 
 return [
 	'props' => [

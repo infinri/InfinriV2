@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\VersionId;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\Dir;
-use Kirby\Panel\Site as Panel;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\BlockCollectionAccess;
+use Infinri\Content\VersionId;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\Dir;
+use Infinri\Panel\Site as Panel;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\BlockCollectionAccess;
 
 class Site extends ModelWithContent
 {

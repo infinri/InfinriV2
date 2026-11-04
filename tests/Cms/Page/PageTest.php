@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Panel\Page as PanelPage;
+use Infinri\Panel\Page as PanelPage;
 use PHPUnit\Framework\Attributes\CoversClass;
 use TypeError;
 

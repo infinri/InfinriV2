@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Http\Cookie;
-use Kirby\Http\Url;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\SymmetricCrypto;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Http\Cookie;
+use Infinri\Http\Url;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\SymmetricCrypto;
 
 class Session
 {
@@ -41,7 +41,7 @@ class Session
 	/**
 	 * Creates a new Session instance
 	 *
-	 * @param \Kirby\Session\Sessions $sessions Parent sessions object
+	 * @param \Infinri\Session\Sessions $sessions Parent sessions object
 	 * @param string|null $token Session token or null for a new session
 	 * @param array $options Optional additional options:
 	 *                       - `mode`: Token transmission mode (cookie or manual); defaults to `cookie`
@@ -280,7 +280,7 @@ class Session
 	/**
 	 * Returns the session data object
 	 *
-	 * @return \Kirby\Session\SessionData
+	 * @return \Infinri\Session\SessionData
 	 */
 	public function data()
 	{

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Http\Request\Auth;
+namespace Infinri\Http\Request\Auth;
 
-use Kirby\Cms\App;
-use Kirby\Http\Request\Auth;
-use Kirby\Session\Session;
+use Infinri\Cms\App;
+use Infinri\Http\Request\Auth;
+use Infinri\Session\Session;
 
 class SessionAuth extends Auth
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\F;
-use Kirby\Http\Url as BaseUrl;
-use Kirby\Toolkit\Str;
+use Infinri\Filesystem\F;
+use Infinri\Http\Url as BaseUrl;
+use Infinri\Toolkit\Str;
 
 class Url extends BaseUrl
 {

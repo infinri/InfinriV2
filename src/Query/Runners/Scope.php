@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Query\Runners;
+namespace Infinri\Query\Runners;
 
 use Closure;
 use Exception;

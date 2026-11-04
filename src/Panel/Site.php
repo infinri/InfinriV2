@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\File as CmsFile;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Filesystem\Asset;
-use Kirby\Panel\Ui\Buttons\ViewButtons;
+use Infinri\Cms\File as CmsFile;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Filesystem\Asset;
+use Infinri\Panel\Ui\Buttons\ViewButtons;
 
 class Site extends Model
 {
 	/**
-	 * @var \Kirby\Cms\Site
+	 * @var \Infinri\Cms\Site
 	 */
 	protected ModelWithContent $model;
 

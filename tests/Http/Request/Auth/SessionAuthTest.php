@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Http\Request\Auth;
+namespace Infinri\Http\Request\Auth;
 
-use Kirby\Cms\App;
-use Kirby\Filesystem\Dir;
-use Kirby\Http\Request\Auth;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Filesystem\Dir;
+use Infinri\Http\Request\Auth;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Auth::class)]

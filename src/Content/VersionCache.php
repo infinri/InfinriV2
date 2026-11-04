@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Language;
+use Infinri\Cms\Language;
 use WeakMap;
 
 class VersionCache

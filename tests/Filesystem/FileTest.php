@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
 use Exception as GlobalException;
-use Kirby\Cms\App;
-use Kirby\Cms\File as CmsFile;
-use Kirby\Cms\Page;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Http\Response;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\File as CmsFile;
+use Infinri\Cms\Page;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Http\Response;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class InvalidFileModel
@@ -18,7 +18,7 @@ class InvalidFileModel
 	public string $foo = 'bar';
 }
 
-#[CoversClass(\Kirby\Filesystem\File::class)]
+#[CoversClass(\Infinri\Filesystem\File::class)]
 class FileTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/files';
@@ -382,7 +382,7 @@ class FileTest extends TestCase
 	public function testInvalidModel(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The model object must use the "Kirby\Filesystem\IsFile" trait');
+		$this->expectExceptionMessage('The model object must use the "Infinri\Filesystem\IsFile" trait');
 
 		new File([
 			'root' => static::TMP . '/test.js',

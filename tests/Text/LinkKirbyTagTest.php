@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Text;
+namespace Infinri\Text;
 
-use Kirby\Cms\App;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 
 class LinkKirbyTagTest extends TestCase
 {

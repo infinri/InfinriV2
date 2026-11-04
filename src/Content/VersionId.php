@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
 use Closure;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 use Stringable;
 
 class VersionId implements Stringable
@@ -25,7 +25,7 @@ class VersionId implements Stringable
 	public static self|null $render = null;
 
 	/**
-	 * @throws \Kirby\Exception\InvalidArgumentException If the version ID is not valid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the version ID is not valid
 	 */
 	public function __construct(
 		public string $value

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Email;
+namespace Infinri\Email;
 
 use Closure;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 use PHPMailer\PHPMailer\PHPMailer as Mailer;
 
 class PHPMailer extends Email
@@ -11,7 +11,7 @@ class PHPMailer extends Email
 	/**
 	 * Sends email via PHPMailer library
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function send(bool $debug = false): bool
 	{

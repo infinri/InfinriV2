@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
 use Exception;
-use Kirby\Cms\Language;
-use Kirby\Cms\Page;
-use Kirby\TestCase;
+use Infinri\Cms\Language;
+use Infinri\Cms\Page;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class TestField extends FieldClass

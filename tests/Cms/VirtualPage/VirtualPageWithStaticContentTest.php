@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\ImmutableMemoryStorage;
+use Infinri\Content\ImmutableMemoryStorage;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class VirtualPageWithStaticContent extends Page

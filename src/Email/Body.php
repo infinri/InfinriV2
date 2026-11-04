@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Email;
+namespace Infinri\Email;
 
-use Kirby\Toolkit\Properties;
+use Infinri\Toolkit\Properties;
 
 class Body
 {

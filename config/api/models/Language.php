@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Language;
+use Infinri\Cms\Language;
 
 /**
  * Language

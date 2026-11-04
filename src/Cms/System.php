@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cms\System\UpdateStatus;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\System\UpdateStatus;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\Dir;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 use Throwable;
 class System
 {
@@ -166,7 +166,7 @@ class System
 	 * Create the most important folders
 	 * if they don't exist yet
 	 *
-	 * @throws \Kirby\Exception\PermissionException
+	 * @throws \Infinri\Exception\PermissionException
 	 */
 	public function init(): void
 	{
@@ -286,7 +286,7 @@ class System
 	 * Returns the configured UI modes for the login form
 	 * with their respective options
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the configuration is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the configuration is invalid
 	 *                                                   (only in debug mode)
 	 */
 	public function loginMethods(): array
@@ -383,8 +383,8 @@ class System
 	 * and adds it to the .license file in the config
 	 * folder if possible.
 	 *
-	 * @throws \Kirby\Exception\Exception
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\Exception
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function register(
 		string|null $license = null,

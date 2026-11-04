@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Collector;
+namespace Infinri\Panel\Collector;
 
-use Kirby\Cms\Users;
+use Infinri\Cms\Users;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(UsersCollector::class)]

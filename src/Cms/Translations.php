@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
 
 class Translations extends Collection
 {

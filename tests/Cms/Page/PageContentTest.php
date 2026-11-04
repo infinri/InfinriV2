@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Content;
-use Kirby\Content\MemoryStorage;
+use Infinri\Content\Content;
+use Infinri\Content\MemoryStorage;
 use PHPUnit\Framework\Attributes\CoversClass;
 use TypeError;
 

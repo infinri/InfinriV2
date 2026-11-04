@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Email;
+namespace Infinri\Email;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 

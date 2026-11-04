@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Content\Field;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Obj;
+use Infinri\Content\Field;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Obj;
 use PHPUnit\Framework\Attributes\CoversClass;
 use stdClass;
 

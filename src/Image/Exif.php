@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\V;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\V;
 
 class Exif
 {

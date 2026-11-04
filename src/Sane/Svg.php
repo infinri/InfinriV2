@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Sane;
+namespace Infinri\Sane;
 
 use DOMAttr;
 use DOMDocumentType;
 use DOMElement;
 use DOMXPath;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Http\Url;
-use Kirby\Toolkit\Dom;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Http\Url;
+use Infinri\Toolkit\Dom;
+use Infinri\Toolkit\Str;
 
 class Svg extends Xml
 {
@@ -470,7 +470,7 @@ class Svg extends Xml
 	/**
 	 * Parses the given string into a `Toolkit\Dom` object
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file couldn't be parsed
 	 */
 	protected static function parse(string $string): Dom
 	{

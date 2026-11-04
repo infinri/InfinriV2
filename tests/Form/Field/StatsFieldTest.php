@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Panel\Ui\Stats;
+use Infinri\Panel\Ui\Stats;
 
 class StatsFieldTest extends TestCase
 {

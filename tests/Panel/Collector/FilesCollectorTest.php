@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Collector;
+namespace Infinri\Panel\Collector;
 
-use Kirby\Cms\Files;
+use Infinri\Cms\Files;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(FilesCollector::class)]

@@ -1,9 +1,9 @@
 <?php
 
-use Kirby\Toolkit\Html;
+use Infinri\Toolkit\Html;
 
 /**
- * @var \Kirby\Cms\App $kirby
+ * @var \Infinri\Cms\App $kirby
  * @var string $icons
  * @var array<string, mixed> $assets
  * @var array<string, mixed> $fiber
@@ -19,7 +19,7 @@ use Kirby\Toolkit\Html;
   <meta name="referrer" content="same-origin">
   <meta name="robots" content="noindex, nofollow">
 
-  <title>Kirby Panel</title>
+  <title>Infinri Admin</title>
 
 	<script type="importmap" nonce="<?= $nonce ?>">
 	{

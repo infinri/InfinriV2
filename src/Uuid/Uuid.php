@@ -1,20 +1,20 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Closure;
 use Generator;
-use Kirby\Cms\App;
-use Kirby\Cms\Collection;
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Collection;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 use Stringable;
 abstract class Uuid implements Stringable
 {
@@ -30,7 +30,7 @@ abstract class Uuid implements Stringable
 	 * Collection that is likely to contain the model and
 	 * that will be checked first to speed up the lookup
 	 *
-	 * @var \Kirby\Cms\Collection<TModel>|null
+	 * @var \Infinri\Cms\Collection<TModel>|null
 	 */
 	public Collection|null $context;
 

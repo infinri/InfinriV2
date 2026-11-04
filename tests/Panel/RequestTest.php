@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
 use Exception;
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Request::class)]

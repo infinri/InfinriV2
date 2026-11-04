@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 
 class StructureTest extends TestCase
 {
@@ -105,7 +105,7 @@ class StructureTest extends TestCase
 	public function testWithInvalidData(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('Invalid data for Kirby\Cms\StructureObject');
+		$this->expectExceptionMessage('Invalid data for Infinri\Cms\StructureObject');
 
 		Structure::factory([
 			[

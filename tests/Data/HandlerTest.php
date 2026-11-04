@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
 use Exception;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Handler::class)]

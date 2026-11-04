@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Language;
-use Kirby\Cms\Languages;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\User;
-use Kirby\Data\Data;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Language;
+use Infinri\Cms\Languages;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\User;
+use Infinri\Data\Data;
+use Infinri\Toolkit\Str;
 
 class Lock
 {

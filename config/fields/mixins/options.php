@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Field\FieldOptions;
+use Infinri\Field\FieldOptions;
 
 return [
 	'props' => [

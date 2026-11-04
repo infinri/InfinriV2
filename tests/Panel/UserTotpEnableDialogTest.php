@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\Image\QrCode;
-use Kirby\TestCase;
-use Kirby\Toolkit\Totp;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
+use Infinri\Image\QrCode;
+use Infinri\TestCase;
+use Infinri\Toolkit\Totp;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(UserTotpEnableDialog::class)]

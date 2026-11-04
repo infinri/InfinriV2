@@ -1,12 +1,12 @@
 <?php
 
-use Kirby\Cms\Html;
-use Kirby\Cms\Url;
-use Kirby\Text\KirbyTag;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuid;
+use Infinri\Cms\Html;
+use Infinri\Cms\Url;
+use Infinri\Text\KirbyTag;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Uuid;
 
 /**
  * Default KirbyTags definition

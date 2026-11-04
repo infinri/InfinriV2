@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\Find;
-use Kirby\Panel\Field;
-use Kirby\Panel\Panel;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\Find;
+use Infinri\Panel\Field;
+use Infinri\Panel\Panel;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\I18n;
 
 /**
  * Shared file dialogs

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\App;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Toolkit\Str;
 
 class Cookie
 {

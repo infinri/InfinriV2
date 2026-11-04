@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
-use Kirby\Cms\Language;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\Language;
+use Infinri\Toolkit\Str;
 use Stringable;
 
 class Filename implements Stringable

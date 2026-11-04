@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\File;
-use Kirby\Cms\Language;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
-use Kirby\Data\Data;
-use Kirby\Exception\Exception;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
+use Infinri\Cms\File;
+use Infinri\Cms\Language;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
+use Infinri\Data\Data;
+use Infinri\Exception\Exception;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
 
 class PlainTextStorage extends Storage
 {
@@ -150,7 +150,7 @@ class PlainTextStorage extends Storage
 	/**
 	 * Helper to delete empty _changes directories
 	 *
-	 * @throws \Kirby\Exception\Exception if the directory cannot be deleted
+	 * @throws \Infinri\Exception\Exception if the directory cannot be deleted
 	 */
 	protected function deleteEmptyDirectory(string $directory): void
 	{
@@ -314,7 +314,7 @@ class PlainTextStorage extends Storage
 	/**
 	 * Updates the modification timestamp of an existing version
 	 *
-	 * @throws \Kirby\Exception\Exception If the file cannot be touched
+	 * @throws \Infinri\Exception\Exception If the file cannot be touched
 	 */
 	public function touch(VersionId $versionId, Language $language): void
 	{
@@ -334,7 +334,7 @@ class PlainTextStorage extends Storage
 	 *
 	 * @param array<string, string> $fields Content fields
 	 *
-	 * @throws \Kirby\Exception\Exception If the content cannot be written
+	 * @throws \Infinri\Exception\Exception If the content cannot be written
 	 */
 	protected function write(VersionId $versionId, Language $language, array $fields): void
 	{

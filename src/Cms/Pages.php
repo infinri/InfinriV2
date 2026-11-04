@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Uuid\HasUuids;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Uuid\HasUuids;
 use Throwable;
 
 class Pages extends Collection
@@ -28,7 +28,7 @@ class Pages extends Collection
 	public static array $methods = [];
 
 	/**
-	 * @var \Kirby\Cms\Page|\Kirby\Cms\Site|null
+	 * @var \Infinri\Cms\Page|\Infinri\Cms\Site|null
 	 */
 	protected object|null $parent = null;
 
@@ -37,9 +37,9 @@ class Pages extends Collection
 	 * an entire second collection to the
 	 * current collection
 	 *
-	 * @param \Kirby\Cms\Pages<TPage>|TPage|string $object
+	 * @param \Infinri\Cms\Pages<TPage>|TPage|string $object
 	 * @return $this
-	 * @throws \Kirby\Exception\InvalidArgumentException When no `Page` or `Pages` object or an ID of an existing page is passed
+	 * @throws \Infinri\Exception\InvalidArgumentException When no `Page` or `Pages` object or an ID of an existing page is passed
 	 */
 	public function add($object): static
 	{
@@ -81,7 +81,7 @@ class Pages extends Collection
 
 	/**
 	 * Returns all children for each page in the array
-	 * @return \Kirby\Cms\Pages<TPage>
+	 * @return \Infinri\Cms\Pages<TPage>
 	 */
 	public function children(): static
 	{
@@ -108,7 +108,7 @@ class Pages extends Collection
 	 * Deletes the pages with the given IDs
 	 * if they exist in the collection
 	 *
-	 * @throws \Kirby\Exception\Exception If not all pages could be deleted
+	 * @throws \Infinri\Exception\Exception If not all pages could be deleted
 	 */
 	public function delete(array $ids): void
 	{
@@ -159,7 +159,7 @@ class Pages extends Collection
 
 	/**
 	 * Fetch all drafts for all pages in the collection
-	 * @return \Kirby\Cms\Pages<TPage>
+	 * @return \Infinri\Cms\Pages<TPage>
 	 */
 	public function drafts(): static
 	{
@@ -390,7 +390,7 @@ class Pages extends Collection
 
 	/**
 	 * Returns all listed pages in the collection
-	 * @return \Kirby\Cms\Pages<TPage>
+	 * @return \Infinri\Cms\Pages<TPage>
 	 */
 	public function listed(): static
 	{
@@ -399,7 +399,7 @@ class Pages extends Collection
 
 	/**
 	 * Returns all unlisted pages in the collection
-	 * @return \Kirby\Cms\Pages<TPage>
+	 * @return \Infinri\Cms\Pages<TPage>
 	 */
 	public function unlisted(): static
 	{
@@ -491,7 +491,7 @@ class Pages extends Collection
 
 	/**
 	 * Returns all listed and unlisted pages in the collection
-	 * @return \Kirby\Cms\Pages<TPage>
+	 * @return \Infinri\Cms\Pages<TPage>
 	 */
 	public function published(): static
 	{

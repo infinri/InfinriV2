@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
 use SensitiveParameter;
 use Stringable;
 use Throwable;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Email;
+namespace Infinri\Email;
 
-class TestCase extends \Kirby\TestCase
+class TestCase extends \Infinri\TestCase
 {
 	protected function _email(array $props, $mailer)
 	{

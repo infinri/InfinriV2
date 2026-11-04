@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Form\Mixin;
+namespace Infinri\Form\Mixin;
 
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Str;
 
 trait Label
 {

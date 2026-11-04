@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\File as ModelFile;
-use Kirby\Cms\Page as ModelPage;
-use Kirby\Cms\Site as ModelSite;
-use Kirby\Cms\User as ModelUser;
-use Kirby\Content\Lock;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\File as ModelFile;
+use Infinri\Cms\Page as ModelPage;
+use Infinri\Cms\Site as ModelSite;
+use Infinri\Cms\User as ModelUser;
+use Infinri\Content\Lock;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class FileForceLocked extends ModelFile
@@ -24,7 +24,7 @@ class FileForceLocked extends ModelFile
 	}
 }
 
-#[CoversClass(\Kirby\Panel\File::class)]
+#[CoversClass(\Infinri\Panel\File::class)]
 #[CoversClass(Model::class)]
 class FileTest extends TestCase
 {

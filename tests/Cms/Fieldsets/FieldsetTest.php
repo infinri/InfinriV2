@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Form\Form;
-use Kirby\TestCase;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Form\Form;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Fieldset::class)]

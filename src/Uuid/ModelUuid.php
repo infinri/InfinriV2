@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 abstract class ModelUuid extends Uuid
 {
@@ -62,7 +62,7 @@ abstract class ModelUuid extends Uuid
 	 * Retrieves the ID string (UUID without scheme) for the model
 	 * from the content file, if it is already stored there
 	 *
-	 * @param \Kirby\Cms\ModelWithContent $model
+	 * @param \Infinri\Cms\ModelWithContent $model
 	 */
 	public static function retrieveId(Identifiable $model): string|null
 	{

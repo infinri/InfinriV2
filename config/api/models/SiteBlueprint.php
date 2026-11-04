@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\SiteBlueprint;
+use Infinri\Cms\SiteBlueprint;
 
 /**
  * SiteBlueprint

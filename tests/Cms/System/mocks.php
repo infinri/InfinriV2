@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms\System;
+namespace Infinri\Cms\System;
 
-use Kirby\Cms\App;
+use Infinri\Cms\App;
 
 class MockApp extends App
 {

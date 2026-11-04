@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Mime;
-use Kirby\Http\Response as HttpResponse;
-use Kirby\Http\VolatileHeaders;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Mime;
+use Infinri\Http\Response as HttpResponse;
+use Infinri\Http\VolatileHeaders;
+use Infinri\Toolkit\Str;
 use Stringable;
 
 class Responder implements Stringable

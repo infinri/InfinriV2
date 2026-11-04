@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
-use Kirby\Cms\App;
-use Kirby\Cms\Page;
+use Infinri\Cms\App;
+use Infinri\Cms\Page;
 
 class PageUuid extends ModelUuid
 {
@@ -18,7 +18,7 @@ class PageUuid extends ModelUuid
 	{
 		/**
 		 * If $recursive, also clear UUIDs from cache for all children
-		 * @var \Kirby\Cms\Page $model
+		 * @var \Infinri\Cms\Page $model
 		 */
 		if ($recursive === true && $model = $this->model()) {
 			foreach ($model->childrenAndDrafts() as $child) {
@@ -53,7 +53,7 @@ class PageUuid extends ModelUuid
 	/**
 	 * Generator for all pages and drafts in the site
 	 *
-	 * @return \Generator|\Kirby\Cms\Page[]
+	 * @return \Generator|\Infinri\Cms\Page[]
 	 */
 	public static function index(Page|null $entry = null): Generator
 	{
@@ -75,7 +75,7 @@ class PageUuid extends ModelUuid
 	): bool {
 		/**
 		 * If $recursive, also populate UUIDs for all children
-		 * @var \Kirby\Cms\Page $model
+		 * @var \Infinri\Cms\Page $model
 		 */
 		if ($recursive === true && $model = $this->model()) {
 			foreach ($model->childrenAndDrafts() as $child) {

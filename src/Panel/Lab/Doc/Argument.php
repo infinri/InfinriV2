@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Lab\Doc;
+namespace Infinri\Panel\Lab\Doc;
 
-use Kirby\Panel\Lab\Doc;
+use Infinri\Panel\Lab\Doc;
 
 class Argument
 {

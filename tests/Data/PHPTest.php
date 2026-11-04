@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
 use Exception;
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(PHP::class)]

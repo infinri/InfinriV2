@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\Cms\Language;
-use Kirby\Cms\Page;
-use Kirby\Panel\Areas\AreaTestCase;
+use Infinri\Cms\Language;
+use Infinri\Cms\Page;
+use Infinri\Panel\Areas\AreaTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(LanguagesDropdown::class)]

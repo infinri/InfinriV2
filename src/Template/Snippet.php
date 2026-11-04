@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Template;
+namespace Infinri\Template;
 
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Tpl;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Tpl;
 
 class Snippet extends Tpl
 {
@@ -292,7 +292,7 @@ class Snippet extends Tpl
 	/**
 	 * Returns the data variables that get passed to a snippet
 	 *
-	 * @param \Kirby\Template\Slots|null $slots If null, an empty dummy object is used
+	 * @param \Infinri\Template\Slots|null $slots If null, an empty dummy object is used
 	 */
 	protected static function scope(
 		array $data = [],

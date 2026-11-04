@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
 
 return [
 	'extends' => 'tags',

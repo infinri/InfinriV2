@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Closure;
 use DOMAttr;
@@ -12,9 +12,9 @@ use DOMNodeList;
 use DOMProcessingInstruction;
 use DOMText;
 use DOMXPath;
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Http\Url;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Http\Url;
 
 class Dom
 {
@@ -621,7 +621,7 @@ class Dom
 	 *                       - `urlAttrs`: List of attributes that may contain URLs
 	 * @return array List of validation errors during sanitization
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the doctype is not valid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the doctype is not valid
 	 */
 	public function sanitize(array $options): array
 	{
@@ -1245,7 +1245,7 @@ class Dom
 	 *
 	 * @param array $options See `Dom::sanitize()`
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the doctype is not valid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the doctype is not valid
 	 */
 	protected function validateDoctype(
 		DOMDocumentType $doctype,

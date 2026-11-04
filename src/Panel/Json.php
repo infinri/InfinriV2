@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Exception\Exception;
-use Kirby\Http\Response;
+use Infinri\Cms\App;
+use Infinri\Exception\Exception;
+use Infinri\Http\Response;
 use Throwable;
 
 abstract class Json

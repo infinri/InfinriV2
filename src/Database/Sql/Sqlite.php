@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Database\Sql;
+namespace Infinri\Database\Sql;
 
-use Kirby\Database\Sql;
+use Infinri\Database\Sql;
 
 class Sqlite extends Sql
 {
@@ -63,7 +63,7 @@ class Sqlite extends Sql
 	 * Creates a CREATE TABLE query
 	 *
 	 * @param string $table Table name
-	 * @param array $columns Array of column definition arrays, see `Kirby\Database\Sql::createColumn()`
+	 * @param array $columns Array of column definition arrays, see `Infinri\Database\Sql::createColumn()`
 	 * @return array Array with a `query` string and a `bindings` array
 	 */
 	public function createTable(

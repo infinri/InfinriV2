@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
 use Closure;
-use Kirby\Http\Response;
+use Infinri\Http\Response;
 
 class Dropdown extends Json
 {

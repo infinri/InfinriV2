@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
 use Exception;
 use IntlDateFormatter;
-use Kirby\Cms\Helpers;
-use Kirby\Http\Response;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\Helpers;
+use Infinri\Http\Response;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 use Throwable;
 use ZipArchive;
 

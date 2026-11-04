@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Closure;
 use DateTime;
 use Exception;
 use IntlDateFormatter;
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Query\Query;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Query\Query;
 use Throwable;
 class Str
 {
@@ -770,7 +770,7 @@ class Str
 	 * Returns the position of a needle in a string
 	 * if it can be found
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException for empty $needle
+	 * @throws \Infinri\Exception\InvalidArgumentException for empty $needle
 	 */
 	public static function position(
 		string|null $string,

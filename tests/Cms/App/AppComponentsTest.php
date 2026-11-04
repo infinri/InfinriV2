@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Field;
-use Kirby\Content\MemoryStorage;
-use Kirby\Content\PlainTextStorage;
-use Kirby\Email\Email;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\F;
-use Kirby\Template\Template;
-use Kirby\Toolkit\Obj;
+use Infinri\Content\Field;
+use Infinri\Content\MemoryStorage;
+use Infinri\Content\PlainTextStorage;
+use Infinri\Email\Email;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\F;
+use Infinri\Template\Template;
+use Infinri\Toolkit\Obj;
 
 class CustomEmailProvider extends Email
 {

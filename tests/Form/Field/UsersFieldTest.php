@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Page;
+use Infinri\Cms\App;
+use Infinri\Cms\Page;
 
 class UsersFieldTest extends TestCase
 {

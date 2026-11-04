@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\FileVersion;
+use Infinri\Cms\FileVersion;
 
 /**
  * FileVersion

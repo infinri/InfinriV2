@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Panel\Ui\FilePreviews;
+namespace Infinri\Panel\Ui\FilePreviews;
 
-use Kirby\Cms\File;
-use Kirby\Image\Svg;
-use Kirby\Panel\Ui\FilePreview;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\File;
+use Infinri\Image\Svg;
+use Infinri\Panel\Ui\FilePreview;
+use Infinri\Toolkit\I18n;
 
 class ImageFilePreview extends FilePreview
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
-use Kirby\TestCase as BaseTestCase;
+use Infinri\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cache;
+namespace Infinri\Cache;
 
-use Kirby\Cms\Helpers;
+use Infinri\Cms\Helpers;
 use Redis;
 use Throwable;
 

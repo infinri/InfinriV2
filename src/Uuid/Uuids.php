@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Closure;
-use Kirby\Cache\Cache;
-use Kirby\Cms\App;
-use Kirby\Exception\LogicException;
+use Infinri\Cache\Cache;
+use Infinri\Cms\App;
+use Infinri\Exception\LogicException;
 class Uuids
 {
 	/**

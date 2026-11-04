@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
 
 /**
  * Authentication

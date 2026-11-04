@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
 
 return [
 	'mixins' => ['min', 'options'],

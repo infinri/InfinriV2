@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Text;
+namespace Infinri\Text;
 
 use Exception;
-use Kirby\Cms\Helpers;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\Helpers;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Str;
 
 class KirbyTags
 {

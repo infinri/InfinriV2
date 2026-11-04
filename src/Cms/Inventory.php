@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\Dir;
+use Infinri\Filesystem\Dir;
 
 class Inventory
 {

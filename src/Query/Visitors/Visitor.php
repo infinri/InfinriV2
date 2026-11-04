@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Query\Visitors;
+namespace Infinri\Query\Visitors;
 
 use Closure;
 

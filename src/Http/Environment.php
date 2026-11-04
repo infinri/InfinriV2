@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class Environment
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
-use Kirby\Exception\ErrorPageException;
-use Kirby\Exception\Exception;
+use Infinri\Exception\ErrorPageException;
+use Infinri\Exception\Exception;
 
 class Pagination
 {

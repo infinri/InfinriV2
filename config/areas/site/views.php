@@ -1,9 +1,9 @@
 <?php
 
-use Kirby\Cms\Find;
-use Kirby\Exception\PermissionException;
-use Kirby\Panel\Ui\Buttons\ViewButtons;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\Find;
+use Infinri\Exception\PermissionException;
+use Infinri\Panel\Ui\Buttons\ViewButtons;
+use Infinri\Toolkit\I18n;
 
 return [
 	'page' => [

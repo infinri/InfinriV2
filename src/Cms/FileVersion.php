@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\Asset;
-use Kirby\Filesystem\F;
-use Kirby\Filesystem\IsFile;
+use Infinri\Filesystem\Asset;
+use Infinri\Filesystem\F;
+use Infinri\Filesystem\IsFile;
 
 class FileVersion
 {

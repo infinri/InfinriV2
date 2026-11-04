@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\UserPicker;
+use Infinri\Cms\UserPicker;
 
 return [
 	'methods' => [

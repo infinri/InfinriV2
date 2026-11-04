@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Panel\Ui\Buttons\ViewButtons;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Panel\Ui\Buttons\ViewButtons;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\I18n;
 
 return [
 	'language' => [

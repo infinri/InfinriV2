@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Sane;
+namespace Infinri\Sane;
 
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Sane::class)]
@@ -127,7 +127,7 @@ class SaneTest extends TestCase
 		$fixture = $this->fixture('script-2.xml', true);
 
 		$this->expectException(LogicException::class);
-		$this->expectExceptionMessage('Cannot sanitize file as more than one handler applies: Kirby\Sane\Xml, Kirby\Sane\Svg');
+		$this->expectExceptionMessage('Cannot sanitize file as more than one handler applies: Infinri\Sane\Xml, Infinri\Sane\Svg');
 
 		Sane::sanitizeFile($fixture);
 	}

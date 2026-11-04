@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Find;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Page;
-use Kirby\Cms\Roles;
-use Kirby\Form\Form;
-use Kirby\Http\Router;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Find;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Page;
+use Infinri\Cms\Roles;
+use Infinri\Form\Form;
+use Infinri\Http\Router;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 class Field
 {

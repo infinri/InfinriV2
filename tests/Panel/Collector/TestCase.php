@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel\Collector;
+namespace Infinri\Panel\Collector;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Pagination;
-use Kirby\TestCase as BaseTestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\Pagination;
+use Infinri\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {

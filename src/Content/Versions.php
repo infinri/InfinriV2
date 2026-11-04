@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Collection;
-use Kirby\Cms\ModelWithContent;
+use Infinri\Cms\Collection;
+use Infinri\Cms\ModelWithContent;
 
 class Versions extends Collection
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\FilePicker;
+use Infinri\Cms\FilePicker;
 
 return [
 	'methods' => [

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\Cms\Page;
-use Kirby\TestCase;
+use Infinri\Cms\Page;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(SettingsButton::class)]

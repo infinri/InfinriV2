@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\Api;
-use Kirby\Cms\File;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\PermissionException;
+use Infinri\Cms\Api;
+use Infinri\Cms\File;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\PermissionException;
 
 return [
 	'props' => [

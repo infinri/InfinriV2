@@ -1,20 +1,20 @@
 <?php
 
-namespace Kirby\Panel\Ui\Item;
+namespace Infinri\Panel\Ui\Item;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Page;
-use Kirby\Panel\Model;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Page;
+use Infinri\Panel\Model;
 
 class PageItem extends ModelItem
 {
 	/**
-	 * @var \Kirby\Cms\Page
+	 * @var \Infinri\Cms\Page
 	 */
 	protected ModelWithContent $model;
 
 	/**
-	 * @var \Kirby\Panel\Page
+	 * @var \Infinri\Panel\Page
 	 */
 	protected Model $panel;
 

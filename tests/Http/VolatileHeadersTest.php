@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\TestCase;
+use Infinri\Cms\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(VolatileHeaders::class)]

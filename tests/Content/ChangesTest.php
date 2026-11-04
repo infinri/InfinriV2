@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cache\Cache;
-use Kirby\Cms\App;
-use Kirby\TestCase;
-use Kirby\Uuid\Uuids;
+use Infinri\Cache\Cache;
+use Infinri\Cms\App;
+use Infinri\TestCase;
+use Infinri\Uuid\Uuids;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Changes::class)]

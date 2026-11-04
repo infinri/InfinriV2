@@ -1,5 +1,5 @@
 <?php
 
-use Kirby\Cms\Collection;
+use Infinri\Cms\Collection;
 
 return fn () => new Collection();

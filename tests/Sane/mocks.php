@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Sane;
+namespace Infinri\Sane;
 
 class CustomHandler extends Svg
 {

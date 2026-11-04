@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Exception\LogicException;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Exception\LogicException;
 
 class ImmutableMemoryStorage extends MemoryStorage
 {
@@ -18,7 +18,7 @@ class ImmutableMemoryStorage extends MemoryStorage
 	/**
 	 * Immutable storage entries cannot be deleted
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	public function delete(VersionId $versionId, Language $language): void
 	{
@@ -28,7 +28,7 @@ class ImmutableMemoryStorage extends MemoryStorage
 	/**
 	 * Immutable storage entries cannot be moved
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	public function move(
 		VersionId $fromVersionId,
@@ -52,7 +52,7 @@ class ImmutableMemoryStorage extends MemoryStorage
 	/**
 	 * Throws an exception to avoid the mutation of storage data
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	protected function preventMutation(string $mutation): void
 	{
@@ -64,7 +64,7 @@ class ImmutableMemoryStorage extends MemoryStorage
 	/**
 	 * Immutable storage entries cannot be touched
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	public function touch(VersionId $versionId, Language $language): void
 	{
@@ -74,7 +74,7 @@ class ImmutableMemoryStorage extends MemoryStorage
 	/**
 	 * Immutable storage entries cannot be updated
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	public function update(VersionId $versionId, Language $language, array $fields): void
 	{

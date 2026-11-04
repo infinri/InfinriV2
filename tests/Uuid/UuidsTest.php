@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
-use Kirby\Cache\Cache;
-use Kirby\Cache\MemoryCache;
-use Kirby\Cache\NullCache;
-use Kirby\Exception\LogicException;
+use Infinri\Cache\Cache;
+use Infinri\Cache\MemoryCache;
+use Infinri\Cache\NullCache;
+use Infinri\Exception\LogicException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Uuids::class)]

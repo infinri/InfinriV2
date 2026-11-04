@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\PagePicker;
+use Infinri\Cms\PagePicker;
 
 return [
 	'methods' => [

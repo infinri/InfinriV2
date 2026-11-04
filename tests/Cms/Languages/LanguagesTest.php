@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Data;
-use Kirby\Exception\DuplicateException;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Data\Data;
+use Infinri\Exception\DuplicateException;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 
 class LanguagesTest extends TestCase
 {

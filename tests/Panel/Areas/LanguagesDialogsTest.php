@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
 class LanguagesDialogsTest extends AreaTestCase
 {

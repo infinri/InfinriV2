@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Str;
 
 return [
 	'props' => [

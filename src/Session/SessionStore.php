@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
 abstract class SessionStore
 {

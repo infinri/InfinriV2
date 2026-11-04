@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\File as BaseFile;
-use Kirby\Panel\File as PanelFile;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\File as BaseFile;
+use Infinri\Panel\File as PanelFile;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(File::class)]

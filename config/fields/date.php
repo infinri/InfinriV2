@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Exception\Exception;
-use Kirby\Form\Field;
-use Kirby\Toolkit\Date;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\Exception;
+use Infinri\Form\Field;
+use Infinri\Toolkit\Date;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 return [
 	'mixins' => ['datetime'],

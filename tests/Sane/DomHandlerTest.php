@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Sane;
+namespace Infinri\Sane;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(DomHandler::class)]

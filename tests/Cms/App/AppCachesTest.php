@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cache\FileCache;
-use Kirby\Cache\NullCache;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
+use Infinri\Cache\FileCache;
+use Infinri\Cache\NullCache;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
 
 class AppCachesTest extends TestCase
 {

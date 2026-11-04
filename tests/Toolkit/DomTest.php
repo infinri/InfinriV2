@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Closure;
 use DOMAttr;
@@ -8,9 +8,9 @@ use DOMDocument;
 use DOMDocumentType;
 use DOMElement;
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Data\Data;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Cms\App;
+use Infinri\Data\Data;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;

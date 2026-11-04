@@ -1,3 +1,3 @@
 <?php
 
-Kirby\Http\HeadersSent::$value = true;
+Infinri\Http\HeadersSent::$value = true;

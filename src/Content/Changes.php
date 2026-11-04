@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cache\Cache;
-use Kirby\Cms\App;
-use Kirby\Cms\Files;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Pages;
-use Kirby\Cms\Users;
-use Kirby\Toolkit\A;
+use Infinri\Cache\Cache;
+use Infinri\Cms\App;
+use Infinri\Cms\Files;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Pages;
+use Infinri\Cms\Users;
+use Infinri\Toolkit\A;
 
 class Changes
 {
@@ -47,7 +47,7 @@ class Changes
 	 * Verify that the tracked model still really has changes.
 	 * If not, untrack and remove from collection.
 	 *
-	 * @template T of \Kirby\Cms\Files|\Kirby\Cms\Pages|\Kirby\Cms\Users
+	 * @template T of \Infinri\Cms\Files|\Infinri\Cms\Pages|\Infinri\Cms\Users
 	 * @param T $tracked
 	 * @return T
 	 */
@@ -107,7 +107,7 @@ class Changes
 	public function pages(): Pages
 	{
 		/**
-		 * @var \Kirby\Cms\Pages $pages
+		 * @var \Infinri\Cms\Pages $pages
 		 *
 		 * Always pass at least two arguments even if the
 		 * data is empty so that `$site->find()` always
@@ -178,7 +178,7 @@ class Changes
 	public function users(): Users
 	{
 		/**
-		 * @var \Kirby\Cms\Users $users
+		 * @var \Infinri\Cms\Users $users
 		 *
 		 * Always pass at least two arguments even if the
 		 * data is empty so that `$users->find()` always

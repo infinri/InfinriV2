@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
 
 class ColorFieldTest extends TestCase
 {

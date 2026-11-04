@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Option;
+namespace Infinri\Option;
 
-use Kirby\Cms\Page;
-use Kirby\Exception\NotFoundException;
-use Kirby\Field\TestCase;
+use Infinri\Cms\Page;
+use Infinri\Exception\NotFoundException;
+use Infinri\Field\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(OptionsApi::class)]

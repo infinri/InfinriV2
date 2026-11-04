@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\Site;
-use Kirby\Form\Form;
+use Infinri\Cms\Site;
+use Infinri\Form\Form;
 
 /**
  * Site

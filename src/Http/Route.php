@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
 use Closure;
 

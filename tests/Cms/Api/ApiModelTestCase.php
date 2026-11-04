@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms\Api;
+namespace Infinri\Cms\Api;
 
-use Kirby\Cms\Api;
-use Kirby\Cms\App;
-use Kirby\Cms\TestCase;
+use Infinri\Cms\Api;
+use Infinri\Cms\App;
+use Infinri\Cms\TestCase;
 
 class ApiModelTestCase extends TestCase
 {

@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Panel\Panel;
-use Kirby\Toolkit\I18n;
+use Infinri\Panel\Panel;
+use Infinri\Toolkit\I18n;
 
 return function ($kirby) {
 	return [

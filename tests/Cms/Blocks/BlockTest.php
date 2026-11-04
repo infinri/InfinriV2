@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Error;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\TestCase;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\TestCase;
 
 class BlockTest extends TestCase
 {

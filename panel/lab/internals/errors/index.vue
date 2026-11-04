@@ -56,7 +56,7 @@
 			</k-text>
 
 			<k-code language="php">{{
-				`throw new Kirby\\Exception\\InvalidArgumentException(
+				`throw new Infinri\\Exception\\InvalidArgumentException(
 	fallback: 'Exception with details',
 	details: [
 		'a' => [

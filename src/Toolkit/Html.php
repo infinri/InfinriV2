@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
-use Kirby\Filesystem\F;
-use Kirby\Http\Uri;
-use Kirby\Http\Url;
+use Infinri\Filesystem\F;
+use Infinri\Http\Uri;
+use Infinri\Http\Url;
 
 class Html extends Xml
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Plugin;
+namespace Infinri\Plugin;
 
 use Composer\Autoload\ClassLoader;
-use Kirby\Cms\App;
-use Kirby\Cms\System\UpdateStatus;
-use Kirby\Cms\TestCase;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\App;
+use Infinri\Cms\System\UpdateStatus;
+use Infinri\Cms\TestCase;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Plugin::class)]

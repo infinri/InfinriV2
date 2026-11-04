@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
-use Kirby\Filesystem\F;
+use Infinri\Filesystem\F;
 
 class FileDialogsTest extends AreaTestCase
 {

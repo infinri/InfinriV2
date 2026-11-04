@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Ui\Item;
+namespace Infinri\Panel\Ui\Item;
 
-use Kirby\Cms\Page;
-use Kirby\Cms\TestCase;
+use Infinri\Cms\Page;
+use Infinri\Cms\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(PageItem::class)]

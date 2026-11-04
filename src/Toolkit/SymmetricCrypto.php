@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
-use Kirby\Data\Json;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
+use Infinri\Data\Json;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
 use SensitiveParameter;
 
 class SymmetricCrypto

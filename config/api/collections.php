@@ -4,12 +4,12 @@
  * Api Collection Definitions
  */
 
-use Kirby\Cms\Files;
-use Kirby\Cms\Languages;
-use Kirby\Cms\Pages;
-use Kirby\Cms\Roles;
-use Kirby\Cms\Translations;
-use Kirby\Cms\Users;
+use Infinri\Cms\Files;
+use Infinri\Cms\Languages;
+use Infinri\Cms\Pages;
+use Infinri\Cms\Roles;
+use Infinri\Cms\Translations;
+use Infinri\Cms\Users;
 
 return [
 

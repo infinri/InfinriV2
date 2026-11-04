@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
 use Exception;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\SymmetricCrypto;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\SymmetricCrypto;
 
 class InvalidSessionStore
 {

@@ -1,14 +1,14 @@
 <?php
 
-use Kirby\Cms\Blueprint;
-use Kirby\Cms\Page;
-use Kirby\Cms\Pages;
-use Kirby\Cms\Site;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Panel\Collector\PagesCollector;
-use Kirby\Panel\Ui\Item\PageItem;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\Blueprint;
+use Infinri\Cms\Page;
+use Infinri\Cms\Pages;
+use Infinri\Cms\Site;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Panel\Collector\PagesCollector;
+use Infinri\Panel\Ui\Item\PageItem;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\I18n;
 
 return [
 	'mixins' => [

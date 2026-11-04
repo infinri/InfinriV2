@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\F;
-use Kirby\Plugin\Assets;
-use Kirby\Plugin\Plugin;
-use Kirby\Toolkit\A;
+use Infinri\Filesystem\F;
+use Infinri\Plugin\Assets;
+use Infinri\Plugin\Plugin;
+use Infinri\Toolkit\A;
 
-class Html extends \Kirby\Toolkit\Html
+class Html extends \Infinri\Toolkit\Html
 {
 	/**
 	 * Creates one or multiple CSS link tags

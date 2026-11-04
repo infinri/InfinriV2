@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Query\AST;
+namespace Infinri\Query\AST;
 
-use Kirby\Query\Visitors\DefaultVisitor;
-use Kirby\TestCase;
+use Infinri\Query\Visitors\DefaultVisitor;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(LiteralNode::class)]

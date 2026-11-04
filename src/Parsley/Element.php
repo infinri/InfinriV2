@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Parsley;
+namespace Infinri\Parsley;
 
 use DOMElement;
 use DOMNodeList;
 use DOMXPath;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Str;
 
 class Element
 {

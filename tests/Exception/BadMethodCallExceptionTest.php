@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Exception;
+namespace Infinri\Exception;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 class BadMethodCallExceptionTest extends TestCase

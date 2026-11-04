@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Parsley;
+namespace Infinri\Parsley;
 
 class Schema
 {

@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\Collection;
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Cms\User;
-use Kirby\Content\Changes;
-use Kirby\Panel\Ui\Item\FileItem;
-use Kirby\Panel\Ui\Item\PageItem;
-use Kirby\Panel\Ui\Item\UserItem;
+use Infinri\Cms\Collection;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Cms\User;
+use Infinri\Content\Changes;
+use Infinri\Panel\Ui\Item\FileItem;
+use Infinri\Panel\Ui\Item\PageItem;
+use Infinri\Panel\Ui\Item\UserItem;
 
 class ChangesDialog
 {

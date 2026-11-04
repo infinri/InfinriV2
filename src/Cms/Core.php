@@ -1,22 +1,22 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cache\ApcuCache;
-use Kirby\Cache\FileCache;
-use Kirby\Cache\MemCached;
-use Kirby\Cache\MemoryCache;
-use Kirby\Cache\RedisCache;
-use Kirby\Cms\Auth\EmailChallenge;
-use Kirby\Cms\Auth\TotpChallenge;
-use Kirby\Form\Field\BlocksField;
-use Kirby\Form\Field\EntriesField;
-use Kirby\Form\Field\LayoutField;
-use Kirby\Form\Field\StatsField;
-use Kirby\Panel\Ui\FilePreviews\AudioFilePreview;
-use Kirby\Panel\Ui\FilePreviews\ImageFilePreview;
-use Kirby\Panel\Ui\FilePreviews\PdfFilePreview;
-use Kirby\Panel\Ui\FilePreviews\VideoFilePreview;
+use Infinri\Cache\ApcuCache;
+use Infinri\Cache\FileCache;
+use Infinri\Cache\MemCached;
+use Infinri\Cache\MemoryCache;
+use Infinri\Cache\RedisCache;
+use Infinri\Cms\Auth\EmailChallenge;
+use Infinri\Cms\Auth\TotpChallenge;
+use Infinri\Form\Field\BlocksField;
+use Infinri\Form\Field\EntriesField;
+use Infinri\Form\Field\LayoutField;
+use Infinri\Form\Field\StatsField;
+use Infinri\Panel\Ui\FilePreviews\AudioFilePreview;
+use Infinri\Panel\Ui\FilePreviews\ImageFilePreview;
+use Infinri\Panel\Ui\FilePreviews\PdfFilePreview;
+use Infinri\Panel\Ui\FilePreviews\VideoFilePreview;
 
 class Core
 {
@@ -322,7 +322,7 @@ class Core
 	/**
 	 * Returns all absolute paths to important directories
 	 *
-	 * Roots are resolved and baked in `\Kirby\Cms\App::bakeRoots()`
+	 * Roots are resolved and baked in `\Infinri\Cms\App::bakeRoots()`
 	 */
 	public function roots(): array
 	{
@@ -446,7 +446,7 @@ class Core
 	/**
 	 * Returns an array with all system URLs
 	 *
-	 * URLs are resolved and baked in `\Kirby\Cms\App::bakeUrls()`
+	 * URLs are resolved and baked in `\Infinri\Cms\App::bakeUrls()`
 	 */
 	public function urls(): array
 	{

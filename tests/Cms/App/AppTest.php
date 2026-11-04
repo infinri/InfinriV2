@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Data;
-use Kirby\Email\PHPMailer;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Http\Route;
-use Kirby\Session\Session;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Data;
+use Infinri\Email\PHPMailer;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Http\Route;
+use Infinri\Session\Session;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionMethod;
@@ -655,7 +655,7 @@ class AppTest extends TestCase
 	//         'body' => 'We will never reply',
 	//         'debug' => true
 	//     ]);
-	//     $this->assertInstanceOf(\Kirby\Email\Email::class, $email);
+	//     $this->assertInstanceOf(\Infinri\Email\Email::class, $email);
 	// }
 
 	public function testRoute(): void

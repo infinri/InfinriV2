@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\Exception;
-use Kirby\Filesystem\F;
+use Infinri\Exception\Exception;
+use Infinri\Filesystem\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionMethod;
 use Whoops\Handler\CallbackHandler;
@@ -313,7 +313,7 @@ class AppErrorsTest extends TestCase
 			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://getkirby.com/docs/reference/system/options/debug'
 		]), $this->_getBufferedContent($handlers[0]));
 
-		// test CallbackHandler with \Kirby\Exception\Exception class
+		// test CallbackHandler with \Infinri\Exception\Exception class
 		$exception = new Exception(
 			data: [],
 			details: ['Some error message']

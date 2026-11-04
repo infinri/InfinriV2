@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
 use Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\TestCase;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use stdClass;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Content\ImmutableMemoryStorage;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Controller;
+use Infinri\Content\ImmutableMemoryStorage;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Controller;
 use Stringable;
 
 class Event implements Stringable
@@ -222,7 +222,7 @@ class Event implements Stringable
 	 * Updates a given argument with a new value
 	 *
 	 * @unstable
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function updateArgument(string $name, $value): void
 	{

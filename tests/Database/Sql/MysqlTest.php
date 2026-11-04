@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Database\Sql;
+namespace Infinri\Database\Sql;
 
-use Kirby\Database\Database;
-use Kirby\Toolkit\A;
+use Infinri\Database\Database;
+use Infinri\Toolkit\A;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Mysql::class)]

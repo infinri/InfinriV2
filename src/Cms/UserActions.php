@@ -1,19 +1,19 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Content\ImmutableMemoryStorage;
-use Kirby\Content\MemoryStorage;
-use Kirby\Data\Data;
-use Kirby\Data\Json;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Http\Idn;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Content\ImmutableMemoryStorage;
+use Infinri\Content\MemoryStorage;
+use Infinri\Data\Data;
+use Infinri\Data\Json;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Http\Idn;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 use SensitiveParameter;
 use Throwable;
 
@@ -140,7 +140,7 @@ trait UserActions
 	 * 4. applies the `after` hook
 	 * 5. returns the result
 	 *
-	 * @throws \Kirby\Exception\PermissionException
+	 * @throws \Infinri\Exception\PermissionException
 	 */
 	protected function commit(
 		string $action,
@@ -264,7 +264,7 @@ trait UserActions
 	/**
 	 * Deletes the user
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	#[BlockCollectionAccess]
 	public function delete(): bool

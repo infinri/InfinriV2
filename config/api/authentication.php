@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Exception\AuthException;
+use Infinri\Exception\AuthException;
 
 return function () {
 	$auth               = $this->kirby()->auth();

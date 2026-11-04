@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
 use Iterator;
-use Kirby\Exception\LogicException;
+use Infinri\Exception\LogicException;
 
 abstract class LazyCollection extends Collection
 {

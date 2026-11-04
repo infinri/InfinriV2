@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms\Auth;
+namespace Infinri\Cms\Auth;
 
 use Exception;
-use Kirby\Cms\User;
+use Infinri\Cms\User;
 
 class ErrorneousChallenge extends Challenge
 {

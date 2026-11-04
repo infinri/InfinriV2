@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Config;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Config;
 
 class Db
 {
@@ -88,7 +88,7 @@ class Db
 	 * redirected to either a predefined query or
 	 * the respective method of the Database object
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function __callStatic(string $method, $arguments)
 	{

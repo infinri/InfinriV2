@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
 use Exception;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
 
 class TestStorage extends Storage
 {

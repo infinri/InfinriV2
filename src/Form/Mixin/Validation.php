@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Form\Mixin;
+namespace Infinri\Form\Mixin;
 
 use Closure;
 use Exception;
-use Kirby\Form\Validations;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\V;
+use Infinri\Form\Validations;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\V;
 
 trait Validation
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\Cms\App;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Toolkit\I18n;
 
 class LanguageCreateButton extends ViewButton
 {

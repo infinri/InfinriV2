@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel\Lab;
+namespace Infinri\Panel\Lab;
 
 use Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Http\Response;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Http\Response;
 
 class Responses
 {

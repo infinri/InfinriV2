@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Query\AST;
+namespace Infinri\Query\AST;
 
 use DivisionByZeroError;
 use Exception;
-use Kirby\Query\Visitors\DefaultVisitor;
-use Kirby\TestCase;
+use Infinri\Query\Visitors\DefaultVisitor;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

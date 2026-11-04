@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\User;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Http\Router;
-use Kirby\Http\Uri;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\User;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Http\Router;
+use Infinri\Http\Uri;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Home

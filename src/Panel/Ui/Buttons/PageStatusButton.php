@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\Cms\Page;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\Page;
+use Infinri\Toolkit\I18n;
 
 class PageStatusButton extends ViewButton
 {

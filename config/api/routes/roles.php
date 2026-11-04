@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Find;
+use Infinri\Cms\Find;
 
 /**
  * Roles Routes

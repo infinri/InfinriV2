@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Language;
-use Kirby\Cms\Languages;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Language;
+use Infinri\Cms\Languages;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Toolkit\Str;
 
 class LanguagesDropdown extends ViewButton
 {

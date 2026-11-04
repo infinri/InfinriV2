@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\F;
-use Kirby\Uuid\Uuid;
-use Kirby\Uuid\Uuids;
+use Infinri\Filesystem\F;
+use Infinri\Uuid\Uuid;
+use Infinri\Uuid\Uuids;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(PageCopy::class)]

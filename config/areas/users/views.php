@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Panel\Collector\UsersCollector;
-use Kirby\Panel\Ui\Buttons\ViewButtons;
-use Kirby\Panel\Ui\Item\UserItem;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Panel\Collector\UsersCollector;
+use Infinri\Panel\Ui\Buttons\ViewButtons;
+use Infinri\Panel\Ui\Item\UserItem;
 
 return [
 	'users' => [

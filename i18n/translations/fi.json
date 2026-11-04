@@ -155,7 +155,7 @@
 	"error.language.name": "Anna kielen nimi",
 	"error.language.notFound": "Kieltä ei löytynyt",
 	"error.language.update.permission": "You are not allowed to update the language",
-	"error.language.variable.core": "\"{key}\" is one of Kirby's own translation strings and cannot be overwritten by a language variable",
+	"error.language.variable.core": "\"{key}\" is one of Infinri's own translation strings and cannot be overwritten by a language variable",
 	"error.language.variable.duplicate": "A variable for \"{key}\" already exists",
 	"error.language.variable.key": "Please enter a valid key for the variable",
 	"error.language.variable.notFound": "The variable could not be found",

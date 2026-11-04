@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
 use IntlDateFormatter;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
-use Kirby\Filesystem\IsFile;
-use Kirby\Panel\File as Panel;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\F;
+use Infinri\Filesystem\IsFile;
+use Infinri\Panel\File as Panel;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 
 class File extends ModelWithContent
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Toolkit\Obj;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Obj;
+use Infinri\Toolkit\Str;
 use Stringable;
 
 class Params extends Obj implements Stringable

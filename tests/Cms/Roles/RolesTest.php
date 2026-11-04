@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Data;
+use Infinri\Data\Data;
 
 class RolesTest extends TestCase
 {

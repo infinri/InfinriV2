@@ -1,15 +1,15 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Cms\UserRules;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Panel\Field;
-use Kirby\Panel\Panel;
-use Kirby\Panel\UserTotpDisableDialog;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Cms\UserRules;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Panel\Field;
+use Infinri\Panel\Panel;
+use Infinri\Panel\UserTotpDisableDialog;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\I18n;
 
 $fields = require __DIR__ . '/../fields/dialogs.php';
 $files = require __DIR__ . '/../files/dialogs.php';

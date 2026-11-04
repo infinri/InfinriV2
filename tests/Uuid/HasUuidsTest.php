@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 class HasUuidsTest extends TestCase
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Language;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\Language;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(LanguageSettingsButton::class)]

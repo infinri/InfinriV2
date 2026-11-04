@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cache\Value;
-use Kirby\Content\VersionId;
-use Kirby\Exception\Exception;
-use Kirby\Exception\NotFoundException;
+use Infinri\Cache\Value;
+use Infinri\Content\VersionId;
+use Infinri\Exception\Exception;
+use Infinri\Exception\NotFoundException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

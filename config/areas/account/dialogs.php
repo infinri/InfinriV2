@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Panel\UserTotpEnableDialog;
+use Infinri\Panel\UserTotpEnableDialog;
 
 $dialogs = require __DIR__ . '/../users/dialogs.php';
 

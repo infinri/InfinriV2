@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
 use Exception;
 

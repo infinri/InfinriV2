@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Form\FieldClass;
-use Kirby\Panel\Ui\Stats;
+use Infinri\Form\FieldClass;
+use Infinri\Panel\Ui\Stats;
 
 class StatsField extends FieldClass
 {

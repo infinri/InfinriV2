@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Exception\Exception;
-use Kirby\Filesystem\F;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Exception\Exception;
+use Infinri\Filesystem\F;
 
 class PHP extends Handler
 {

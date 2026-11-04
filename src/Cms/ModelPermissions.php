@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\LogicException;
-use Kirby\Toolkit\A;
+use Infinri\Exception\LogicException;
+use Infinri\Toolkit\A;
 
 abstract class ModelPermissions
 {

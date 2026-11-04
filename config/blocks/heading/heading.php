@@ -1,5 +1,5 @@
 <?php
-/** @var \Kirby\Cms\Block $block */
+/** @var \Infinri\Cms\Block $block */
 $level = $block->level()->value();
 
 // ensure a valid heading tag

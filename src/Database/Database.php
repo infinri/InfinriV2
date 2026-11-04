@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
 use Closure;
-use Kirby\Database\Sql\Mysql;
-use Kirby\Database\Sql\Sqlite;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Obj;
-use Kirby\Toolkit\Str;
+use Infinri\Database\Sql\Mysql;
+use Infinri\Database\Sql\Sqlite;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Obj;
+use Infinri\Toolkit\Str;
 use PDO;
 use PDOStatement;
 use Throwable;
@@ -131,7 +131,7 @@ class Database
 	/**
 	 * Connects to a database
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function connect(array $params = []): PDO|null
 	{

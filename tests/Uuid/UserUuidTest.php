@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
 use PHPUnit\Framework\Attributes\CoversClass;

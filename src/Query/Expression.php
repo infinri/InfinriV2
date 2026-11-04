@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
-use Kirby\Exception\LogicException;
-use Kirby\Toolkit\A;
+use Infinri\Exception\LogicException;
+use Infinri\Toolkit\A;
 
 class Expression
 {

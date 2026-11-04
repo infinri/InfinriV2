@@ -9,7 +9,7 @@ return [
 				'method'  => 'POST|GET',
 				'auth'    => $kirby->option('kql.auth') !== false,
 				'action'  => function () use ($kirby) {
-					$kql = '\Kirby\Kql\Kql';
+					$kql = '\Infinri\Kql\Kql';
 
 					if (class_exists($kql) === false) {
 						return [

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
 
 class Permissions
 {
@@ -88,7 +88,7 @@ class Permissions
 	/**
 	 * Permissions constructor
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function __construct(array|bool|null $settings = [])
 	{

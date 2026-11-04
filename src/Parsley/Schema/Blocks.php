@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Parsley\Schema;
+namespace Infinri\Parsley\Schema;
 
 use DOMElement;
 use DOMText;
-use Kirby\Http\Url;
-use Kirby\Parsley\Element;
-use Kirby\Sane\Html;
-use Kirby\Toolkit\Dom;
-use Kirby\Toolkit\Str;
+use Infinri\Http\Url;
+use Infinri\Parsley\Element;
+use Infinri\Sane\Html;
+use Infinri\Toolkit\Dom;
+use Infinri\Toolkit\Str;
 
 class Blocks extends Plain
 {

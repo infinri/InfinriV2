@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Str;
 
 class Path extends Collection
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Panel\Controller;
+namespace Infinri\Panel\Controller;
 
-use Kirby\Cms\App;
-use Kirby\Panel\Ui\Item\FileItem;
-use Kirby\Panel\Ui\Item\PageItem;
-use Kirby\Panel\Ui\Item\UserItem;
+use Infinri\Cms\App;
+use Infinri\Panel\Ui\Item\FileItem;
+use Infinri\Panel\Ui\Item\PageItem;
+use Infinri\Panel\Ui\Item\UserItem;
 
 class Search
 {

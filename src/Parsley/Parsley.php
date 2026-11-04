@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Parsley;
+namespace Infinri\Parsley;
 
 use DOMComment;
 use DOMDocument;
@@ -8,8 +8,8 @@ use DOMDocumentType;
 use DOMElement;
 use DOMNode;
 use DOMText;
-use Kirby\Parsley\Schema\Plain;
-use Kirby\Toolkit\Dom;
+use Infinri\Parsley\Schema\Plain;
+use Infinri\Toolkit\Dom;
 
 class Parsley
 {

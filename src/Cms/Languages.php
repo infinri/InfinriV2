@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\DuplicateException;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\DuplicateException;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Str;
 
 class Languages extends Collection
 {
@@ -17,7 +17,7 @@ class Languages extends Collection
 	 * Creates a new collection with the given language objects
 	 *
 	 * @param null $parent
-	 * @throws \Kirby\Exception\DuplicateException
+	 * @throws \Infinri\Exception\DuplicateException
 	 */
 	public function __construct(
 		array $objects = [],

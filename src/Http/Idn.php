@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
 use Closure;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Str;
 
 class Idn
 {

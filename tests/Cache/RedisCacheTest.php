@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cache;
+namespace Infinri\Cache;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Redis;
 use ReflectionProperty;

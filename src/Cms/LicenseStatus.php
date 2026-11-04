@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Toolkit\I18n;
+use Infinri\Toolkit\I18n;
 enum LicenseStatus: string
 {
 	/**

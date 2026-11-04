@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cms\Api\ApiModelTestCase;
+use Infinri\Cms\Api\ApiModelTestCase;
 
 class PageBlueprintApiModelTest extends ApiModelTestCase
 {

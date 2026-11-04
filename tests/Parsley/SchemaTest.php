@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Parsley;
+namespace Infinri\Parsley;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Schema::class)]

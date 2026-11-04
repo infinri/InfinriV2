@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cache;
+namespace Infinri\Cache;
 
-use Kirby\Exception\Exception;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\Exception;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Str;
 
 class FileCache extends Cache
 {

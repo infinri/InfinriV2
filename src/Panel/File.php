@@ -1,20 +1,20 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\File as CmsFile;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Filesystem\Asset;
-use Kirby\Panel\Ui\Buttons\ViewButtons;
-use Kirby\Panel\Ui\FilePreview;
-use Kirby\Panel\Ui\Item\FileItem;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\File as CmsFile;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Filesystem\Asset;
+use Infinri\Panel\Ui\Buttons\ViewButtons;
+use Infinri\Panel\Ui\FilePreview;
+use Infinri\Panel\Ui\Item\FileItem;
+use Infinri\Toolkit\I18n;
 use Throwable;
 
 class File extends Model
 {
 	/**
-	 * @var \Kirby\Cms\File
+	 * @var \Infinri\Cms\File
 	 */
 	protected ModelWithContent $model;
 
@@ -28,7 +28,7 @@ class File extends Model
 
 		switch ($parent::CLASS_ALIAS) {
 			case 'user':
-				/** @var \Kirby\Cms\User $parent */
+				/** @var \Infinri\Cms\User $parent */
 				// The breadcrumb is not necessary
 				// on the account view
 				if ($parent->isLoggedIn() === false) {
@@ -39,7 +39,7 @@ class File extends Model
 				}
 				break;
 			case 'page':
-				/** @var \Kirby\Cms\Page $parent */
+				/** @var \Infinri\Cms\Page $parent */
 				$breadcrumb = $this->model->parents()->flip()->values(
 					fn ($parent) => $parent->panel()->crumb()
 				);
@@ -184,7 +184,7 @@ class File extends Model
 	 * which is used in the changes dropdown
 	 * for example
 	 *
-	 * @deprecated 5.1.4 Use the Kirby\Panel\Ui\Item\FileItem class instead
+	 * @deprecated 5.1.4 Use the Infinri\Panel\Ui\Item\FileItem class instead
 	 */
 	public function dropdownOption(): array
 	{

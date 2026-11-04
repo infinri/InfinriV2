@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\Fieldsets;
-use Kirby\Cms\Layouts;
+use Infinri\Cms\Fieldsets;
+use Infinri\Cms\Layouts;
 
 class LayoutFieldTest extends TestCase
 {

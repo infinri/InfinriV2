@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\V;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\V;
 
 class Validations
 {
 	/**
 	 * Validates if the field value is boolean
 	 *
-	 * @param \Kirby\Form\Field|\Kirby\Form\FieldClass $field
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @param \Infinri\Form\Field|\Infinri\Form\FieldClass $field
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function boolean($field, $value): bool
 	{
@@ -29,7 +29,7 @@ class Validations
 	/**
 	 * Validates if the field value is valid date
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function date(Field|FieldClass $field, mixed $value): bool
 	{
@@ -47,7 +47,7 @@ class Validations
 	/**
 	 * Validates if the field value is valid email
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function email(Field|FieldClass $field, mixed $value): bool
 	{
@@ -65,7 +65,7 @@ class Validations
 	/**
 	 * Validates if the field value is maximum
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function max(Field|FieldClass $field, mixed $value): bool
 	{
@@ -86,7 +86,7 @@ class Validations
 	/**
 	 * Validates if the field value is max length
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function maxlength(Field|FieldClass $field, mixed $value): bool
 	{
@@ -107,7 +107,7 @@ class Validations
 	/**
 	 * Validates if the field value is minimum
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function min(Field|FieldClass $field, mixed $value): bool
 	{
@@ -128,7 +128,7 @@ class Validations
 	/**
 	 * Validates if the field value is min length
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function minlength(Field|FieldClass $field, mixed $value): bool
 	{
@@ -149,7 +149,7 @@ class Validations
 	/**
 	 * Validates if the field value matches defined pattern
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function pattern(Field|FieldClass $field, mixed $value): bool
 	{
@@ -174,7 +174,7 @@ class Validations
 	/**
 	 * Validates if the field value is required
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function required(Field|FieldClass $field, mixed $value): bool
 	{
@@ -194,7 +194,7 @@ class Validations
 	/**
 	 * Validates if the field value is in defined options
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function option(Field|FieldClass $field, mixed $value): bool
 	{
@@ -214,7 +214,7 @@ class Validations
 	/**
 	 * Validates if the field values is in defined options
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function options(Field|FieldClass $field, mixed $value): bool
 	{
@@ -235,7 +235,7 @@ class Validations
 	/**
 	 * Validates if the field value is valid time
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function time(Field|FieldClass $field, mixed $value): bool
 	{
@@ -253,7 +253,7 @@ class Validations
 	/**
 	 * Validates if the field value is valid url
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function url(Field|FieldClass $field, mixed $value): bool
 	{

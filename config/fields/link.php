@@ -1,9 +1,9 @@
 <?php
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Http\Url;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Http\Url;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
 
 return [
 	'props' => [

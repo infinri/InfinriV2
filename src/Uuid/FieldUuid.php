@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
-use Kirby\Cms\Collection;
-use Kirby\Content\Field;
-use Kirby\Toolkit\A;
+use Infinri\Cms\Collection;
+use Infinri\Content\Field;
+use Infinri\Toolkit\A;
 
 abstract class FieldUuid extends Uuid
 {
@@ -70,7 +70,7 @@ abstract class FieldUuid extends Uuid
 	 * Generator function that returns collections for all fields globally
 	 * (in any page's, file's, user's or site's content file)
 	 *
-	 * @return \Generator|\Kirby\Cms\Collection[]
+	 * @return \Generator|\Infinri\Cms\Collection[]
 	 */
 	public static function index(): Generator
 	{

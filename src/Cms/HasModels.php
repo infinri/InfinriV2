@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\BlockCollectionAccess;
 
 trait HasModels
 {

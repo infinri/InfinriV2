@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Field;
+namespace Infinri\Field;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Option\Options;
-use Kirby\Option\OptionsApi;
-use Kirby\Option\OptionsProvider;
-use Kirby\Option\OptionsQuery;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Option\Options;
+use Infinri\Option\OptionsApi;
+use Infinri\Option\OptionsProvider;
+use Infinri\Option\OptionsQuery;
 
 class FieldOptions
 {

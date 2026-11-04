@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Closure;
 use Exception;
-use Kirby\Filesystem\F;
+use Infinri\Filesystem\F;
 use ReflectionFunction;
 
 class Controller

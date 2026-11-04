@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
 use Closure;
-use Kirby\Cms\App;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Http\Url;
-use Kirby\Panel\Panel;
-use Kirby\Panel\Ui\Button;
-use Kirby\Toolkit\Controller;
+use Infinri\Cms\App;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Http\Url;
+use Infinri\Panel\Panel;
+use Infinri\Panel\Ui\Button;
+use Infinri\Toolkit\Controller;
 
 class ViewButton extends Button
 {

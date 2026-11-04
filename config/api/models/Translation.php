@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Translation;
+use Infinri\Cms\Translation;
 
 /**
  * Translation

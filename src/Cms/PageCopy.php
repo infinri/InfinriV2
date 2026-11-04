@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Uuid\ModelUuid;
-use Kirby\Uuid\Uuid;
-use Kirby\Uuid\Uuids;
+use Infinri\Uuid\ModelUuid;
+use Infinri\Uuid\Uuid;
+use Infinri\Uuid\Uuids;
 
 class PageCopy
 {

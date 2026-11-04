@@ -1,31 +1,31 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Blocks;
-use Kirby\Cms\Collection;
-use Kirby\Cms\File;
-use Kirby\Cms\Files;
-use Kirby\Cms\Html;
-use Kirby\Cms\Layouts;
-use Kirby\Cms\Page;
-use Kirby\Cms\Pages;
-use Kirby\Cms\Structure;
-use Kirby\Cms\Url;
-use Kirby\Cms\User;
-use Kirby\Cms\Users;
-use Kirby\Content\Content;
-use Kirby\Content\Field;
-use Kirby\Data\Data;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Image\QrCode;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Dom;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
-use Kirby\Toolkit\Xml;
-use Kirby\Uuid\Uuid;
+use Infinri\Cms\App;
+use Infinri\Cms\Blocks;
+use Infinri\Cms\Collection;
+use Infinri\Cms\File;
+use Infinri\Cms\Files;
+use Infinri\Cms\Html;
+use Infinri\Cms\Layouts;
+use Infinri\Cms\Page;
+use Infinri\Cms\Pages;
+use Infinri\Cms\Structure;
+use Infinri\Cms\Url;
+use Infinri\Cms\User;
+use Infinri\Cms\Users;
+use Infinri\Content\Content;
+use Infinri\Content\Field;
+use Infinri\Data\Data;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Image\QrCode;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Dom;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
+use Infinri\Toolkit\Xml;
+use Infinri\Uuid\Uuid;
 
 /**
  * Field method setup

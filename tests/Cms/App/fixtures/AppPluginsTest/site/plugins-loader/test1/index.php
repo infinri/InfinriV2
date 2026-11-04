@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\AppPluginsTest;
+use Infinri\Cms\AppPluginsTest;
 
 Kirby::plugin('kirby/test1', [
 	'hooks' => [

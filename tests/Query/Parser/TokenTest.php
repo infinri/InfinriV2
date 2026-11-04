@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Query\Parser;
+namespace Infinri\Query\Parser;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Token::class)]

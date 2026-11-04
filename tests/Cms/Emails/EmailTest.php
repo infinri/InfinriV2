@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\NotFoundException;
+use Infinri\Exception\NotFoundException;
 use PHPMailer\PHPMailer\PHPMailer as Mailer;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunInSeparateProcess;

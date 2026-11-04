@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Collection;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Collection;
 
 class Segments extends Collection
 {

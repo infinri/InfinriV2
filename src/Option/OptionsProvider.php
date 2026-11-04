@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Option;
+namespace Infinri\Option;
 
-use Kirby\Cms\ModelWithContent;
+use Infinri\Cms\ModelWithContent;
 
 abstract class OptionsProvider
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Content\Lock;
-use Kirby\Content\Version;
-use Kirby\Content\VersionId;
-use Kirby\Content\Versions;
-use Kirby\Exception\NotFoundException;
-use Kirby\Panel\Page as PanelPage;
-use Kirby\Uuid\PageUuid;
-use Kirby\Uuid\SiteUuid;
+use Infinri\Content\Lock;
+use Infinri\Content\Version;
+use Infinri\Content\VersionId;
+use Infinri\Content\Versions;
+use Infinri\Exception\NotFoundException;
+use Infinri\Panel\Page as PanelPage;
+use Infinri\Uuid\PageUuid;
+use Infinri\Uuid\SiteUuid;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

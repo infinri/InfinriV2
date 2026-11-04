@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 trait AppTranslations
 {

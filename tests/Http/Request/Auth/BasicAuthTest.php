@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http\Request\Auth;
+namespace Infinri\Http\Request\Auth;
 
-use Kirby\Http\Request\Auth;
-use Kirby\TestCase;
+use Infinri\Http\Request\Auth;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Auth::class)]

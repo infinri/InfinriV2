@@ -155,7 +155,7 @@
 	"error.language.name": "有効な言語名を入力してください",
 	"error.language.notFound": "言語が見つかりません",
 	"error.language.update.permission": "言語を更新する権限がありません",
-	"error.language.variable.core": "\"{key}\" is one of Kirby's own translation strings and cannot be overwritten by a language variable",
+	"error.language.variable.core": "\"{key}\" is one of Infinri's own translation strings and cannot be overwritten by a language variable",
 	"error.language.variable.duplicate": "A variable for \"{key}\" already exists",
 	"error.language.variable.key": "Please enter a valid key for the variable",
 	"error.language.variable.notFound": "変数が見つかりませんでした",
@@ -819,7 +819,7 @@
 
 	"users": "ユーザー",
 
-	"version": "Kirbyのバージョン",
+	"version": "Infinriのバージョン",
 	"version.changes": "変更されたバージョン",
 	"version.compare": "バージョンを比較",
 	"version.current": "現在のバージョン",

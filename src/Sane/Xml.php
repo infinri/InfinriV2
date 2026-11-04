@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Sane;
+namespace Infinri\Sane;
 
 use DOMDocumentType;
 use DOMElement;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Str;
 
 class Xml extends DomHandler
 {

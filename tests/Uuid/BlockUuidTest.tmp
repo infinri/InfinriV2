@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
-use Kirby\Cms\Blocks;
+use Infinri\Cms\Blocks;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(BlockUuid::class)]

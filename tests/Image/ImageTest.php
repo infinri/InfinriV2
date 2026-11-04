@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Exception\Exception;
-use Kirby\Exception\LogicException;
-use Kirby\TestCase;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Exception\Exception;
+use Infinri\Exception\LogicException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Image::class)]

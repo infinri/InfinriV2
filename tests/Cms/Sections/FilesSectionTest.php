@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 
 class FilesSectionTest extends TestCase
 {

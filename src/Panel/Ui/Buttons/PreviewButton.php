@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\Toolkit\I18n;
+use Infinri\Toolkit\I18n;
 
 class PreviewButton extends ViewButton
 {

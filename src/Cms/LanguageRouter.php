@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Exception\NotFoundException;
-use Kirby\Http\Router;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuid;
+use Infinri\Exception\NotFoundException;
+use Infinri\Http\Router;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Uuid;
 
 class LanguageRouter
 {
@@ -26,7 +26,7 @@ class LanguageRouter
 	 * Fetches all scoped routes for the
 	 * current language from the Kirby instance
 	 *
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 */
 	public function routes(): array
 	{

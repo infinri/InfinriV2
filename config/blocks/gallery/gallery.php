@@ -1,5 +1,5 @@
 <?php
-/** @var \Kirby\Cms\Block $block */
+/** @var \Infinri\Cms\Block $block */
 $caption = $block->caption();
 $crop    = $block->crop()->isTrue();
 $ratio   = $block->ratio()->or('auto');

@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Dropdown::class)]

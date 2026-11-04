@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Api\Controller;
+namespace Infinri\Api\Controller;
 
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Content\Lock;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\F;
-use Kirby\Form\Fields;
-use Kirby\Form\Form;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Content\Lock;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\F;
+use Infinri\Form\Fields;
+use Infinri\Form\Form;
 
 class Changes
 {

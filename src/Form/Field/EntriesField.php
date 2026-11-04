@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Data\Data;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Form\FieldClass;
-use Kirby\Form\Form;
-use Kirby\Form\Mixin\EmptyState;
-use Kirby\Form\Mixin\Max;
-use Kirby\Form\Mixin\Min;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Data;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Form\FieldClass;
+use Infinri\Form\Form;
+use Infinri\Form\Mixin\EmptyState;
+use Infinri\Form\Mixin\Max;
+use Infinri\Form\Mixin\Min;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 
 class EntriesField extends FieldClass
 {

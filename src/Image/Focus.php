@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class Focus
 {

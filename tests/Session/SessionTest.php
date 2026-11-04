@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Http\Cookie;
-use Kirby\TestCase;
-use Kirby\Toolkit\Obj;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\SymmetricCrypto;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Http\Cookie;
+use Infinri\TestCase;
+use Infinri\Toolkit\Obj;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\SymmetricCrypto;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionClass;
 use TypeError;

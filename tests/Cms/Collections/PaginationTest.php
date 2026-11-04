@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Http\Uri;
+use Infinri\Http\Uri;
 
 class PaginationTest extends TestCase
 {

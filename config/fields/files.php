@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Data\Data;
-use Kirby\Toolkit\A;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Data\Data;
+use Infinri\Toolkit\A;
 
 return [
 	'mixins' => [

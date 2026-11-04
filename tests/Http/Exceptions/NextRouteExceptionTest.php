@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http\Exceptions;
+namespace Infinri\Http\Exceptions;
 
 use Exception;
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[CoversNothing]

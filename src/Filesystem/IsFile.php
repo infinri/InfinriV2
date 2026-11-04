@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
-use Kirby\Cms\App;
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Image\Image;
+use Infinri\Cms\App;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Image\Image;
 
 trait IsFile
 {
@@ -35,7 +35,7 @@ trait IsFile
 	/**
 	 * Magic caller for asset methods
 	 *
-	 * @throws \Kirby\Exception\BadMethodCallException
+	 * @throws \Infinri\Exception\BadMethodCallException
 	 */
 	public function __call(string $method, array $arguments = []): mixed
 	{

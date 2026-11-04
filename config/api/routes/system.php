@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
 
 /**
  * System Routes

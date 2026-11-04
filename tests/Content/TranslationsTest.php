@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Exception\NotFoundException;
+use Infinri\Exception\NotFoundException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Translations::class)]

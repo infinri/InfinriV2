@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Lab;
+namespace Infinri\Panel\Lab;
 
-use Kirby\Template\Template as BaseTemplate;
+use Infinri\Template\Template as BaseTemplate;
 
 class Template extends BaseTemplate
 {

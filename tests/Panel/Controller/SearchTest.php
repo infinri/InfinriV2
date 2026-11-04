@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Controller;
+namespace Infinri\Panel\Controller;
 
-use Kirby\Cms\App;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Search::class)]

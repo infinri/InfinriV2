@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Lab\Doc;
+namespace Infinri\Panel\Lab\Doc;
 
-use Kirby\Panel\Lab\Doc;
-use Kirby\Toolkit\A;
+use Infinri\Panel\Lab\Doc;
+use Infinri\Toolkit\A;
 
 class Slot
 {

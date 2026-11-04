@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cache\Cache;
-use Kirby\Cache\NullCache;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Cache\Cache;
+use Infinri\Cache\NullCache;
+use Infinri\Exception\InvalidArgumentException;
 
 trait AppCaches
 {

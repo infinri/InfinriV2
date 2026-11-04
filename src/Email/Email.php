@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Email;
+namespace Infinri\Email;
 
 use Closure;
 use Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\V;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\V;
 
 class Email
 {

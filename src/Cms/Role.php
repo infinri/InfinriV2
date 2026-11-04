@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Data;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Data;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 use Stringable;
 
 class Role implements Stringable

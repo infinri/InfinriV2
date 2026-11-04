@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Str;
 
 class Helpers
 {
@@ -193,7 +193,7 @@ class Helpers
 	 * Determines the size/length of numbers,
 	 * strings, arrays and countable objects
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function size(mixed $value): int
 	{

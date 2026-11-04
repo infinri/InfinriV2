@@ -1,15 +1,15 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Cors;
-use Kirby\Cms\LanguageRoutes;
-use Kirby\Cms\Media;
-use Kirby\Http\Response;
-use Kirby\Panel\Panel;
-use Kirby\Panel\Plugins;
-use Kirby\Plugin\Assets;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuid;
+use Infinri\Cms\App;
+use Infinri\Cms\Cors;
+use Infinri\Cms\LanguageRoutes;
+use Infinri\Cms\Media;
+use Infinri\Http\Response;
+use Infinri\Panel\Panel;
+use Infinri\Panel\Plugins;
+use Infinri\Plugin\Assets;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Uuid;
 
 return function (App $kirby) {
 	$api   = $kirby->option('api.slug', 'api');
@@ -40,13 +40,13 @@ return function (App $kirby) {
 
 				// skip if no CORS request
 				if ($request->header('Access-Control-Request-Method') === null) {
-					/** @var \Kirby\Http\Route $this */
+					/** @var \Infinri\Http\Route $this */
 					$this->next();
 				}
 
 				// skip if CORS is disabled
 				if ($kirby->isCorsEnabled() === false) {
-					/** @var \Kirby\Http\Route $this */
+					/** @var \Infinri\Http\Route $this */
 					$this->next();
 				}
 

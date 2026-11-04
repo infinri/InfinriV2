@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\Cors;
-use Kirby\Toolkit\A;
+use Infinri\Cms\Cors;
+use Infinri\Toolkit\A;
 
 class VolatileHeaders
 {

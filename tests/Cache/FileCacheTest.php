@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cache;
+namespace Infinri\Cache;
 
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionMethod;
 

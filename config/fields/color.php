@@ -1,11 +1,11 @@
 <?php
 
-use Kirby\Cms\Helpers;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Field\FieldOptions;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\Helpers;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Field\FieldOptions;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\Str;
 
 return [
 	'props' => [

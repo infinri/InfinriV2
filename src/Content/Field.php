@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
 use Closure;
-use Kirby\Cms\ModelWithContent;
+use Infinri\Cms\ModelWithContent;
 use Stringable;
 
 class Field implements Stringable
@@ -21,7 +21,7 @@ class Field implements Stringable
 	/**
 	 * Creates a new field object
 	 *
-	 * @param \Kirby\Cms\ModelWithContent|null $parent Parent object if available. This will be the page, site, user or file to which the content belongs
+	 * @param \Infinri\Cms\ModelWithContent|null $parent Parent object if available. This will be the page, site, user or file to which the content belongs
 	 * @param string $key The field name
 	 */
 	public function __construct(

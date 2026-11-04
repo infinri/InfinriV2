@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversNothing;
 use ReflectionProperty;

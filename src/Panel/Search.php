@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Http\Response;
+use Infinri\Http\Response;
 
 class Search extends Json
 {

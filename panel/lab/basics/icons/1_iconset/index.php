@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Panel\Assets;
+use Infinri\Panel\Assets;
 
 $assets = new Assets();
 $file   = $assets->icons();

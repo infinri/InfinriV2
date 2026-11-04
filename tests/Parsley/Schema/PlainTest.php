@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Parsley\Schema;
+namespace Infinri\Parsley\Schema;
 
-use Kirby\Parsley\Element;
-use Kirby\Parsley\Schema;
-use Kirby\Toolkit\Dom;
+use Infinri\Parsley\Element;
+use Infinri\Parsley\Schema;
+use Infinri\Toolkit\Dom;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Plain::class)]
 class PlainTest extends TestCase
 {
-	/** @var \Kirby\Parsley\Schema\Plain */
+	/** @var \Infinri\Parsley\Schema\Plain */
 	protected Schema $schema;
 
 	protected function setUp(): void

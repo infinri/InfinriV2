@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Email;
+namespace Infinri\Email;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(PHPMailer::class)]

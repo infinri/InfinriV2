@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\Exception;
-use Kirby\Http\Response;
-use Kirby\TestCase;
+use Infinri\Exception\Exception;
+use Infinri\Http\Response;
+use Infinri\TestCase;
 
 class AppIoTest extends TestCase
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Panel\Ui;
+namespace Infinri\Panel\Ui;
 
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Panel\Ui\FilePreviews\DefaultFilePreview;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Panel\Ui\FilePreviews\DefaultFilePreview;
+use Infinri\Toolkit\I18n;
 
 abstract class FilePreview extends Component
 {

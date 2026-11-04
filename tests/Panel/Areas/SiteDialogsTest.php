@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
-use Kirby\Cms\Page;
+use Infinri\Cms\Page;
 
 class SiteDialogsTest extends AreaTestCase
 {
