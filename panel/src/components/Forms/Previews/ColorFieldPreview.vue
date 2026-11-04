@@ -10,9 +10,6 @@
 <script>
 import FieldPreview from "@/mixins/forms/fieldPreview.js";
 
-/**
- * @since 4.0.0
- */
 export default {
 	mixins: [FieldPreview],
 	props: {

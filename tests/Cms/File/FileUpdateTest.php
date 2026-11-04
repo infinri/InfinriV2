@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(File::class)]
 class FileUpdateTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileUpdate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileUpdate';
 
 	public function testUpdate(): void
 	{
@@ -73,7 +73,7 @@ class FileUpdateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$file = new File([
 			'filename' => 'test.jpg',

@@ -154,7 +154,6 @@ class Files extends Collection
 	 * Returns the file size for all
 	 * files in the collection in a
 	 * human-readable format
-	 * @since 3.6.0
 	 *
 	 * @param string|null|false $locale Locale for number formatting,
 	 *                                  `null` for the current locale,
@@ -168,7 +167,6 @@ class Files extends Collection
 	/**
 	 * Returns the raw size for all
 	 * files in the collection
-	 * @since 3.6.0
 	 */
 	public function size(): int
 	{

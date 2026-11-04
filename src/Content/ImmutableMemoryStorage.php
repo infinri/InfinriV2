@@ -3,18 +3,10 @@
 namespace Infinri\Content;
 
 use Infinri\Cms\Language;
-use Infinri\Cms\ModelWithContent;
 use Infinri\Exception\LogicException;
 
 class ImmutableMemoryStorage extends MemoryStorage
 {
-	public function __construct(
-		protected ModelWithContent $model,
-		protected ModelWithContent|null $nextModel = null
-	) {
-		parent::__construct($model);
-	}
-
 	/**
 	 * Immutable storage entries cannot be deleted
 	 *
@@ -38,15 +30,6 @@ class ImmutableMemoryStorage extends MemoryStorage
 		Storage|null $toStorage = null
 	): void {
 		$this->preventMutation('moved');
-	}
-
-	/**
-	 * Returns the next state of the model if the
-	 * reference is given
-	 */
-	public function nextModel(): ModelWithContent|null
-	{
-		return $this->nextModel;
 	}
 
 	/**

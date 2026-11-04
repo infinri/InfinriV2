@@ -17,7 +17,7 @@ export default {
 			return [
 				{ title: "Template", text: "custom-audio" },
 				{ title: "Mime", text: "audio/mp3" },
-				{ title: "URL", text: "some-audio.mp3", link: "https://getkirby.com" },
+				{ title: "URL", text: "some-audio.mp3", link: "https://infinri.com" },
 				{ title: "Size", text: "1.2 MB" },
 				{ title: "Length", text: "12 minutes" }
 			];

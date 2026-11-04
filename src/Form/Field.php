@@ -143,7 +143,7 @@ class Field extends Component
 					return $translate;
 				},
 				/**
-				 * Conditions when the field will be shown (since 3.1.0)
+				 * Conditions when the field will be shown
 				 */
 				'when' => function ($when = null) {
 					return $when;
@@ -187,7 +187,7 @@ class Field extends Component
 					/** @var \Infinri\Form\Field $this */
 					if ($this->help) {
 						$help = $this->model()->toSafeString($this->help);
-						$help = $this->kirby()->kirbytext($help);
+						$help = $this->infinri()->infinritext($help);
 						return $help;
 					}
 				},
@@ -239,8 +239,6 @@ class Field extends Component
 
 	/**
 	 * Returns the preferred empty state for the field
-	 *
-	 * @since 5.2.0
 	 */
 	public function emptyValue(): mixed
 	{
@@ -302,8 +300,6 @@ class Field extends Component
 	/**
 	 * Preferred name would be `::reset` but this is
 	 * taken by options in other fields.
-	 *
-	 * @since 5.2.0
 	 */
 	#[BlockCollectionAccess]
 	public function fillWithEmptyValue(): static
@@ -313,14 +309,6 @@ class Field extends Component
 		// with a different form value than the same field filled with
 		// its own empty value
 		return $this->fill($this->emptyValue());
-	}
-
-	/**
-	 * @deprecated 5.0.0 Use `::siblings() instead
-	 */
-	public function formFields(): Fields
-	{
-		return $this->siblings;
 	}
 
 	/**

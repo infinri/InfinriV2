@@ -38,7 +38,6 @@ export interface PanelRequestOptions extends Omit<
 
 /**
  * Creates a proper request body
- * @since 4.0.0
  */
 export function body(data: RequestBody | undefined): string | null | undefined {
 	if (data instanceof HTMLFormElement) {
@@ -58,7 +57,6 @@ export function body(data: RequestBody | undefined): string | null | undefined {
 
 /**
  * Convert globals to comma separated string
- * @since 4.0.0
  */
 export function globals(input?: string | string[]): string | undefined {
 	if (Array.isArray(input) === true) {
@@ -70,7 +68,6 @@ export function globals(input?: string | string[]): string | undefined {
 
 /**
  * Builds all required headers for a request
- * @since 4.0.0
  */
 export function headers(
 	input: Record<string, string> = {},
@@ -104,9 +101,6 @@ export function headers(
 	return result;
 }
 
-/**
- * @since 4.0.0
- */
 export function redirect(url: string | URL): never {
 	throw new RedirectError(makeAbsolute(url));
 }
@@ -118,7 +112,6 @@ export function redirect(url: string | URL): never {
  * It also makes sure to redirect requests,
  * which cannot be handled via fetch and
  * throws more useful errors.
- * @since 4.0.0
  */
 export async function request(
 	url: string,
@@ -154,7 +147,6 @@ export async function request(
 /**
  * Try to parse the response and throw
  * matching errors for issues with the response.
- * @since 4.0.0
  */
 export async function responder(
 	request: Request,

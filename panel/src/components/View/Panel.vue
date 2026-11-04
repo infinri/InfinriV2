@@ -15,10 +15,10 @@
 		<slot />
 
 		<!-- Fiber dialogs -->
-		<k-fiber-dialog v-if="$panel.dialog.isOpen && !$panel.dialog.legacy" />
+		<k-fiber-dialog v-if="$panel.dialog.isOpen" />
 
 		<!-- Fiber drawers -->
-		<k-fiber-drawer v-if="$panel.drawer.isOpen && !$panel.drawer.legacy" />
+		<k-fiber-drawer v-if="$panel.drawer.isOpen" />
 
 		<!-- Fatal iframe -->
 		<k-fatal

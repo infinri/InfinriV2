@@ -3,7 +3,7 @@
 		:caption="content.caption"
 		:caption-marks="captionMarks"
 		:disabled="disabled"
-		:empty-text="$t('field.blocks.video.placeholder') + ' …'"
+		:empty-text="$panel.t('field.blocks.video.placeholder') + ' …'"
 		:is-empty="!video"
 		empty-icon="video"
 		class="k-block-type-video-figure"
@@ -13,7 +13,7 @@
 		<k-frame ratio="16/9">
 			<template v-if="video">
 				<video
-					v-if="location == 'kirby'"
+					v-if="location == 'infinri'"
 					:src="video"
 					:poster="poster"
 					controls
@@ -47,7 +47,7 @@ export default {
 			return this.content.poster?.[0]?.url;
 		},
 		video() {
-			if (this.content.location === "kirby") {
+			if (this.content.location === "infinri") {
 				return this.content.video?.[0]?.url;
 			}
 

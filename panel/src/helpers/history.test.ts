@@ -41,7 +41,6 @@ describe("History", () => {
 		it("should reactively replace the last item", () => {
 			// when nested in a reactive object, replacing a milestone
 			// must trigger Vue reactivity so watchers/renderers update
-			// (regression: https://github.com/getkirby/kirby/issues/8264)
 			const store = reactive({ history: new History() });
 			expect(isReactive(store.history.milestones)).toBe(true);
 

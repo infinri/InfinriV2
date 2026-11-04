@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.User';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.User';
 
 	public function testAvatar(): void
 	{
@@ -48,20 +48,20 @@ class UserTest extends ModelTestCase
 	public function testToString(): void
 	{
 		$user = new User([
-			'email' => 'test@getkirby.com'
+			'email' => 'test@infinri.com'
 		]);
 
-		$this->assertSame('test@getkirby.com', $user->toString());
+		$this->assertSame('test@infinri.com', $user->toString());
 	}
 
 	public function testToStringWithTemplate(): void
 	{
 		$user = new User([
-			'email' => 'test@getkirby.com'
+			'email' => 'test@infinri.com'
 		]);
 
 		$this->assertSame(
-			'Email: test@getkirby.com',
+			'Email: test@infinri.com',
 			$user->toString('Email: {{ user.email }}')
 		);
 	}
@@ -69,15 +69,15 @@ class UserTest extends ModelTestCase
 	public function testQuery(): void
 	{
 		$user = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'name'  => 'Test User'
 		]);
 
 		$this->assertSame('Test User', $user->query('user.name')->value());
-		$this->assertSame('test@getkirby.com', $user->query('user.email'));
+		$this->assertSame('test@infinri.com', $user->query('user.email'));
 
 		// also test with `model` key
 		$this->assertSame('Test User', $user->query('model.name')->value());
-		$this->assertSame('test@getkirby.com', $user->query('model.email'));
+		$this->assertSame('test@infinri.com', $user->query('model.email'));
 	}
 }

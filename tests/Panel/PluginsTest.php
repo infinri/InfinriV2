@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Plugins::class)]
 class PluginsTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Plugins';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Plugins';
 
 	protected string $cssA;
 	protected string $cssB;
@@ -19,9 +19,7 @@ class PluginsTest extends TestCase
 	protected string $jsA;
 	protected string $jsB;
 	protected string $jsC;
-	protected string $mjsA;
-	protected string $mjsB;
-	protected string $mjsC;
+	protected string $devMjsC;
 
 	protected function setUp(): void
 	{
@@ -36,33 +34,32 @@ class PluginsTest extends TestCase
 	{
 		$time = \time() + 2;
 
-		F::write(static::TMP . '/site/plugins/a/index.php', '<?php Kirby::plugin("test/a", []);');
+		F::write(static::TMP . '/site/plugins/a/index.php', '<?php Infinri::plugin("test/a", []);');
 		touch(static::TMP . '/site/plugins/a/index.php', $time);
 		F::write($this->cssA = static::TMP . '/site/plugins/a/index.css', 'a');
 		touch($this->cssA, $time);
 		F::write($this->jsA = static::TMP . '/site/plugins/a/index.js', 'a');
 		touch($this->jsA, $time);
-		$this->mjsA = static::TMP . '/site/plugins/a/index.dev.mjs';
 
-		F::write(static::TMP . '/site/plugins/b/index.php', '<?php Kirby::plugin("test/b", []);');
+		F::write(static::TMP . '/site/plugins/b/index.php', '<?php Infinri::plugin("test/b", []);');
 		touch(static::TMP . '/site/plugins/b/index.php', $time);
 		F::write($this->cssB = static::TMP . '/site/plugins/b/index.css', 'b');
 		touch($this->cssB, $time);
 		F::write($this->jsB = static::TMP . '/site/plugins/b/index.js', 'b');
 		touch($this->jsB, $time);
-		$this->mjsB = static::TMP . '/site/plugins/b/index.dev.mjs';
 
-		F::write(static::TMP . '/site/plugins/c/index.php', '<?php Kirby::plugin("test/c", []);');
+		F::write(static::TMP . '/site/plugins/c/index.php', '<?php Infinri::plugin("test/c", []);');
 		touch(static::TMP . '/site/plugins/c/index.php', $time);
 		F::write($this->cssC = static::TMP . '/site/plugins/c/index.css', 'c');
 		touch($this->cssC, $time);
 		F::write($this->jsC = static::TMP . '/site/plugins/c/index.js', 'c');
 		touch($this->jsC, $time);
-		$this->mjsC = static::TMP . '/site/plugins/c/index.dev.mjs';
 
 		if ($addDevMjs === true) {
-			F::write($this->mjsC, 'c');
-			touch($this->mjsC, $time);
+			// an index.dev.mjs next to index.js must have no effect
+			$this->devMjsC = static::TMP . '/site/plugins/c/index.dev.mjs';
+			F::write($this->devMjsC, 'c');
+			touch($this->devMjsC, $time);
 		}
 
 		return $time;
@@ -84,18 +81,36 @@ class PluginsTest extends TestCase
 		$expected = [
 			$this->cssA,
 			$this->jsA,
-			$this->mjsA,
 			$this->cssB,
 			$this->jsB,
-			$this->mjsB,
 			$this->cssC,
-			$this->jsC,
-			$this->mjsC
+			$this->jsC
 		];
 
 		$this->assertSame($expected, $plugins->files());
 		// from cached property
 		$this->assertSame($expected, $plugins->files());
+	}
+
+	public function testFilesIgnoreDevMjs(): void
+	{
+		$this->createPlugins(true);
+
+		// app must be created again to load the new plugins
+		$app = $this->app->clone();
+
+		$plugins  = new Plugins();
+		$expected = [
+			$this->cssA,
+			$this->jsA,
+			$this->cssB,
+			$this->jsB,
+			$this->cssC,
+			$this->jsC
+		];
+
+		$this->assertSame($expected, $plugins->files());
+		$this->assertNotContains($this->devMjsC, $plugins->files());
 	}
 
 	public function testModifiedWithoutFiles(): void
@@ -131,13 +146,9 @@ class PluginsTest extends TestCase
 		// js
 		$expected = "a;\n\nb;\n\nc;";
 		$this->assertSame($expected, $plugins->read('js'));
-
-		// mjs - must be completely empty and not include the loader code
-		$expected = '';
-		$this->assertSame($expected, $plugins->read('mjs'));
 	}
 
-	public function testReadWithDevMjs(): void
+	public function testReadIgnoresDevMjs(): void
 	{
 		$this->createPlugins(true);
 
@@ -150,13 +161,9 @@ class PluginsTest extends TestCase
 		$expected = "a\n\nb\n\nc";
 		$this->assertSame($expected, $plugins->read('css'));
 
-		// js - shouldn't include c because c has an index.dev.mjs
-		$expected = "a;\n\nb;";
+		// js - index.js of c is still read although it has an index.dev.mjs
+		$expected = "a;\n\nb;\n\nc;";
 		$this->assertSame($expected, $plugins->read('js'));
-
-		// mjs - c as base64 data uri wrapped in the loader code
-		$expected = 'try { await Promise.all(["data:text/javascript;base64,Yw=="].map(url => import(url))) } catch (e) { console.error(e) }' . PHP_EOL;
-		$this->assertSame($expected, $plugins->read('mjs'));
 	}
 
 	public function testUrl(): void

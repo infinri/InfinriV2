@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class FileManipulateTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/files';
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileManipulate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileManipulate';
 
 	public function testManipulate(): void
 	{
@@ -82,7 +82,7 @@ class FileManipulateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent       = new Page(['slug' => 'test']);
 		$originalFile = File::create([
@@ -110,7 +110,7 @@ class FileManipulateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent       = new Page(['slug' => 'test']);
 		$originalFile = File::create([
@@ -139,7 +139,7 @@ class FileManipulateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = new Page(['slug' => 'test']);
 

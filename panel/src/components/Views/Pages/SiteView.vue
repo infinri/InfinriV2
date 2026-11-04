@@ -8,13 +8,13 @@
 		<k-header
 			:editable="permissions.changeTitle && !isLocked"
 			class="k-site-view-header"
-			@edit="$dialog(api + '/changeTitle')"
+			@edit="$panel.dialog.open(api + '/changeTitle')"
 		>
 			<span
 				v-if="!title || title.length === 0"
 				class="k-header-title-placeholder"
 			>
-				{{ $t("view.site") }} …
+				{{ $panel.t("view.site") }} …
 			</span>
 			<template v-else>
 				{{ title }}
@@ -43,7 +43,7 @@
 		<k-sections
 			:blueprint="blueprint"
 			:content="content"
-			:empty="$t('site.blueprint')"
+			:empty="$panel.t('site.blueprint')"
 			:lock="lock"
 			:tab="tab"
 			parent="site"

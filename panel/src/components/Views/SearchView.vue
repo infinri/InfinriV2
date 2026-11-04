@@ -1,15 +1,15 @@
 <template>
 	<k-panel-inside class="k-search-view">
 		<k-header>
-			{{ $t("search") }}
+			{{ $panel.t("search") }}
 
 			<k-input
 				ref="input"
 				slot="buttons"
-				:aria-label="$t('search')"
+				:aria-label="$panel.t('search')"
 				:autofocus="true"
 				:icon="isLoading ? 'loader' : 'search'"
-				:placeholder="$t('search') + ' …'"
+				:placeholder="$panel.t('search') + ' …'"
 				:spellcheck="false"
 				:value="query"
 				class="k-search-view-input"
@@ -38,7 +38,6 @@ import Search from "@/mixins/search.js";
 
 /**
  * @internal
- * @since 4.0.0
  */
 export default {
 	mixins: [Search],
@@ -64,14 +63,14 @@ export default {
 		},
 		empty() {
 			if (this.isLoading) {
-				return this.$t("searching") + "…";
+				return this.$panel.t("searching") + "…";
 			}
 
 			if (this.query.length < 2) {
-				return this.$t("search.min", { min: 2 });
+				return this.$panel.t("search.min", { min: 2 });
 			}
 
-			return this.$t("search.results.none");
+			return this.$panel.t("search.results.none");
 		},
 		isLoading() {
 			return this.$panel.searcher.isLoading;

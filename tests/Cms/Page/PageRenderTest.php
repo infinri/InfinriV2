@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class PageRenderTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/PageRenderTest';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.PageRender';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.PageRender';
 
 	protected function setUp(): void
 	{
@@ -127,7 +127,7 @@ class PageRenderTest extends ModelTestCase
 
 		unset(
 			$_COOKIE['foo'],
-			$_COOKIE['kirby_session'],
+			$_COOKIE['infinri_session'],
 			$_SERVER['HTTP_AUTHORIZATION']
 		);
 	}
@@ -178,7 +178,7 @@ class PageRenderTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'request' => [
-				'url' => 'https://getkirby.com/blog/page:2'
+				'url' => 'https://infinri.com/blog/page:2'
 			]
 		]);
 
@@ -293,7 +293,7 @@ class PageRenderTest extends ModelTestCase
 		$this->assertSame(['Cache-Control' => 'private'], $this->app->response()->headers());
 		$this->assertSame('text/plain', $this->app->response()->type());
 
-		// reset the Kirby Responder object
+		// reset the Infinri Responder object
 		$this->setUp();
 		$this->assertNull($this->app->response()->code());
 		$this->assertSame([], $this->app->response()->headers());
@@ -353,12 +353,12 @@ class PageRenderTest extends ModelTestCase
 		if (in_array('cookie', $dynamicElements)) {
 			$this->assertSame(['foo'], $cacheValue->value()['usesCookies']);
 		} elseif (in_array('session', $dynamicElements)) {
-			$this->assertSame(['kirby_session'], $cacheValue->value()['usesCookies']);
+			$this->assertSame(['infinri_session'], $cacheValue->value()['usesCookies']);
 		} else {
 			$this->assertSame([], $cacheValue->value()['usesCookies']);
 		}
 
-		// reset the Kirby Responder object
+		// reset the Infinri Responder object
 		$this->setUp();
 		$html2 = $page->render();
 		$this->assertSame($html1, $html2);
@@ -369,7 +369,7 @@ class PageRenderTest extends ModelTestCase
 		string $slug,
 		array $dynamicElements
 	): void {
-		$_COOKIE['foo'] = $_COOKIE['kirby_session'] = 'bar';
+		$_COOKIE['foo'] = $_COOKIE['infinri_session'] = 'bar';
 		$this->app->clone([
 			'server' => [
 				'HTTP_AUTHORIZATION' => 'Bearer brown-bearer'
@@ -387,7 +387,7 @@ class PageRenderTest extends ModelTestCase
 		$cacheValue = $cache->retrieve($slug . '.latest.html');
 		$this->assertNull($cacheValue);
 
-		// reset the Kirby Responder object
+		// reset the Infinri Responder object
 		$this->setUp();
 		$html2 = $page->render();
 		$this->assertStringStartsWith('This is a test:', $html2);
@@ -413,15 +413,15 @@ class PageRenderTest extends ModelTestCase
 		if (in_array('cookie', $dynamicElements)) {
 			$this->assertSame(['foo'], $cacheValue->value()['usesCookies']);
 		} elseif (in_array('session', $dynamicElements)) {
-			$this->assertSame(['kirby_session'], $cacheValue->value()['usesCookies']);
+			$this->assertSame(['infinri_session'], $cacheValue->value()['usesCookies']);
 		} else {
 			$this->assertSame([], $cacheValue->value()['usesCookies']);
 		}
 
-		$_COOKIE['foo'] = $_COOKIE['kirby_session'] = 'bar';
+		$_COOKIE['foo'] = $_COOKIE['infinri_session'] = 'bar';
 		$_SERVER['HTTP_AUTHORIZATION'] = 'Bearer brown-bearer';
 
-		// reset the Kirby Responder object
+		// reset the Infinri Responder object
 		$this->setUp();
 		$html2 = $page->render();
 		$this->assertStringStartsWith('This is a test:', $html2);
@@ -563,7 +563,7 @@ class PageRenderTest extends ModelTestCase
 		$page->version('changes')->save(['title' => 'Changes Title']);
 
 		// manual renders of drafts falls back to the latest version even if
-		// the draft couldn't be rendered "publicly" by `$kirby->resolve()`
+		// the draft couldn't be rendered "publicly" by `$infinri->resolve()`
 		$this->assertSame("Version: latest\nContent: Latest Title", $page->render());
 
 		$this->app = $this->app->clone([

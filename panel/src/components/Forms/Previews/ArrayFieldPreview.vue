@@ -11,8 +11,8 @@ export default {
 				{
 					text:
 						this.value.length === 1
-							? `1 ${this.$t("entry")}`
-							: `${this.value.length} ${this.$t("entries")}`
+							? `1 ${this.$panel.t("entry")}`
+							: `${this.value.length} ${this.$panel.t("entries")}`
 				}
 			];
 		}

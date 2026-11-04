@@ -5,7 +5,7 @@
   </p>
   <p class="admin-advice">
     Advice for developers and administrators:<br>
-    Change the PHP version to one <a href="https://getkirby.com/fatal/php">supported by this Infinri installation</a>
+    Change the PHP version to one <a href="https://infinri.com/fatal/php">supported by this Infinri installation</a>
   </p>
 
 <?php include __DIR__ . '/snippets/footer.php' ?>

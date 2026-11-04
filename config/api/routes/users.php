@@ -181,12 +181,12 @@ return [
 		'method'  => 'PATCH',
 		'action'  => function (string $id) {
 			$user        = Find::user($id);
-			$currentUser = $this->kirby()->user();
+			$currentUser = $this->infinri()->user();
 
 			// validate password of acting user unless they have logged in to reset it;
 			// always validate password of acting user when changing password of other users
 			if (
-				$this->kirby()->auth()->isResettingPassword($this->session()) !== true ||
+				$this->infinri()->auth()->isResettingPassword($this->session()) !== true ||
 				$user->is($currentUser) !== true
 			) {
 				$currentUser->validatePassword($this->requestBody('currentPassword'));
@@ -197,7 +197,7 @@ return [
 			// if we changed the password of the current user…
 			if ($user->isLoggedIn() === true) {
 				// …don't allow additional resets (now the password is known again)
-				$this->session()->remove('kirby.resetPassword');
+				$this->session()->remove('infinri.resetPassword');
 			}
 
 			return $result;

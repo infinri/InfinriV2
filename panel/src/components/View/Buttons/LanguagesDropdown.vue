@@ -8,7 +8,7 @@
 		/>
 		<k-dropdown-content
 			ref="dropdown"
-			:options="$dropdown(options)"
+			:options="$panel.dropdown.openAsync(options)"
 			align-x="end"
 		>
 			<template #item="{ item: language, index }">
@@ -26,7 +26,7 @@
 					>
 						<k-icon
 							v-if="language.changes"
-							:alt="$t('lock.unsaved')"
+							:alt="$panel.t('lock.unsaved')"
 							:type="language.lock ? 'lock' : 'edit-line'"
 							class="k-languages-dropdown-item-icon"
 						/>
@@ -46,7 +46,6 @@ import { props as ButtonProps } from "@/components/Navigation/Button.vue";
 /**
  * View header button to switch between content languages
  * @displayName LanguagesViewButton
- * @since 4.0.0
  * @unstable
  */
 export default {
@@ -93,7 +92,7 @@ export default {
 				return;
 			}
 
-			this.$reload({
+			this.$panel.reload({
 				query: {
 					language: language.code
 				}

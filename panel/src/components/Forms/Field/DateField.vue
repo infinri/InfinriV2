@@ -18,12 +18,12 @@
 					<k-button
 						:disabled="disabled"
 						:icon="icon"
-						:title="$t('date.select')"
+						:title="$panel.t('date.select')"
 						class="k-input-icon-button"
 						@click="$refs.calendar.toggle()"
 					/>
 					<k-dropdown-content ref="calendar" align-x="end">
-						<k-calendar
+						<k-calendar-input
 							:value="iso.date"
 							:min="min"
 							:max="max"
@@ -51,7 +51,7 @@
 					<k-button
 						:disabled="disabled"
 						:icon="time.icon ?? 'clock'"
-						:title="$t('time.select')"
+						:title="$panel.t('time.select')"
 						class="k-input-icon-button"
 						@click="$refs.times.toggle()"
 					/>
@@ -76,8 +76,8 @@ import { props as DateInput } from "../Input/DateInput.vue";
 /**
  * Form field to handle a date/datetime value.
  *
- * Bundles `k-date-input` with `k-calendar` and, optionally,
- * `k-time-input` with `k-times`.
+ * Bundles `k-date-input` with `k-calendar-input` and, optionally,
+ * `k-time-input` with `k-timeoptions-input`.
  *
  * Have a look at `<k-field>`, `<k-input>`
  * and `<k-datetime-input>` for additional information.

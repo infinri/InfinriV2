@@ -6,7 +6,7 @@ use Infinri\Cms\Api\ApiCollectionTestCase;
 
 class FilesApiCollectionTest extends ApiCollectionTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FilesApiCollection';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FilesApiCollection';
 
 	public function testCollection(): void
 	{

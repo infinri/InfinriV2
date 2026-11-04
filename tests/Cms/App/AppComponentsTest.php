@@ -22,14 +22,14 @@ class CustomEmailProvider extends Email
 
 	public function send(bool $debug = false): bool
 	{
-		static::$apiKey = 'KIRBY';
+		static::$apiKey = 'INFINRI';
 		return true;
 	}
 }
 
 class AppComponentsTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.AppComponents';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.AppComponents';
 
 	protected function setUp(): void
 	{
@@ -44,7 +44,7 @@ class AppComponentsTest extends TestCase
 	{
 		$this->app->clone([
 			'components' => [
-				'css' => fn ($kirby, $url, $options) => '/test.css'
+				'css' => fn ($infinri, $url, $options) => '/test.css'
 			]
 		]);
 
@@ -56,7 +56,7 @@ class AppComponentsTest extends TestCase
 	{
 		$this->app->clone([
 			'components' => [
-				'js' => fn ($kirby, $url, $options) => '/test.js'
+				'js' => fn ($infinri, $url, $options) => '/test.js'
 			]
 		]);
 
@@ -64,36 +64,36 @@ class AppComponentsTest extends TestCase
 		$this->assertSame($expected, js('something.js'));
 	}
 
-	public function testKirbyTag(): void
+	public function testInfinriTag(): void
 	{
-		$tag = $this->app->kirbytag('link', 'https://getkirby.com', ['text' => 'Kirby']);
-		$expected = '<a href="https://getkirby.com">Kirby</a>';
+		$tag = $this->app->infinritag('link', 'https://infinri.com', ['text' => 'Infinri']);
+		$expected = '<a href="https://infinri.com">Infinri</a>';
 
 		$this->assertSame($expected, $tag);
 	}
 
-	public function testKirbyTags(): void
+	public function testInfinriTags(): void
 	{
-		$tag = $this->app->kirbytags('(link: https://getkirby.com text: Kirby)');
-		$expected = '<a href="https://getkirby.com">Kirby</a>';
+		$tag = $this->app->infinritags('(link: https://infinri.com text: Infinri)');
+		$expected = '<a href="https://infinri.com">Infinri</a>';
 
 		$this->assertSame($expected, $tag);
 	}
 
-	public function testKirbytext(): void
+	public function testInfinritext(): void
 	{
 		$text     = 'Test';
 		$expected = '<p>Test</p>';
 
-		$this->assertSame($expected, $this->app->kirbytext($text));
+		$this->assertSame($expected, $this->app->infinritext($text));
 	}
 
-	public function testKirbytextWithSafeMode(): void
+	public function testInfinritextWithSafeMode(): void
 	{
 		$text     = '<h1>**Test**</h1>';
 		$expected = '&lt;h1&gt;<strong>Test</strong>&lt;/h1&gt;';
 
-		$this->assertSame($expected, $this->app->kirbytext($text, [
+		$this->assertSame($expected, $this->app->infinritext($text, [
 			'markdown' => [
 				'safe'   => true,
 				'inline' => true
@@ -101,12 +101,12 @@ class AppComponentsTest extends TestCase
 		]));
 	}
 
-	public function testKirbytextInline(): void
+	public function testInfinritextInline(): void
 	{
 		$text     = 'Test';
 		$expected = 'Test';
 
-		$this->assertSame($expected, $this->app->kirbytext($text, [
+		$this->assertSame($expected, $this->app->infinritext($text, [
 			'markdown' => [
 				'inline' => true
 			]
@@ -155,7 +155,7 @@ class AppComponentsTest extends TestCase
 	{
 		$this->app = $this->app->clone([
 			'components' => [
-				'markdown' => function (App $kirby, string|null $text = null, array $options = []) {
+				'markdown' => function (App $infinri, string|null $text = null, array $options = []) {
 					$result = Html::encode($text);
 
 					if (($options['inline'] ?? false) === false) {
@@ -388,7 +388,7 @@ class AppComponentsTest extends TestCase
 	{
 		$this->app->clone([
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'languages' => [
 				[
@@ -412,25 +412,25 @@ class AppComponentsTest extends TestCase
 
 		// extension is preserved for the default language
 		$this->assertSame(
-			'https://getkirby.com/articles.xml',
+			'https://infinri.com/articles.xml',
 			url('articles.xml')
 		);
 
 		// extension is preserved for a secondary language
 		$this->assertSame(
-			'https://getkirby.com/de/articles.xml',
+			'https://infinri.com/de/articles.xml',
 			url('articles.xml', 'de')
 		);
 
 		// works without extension as before
 		$this->assertSame(
-			'https://getkirby.com/articles',
+			'https://infinri.com/articles',
 			url('articles')
 		);
 
 		// fragment is still appended correctly alongside the extension
 		$this->assertSame(
-			'https://getkirby.com/articles.xml#section',
+			'https://infinri.com/articles.xml#section',
 			url('articles.xml#section')
 		);
 	}
@@ -439,7 +439,7 @@ class AppComponentsTest extends TestCase
 	{
 		$this->app->clone([
 			'components' => [
-				'url' => fn ($kirby, $path, $options) => 'test'
+				'url' => fn ($infinri, $path, $options) => 'test'
 			]
 		]);
 
@@ -450,12 +450,12 @@ class AppComponentsTest extends TestCase
 	{
 		$this->app->clone([
 			'components' => [
-				'url' => function ($kirby, $path, $options) {
+				'url' => function ($infinri, $path, $options) {
 					if ($path === 'test') {
 						return 'test-path';
 					}
 
-					return $kirby->nativeComponent('url')($kirby, $path, $options);
+					return $infinri->nativeComponent('url')($infinri, $path, $options);
 				}
 			]
 		]);
@@ -482,7 +482,7 @@ class AppComponentsTest extends TestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'email' => function ($kirby, $props, $debug) {
+				'email' => function ($infinri, $props, $debug) {
 					return new CustomEmailProvider($props, $debug);
 				}
 			]
@@ -504,6 +504,6 @@ class AppComponentsTest extends TestCase
 
 		$this->assertNull($email::$apiKey);
 		$email->send();
-		$this->assertSame('KIRBY', $email::$apiKey);
+		$this->assertSame('INFINRI', $email::$apiKey);
 	}
 }

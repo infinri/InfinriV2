@@ -10,7 +10,7 @@ class Option
 	public string|array $text;
 
 	/**
-	 * @param bool $resolve Deprecated, will be removed in v6
+	 * @param bool $resolve Whether query templates in the text and info get resolved
 	 */
 	public function __construct(
 		public string|int|float|null $value,
@@ -24,7 +24,7 @@ class Option
 	}
 
 	/**
-	 * @param bool $resolve Deprecated, will be removed in v6
+	 * @param bool $resolve Whether query templates in the text and info get resolved
 	 */
 	public static function factory(
 		string|int|float|array|null $props,

@@ -1,3 +1,3 @@
 This is a test: <?= uniqid() ?>
 
-<?php $kirby->response()->cache(false); ?>
+<?php $infinri->response()->cache(false); ?>

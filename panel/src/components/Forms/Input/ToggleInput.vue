@@ -41,7 +41,7 @@ export default {
 	computed: {
 		labelText() {
 			// Add fallback for text
-			const text = this.text ?? [this.$t("off"), this.$t("on")];
+			const text = this.text ?? [this.$panel.t("off"), this.$panel.t("on")];
 
 			// If text differentiates between toggle state
 			if (Array.isArray(text)) {

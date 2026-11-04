@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(SessionAuth::class)]
 class SessionAuthTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Http.Request.Auth.SessionAuth';
+	public const TMP = INFINRI_TMP_DIR . '/Http.Request.Auth.SessionAuth';
 
 	protected function setUp(): void
 	{

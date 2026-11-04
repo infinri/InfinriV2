@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(UserPicker::class)]
 class UserPickerTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserPicker';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserPicker';
 
 	protected function setUp(): void
 	{
@@ -19,13 +19,13 @@ class UserPickerTest extends ModelTestCase
 
 		$this->app = $this->app->clone([
 			'users' => [
-				['email' => 'a@getkirby.com', 'role' => 'editor-' . $uuid],
-				['email' => 'b@getkirby.com', 'role' => 'editor-' . $uuid],
-				['email' => 'c@getkirby.com', 'role' => 'editor-' . $uuid]
+				['email' => 'a@infinri.com', 'role' => 'editor-' . $uuid],
+				['email' => 'b@infinri.com', 'role' => 'editor-' . $uuid],
+				['email' => 'c@infinri.com', 'role' => 'editor-' . $uuid]
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testDefaults(): void
@@ -54,42 +54,42 @@ class UserPickerTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'a@getkirby.com',
+					'email' => 'a@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
-					'email' => 'b@getkirby.com',
+					'email' => 'b@infinri.com',
 					'role'  => 'restricted-' . $uuid
 				],
 				[
-					'email' => 'c@getkirby.com',
+					'email' => 'c@infinri.com',
 					'role'  => 'restricted-' . $uuid
 				]
 			]
 		]);
 
-		// the kirby superuser bypasses all blueprint restrictions
-		$app->impersonate('kirby');
+		// the infinri superuser bypasses all blueprint restrictions
+		$app->impersonate('infinri');
 
 		$picker = new UserPicker();
 
 		$this->assertCount(3, $picker->items());
 
 		// the editor can only access their own account
-		$app->impersonate('a@getkirby.com');
+		$app->impersonate('a@infinri.com');
 
 		$picker = new UserPicker();
 
 		// only the listable user is returned
 		$this->assertCount(1, $picker->items());
-		$this->assertSame('a@getkirby.com', $picker->items()->first()->email());
+		$this->assertSame('a@infinri.com', $picker->items()->first()->email());
 
 	}
 
 	public function testQuery(): void
 	{
 		$picker = new UserPicker([
-			'query' => 'kirby.users.offset(1)'
+			'query' => 'infinri.users.offset(1)'
 		]);
 
 		$this->assertCount(2, $picker->items());

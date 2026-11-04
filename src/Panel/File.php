@@ -68,12 +68,12 @@ class File extends Model
 	}
 
 	/**
-	 * Provides a kirbytag or markdown
+	 * Provides a infinritag or markdown
 	 * tag for the file, which will be
 	 * used in the panel, when the file
 	 * gets dragged onto a textarea
 	 *
-	 * @param string|null $type (`auto`|`kirbytext`|`markdown`)
+	 * @param string|null $type (`auto`|`infinritext`|`markdown`)
 	 */
 	public function dragText(
 		string|null $type = 'auto',
@@ -117,7 +117,7 @@ class File extends Model
 	public function dropdown(array $options = []): array
 	{
 		$file     = $this->model;
-		$request  = $file->kirby()->request();
+		$request  = $file->infinri()->request();
 		$defaults = $request->get(['delete', 'sort', 'view']);
 		$options  = [...$defaults, ...$options];
 
@@ -177,20 +177,6 @@ class File extends Model
 		];
 
 		return $result;
-	}
-
-	/**
-	 * Returns the setup for a dropdown option
-	 * which is used in the changes dropdown
-	 * for example
-	 *
-	 * @deprecated 5.1.4 Use the Infinri\Panel\Ui\Item\FileItem class instead
-	 */
-	public function dropdownOption(): array
-	{
-		return (new FileItem(file: $this->model))->props() + [
-			'icon' => 'image'
-		];
 	}
 
 	/**
@@ -313,13 +299,13 @@ class File extends Model
 			return false;
 		}
 
-		$kirby = $this->model->kirby();
+		$infinri = $this->model->infinri();
 
 		// ensure focus is only added when editing primary/only language
 		if (
-			$kirby->multilang() === false ||
-			$kirby->languages()->count() === 0 ||
-			$kirby->language()->isDefault() === true
+			$infinri->multilang() === false ||
+			$infinri->languages()->count() === 0 ||
+			$infinri->language()->isDefault() === true
 		) {
 			return true;
 		}
@@ -403,34 +389,16 @@ class File extends Model
 		$props = parent::props();
 		$file  = $this->model;
 
-		// Additional model information
-		// @deprecated Use the top-level props instead
-		$model = [
-			'dimensions' => $file->dimensions()->toArray(),
-			'extension'  => $file->extension(),
-			'filename'   => $file->filename(),
-			'link'       => $props['link'],
-			'mime'       => $file->mime(),
-			'niceSize'   => $file->niceSize(),
-			'id'         => $props['id'],
-			'parent'     => $file->parent()->panel()->path(),
-			'template'   => $file->template(),
-			'type'       => $file->type(),
-			'url'        => $file->url(),
-			'uuid'       => $props['uuid'],
-		];
-
 		return [
 			...$props,
 			...$this->prevNext(),
-			'blueprint' => $this->model->template() ?? 'default',
-			'extension' => $model['extension'],
-			'filename'  => $model['filename'],
-			'mime'      => $model['mime'],
-			'model'     => $model,
-			'preview'   => FilePreview::factory($this->model)->render(),
-			'type'      => $model['type'],
-			'url'       => $model['url'],
+			'blueprint' => $file->template() ?? 'default',
+			'extension' => $file->extension(),
+			'filename'  => $file->filename(),
+			'mime'      => $file->mime(),
+			'preview'   => FilePreview::factory($file)->render(),
+			'type'      => $file->type(),
+			'url'       => $file->url(),
 		];
 	}
 

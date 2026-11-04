@@ -113,8 +113,8 @@ class CoreTest extends TestCase
 		$this->assertSame('toFloat', $aliases['float']);
 		$this->assertSame('html', $aliases['h']);
 		$this->assertSame('toInt', $aliases['int']);
-		$this->assertSame('kirbytext', $aliases['kt']);
-		$this->assertSame('kirbytextinline', $aliases['kti']);
+		$this->assertSame('infinritext', $aliases['kt']);
+		$this->assertSame('infinritextinline', $aliases['kti']);
 		$this->assertSame('toLink', $aliases['link']);
 		$this->assertSame('markdown', $aliases['md']);
 		$this->assertSame('smartypants', $aliases['sp']);
@@ -155,9 +155,9 @@ class CoreTest extends TestCase
 		$this->assertArrayHasKey('excerpt', $methods);
 		$this->assertArrayHasKey('html', $methods);
 		$this->assertArrayHasKey('inline', $methods);
-		$this->assertArrayHasKey('kirbytext', $methods);
-		$this->assertArrayHasKey('kirbytextinline', $methods);
-		$this->assertArrayHasKey('kirbytags', $methods);
+		$this->assertArrayHasKey('infinritext', $methods);
+		$this->assertArrayHasKey('infinritextinline', $methods);
+		$this->assertArrayHasKey('infinritags', $methods);
 		$this->assertArrayHasKey('lower', $methods);
 		$this->assertArrayHasKey('markdown', $methods);
 		$this->assertArrayHasKey('nl2br', $methods);
@@ -241,7 +241,7 @@ class CoreTest extends TestCase
 	{
 		$roots = $this->core->roots();
 
-		$this->assertArrayHasKey('kirby', $roots);
+		$this->assertArrayHasKey('infinri', $roots);
 		$this->assertArrayHasKey('i18n', $roots);
 		$this->assertArrayHasKey('i18n:translations', $roots);
 		$this->assertArrayHasKey('i18n:rules', $roots);
@@ -259,7 +259,8 @@ class CoreTest extends TestCase
 		$this->assertArrayHasKey('config', $roots);
 		$this->assertArrayHasKey('controllers', $roots);
 		$this->assertArrayHasKey('languages', $roots);
-		$this->assertArrayHasKey('license', $roots);
+		$this->assertArrayNotHasKey('license', $roots);
+		$this->assertArrayNotHasKey('licenses', $roots);
 		$this->assertArrayHasKey('logs', $roots);
 		$this->assertArrayHasKey('models', $roots);
 		$this->assertArrayHasKey('plugins', $roots);
@@ -294,17 +295,17 @@ class CoreTest extends TestCase
 		$this->assertArrayHasKey('blocks/video', $snippets);
 	}
 
-	public function testKirbyTagAliases(): void
+	public function testInfinriTagAliases(): void
 	{
-		$aliases = $this->core->kirbyTagAliases();
+		$aliases = $this->core->infinriTagAliases();
 
 		$this->assertArrayHasKey('youtube', $aliases);
 		$this->assertArrayHasKey('vimeo', $aliases);
 	}
 
-	public function testKirbyTags(): void
+	public function testInfinriTags(): void
 	{
-		$tags = $this->core->kirbyTags();
+		$tags = $this->core->infinriTags();
 
 		$this->assertArrayHasKey('date', $tags);
 		$this->assertArrayHasKey('email', $tags);

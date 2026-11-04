@@ -31,7 +31,7 @@ class SimpleImageMock extends SimpleImage
 class GdLibTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/../fixtures/image';
-	public const TMP      = KIRBY_TMP_DIR . '/Image.Darkroom.GdLib';
+	public const TMP      = INFINRI_TMP_DIR . '/Image.Darkroom.GdLib';
 
 	protected function setUp(): void
 	{

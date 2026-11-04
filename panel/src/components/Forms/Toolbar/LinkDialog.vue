@@ -26,8 +26,8 @@ export default {
 			const url = this.values.href ?? "";
 			const text = this.values.title ?? "";
 
-			// KirbyText
-			if (this.$panel.config.kirbytext) {
+			// InfinriText
+			if (this.$panel.config.infinritext) {
 				if (text?.length > 0) {
 					return this.$emit("submit", `(link: ${url} text: ${text})`);
 				}

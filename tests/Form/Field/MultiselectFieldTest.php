@@ -20,7 +20,7 @@ class MultiselectFieldTest extends TestCase
 		$this->assertNull($field->counter());
 		$this->assertTrue($field->search());
 		$this->assertFalse($field->sort());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testMin(): void

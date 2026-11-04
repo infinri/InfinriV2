@@ -6,14 +6,14 @@ describe("$helper.string.template", () => {
 		string,
 		string | Record<string, string> | Record<string, string>[]
 	> = {
-		title: "Kirby",
+		title: "Infinri",
 		images: [
 			{ filename: "foo.jpg" },
 			{ filename: "bar.jpg" },
 			{ filename: "baz.jpg" }
 		],
 		user: {
-			email: "bastian@getkirby.com",
+			email: "bastian@infinri.com",
 			username: "bastian"
 		},
 		info: ""
@@ -24,19 +24,19 @@ describe("$helper.string.template", () => {
 		expect(result).toBe("Hello World!");
 
 		result = string.template("{{title}}", values);
-		expect(result).toBe("Kirby");
+		expect(result).toBe("Infinri");
 
 		result = string.template("{{ title }}", values);
-		expect(result).toBe("Kirby");
+		expect(result).toBe("Infinri");
 
 		result = string.template("{ title }", values);
-		expect(result).toBe("Kirby");
+		expect(result).toBe("Infinri");
 
 		result = string.template("{title}", values);
-		expect(result).toBe("Kirby");
+		expect(result).toBe("Infinri");
 
 		result = string.template("Hello {{title}}!", values);
-		expect(result).toBe("Hello Kirby!");
+		expect(result).toBe("Hello Infinri!");
 
 		result = string.template("{{images.0.filename}}", values);
 		expect(result).toBe("foo.jpg");
@@ -48,19 +48,19 @@ describe("$helper.string.template", () => {
 		expect(result).toBe("baz.jpg");
 
 		result = string.template("{{user.email}}", values);
-		expect(result).toBe("bastian@getkirby.com");
+		expect(result).toBe("bastian@infinri.com");
 
 		result = string.template(
 			"{{title}} {{ images.1.filename }}, { user.username }:{user.email}",
 			values
 		);
-		expect(result).toBe("Kirby bar.jpg, bastian:bastian@getkirby.com");
+		expect(result).toBe("Infinri bar.jpg, bastian:bastian@infinri.com");
 
 		result = string.template("Counting: {{images.length}}", values);
 		expect(result).toBe("Counting: 3");
 
 		result = string.template("{{ title }}: {{ info }}", values);
-		expect(result).toBe("Kirby: ");
+		expect(result).toBe("Infinri: ");
 	});
 
 	it("should insert default", () => {
@@ -86,9 +86,9 @@ describe("$helper.string.template", () => {
 
 	it("should allow native string methods", () => {
 		const values = {
-			title: "Kirby"
+			title: "Infinri"
 		};
 		const result = string.template("{{ title.length }}", values);
-		expect(result).toBe("5");
+		expect(result).toBe("7");
 	});
 });

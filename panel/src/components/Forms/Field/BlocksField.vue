@@ -11,7 +11,7 @@
 					:autofocus="autofocus"
 					:disabled="isFull"
 					:responsive="true"
-					:text="$t('add')"
+					:text="$panel.t('add')"
 					icon="add"
 					variant="filled"
 					size="xs"
@@ -19,7 +19,7 @@
 					@click="$refs.blocks.choose(value.length)"
 				/>
 				<k-button
-					:title="$t('options')"
+					:title="$panel.t('options')"
 					icon="dots"
 					variant="filled"
 					size="xs"
@@ -44,7 +44,7 @@
 
 		<footer v-if="!disabled && !isEmpty && !isFull && hasFieldsets">
 			<k-button
-				:title="$t('add')"
+				:title="$panel.t('add')"
 				icon="add"
 				size="xs"
 				variant="filled"
@@ -87,13 +87,13 @@ export default {
 					click: () => this.$refs.blocks.copyAll(),
 					disabled: this.isEmpty,
 					icon: "template",
-					text: this.$t("copy.all")
+					text: this.$panel.t("copy.all")
 				},
 				{
 					click: () => this.$refs.blocks.pasteboard(),
 					disabled: this.isFull,
 					icon: "download",
-					text: this.$t("paste")
+					text: this.$panel.t("paste")
 				}
 			];
 
@@ -109,7 +109,7 @@ export default {
 					click: () => this.$refs.blocks.collapseAll(),
 					disabled: this.isEmpty || this.$refs.blocks.isFullyCollapsed(),
 					icon: "collapse",
-					text: this.$t("collapse.all")
+					text: this.$panel.t("collapse.all")
 				});
 			}
 
@@ -118,7 +118,7 @@ export default {
 					click: () => this.$refs.blocks.expandAll(),
 					disabled: this.isEmpty || this.$refs.blocks.isFullyExpanded(),
 					icon: "expand",
-					text: this.$t("expand.all")
+					text: this.$panel.t("expand.all")
 				});
 			}
 
@@ -127,7 +127,7 @@ export default {
 				click: () => this.$refs.blocks.removeAll(),
 				disabled: this.isEmpty,
 				icon: "trash",
-				text: this.$t("delete.all")
+				text: this.$panel.t("delete.all")
 			});
 
 			return ready(options);

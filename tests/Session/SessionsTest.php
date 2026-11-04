@@ -63,11 +63,11 @@ class SessionsTest extends TestCase
 	{
 		$sessions = new Sessions(static::FIXTURES, [
 			'mode'         => 'header',
-			'cookieDomain' => 'getkirby.com',
+			'cookieDomain' => 'infinri.com',
 			'cookieName'   => 'my_cookie_name'
 		]);
 
-		$this->assertSame('getkirby.com', $sessions->cookieDomain());
+		$this->assertSame('infinri.com', $sessions->cookieDomain());
 		$this->assertSame('my_cookie_name', $sessions->cookieName());
 
 		$reflector = new ReflectionClass(Sessions::class);
@@ -171,7 +171,7 @@ class SessionsTest extends TestCase
 
 	public function testCurrent(): void
 	{
-		Cookie::set('kirby_session', '9999999999.valid.' . $this->store->validKey);
+		Cookie::set('infinri_session', '9999999999.valid.' . $this->store->validKey);
 		$this->setAuthorization('Session 9999999999.valid2.' . $this->store->validKey);
 
 		$sessions = new Sessions($this->store, ['mode' => 'cookie']);
@@ -208,7 +208,7 @@ class SessionsTest extends TestCase
 
 	public function testCurrentDetected(): void
 	{
-		Cookie::set('kirby_session', '9999999999.valid.' . $this->store->validKey);
+		Cookie::set('infinri_session', '9999999999.valid.' . $this->store->validKey);
 		$this->setAuthorization('Session 9999999999.valid2.' . $this->store->validKey);
 
 		$session = $this->sessions->currentDetected();
@@ -220,10 +220,10 @@ class SessionsTest extends TestCase
 		$this->assertSame('cookie', $session->mode());
 		$this->assertSame('9999999999.valid.' . $this->store->validKey, $session->token());
 
-		Cookie::remove('kirby_session');
+		Cookie::remove('infinri_session');
 		$this->assertNull($this->sessions->currentDetected());
 
-		Cookie::set('kirby_session', '9999999999.valid.' . $this->store->validKey);
+		Cookie::set('infinri_session', '9999999999.valid.' . $this->store->validKey);
 		$this->setAuthorization('Session 9999999999.valid2.' . $this->store->invalidKey);
 		$this->assertNull($this->sessions->currentDetected());
 
@@ -264,13 +264,13 @@ class SessionsTest extends TestCase
 		$reflector = new ReflectionClass(Sessions::class);
 		$tokenFromCookie = $reflector->getMethod('tokenFromCookie');
 
-		Cookie::remove('kirby_session');
+		Cookie::remove('infinri_session');
 		$this->assertNull($tokenFromCookie->invoke($this->sessions));
 
-		Cookie::set('kirby_session', 'amazingSessionIdFromCookie');
+		Cookie::set('infinri_session', 'amazingSessionIdFromCookie');
 		$this->assertSame('amazingSessionIdFromCookie', $tokenFromCookie->invoke($this->sessions));
 
-		Cookie::remove('kirby_session');
+		Cookie::remove('infinri_session');
 	}
 
 	public function testTokenFromHeader(): void

@@ -18,7 +18,7 @@ class TimeFieldTest extends TestCase
 		$this->assertSame('clock', $field->icon());
 		$this->assertSame(24, $field->notation());
 		$this->assertSame(['size' => 5, 'unit' => 'minute'], $field->step());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testDisplayFor12HourNotation(): void

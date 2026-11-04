@@ -12,7 +12,7 @@ use Infinri\Toolkit\I18n;
 
 class QueryDefaultFunctionsTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Query.QueryDefaultFunctions';
+	public const TMP = INFINRI_TMP_DIR . '/Query.QueryDefaultFunctions';
 
 	protected function setUp(): void
 	{
@@ -31,12 +31,12 @@ class QueryDefaultFunctionsTest extends TestCase
 		Dir::remove(static::TMP);
 	}
 
-	public function testKirby(): void
+	public function testInfinri(): void
 	{
-		$query = new Query('kirby');
+		$query = new Query('infinri');
 		$this->assertInstanceOf(App::class, $query->resolve());
 
-		$query = new Query('kirby.site');
+		$query = new Query('infinri.site');
 		$this->assertIsSite($query->resolve());
 	}
 
@@ -124,10 +124,10 @@ class QueryDefaultFunctionsTest extends TestCase
 
 	public function testqr(): void
 	{
-		$query = new Query('qr("https://getkirby.com")');
+		$query = new Query('qr("https://infinri.com")');
 		$qr = $query->resolve();
 		$this->assertInstanceOf(QrCode::class, $qr);
-		$this->assertSame('https://getkirby.com', $qr->data);
+		$this->assertSame('https://infinri.com', $qr->data);
 	}
 
 	public function testSite(): void
@@ -188,8 +188,8 @@ class QueryDefaultFunctionsTest extends TestCase
 	{
 		new App([
 			'users' => [
-				['id' => 'user-a', 'email' => 'foo@getkirby.com'],
-				['id' => 'user-b', 'email' => 'bar@getkirby.com']
+				['id' => 'user-a', 'email' => 'foo@infinri.com'],
+				['id' => 'user-b', 'email' => 'bar@infinri.com']
 			]
 		]);
 

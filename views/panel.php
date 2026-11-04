@@ -3,7 +3,7 @@
 use Infinri\Toolkit\Html;
 
 /**
- * @var \Infinri\Cms\App $kirby
+ * @var \Infinri\Cms\App $infinri
  * @var string $icons
  * @var array<string, mixed> $assets
  * @var array<string, mixed> $fiber
@@ -70,7 +70,6 @@ use Infinri\Toolkit\Html;
 	<?php foreach ($assets['js'] as $key => $js): ?>
 		<?php if ($key === 'index'): ?>
 			<script type="module" nonce="<?= $nonce ?>" defer>
-				<?= $assets['plugin-imports'] ?>
     		import('<?= $js['src'] ?>')
 			</script>
 		<?php else: ?>

@@ -2,7 +2,6 @@
  * Tracks a list of state milestones and allows
  * retrieving previous milestones, adding new ones, etc.
  *
- * @since 5.4.0
  *
  * @example
  * const history = new History();

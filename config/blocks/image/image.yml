@@ -6,10 +6,10 @@ fields:
     label: field.blocks.image.location
     type: radio
     columns: 2
-    default: "kirby"
+    default: "infinri"
     required: true
     options:
-      kirby: "{{ t('field.blocks.image.location.internal') }}"
+      infinri: "{{ t('field.blocks.image.location.internal') }}"
       web: "{{ t('field.blocks.image.location.external') }}"
   image:
     label: field.blocks.image.name
@@ -21,7 +21,7 @@ fields:
     uploads:
       template: blocks/image
     when:
-      location: kirby
+      location: infinri
   src:
     label: field.blocks.image.url
     type: url

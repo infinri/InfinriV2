@@ -1,17 +1,17 @@
 {
-    "name": "getkirby/test-plugin",
+    "name": "infinri/test-plugin",
     "description": "Some really nice description",
     "type": "plugin",
     "license": "MIT",
-    "homepage": "https://getkirby.com",
+    "homepage": "https://infinri.com",
     "authors": [
         {
             "name": "A",
-            "email": "a@getkirby.com"
+            "email": "a@infinri.com"
         },
         {
             "name": "B",
-            "email": "b@getkirby.com"
+            "email": "b@infinri.com"
         }
     ],
     "require": {}

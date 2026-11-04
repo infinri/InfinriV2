@@ -12,9 +12,9 @@
 		<span v-else class="k-label-text">
 			<slot />
 		</span>
-		<abbr v-if="required" :title="$t(type + '.required')">✶</abbr>
+		<abbr v-if="required" :title="$panel.t(type + '.required')">✶</abbr>
 		<abbr
-			:title="$t(type + '.invalid')"
+			:title="$panel.t(type + '.invalid')"
 			data-theme="negative"
 			class="k-label-invalid"
 		>

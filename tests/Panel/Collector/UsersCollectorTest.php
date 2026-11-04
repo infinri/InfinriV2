@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(UsersCollector::class)]
 class UsersCollectorTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Collector.UsersCollector';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Collector.UsersCollector';
 
 	public function setUpUsers()
 	{
@@ -24,17 +24,17 @@ class UsersCollectorTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'a',
-					'email' => 'a@getkirby.com',
+					'email' => 'a@infinri.com',
 					'role'  => 'admin',
 				],
 				[
 					'id'    => 'b',
-					'email' => 'b@getkirby.com',
+					'email' => 'b@infinri.com',
 					'role'  => 'editor',
 				],
 				[
 					'id'    => 'c',
-					'email' => 'c@getkirby.com',
+					'email' => 'c@infinri.com',
 					'role'  => 'editor',
 				],
 			]
@@ -44,15 +44,15 @@ class UsersCollectorTest extends TestCase
 	public function testCollect(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertCollect(UsersCollector::class, ['a', 'b', 'c']);
 	}
 
 	public function testCollectByQuery(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
-		$this->assertCollectByQuery(UsersCollector::class, 'kirby.users.role("editor")', ['b', 'c']);
+		$this->app->impersonate('infinri');
+		$this->assertCollectByQuery(UsersCollector::class, 'infinri.users.role("editor")', ['b', 'c']);
 	}
 
 	public function testCollectUnauthenticated(): void
@@ -91,31 +91,31 @@ class UsersCollectorTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'a',
-					'email' => 'a@getkirby.com',
+					'email' => 'a@infinri.com',
 					'role'  => 'manager-' . $uuid,
 				],
 				[
 					'id'    => 'b',
-					'email' => 'b@getkirby.com',
+					'email' => 'b@infinri.com',
 					'role'  => 'editor-' . $uuid,
 				],
 				[
 					'id'    => 'c',
-					'email' => 'c@getkirby.com',
+					'email' => 'c@infinri.com',
 					'role'  => 'editor-' . $uuid,
 				],
 			]
 		]);
 
 		// manager only sees users whose blueprint allows listing
-		$this->app->impersonate('a@getkirby.com');
+		$this->app->impersonate('a@infinri.com');
 		$this->assertCollect(UsersCollector::class, ['a']);
 	}
 
 	public function testFilterByRole(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$collector = new UsersCollector(
 			role: 'editor'
@@ -127,7 +127,7 @@ class UsersCollectorTest extends TestCase
 	public function testFlip(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->assertFlip(UsersCollector::class, ['c', 'b', 'a']);
 	}
@@ -160,15 +160,15 @@ class UsersCollectorTest extends TestCase
 	public function testPagination(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertPagination(UsersCollector::class);
 	}
 
 	public function testSearch(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
-		$this->app->users()->find('c@getkirby.com')->update([
+		$this->app->impersonate('infinri');
+		$this->app->users()->find('c@infinri.com')->update([
 			'text' => 'Searchword'
 		]);
 
@@ -178,13 +178,13 @@ class UsersCollectorTest extends TestCase
 	public function testSearchAndFlip(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
-		$this->app->users()->find('b@getkirby.com')->update([
+		$this->app->users()->find('b@infinri.com')->update([
 			'title' => 'Searchword'
 		]);
 
-		$this->app->users()->find('c@getkirby.com')->update([
+		$this->app->users()->find('c@infinri.com')->update([
 			'title' => 'Searchword'
 		]);
 
@@ -195,13 +195,13 @@ class UsersCollectorTest extends TestCase
 	public function testSearchAndSortBy(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
-		$this->app->users()->find('b@getkirby.com')->update([
+		$this->app->users()->find('b@infinri.com')->update([
 			'title' => 'Searchword'
 		]);
 
-		$this->app->users()->find('c@getkirby.com')->update([
+		$this->app->users()->find('c@infinri.com')->update([
 			'title' => 'Searchword'
 		]);
 
@@ -212,7 +212,7 @@ class UsersCollectorTest extends TestCase
 	public function testSortBy(): void
 	{
 		$this->setUpUsers();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertSortBy(UsersCollector::class, 'email desc', ['c', 'b', 'a']);
 	}
 }

@@ -26,8 +26,8 @@ describe("$helper.url.isUrl", () => {
 	});
 
 	it("should detect URL object", () => {
-		expect(url.isUrl(new URL("https://getkirby.com"))).toStrictEqual(true);
-		expect(url.isUrl(new URL("https://getkirby.com"), true)).toStrictEqual(
+		expect(url.isUrl(new URL("https://infinri.com"))).toStrictEqual(true);
+		expect(url.isUrl(new URL("https://infinri.com"), true)).toStrictEqual(
 			true
 		);
 		expect(url.isUrl(new URL("javascript:alert(/XSS/)"), true)).toStrictEqual(

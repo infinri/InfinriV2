@@ -18,7 +18,7 @@ class FileForceLocked extends ModelFile
 	public function lock(): Lock
 	{
 		return new Lock(
-			user: new ModelUser(['email' => 'test@getkirby.com']),
+			user: new ModelUser(['email' => 'test@infinri.com']),
 			modified: time()
 		);
 	}
@@ -29,7 +29,7 @@ class FileForceLocked extends ModelFile
 class FileTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP = KIRBY_TMP_DIR . '/Panel.File';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.File';
 
 	protected function setUp(): void
 	{
@@ -77,7 +77,7 @@ class FileTest extends TestCase
 
 	public function testBreadcrumbForPageFile(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new ModelPage([
 			'slug' => 'test',
@@ -135,11 +135,11 @@ class FileTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
-			'user' => 'editor@getkirby.com'
+			'user' => 'editor@infinri.com'
 		]);
 
 		// the title of the protected ancestor must not leak into the breadcrumb
@@ -165,7 +165,7 @@ class FileTest extends TestCase
 	{
 		$user = new ModelUser([
 			'id'    => 'test',
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'files' => [
 				['filename' => 'test.jpg'],
 			]
@@ -174,7 +174,7 @@ class FileTest extends TestCase
 		$file = new File($user->file('test.jpg'));
 		$this->assertSame([
 			[
-				'label' => 'test@getkirby.com',
+				'label' => 'test@infinri.com',
 				'link'  => '/users/test'
 			],
 			[
@@ -228,7 +228,7 @@ class FileTest extends TestCase
 		$app = $this->app->clone([
 			'options' => [
 				'panel' => [
-					'kirbytext' => false
+					'infinritext' => false
 				]
 			],
 			'site' => [
@@ -269,7 +269,7 @@ class FileTest extends TestCase
 		$app = $this->app->clone([
 			'options' => [
 				'panel' => [
-					'kirbytext' => false,
+					'infinritext' => false,
 					'markdown' => [
 						'fileDragText' => function (ModelFile $file, string $url) {
 							if ($file->extension() === 'heic') {
@@ -309,12 +309,12 @@ class FileTest extends TestCase
 		$this->assertSame('![](//@/file/test-heic)', $panel->dragText());
 	}
 
-	public function testDragTextCustomKirbytext(): void
+	public function testDragTextCustomInfinritext(): void
 	{
 		$app = $this->app->clone([
 			'options' => [
 				'panel' => [
-					'kirbytext' => [
+					'infinritext' => [
 						'fileDragText' => function (ModelFile $file, string $url) {
 							if ($file->extension() === 'heic') {
 								return sprintf('(image: %s)', $url);
@@ -353,21 +353,11 @@ class FileTest extends TestCase
 		$this->assertSame('(image: file://test-heic)', $panel->dragText());
 	}
 
-	public function testDropdownOption(): void
+	public function testDropdownOptionIsNotOverridden(): void
 	{
-		$page = new ModelPage([
-			'slug' => 'test',
-			'files' => [
-				['filename' => 'test.jpg'],
-			]
-		]);
+		$declaring = (new \ReflectionMethod(File::class, 'dropdownOption'))->getDeclaringClass()->getName();
 
-		$panel  = new File($page->file());
-		$option = $panel->dropdownOption();
-
-		$this->assertSame('image', $option['icon']);
-		$this->assertSame('test.jpg', $option['text']);
-		$this->assertSame('/pages/test/files/test.jpg', $option['link']);
+		$this->assertNotSame(File::class, $declaring);
 	}
 
 	public function testImage(): void
@@ -521,7 +511,7 @@ class FileTest extends TestCase
 			'filename' => 'test.jpg',
 			'parent'   => $page,
 		]);
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		$this->assertTrue((new File($file))->isFocusable());
 
@@ -530,7 +520,7 @@ class FileTest extends TestCase
 			'filename' => 'test.mp4',
 			'parent'   => $page,
 		]);
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		$this->assertFalse((new File($file))->isFocusable());
 
@@ -540,7 +530,7 @@ class FileTest extends TestCase
 			'parent'   => $page,
 			'template' => 'foo',
 		]);
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		$this->assertFalse((new File($file))->isFocusable());
 
@@ -566,7 +556,7 @@ class FileTest extends TestCase
 			'filename' => 'test.jpg',
 			'parent'   => $page,
 		]);
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		$this->assertFalse((new File($file))->isFocusable());
 	}
@@ -582,7 +572,7 @@ class FileTest extends TestCase
 			'parent'   => $page
 		]);
 
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		$expected = [
 			'access'      	 => true,
@@ -612,7 +602,7 @@ class FileTest extends TestCase
 			'parent'   => $page
 		]);
 
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		// without override
 		$expected = [
@@ -658,7 +648,7 @@ class FileTest extends TestCase
 			'filename' => 'test.js',
 			'parent'   => $page
 		]);
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		$expected = [
 			'access'     	 => true,
@@ -698,7 +688,7 @@ class FileTest extends TestCase
 			'template' => 'test',
 		]);
 
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		$expected = [
 			'access'     	 => true,
@@ -740,7 +730,7 @@ class FileTest extends TestCase
 			'template' => 'restricted',
 		]);
 
-		$file->kirby()->impersonate('kirby');
+		$file->infinri()->impersonate('infinri');
 
 		$expected = [
 			'access'     	 => true,
@@ -871,17 +861,12 @@ class FileTest extends TestCase
 		$panel = new File($page->file('test.jpg'));
 		$props = $panel->props();
 
-		$this->assertArrayHasKey('model', $props);
-		$this->assertArrayHasKey('dimensions', $props['model']);
-		$this->assertArrayHasKey('extension', $props['model']);
-		$this->assertArrayHasKey('filename', $props['model']);
-		$this->assertArrayHasKey('id', $props['model']);
-		$this->assertArrayHasKey('mime', $props['model']);
-		$this->assertArrayHasKey('niceSize', $props['model']);
-		$this->assertArrayHasKey('parent', $props['model']);
-		$this->assertArrayHasKey('url', $props['model']);
-		$this->assertArrayHasKey('template', $props['model']);
-		$this->assertArrayHasKey('type', $props['model']);
+		$this->assertArrayNotHasKey('model', $props);
+		$this->assertArrayHasKey('extension', $props);
+		$this->assertArrayHasKey('filename', $props);
+		$this->assertArrayHasKey('mime', $props);
+		$this->assertArrayHasKey('type', $props);
+		$this->assertArrayHasKey('url', $props);
 		$this->assertArrayHasKey('preview', $props);
 
 		// inherited props
@@ -895,7 +880,7 @@ class FileTest extends TestCase
 
 	public function testPropsPrevNext(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new ModelPage([
 			'slug'  => 'test',
@@ -921,7 +906,7 @@ class FileTest extends TestCase
 
 	public function testPropsPrevNextWithSort(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new ModelPage([
 			'slug'  => 'test',
@@ -947,7 +932,7 @@ class FileTest extends TestCase
 
 	public function testPropsPrevNextWithTab(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new ModelPage([
 			'slug'  => 'test',
@@ -971,7 +956,7 @@ class FileTest extends TestCase
 	{
 		$app = $this->app->clone([
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'site' => [
 				'children' => [
@@ -993,7 +978,7 @@ class FileTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'id'    => 'test',
 					'files' => [
 						['filename' => 'user-file.jpg']
@@ -1006,28 +991,28 @@ class FileTest extends TestCase
 		$file = $app->file('site-file.jpg');
 		$panel = new File($file);
 
-		$this->assertSame('https://getkirby.com/panel/site/files/site-file.jpg', $panel->url());
+		$this->assertSame('https://infinri.com/panel/site/files/site-file.jpg', $panel->url());
 		$this->assertSame('/site/files/site-file.jpg', $panel->url(true));
 
 		// page file
 		$file = $app->file('mother/child/page-file.jpg');
 		$panel = new File($file);
 
-		$this->assertSame('https://getkirby.com/panel/pages/mother+child/files/page-file.jpg', $panel->url());
+		$this->assertSame('https://infinri.com/panel/pages/mother+child/files/page-file.jpg', $panel->url());
 		$this->assertSame('/pages/mother+child/files/page-file.jpg', $panel->url(true));
 
 		// user file
-		$user = $app->user('test@getkirby.com');
+		$user = $app->user('test@infinri.com');
 		$file = $user->file('user-file.jpg');
 		$panel = new File($file);
 
-		$this->assertSame('https://getkirby.com/panel/users/test/files/user-file.jpg', $panel->url());
+		$this->assertSame('https://infinri.com/panel/users/test/files/user-file.jpg', $panel->url());
 		$this->assertSame('/users/test/files/user-file.jpg', $panel->url(true));
 	}
 
 	public function testPrevNext(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new ModelPage([
 			'slug'  => 'test',
@@ -1053,7 +1038,7 @@ class FileTest extends TestCase
 
 	public function testView(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new ModelPage([
 			'slug'  => 'test',

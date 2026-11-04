@@ -15,7 +15,7 @@ class UserBlueprintTest extends TestCase
 	public function testTranslatedDescription(): void
 	{
 		$blueprint = new UserBlueprint([
-			'model' => new User(['email' => 'test@getkirby.com']),
+			'model' => new User(['email' => 'test@infinri.com']),
 			'description' => [
 				'en' => 'User',
 				'de' => 'Benutzer'
@@ -28,7 +28,7 @@ class UserBlueprintTest extends TestCase
 	public function testOptions(): void
 	{
 		$blueprint = new UserBlueprint([
-			'model' => new User(['email' => 'test@getkirby.com'])
+			'model' => new User(['email' => 'test@infinri.com'])
 		]);
 
 		$expected = [
@@ -73,21 +73,21 @@ class UserBlueprintTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
 		$app->setCurrentTranslation('de');
-		$user = $app->user('editor@getkirby.com');
+		$user = $app->user('editor@infinri.com');
 		$this->assertSame('Editor-Rolle', $user->role()->title());
 
 		// clone app to test other language
 		// since $user object has not `->purge()` method
 		$app = $app->clone();
 		$app->setCurrentTranslation('en');
-		$user = $app->user('editor@getkirby.com');
+		$user = $app->user('editor@infinri.com');
 		$this->assertSame('Editor role', $user->role()->title());
 	}
 
@@ -115,14 +115,14 @@ class UserBlueprintTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
 		$app->setCurrentTranslation('fr');
-		$user = $app->user('editor@getkirby.com');
+		$user = $app->user('editor@infinri.com');
 		$this->assertSame('Editor role', $user->role()->title());
 	}
 
@@ -149,21 +149,21 @@ class UserBlueprintTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
 		$app->setCurrentTranslation('de');
-		$user = $app->user('editor@getkirby.com');
+		$user = $app->user('editor@infinri.com');
 		$this->assertSame('Editor-Rolle', $user->role()->title());
 
 		// clone app to test other language
 		// since $user object has not `->purge()` method
 		$app = $app->clone();
 		$app->setCurrentTranslation('en');
-		$user = $app->user('editor@getkirby.com');
+		$user = $app->user('editor@infinri.com');
 		$this->assertSame('Editor role', $user->role()->title());
 	}
 
@@ -190,14 +190,14 @@ class UserBlueprintTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
 		$app->setCurrentTranslation('fr');
-		$user = $app->user('editor@getkirby.com');
+		$user = $app->user('editor@infinri.com');
 		$this->assertSame('Editor role', $user->role()->title());
 	}
 }

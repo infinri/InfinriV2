@@ -2,9 +2,7 @@
 
 namespace Infinri\Cms;
 
-use Exception;
 use Infinri\Data\Json;
-use Infinri\Data\Yaml;
 use Infinri\Parsley\Parsley;
 use Infinri\Parsley\Schema\Blocks as BlockSchema;
 use Infinri\Toolkit\A;
@@ -49,12 +47,6 @@ class Blocks extends Items
 	): static {
 		$items = static::extractFromLayouts($items);
 
-		// @deprecated old editor format
-		// @todo block.converter remove eventually
-		// @codeCoverageIgnoreStart
-		$items = BlockConverter::editorBlocks($items);
-		// @codeCoverageIgnoreEnd
-
 		return parent::factory($items, $params);
 	}
 
@@ -67,13 +59,8 @@ class Blocks extends Items
 			return [];
 		}
 
-		if (
-			// no columns = no layout
-			array_key_exists('columns', $input[0]) === false  ||
-			// @deprecated checks if this is a block for the builder plugin
-			// @todo block.converter remove eventually
-			array_key_exists('_key', $input[0]) === true
-		) {
+		// no columns = no layout
+		if (array_key_exists('columns', $input[0]) === false) {
 			return $input;
 		}
 
@@ -92,7 +79,6 @@ class Blocks extends Items
 
 	/**
 	 * Checks if a given block type exists in the collection
-	 * @since 3.6.0
 	 */
 	public function hasType(string $type): bool
 	{
@@ -111,33 +97,8 @@ class Blocks extends Items
 			try {
 				$input = Json::decode((string)$input);
 			} catch (Throwable) {
-				// @deprecated try to import the old YAML format
-				// @todo block.converter remove eventually
-				// @codeCoverageIgnoreStart
-				try {
-					$yaml  = Yaml::decode((string)$input);
-					$first = A::first($yaml);
-
-					// check for valid yaml
-					if (
-						$yaml === [] ||
-						(
-							isset($first['_key']) === false &&
-							isset($first['type']) === false
-						)
-					) {
-						throw new Exception(message: 'Invalid YAML');
-					}
-
-					$input = $yaml;
-				} catch (Throwable) {
-					// the next 2 lines remain after removing block.converter
-					// @codeCoverageIgnoreEnd
-					$parser = new Parsley((string)$input, new BlockSchema());
-					$input  = $parser->blocks();
-					// @codeCoverageIgnoreStart
-				}
-				// @codeCoverageIgnoreEnd
+				$parser = new Parsley((string)$input, new BlockSchema());
+				$input  = $parser->blocks();
 			}
 		}
 

@@ -5,7 +5,6 @@ import Components from "./components/index.js";
 import ErrorHandling from "./config/errorhandling";
 import Helpers from "./helpers/index";
 import I18n from "./config/i18n.js";
-import Legacy from "./panel/legacy.js";
 import Libraries from "./libraries/index";
 import Panel from "./panel/panel.js";
 
@@ -53,7 +52,6 @@ window.panel.app = new Vue({
  */
 Vue.use(I18n);
 Vue.use(ErrorHandling);
-Vue.use(Legacy);
 
 /**
  * Mount the Vue application

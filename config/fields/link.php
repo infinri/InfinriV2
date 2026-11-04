@@ -32,10 +32,10 @@ return [
 			$available = array_keys($this->availableTypes());
 
 			if ($unavailable = array_diff($options, $available)) {
-				throw new InvalidArgumentException([
-					'key'  => 'field.link.options',
-					'data' => ['options' => implode(', ', $unavailable)]
-				]);
+				throw new InvalidArgumentException(
+					key: 'field.link.options',
+					data: ['options' => implode(', ', $unavailable)]
+				);
 			}
 
 			return $options;

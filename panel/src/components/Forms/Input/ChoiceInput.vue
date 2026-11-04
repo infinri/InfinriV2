@@ -64,7 +64,6 @@ export const props = {
 };
 
 /**
- * @since 4.0.0
  * @example <k-choice-input :value="value" @input="value = $event" />
  */
 export default {

@@ -11,7 +11,7 @@
 				<k-input
 					type="search"
 					icon="search"
-					:placeholder="$t('filter') + ' …'"
+					:placeholder="$panel.t('filter') + ' …'"
 					:value="q"
 					@input="q = $event"
 				/>

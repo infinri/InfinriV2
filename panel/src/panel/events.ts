@@ -6,7 +6,6 @@ import mitt from "mitt";
  * Global event delegation and event bus
  * which can be used by any component in the app
  * to start and stop listening to events
- * @since 4.0.0
  */
 export default function (panel: TODO) {
 	const emitter = mitt();
@@ -36,7 +35,6 @@ export default function (panel: TODO) {
 
 	/**
 	 * Custom copy to clipboard event
-	 * @since 5.0.0
 	 */
 	emitter.on("clipboard.write", async (e) => {
 		clipboard.write(e);

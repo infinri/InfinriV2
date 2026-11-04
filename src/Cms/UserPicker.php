@@ -33,7 +33,7 @@ class UserPicker extends Picker
 			$model instanceof User
 				=> 'user.siblings',
 			default
-			=> 'kirby.users'
+			=> 'infinri.users'
 		};
 
 		// fetch all users for the picker

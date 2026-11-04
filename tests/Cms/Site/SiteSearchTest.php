@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Site::class)]
 class SiteSearchTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SiteSearch';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SiteSearch';
 
 	public function testSearch(): void
 	{

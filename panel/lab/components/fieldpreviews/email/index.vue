@@ -3,7 +3,7 @@
 		<k-lab-example label="Default">
 			<k-lab-table-cell>
 				<!-- @code -->
-				<k-email-field-preview value="mail@getkirby.com" />
+				<k-email-field-preview value="mail@infinri.com" />
 				<!-- @code-end -->
 			</k-lab-table-cell>
 		</k-lab-example>
@@ -12,7 +12,7 @@
 			<k-lab-table-cell>
 				<!-- @code -->
 				<k-email-field-preview
-					value="mail@getkirbyisasjkdhaksjhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdkjahskjdhaksjhdakjshdkajsdhaksjhdkajshdkasjhdkjahsjkd.com"
+					value="mail@infinriisasjkdhaksjhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdhdakjshdkajhdkjahskjdhaksjhdakjshdkajsdhaksjhdkajshdkasjhdkjahsjkd.com"
 				/>
 				<!-- @code-end -->
 			</k-lab-table-cell>

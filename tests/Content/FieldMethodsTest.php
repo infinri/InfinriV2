@@ -22,7 +22,7 @@ use Infinri\TestCase;
 class FieldMethodsTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Content.FieldMethods';
+	public const TMP      = INFINRI_TMP_DIR . '/Content.FieldMethods';
 
 	protected function setUp(): void
 	{
@@ -359,9 +359,9 @@ class FieldMethodsTest extends TestCase
 			]
 		]);
 
-		$expected = '<a class="test" href="https://getkirby.com">Test</a>';
+		$expected = '<a class="test" href="https://infinri.com">Test</a>';
 
-		$this->assertSame($expected, $page->title()->toLink('https://getkirby.com', ['class' => 'test']));
+		$this->assertSame($expected, $page->title()->toLink('https://infinri.com', ['class' => 'test']));
 	}
 
 	public function testToLinkWithActivePage(): void
@@ -485,7 +485,7 @@ class FieldMethodsTest extends TestCase
 
 	public function testToQrCode(): void
 	{
-		$field = $this->field($url = 'https://getkirby.com');
+		$field = $this->field($url = 'https://infinri.com');
 		$qr    = $field->toQrCode();
 
 		$this->assertInstanceOf(QrCode::class, $qr);
@@ -520,11 +520,11 @@ class FieldMethodsTest extends TestCase
 			]
 		]);
 
-		$field  = $this->field('<p>This is a <a href="/@/page/my-page">test</a><img src="/@/file/my-file"></p>. This should not be <a href="https://getkirby.com">affected</a>.');
+		$field  = $this->field('<p>This is a <a href="/@/page/my-page">test</a><img src="/@/file/my-file"></p>. This should not be <a href="https://infinri.com">affected</a>.');
 		$result = $field->permalinksToUrls();
 		$hash   = $app->file('a/test.jpg')->mediaHash();
 
-		$this->assertSame('<p>This is a <a href="/a">test</a><img src="/media/pages/a/' . $hash . '/test.jpg"></p>. This should not be <a href="https://getkirby.com">affected</a>.', (string)$result);
+		$this->assertSame('<p>This is a <a href="/a">test</a><img src="/media/pages/a/' . $hash . '/test.jpg"></p>. This should not be <a href="https://infinri.com">affected</a>.', (string)$result);
 	}
 
 	public function testPermalinksToUrlsWithMissingUUID(): void
@@ -573,7 +573,7 @@ class FieldMethodsTest extends TestCase
 		];
 
 		$yaml  = Yaml::encode($data);
-		$field = $this->field($yaml, kirby()->page('files'));
+		$field = $this->field($yaml, infinri()->page('files'));
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid structure data for "test" field on parent "files"');
@@ -605,12 +605,12 @@ class FieldMethodsTest extends TestCase
 				'index' => static::TMP
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			]
 		]);
 
 		$field    = $this->field('super/cool');
-		$expected = 'https://getkirby.com/super/cool';
+		$expected = 'https://infinri.com/super/cool';
 
 		$this->assertSame($expected, $field->toUrl());
 	}
@@ -801,46 +801,46 @@ class FieldMethodsTest extends TestCase
 		$this->assertSame('', $this->field(null)->nl2br()->value());
 	}
 
-	public function testKirbytext(): void
+	public function testInfinritext(): void
 	{
-		$kirbytext = '(link: # text: Test)';
+		$infinritext = '(link: # text: Test)';
 		$expected  = '<p><a href="#">Test</a></p>';
 
-		$this->assertSame($expected, $this->field($kirbytext)->kirbytext()->value());
-		$this->assertSame($expected, $this->field($kirbytext)->kt()->value());
+		$this->assertSame($expected, $this->field($infinritext)->infinritext()->value());
+		$this->assertSame($expected, $this->field($infinritext)->kt()->value());
 	}
 
-	public function testKirbytextWithSafeMode(): void
+	public function testInfinritextWithSafeMode(): void
 	{
-		$kirbytext = '<h1>Test</h1>';
+		$infinritext = '<h1>Test</h1>';
 		$expected  = '<p>&lt;h1&gt;Test&lt;/h1&gt;</p>';
 
-		$this->assertSame($expected, $this->field($kirbytext)->kirbytext(['markdown' => ['safe' => true]])->value());
+		$this->assertSame($expected, $this->field($infinritext)->infinritext(['markdown' => ['safe' => true]])->value());
 	}
 
-	public function testKirbytextInline(): void
+	public function testInfinritextInline(): void
 	{
-		$kirbytext = '(link: # text: Test)';
+		$infinritext = '(link: # text: Test)';
 		$expected  = '<a href="#">Test</a>';
 
-		$this->assertSame($expected, $this->field($kirbytext)->kirbytextinline()->value());
-		$this->assertSame($expected, $this->field($kirbytext)->kti()->value());
+		$this->assertSame($expected, $this->field($infinritext)->infinritextinline()->value());
+		$this->assertSame($expected, $this->field($infinritext)->kti()->value());
 	}
 
-	public function testKirbytextInlineWithSafeMode(): void
+	public function testInfinritextInlineWithSafeMode(): void
 	{
-		$kirbytext = '<b>Test</b>';
+		$infinritext = '<b>Test</b>';
 		$expected  = '&lt;b&gt;Test&lt;/b&gt;';
 
-		$this->assertSame($expected, $this->field($kirbytext)->kirbytextInline(['markdown' => ['safe' => true]])->value());
+		$this->assertSame($expected, $this->field($infinritext)->infinritextInline(['markdown' => ['safe' => true]])->value());
 	}
 
-	public function testKirbytags(): void
+	public function testInfinritags(): void
 	{
-		$kirbytext = '(link: # text: Test)';
+		$infinritext = '(link: # text: Test)';
 		$expected  = '<a href="#">Test</a>';
 
-		$this->assertSame($expected, $this->field($kirbytext)->kirbytags()->value());
+		$this->assertSame($expected, $this->field($infinritext)->infinritags()->value());
 	}
 
 	public function testLower(): void
@@ -940,7 +940,7 @@ class FieldMethodsTest extends TestCase
 		$this->assertSame($expected, $this->field($text)->smartypants()->value());
 	}
 
-	public function testSmartypantsWithKirbytext(): void
+	public function testSmartypantsWithInfinritext(): void
 	{
 		new App([
 			'roots' => [
@@ -1030,11 +1030,11 @@ class FieldMethodsTest extends TestCase
 			[
 				'type'    => 'image',
 				'content' => [
-					'alt'      => 'The Kirby logo as favicon',
+					'alt'      => 'The Infinri logo as favicon',
 					'caption'  => 'This favicon is really amazing!',
 					'location' => 'web',
-					'src'      => 'https://getkirby.com/favicon.png',
-					'link'     => 'https://getkirby.com',
+					'src'      => 'https://infinri.com/favicon.png',
+					'link'     => 'https://infinri.com',
 				]
 			],
 			[
@@ -1078,14 +1078,14 @@ class FieldMethodsTest extends TestCase
 			[
 				'type'    => 'video',
 				'content' => [
-					'caption' => 'How to install Kirby in 5 minutes',
+					'caption' => 'How to install Infinri in 5 minutes',
 					'url'     => 'https://www.youtube.com/watch?v=EDVYjxWMecc',
 				]
 			]
 		];
 
 		$json   = Json::encode($data);
-		$page   = kirby()->page('files');
+		$page   = infinri()->page('files');
 		$field  = new Field($page, 'test', $json);
 		$blocks = $field->toBlocks();
 
@@ -1116,7 +1116,7 @@ class FieldMethodsTest extends TestCase
 		];
 
 		$json   = Json::encode($data);
-		$field  = new Field(kirby()->page('files'), 'test', $json);
+		$field  = new Field(infinri()->page('files'), 'test', $json);
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid blocks data for "test" field on parent "files"');
@@ -1137,7 +1137,7 @@ class FieldMethodsTest extends TestCase
 			]
 		];
 
-		$page    = kirby()->page('files');
+		$page    = infinri()->page('files');
 		$field   = new Field($page, 'test', json_encode($data));
 		$layouts = $field->toLayouts();
 		$blocks  = $layouts->toBlocks();

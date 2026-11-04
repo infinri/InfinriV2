@@ -3,7 +3,7 @@
 use Infinri\Panel\Panel;
 use Infinri\Toolkit\I18n;
 
-return function ($kirby) {
+return function ($infinri) {
 	return [
 		'icon'  => 'user',
 		'label' => I18n::translate('logout'),
@@ -11,8 +11,8 @@ return function ($kirby) {
 			'logout' => [
 				'pattern' => 'logout',
 				'auth'    => false,
-				'action'  => function () use ($kirby) {
-					$kirby->auth()->logout();
+				'action'  => function () use ($infinri) {
+					$infinri->auth()->logout();
 
 					// the Panel follows this redirect in place and has to
 					// refresh the globals it cached, above all the CSRF token

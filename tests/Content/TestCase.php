@@ -10,7 +10,7 @@ use Infinri\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
-	public const TMP = KIRBY_TMP_DIR;
+	public const TMP = INFINRI_TMP_DIR;
 
 	protected ModelWithContent $model;
 

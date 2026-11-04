@@ -14,7 +14,7 @@ export default {
 			if (this.hasDropzone) {
 				buttons.unshift({
 					autofocus: this.autofocus,
-					text: this.$t("upload"),
+					text: this.$panel.t("upload"),
 					responsive: true,
 					icon: "upload",
 					click: () => this.$panel.upload.pick(this.uploadOptions)
@@ -29,8 +29,8 @@ export default {
 				text:
 					this.empty ??
 					(this.multiple && this.max !== 1
-						? this.$t("field.files.empty")
-						: this.$t("field.files.empty.single"))
+						? this.$panel.t("field.files.empty")
+						: this.$panel.t("field.files.empty.single"))
 			};
 		},
 		hasDropzone() {
@@ -68,10 +68,10 @@ export default {
 		}
 	},
 	mounted() {
-		this.$events.on("file.delete", this.removeById);
+		this.$panel.events.on("file.delete", this.removeById);
 	},
 	destroyed() {
-		this.$events.off("file.delete", this.removeById);
+		this.$panel.events.off("file.delete", this.removeById);
 	},
 	methods: {
 		drop(files) {

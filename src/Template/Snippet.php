@@ -123,7 +123,6 @@ class Snippet extends Tpl
 
 	/**
 	 * Returns whether the snippet has any closed slots
-	 * @since 5.5.0
 	 */
 	public function hasSlots(): bool
 	{
@@ -178,7 +177,7 @@ class Snippet extends Tpl
 	 */
 	public static function file(string|array $name): string|null
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 		$root  = static::root();
 		$names = A::wrap($name);
 
@@ -193,7 +192,7 @@ class Snippet extends Tpl
 			$file = $root . '/' . $name . '.php';
 
 			if (F::exists($file, $root) === false) {
-				$file = $kirby->extensions('snippets')[$name] ?? null;
+				$file = $infinri->extensions('snippets')[$name] ?? null;
 			}
 
 			if ($file) {

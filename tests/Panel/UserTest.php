@@ -17,7 +17,7 @@ class UserForceLocked extends ModelUser
 	public function lock(): Lock
 	{
 		return new Lock(
-			user: new ModelUser(['email' => 'test@getkirby.com']),
+			user: new ModelUser(['email' => 'test@infinri.com']),
 			modified: time()
 		);
 	}
@@ -28,7 +28,7 @@ class UserForceLocked extends ModelUser
 class UserTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP = KIRBY_TMP_DIR . '/Panel.User';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.User';
 
 	protected function setUp(): void
 	{
@@ -58,11 +58,11 @@ class UserTest extends TestCase
 	public function testBreadcrumb(): void
 	{
 		$model = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
 		$breadcrumb = (new User($model))->breadcrumb();
-		$this->assertSame('test@getkirby.com', $breadcrumb[0]['label']);
+		$this->assertSame('test@infinri.com', $breadcrumb[0]['label']);
 		$this->assertStringStartsWith('/users/', $breadcrumb[0]['link']);
 	}
 
@@ -87,10 +87,10 @@ class UserTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'test@getkirby.com'],
-				['email' => 'foo@getkirby.com']
+				['email' => 'test@infinri.com'],
+				['email' => 'foo@infinri.com']
 			],
-			'user' => 'test@getkirby.com'
+			'user' => 'test@infinri.com'
 		]);
 
 		$user = $this->app->user();
@@ -103,23 +103,17 @@ class UserTest extends TestCase
 		$this->assertSame('/account/totp/disable', $dropdown[7]['dialog']);
 	}
 
-	public function testDropdownOption(): void
+	public function testDropdownOptionIsNotOverridden(): void
 	{
-		$model = new ModelUser([
-			'id'    => 'test',
-			'email' => 'test@getkirby.com',
-		]);
+		$declaring = (new \ReflectionMethod(User::class, 'dropdownOption'))->getDeclaringClass()->getName();
 
-		$option = (new User($model))->dropdownOption();
-		$this->assertSame('user', $option['icon']);
-		$this->assertSame('test@getkirby.com', $option['text']);
-		$this->assertSame('/users/test', $option['link']);
+		$this->assertNotSame(User::class, $declaring);
 	}
 
 	public function testHome(): void
 	{
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
 		$panel = new User($user);
@@ -141,7 +135,7 @@ class UserTest extends TestCase
 		]);
 
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'role'  => 'editor'
 		]);
 
@@ -169,7 +163,7 @@ class UserTest extends TestCase
 		]);
 
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'role'  => 'editor'
 		]);
 
@@ -180,7 +174,7 @@ class UserTest extends TestCase
 	public function testImage(): void
 	{
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
 		$image = (new User($user))->image();
@@ -191,7 +185,7 @@ class UserTest extends TestCase
 	public function testImageStringQuery(): void
 	{
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
 		// fallback to model itself
@@ -204,7 +198,7 @@ class UserTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						[
 							'filename' => 'test.jpg',
@@ -215,7 +209,7 @@ class UserTest extends TestCase
 			]
 		]);
 
-		$user = $app->user('test@getkirby.com');
+		$user = $app->user('test@infinri.com');
 
 		$testImage = static::FIXTURES . '/image/test.jpg';
 		F::copy($testImage, $user->root() . '/test.jpg');
@@ -253,10 +247,10 @@ class UserTest extends TestCase
 	public function testOptions(): void
 	{
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
-		$user->kirby()->impersonate('kirby');
+		$user->infinri()->impersonate('infinri');
 
 		$expected = [
 			'access'         => true,
@@ -278,10 +272,10 @@ class UserTest extends TestCase
 	public function testOptionsWithLockedUser(): void
 	{
 		$user = new UserForceLocked([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
-		$user->kirby()->impersonate('kirby');
+		$user->infinri()->impersonate('infinri');
 
 		// without override
 		$expected = [
@@ -320,7 +314,7 @@ class UserTest extends TestCase
 	public function testPath(): void
 	{
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
 		$panel = new User($user);
@@ -330,35 +324,34 @@ class UserTest extends TestCase
 	public function testPickerDataDefault(): void
 	{
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
 		$panel = new User($user);
 		$data  = $panel->pickerData();
 
-		$this->assertSame('test@getkirby.com', $data['email']);
+		$this->assertSame('test@infinri.com', $data['email']);
 		$this->assertTrue(Str::startsWith($data['link'], '/users/'));
-		$this->assertSame('test@getkirby.com', $data['text']);
+		$this->assertSame('test@infinri.com', $data['text']);
 	}
 
 	public function testProps(): void
 	{
 		$user = new ModelUser([
-			'email'    => 'test@getkirby.com',
+			'email'    => 'test@infinri.com',
 			'language' => 'de'
 		]);
 
 		$panel = new User($user);
 		$props = $panel->props();
 
-		$this->assertArrayHasKey('model', $props);
-		$this->assertArrayHasKey('avatar', $props['model']);
-		$this->assertArrayHasKey('email', $props['model']);
-		$this->assertArrayHasKey('id', $props['model']);
-		$this->assertArrayHasKey('language', $props['model']);
-		$this->assertArrayHasKey('name', $props['model']);
-		$this->assertArrayHasKey('role', $props['model']);
-		$this->assertArrayHasKey('username', $props['model']);
+		$this->assertArrayNotHasKey('model', $props);
+		$this->assertArrayHasKey('avatar', $props);
+		$this->assertArrayHasKey('email', $props);
+		$this->assertArrayHasKey('language', $props);
+		$this->assertArrayHasKey('name', $props);
+		$this->assertArrayHasKey('role', $props);
+		$this->assertArrayHasKey('username', $props);
 
 		// inherited props
 		$this->assertArrayHasKey('blueprint', $props);
@@ -376,24 +369,24 @@ class UserTest extends TestCase
 	{
 		$app = $this->app->clone([
 			'users' => [
-				['email' => 'a@getkirby.com'],
-				['email' => 'b@getkirby.com'],
-				['email' => 'c@getkirby.com']
+				['email' => 'a@infinri.com'],
+				['email' => 'b@infinri.com'],
+				['email' => 'c@infinri.com']
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$props = (new User($app->user('a@getkirby.com')))->props();
+		$props = (new User($app->user('a@infinri.com')))->props();
 		$this->assertNull($props['prev']());
-		$this->assertSame('b@getkirby.com', $props['next']()['title']);
+		$this->assertSame('b@infinri.com', $props['next']()['title']);
 
-		$props = (new User($app->user('b@getkirby.com')))->props();
-		$this->assertSame('a@getkirby.com', $props['prev']()['title']);
-		$this->assertSame('c@getkirby.com', $props['next']()['title']);
+		$props = (new User($app->user('b@infinri.com')))->props();
+		$this->assertSame('a@infinri.com', $props['prev']()['title']);
+		$this->assertSame('c@infinri.com', $props['next']()['title']);
 
-		$props = (new User($app->user('c@getkirby.com')))->props();
-		$this->assertSame('b@getkirby.com', $props['prev']()['title']);
+		$props = (new User($app->user('c@infinri.com')))->props();
+		$this->assertSame('b@infinri.com', $props['prev']()['title']);
 		$this->assertNull($props['next']());
 	}
 
@@ -401,7 +394,7 @@ class UserTest extends TestCase
 	{
 		// existing
 		$user = new ModelUser([
-			'email'    => 'test@getkirby.com',
+			'email'    => 'test@infinri.com',
 			'language' => 'de'
 		]);
 
@@ -412,7 +405,7 @@ class UserTest extends TestCase
 
 		// non-existing
 		$user = new ModelUser([
-			'email'    => 'test@getkirby.com',
+			'email'    => 'test@infinri.com',
 			'language' => 'foo'
 		]);
 
@@ -426,24 +419,24 @@ class UserTest extends TestCase
 	{
 		$app = $this->app->clone([
 			'users' => [
-				['email' => 'a@getkirby.com'],
-				['email' => 'b@getkirby.com'],
-				['email' => 'c@getkirby.com']
+				['email' => 'a@infinri.com'],
+				['email' => 'b@infinri.com'],
+				['email' => 'c@infinri.com']
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$prevNext = (new User($app->user('a@getkirby.com')))->prevNext();
+		$prevNext = (new User($app->user('a@infinri.com')))->prevNext();
 		$this->assertNull($prevNext['prev']());
-		$this->assertSame('b@getkirby.com', $prevNext['next']()['title']);
+		$this->assertSame('b@infinri.com', $prevNext['next']()['title']);
 
-		$prevNext = (new User($app->user('b@getkirby.com')))->prevNext();
-		$this->assertSame('a@getkirby.com', $prevNext['prev']()['title']);
-		$this->assertSame('c@getkirby.com', $prevNext['next']()['title']);
+		$prevNext = (new User($app->user('b@infinri.com')))->prevNext();
+		$this->assertSame('a@infinri.com', $prevNext['prev']()['title']);
+		$this->assertSame('c@infinri.com', $prevNext['next']()['title']);
 
-		$prevNext = (new User($app->user('c@getkirby.com')))->prevNext();
-		$this->assertSame('b@getkirby.com', $prevNext['prev']()['title']);
+		$prevNext = (new User($app->user('c@infinri.com')))->prevNext();
+		$this->assertSame('b@infinri.com', $prevNext['prev']()['title']);
 		$this->assertNull($prevNext['next']());
 	}
 
@@ -451,17 +444,17 @@ class UserTest extends TestCase
 	{
 		$app = $this->app->clone([
 			'users' => [
-				['id' => 'a', 'email' => 'a@getkirby.com'],
-				['id' => 'b', 'email' => 'b@getkirby.com'],
-				['id' => 'c', 'email' => 'c@getkirby.com']
+				['id' => 'a', 'email' => 'a@infinri.com'],
+				['id' => 'b', 'email' => 'b@infinri.com'],
+				['id' => 'c', 'email' => 'c@infinri.com']
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$_GET['tab'] = 'test';
 
-		$prevNext = (new User($app->user('b@getkirby.com')))->prevNext();
+		$prevNext = (new User($app->user('b@infinri.com')))->prevNext();
 		$this->assertSame('/users/a?tab=test', $prevNext['prev']()['link']);
 		$this->assertSame('/users/c?tab=test', $prevNext['next']()['link']);
 
@@ -487,47 +480,47 @@ class UserTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'a',
-					'email' => 'a@getkirby.com',
+					'email' => 'a@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
 					'id'    => 'b',
-					'email' => 'b@getkirby.com',
+					'email' => 'b@infinri.com',
 					'role'  => 'restricted-' . $uuid
 				],
 				[
 					'id'    => 'c',
-					'email' => 'c@getkirby.com',
+					'email' => 'c@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			]
 		]);
 
 		// as a regular editor, non-listable user b is skipped in navigation
-		$app->impersonate('a@getkirby.com');
+		$app->impersonate('a@infinri.com');
 
-		$prevNext = (new User($app->user('a@getkirby.com')))->prevNext();
+		$prevNext = (new User($app->user('a@infinri.com')))->prevNext();
 		$this->assertNull($prevNext['prev']());
-		$this->assertSame('c@getkirby.com', $prevNext['next']()['title']);
+		$this->assertSame('c@infinri.com', $prevNext['next']()['title']);
 
-		$prevNext = (new User($app->user('c@getkirby.com')))->prevNext();
-		$this->assertSame('a@getkirby.com', $prevNext['prev']()['title']);
+		$prevNext = (new User($app->user('c@infinri.com')))->prevNext();
+		$this->assertSame('a@infinri.com', $prevNext['prev']()['title']);
 		$this->assertNull($prevNext['next']());
 
-		// the kirby superuser sees all users including non-listable ones
-		$app->impersonate('kirby');
+		// the infinri superuser sees all users including non-listable ones
+		$app->impersonate('infinri');
 
-		$prevNext = (new User($app->user('a@getkirby.com')))->prevNext();
-		$this->assertSame('b@getkirby.com', $prevNext['next']()['title']);
+		$prevNext = (new User($app->user('a@infinri.com')))->prevNext();
+		$this->assertSame('b@infinri.com', $prevNext['next']()['title']);
 
-		$prevNext = (new User($app->user('c@getkirby.com')))->prevNext();
-		$this->assertSame('b@getkirby.com', $prevNext['prev']()['title']);
+		$prevNext = (new User($app->user('c@infinri.com')))->prevNext();
+		$this->assertSame('b@infinri.com', $prevNext['prev']()['title']);
 	}
 
 	public function testView(): void
 	{
 		$user = new ModelUser([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
 		$panel = new User($user);
@@ -535,7 +528,7 @@ class UserTest extends TestCase
 
 		$this->assertArrayHasKey('props', $view);
 		$this->assertSame('k-user-view', $view['component']);
-		$this->assertSame('test@getkirby.com', $view['title']);
-		$this->assertSame('test@getkirby.com', $view['breadcrumb'][0]['label']);
+		$this->assertSame('test@infinri.com', $view['title']);
+		$this->assertSame('test@infinri.com', $view['breadcrumb'][0]['label']);
 	}
 }

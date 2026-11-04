@@ -13,7 +13,6 @@
 <script>
 /**
  * Single stat report used in `k-stats`
- * @since 4.0.0
  *
  * @example <k-stat label="Pages" value="123" info="Last week" theme="info" />
  */
@@ -33,14 +32,12 @@ export default {
 		/**
 		 * Drawer endpoint or options to be passed to `this.$panel.drawer.open()`.
 		 * Use instead of `link` or `dialog`.
-		 * @since 5.1.0
 		 */
 		drawer: {
 			type: [String, Object]
 		},
 		/**
 		 * Additional icon for the stat
-		 * @since 4.0.0
 		 */
 		icon: String,
 		/**
@@ -114,7 +111,7 @@ export default {
 	background: var(--stat-color-back);
 	border-radius: var(--rounded);
 	box-shadow: var(--shadow);
-	line-height: var(--leading-normal);
+	line-height: 1.5;
 }
 .k-stat.k-link:hover {
 	cursor: pointer;

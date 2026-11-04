@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(PagesCollector::class)]
 class PagesCollectorTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Collector.PagesCollector';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Collector.PagesCollector';
 
 	public function setUpPages()
 	{
@@ -35,7 +35,7 @@ class PagesCollectorTest extends TestCase
 	public function testCollect(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertCollect(PagesCollector::class, ['a', 'b', 'c']);
 	}
 
@@ -53,7 +53,7 @@ class PagesCollectorTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// all
 		$collector = new PagesCollector();
@@ -92,7 +92,7 @@ class PagesCollectorTest extends TestCase
 	public function testCollectByQuery(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertCollectByQuery(PagesCollector::class, 'site.children.filterBy("intendedTemplate", "article")', ['b', 'c']);
 	}
 
@@ -105,7 +105,7 @@ class PagesCollectorTest extends TestCase
 	public function testFilterByTemplates(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$collector = new PagesCollector(
 			templates: ['article']
@@ -117,7 +117,7 @@ class PagesCollectorTest extends TestCase
 	public function testFilterByTemplatesIgnore(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$collector = new PagesCollector(
 			templatesIgnore: ['article']
@@ -129,7 +129,7 @@ class PagesCollectorTest extends TestCase
 	public function testFlip(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->assertFlip(PagesCollector::class, ['c', 'b', 'a']);
 	}
@@ -162,14 +162,14 @@ class PagesCollectorTest extends TestCase
 	public function testPagination(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertPagination(PagesCollector::class);
 	}
 
 	public function testSearch(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->app->site()->children()->find('c')->update([
 			'title' => 'Searchword'
 		]);
@@ -180,7 +180,7 @@ class PagesCollectorTest extends TestCase
 	public function testSearchAndFlip(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->app->site()->children()->find('b')->update([
 			'title' => 'Searchword'
@@ -197,7 +197,7 @@ class PagesCollectorTest extends TestCase
 	public function testSearchAndSortBy(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->app->site()->children()->find('b')->update([
 			'title' => 'Searchword'
@@ -214,7 +214,7 @@ class PagesCollectorTest extends TestCase
 	public function testSortBy(): void
 	{
 		$this->setUpPages();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertSortBy(PagesCollector::class, 'slug desc', ['c', 'b', 'a']);
 	}
 }

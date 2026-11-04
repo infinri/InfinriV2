@@ -4,7 +4,7 @@ namespace Infinri\Uuid;
 
 class IdentifiableModelActionsTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Uuid.IdentifiableModelActions';
+	public const TMP = INFINRI_TMP_DIR . '/Uuid.IdentifiableModelActions';
 
 	public function testFileChangeName(): void
 	{
@@ -14,7 +14,7 @@ class IdentifiableModelActionsTest extends TestCase
 		$uuid->populate();
 		$this->assertTrue($uuid->isCached());
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$file->changeName('foo.pdf');
 		$this->assertFalse($uuid->isCached());
 	}
@@ -27,7 +27,7 @@ class IdentifiableModelActionsTest extends TestCase
 		$uuid->populate();
 		$this->assertTrue($uuid->isCached());
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$file->delete();
 		$this->assertFalse($uuid->isCached());
 	}
@@ -40,7 +40,7 @@ class IdentifiableModelActionsTest extends TestCase
 		$uuid->populate();
 		$this->assertTrue($uuid->isCached());
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$page->changeSlug('page-c');
 		$this->assertTrue($uuid->isCached());
 	}
@@ -53,7 +53,7 @@ class IdentifiableModelActionsTest extends TestCase
 		$uuid->populate();
 		$this->assertTrue($uuid->isCached());
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$page->delete();
 		$uuid = $page->uuid();
 		$this->assertFalse($uuid->isCached());

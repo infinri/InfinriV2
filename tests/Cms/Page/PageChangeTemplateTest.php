@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Page::class)]
 class PageChangeTemplateTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageChangeTemplate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageChangeTemplate';
 
 	public function testChangeTemplateInMultiLanguageMode(): void
 	{
@@ -79,7 +79,7 @@ class PageChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',
@@ -157,7 +157,7 @@ class PageChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',
@@ -224,7 +224,7 @@ class PageChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',
@@ -298,12 +298,12 @@ class PageChangeTemplateTest extends ModelTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com'
+					'email' => 'editor@infinri.com'
 				]
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',
@@ -346,7 +346,7 @@ class PageChangeTemplateTest extends ModelTestCase
 			],
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',
@@ -396,7 +396,7 @@ class PageChangeTemplateTest extends ModelTestCase
 			],
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',

@@ -253,7 +253,8 @@ class PageDialogsTest extends AreaTestCase
 		$this->assertSame('B', $props['fields']['template']['options'][1]['text']);
 		$this->assertSame('b', $props['fields']['template']['options'][1]['value']);
 
-		$this->assertSame('Change', $props['submitButton']);
+		$this->assertSame(['text' => 'Change', 'theme' => 'notice'], $props['submitButton']);
+		$this->assertArrayNotHasKey('theme', $props);
 		$this->assertSame('a', $props['value']['template']);
 	}
 
@@ -892,7 +893,8 @@ class PageDialogsTest extends AreaTestCase
 		$this->assertSame('info', $props['fields']['info']['type']);
 		$this->assertSame('text', $props['fields']['check']['type']);
 		$this->assertSame('Do you really want to delete <strong>test</strong>?', $props['text']);
-		$this->assertSame('Delete', $props['submitButton']);
+		$this->assertSame(['text' => 'Delete', 'theme' => 'negative'], $props['submitButton']);
+		$this->assertArrayNotHasKey('theme', $props);
 		$this->assertSame('medium', $props['size']);
 	}
 

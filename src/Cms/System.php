@@ -12,7 +12,6 @@ use Throwable;
 class System
 {
 	// cache
-	protected License|null $license = null;
 	protected UpdateStatus|null $updateStatus = null;
 
 	public function __construct(protected App $app)
@@ -50,7 +49,7 @@ class System
 	 * if the file is located in the document
 	 * root. Otherwise it will return null.
 	 *
-	 * @param string $folder 'git', 'content', 'site', 'kirby'
+	 * @param string $folder 'git', 'content', 'site', 'infinri'
 	 */
 	public function exposedFileUrl(string $folder): string|null
 	{
@@ -63,7 +62,7 @@ class System
 				return $url . '/' . basename($this->app->site()->version('latest')->contentFile());
 			case 'git':
 				return $url . '/config';
-			case 'kirby':
+			case 'infinri':
 				return $url . '/LICENSE.md';
 			case 'site':
 				$root  = $this->app->root('site');
@@ -95,7 +94,7 @@ class System
 	 * if the folder is located in the document
 	 * root. Otherwise it will return null.
 	 *
-	 * @param string $folder 'git', 'content', 'site', 'kirby'
+	 * @param string $folder 'git', 'content', 'site', 'infinri'
 	 */
 	public function folderUrl(string $folder): string|null
 	{
@@ -147,15 +146,13 @@ class System
 	/**
 	 * Returns an array with relevant system information
 	 * used for debugging
-	 * @since 4.3.0
 	 */
 	public function info(): array
 	{
 		return [
-			'kirby'     => $this->app->version(),
+			'infinri'     => $this->app->version(),
 			'php'       => phpversion(),
 			'server'    => $this->serverSoftware(),
-			'license'   => $this->license()->label(),
 			'languages' => $this->app->languages()->values(
 				fn ($lang) => $lang->code()
 			)
@@ -239,7 +236,7 @@ class System
 	}
 
 	/**
-	 * Check if Kirby is already installed
+	 * Check if Infinri is already installed
 	 */
 	public function isInstalled(): bool
 	{
@@ -260,26 +257,6 @@ class System
 	public function isOk(): bool
 	{
 		return in_array(false, array_values($this->status()), true) === false;
-	}
-
-	/**
-	 * Loads the license file and returns
-	 * the license information if available
-	 */
-	public function license(): License
-	{
-		if ($this->license !== null) {
-			return $this->license; // @codeCoverageIgnore
-		}
-
-		// load the license
-		$this->license = License::read();
-
-		// if the license has expired,
-		// try to get it reissued by the hub
-		$this->license->reissue();
-
-		return $this->license;
 	}
 
 	/**
@@ -321,7 +298,7 @@ class System
 
 				if ($this->app->option('debug') === true) {
 					$message = 'The "' . $method . '" login method cannot be enabled when 2FA is required';
-					throw new InvalidArgumentException($message);
+					throw new InvalidArgumentException(message: $message);
 				}
 			}
 		}
@@ -335,7 +312,7 @@ class System
 
 			if ($this->app->option('debug') === true) {
 				$message = 'The "code" and "password-reset" login methods cannot be enabled together';
-				throw new InvalidArgumentException($message);
+				throw new InvalidArgumentException(message: $message);
 			}
 		}
 
@@ -379,28 +356,6 @@ class System
 	}
 
 	/**
-	 * Validates the license key
-	 * and adds it to the .license file in the config
-	 * folder if possible.
-	 *
-	 * @throws \Infinri\Exception\Exception
-	 * @throws \Infinri\Exception\InvalidArgumentException
-	 */
-	public function register(
-		string|null $license = null,
-		string|null $email = null
-	): bool {
-		$license = new License(
-			code: $license,
-			domain: $this->indexUrl(),
-			email: $email,
-		);
-
-		$this->license = $license->register();
-		return true;
-	}
-
-	/**
 	 * Returns the detected server software
 	 */
 	public function serverSoftware(): string
@@ -410,7 +365,6 @@ class System
 
 	/**
 	 * Returns the short version of the detected server software
-	 * @since 4.6.0
 	 */
 	public function serverSoftwareShort(): string
 	{
@@ -445,7 +399,6 @@ class System
 	/**
 	 * Returns the site's title as defined in the
 	 * content file or `site.yml` blueprint
-	 * @since 3.6.0
 	 */
 	public function title(): string
 	{
@@ -465,10 +418,9 @@ class System
 
 	/**
 	 * Returns the update status object unless
-	 * the update check for Kirby has been disabled
-	 * @since 3.8.0
+	 * the update check for Infinri has been disabled
 	 *
-	 * @param array|null $data Custom override for the getkirby.com update data
+	 * @param array|null $data Custom override for the infinri.com update data
 	 */
 	public function updateStatus(array|null $data = null): UpdateStatus|null
 	{
@@ -476,17 +428,17 @@ class System
 			return $this->updateStatus;
 		}
 
-		$kirby  = $this->app;
+		$infinri  = $this->app;
 		$option =
-			$kirby->option('updates.kirby') ??
-			$kirby->option('updates', true);
+			$infinri->option('updates.infinri') ??
+			$infinri->option('updates', true);
 
 		if ($option === false) {
 			return null;
 		}
 
 		return $this->updateStatus = new UpdateStatus(
-			$kirby,
+			$infinri,
 			$option === 'security',
 			$data
 		);

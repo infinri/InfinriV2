@@ -84,7 +84,7 @@ class Events
 			// mark the hook as processed, to avoid endless loops
 			$this->processed[$name][] = $hook;
 
-			// bind the Kirby instance to the hook and run it
+			// bind the Infinri instance to the hook and run it
 			$result = $event->call($this->app, $hook);
 
 			// run the afterEach callback

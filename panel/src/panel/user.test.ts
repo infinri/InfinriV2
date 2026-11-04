@@ -6,7 +6,7 @@ describe("panel.user", () => {
 		it("restores all default values", () => {
 			const user = User();
 
-			user.set({ id: "abc", username: "Kirby" });
+			user.set({ id: "abc", username: "Infinri" });
 			user.reset();
 
 			expect(user.state()).toStrictEqual(user.defaults());
@@ -17,10 +17,10 @@ describe("panel.user", () => {
 		it("applies partial state", () => {
 			const user = User();
 
-			user.set({ id: "abc", username: "Kirby" });
+			user.set({ id: "abc", username: "Infinri" });
 
 			expect(user.id).toStrictEqual("abc");
-			expect(user.username).toStrictEqual("Kirby");
+			expect(user.username).toStrictEqual("Infinri");
 			expect(user.email).toBeNull();
 		});
 	});

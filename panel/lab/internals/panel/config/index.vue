@@ -14,13 +14,13 @@
 				/>
 			</k-text>
 		</k-lab-example>
-		<k-lab-example label="kirbytext" :code="false">
+		<k-lab-example label="infinritext" :code="false">
 			<k-text>
 				<p>
-					<code>window.panel.config.kirbytext</code> If true, the textarea will
-					insert code as kirbytext instead of markdown.
+					<code>window.panel.config.infinritext</code> If true, the textarea will
+					insert code as infinritext instead of markdown.
 				</p>
-				<k-code>{{ $panel.config.kirbytext }}</k-code>
+				<k-code>{{ $panel.config.infinritext }}</k-code>
 			</k-text>
 		</k-lab-example>
 	</k-lab-examples>

@@ -20,6 +20,27 @@ class LabTest extends AreaTestCase
 		$this->assertTrue($props['compiler']);
 	}
 
+	public function testPlaygroundViewHasNoGithubButtonOrProp(): void
+	{
+		$view  = $this->view('lab/components/buttons');
+		$props = $view['props'];
+
+		$this->assertArrayNotHasKey('github', $props);
+		$this->assertNotContains('github', array_column(array_column($props['buttons'], 'props'), 'icon'));
+	}
+
+	public function testDocsViewHasNoGithubButtonOrSourceData(): void
+	{
+		$view  = $this->view('lab/docs/k-button');
+		$props = $view['props'];
+
+		$this->assertSame('k-lab-docs-view', $view['component']);
+		$this->assertNotContains('github', array_column(array_column($props['buttons'], 'props'), 'icon'));
+		$this->assertArrayNotHasKey('source', $props['docs']);
+		$this->assertArrayNotHasKey('since', $props['docs']);
+		$this->assertArrayNotHasKey('deprecated', $props['docs']);
+	}
+
 	public function testPlaygroundViewWithDisabledCompiler(): void
 	{
 		$this->app = $this->app->clone([

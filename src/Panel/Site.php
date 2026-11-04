@@ -28,21 +28,6 @@ class Site extends Model
 	}
 
 	/**
-	 * Returns the setup for a dropdown option
-	 * which is used in the changes dropdown
-	 * for example.
-	 *
-	 * @deprecated 5.1.4
-	 */
-	public function dropdownOption(): array
-	{
-		return [
-			'icon' => 'home',
-			'text' => $this->model->toSafeString('{{ site.title }}'),
-		] + parent::dropdownOption();
-	}
-
-	/**
 	 * Returns the image file object based on provided query
 	 */
 	protected function imageSource(
@@ -67,28 +52,14 @@ class Site extends Model
 	{
 		$props = parent::props();
 
-		// Additional model information
-		// @deprecated Use the top-level props instead
-		$model = [
-			'link'       => $props['link'],
-			'previewUrl' => $this->model->previewUrl(),
-			'title'      => $this->model->title()->toString(),
-			'uuid'       => $props['uuid'],
-		];
-
 		return [
 			...$props,
 			'blueprint'   => 'site',
 			'id'          => '/',
-			'model'       => $model,
-			'title'       => $model['title'],
+			'title'       => $this->model->title()->toString(),
 			'permissions' => [
 				...$props['permissions'],
-				// the home page check is kept for backward compatibility
-				// @todo Remove the home page check in 6.0.0
-				'preview' =>
-					$this->model->permissions()->can('preview') === true &&
-					$this->model->homePage()?->permissions()->can('preview') === true,
+				'preview' => $this->model->permissions()->can('preview') === true,
 			],
 		];
 	}

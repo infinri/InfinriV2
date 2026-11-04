@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(File::class)]
 class FileChangeNameTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileChangeName';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileChangeName';
 
 	public function testChangeName(): void
 	{
@@ -48,7 +48,7 @@ class FileChangeNameTest extends ModelTestCase
 	public function testChangeNameMultiLang(): void
 	{
 		$this->setUpMultiLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$file = new File([
 			'filename' => 'test.pdf',
@@ -109,7 +109,7 @@ class FileChangeNameTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$file = new File([
 			'filename' => 'test.pdf',

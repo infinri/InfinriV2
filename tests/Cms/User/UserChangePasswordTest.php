@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserChangePasswordTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserChangePassword';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserChangePassword';
 
 	public function testChangePassword(): void
 	{
@@ -43,7 +43,7 @@ class UserChangePasswordTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = new User(['email' => 'editor@domain.com']);
 		$user->changePassword('topsecret2018');

@@ -22,7 +22,7 @@ class TestCase extends BaseTestCase
 				'index' => $this->hasTmp() ? static::TMP : '/dev/null'
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com/subfolder'
+				'index' => 'https://infinri.com/subfolder'
 			]
 		]);
 	}

@@ -50,7 +50,7 @@ export default {
 		},
 		label: {
 			default() {
-				return this.$t("field.layout.select");
+				return this.$panel.t("field.layout.select");
 			},
 			type: String
 		},

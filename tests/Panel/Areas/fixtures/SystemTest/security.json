@@ -2,7 +2,7 @@
 	"latest": "99999.9.9",
 	"versions": {
 		"99999.9.9": {
-			"description": "Latest Kirby release",
+			"description": "Latest Infinri release",
 			"status": "latest"
 		},
 		"*": {
@@ -13,16 +13,16 @@
 	},
 	"urls": {
 		"*": {
-			"changes": "https://getkirby.com/releases/{{ version }}",
+			"changes": "https://infinri.com/releases/{{ version }}",
 			"download": "https://repoofthefuture.com/{{ version }}.zip",
-			"upgrade": "https://getkirby.com/releases/99999"
+			"upgrade": "https://infinri.com/releases/99999"
 		}
 	},
 	"incidents": [],
 	"messages": [
 		{
 			"text": "This is a very important announcement!",
-			"kirby": "*",
+			"infinri": "*",
 			"php": "*"
 		}
 	]

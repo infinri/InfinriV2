@@ -11,7 +11,7 @@ return [
 		'pattern' => 'auth',
 		'method'  => 'GET',
 		'action'  => function () {
-			if ($user = $this->kirby()->auth()->user()) {
+			if ($user = $this->infinri()->auth()->user()) {
 				return $this->resolve($user)->view('auth');
 			}
 
@@ -25,7 +25,7 @@ return [
 		'method'  => 'POST',
 		'auth'    => false,
 		'action'  => function () {
-			$auth = $this->kirby()->auth();
+			$auth = $this->infinri()->auth();
 
 			// csrf token check
 			if ($auth->type() === 'session' && $auth->csrf() === false) {
@@ -48,8 +48,8 @@ return [
 		'method'  => 'POST',
 		'auth'    => false,
 		'action'  => function () {
-			$auth    = $this->kirby()->auth();
-			$methods = $this->kirby()->system()->loginMethods();
+			$auth    = $this->infinri()->auth();
+			$methods = $this->infinri()->system()->loginMethods();
 
 			// csrf token check
 			if ($auth->type() === 'session' && $auth->csrf() === false) {
@@ -109,7 +109,7 @@ return [
 		'method'  => 'POST',
 		'auth'    => false,
 		'action'  => function () {
-			$this->kirby()->auth()->logout();
+			$this->infinri()->auth()->logout();
 			return true;
 		}
 	],
@@ -119,7 +119,7 @@ return [
 		'auth'    => false,
 		'action'  => function () {
 			// refresh the session timeout
-			$this->kirby()->session();
+			$this->infinri()->session();
 			return true;
 		}
 	],

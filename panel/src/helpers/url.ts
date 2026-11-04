@@ -1,6 +1,5 @@
 /**
  * Returns the base URL from the <base> element
- * @since 4.0.0
  */
 export function base(): URL {
 	return new URL(
@@ -11,7 +10,6 @@ export function base(): URL {
 /**
  * Turns the given object into an URL query string
  * and appends it, if given, to the query of the origin
- * @since 4.0.0
  */
 export function buildQuery(
 	query: Record<string, string | null> = {},
@@ -33,7 +31,6 @@ export function buildQuery(
 /**
  * Builds a full URL object based on the
  * given path or another URL object and query data
- * @since 4.0.0
  */
 export function buildUrl(
 	url: string | URL = "",
@@ -48,8 +45,6 @@ export function buildUrl(
 /**
  * Checks if a URL starts with a dangerous URI scheme (e.g. javascript:).
  * Mirrors `Infinri\Http\Url::hasDangerousScheme()`.
- *
- * @since 5.4.4
  */
 export function hasDangerousScheme(url: unknown): boolean {
 	if (url === null || url === undefined) {
@@ -66,7 +61,6 @@ export function hasDangerousScheme(url: unknown): boolean {
 
 /**
  * Checks if the url string is absolute
- * @since 4.0.0
  */
 export function isAbsolute(url: unknown): boolean {
 	return String(url).match(/^https?:\/\//) !== null;
@@ -74,7 +68,6 @@ export function isAbsolute(url: unknown): boolean {
 
 /**
  * Checks if the url is on the same origin
- * @since 4.0.0
  */
 export function isSameOrigin(url: string | URL): boolean {
 	return toObject(url).origin === window.location.origin;
@@ -82,9 +75,8 @@ export function isSameOrigin(url: string | URL): boolean {
 
 /**
  * Checks if the given argument is a URL
- * @since 4.0.0
  *
- * @param strict - Whether to also check the URL against Kirby's URL validator
+ * @param strict - Whether to also check the URL against Infinri's URL validator
  */
 export function isUrl(
 	url: unknown,
@@ -122,7 +114,6 @@ export function isUrl(
 
 /**
  * Make sure the URL is absolute
- * @since 4.0.0
  */
 export function makeAbsolute(
 	path: string | URL,
@@ -140,7 +131,6 @@ export function makeAbsolute(
 
 /**
  * Converts any given url to a URL object
- * @since 4.0.0
  */
 export function toObject(url: string | URL, origin?: string | URL): URL {
 	return url instanceof URL ? url : new URL(makeAbsolute(String(url), origin));

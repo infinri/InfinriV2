@@ -52,7 +52,6 @@ class Layouts extends Items
 
 	/**
 	 * Checks if a given block type exists in the layouts collection
-	 * @since 3.6.0
 	 */
 	public function hasBlockType(string $type): bool
 	{
@@ -84,7 +83,6 @@ class Layouts extends Items
 
 	/**
 	 * Converts layouts to blocks
-	 * @since 3.6.0
 	 *
 	 * @param bool $includeHidden Sets whether to include hidden blocks
 	 */

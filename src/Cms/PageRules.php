@@ -345,12 +345,12 @@ class PageRules
 
 		// check if the parent has at least one pages section
 		if ($sections === []) {
-			throw new LogicException([
-				'key'  => 'page.move.noSections',
-				'data' => [
+			throw new LogicException(
+				key: 'page.move.noSections',
+				data: [
 					'parent' => $parent->id() ?? '/',
 				]
-			]);
+			);
 		}
 
 		// go through all allowed templates and
@@ -461,7 +461,7 @@ class PageRules
 
 		$paths = A::map(
 			['api', 'assets', 'media', 'panel'],
-			fn ($url) => $page->kirby()->url($url, true)->path()->toString()
+			fn ($url) => $page->infinri()->url($url, true)->path()->toString()
 		);
 
 		$index = array_search($slug, $paths);

@@ -94,7 +94,7 @@ class VolatileHeadersTest extends TestCase
 
 	public function testCollectWithCors(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://example.com']
@@ -115,7 +115,7 @@ class VolatileHeadersTest extends TestCase
 
 	public function testCollectMergesVaryFromCors(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://example.com']

@@ -8,7 +8,7 @@ type ThemeState = {
 
 export function defaults(media?: MediaQueryList): ThemeState {
 	return {
-		setting: localStorage.getItem("kirby$theme"),
+		setting: localStorage.getItem("infinri$theme"),
 		system: media?.matches ? "dark" : "light"
 	};
 }
@@ -16,8 +16,6 @@ export function defaults(media?: MediaQueryList): ThemeState {
 /**
  * Tracks the active color theme (light, dark, or system)
  * resolved from user setting, Panel config, or OS preference
- *
- * @since 5.0.0
  */
 export default function Theme(panel: { config: { theme: string | null } }) {
 	const media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -42,12 +40,12 @@ export default function Theme(panel: { config: { theme: string | null } }) {
 
 		reset(): void {
 			this.setting = null;
-			localStorage.removeItem("kirby$theme");
+			localStorage.removeItem("infinri$theme");
 		},
 
 		set(theme: "light" | "dark" | "system"): void {
 			this.setting = theme;
-			localStorage.setItem("kirby$theme", theme);
+			localStorage.setItem("infinri$theme", theme);
 		}
 	});
 

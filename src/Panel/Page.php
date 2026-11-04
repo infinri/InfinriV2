@@ -54,8 +54,6 @@ class Page extends Model
 	/**
 	 * Single breadcrumb entry for the page. The title of a page
 	 * that the user must not see gets redacted.
-	 *
-	 * @since 5.6.0
 	 */
 	public function crumb(): array
 	{
@@ -73,12 +71,12 @@ class Page extends Model
 	}
 
 	/**
-	 * Provides a kirbytag or markdown
+	 * Provides a infinritag or markdown
 	 * tag for the page, which will be
 	 * used in the panel, when the page
 	 * gets dragged onto a textarea
 	 *
-	 * @param string|null $type (`auto`|`kirbytext`|`markdown`)
+	 * @param string|null $type (`auto`|`infinritext`|`markdown`)
 	 */
 	public function dragText(string|null $type = null): string
 	{
@@ -96,7 +94,7 @@ class Page extends Model
 			return '[' . $title . '](' . $url . ')';
 		}
 
-		// type: kirbytext
+		// type: infinritext
 		$link = $this->model->uuid() ?? $this->model->uri();
 		return '(link: ' . $link . ' text: ' . $title . ')';
 	}
@@ -107,7 +105,7 @@ class Page extends Model
 	public function dropdown(array $options = []): array
 	{
 		$page        = $this->model;
-		$request     = $page->kirby()->request();
+		$request     = $page->infinri()->request();
 		$defaults    = $request->get(['view', 'sort', 'delete']);
 		$options     = [...$defaults, ...$options];
 		$permissions = $this->options(['preview']);
@@ -207,20 +205,6 @@ class Page extends Model
 		];
 
 		return $result;
-	}
-
-	/**
-	 * Returns the setup for a dropdown option
-	 * which is used in the changes dropdown
-	 * for example.
-	 *
-	 * @deprecated 5.1.4 Use the Infinri\Panel\Ui\Item\PageItem class instead
-	 */
-	public function dropdownOption(): array
-	{
-		return (new PageItem(page: $this->model))->props() + [
-			'icon' => 'page'
-		];
 	}
 
 	/**
@@ -365,26 +349,11 @@ class Page extends Model
 	 */
 	public function props(): array
 	{
-		$props = parent::props();
-
-		// Additional model information
-		// @deprecated Use the top-level props instead
-		$model = [
-			'id'         => $props['id'],
-			'link'       => $props['link'],
-			'parent'     => $this->model->parentModel()->panel()->url(true),
-			'previewUrl' => $this->model->previewUrl(),
-			'status'     => $this->model->status(),
-			'title'      => $this->model->title()->toString(),
-			'uuid'       => $props['uuid'],
-		];
-
 		return [
-			...$props,
+			...parent::props(),
 			...$this->prevNext(),
 			'blueprint'  => $this->model->intendedTemplate()->name(),
-			'model'      => $model,
-			'title'      => $model['title'],
+			'title'      => $this->model->title()->toString(),
 		];
 	}
 

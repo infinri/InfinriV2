@@ -1,5 +1,5 @@
 {
-	"based_on": "https://github.com/web-platform-tests/wpt/blob/c23755a1449cc9c5a9131378c13ecf073c0885c6/url/resources/urltestdata.json",
+	"based_on": "web-platform-tests url/resources/urltestdata.json",
 	"license": "BSD-3-Clause",
 	"description": "URLs that a browser resolves to a host other than the one the site is served from; the sanitizer must never allow them when the host is not in the allowlist",
 	"cases": [

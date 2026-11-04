@@ -40,7 +40,7 @@ return [
 		},
 		'submit' => function (string $path, string $filename) {
 			$file     = Find::file($path, $filename);
-			$name     = $file->kirby()->request()->get('name');
+			$name     = $file->infinri()->request()->get('name');
 			$renamed  = $file->changeName($name);
 			$oldUrl   = $file->panel()->url(true);
 			$newUrl   = $renamed->panel()->url(true);
@@ -77,7 +77,7 @@ return [
 			$file     = Find::file($path, $filename);
 			$files    = $file->siblings()->sorted();
 			$ids      = $files->keys();
-			$newIndex = (int)($file->kirby()->request()->get('position')) - 1;
+			$newIndex = (int)($file->infinri()->request()->get('position')) - 1;
 			$oldIndex = $files->indexOf($file);
 
 			array_splice($ids, $oldIndex, 1);
@@ -109,8 +109,10 @@ return [
 							'required' => true
 						])
 					],
-					'theme' => 'notice',
-					'submitButton' => I18n::translate('change'),
+					'submitButton' => [
+						'text'  => I18n::translate('change'),
+						'theme' => 'notice'
+					],
 					'value' => [
 						'template' => $file->template()
 					]
@@ -119,7 +121,7 @@ return [
 		},
 		'submit' => function (string $path, string $filename) {
 			$file     = Find::file($path, $filename);
-			$template = $file->kirby()->request()->get('template');
+			$template = $file->infinri()->request()->get('template');
 
 			$file->changeTemplate($template);
 

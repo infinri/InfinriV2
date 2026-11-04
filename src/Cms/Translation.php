@@ -28,7 +28,7 @@ class Translation
 	 */
 	public function author(): string
 	{
-		return $this->get('translation.author', 'Kirby');
+		return $this->get('translation.author', 'Infinri');
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Translation
 
 	/**
 	 * Loads the translation from the
-	 * json file in Kirby's translations folder
+	 * json file in Infinri's translations folder
 	 */
 	#[BlockCollectionAccess]
 	public static function load(

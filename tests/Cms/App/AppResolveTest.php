@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class AppResolveTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.AppResolve';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.AppResolve';
 
 	public function testResolveHomePage(): void
 	{
@@ -118,11 +118,11 @@ class AppResolveTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin']
+				['email' => 'admin@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 
 		$result = $app->resolve('test/a-draft');
 
@@ -155,11 +155,11 @@ class AppResolveTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 
 		$result = $app->resolve('test/a-draft');
 
@@ -224,7 +224,7 @@ class AppResolveTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			]
 		]);
 
@@ -235,7 +235,7 @@ class AppResolveTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 
 		$result = $app->resolve('test/a-draft');
 
@@ -249,7 +249,7 @@ class AppResolveTest extends TestCase
 		F::write($template = static::TMP . '/test.xml.php', 'xml');
 		F::write(
 			$template = static::TMP . '/test.png.php',
-			'<?php $kirby->response()->type("image/jpeg"); ?>png'
+			'<?php $infinri->response()->type("image/jpeg"); ?>png'
 		);
 
 		$app = new App([
@@ -451,7 +451,7 @@ class AppResolveTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin']
+				['email' => 'admin@infinri.com', 'role' => 'admin']
 			],
 			'options' => [
 				'content' => [
@@ -460,7 +460,7 @@ class AppResolveTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 
 		$result = $app->resolve('a-draft/test.jpg');
 
@@ -493,7 +493,7 @@ class AppResolveTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			],
 			'options' => [
 				'content' => [
@@ -502,7 +502,7 @@ class AppResolveTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 
 		$result = $app->resolve('a-draft/test.jpg');
 		$this->assertNull($result);

@@ -5,7 +5,7 @@
 		<!-- <div> as single child for grid layout -->
 		<div class="k-dialog k-login k-login-dialog">
 			<h1 class="sr-only">
-				{{ $t("login") }}
+				{{ $panel.t("login") }}
 			</h1>
 
 			<k-login-alert v-if="issue" @click.native="issue = null">
@@ -78,7 +78,7 @@ export default {
 
 			if (error.details.challengeDestroyed === true) {
 				// reset from the LoginCode component back to Login
-				await this.$reload({
+				await this.$panel.reload({
 					globals: ["$system"]
 				});
 			}
@@ -103,6 +103,6 @@ export default {
 	gap: 1.5rem;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: var(--spacing-10);
+	margin-top: 2.5rem;
 }
 </style>

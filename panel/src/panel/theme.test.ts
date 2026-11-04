@@ -66,7 +66,7 @@ describe("panel.theme", () => {
 		});
 
 		it("restores setting from localStorage", () => {
-			localStorage.setItem("kirby$theme", "dark");
+			localStorage.setItem("infinri$theme", "dark");
 			expect(defaults().setting).toStrictEqual("dark");
 		});
 	});
@@ -77,7 +77,7 @@ describe("panel.theme", () => {
 			theme.set("dark");
 			theme.reset();
 			expect(theme.setting).toStrictEqual(null);
-			expect(localStorage.getItem("kirby$theme")).toStrictEqual(null);
+			expect(localStorage.getItem("infinri$theme")).toStrictEqual(null);
 		});
 	});
 
@@ -86,7 +86,7 @@ describe("panel.theme", () => {
 			const theme = Theme(createPanel());
 			theme.set("dark");
 			expect(theme.setting).toStrictEqual("dark");
-			expect(localStorage.getItem("kirby$theme")).toStrictEqual("dark");
+			expect(localStorage.getItem("infinri$theme")).toStrictEqual("dark");
 		});
 	});
 });

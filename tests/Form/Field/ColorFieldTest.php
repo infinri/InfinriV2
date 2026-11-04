@@ -17,7 +17,7 @@ class ColorFieldTest extends TestCase
 		$this->assertFalse($field->alpha());
 		$this->assertSame('hex', $field->format());
 		$this->assertSame('picker', $field->mode());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testEmptyColor(): void
@@ -92,6 +92,21 @@ class ColorFieldTest extends TestCase
 		], $field->options());
 	}
 
+	public function testOptionsAreNotFlippedForTextValueNotation(): void
+	{
+		$field = $this->field('color', [
+			'options' => [
+				'Color a' => '#aaa',
+				'Color b' => '#bbb'
+			],
+		]);
+
+		$this->assertSame([
+			['value' => 'Color a', 'text' => '#aaa'],
+			['value' => 'Color b', 'text' => '#bbb']
+		], $field->options());
+	}
+
 	public function testOptionsFromQuery(): void
 	{
 		// Only values
@@ -102,7 +117,7 @@ class ColorFieldTest extends TestCase
 		]);
 
 		$field = $this->field('color', [
-			'options' => ['type' => 'query', 'query' => 'kirby.option("foo")'],
+			'options' => ['type' => 'query', 'query' => 'infinri.option("foo")'],
 		]);
 
 		$this->assertSame([
@@ -123,7 +138,7 @@ class ColorFieldTest extends TestCase
 		]);
 
 		$field = $this->field('color', [
-			'options' => ['type' => 'query', 'query' => 'kirby.option("foo")'],
+			'options' => ['type' => 'query', 'query' => 'infinri.option("foo")'],
 		]);
 
 		$this->assertSame([

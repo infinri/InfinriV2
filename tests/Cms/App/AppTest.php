@@ -19,7 +19,7 @@ use Whoops\Handler\PrettyPageHandler;
 class AppTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.App';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.App';
 
 	protected $_SERVER;
 
@@ -100,8 +100,8 @@ class AppTest extends TestCase
 					$test->assertNull($shallBeNull);
 					return [];
 				},
-				'overwrites' => function (App $kirby) use ($test) {
-					$test->assertInstanceOf(App::class, $kirby);
+				'overwrites' => function (App $infinri) use ($test) {
+					$test->assertInstanceOf(App::class, $infinri);
 					return [];
 				},
 			]
@@ -132,7 +132,7 @@ class AppTest extends TestCase
 		$app->collection('nullable');
 
 		// don't overwrite default objects
-		$app->collection('overwrites', ['kirby' => 'foo']);
+		$app->collection('overwrites', ['infinri' => 'foo']);
 	}
 
 	public function testContentToken(): void
@@ -210,30 +210,30 @@ class AppTest extends TestCase
 		$session = $app->session();
 
 		// should generate token
-		$session->remove('kirby.csrf');
+		$session->remove('infinri.csrf');
 		$token = $app->csrf();
 		$this->assertIsString($token);
 		$this->assertStringMatchesFormat('%x', $token);
 		$this->assertSame(64, strlen($token));
-		$this->assertSame($session->get('kirby.csrf'), $token);
+		$this->assertSame($session->get('infinri.csrf'), $token);
 
 		// should not regenerate when a param is passed
 		$this->assertFalse($app->csrf(null));
 		$this->assertFalse($app->csrf(false));
 		$this->assertFalse($app->csrf(123));
 		$this->assertFalse($app->csrf('some invalid string'));
-		$this->assertSame($token, $session->get('kirby.csrf'));
+		$this->assertSame($token, $session->get('infinri.csrf'));
 
 		// should not regenerate if there is already a token
 		$token2 = $app->csrf();
 		$this->assertSame($token, $token2);
 
 		// should regenerate if there is an invalid token
-		$session->set('kirby.csrf', 123);
+		$session->set('infinri.csrf', 123);
 		$token3 = $app->csrf();
 		$this->assertNotEquals($token, $token3);
 		$this->assertSame(64, strlen($token3));
-		$this->assertSame($session->get('kirby.csrf'), $token3);
+		$this->assertSame($session->get('infinri.csrf'), $token3);
 
 		// should verify token
 		$this->assertTrue($app->csrf($token3));
@@ -281,8 +281,8 @@ class AppTest extends TestCase
 
 		$email = $app->email(
 			[
-				'from'    => 'test@getkirby.com',
-				'to'      => 'test@getkirby.com',
+				'from'    => 'test@infinri.com',
+				'to'      => 'test@infinri.com',
 				'body'    => 'test',
 				'subject' => 'Test'
 			],
@@ -316,7 +316,7 @@ class AppTest extends TestCase
 		new App([
 			'options' => [
 				'debug' => true,
-				'url'   => ['https://getkirby.com', 'https://trykirby.com']
+				'url'   => ['https://infinri.com', 'https://tryinfinri.com']
 			]
 		]);
 	}
@@ -381,7 +381,7 @@ class AppTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						['filename' => 'userfile.jpg'],
 					]
@@ -401,7 +401,7 @@ class AppTest extends TestCase
 		$models->next();
 		$this->assertSame('userfile.jpg', $models->current()->filename());
 		$models->next();
-		$this->assertSame('test@getkirby.com', $models->current()->email());
+		$this->assertSame('test@infinri.com', $models->current()->email());
 	}
 
 	public function testNonce(): void
@@ -468,7 +468,7 @@ class AppTest extends TestCase
 					'key' => 'A1'
 				],
 
-				// legacy syntax (<= Kirby 3.4)
+				// legacy syntax (<= Infinri 3.4)
 				'namespace.plugin.nested' => [
 					'key' => 'B1'
 				],
@@ -514,7 +514,7 @@ class AppTest extends TestCase
 				'config' => static::FIXTURES . '/AppTest/options'
 			],
 			'server' => [
-				'SERVER_NAME' => 'getkirby.com',
+				'SERVER_NAME' => 'infinri.com',
 				'SERVER_ADDR' => '10.1.2.3',
 				'HTTPS'       => true
 			]
@@ -522,8 +522,8 @@ class AppTest extends TestCase
 
 		$this->assertSame([
 			'option1' => 'global',
-			'option2' => 'getkirby',
-			'url'     => 'https://getkirby.com/docs',
+			'option2' => 'infinri',
+			'url'     => 'https://infinri.com/docs',
 			'option3' => '10.1.2.3',
 			'option4' => '10.1.2.3'
 		], $app->options());
@@ -537,7 +537,7 @@ class AppTest extends TestCase
 				'config' => static::FIXTURES . '/AppTest/options-env1'
 			],
 			'server' => [
-				'SERVER_NAME' => 'getkirby.com',
+				'SERVER_NAME' => 'infinri.com',
 				'SERVER_ADDR' => '10.1.2.3',
 				'HTTPS'       => true
 			]
@@ -545,8 +545,8 @@ class AppTest extends TestCase
 
 		$this->assertSame([
 			'option1' => 'global',
-			'option2' => 'getkirby',
-			'url'     => 'https://getkirby.com/docs',
+			'option2' => 'infinri',
+			'url'     => 'https://infinri.com/docs',
 			'option3' => '10.1.2.3',
 			'option4' => 'env',
 			'option5' => 'env'
@@ -561,7 +561,7 @@ class AppTest extends TestCase
 				'config' => static::FIXTURES . '/AppTest/options-env2'
 			],
 			'server' => [
-				'SERVER_NAME' => 'getkirby.com',
+				'SERVER_NAME' => 'infinri.com',
 				'SERVER_ADDR' => '10.1.2.3',
 				'HTTPS'       => true
 			]
@@ -571,8 +571,8 @@ class AppTest extends TestCase
 		// and therefore the loaded host-specific config file
 		$this->assertSame([
 			'option1' => 'global',
-			'option2' => 'trykirby',
-			'url'     => 'https://trykirby.com',
+			'option2' => 'tryinfinri',
+			'url'     => 'https://tryinfinri.com',
 			'option3' => '10.1.2.3',
 			'option4' => 'env',
 			'option5' => 'env'
@@ -593,12 +593,12 @@ class AppTest extends TestCase
 				]
 			],
 			'options' => [
-				'ready' => $ready = fn ($kirby) => [
-					'test'         => $kirby->root('index'),
+				'ready' => $ready = fn ($infinri) => [
+					'test'         => $infinri->root('index'),
 					'another.test' => 'foo',
 					'debug'        => true,
-					'home'         => $kirby->site()->content()->home()->value(),
-					'error'        => $kirby->site()->content()->error()->value(),
+					'home'         => $infinri->site()->content()->home()->value(),
+					'error'        => $infinri->site()->content()->error()->value(),
 					'slugs'        => 'de'
 				],
 				'whoops' => true
@@ -814,7 +814,7 @@ class AppTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						['filename' => 'test-a.jpg'],
 						['filename' => 'test-b.jpg']
@@ -823,7 +823,7 @@ class AppTest extends TestCase
 			]
 		]);
 
-		$user  = $app->user('test@getkirby.com');
+		$user  = $app->user('test@infinri.com');
 		$fileA = $user->file('test-a.jpg');
 		$fileB = $user->file('test-b.jpg');
 
@@ -919,9 +919,9 @@ class AppTest extends TestCase
 	public static function urlProvider(): array
 	{
 		return [
-			['http://getkirby.com', 'http://getkirby.com'],
-			['https://getkirby.com', 'https://getkirby.com'],
-			['https://getkirby.com/test', 'https://getkirby.com/test'],
+			['http://infinri.com', 'http://infinri.com'],
+			['https://infinri.com', 'https://infinri.com'],
+			['https://infinri.com/test', 'https://infinri.com/test'],
 			['/', '/'],
 			['/test', '/test'],
 		];
@@ -954,14 +954,14 @@ class AppTest extends TestCase
 				'config' => static::FIXTURES . '/AppTest/options'
 			],
 			'server' => [
-				'SERVER_NAME' => 'trykirby.com',
+				'SERVER_NAME' => 'tryinfinri.com',
 				'HTTPS'       => true
 			]
 		]);
 
-		$this->assertSame(['https://getkirby.com', 'https://trykirby.com'], $app->option('url'));
-		$this->assertSame('https://trykirby.com', $app->url('index'));
-		$this->assertSame('https://trykirby.com/panel', $app->url('panel'));
+		$this->assertSame(['https://infinri.com', 'https://tryinfinri.com'], $app->option('url'));
+		$this->assertSame('https://tryinfinri.com', $app->url('index'));
+		$this->assertSame('https://tryinfinri.com/panel', $app->url('panel'));
 	}
 
 	public function testUrlFromEnvWithOverride(): void
@@ -972,14 +972,51 @@ class AppTest extends TestCase
 				'config' => static::FIXTURES . '/AppTest/options'
 			],
 			'server' => [
-				'SERVER_NAME' => 'getkirby.com',
+				'SERVER_NAME' => 'infinri.com',
 				'HTTPS'       => true
 			]
 		]);
 
-		$this->assertSame('https://getkirby.com/docs', $app->option('url'));
-		$this->assertSame('https://getkirby.com/docs', $app->url('index'));
-		$this->assertSame('https://getkirby.com/docs/panel', $app->url('panel'));
+		$this->assertSame('https://infinri.com/docs', $app->option('url'));
+		$this->assertSame('https://infinri.com/docs', $app->url('index'));
+		$this->assertSame('https://infinri.com/docs/panel', $app->url('panel'));
+	}
+
+	public function testVersionDetectionFailureMessage(): void
+	{
+		$property = new \ReflectionProperty(App::class, 'version');
+		$version  = $property->getValue();
+		$handlers = Data::$handlers;
+
+		$property->setValue(null, null);
+		Data::$handlers['json'] = ThrowingJsonHandler::class;
+
+		try {
+			App::version();
+			$this->fail('The version detection should have thrown');
+		} catch (\Infinri\Exception\LogicException $e) {
+			$this->assertSame(
+				'The Infinri version cannot be detected. The composer.json is probably missing or not readable.',
+				$e->getMessage()
+			);
+		} finally {
+			Data::$handlers = $handlers;
+			$property->setValue(null, $version);
+		}
+	}
+
+	public function testVersion(): void
+	{
+		$property = new \ReflectionProperty(App::class, 'version');
+		$version  = $property->getValue();
+
+		$property->setValue(null, null);
+
+		try {
+			$this->assertSame('1.0.0', App::version());
+		} finally {
+			$property->setValue(null, $version);
+		}
 	}
 
 	public function testVersionHash(): void
@@ -1224,21 +1261,34 @@ class AppTest extends TestCase
 
 		$this->assertSame('Hello', $app->render()->body());
 
-		$_ENV['KIRBY_RENDER'] = false;
+		$_ENV['INFINRI_RENDER'] = false;
 		$this->assertNull($app->render());
 
-		$_ENV['KIRBY_RENDER'] = '0';
+		$_ENV['INFINRI_RENDER'] = '0';
 		$this->assertNull($app->render());
 
-		$_ENV['KIRBY_RENDER'] = 'false';
+		$_ENV['INFINRI_RENDER'] = 'false';
 		$this->assertNull($app->render());
 
-		$_ENV['KIRBY_RENDER'] = '1';
+		$_ENV['INFINRI_RENDER'] = '1';
 		$this->assertNotNull($app->render());
 
-		$_ENV['KIRBY_RENDER'] = 'true';
+		$_ENV['INFINRI_RENDER'] = 'true';
 		$this->assertNotNull($app->render());
 
-		unset($_ENV['KIRBY_RENDER']);
+		unset($_ENV['INFINRI_RENDER']);
+	}
+}
+
+class ThrowingJsonHandler extends \Infinri\Data\Handler
+{
+	public static function decode($string): array
+	{
+		throw new \Exception('forced failure');
+	}
+
+	public static function encode($data): string
+	{
+		return '';
 	}
 }

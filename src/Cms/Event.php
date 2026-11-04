@@ -3,7 +3,6 @@
 namespace Infinri\Cms;
 
 use Closure;
-use Infinri\Content\ImmutableMemoryStorage;
 use Infinri\Exception\InvalidArgumentException;
 use Infinri\Toolkit\Controller;
 use Stringable;
@@ -234,31 +233,6 @@ class Event implements Stringable
 
 		// no new value has been supplied by the apply hook
 		if ($value === null) {
-
-			// To support legacy model modification
-			// in hooks without return values, we need to
-			// check the state of the updated argument.
-			// If the argument is an instance of ModelWithContent
-			// and the storage is an instance of ImmutableMemoryStorage,
-			// we can replace the argument with its clone to achieve
-			// the same effect as if the hook returned the modified model.
-			$state = $this->arguments[$name];
-
-			// follow chained modifications to the last clone
-			while ($state instanceof ModelWithContent) {
-				$storage = $state->storage();
-
-				if (
-					($storage instanceof ImmutableMemoryStorage) === false ||
-					$storage->nextModel() === null
-				) {
-					break;
-				}
-
-				$state = $storage->nextModel();
-			}
-
-			$this->arguments[$name] = $state;
 			return;
 		}
 

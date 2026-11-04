@@ -33,7 +33,7 @@ describe("$helper.url.buildQuery", () => {
 	});
 
 	it("should keep values from URL origin", () => {
-		const origin = new URL("https://getkirby.com/?page=1");
+		const origin = new URL("https://infinri.com/?page=1");
 
 		const query = url.buildQuery(
 			{

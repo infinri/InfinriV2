@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Page::class)]
 class PageChangeSlugTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageChangeSlug';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageChangeSlug';
 
 	public static function slugProvider(): array
 	{
@@ -30,7 +30,7 @@ class PageChangeSlugTest extends ModelTestCase
 	): void {
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$site = $this->app->site();
 
 		// pre-populate caches
@@ -142,7 +142,7 @@ class PageChangeSlugTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = new Page([
 			'slug' => 'test'

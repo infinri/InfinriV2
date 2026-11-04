@@ -7,7 +7,7 @@
 					icon: 'markdown',
 					color: 'orange-600'
 				}"
-				url="https://getkirby.com"
+				url="https://infinri.com"
 				class="k-file-preview"
 			/>
 		</k-lab-example>
@@ -21,7 +21,7 @@ export default {
 			return [
 				{ title: "Template", text: "custom-image" },
 				{ title: "Mime", text: "image/jpeg" },
-				{ title: "URL", text: "some-file.pdf", link: "https://getkirby.com" },
+				{ title: "URL", text: "some-file.pdf", link: "https://infinri.com" },
 				{ title: "Size", text: "1.2 MB" }
 			];
 		}

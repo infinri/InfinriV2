@@ -12,7 +12,7 @@ class UrlTest extends TestCase
 {
 	protected string $_yt   = 'http://www.youtube.com/watch?v=9q_aXttJduk';
 	protected string $_yts  = 'https://www.youtube.com/watch?v=9q_aXttJduk';
-	protected string $_docs = 'http://getkirby.com/docs/';
+	protected string $_docs = 'http://infinri.com/docs/';
 	protected $_SERVER = null;
 
 	protected function setUp(): void
@@ -54,13 +54,9 @@ class UrlTest extends TestCase
 		$this->assertSame('/', Url::home());
 	}
 
-	public function testTo(): void
+	public function testToIsRemoved(): void
 	{
-		$this->assertSame('/', Url::to());
-		$this->assertSame($this->_yt, Url::to($this->_yt));
-		$this->assertSame('/getkirby.com', Url::to('getkirby.com'));
-		$this->assertSame('./something', Url::to('./something'));
-		$this->assertSame('../something', Url::to('../something'));
+		$this->assertFalse(method_exists(Url::class, 'to'));
 	}
 
 	public function testLast(): void
@@ -78,16 +74,16 @@ class UrlTest extends TestCase
 		$this->assertSame('https://www.youtube.com/watch?v=9q_aXttJduk', Url::build());
 
 		// build with different host
-		$this->assertSame('https://kirbyvideo.com/watch?v=9q_aXttJduk', Url::build(['host' => 'kirbyvideo.com']));
+		$this->assertSame('https://infinrivideo.com/watch?v=9q_aXttJduk', Url::build(['host' => 'infinrivideo.com']));
 
 		// build from parts
 		$parts = [
 			'path'     => ['hello', 'kitty', 'mickey', 'mouse'],
-			'query'    => ['get' => 'kirby'],
+			'query'    => ['get' => 'infinri'],
 			'fragment' => 'foo'
 		];
-		$result = 'http://getkirby.com/hello/kitty/mickey/mouse?get=kirby#foo';
-		$this->assertSame($result, Url::build($parts, 'http://getkirby.com'));
+		$result = 'http://infinri.com/hello/kitty/mickey/mouse?get=infinri#foo';
+		$this->assertSame($result, Url::build($parts, 'http://infinri.com'));
 	}
 
 	public function testHasDangerousScheme(): void
@@ -114,21 +110,21 @@ class UrlTest extends TestCase
 		$this->assertTrue(Url::hasDangerousScheme("javas\ncript://x"));
 		$this->assertTrue(Url::hasDangerousScheme("javasc\rript://x"));
 
-		$this->assertFalse(Url::hasDangerousScheme('https://getkirby.com'));
-		$this->assertFalse(Url::hasDangerousScheme('//getkirby.com'));
+		$this->assertFalse(Url::hasDangerousScheme('https://infinri.com'));
+		$this->assertFalse(Url::hasDangerousScheme('//infinri.com'));
 		$this->assertFalse(Url::hasDangerousScheme('/relative/path'));
 		$this->assertFalse(Url::hasDangerousScheme(null));
 	}
 
 	public function testIsAbsolute(): void
 	{
-		$this->assertTrue(Url::isAbsolute('http://getkirby.com/docs'));
-		$this->assertTrue(Url::isAbsolute('https://getkirby.com/docs'));
-		$this->assertTrue(Url::isAbsolute('//getkirby.com/docs'));
-		$this->assertTrue(Url::isAbsolute('mailto:mail@getkirby.com'));
+		$this->assertTrue(Url::isAbsolute('http://infinri.com/docs'));
+		$this->assertTrue(Url::isAbsolute('https://infinri.com/docs'));
+		$this->assertTrue(Url::isAbsolute('//infinri.com/docs'));
+		$this->assertTrue(Url::isAbsolute('mailto:mail@infinri.com'));
 		$this->assertTrue(Url::isAbsolute('tel:1234567'));
 		$this->assertTrue(Url::isAbsolute('geo:49.0158,8.3239?z=11'));
-		$this->assertFalse(Url::isAbsolute('../getkirby.com/docs'));
+		$this->assertFalse(Url::isAbsolute('../infinri.com/docs'));
 		$this->assertFalse(Url::isAbsolute('javascript:alert("XSS")'));
 		$this->assertFalse(Url::isAbsolute('javascript://comment%0Aalert(1)'));
 		$this->assertFalse(Url::isAbsolute('vbscript://x'));
@@ -137,24 +133,24 @@ class UrlTest extends TestCase
 
 	public function testMakeAbsolute(): void
 	{
-		$this->assertSame('http://getkirby.com', Url::makeAbsolute('http://getkirby.com'));
+		$this->assertSame('http://infinri.com', Url::makeAbsolute('http://infinri.com'));
 		$this->assertSame('/docs/cheatsheet', Url::makeAbsolute('docs/cheatsheet'));
-		$this->assertSame('http://getkirby.com/docs/cheatsheet', Url::makeAbsolute('docs/cheatsheet', 'http://getkirby.com'));
-		$this->assertSame('http://getkirby.com', Url::makeAbsolute('', 'http://getkirby.com'));
+		$this->assertSame('http://infinri.com/docs/cheatsheet', Url::makeAbsolute('docs/cheatsheet', 'http://infinri.com'));
+		$this->assertSame('http://infinri.com', Url::makeAbsolute('', 'http://infinri.com'));
 	}
 
 	public function testFix(): void
 	{
 		$this->assertSame('http://', Url::fix());
 		$this->assertSame('http://', Url::fix(''));
-		$this->assertSame('http://getkirby.com', Url::fix('getkirby.com'));
-		$this->assertSame('ftp://getkirby.com', Url::fix('ftp://getkirby.com'));
+		$this->assertSame('http://infinri.com', Url::fix('infinri.com'));
+		$this->assertSame('ftp://infinri.com', Url::fix('ftp://infinri.com'));
 	}
 
 	public function testBase(): void
 	{
 		$this->assertNull(Url::base());
-		$this->assertSame('http://getkirby.com', Url::base('http://getkirby.com/docs/cheatsheet'));
+		$this->assertSame('http://infinri.com', Url::base('http://infinri.com/docs/cheatsheet'));
 	}
 
 	public static function normalizeProvider(): array
@@ -162,7 +158,7 @@ class UrlTest extends TestCase
 		return [
 			// unchanged
 			['', ''],
-			['https://getkirby.com', 'https://getkirby.com'],
+			['https://infinri.com', 'https://infinri.com'],
 			['#fragment', '#fragment'],
 
 			// leading/trailing C0 control characters and spaces are trimmed
@@ -207,67 +203,67 @@ class UrlTest extends TestCase
 	public function testPath(): void
 	{
 		// stripped
-		$this->assertSame('', Url::path('https://getkirby.com'));
-		$this->assertSame('', Url::path('https://getkirby.com/'));
+		$this->assertSame('', Url::path('https://infinri.com'));
+		$this->assertSame('', Url::path('https://infinri.com/'));
 		$this->assertSame('a/b', Url::path('a/b'));
-		$this->assertSame('a/b', Url::path('https://getkirby.com/a/b'));
-		$this->assertSame('a/b', Url::path('https://getkirby.com/a/b/'));
+		$this->assertSame('a/b', Url::path('https://infinri.com/a/b'));
+		$this->assertSame('a/b', Url::path('https://infinri.com/a/b/'));
 
 		// leading slash
-		$this->assertSame('', Url::path('https://getkirby.com', true));
-		$this->assertSame('', Url::path('https://getkirby.com/', true));
+		$this->assertSame('', Url::path('https://infinri.com', true));
+		$this->assertSame('', Url::path('https://infinri.com/', true));
 		$this->assertSame('/a/b', Url::path('a/b', true));
-		$this->assertSame('/a/b', Url::path('https://getkirby.com/a/b', true));
-		$this->assertSame('/a/b', Url::path('https://getkirby.com/a/b/', true));
+		$this->assertSame('/a/b', Url::path('https://infinri.com/a/b', true));
+		$this->assertSame('/a/b', Url::path('https://infinri.com/a/b/', true));
 
 		// trailing slash
-		$this->assertSame('', Url::path('https://getkirby.com', false, true));
-		$this->assertSame('', Url::path('https://getkirby.com/', false, true));
+		$this->assertSame('', Url::path('https://infinri.com', false, true));
+		$this->assertSame('', Url::path('https://infinri.com/', false, true));
 		$this->assertSame('a/b/', Url::path('a/b', false, true));
-		$this->assertSame('a/b/', Url::path('https://getkirby.com/a/b', false, true));
-		$this->assertSame('a/b/', Url::path('https://getkirby.com/a/b/', false, true));
+		$this->assertSame('a/b/', Url::path('https://infinri.com/a/b', false, true));
+		$this->assertSame('a/b/', Url::path('https://infinri.com/a/b/', false, true));
 
 		// leading and trailing slash
-		$this->assertSame('', Url::path('https://getkirby.com', true, true));
-		$this->assertSame('', Url::path('https://getkirby.com/', true, true));
+		$this->assertSame('', Url::path('https://infinri.com', true, true));
+		$this->assertSame('', Url::path('https://infinri.com/', true, true));
 		$this->assertSame('/a/b/', Url::path('a/b', true, true));
-		$this->assertSame('/a/b/', Url::path('https://getkirby.com/a/b', true, true));
-		$this->assertSame('/a/b/', Url::path('https://getkirby.com/a/b/', true, true));
+		$this->assertSame('/a/b/', Url::path('https://infinri.com/a/b', true, true));
+		$this->assertSame('/a/b/', Url::path('https://infinri.com/a/b/', true, true));
 	}
 
 	public function testStripPath(): void
 	{
-		$this->assertSame('https://getkirby.com', Url::stripPath('https://getkirby.com/a/b'));
-		$this->assertSame('https://getkirby.com/', Url::stripPath('https://getkirby.com/a/b/'));
+		$this->assertSame('https://infinri.com', Url::stripPath('https://infinri.com/a/b'));
+		$this->assertSame('https://infinri.com/', Url::stripPath('https://infinri.com/a/b/'));
 	}
 
 	public function testStripQuery(): void
 	{
-		$this->assertSame('https://getkirby.com', Url::stripQuery('https://getkirby.com?a=b'));
-		$this->assertSame('https://getkirby.com/', Url::stripQuery('https://getkirby.com/?a=b'));
+		$this->assertSame('https://infinri.com', Url::stripQuery('https://infinri.com?a=b'));
+		$this->assertSame('https://infinri.com/', Url::stripQuery('https://infinri.com/?a=b'));
 	}
 
 	public function testStripFragment(): void
 	{
-		$this->assertSame('https://getkirby.com', Url::stripFragment('https://getkirby.com#a/b'));
-		$this->assertSame('https://getkirby.com/', Url::stripFragment('https://getkirby.com/#a/b'));
+		$this->assertSame('https://infinri.com', Url::stripFragment('https://infinri.com#a/b'));
+		$this->assertSame('https://infinri.com/', Url::stripFragment('https://infinri.com/#a/b'));
 	}
 
 	public function testQuery(): void
 	{
-		$this->assertSame('', Url::query('https://getkirby.com'));
+		$this->assertSame('', Url::query('https://infinri.com'));
 		$this->assertSame('a=b', Url::query('?a=b'));
-		$this->assertSame('a=b', Url::query('https://getkirby.com?a=b'));
-		$this->assertSame('a=b', Url::query('https://getkirby.com/?a=b'));
+		$this->assertSame('a=b', Url::query('https://infinri.com?a=b'));
+		$this->assertSame('a=b', Url::query('https://infinri.com/?a=b'));
 	}
 
 	public function testShort(): void
 	{
-		$this->assertSame('getkirby.com/docs', Url::short($this->_docs));
-		$this->assertSame('getkirby.com/docs', Url::short($this->_docs, 100));
-		$this->assertSame('getkirby.com…', Url::short($this->_docs, 12));
-		$this->assertSame('getkirby.com', Url::short($this->_docs, 20, true));
-		$this->assertSame('getkirby.com###', Url::short($this->_docs, 12, false, '###'));
+		$this->assertSame('infinri.com/docs', Url::short($this->_docs));
+		$this->assertSame('infinri.com/docs', Url::short($this->_docs, 100));
+		$this->assertSame('infinri.com…', Url::short($this->_docs, 11));
+		$this->assertSame('infinri.com', Url::short($this->_docs, 20, true));
+		$this->assertSame('infinri.com###', Url::short($this->_docs, 11, false, '###'));
 	}
 
 	public function testIdn(): void
@@ -284,21 +280,21 @@ class UrlTest extends TestCase
 			[null, '/index.php', '/'],
 			[null, '', '/'],
 			[null, '/', '/'],
-			[null, '/kirby/index.php', '/kirby'],
-			[null, 'kirby/index.php', '/kirby'],
-			[null, '/kirby/super.php', '/kirby'],
-			[null, 'kirby/super.php', '/kirby'],
-			[null, 'kirby\super.php', '/kirby'],
+			[null, '/infinri/index.php', '/infinri'],
+			[null, 'infinri/index.php', '/infinri'],
+			[null, '/infinri/super.php', '/infinri'],
+			[null, 'infinri/super.php', '/infinri'],
+			[null, 'infinri\super.php', '/infinri'],
 
 			['localhost', 'index.php', 'http://localhost'],
 			['localhost', '/index.php', 'http://localhost'],
 			['localhost', '', 'http://localhost'],
 			['localhost', '/', 'http://localhost'],
-			['localhost', '/kirby/index.php', 'http://localhost/kirby'],
-			['localhost', 'kirby/index.php', 'http://localhost/kirby'],
-			['localhost', '/kirby/super.php', 'http://localhost/kirby'],
-			['localhost', 'kirby/super.php', 'http://localhost/kirby'],
-			['localhost', 'kirby\super.php', 'http://localhost/kirby'],
+			['localhost', '/infinri/index.php', 'http://localhost/infinri'],
+			['localhost', 'infinri/index.php', 'http://localhost/infinri'],
+			['localhost', '/infinri/super.php', 'http://localhost/infinri'],
+			['localhost', 'infinri/super.php', 'http://localhost/infinri'],
+			['localhost', 'infinri\super.php', 'http://localhost/infinri'],
 		];
 	}
 

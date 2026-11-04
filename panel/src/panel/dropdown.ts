@@ -4,9 +4,6 @@ import { type Listener } from "./listeners";
 
 type DropdownState = FeatureState & {};
 
-/**
- * @since 4.0.0
- */
 export default function Dropdown(panel: TODO) {
 	const parent = Feature(panel, "dropdown", defaults() as DropdownState);
 
@@ -31,16 +28,13 @@ export default function Dropdown(panel: TODO) {
 		},
 
 		/**
-		 * @deprecated 4.0.0
+		 * Returns an async closure that loads the dropdown
+		 * and passes its options to the given callback
 		 */
 		openAsync(
 			dropdown: string,
 			options: Partial<Prettify<DropdownState>> | Listener = {}
 		): (ready: (items: unknown[]) => void) => Promise<void> {
-			// panel.deprecated(
-			// 	"`panel.dropdown`: opening via $dropdown won't return an async closure in future versions."
-			// );
-
 			return async (ready: (items: unknown[]) => void) => {
 				await this.open(dropdown, options);
 
@@ -66,13 +60,9 @@ export default function Dropdown(panel: TODO) {
 		},
 
 		set(state: Partial<Prettify<DropdownState>>): Prettify<DropdownState> {
-			// deprecated dropdown responses only return the options
-			// @ts-expect-error normalize malformed response
+			// dropdown responses only return the options
+			// @ts-expect-error normalize the response
 			if (state.options) {
-				// panel.deprecated(
-				// 	"`panel.dropdown`: responses should return the full state object. Only returning the options has been deprecated and will be removed in a future version."
-				// );
-
 				state.props = {
 					// @ts-expect-error normalize malformed response
 					options: state.options

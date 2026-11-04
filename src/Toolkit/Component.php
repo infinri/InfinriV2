@@ -217,7 +217,7 @@ class Component
 		if (is_string($definition) === true) {
 			if (is_file($definition) !== true) {
 				throw new Exception(
-					'Component definition ' . $definition . ' does not exist'
+					message: 'Component definition ' . $definition . ' does not exist'
 				);
 			}
 

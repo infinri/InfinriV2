@@ -7,23 +7,23 @@
 				{
 					icon: 'email',
 					text: email,
-					title: `${$t('email')}: ${email}`,
+					title: `${$panel.t('email')}: ${email}`,
 					disabled: !canChangeEmail,
-					click: () => $dialog(api + '/changeEmail')
+					click: () => $panel.dialog.open(api + '/changeEmail')
 				},
 				{
 					icon: 'bolt',
 					text: role,
-					title: `${$t('role')}: ${role}`,
+					title: `${$panel.t('role')}: ${role}`,
 					disabled: !canChangeRole,
-					click: () => $dialog(api + '/changeRole')
+					click: () => $panel.dialog.open(api + '/changeRole')
 				},
 				{
 					icon: 'translate',
 					text: language,
-					title: `${$t('language')}: ${language}`,
+					title: `${$panel.t('language')}: ${language}`,
 					disabled: !canChangeLanguage,
-					click: () => $dialog(api + '/changeLanguage')
+					click: () => $panel.dialog.open(api + '/changeLanguage')
 				}
 			]"
 		/>
@@ -32,7 +32,6 @@
 
 <script>
 /**
- * @since 4.0.0
  * @unstable
  */
 export default {

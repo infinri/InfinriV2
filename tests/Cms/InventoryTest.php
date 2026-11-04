@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Inventory::class)]
 class InventoryTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Inventory';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Inventory';
 
 	protected function setUp(): void
 	{

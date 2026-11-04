@@ -47,11 +47,11 @@
 				</tbody>
 			</table>
 			<k-empty v-else icon="box" @click="add">
-				{{ empty ?? $t("field.object.empty") }}
+				{{ empty ?? $panel.t("field.object.empty") }}
 			</k-empty>
 		</template>
 		<template v-else>
-			<k-empty icon="box">{{ $t("fields.empty") }}</k-empty>
+			<k-empty icon="box">{{ $panel.t("fields.empty") }}</k-empty>
 		</template>
 
 		<!-- Validation -->

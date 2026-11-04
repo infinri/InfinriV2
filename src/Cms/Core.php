@@ -28,7 +28,7 @@ class Core
 	protected array $cache = [];
 	protected string $root;
 
-	public function __construct(protected App $kirby)
+	public function __construct(protected App $infinri)
 	{
 		$this->root = dirname(__DIR__, 2) . '/config';
 	}
@@ -36,7 +36,7 @@ class Core
 	/**
 	 * Fetches the definition array of a particular area.
 	 *
-	 * This is a shortcut for `$kirby->core()->load()->area()`
+	 * This is a shortcut for `$infinri->core()->load()->area()`
 	 * to give faster access to original area code in plugins.
 	 */
 	public function area(string $name): array|null
@@ -47,7 +47,7 @@ class Core
 	/**
 	 * Returns a list of all paths to area definition files
 	 *
-	 * They are located in `/kirby/config/areas`
+	 * They are located in `/infinri/config/areas`
 	 */
 	public function areas(): array
 	{
@@ -79,7 +79,7 @@ class Core
 	/**
 	 * Returns a list of all paths to blueprint presets
 	 *
-	 * They are located in `/kirby/config/presets`
+	 * They are located in `/infinri/config/presets`
 	 */
 	public function blueprintPresets(): array
 	{
@@ -94,7 +94,7 @@ class Core
 	 * Returns a list of paths to core blueprints or
 	 * the blueprint in array form
 	 *
-	 * Block blueprints are located in `/kirby/config/blocks`
+	 * Block blueprints are located in `/infinri/config/blocks`
 	 */
 	public function blueprints(): array
 	{
@@ -165,7 +165,7 @@ class Core
 	 * Returns an array of all core component functions
 	 *
 	 * The component functions can be found in
-	 * `/kirby/config/components.php`
+	 * `/infinri/config/components.php`
 	 */
 	public function components(): array
 	{
@@ -184,8 +184,8 @@ class Core
 			'float'   => 'toFloat',
 			'h'       => 'html',
 			'int'     => 'toInt',
-			'kt'      => 'kirbytext',
-			'kti'     => 'kirbytextinline',
+			'kt'      => 'infinritext',
+			'kti'     => 'infinritextinline',
 			'link'    => 'toLink',
 			'md'      => 'markdown',
 			'sp'      => 'smartypants',
@@ -197,17 +197,17 @@ class Core
 	/**
 	 * Returns an array of all field method functions
 	 *
-	 * Field methods are stored in `/kirby/config/methods.php`
+	 * Field methods are stored in `/infinri/config/methods.php`
 	 */
 	public function fieldMethods(): array
 	{
-		return $this->cache['fieldMethods'] ??= (include $this->root . '/methods.php')($this->kirby);
+		return $this->cache['fieldMethods'] ??= (include $this->root . '/methods.php')($this->infinri);
 	}
 
 	/**
 	 * Returns an array of paths for field mixins
 	 *
-	 * They are located in `/kirby/config/fields/mixins`
+	 * They are located in `/infinri/config/fields/mixins`
 	 */
 	public function fieldMixins(): array
 	{
@@ -227,10 +227,10 @@ class Core
 	/**
 	 * Returns an array of all paths and class names of panel fields
 	 *
-	 * Traditional panel fields are located in `/kirby/config/fields`
+	 * Traditional panel fields are located in `/infinri/config/fields`
 	 *
 	 * The more complex field classes can be found in
-	 * `/kirby/src/Form/Fields`
+	 * `/infinri/src/Form/Fields`
 	 */
 	public function fields(): array
 	{
@@ -287,9 +287,9 @@ class Core
 	}
 
 	/**
-	 * Returns a map of all kirbytag aliases
+	 * Returns a map of all infinritag aliases
 	 */
-	public function kirbyTagAliases(): array
+	public function infinriTagAliases(): array
 	{
 		return [
 			'youtube' => 'video',
@@ -298,25 +298,25 @@ class Core
 	}
 
 	/**
-	 * Returns an array of all kirbytag definitions
+	 * Returns an array of all infinritag definitions
 	 *
-	 * They are located in `/kirby/config/tags.php`
+	 * They are located in `/infinri/config/tags.php`
 	 */
-	public function kirbyTags(): array
+	public function infinriTags(): array
 	{
-		return $this->cache['kirbytags'] ??= include $this->root . '/tags.php';
+		return $this->cache['infinritags'] ??= include $this->root . '/tags.php';
 	}
 
 	/**
-	 * Loads a core part of Kirby
+	 * Loads a core part of Infinri
 	 *
 	 * The loader is set to not include plugins.
-	 * This way, you can access original Kirby core code
+	 * This way, you can access original Infinri core code
 	 * through this load method.
 	 */
 	public function load(): Loader
 	{
-		return new Loader($this->kirby, false);
+		return new Loader($this->infinri, false);
 	}
 
 	/**
@@ -327,15 +327,15 @@ class Core
 	public function roots(): array
 	{
 		return $this->cache['roots'] ??= [
-			'kirby'             => fn (array $roots) => dirname(__DIR__, 2),
-			'i18n'              => fn (array $roots) => $roots['kirby'] . '/i18n',
+			'infinri'             => fn (array $roots) => dirname(__DIR__, 2),
+			'i18n'              => fn (array $roots) => $roots['infinri'] . '/i18n',
 			'i18n:translations' => fn (array $roots) => $roots['i18n'] . '/translations',
 			'i18n:rules'        => fn (array $roots) => $roots['i18n'] . '/rules',
 			'index'             => fn (array $roots) => static::$indexRoot ?? dirname(__DIR__, 3),
 			'assets'            => fn (array $roots) => $roots['index'] . '/assets',
 			'content'           => fn (array $roots) => $roots['index'] . '/content',
 			'media'             => fn (array $roots) => $roots['index'] . '/media',
-			'panel'             => fn (array $roots) => $roots['kirby'] . '/panel',
+			'panel'             => fn (array $roots) => $roots['infinri'] . '/panel',
 			'site'              => fn (array $roots) => $roots['index'] . '/site',
 			'accounts'          => fn (array $roots) => $roots['site'] . '/accounts',
 			'blueprints'        => fn (array $roots) => $roots['site'] . '/blueprints',
@@ -345,8 +345,6 @@ class Core
 			'config'            => fn (array $roots) => $roots['site'] . '/config',
 			'controllers'       => fn (array $roots) => $roots['site'] . '/controllers',
 			'languages'         => fn (array $roots) => $roots['site'] . '/languages',
-			'licenses'          => fn (array $roots) => $roots['site'] . '/licenses',
-			'license'           => fn (array $roots) => $roots['config'] . '/.license',
 			'logs'              => fn (array $roots) => $roots['site'] . '/logs',
 			'models'            => fn (array $roots) => $roots['site'] . '/models',
 			'plugins'           => fn (array $roots) => $roots['site'] . '/plugins',
@@ -358,7 +356,7 @@ class Core
 	}
 
 	/**
-	 * Returns an array of all routes for Kirby’s router
+	 * Returns an array of all routes for Infinri’s router
 	 *
 	 * Routes are split into `before` and `after` routes.
 	 *
@@ -366,13 +364,13 @@ class Core
 	 */
 	public function routes(): array
 	{
-		return $this->cache['routes'] ??= (include $this->root . '/routes.php')($this->kirby);
+		return $this->cache['routes'] ??= (include $this->root . '/routes.php')($this->infinri);
 	}
 
 	/**
 	 * Returns a list of all paths to core block snippets
 	 *
-	 * They are located in `/kirby/config/blocks`
+	 * They are located in `/infinri/config/blocks`
 	 */
 	public function snippets(): array
 	{
@@ -394,7 +392,7 @@ class Core
 	/**
 	 * Returns a list of paths to section mixins
 	 *
-	 * They are located in `/kirby/config/sections/mixins`
+	 * They are located in `/infinri/config/sections/mixins`
 	 */
 	public function sectionMixins(): array
 	{
@@ -417,7 +415,7 @@ class Core
 	/**
 	 * Returns a list of all section definitions
 	 *
-	 * They are located in `/kirby/config/sections`
+	 * They are located in `/infinri/config/sections`
 	 */
 	public function sections(): array
 	{
@@ -433,7 +431,7 @@ class Core
 	/**
 	 * Returns a list of paths to all system templates
 	 *
-	 * They are located in `/kirby/config/templates`
+	 * They are located in `/infinri/config/templates`
 	 */
 	public function templates(): array
 	{
@@ -451,10 +449,10 @@ class Core
 	public function urls(): array
 	{
 		return $this->cache['urls'] ??= [
-			'index'   => fn () => $this->kirby->environment()->baseUrl(),
+			'index'   => fn () => $this->infinri->environment()->baseUrl(),
 			'base'    => fn (array $urls) => rtrim($urls['index'], '/'),
 			'current' => function (array $urls) {
-				$path = trim($this->kirby->path(), '/');
+				$path = trim($this->infinri->path(), '/');
 
 				if (empty($path) === true) {
 					return $urls['index'];
@@ -463,9 +461,9 @@ class Core
 				return $urls['base'] . '/' . $path;
 			},
 			'assets' => fn (array $urls) => $urls['base'] . '/assets',
-			'api'    => fn (array $urls) => $urls['base'] . '/' . $this->kirby->option('api.slug', 'api'),
+			'api'    => fn (array $urls) => $urls['base'] . '/' . $this->infinri->option('api.slug', 'api'),
 			'media'  => fn (array $urls) => $urls['base'] . '/media',
-			'panel'  => fn (array $urls) => $urls['base'] . '/' . $this->kirby->option('panel.slug', 'panel')
+			'panel'  => fn (array $urls) => $urls['base'] . '/' . $this->infinri->option('panel.slug', 'panel')
 		];
 	}
 }

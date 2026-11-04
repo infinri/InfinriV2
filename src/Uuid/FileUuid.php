@@ -91,12 +91,4 @@ class FileUuid extends ModelUuid
 
 		return App::instance()->url() . '/@/' . static::TYPE . '/' . $this->id();
 	}
-
-	/**
-	 * @deprecated 5.1.0 Use `::toPermalink()` instead
-	 */
-	public function url(): string
-	{
-		return $this->toPermalink();
-	}
 }

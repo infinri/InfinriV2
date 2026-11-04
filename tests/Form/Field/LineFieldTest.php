@@ -10,6 +10,6 @@ class LineFieldTest extends TestCase
 
 		$this->assertSame('line', $field->type());
 		$this->assertSame('line', $field->name());
-		$this->assertFalse($field->save());
+		$this->assertFalse($field->hasValue());
 	}
 }

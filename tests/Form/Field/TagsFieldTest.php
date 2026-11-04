@@ -19,7 +19,7 @@ class TagsFieldTest extends TestCase
 		$this->assertSame(',', $field->separator());
 		$this->assertSame('tag', $field->icon());
 		$this->assertNull($field->counter());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testFillWithEmptyValue(): void

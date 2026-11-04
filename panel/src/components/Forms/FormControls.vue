@@ -18,12 +18,12 @@
 		>
 			<template v-if="isLocked">
 				<p>
-					{{ $t("form.locked") }}
+					{{ $panel.t("form.locked") }}
 				</p>
 			</template>
 			<template v-else>
 				<p>
-					{{ $t("form.unsaved") }}
+					{{ $panel.t("form.unsaved") }}
 				</p>
 			</template>
 			<template v-if="editor || modified">
@@ -44,7 +44,7 @@
 			<template v-if="preview">
 				<hr />
 				<k-dropdown-item :link="preview" icon="window">
-					{{ $t("form.preview") }}
+					{{ $panel.t("form.preview") }}
 				</k-dropdown-item>
 			</template>
 		</k-dropdown-content>
@@ -72,7 +72,6 @@ export const props = {
 
 /**
  * @displayName FormControls
- * @since 5.0.0
  */
 export default {
 	mixins: [props],
@@ -96,19 +95,19 @@ export default {
 				return [
 					{
 						theme: "notice",
-						text: this.$t("discard"),
+						text: this.$panel.t("discard"),
 						icon: "undo",
 						responsive: true,
 						click: () => this.discard()
 					},
 					{
 						theme: "notice",
-						text: this.$t("save"),
+						text: this.$panel.t("save"),
 						icon: this.isProcessing ? "loader" : "check",
 						click: () => this.$emit("submit")
 					},
 					{
-						title: this.$t("options"),
+						title: this.$panel.t("options"),
 						theme: "notice",
 						icon: "dots",
 						click: () => this.$refs.dropdown.toggle()
@@ -130,11 +129,11 @@ export default {
 					submitButton: {
 						theme: "notice",
 						icon: "undo",
-						text: this.$t("form.discard")
+						text: this.$panel.t("form.discard")
 					},
 					text: isCurrentUser
-						? this.$t("form.discard.confirm")
-						: this.$t("form.discard.confirm.editor", {
+						? this.$panel.t("form.discard.confirm")
+						: this.$panel.t("form.discard.confirm.editor", {
 								editor: this.$helper.string.stripHTML(this.editor)
 							})
 				},
@@ -154,12 +153,12 @@ export default {
 	max-width: 15rem;
 }
 .k-form-controls-dropdown p {
-	line-height: var(--leading-normal);
+	line-height: 1.5;
 	padding: var(--spacing-1) var(--spacing-2);
 }
 .k-form-controls-dropdown dl div {
 	padding: var(--spacing-1) var(--spacing-2);
-	line-height: var(--leading-normal);
+	line-height: 1.5;
 	display: flex;
 	align-items: center;
 	gap: 0.75rem;

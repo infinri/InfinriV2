@@ -8,7 +8,7 @@ use Infinri\Form\Field;
 
 class UserPickerMixinTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Form.Fields.UserPickerMixin';
+	public const TMP = INFINRI_TMP_DIR . '/Form.Fields.UserPickerMixin';
 
 	protected function setUp(): void
 	{
@@ -23,13 +23,13 @@ class UserPickerMixinTest extends TestCase
 				['name' => 'editor']
 			],
 			'users' => [
-				['email' => 'a@getkirby.com', 'role' => 'admin'],
-				['email' => 'b@getkirby.com', 'role' => 'editor'],
-				['email' => 'c@getkirby.com', 'role' => 'editor']
+				['email' => 'a@infinri.com', 'role' => 'admin'],
+				['email' => 'b@infinri.com', 'role' => 'editor'],
+				['email' => 'c@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 	}
 
 	public function testUsersWithoutQuery(): void
@@ -54,9 +54,9 @@ class UserPickerMixinTest extends TestCase
 		$users = $field->users();
 
 		$this->assertCount(3, $users);
-		$this->assertSame('a@getkirby.com', $users[0]['email']);
-		$this->assertSame('b@getkirby.com', $users[1]['email']);
-		$this->assertSame('c@getkirby.com', $users[2]['email']);
+		$this->assertSame('a@infinri.com', $users[0]['email']);
+		$this->assertSame('b@infinri.com', $users[1]['email']);
+		$this->assertSame('c@infinri.com', $users[2]['email']);
 	}
 
 	public function testUsersWithQuery(): void
@@ -66,7 +66,7 @@ class UserPickerMixinTest extends TestCase
 				'mixins'  => ['userpicker'],
 				'methods' => [
 					'users' => fn () => $this->userpicker([
-						'query' => 'kirby.users.role("editor")'
+						'query' => 'infinri.users.role("editor")'
 					])['data']
 				]
 			]
@@ -83,8 +83,8 @@ class UserPickerMixinTest extends TestCase
 		$users = $field->users();
 
 		$this->assertCount(2, $users);
-		$this->assertSame('b@getkirby.com', $users[0]['email']);
-		$this->assertSame('c@getkirby.com', $users[1]['email']);
+		$this->assertSame('b@infinri.com', $users[0]['email']);
+		$this->assertSame('c@infinri.com', $users[1]['email']);
 	}
 
 	public function testMap(): void
@@ -111,9 +111,9 @@ class UserPickerMixinTest extends TestCase
 		$users = $field->users();
 
 		$this->assertSame([
-			'a@getkirby.com',
-			'b@getkirby.com',
-			'c@getkirby.com',
+			'a@infinri.com',
+			'b@infinri.com',
+			'c@infinri.com',
 		], $users);
 	}
 }

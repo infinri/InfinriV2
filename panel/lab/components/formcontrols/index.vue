@@ -17,9 +17,9 @@
 					<k-form-controls
 						:has-diff="hasDiff"
 						:is-locked="isLocked"
-						editor="editor@getkirby.com"
+						editor="editor@infinri.com"
 						modified="2024-10-01T17:00:00"
-						preview="https://getkirby.com"
+						preview="https://infinri.com"
 						@discard="log('discard')"
 						@submit="log('submit')"
 					/>
@@ -51,9 +51,9 @@
 		<k-lab-example label="Changes">
 			<k-form-controls
 				:has-diff="true"
-				editor="editor@getkirby.com"
+				editor="editor@infinri.com"
 				modified="2024-10-01T17:00:00"
-				preview="https://getkirby.com"
+				preview="https://infinri.com"
 				@discard="log('discard')"
 				@submit="log('submit')"
 			/>
@@ -64,9 +64,9 @@
 		<k-lab-example label="Locked">
 			<k-form-controls
 				:is-locked="true"
-				editor="editor@getkirby.com"
+				editor="editor@infinri.com"
 				modified="2024-10-01T17:00:00"
-				preview="https://getkirby.com"
+				preview="https://infinri.com"
 				@discard="log('discard')"
 				@submit="log('submit')"
 			/>

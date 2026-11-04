@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Site::class)]
 class SiteUrlTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SiteUrl';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SiteUrl';
 
 	public function testUrlInMultiLanguageMode(): void
 	{
@@ -25,7 +25,7 @@ class SiteUrlTest extends ModelTestCase
 	public function testUrlInSingleLanguageMode(): void
 	{
 		$site = new Site([
-			'url' => $url = 'https://getkirby.com'
+			'url' => $url = 'https://infinri.com'
 		]);
 
 		$this->assertSame($url, $site->url());

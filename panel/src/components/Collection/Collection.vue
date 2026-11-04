@@ -84,7 +84,6 @@ export default {
 		},
 		/**
 		 * Whether the items should scroll within the available space
-		 * @since 5.6.0
 		 */
 		scrollable: Boolean
 	},

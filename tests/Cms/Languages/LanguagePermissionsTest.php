@@ -22,7 +22,7 @@ class LanguagePermissionsTest extends TestCase
 	#[DataProvider('actionProvider')]
 	public function testWithAdmin($action): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -32,7 +32,7 @@ class LanguagePermissionsTest extends TestCase
 			]
 		]);
 
-		$kirby->impersonate('kirby');
+		$infinri->impersonate('infinri');
 
 		$language = new Language(['code' => 'en']);
 		$perms    = $language->permissions();
@@ -84,14 +84,14 @@ class LanguagePermissionsTest extends TestCase
 					]
 				]
 			],
-			'user'  => 'editor@getkirby.com',
+			'user'  => 'editor@infinri.com',
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -124,7 +124,7 @@ class LanguagePermissionsTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$language = $app->language('en');
 		$perms    = $language->permissions();

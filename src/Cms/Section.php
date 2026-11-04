@@ -66,9 +66,9 @@ class Section extends Component
 		return $this->errors ?? [];
 	}
 
-	public function kirby(): App
+	public function infinri(): App
 	{
-		return $this->model()->kirby();
+		return $this->model()->infinri();
 	}
 
 	public function model(): ModelWithContent

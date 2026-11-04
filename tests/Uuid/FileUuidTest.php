@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(FileUuid::class)]
 class FileUuidTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Uuid.FileUuid';
+	public const TMP = INFINRI_TMP_DIR . '/Uuid.FileUuid';
 
 	public function testFindByCache(): void
 	{
@@ -124,9 +124,9 @@ class FileUuidTest extends TestCase
 	public function testToPermalink(): void
 	{
 		$file = $this->app->file('page-a/test.pdf');
-		$url  = 'https://getkirby.com/@/file/my-file';
+		$url  = 'https://infinri.com/@/file/my-file';
 		$this->assertSame($url, $file->uuid()->toPermalink());
-		$this->assertSame($url, $file->uuid()->url());
+		$this->assertFalse(method_exists($file->uuid(), 'url'));
 	}
 
 	public function testValue(): void
@@ -192,7 +192,7 @@ class FileUuidTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = $app->call($language . '/foo');
 		$file = $page->files()->first();

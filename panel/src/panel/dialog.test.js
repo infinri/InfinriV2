@@ -34,18 +34,35 @@ describe("panel.dialog", () => {
 			component: null,
 			id: null,
 			isLoading: false,
-			legacy: false,
 			on: {},
 			path: null,
 			props: {},
 			query: {},
-			ref: null,
 			referrer: null,
 			timestamp: null
 		};
 
 		expect(dialog.key()).toStrictEqual("dialog");
 		expect(dialog.state()).toStrictEqual(state);
+	});
+
+	it("should only expose the known state and no component opening", () => {
+		const panel = Panel.create();
+		const dialog = Dialog(panel);
+
+		expect(Object.keys(dialog.state()).sort()).toStrictEqual([
+			"component",
+			"id",
+			"isLoading",
+			"on",
+			"path",
+			"props",
+			"query",
+			"referrer",
+			"timestamp"
+		]);
+		expect(dialog.state()).not.toHaveProperty("ref");
+		expect(dialog.openComponent).toBeUndefined();
 	});
 
 	it("should submit the active dialog form on save shortcut", () => {

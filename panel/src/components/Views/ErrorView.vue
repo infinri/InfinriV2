@@ -6,7 +6,7 @@
 			</div>
 		</template>
 		<template v-else>
-			<k-header>{{ $t("error") }}</k-header>
+			<k-header>{{ $panel.t("error") }}</k-header>
 			<k-box icon="alert" theme="negative">{{ error }}</k-box>
 		</template>
 	</component>

@@ -9,17 +9,17 @@ class LanguageRoutes
 	/**
 	 * Creates all multi-language routes
 	 */
-	public static function create(App $kirby): array
+	public static function create(App $infinri): array
 	{
 		$routes = [];
 
 		// add the route for the home page
-		$routes[] = static::home($kirby);
+		$routes[] = static::home($infinri);
 
-		// Kirby's base url
-		$baseurl = $kirby->url();
+		// Infinri's base url
+		$baseurl = $infinri->url();
 
-		foreach ($kirby->languages() as $language) {
+		foreach ($infinri->languages() as $language) {
 			// ignore languages with a different base url
 			if ($language->baseurl() !== $baseurl) {
 				continue;
@@ -29,7 +29,7 @@ class LanguageRoutes
 				'pattern' => $language->pattern(),
 				'method'  => 'ALL',
 				'env'     => 'site',
-				'action'  => function ($path = null) use ($kirby, $language, $baseurl) {
+				'action'  => function ($path = null) use ($infinri, $language, $baseurl) {
 					$result = $language->router()->call($path);
 
 					// explicitly test for null as $result can
@@ -42,13 +42,13 @@ class LanguageRoutes
 					// if the path belongs to the URL prefix of another
 					// language, that language stays the current one
 					if ($language->path() === '') {
-						$matched = $kirby->languages()
+						$matched = $infinri->languages()
 							->filter('baseurl', $baseurl)
 							->findByPath($path);
 
 						if ($matched !== null) {
-							$kirby->setCurrentTranslation($matched->code());
-							$kirby->setCurrentLanguage($matched->code());
+							$infinri->setCurrentTranslation($matched->code());
+							$infinri->setCurrentLanguage($matched->code());
 						}
 					}
 
@@ -60,7 +60,7 @@ class LanguageRoutes
 			];
 		}
 
-		$routes[] = static::fallback($kirby);
+		$routes[] = static::fallback($infinri);
 
 		return $routes;
 	}
@@ -70,22 +70,22 @@ class LanguageRoutes
 	 * Create the fallback route
 	 * for unprefixed default language URLs.
 	 */
-	public static function fallback(App $kirby): array
+	public static function fallback(App $infinri): array
 	{
 		return [
 			'pattern' => '(:all)',
 			'method'  => 'ALL',
 			'env'     => 'site',
-			'action'  => function (string $path) use ($kirby) {
+			'action'  => function (string $path) use ($infinri) {
 				// check for content representations or files
 				$extension = F::extension($path);
 
 				// try to redirect prefixed pages
 				if (
 					empty($extension) === true &&
-					$page = $kirby->page($path)
+					$page = $infinri->page($path)
 				) {
-					$url = $kirby->request()->url([
+					$url = $infinri->request()->url([
 						'query'    => null,
 						'params'   => null,
 						'fragment' => null
@@ -94,24 +94,24 @@ class LanguageRoutes
 					if ($url->toString() !== $page->url()) {
 						// redirect to translated page directly if translation
 						// is exists and languages detect is enabled
-						$lang = $kirby->detectedLanguage()->code();
+						$lang = $infinri->detectedLanguage()->code();
 
 						if (
-							$kirby->option('languages.detect') === true &&
+							$infinri->option('languages.detect') === true &&
 							$page->translation($lang)->exists() === true
 						) {
-							return $kirby
+							return $infinri
 								->response()
 								->redirect($page->url($lang));
 						}
 
-						return $kirby
+						return $infinri
 							->response()
 							->redirect($page->url());
 					}
 				}
 
-				return $kirby->language()->router()->call($path);
+				return $infinri->language()->router()->call($path);
 			}
 		];
 	}
@@ -119,44 +119,44 @@ class LanguageRoutes
 	/**
 	 * Create the multi-language home page route
 	 */
-	public static function home(App $kirby): array
+	public static function home(App $infinri): array
 	{
 		// Multi-language home
 		return [
 			'pattern' => '',
 			'method'  => 'ALL',
 			'env'     => 'site',
-			'action'  => function () use ($kirby) {
+			'action'  => function () use ($infinri) {
 				// find all languages with the same base url as the current installation
-				$languages = $kirby->languages()->filter(
+				$languages = $infinri->languages()->filter(
 					'baseurl',
-					$kirby->url()
+					$infinri->url()
 				);
 
 				// if there's no language with a matching base url,
 				// redirect to the default language
 				if ($languages->count() === 0) {
-					return $kirby
+					return $infinri
 						->response()
-						->redirect($kirby->defaultLanguage()->url());
+						->redirect($infinri->defaultLanguage()->url());
 				}
 
 				// if there's just one language,
 				// we take that to render the home page
 				$currentLanguage = match ($languages->count()) {
 					1       => $languages->first(),
-					default => $kirby->defaultLanguage()
+					default => $infinri->defaultLanguage()
 				};
 
 				// language detection on the home page with / as URL
-				if ($kirby->url() !== $currentLanguage->url()) {
-					if ($kirby->option('languages.detect') === true) {
-						return $kirby
+				if ($infinri->url() !== $currentLanguage->url()) {
+					if ($infinri->option('languages.detect') === true) {
+						return $infinri
 							->response()
-							->redirect($kirby->detectedLanguage()->url());
+							->redirect($infinri->detectedLanguage()->url());
 					}
 
-					return $kirby
+					return $infinri
 						->response()
 						->redirect($currentLanguage->url());
 				}

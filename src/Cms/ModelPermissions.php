@@ -75,8 +75,8 @@ abstract class ModelPermissions
 			return false;
 		}
 
-		// the almighty `kirby` user can do anything
-		if ($userId === 'kirby' && $role === 'admin') {
+		// the almighty `infinri` user can do anything
+		if ($userId === 'infinri' && $role === 'admin') {
 			return true;
 		}
 
@@ -119,7 +119,7 @@ abstract class ModelPermissions
 		string $action,
 		bool $default = false
 	): bool {
-		$role     = $model->kirby()->role()?->id() ?? '__none__';
+		$role     = $model->infinri()->role()?->id() ?? '__none__';
 		$category = static::category($model);
 		$cacheKey = $category . '.' . $action . '/' . static::cacheKey($model) . '/' . $role . '/' . ($default === true ? 'true' : 'false');
 
@@ -128,7 +128,7 @@ abstract class ModelPermissions
 		}
 
 		if (method_exists(static::class, 'can' . $action) === true) {
-			throw new LogicException('Cannot use permission cache for dynamically-determined permission');
+			throw new LogicException(message: 'Cannot use permission cache for dynamically-determined permission');
 		}
 
 		return static::$cache[$cacheKey] = $model->permissions()->can($action, $default);

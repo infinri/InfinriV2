@@ -57,7 +57,6 @@ export const allowedExtensions = (available, allowed) => {
  * decides the nesting priority: marks listed first wrap the ones listed
  * later. Interactive marks (link, email) come first so that they are not
  * split up by decorative marks like bold or italic.
- * @see https://github.com/getkirby/kirby/issues/5481
  */
 export const availableMarks = (options = {}) => {
 	return {

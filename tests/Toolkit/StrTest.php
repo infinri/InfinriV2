@@ -287,7 +287,7 @@ class StrTest extends TestCase
 
 	public function testEncode(): void
 	{
-		$email = 'test@getkirby.com';
+		$email = 'test@infinri.com';
 		$this->assertSame($email, Html::decode(Str::encode($email)));
 
 		// multibyte round-trip (IDN-style local part)
@@ -401,8 +401,8 @@ class StrTest extends TestCase
 
 	public function testExcerptWithTagFollowedByInterpunctuation(): void
 	{
-		$string   = 'Why not <a href="https://getkirby.com/">Get Kirby</a>?';
-		$expected = 'Why not Get Kirby?';
+		$string   = 'Why not <a href="https://infinri.com/">Get Infinri</a>?';
+		$expected = 'Why not Get Infinri?';
 		$result   = Str::excerpt($string, 100);
 
 		$this->assertSame($expected, $result);
@@ -410,7 +410,7 @@ class StrTest extends TestCase
 
 	public function testExcerptWithWordCharactersAroundTags(): void
 	{
-		// Test case from issue #7306: word characters directly adjacent to tags
+		// Test case: word characters directly adjacent to tags
 		$string   = 'A link in the middle of a word: Ultra<a href="/">Link</a>Modern.';
 		$expected = 'A link in the middle of a word: Ultra Link Modern.';
 		$result   = Str::excerpt($string, 200);
@@ -1058,8 +1058,8 @@ class StrTest extends TestCase
 
 		$this->assertSame([
 			'matches' => 1,
-			'percent' => 20.0
-		], Str::similarity('Kirby', 'KIRBY'));
+			'percent' => 14.285714285714286
+		], Str::similarity('Infinri', 'INFINRI'));
 
 		// case-insensitive
 		$this->assertSame([
@@ -1073,9 +1073,9 @@ class StrTest extends TestCase
 		], Str::similarity('foo', 'FOU', true));
 
 		$this->assertSame([
-			'matches' => 5,
+			'matches' => 7,
 			'percent' => 100.0
-		], Str::similarity('Kirby', 'KIRBY', true));
+		], Str::similarity('Infinri', 'INFINRI', true));
 	}
 
 	public function testSlug(): void

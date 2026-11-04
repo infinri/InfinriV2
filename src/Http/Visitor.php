@@ -174,7 +174,6 @@ class Visitor
 	/**
 	 * Returns the MIME type from the provided list that
 	 * is most accepted (= preferred) by the visitor
-	 * @since 3.3.0
 	 *
 	 * @param string ...$mimeTypes MIME types to query for
 	 * @return string|null Preferred MIME type
@@ -201,7 +200,6 @@ class Visitor
 	/**
 	 * Returns true if the visitor prefers a JSON response over
 	 * an HTML response based on the `Accept` request header
-	 * @since 3.3.0
 	 */
 	public function prefersJson(): bool
 	{

@@ -187,7 +187,7 @@ class Page extends ModelWithContent
 			return 'pages/' . $this->panel()->id();
 		}
 
-		return $this->kirby()->url('api') . '/pages/' . $this->panel()->id();
+		return $this->infinri()->url('api') . '/pages/' . $this->panel()->id();
 	}
 
 	/**
@@ -256,8 +256,8 @@ class Page extends ModelWithContent
 	{
 		$cacheId = [$this->id()];
 
-		if ($this->kirby()->multilang() === true) {
-			$cacheId[] = $this->kirby()->language()->code();
+		if ($this->infinri()->multilang() === true) {
+			$cacheId[] = $this->infinri()->language()->code();
 		}
 
 		$cacheId[] = $versionId->value();
@@ -283,7 +283,7 @@ class Page extends ModelWithContent
 	/**
 	 * Call the page controller
 	 *
-	 * @throws \Infinri\Exception\InvalidArgumentException If the controller returns invalid objects for `kirby`, `site`, `pages` or `page`
+	 * @throws \Infinri\Exception\InvalidArgumentException If the controller returns invalid objects for `infinri`, `site`, `pages` or `page`
 	 */
 	#[BlockCollectionAccess]
 	public function controller(
@@ -293,14 +293,14 @@ class Page extends ModelWithContent
 		// create the template data
 		$data = [
 			...$data,
-			'kirby' => $kirby = $this->kirby(),
+			'infinri' => $infinri = $this->infinri(),
 			'site'  => $site  = $this->site(),
 			'pages' => new LazyValue(fn () => $site->children()),
 			'page'  => new LazyValue(fn () => $site->visit($this))
 		];
 
 		// call the template controller if there's one.
-		$controllerData = $kirby->controller(
+		$controllerData = $infinri->controller(
 			$this->template()->name(),
 			$data,
 			$contentType
@@ -311,7 +311,7 @@ class Page extends ModelWithContent
 		// it wasn't returned by the controller explicitly
 		if ($controllerData !== []) {
 			$classes = [
-				'kirby' => App::class,
+				'infinri' => App::class,
 				'site'  => Site::class,
 				'pages' => Pages::class,
 				'page'  => Page::class
@@ -332,7 +332,7 @@ class Page extends ModelWithContent
 		}
 
 		// unwrap remaining lazy values in data
-		// (happens if the controller didn't override an original lazy Kirby object)
+		// (happens if the controller didn't override an original lazy Infinri object)
 		$data = LazyValue::unwrap($data);
 
 		return $data;
@@ -406,8 +406,6 @@ class Page extends ModelWithContent
 	 * Redirects to this page,
 	 * wrapper for the `go()` helper
 	 *
-	 * @since 3.4.0
-	 *
 	 * @param array $options Options for `Infinri\Http\Uri` to create URL parts
 	 * @param int $code HTTP status code
 	 */
@@ -468,13 +466,13 @@ class Page extends ModelWithContent
 			return $this->inventory;
 		}
 
-		$kirby = $this->kirby();
+		$infinri = $this->infinri();
 
 		return $this->inventory = Inventory::for(
 			$this->root(),
-			$kirby->contentExtension(),
-			$kirby->contentIgnore(),
-			$kirby->multilang()
+			$infinri->contentExtension(),
+			$infinri->contentIgnore(),
+			$infinri->multilang()
 		);
 	}
 
@@ -490,7 +488,7 @@ class Page extends ModelWithContent
 				return false;
 			}
 
-			$page = $this->kirby()->page($page);
+			$page = $this->infinri()->page($page);
 		}
 
 		if ($page instanceof self === false) {
@@ -502,11 +500,11 @@ class Page extends ModelWithContent
 
 	/**
 	 * Checks if the page is accessible to the current user
-	 * This permission depends on the `read` option until v6
+	 * This permission depends on the `read` option
 	 */
 	public function isAccessible(): bool
 	{
-		// TODO: remove this check when `read` option deprecated in v6
+		// TODO: remove this check when the `read` option is removed
 		if ($this->isReadable() === false) {
 			return false;
 		}
@@ -538,8 +536,8 @@ class Page extends ModelWithContent
 	 */
 	public function isCacheable(VersionId|null $versionId = null): bool
 	{
-		$kirby   = $this->kirby();
-		$cache   = $kirby->cache('pages');
+		$infinri   = $this->infinri();
+		$cache   = $infinri->cache('pages');
 		$options = $cache->options();
 		$ignore  = $options['ignore'] ?? null;
 
@@ -554,7 +552,7 @@ class Page extends ModelWithContent
 		}
 
 		// inspect the current request
-		$request = $kirby->request();
+		$request = $infinri->request();
 
 		// disable the pages cache for any request types but GET or HEAD
 		if (in_array($request->method(), ['GET', 'HEAD'], true) === false) {
@@ -664,11 +662,11 @@ class Page extends ModelWithContent
 
 	/**
 	 * Check if the page can be listable by the current user
-	 * This permission depends on the `read` option until v6
+	 * This permission depends on the `read` option
 	 */
 	public function isListable(): bool
 	{
-		// TODO: remove this check when `read` option deprecated in v6
+		// TODO: remove this check when the `read` option is removed
 		if ($this->isReadable() === false) {
 			return false;
 		}
@@ -727,12 +725,12 @@ class Page extends ModelWithContent
 
 	/**
 	 * Check if the page can be read by the current user
-	 * @todo Deprecate `read` option in v6 and make the necessary changes for `access` and `list` options.
+	 * @todo Remove the `read` option and make the necessary changes for `access` and `list` options.
 	 */
 	public function isReadable(): bool
 	{
 		static $readable   = [];
-		$role              = $this->kirby()->role()?->id() ?? '__none__';
+		$role              = $this->infinri()->role()?->id() ?? '__none__';
 		$template          = $this->intendedTemplate()->name();
 		$readable[$role] ??= [];
 
@@ -761,7 +759,7 @@ class Page extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function mediaDir(): string
 	{
-		return $this->kirby()->root('media') . '/pages/' . $this->id();
+		return $this->infinri()->root('media') . '/pages/' . $this->id();
 	}
 
 	/**
@@ -778,7 +776,7 @@ class Page extends ModelWithContent
 	 */
 	public function mediaUrl(): string
 	{
-		return $this->kirby()->url('media') . '/pages/' . $this->id();
+		return $this->infinri()->url('media') . '/pages/' . $this->id();
 	}
 
 	/**
@@ -860,7 +858,6 @@ class Page extends ModelWithContent
 
 	/**
 	 * Return the permanent URL to the page using its UUID
-	 * @since 3.8.0
 	 */
 	public function permalink(): string|null
 	{
@@ -906,7 +903,7 @@ class Page extends ModelWithContent
 		$contentType = 'html',
 		VersionId|string|null $versionId = null
 	): string {
-		$kirby = $this->kirby();
+		$infinri = $this->infinri();
 		$cache = $cacheId = $html = null;
 
 		// if not manually overridden, first use a globally set
@@ -921,7 +918,7 @@ class Page extends ModelWithContent
 
 		// try to get the page from cache
 		if ($data === [] && $this->isCacheable($versionId) === true) {
-			$cache       = $kirby->cache('pages');
+			$cache       = $infinri->cache('pages');
 			$cacheId     = $this->cacheId($contentType, $versionId);
 			$result      = $cache->get($cacheId);
 			$html        = $result['html'] ?? null;
@@ -937,14 +934,14 @@ class Page extends ModelWithContent
 
 			// reconstruct the response configuration
 			if (empty($html) === false && empty($response) === false) {
-				$kirby->response()->fromArray($response);
+				$infinri->response()->fromArray($response);
 			}
 		}
 
 		// fetch the page regularly
 		if ($html === null) {
 			// set `VersionId::$render` to the intended version (only) while we render
-			$html = VersionId::render($versionId, function () use ($kirby, $data, $contentType) {
+			$html = VersionId::render($versionId, function () use ($infinri, $data, $contentType) {
 				$template = match ($contentType) {
 					'html'  => $this->template(),
 					default => $this->representation($contentType)
@@ -956,29 +953,29 @@ class Page extends ModelWithContent
 					);
 				}
 
-				$kirby->data = $this->controller($data, $contentType);
+				$infinri->data = $this->controller($data, $contentType);
 
 				// trigger before hook and apply for `data`
-				$kirby->data = $kirby->apply('page.render:before', [
+				$infinri->data = $infinri->apply('page.render:before', [
 					'contentType' => $contentType,
-					'data'        => $kirby->data,
+					'data'        => $infinri->data,
 					'page'        => $this
 				], 'data');
 
 				// render the page
-				$html = $template->render($kirby->data);
+				$html = $template->render($infinri->data);
 
 				// trigger after hook and apply for `html`
-				return $kirby->apply('page.render:after', [
+				return $infinri->apply('page.render:after', [
 					'contentType' => $contentType,
-					'data'        => $kirby->data,
+					'data'        => $infinri->data,
 					'html'        => $html,
 					'page'        => $this
 				], 'html');
 			});
 
 			// cache the result
-			$response = $kirby->response();
+			$response = $infinri->response();
 			if ($cache !== null && $response->cache() === true) {
 				$cache->set($cacheId, [
 					'html'        => $html,
@@ -1000,7 +997,7 @@ class Page extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function renderVersionFromRequest(): VersionId|null
 	{
-		$request = $this->kirby()->request();
+		$request = $this->infinri()->request();
 		$token   = $request->get('_token', '');
 
 		try {
@@ -1038,9 +1035,9 @@ class Page extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function representation(mixed $type): Template
 	{
-		$kirby          = $this->kirby();
+		$infinri          = $this->infinri();
 		$template       = $this->template();
-		$representation = $kirby->template($template->name(), $type);
+		$representation = $infinri->template($template->name(), $type);
 
 		if ($representation->exists() === true) {
 			return $representation;
@@ -1058,7 +1055,7 @@ class Page extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function root(): string
 	{
-		return $this->root ??= $this->kirby()->root('content') . '/' . $this->diruri();
+		return $this->root ??= $this->infinri()->root('content') . '/' . $this->diruri();
 	}
 
 	/**
@@ -1103,7 +1100,7 @@ class Page extends ModelWithContent
 	protected function setTemplate(string|null $template = null): static
 	{
 		if ($template !== null) {
-			$this->intendedTemplate = $this->kirby()->template(strtolower($template));
+			$this->intendedTemplate = $this->infinri()->template(strtolower($template));
 		}
 
 		return $this;
@@ -1129,9 +1126,9 @@ class Page extends ModelWithContent
 	 */
 	public function slug(string|null $languageCode = null): string
 	{
-		if ($this->kirby()->multilang() === true) {
-			$languageCode      ??= $this->kirby()->languageCode();
-			$defaultLanguageCode = $this->kirby()->defaultLanguage()->code();
+		if ($this->infinri()->multilang() === true) {
+			$languageCode      ??= $this->infinri()->languageCode();
+			$defaultLanguageCode = $this->infinri()->defaultLanguage()->code();
 
 			if (
 				$languageCode !== $defaultLanguageCode &&
@@ -1176,7 +1173,7 @@ class Page extends ModelWithContent
 			return $this->template = $intended;
 		}
 
-		return $this->template = $this->kirby()->template('default');
+		return $this->template = $this->infinri()->template('default');
 	}
 
 	/**
@@ -1246,7 +1243,7 @@ class Page extends ModelWithContent
 	 */
 	public function url($options = null): string
 	{
-		if ($this->kirby()->multilang() === true) {
+		if ($this->infinri()->multilang() === true) {
 			if (is_string($options) === true) {
 				return $this->urlForLanguage($options);
 			}
@@ -1268,13 +1265,13 @@ class Page extends ModelWithContent
 
 		if ($parent = $this->parent()) {
 			if ($parent->isHomePage() === true) {
-				return $this->url = $this->kirby()->url('base') . '/' . $parent->uid() . '/' . $this->uid();
+				return $this->url = $this->infinri()->url('base') . '/' . $parent->uid() . '/' . $this->uid();
 			}
 
 			return $this->url = $this->parent()->url() . '/' . $this->uid();
 		}
 
-		return $this->url = $this->kirby()->url('base') . '/' . $this->uid();
+		return $this->url = $this->infinri()->url('base') . '/' . $this->uid();
 	}
 
 	/**

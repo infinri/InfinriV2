@@ -2,6 +2,7 @@
 
 namespace Infinri\Cms;
 
+use Infinri\Content\Field;
 use Infinri\Exception\InvalidArgumentException;
 
 class StructureTest extends TestCase

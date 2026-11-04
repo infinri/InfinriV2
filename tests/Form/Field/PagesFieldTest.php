@@ -7,7 +7,7 @@ use Infinri\Cms\Page;
 
 class PagesFieldTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Form.Fields.PagesField';
+	public const TMP = INFINRI_TMP_DIR . '/Form.Fields.PagesField';
 
 	protected function setUp(): void
 	{
@@ -37,7 +37,7 @@ class PagesFieldTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function model()
@@ -57,7 +57,7 @@ class PagesFieldTest extends TestCase
 		$this->assertSame([], $field->default());
 		$this->assertNull($field->max());
 		$this->assertTrue($field->multiple());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testValue(): void
@@ -113,11 +113,11 @@ class PagesFieldTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
-			'user' => 'editor@getkirby.com'
+			'user' => 'editor@infinri.com'
 		]);
 
 		$field = $this->field('pages', [
@@ -262,7 +262,7 @@ class PagesFieldTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$api = $app->api()->call('pages/test/fields/related');
 
 		$this->assertCount(3, $api);

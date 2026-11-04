@@ -2,7 +2,7 @@
 	<div :class="['k-timeoptions-input', $attrs.class]" :style="$attrs.style">
 		<div>
 			<h3>
-				<k-icon type="sun" /> <span class="sr-only">{{ $t("day") }}</span>
+				<k-icon type="sun" /> <span class="sr-only">{{ $panel.t("day") }}</span>
 			</h3>
 			<ul>
 				<li v-for="(time, index) in day" :key="time.select">
@@ -21,7 +21,8 @@
 		</div>
 		<div>
 			<h3>
-				<k-icon type="moon" /> <span class="sr-only">{{ $t("night") }}</span>
+				<k-icon type="moon" />
+				<span class="sr-only">{{ $panel.t("night") }}</span>
 			</h3>
 			<ul>
 				<li v-for="time in night" :key="time.select">
@@ -64,7 +65,6 @@ export const props = {
 
 /**
  * The Times component displayes available times to choose from
- * @since 4.0.0
  * @example <k-timeoptions-input value="12:12" @input="onInput" />
  */
 export default {

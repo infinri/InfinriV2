@@ -51,7 +51,7 @@
 		</k-lab-example>
 		<k-lab-example label="Backend issues">
 			<k-text>
-				The backend route throws a Kirby exception with details (we use this for
+				The backend route throws an Infinri exception with details (we use this for
 				form errors for example)
 			</k-text>
 

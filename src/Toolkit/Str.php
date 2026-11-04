@@ -173,7 +173,6 @@ class Str
 	/**
 	 * Removes the given substring or character
 	 * only from the start of the string
-	 * @since 3.7.0
 	 */
 	public static function afterStart(
 		string $string,
@@ -216,7 +215,7 @@ class Str
 			$strtr = [];
 
 			foreach ($ascii as $group => $replacement) {
-				// remove legacy '/.../' delimiters
+				// strip optional '/.../' delimiters from the group key
 				$group = trim($group, '/');
 
 				foreach (explode('|', $group) as $char) {
@@ -252,7 +251,6 @@ class Str
 
 	/**
 	 * Removes the given substring or character only from the end of the string
-	 * @since 3.7.0
 	 */
 	public static function beforeEnd(
 		string $string,
@@ -293,7 +291,6 @@ class Str
 
 	/**
 	 * Converts a camel-case string to kebab-case
-	 * @since 4.0.0
 	 *
 	 * @param string $value The string to convert
 	 */
@@ -450,7 +447,6 @@ class Str
 
 	/**
 	 * Escape string for context specific output
-	 * @since 3.7.0
 	 *
 	 * @param string $string Untrusted data
 	 * @param string $context Location of output (`html`, `attr`, `js`, `css`, `url` or `xml`)
@@ -569,7 +565,6 @@ class Str
 
 	/**
 	 * Adds `-1` to a string or increments the ending number to allow `-2`, `-3`, etc.
-	 * @since 3.7.0
 	 *
 	 * @param string $string The string to increment
 	 * @param int $first Starting number
@@ -616,8 +611,6 @@ class Str
 	 * and title-casing the result.
 	 *
 	 * Example: `workEmailAddress` will turn into `Work email address`
-	 *
-	 * @since 5.2.0
 	 */
 	public static function label(string $value): string
 	{
@@ -855,7 +848,7 @@ class Str
 		string|array|Collection $replace,
 		int|array $limit = -1
 	): string|array {
-		// convert Kirby collections to arrays
+		// convert Infinri collections to arrays
 		if ($string instanceof Collection) {
 			$string = $string->toArray();
 		}
@@ -1033,8 +1026,6 @@ class Str
 	 * and escapes HTML in the results in `{{ }}` placeholders
 	 * while leaving HTML special characters untouched in `{< >}` placeholders
 	 *
-	 * @since 3.6.0
-	 *
 	 * @param string|null $string The string with placeholders
 	 * @param array $data Associative array with placeholders as
 	 *                    keys and replacements as values.
@@ -1159,7 +1150,6 @@ class Str
 
 	/**
 	 * Calculates the similarity between two character arrays
-	 * @since 5.5.0
 	 */
 	protected static function similarityFromChars(
 		array $first,
@@ -1358,7 +1348,6 @@ class Str
 
 	/**
 	 * Converts a string to studly caps case
-	 * @since 3.7.0
 	 *
 	 * @param string $value The string to convert
 	 */
@@ -1562,8 +1551,7 @@ class Str
 
 	/**
 	 * Creates a compliant v4 UUID
-	 * Taken from: https://github.com/symfony/polyfill
-	 * @since 3.7.0
+	 * Taken from: symfony/polyfill
 	 */
 	public static function uuid(): string
 	{
@@ -1616,7 +1604,6 @@ class Str
 
 	/**
 	 * Wraps the string with the given string(s)
-	 * @since 3.7.0
 	 *
 	 * @param string $string String to wrap
 	 * @param string $before String to prepend

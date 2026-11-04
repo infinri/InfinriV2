@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserAuthTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserAuth';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserAuth';
 
 	protected function setUp(): void
 	{
@@ -18,7 +18,7 @@ class UserAuthTest extends ModelTestCase
 		$this->app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'id'    => 'testuser',
 					'role'  => 'admin'
 				]
@@ -36,23 +36,23 @@ class UserAuthTest extends ModelTestCase
 	{
 		$this->app = $this->app->clone([
 			'users' => [
-				['email' => 'a@getkirby.com'],
-				['email' => 'b@getkirby.com']
+				['email' => 'a@infinri.com'],
+				['email' => 'b@infinri.com']
 			],
 		]);
 
-		$a = $this->app->user('a@getkirby.com');
-		$b = $this->app->user('b@getkirby.com');
+		$a = $this->app->user('a@infinri.com');
+		$b = $this->app->user('b@infinri.com');
 
 		$this->assertFalse($a->isLoggedIn());
 		$this->assertFalse($b->isLoggedIn());
 
-		$this->app->impersonate('a@getkirby.com');
+		$this->app->impersonate('a@infinri.com');
 
 		$this->assertTrue($a->isLoggedIn());
 		$this->assertFalse($b->isLoggedIn());
 
-		$this->app->impersonate('b@getkirby.com');
+		$this->app->impersonate('b@infinri.com');
 
 		$this->assertFalse($a->isLoggedIn());
 		$this->assertTrue($b->isLoggedIn());
@@ -60,7 +60,7 @@ class UserAuthTest extends ModelTestCase
 
 	public function testLoginLogout(): void
 	{
-		$user = $this->app->user('test@getkirby.com');
+		$user = $this->app->user('test@infinri.com');
 
 		$this->assertNull($this->app->user());
 		$user->loginPasswordless();
@@ -78,25 +78,25 @@ class UserAuthTest extends ModelTestCase
 		$this->app = $this->app->clone([
 			'hooks' => [
 				'user.login:before' => function ($user, $session) use ($phpunit, &$calls) {
-					$phpunit->assertSame('test@getkirby.com', $user->email());
+					$phpunit->assertSame('test@infinri.com', $user->email());
 					$phpunit->assertSame($session, S::instance());
 
 					$calls += 1;
 				},
 				'user.login:after' => function ($user, $session) use ($phpunit, &$calls) {
-					$phpunit->assertSame('test@getkirby.com', $user->email());
+					$phpunit->assertSame('test@infinri.com', $user->email());
 					$phpunit->assertSame($session, S::instance());
 
 					$calls += 2;
 				},
 				'user.logout:before' => function ($user, $session) use ($phpunit, &$calls) {
-					$phpunit->assertSame('test@getkirby.com', $user->email());
+					$phpunit->assertSame('test@infinri.com', $user->email());
 					$phpunit->assertSame($session, S::instance());
 
 					$calls += 4;
 				},
 				'user.logout:after' => function ($user, $session) use ($phpunit, &$calls, &$logoutSession) {
-					$phpunit->assertSame('test@getkirby.com', $user->email());
+					$phpunit->assertSame('test@infinri.com', $user->email());
 
 					if ($logoutSession === true) {
 						$phpunit->assertSame($session, S::instance());
@@ -111,7 +111,7 @@ class UserAuthTest extends ModelTestCase
 		]);
 
 		// without prepopulated session
-		$user = $this->app->user('test@getkirby.com');
+		$user = $this->app->user('test@infinri.com');
 		$user->loginPasswordless();
 		$user->logout();
 
@@ -125,21 +125,21 @@ class UserAuthTest extends ModelTestCase
 		$this->assertSame((1 + 2 + 4 + 8) * 2, $calls);
 	}
 
-	public function testLoginPasswordlessKirby(): void
+	public function testLoginPasswordlessInfinri(): void
 	{
-		$user = new User(['id' => 'kirby']);
+		$user = new User(['id' => 'infinri']);
 		$this->expectException(PermissionException::class);
 		$user->loginPasswordless();
 	}
 
 	public function testSessionData(): void
 	{
-		$user    = $this->app->user('test@getkirby.com');
+		$user    = $this->app->user('test@infinri.com');
 		$session = $this->app->session();
 
 		$this->assertSame([], $session->data()->get());
 		$user->loginPasswordless();
-		$this->assertSame(['kirby.userId' => 'testuser'], $session->data()->get());
+		$this->assertSame(['infinri.userId' => 'testuser'], $session->data()->get());
 		$user->logout();
 		$this->assertSame([], $session->data()->get());
 	}
@@ -148,12 +148,12 @@ class UserAuthTest extends ModelTestCase
 	{
 		F::write(static::TMP . '/site/accounts/testuser/.htpasswd', 'a very secure hash');
 
-		$user    = $this->app->user('test@getkirby.com');
+		$user    = $this->app->user('test@infinri.com');
 		$session = $this->app->session();
 
 		$this->assertSame([], $session->data()->get());
 		$user->loginPasswordless();
-		$this->assertSame(['kirby.userId' => 'testuser', 'kirby.loginTimestamp' => 1337000000], $session->data()->get());
+		$this->assertSame(['infinri.userId' => 'testuser', 'infinri.loginTimestamp' => 1337000000], $session->data()->get());
 		$user->logout();
 		$this->assertSame([], $session->data()->get());
 	}

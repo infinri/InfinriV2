@@ -12,7 +12,7 @@ class PaginationTest extends TestCase
 			'page'  => 1,
 			'limit' => 10,
 			'total' => 120,
-			'url'   => new Uri('https://getkirby.com'),
+			'url'   => new Uri('https://infinri.com'),
 			...$options
 		]);
 	}
@@ -21,7 +21,7 @@ class PaginationTest extends TestCase
 	{
 		$this->app->clone([
 			'options' => [
-				'url' => 'https://getkirby.com'
+				'url' => 'https://infinri.com'
 			]
 		]);
 
@@ -31,7 +31,7 @@ class PaginationTest extends TestCase
 			'total' => 120,
 		]);
 
-		$this->assertSame('https://getkirby.com/page:2', $pagination->nextPageUrl());
+		$this->assertSame('https://infinri.com/page:2', $pagination->nextPageUrl());
 	}
 
 	public function testSubfolderUrl(): void
@@ -57,7 +57,7 @@ class PaginationTest extends TestCase
 			'page' => 2
 		]);
 
-		$this->assertSame('https://getkirby.com/page:2', $pagination->pageUrl());
+		$this->assertSame('https://infinri.com/page:2', $pagination->pageUrl());
 	}
 
 	public function testCurrentPageUrlWithFirstPage(): void
@@ -66,15 +66,15 @@ class PaginationTest extends TestCase
 			'page' => 1
 		]);
 
-		$this->assertSame('https://getkirby.com', $pagination->pageUrl());
+		$this->assertSame('https://infinri.com', $pagination->pageUrl());
 	}
 
 	public function testPageUrl(): void
 	{
 		$pagination = $this->pagination();
 
-		$this->assertSame('https://getkirby.com', $pagination->pageUrl(1));
-		$this->assertSame('https://getkirby.com/page:12', $pagination->pageUrl(12));
+		$this->assertSame('https://infinri.com', $pagination->pageUrl(1));
+		$this->assertSame('https://infinri.com/page:12', $pagination->pageUrl(12));
 
 		$this->assertNull($pagination->pageUrl(0));
 		$this->assertNull($pagination->pageUrl(13));
@@ -83,13 +83,13 @@ class PaginationTest extends TestCase
 	public function testFirstPageUrl(): void
 	{
 		$pagination = $this->pagination();
-		$this->assertSame('https://getkirby.com', $pagination->firstPageUrl());
+		$this->assertSame('https://infinri.com', $pagination->firstPageUrl());
 	}
 
 	public function testLastPageUrl(): void
 	{
 		$pagination = $this->pagination();
-		$this->assertSame('https://getkirby.com/page:12', $pagination->lastPageUrl());
+		$this->assertSame('https://infinri.com/page:12', $pagination->lastPageUrl());
 	}
 
 	public function testFirstLastPageUrlNull(): void
@@ -98,7 +98,7 @@ class PaginationTest extends TestCase
 			'page'  => 1,
 			'limit' => 10,
 			'total' => 0,
-			'url'   => new Uri('https://getkirby.com')
+			'url'   => new Uri('https://infinri.com')
 		]);
 
 		$this->assertNull($pagination->firstPageUrl());
@@ -111,7 +111,7 @@ class PaginationTest extends TestCase
 			'page' => 2
 		]);
 
-		$this->assertSame('https://getkirby.com/page:3', $pagination->nextPageUrl());
+		$this->assertSame('https://infinri.com/page:3', $pagination->nextPageUrl());
 	}
 
 	public function testNonExistingNextPage(): void
@@ -126,7 +126,7 @@ class PaginationTest extends TestCase
 			'page' => 3
 		]);
 
-		$this->assertSame('https://getkirby.com/page:2', $pagination->prevPageUrl());
+		$this->assertSame('https://infinri.com/page:2', $pagination->prevPageUrl());
 	}
 
 	public function testNonExistingPrevPage(): void
@@ -141,7 +141,7 @@ class PaginationTest extends TestCase
 			'page' => 2
 		]);
 
-		$this->assertSame('https://getkirby.com', $pagination->prevPageUrl());
+		$this->assertSame('https://infinri.com', $pagination->prevPageUrl());
 	}
 
 	public function testMethod(): void
@@ -149,19 +149,19 @@ class PaginationTest extends TestCase
 		$pagination = $this->pagination([
 			'page' => 2
 		]);
-		$this->assertSame('https://getkirby.com/page:2', $pagination->pageUrl());
+		$this->assertSame('https://infinri.com/page:2', $pagination->pageUrl());
 
 		$pagination = $this->pagination([
 			'page'   => 2,
 			'method' => 'query'
 		]);
-		$this->assertSame('https://getkirby.com?page=2', $pagination->pageUrl());
+		$this->assertSame('https://infinri.com?page=2', $pagination->pageUrl());
 
 		$pagination = $this->pagination([
 			'page'   => 2,
 			'method' => 'param'
 		]);
-		$this->assertSame('https://getkirby.com/page:2', $pagination->pageUrl());
+		$this->assertSame('https://infinri.com/page:2', $pagination->pageUrl());
 
 		$pagination = $this->pagination([
 			'page'   => 2,

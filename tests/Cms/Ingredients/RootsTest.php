@@ -21,25 +21,24 @@ class RootsTest extends TestCase
 
 	protected static function rootProvider(string $index): array
 	{
-		$kirby = realpath(__DIR__ . '/../../..');
+		$infinri = realpath(__DIR__ . '/../../..');
 
 		return [
-			[$kirby, 'kirby'],
-			[$kirby . '/i18n', 'i18n'],
-			[$kirby . '/i18n/translations', 'i18n:translations'],
-			[$kirby . '/i18n/rules', 'i18n:rules'],
+			[$infinri, 'infinri'],
+			[$infinri . '/i18n', 'i18n'],
+			[$infinri . '/i18n/translations', 'i18n:translations'],
+			[$infinri . '/i18n/rules', 'i18n:rules'],
 			[$index, 'index'],
 			[$index . '/assets', 'assets'],
 			[$index . '/content', 'content'],
 			[$index . '/media', 'media'],
-			[$kirby . '/panel', 'panel'],
+			[$infinri . '/panel', 'panel'],
 			[$site = $index . '/site', 'site'],
 			[$site . '/accounts', 'accounts'],
 			[$site . '/blueprints', 'blueprints'],
 			[$site . '/cache', 'cache'],
 			[$site . '/collections', 'collections'],
 			[$site . '/config', 'config'],
-			[$site . '/config/.license', 'license'],
 			[$site . '/controllers', 'controllers'],
 			[$site . '/languages', 'languages'],
 			[$site . '/logs', 'logs'],
@@ -50,6 +49,14 @@ class RootsTest extends TestCase
 			[$site . '/templates', 'templates'],
 			[$site . '/blueprints/users', 'roles'],
 		];
+	}
+
+	public function testNoLicenseRoots(): void
+	{
+		$roots = (new App())->roots()->toArray();
+
+		$this->assertArrayNotHasKey('license', $roots);
+		$this->assertArrayNotHasKey('licenses', $roots);
 	}
 
 	public static function defaultRootProvider(): array
@@ -70,7 +77,7 @@ class RootsTest extends TestCase
 
 	public static function customIndexRootProvider(): array
 	{
-		return static::rootProvider('/var/www/getkirby.com');
+		return static::rootProvider('/var/www/infinri.com');
 	}
 
 	#[DataProvider('customIndexRootProvider')]
@@ -78,7 +85,7 @@ class RootsTest extends TestCase
 	{
 		$app = new App([
 			'roots' => [
-				'index' => '/var/www/getkirby.com'
+				'index' => '/var/www/infinri.com'
 			]
 		]);
 
@@ -89,7 +96,7 @@ class RootsTest extends TestCase
 
 	public static function customRootProvider(): array
 	{
-		$base    = '/var/www/getkirby.com';
+		$base    = '/var/www/infinri.com';
 		$public  = $base . '/public';
 
 		return [
@@ -105,7 +112,7 @@ class RootsTest extends TestCase
 	public function testCustomRoot($root, $method): void
 	{
 		// public directory setup
-		$base   = '/var/www/getkirby.com';
+		$base   = '/var/www/infinri.com';
 		$public = $base . '/public';
 
 		$app = new App([

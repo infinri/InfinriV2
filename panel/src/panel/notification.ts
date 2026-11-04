@@ -31,7 +31,6 @@ export function defaults(): NotificationState {
 
 /**
  * Manages the Panel's notifications
- * @since 4.0.0
  */
 export default function Notification(panel: TODO) {
 	const parent = State("notification", defaults());
@@ -51,13 +50,6 @@ export default function Notification(panel: TODO) {
 
 			// return the closed state
 			return this.state();
-		},
-
-		/**
-		 * Sends a deprecation warning to the console
-		 */
-		deprecated(message: string): void {
-			console.warn("Deprecated: " + message);
 		},
 
 		/**
@@ -85,7 +77,7 @@ export default function Notification(panel: TODO) {
 
 			if (error instanceof RequestError) {
 				// get the broken element in the response json that
-				// has an error message. This can be deprecated later
+				// has an error message. This can be removed later
 				// when the server always sends back a simple error
 				// response without nesting it in $dropdown, $dialog, etc.
 				const response = Object.values(error.response.json) as Array<{

@@ -32,7 +32,6 @@ export const props = {
 
 /**
  * Input to select a color's alpha value.
- * @since 4.0.0
  * @example <k-alpha-input :value="value" @input="value = $event" />
  */
 export default {

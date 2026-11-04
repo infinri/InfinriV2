@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Field::class)]
 class FieldTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Field';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Field';
 
 	protected function setUp(): void
 	{
@@ -63,7 +63,7 @@ class FieldTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = $this->app->site();
 		$file = $site->file('b.jpg');
@@ -133,11 +133,11 @@ class FieldTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
-			'user' => 'editor@getkirby.com'
+			'user' => 'editor@infinri.com'
 		]);
 
 		$file  = $this->app->site()->file('b.jpg');
@@ -171,7 +171,7 @@ class FieldTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = $this->app->site();
 		$page = $site->find('b');
@@ -235,11 +235,11 @@ class FieldTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
-			'user' => 'editor@getkirby.com'
+			'user' => 'editor@infinri.com'
 		]);
 
 		$page  = $this->app->site()->find('b');
@@ -339,7 +339,7 @@ class FieldTest extends TestCase
 		$this->assertSame($expected, $field);
 
 		// with authenticated admin
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$field = Field::role();
 		$expected = [

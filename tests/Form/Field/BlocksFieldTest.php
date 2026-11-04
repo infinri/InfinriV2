@@ -19,7 +19,7 @@ class BlocksFieldTest extends TestCase
 		$this->assertNull($field->max());
 		$this->assertInstanceOf(Fieldsets::class, $field->fieldsets());
 		$this->assertSame([], $field->value());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testGroups(): void
@@ -369,7 +369,7 @@ class BlocksFieldTest extends TestCase
 
 		// we need an authenticated user to make sure
 		// that the fields are not disabled by default
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$props = [
 			'fieldsets' => [

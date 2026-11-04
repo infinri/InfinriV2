@@ -59,7 +59,7 @@ class FileDialogsTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 					'files' => [
 						['filename' => 'test.jpg']
@@ -67,7 +67,7 @@ class FileDialogsTest extends AreaTestCase
 				],
 				[
 					'id'    => 'admin',
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			]
@@ -186,7 +186,7 @@ class FileDialogsTest extends AreaTestCase
 		$this->submit([
 			'name' => 'new-test'
 		]);
-		$this->login('admin@getkirby.com');
+		$this->login('admin@infinri.com');
 
 		$dialog = $this->dialog('users/test/files/test.jpg/changeName');
 
@@ -202,7 +202,7 @@ class FileDialogsTest extends AreaTestCase
 			'name'      => 'new-test',
 			'_referrer' => 'users/test/files/test.jpg'
 		]);
-		$this->login('admin@getkirby.com');
+		$this->login('admin@infinri.com');
 
 		$dialog = $this->dialog('users/test/files/test.jpg/changeName');
 		$this->assertSame('/users/test/files/new-test.jpg', $dialog['redirect']);
@@ -219,7 +219,8 @@ class FileDialogsTest extends AreaTestCase
 
 		$this->assertSame('Template', $props['fields']['template']['label']);
 		$this->assertSame('select', $props['fields']['template']['type']);
-		$this->assertSame('Change', $props['submitButton']);
+		$this->assertSame(['text' => 'Change', 'theme' => 'notice'], $props['submitButton']);
+		$this->assertArrayNotHasKey('theme', $props);
 		$this->assertSame('a', $props['value']['template']);
 	}
 
@@ -246,7 +247,8 @@ class FileDialogsTest extends AreaTestCase
 
 		$this->assertSame('Template', $props['fields']['template']['label']);
 		$this->assertSame('select', $props['fields']['template']['type']);
-		$this->assertSame('Change', $props['submitButton']);
+		$this->assertSame(['text' => 'Change', 'theme' => 'notice'], $props['submitButton']);
+		$this->assertArrayNotHasKey('theme', $props);
 		$this->assertNull($props['value']['template']);
 	}
 
@@ -261,7 +263,8 @@ class FileDialogsTest extends AreaTestCase
 
 		$this->assertSame('Template', $props['fields']['template']['label']);
 		$this->assertSame('select', $props['fields']['template']['type']);
-		$this->assertSame('Change', $props['submitButton']);
+		$this->assertSame(['text' => 'Change', 'theme' => 'notice'], $props['submitButton']);
+		$this->assertArrayNotHasKey('theme', $props);
 		$this->assertNull($props['value']['template']);
 	}
 
@@ -388,7 +391,7 @@ class FileDialogsTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 					'files' => [
 						['filename' => 'a.jpg'],
@@ -513,7 +516,7 @@ class FileDialogsTest extends AreaTestCase
 	{
 		$this->createUserFile();
 		$this->submit([]);
-		$this->login('admin@getkirby.com');
+		$this->login('admin@infinri.com');
 
 		$dialog = $this->dialog('users/test/files/test.jpg/delete');
 
@@ -529,7 +532,7 @@ class FileDialogsTest extends AreaTestCase
 		$this->submit([
 			'_referrer' => '/users/test/files/test.jpg'
 		]);
-		$this->login('admin@getkirby.com');
+		$this->login('admin@infinri.com');
 
 		$dialog = $this->dialog('users/test/files/test.jpg/delete');
 

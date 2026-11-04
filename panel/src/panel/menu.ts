@@ -20,8 +20,6 @@ export function defaults(): MenuState {
 /**
  * Manages the Panel sidebar navigation menu, including open/close state,
  * mobile vs. desktop behavior, and state persistence via localStorage
- *
- * @since 4.0.0
  */
 export default function Menu(panel: {
 	events: { on: (event: string, handler: EventListener) => void };
@@ -61,7 +59,7 @@ export default function Menu(panel: {
 			this.isOpen = false;
 
 			if (media.matches === false) {
-				localStorage.setItem("kirby$menu", "true");
+				localStorage.setItem("infinri$menu", "true");
 			}
 		},
 
@@ -84,7 +82,7 @@ export default function Menu(panel: {
 			this.isOpen = true;
 
 			if (media.matches === false) {
-				localStorage.removeItem("kirby$menu");
+				localStorage.removeItem("infinri$menu");
 			}
 		},
 
@@ -99,7 +97,7 @@ export default function Menu(panel: {
 			}
 
 			// on desktop, restore the last collapsed/expanded state
-			this.isOpen = localStorage.getItem("kirby$menu") === null;
+			this.isOpen = localStorage.getItem("infinri$menu") === null;
 		},
 
 		/**

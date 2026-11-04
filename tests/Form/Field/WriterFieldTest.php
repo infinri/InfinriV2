@@ -14,7 +14,7 @@ class WriterFieldTest extends TestCase
 		$this->assertFalse($field->inline());
 		$this->assertNull($field->marks());
 		$this->assertNull($field->nodes());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testFillWithEmptyValue(): void

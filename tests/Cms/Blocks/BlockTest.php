@@ -3,13 +3,15 @@
 namespace Infinri\Cms;
 
 use Error;
+use Infinri\Content\Content;
+use Infinri\Content\Field;
 use Infinri\Exception\InvalidArgumentException;
 use Infinri\TestCase;
 
 class BlockTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.Block';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.Block';
 
 	protected Page $page;
 
@@ -63,17 +65,30 @@ class BlockTest extends TestCase
 		$this->assertSame($content, $block->content()->toArray());
 	}
 
-	/**
-	 * @todo block.converter remove eventually
-	 */
-	public function testContentWhenNotArrayConvertedAsEditorBlock(): void
+	public function testContentWhenNotArrayIsNotConvertedAsEditorBlock(): void
 	{
 		$block = new Block([
 			'type'    => 'heading',
-			'content' => $content = 'this is old editor content'
+			'content' => 'this is old editor content'
 		]);
 
-		$this->assertSame($content, $block->content()->toArray()['text']);
+		$this->assertSame([], $block->content()->toArray());
+	}
+
+	public function testConstructWithBuilderFormat(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('The block type is missing');
+
+		new Block([
+			'_key'    => 'heading',
+			'content' => ['text' => 'Test']
+		]);
+	}
+
+	public function testBlockConverterIsRemoved(): void
+	{
+		$this->assertFalse(class_exists(BlockConverter::class));
 	}
 
 	public function testController(): void
@@ -91,6 +106,7 @@ class BlockTest extends TestCase
 		$this->assertSame($block->id(), $block->controller()['id']);
 		$this->assertNull($block->controller()['prev']);
 		$this->assertNull($block->controller()['next']);
+		$this->assertArrayNotHasKey('data', $block->controller());
 	}
 
 	public function testFactory(): void

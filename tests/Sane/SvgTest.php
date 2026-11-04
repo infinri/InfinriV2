@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Svg::class)]
 class SvgTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Sane.Svg';
+	public const TMP = INFINRI_TMP_DIR . '/Sane.Svg';
 
 	protected static string $type = 'svg';
 
@@ -108,7 +108,6 @@ class SvgTest extends TestCase
 	{
 		/**
 		 * Test fixture inspired by DOMPurify
-		 * @link https://github.com/cure53/DOMPurify
 		 * @copyright 2015 Mario Heiderich
 		 * @license https://www.apache.org/licenses/LICENSE-2.0
 		 */
@@ -179,7 +178,7 @@ class SvgTest extends TestCase
 		$this->assertStringEqualsFile($sanitized, Svg::sanitize(file_get_contents($fixture)));
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The URL is not allowed in attribute "style" (line 7)');
+		$this->expectExceptionMessage('The URL is not allowed in attribute "style" (line 6)');
 		Svg::validateFile($fixture);
 	}
 
@@ -191,7 +190,7 @@ class SvgTest extends TestCase
 		$this->assertStringEqualsFile($sanitized, Svg::sanitize(file_get_contents($fixture)));
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The URL is not allowed in attribute "filter" (line 7)');
+		$this->expectExceptionMessage('The URL is not allowed in attribute "filter" (line 6)');
 		Svg::validateFile($fixture);
 	}
 
@@ -395,7 +394,7 @@ class SvgTest extends TestCase
 		$this->assertStringEqualsFile($sanitized, Svg::sanitize(file_get_contents($fixture)));
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The "set" element (line 7) is not allowed');
+		$this->expectExceptionMessage('The "set" element (line 6) is not allowed');
 		Svg::validateFile($fixture);
 	}
 
@@ -467,7 +466,7 @@ class SvgTest extends TestCase
 		$this->assertStringEqualsFile($sanitized, Svg::sanitize(file_get_contents($fixture)));
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The "xml-stylesheet" processing instruction (line 6) is not allowed');
+		$this->expectExceptionMessage('The "xml-stylesheet" processing instruction (line 5) is not allowed');
 		Svg::validateFile($fixture);
 	}
 

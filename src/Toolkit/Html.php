@@ -15,15 +15,15 @@ class Html extends Xml
 
 	/**
 	 * List of hosts that are allowed as source for embedded
-	 * Gists. Embedding Gists from any other host is blocked to
-	 * prevent loading untrusted scripts. Additional hosts (e.g.
-	 * for GitHub Enterprise) can be allowed via config:
+	 * Gists. No host is allowed by default; embedding Gists from
+	 * any host that is not listed is blocked to prevent loading
+	 * untrusted scripts. Gist hosts can be allowed via config:
 	 *
 	 * ```php
 	 * Html::$gistDomains[] = 'gist.example.com';
 	 * ```
 	 */
-	public static array $gistDomains = ['gist.github.com'];
+	public static array $gistDomains = [];
 
 	/**
 	 * List of HTML tags that can be used inline
@@ -306,7 +306,7 @@ class Html extends Xml
 	}
 
 	/**
-	 * Embeds a GitHub Gist
+	 * Embeds a Gist from an allowed gist host
 	 *
 	 * @param string $url Gist URL
 	 * @param string|null $file Optional specific file to embed

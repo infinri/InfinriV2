@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class FileUrlTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/files';
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileUrl';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileUrl';
 
 	protected function setUp(): void
 	{
@@ -41,7 +41,7 @@ class FileUrlTest extends ModelTestCase
 	{
 		$file = new File([
 			'filename' => 'test.pdf',
-			'url'      => $url = 'http://getkirby.com/test.pdf',
+			'url'      => $url = 'http://infinri.com/test.pdf',
 			'parent'   => $this->app->site()
 		]);
 

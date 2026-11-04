@@ -13,7 +13,7 @@ use Infinri\Toolkit\Str;
 class Assets extends Collection
 {
 	/**
-	 * Clean old/deprecated assets on every resolve
+	 * Clean outdated assets on every resolve
 	 */
 	public static function clean(string $pluginName): void
 	{
@@ -35,9 +35,6 @@ class Assets extends Collection
 					// (e.g. foo/, foo/bar/, foo/bar/baz.css) for the asset
 					for ($i = 1, $max = count($parts); $i <= $max; $i++) {
 						$paths[] = implode('/', array_slice($parts, 0, $i));
-
-						// TODO: remove when media hash is enforced as mandatory
-						$paths[] = implode('/', array_slice($parts, 1, $i));
 					}
 
 					return $paths;
@@ -142,21 +139,6 @@ class Assets extends Collection
 		if ($plugin = App::instance()->plugin($pluginName)) {
 			// do some spring cleaning for older files
 			static::clean($pluginName);
-
-			// @codeCoverageIgnoreStart
-			// TODO: deprecated media URL without hash
-			if (empty($hash) === true) {
-				$asset = $plugin->asset($path);
-				$asset->publishAt($path);
-				return Response::file($asset->root());
-			}
-
-			// TODO: deprecated media URL with hash (but path)
-			if ($asset = $plugin->asset($hash . '/' . $path)) {
-				$asset->publishAt($hash . '/' . $path);
-				return Response::file($asset->root());
-			}
-			// @codeCoverageIgnoreEnd
 
 			if ($asset = $plugin->asset($path)) {
 				if ($asset->mediaHash() === $hash) {

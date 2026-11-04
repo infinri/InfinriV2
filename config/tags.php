@@ -2,14 +2,14 @@
 
 use Infinri\Cms\Html;
 use Infinri\Cms\Url;
-use Infinri\Text\KirbyTag;
+use Infinri\Text\InfinriTag;
 use Infinri\Toolkit\A;
 use Infinri\Toolkit\Escape;
 use Infinri\Toolkit\Str;
 use Infinri\Uuid\Uuid;
 
 /**
- * Default KirbyTags definition
+ * Default InfinriTags definition
  */
 return [
 
@@ -20,11 +20,11 @@ return [
 		'attr' => [
 			'expiry'
 		],
-		'html' => function (KirbyTag $tag): string {
+		'html' => function (InfinriTag $tag): string {
 			if (strtolower($tag->date) === 'year') {
 				// make sure cached pages reset the year at New Year,
 				// unless a custom expiry point has been requested
-				$tag->kirby()->response()->expires(
+				$tag->infinri()->response()->expires(
 					$tag->expiry ?? 'first day of January next year'
 				);
 
@@ -34,7 +34,7 @@ return [
 			// let authors control the cache expiry for custom formats,
 			// e.g. `(date: Y-m-d expiry: tomorrow)`
 			if ($tag->expiry !== null) {
-				$tag->kirby()->response()->expires($tag->expiry);
+				$tag->infinri()->response()->expires($tag->expiry);
 			}
 
 			// escape the formatted date to prevent injecting HTML
@@ -54,7 +54,7 @@ return [
 			'text',
 			'title'
 		],
-		'html' => function (KirbyTag $tag): string {
+		'html' => function (InfinriTag $tag): string {
 			return Html::email($tag->value, $tag->text, [
 				'class'  => $tag->class,
 				'rel'    => $tag->rel,
@@ -76,7 +76,7 @@ return [
 			'text',
 			'title'
 		],
-		'html' => function (KirbyTag $tag): string {
+		'html' => function (InfinriTag $tag): string {
 			if (!$file = $tag->file($tag->value)) {
 				return $tag->text ?? $tag->value;
 			}
@@ -104,7 +104,7 @@ return [
 		'attr' => [
 			'file'
 		],
-		'html' => function (KirbyTag $tag): string {
+		'html' => function (InfinriTag $tag): string {
 			return Html::gist($tag->value, $tag->file);
 		}
 	],
@@ -127,11 +127,11 @@ return [
 			'title',
 			'width'
 		],
-		'html' => function (KirbyTag $tag): string {
-			$kirby = $tag->kirby();
+		'html' => function (InfinriTag $tag): string {
+			$infinri = $tag->infinri();
 
-			$tag->width  ??= $kirby->option('kirbytext.image.width');
-			$tag->height ??= $kirby->option('kirbytext.image.height');
+			$tag->width  ??= $infinri->option('infinritext.image.width');
+			$tag->height ??= $infinri->option('infinritext.image.height');
 
 			if ($tag->file = $tag->file($tag->value)) {
 				$tag->src       = $tag->file->url();
@@ -185,14 +185,14 @@ return [
 				'alt'    => $tag->alt ?? ''
 			]);
 
-			if ($kirby->option('kirbytext.image.figure', true) === false) {
+			if ($infinri->option('infinritext.image.figure', true) === false) {
 				return $link($image);
 			}
 
-			// render KirbyText in caption
+			// render InfinriText in caption
 			if ($tag->caption) {
 				$options = ['markdown' => ['inline' => true]];
-				$caption = $kirby->kirbytext($tag->caption, $options);
+				$caption = $infinri->infinritext($tag->caption, $options);
 				$tag->caption = [$caption];
 			}
 
@@ -215,7 +215,7 @@ return [
 			'title',
 			'text',
 		],
-		'html' => function (KirbyTag $tag): string {
+		'html' => function (InfinriTag $tag): string {
 			// keep $tag->value as the original value (e.g. UUID) for errors
 			$link = $tag->value;
 
@@ -233,7 +233,7 @@ return [
 			// whole page into the error page
 			if ($link === null) {
 				// debug: visible inline error, no styles to avoid clashes
-				if ($tag->kirby()->option('debug', false) === true) {
+				if ($tag->infinri()->option('debug', false) === true) {
 					$error = 'The link "' . $tag->value . '" cannot be found';
 
 					if ($tag->text !== null && $tag->text !== '') {
@@ -241,7 +241,7 @@ return [
 					}
 
 					return Html::tag('span', '🚨 ' . $error, [
-						'class' => Str::trim('kirby-broken-link ' . $tag->class)
+						'class' => Str::trim('infinri-broken-link ' . $tag->class)
 					]);
 				}
 
@@ -275,7 +275,7 @@ return [
 			'text',
 			'title'
 		],
-		'html' => function (KirbyTag $tag): string {
+		'html' => function (InfinriTag $tag): string {
 			return Html::tel($tag->value, $tag->text, [
 				'class' => $tag->class,
 				'rel'   => $tag->rel,
@@ -303,7 +303,7 @@ return [
 			'style',
 			'width',
 		],
-		'html' => function (KirbyTag $tag): string {
+		'html' => function (InfinriTag $tag): string {
 			// checks and gets if poster is local file
 			if (
 				empty($tag->poster) === false &&
@@ -365,7 +365,7 @@ return [
 			} else {
 				$video = Html::video(
 					$tag->value,
-					$tag->kirby()->option('kirbytext.video.options', []),
+					$tag->infinri()->option('infinritext.video.options', []),
 					$attrs
 				);
 			}

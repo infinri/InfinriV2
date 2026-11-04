@@ -143,23 +143,11 @@ class Permissions
 		return $values;
 	}
 
-	/**
-	 * @todo Replace first param with `string $category` in v6
-	 */
 	public function for(
-		string|null $category = null,
+		string $category,
 		string|null $action = null,
 		bool $default = false
 	): bool {
-		if (is_null($category) === true) {
-			Helpers::deprecated(
-				'Passing `$category = null` to `Permissions::for()` is not supported',
-				'permissions-for-category-null'
-			);
-
-			return $default;
-		}
-
 		if ($this->has($category, $action) === false) {
 			return $default;
 		}
@@ -214,11 +202,7 @@ class Permissions
 
 		foreach ($categories as $category => $actions) {
 			if (isset($defaults[$category]) === false) {
-				Helpers::deprecated(
-					'Setting undefined permission category "' . $category . '" is deprecated and will be ignored in a future version. Please use https://getkirby.com/docs/reference/plugins/extensions/permissions to register custom permissions.',
-					'permissions-undefined'
-				);
-				$defaults[$category] = [];
+				continue;
 			}
 
 			$actions = $this->expand($actions, $defaults[$category]);
@@ -231,10 +215,7 @@ class Permissions
 				}
 
 				if (isset($defaults[$category][$key]) === false) {
-					Helpers::deprecated(
-						'Setting undefined permission "' . $category . '.' . $key . '" is deprecated and will be ignored in a future version. Please use https://getkirby.com/docs/reference/plugins/extensions/permissions to register custom permissions.',
-						'permissions-undefined'
-					);
+					continue;
 				}
 
 				$defaults[$category][$key] = $value;

@@ -21,7 +21,7 @@ return [
 		'text' => function () {
 			if ($this->text) {
 				$text = $this->model()->toSafeString($this->text);
-				$text = $this->kirby()->kirbytext($text);
+				$text = $this->infinri()->infinritext($text);
 				return $text;
 			}
 		},

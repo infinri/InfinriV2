@@ -19,19 +19,6 @@ class Body
 	}
 
 	/**
-	 * Creates a new instance while
-	 * merging initial and new properties
-	 * @deprecated 4.0.0
-	 */
-	public function clone(array $props = []): static
-	{
-		return new static(array_merge_recursive([
-			'html' => $this->html,
-			'text' => $this->text
-		], $props));
-	}
-
-	/**
 	 * Returns the HTML content of the email body
 	 */
 	public function html(): string
@@ -47,9 +34,6 @@ class Body
 		return $this->text ?? '';
 	}
 
-	/**
-	 * @since 4.0.0
-	 */
 	public function toArray(): array
 	{
 		return [

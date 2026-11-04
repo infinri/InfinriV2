@@ -4,7 +4,7 @@
 		:disabled="disabled"
 		class="k-coloroptions-input"
 	>
-		<legend class="sr-only">{{ $t("options") }}</legend>
+		<legend class="sr-only">{{ $panel.t("options") }}</legend>
 		<ul>
 			<li v-for="(choice, index) in choices" :key="index">
 				<label :title="choice.title">
@@ -48,7 +48,6 @@ export const props = {
 };
 
 /**
- * @since 4.0.0
  * @example <k-coloroptions-input :options="options" :value="value" @input="value = $event" />
  */
 export default {

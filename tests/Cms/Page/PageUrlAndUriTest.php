@@ -8,7 +8,7 @@ use TypeError;
 #[CoversClass(Page::class)]
 class PageUrlAndUriTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageUrl';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageUrl';
 
 	public function testHomeUrlAndUriInMultiLanguageMode(): void
 	{
@@ -114,10 +114,10 @@ class PageUrlAndUriTest extends ModelTestCase
 	{
 		$page = new Page([
 			'slug' => 'test',
-			'url'  => 'https://getkirby.com/test'
+			'url'  => 'https://infinri.com/test'
 		]);
 
-		$this->assertSame('https://getkirby.com/test', $page->url());
+		$this->assertSame('https://infinri.com/test', $page->url());
 		$this->assertSame('test', $page->uri());
 	}
 

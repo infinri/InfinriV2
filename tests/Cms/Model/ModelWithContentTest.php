@@ -102,7 +102,7 @@ class BlueprintsModelWithContent extends ExtendedModelWithContent
 #[CoversClass(ModelWithContent::class)]
 class ModelWithContentTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.ModelWithContent';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.ModelWithContent';
 
 	public static function modelsProvider(): array
 	{
@@ -123,7 +123,7 @@ class ModelWithContentTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com'
+					'email' => 'test@infinri.com'
 				]
 			]
 		]);
@@ -132,7 +132,7 @@ class ModelWithContentTest extends TestCase
 			[$app->site()],
 			[$app->page('foo')],
 			[$app->site()->files()->first()],
-			[$app->user('test@getkirby.com')]
+			[$app->user('test@infinri.com')]
 		];
 	}
 
@@ -267,6 +267,23 @@ class ModelWithContentTest extends TestCase
 		VersionId::$render = null;
 
 		$this->assertSame('Original Title', $page->content()->title()->value());
+	}
+
+	public function testDeprecatedMembersAreRemoved(): void
+	{
+		foreach ([
+			'createDefaultContent',
+			'isLocked',
+			'readContent',
+			'saveContent',
+			'saveTranslation',
+			'writeContent'
+		] as $method) {
+			$this->assertFalse(
+				method_exists(ModelWithContent::class, $method),
+				'ModelWithContent::' . $method . '() should be removed'
+			);
+		}
 	}
 
 	public function testCreateContent(): void
@@ -487,14 +504,14 @@ class ModelWithContentTest extends TestCase
 		$this->assertFalse($model->isValid());
 	}
 
-	public function testKirby(): void
+	public function testInfinri(): void
 	{
-		$kirby = new App();
+		$infinri = new App();
 		$model = new Page([
 			'slug'  => 'foo',
-			'kirby' => $kirby
+			'infinri' => $infinri
 		]);
-		$this->assertSame($kirby, $model->kirby());
+		$this->assertSame($infinri, $model->infinri());
 	}
 
 	public function testLock(): void

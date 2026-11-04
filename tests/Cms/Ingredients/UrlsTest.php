@@ -32,8 +32,8 @@ class UrlsTest extends TestCase
 	public static function customBaseUrlProvider(): array
 	{
 		return [
-			['https://getkirby.com',       'index'],
-			['https://getkirby.com/media', 'media'],
+			['https://infinri.com',       'index'],
+			['https://infinri.com/media', 'media'],
 		];
 	}
 
@@ -45,7 +45,7 @@ class UrlsTest extends TestCase
 				'index' => '/dev/null'
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			]
 		]);
 
@@ -56,8 +56,8 @@ class UrlsTest extends TestCase
 	public static function customUrlProvider(): array
 	{
 		return [
-			['https://getkirby.com',       'index'],
-			['https://cdn.getkirby.com',   'media'],
+			['https://infinri.com',       'index'],
+			['https://cdn.infinri.com',   'media'],
 		];
 	}
 
@@ -69,8 +69,8 @@ class UrlsTest extends TestCase
 				'index' => '/dev/null'
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com',
-				'media' => 'https://cdn.getkirby.com',
+				'index' => 'https://infinri.com',
+				'media' => 'https://cdn.infinri.com',
 			]
 		]);
 
@@ -122,11 +122,11 @@ class UrlsTest extends TestCase
 				'index' => '/dev/null'
 			],
 			'urls' => [
-				'index' => 'http://getkirby.com'
+				'index' => 'http://infinri.com'
 			]
 		]);
 
-		$this->assertSame('http://getkirby.com', $app->url('current'));
+		$this->assertSame('http://infinri.com', $app->url('current'));
 	}
 
 	public function testCurrentWithCustomPath(): void
@@ -148,11 +148,11 @@ class UrlsTest extends TestCase
 				'index' => '/dev/null'
 			],
 			'urls' => [
-				'index' => 'http://getkirby.com',
+				'index' => 'http://infinri.com',
 			],
 			'path' => 'test/path'
 		]);
 
-		$this->assertSame('http://getkirby.com/test/path', $app->url('current'));
+		$this->assertSame('http://infinri.com/test/path', $app->url('current'));
 	}
 }

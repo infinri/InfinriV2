@@ -58,7 +58,7 @@ export const props = {
  * Wapper around a native HTML `<a>` element that ensures the
  * correct routing behavior for Panel as well as external links.
  *
- * @example <k-link to="https://getkirby.com">Kirby Website</k-link>
+ * @example <k-link to="https://infinri.com">Infinri Website</k-link>
  */
 export default {
 	mixins: [props],
@@ -83,7 +83,7 @@ export default {
 			}
 
 			if (this.to[0] === "/" && !this.target) {
-				return this.$url(this.to);
+				return this.$panel.url(this.to);
 			}
 
 			if (
@@ -154,7 +154,7 @@ export default {
 
 			if (this.isRoutable(e)) {
 				e.preventDefault();
-				this.$go(this.to);
+				this.$panel.view.open(this.to);
 			}
 
 			/**

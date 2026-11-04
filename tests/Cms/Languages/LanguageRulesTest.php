@@ -29,15 +29,15 @@ class LanguageRulesTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin'],
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'admin@infinri.com', 'role' => 'admin'],
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 	}
 
 	public function testCreate(): void
 	{
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
 		$language = new Language([
 			'code' => 'de',
@@ -86,7 +86,7 @@ class LanguageRulesTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
 		$language = new Language([
 			'code'    => 'de',
@@ -128,7 +128,7 @@ class LanguageRulesTest extends TestCase
 
 	public function testCreateWithoutPermissions(): void
 	{
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$language = new Language([
 			'code' => 'de',
@@ -143,7 +143,7 @@ class LanguageRulesTest extends TestCase
 
 	public function testDelete(): void
 	{
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
 		$language = new Language([
 			'code' => 'de',
@@ -181,7 +181,7 @@ class LanguageRulesTest extends TestCase
 
 	public function testDeleteWithoutPermissions(): void
 	{
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$language = new Language([
 			'code' => 'de',
@@ -196,7 +196,7 @@ class LanguageRulesTest extends TestCase
 
 	public function testUpdate(): void
 	{
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
 		$language = new Language([
 			'code' => 'de',
@@ -247,7 +247,7 @@ class LanguageRulesTest extends TestCase
 
 	public function testUpdateWithoutPermissions(): void
 	{
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$language = new Language([
 			'code' => 'de',
@@ -275,7 +275,7 @@ class LanguageRulesTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
 		$oldLanguage = $this->app->language('de');
 		$newLanguage = new Language([

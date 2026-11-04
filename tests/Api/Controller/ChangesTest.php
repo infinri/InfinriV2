@@ -9,7 +9,7 @@ use Infinri\TestCase;
 
 class ChangesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Api.Controller.Changes';
+	public const TMP = INFINRI_TMP_DIR . '/Api.Controller.Changes';
 	public Page $page;
 
 	protected function setUp(): void
@@ -44,7 +44,7 @@ class ChangesTest extends TestCase
 
 	public function testDiscard(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($file = $this->page->root() . '/_changes/article.txt', []);
 
@@ -65,7 +65,7 @@ class ChangesTest extends TestCase
 
 	public function testPublish(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($this->page->root() . '/article.txt', [
 			// title and uuid should be passed through
@@ -109,7 +109,7 @@ class ChangesTest extends TestCase
 
 	public function testSave(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($this->page->root() . '/article.txt', [
 			// title and uuid should be passed through
@@ -138,13 +138,13 @@ class ChangesTest extends TestCase
 			'title' => 'Test',
 			'text'  => 'Test',
 			'uuid'  => 'test',
-			'lock'  => 'kirby'
+			'lock'  => 'infinri'
 		], $changes);
 	}
 
 	public function testSaveWithEmptyChanges(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($this->page->root() . '/article.txt', [
 			// title and uuid are only passed through and would be
@@ -170,7 +170,7 @@ class ChangesTest extends TestCase
 			'title' => 'Test',
 			'text'  => 'New text',
 			'uuid'  => 'test',
-			'lock'  => 'kirby'
+			'lock'  => 'infinri'
 		], Data::read($file));
 	}
 
@@ -193,7 +193,7 @@ class ChangesTest extends TestCase
 		]);
 
 		$page = $this->app->page('article');
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($page->root() . '/article.en.txt', [
 			'title' => 'English title',
@@ -228,13 +228,13 @@ class ChangesTest extends TestCase
 		$this->assertSame([
 			'title' => 'German title',
 			'text'  => 'German draft',
-			'lock'  => 'kirby'
+			'lock'  => 'infinri'
 		], Data::read($de));
 	}
 
 	public function testSaveWithLockOnlyChanges(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($this->page->root() . '/article.txt', [
 			'title' => 'Test',
@@ -244,7 +244,7 @@ class ChangesTest extends TestCase
 
 		// a changes version that only holds the lock has no content
 		Data::write($file = $this->page->root() . '/_changes/article.txt', [
-			'lock' => 'kirby'
+			'lock' => 'infinri'
 		]);
 
 		Changes::save($this->page, [
@@ -253,7 +253,7 @@ class ChangesTest extends TestCase
 
 		$this->assertSame([
 			'title' => 'Test',
-			'lock'  => 'kirby',
+			'lock'  => 'infinri',
 			'text'  => 'New text',
 			'uuid'  => 'test'
 		], Data::read($file));
@@ -261,7 +261,7 @@ class ChangesTest extends TestCase
 
 	public function testSaveWithNoDiff(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($this->page->root() . '/article.txt', [
 			// title and uuid should be passed through
@@ -286,12 +286,12 @@ class ChangesTest extends TestCase
 	}
 
 	/**
-	 * @todo We want to ignore undefined fields later in v6. This needs to be
+	 * @todo We want to ignore undefined fields later. This needs to be
 	 * refactored at that point to make sure that undefined fields are not saved.
 	 */
 	public function testSaveWithUndefinedField(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($this->page->root() . '/article.txt', [
 			// title and uuid should be passed through
@@ -312,7 +312,7 @@ class ChangesTest extends TestCase
 			'text'      => 'Test',
 			'uuid'      => 'test',
 			'undefined' => 'This should be passed through',
-			'lock'      => 'kirby'
+			'lock'      => 'infinri'
 		], $changes);
 	}
 
@@ -324,14 +324,55 @@ class ChangesTest extends TestCase
 		Changes::save($this->page, []);
 	}
 
+	public function testDiscardLeavesStrayLockFileUntouched(): void
+	{
+		$this->app->impersonate('infinri');
+
+		Data::write($file = $this->page->root() . '/.lock', ['stray' => 'lock'], 'yml');
+		Data::write($this->page->root() . '/_changes/article.txt', []);
+
+		Changes::discard($this->page);
+
+		$this->assertFileExists($file);
+	}
+
+	public function testPublishLeavesStrayLockFileUntouched(): void
+	{
+		$this->app->impersonate('infinri');
+
+		Data::write($this->page->root() . '/article.txt', ['title' => 'Test', 'uuid' => 'test']);
+		Data::write($file = $this->page->root() . '/.lock', ['stray' => 'lock'], 'yml');
+
+		Changes::publish($this->page, ['text' => 'Test']);
+
+		$this->assertFileExists($file);
+	}
+
+	public function testSaveLeavesStrayLockFileUntouched(): void
+	{
+		$this->app->impersonate('infinri');
+
+		Data::write($this->page->root() . '/article.txt', ['title' => 'Test', 'uuid' => 'test']);
+		Data::write($file = $this->page->root() . '/.lock', ['stray' => 'lock'], 'yml');
+
+		Changes::save($this->page, ['text' => 'Test']);
+
+		$this->assertFileExists($file);
+	}
+
+	public function testCleanupIsRemoved(): void
+	{
+		$this->assertFalse(method_exists(Changes::class, 'cleanup'));
+	}
+
 	public function testUnlock(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($file = $this->page->root() . '/_changes/article.txt', [
 			'title' => 'Test',
 			'uuid'  => 'test',
-			'lock'  => 'kirby'
+			'lock'  => 'infinri'
 		]);
 
 		$response = Changes::unlock($this->page);

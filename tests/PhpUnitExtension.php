@@ -17,8 +17,8 @@ use ReflectionFunction;
  * PHPUnit extension to bootstrap the tests and
  * manage the temporary directory during testing
  *
- * @author Lukas Bestle <lukas@getkirby.com>
- * @link https://getkirby.com
+ * @author Lukas Bestle <lukas@infinri.com>
+ * @link https://infinri.com
  * @copyright Bastian Allgeier
  * @license https://opensource.org/licenses/MIT
  */
@@ -30,7 +30,7 @@ final class PhpUnitExtension implements Extension
 		ParameterCollection $parameters
 	): void {
 		// ensure the temp directory is there
-		Dir::make(KIRBY_TMP_DIR);
+		Dir::make(INFINRI_TMP_DIR);
 
 		// delete the temp directory again after the tests
 		$facade->registerSubscriber(new TempCleanupSubscriber());
@@ -46,9 +46,9 @@ final class PhpUnitExtension implements Extension
 			$tmpDir .= '/' . getenv('UNIQUE_TEST_TOKEN');
 		}
 
-		define('KIRBY_DIR', dirname(__DIR__));
-		define('KIRBY_TMP_DIR', $tmpDir);
-		define('KIRBY_TESTING', true);
+		define('INFINRI_DIR', dirname(__DIR__));
+		define('INFINRI_TMP_DIR', $tmpDir);
+		define('INFINRI_TESTING', true);
 
 		// disable Whoops for all tests that don't need it
 		// to reduce the impact of memory leaks
@@ -59,15 +59,15 @@ final class PhpUnitExtension implements Extension
 
 		// check if the `dump()` helper was overridden, e.g. by Herd
 		$dump = new ReflectionFunction('dump');
-		define('KIRBY_DUMP_OVERRIDDEN', str_starts_with($dump->getFileName(), dirname(__DIR__)) === false);
+		define('INFINRI_DUMP_OVERRIDDEN', str_starts_with($dump->getFileName(), dirname(__DIR__)) === false);
 	}
 }
 
 /**
  * PHPUnit event subscriber to be executed after all tests have been run
  *
- * @author Lukas Bestle <lukas@getkirby.com>
- * @link https://getkirby.com
+ * @author Lukas Bestle <lukas@infinri.com>
+ * @link https://infinri.com
  * @copyright Bastian Allgeier
  * @license https://opensource.org/licenses/MIT
  */
@@ -75,6 +75,6 @@ final class TempCleanupSubscriber implements ExecutionFinishedSubscriber
 {
 	public function notify(ExecutionFinished $event): void
 	{
-		Dir::remove(KIRBY_TMP_DIR);
+		Dir::remove(INFINRI_TMP_DIR);
 	}
 }

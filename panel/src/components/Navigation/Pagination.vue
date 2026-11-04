@@ -9,7 +9,7 @@
 		<!-- prev -->
 		<k-button
 			:disabled="start <= 1"
-			:title="$t('prev')"
+			:title="$panel.t('prev')"
 			class="k-pagination-button"
 			icon="angle-left"
 			size="xs"
@@ -37,7 +37,7 @@
 			>
 				<form method="dialog" @click.stop @submit="goTo($refs.page.value)">
 					<label>
-						{{ $t("pagination.page") }}:
+						{{ $panel.t("pagination.page") }}:
 						<select ref="page" :autofocus="true">
 							<option
 								v-for="p in pages"
@@ -57,7 +57,7 @@
 		<!-- next -->
 		<k-button
 			:disabled="end >= total"
-			:title="$t('next')"
+			:title="$panel.t('next')"
 			class="k-pagination-button"
 			icon="angle-right"
 			size="xs"

@@ -8,7 +8,7 @@ use Infinri\TestCase;
 
 class AuthRoutesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.AuthRoutes';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.AuthRoutes';
 
 	protected function setUp(): void
 	{
@@ -30,11 +30,11 @@ class AuthRoutesTest extends TestCase
 
 	public function testGet(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$response = $this->app->api()->call('auth');
 
-		$this->assertSame('kirby@getkirby.com', $response['data']['email']);
+		$this->assertSame('infinri@infinri.com', $response['data']['email']);
 	}
 
 	public function testLoginWithoutCSRF(): void

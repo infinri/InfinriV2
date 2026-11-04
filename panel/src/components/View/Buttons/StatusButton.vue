@@ -11,8 +11,6 @@ import Button from "./Button.vue";
 /**
  * View header button to change the page status
  * @displayName StatusViewButton
- * @since 5.0.0
- * @deprecated 5.0.0
  * @internal
  * @todo implement fully on backend when changes feature implemented
  */

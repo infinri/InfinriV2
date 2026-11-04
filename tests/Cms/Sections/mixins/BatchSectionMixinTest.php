@@ -9,7 +9,7 @@ use Infinri\TestCase;
 
 class BatchSectionMixinTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.BatchSectionMixin';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.BatchSectionMixin';
 
 	protected Page $page;
 
@@ -130,7 +130,7 @@ class BatchSectionMixinTest extends TestCase
 			'batch' => true,
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->assertTrue($section->deleteSelected([
 			'test/a', 'test/b', 'test/c'

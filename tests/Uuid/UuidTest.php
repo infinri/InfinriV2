@@ -20,7 +20,7 @@ class TestUuid extends Uuid
 #[CoversClass(Uuid::class)]
 class UuidTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Uuid.Uuid';
+	public const TMP = INFINRI_TMP_DIR . '/Uuid.Uuid';
 
 	public function testConstructUuidString(): void
 	{
@@ -434,13 +434,13 @@ class UuidTest extends TestCase
 	public function testToUrl(): void
 	{
 		$uuid = Uuid::for('page://my-page');
-		$this->assertSame('https://getkirby.com/page-a', $uuid->toUrl());
+		$this->assertSame('https://infinri.com/page-a', $uuid->toUrl());
 
 		$uuid = Uuid::for('page://my-page?foo=bar');
-		$this->assertSame('https://getkirby.com/page-a?foo=bar', $uuid->toUrl());
+		$this->assertSame('https://infinri.com/page-a?foo=bar', $uuid->toUrl());
 
 		$uuid = Uuid::for('page://my-page#fragment');
-		$this->assertSame('https://getkirby.com/page-a#fragment', $uuid->toUrl());
+		$this->assertSame('https://infinri.com/page-a#fragment', $uuid->toUrl());
 
 		$uuid = Uuid::for('page://does-not-exist');
 		$this->assertNull($uuid->toUrl());

@@ -18,7 +18,7 @@ class VirtualPageWithChildren extends Page
 #[CoversClass(Page::class)]
 class VirtualPageWithChildrenTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.VirtualPageWithChildren';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.VirtualPageWithChildren';
 
 	public function testChildren(): void
 	{

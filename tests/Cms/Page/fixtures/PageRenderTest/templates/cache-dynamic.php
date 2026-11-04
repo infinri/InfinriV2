@@ -3,7 +3,7 @@ This is a test: <?= uniqid() ?>
 <?php
 
 if (Str::contains($page->slug(), '-auth')) {
-	$kirby->request()->auth();
+	$infinri->request()->auth();
 }
 
 if (Str::contains($page->slug(), '-cookie')) {
@@ -11,5 +11,5 @@ if (Str::contains($page->slug(), '-cookie')) {
 }
 
 if (Str::contains($page->slug(), '-session')) {
-	$kirby->session();
+	$infinri->session();
 }

@@ -2,13 +2,13 @@
 
 // @codeCoverageIgnoreStart
 return [
-	'routes' => function ($kirby) {
+	'routes' => function ($infinri) {
 		return [
 			[
 				'pattern' => 'query',
 				'method'  => 'POST|GET',
-				'auth'    => $kirby->option('kql.auth') !== false,
-				'action'  => function () use ($kirby) {
+				'auth'    => $infinri->option('kql.auth') !== false,
+				'action'  => function () use ($infinri) {
 					$kql = '\Infinri\Kql\Kql';
 
 					if (class_exists($kql) === false) {
@@ -19,7 +19,7 @@ return [
 						];
 					}
 
-					$input  = $kirby->request()->get();
+					$input  = $infinri->request()->get();
 					$result = $kql::run($input);
 
 					return [

@@ -22,7 +22,6 @@
  * respective view button components passed as `buttons` prop.
  *
  * @displayName ViewButtons
- * @since 5.0.0
  * @internal
  */
 export default {

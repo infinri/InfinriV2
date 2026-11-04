@@ -18,9 +18,9 @@ function context({ unlocked = true, unlockError = null } = {}) {
 					unlockError ? Promise.reject(unlockError) : Promise.resolve(unlocked)
 				)
 			},
-			error: vi.fn()
-		},
-		$reload: vi.fn()
+			error: vi.fn(),
+			reload: vi.fn()
+		}
 	};
 }
 
@@ -30,7 +30,7 @@ describe("LanguagesDropdown.change()", () => {
 		await change.call(ctx, { code: "en", current: true });
 
 		expect(ctx.$panel.content.unlock).not.toHaveBeenCalled();
-		expect(ctx.$reload).not.toHaveBeenCalled();
+		expect(ctx.$panel.reload).not.toHaveBeenCalled();
 	});
 
 	it("releases the lock and reloads when switching language", async () => {
@@ -38,12 +38,14 @@ describe("LanguagesDropdown.change()", () => {
 		await change.call(ctx, { code: "de", current: false });
 
 		expect(ctx.$panel.content.unlock).toHaveBeenCalledOnce();
-		expect(ctx.$reload).toHaveBeenCalledWith({ query: { language: "de" } });
+		expect(ctx.$panel.reload).toHaveBeenCalledWith({
+			query: { language: "de" }
+		});
 
 		// the lock must be released before the reload, otherwise the
 		// unlock request would be sent for the new language
 		const unlock = ctx.$panel.content.unlock.mock.invocationCallOrder[0];
-		const reload = ctx.$reload.mock.invocationCallOrder[0];
+		const reload = ctx.$panel.reload.mock.invocationCallOrder[0];
 
 		expect(unlock).toBeLessThan(reload);
 	});
@@ -58,7 +60,7 @@ describe("LanguagesDropdown.change()", () => {
 		await change.call(ctx, { code: "de", current: false });
 
 		expect(ctx.$panel.error).not.toHaveBeenCalled();
-		expect(ctx.$reload).not.toHaveBeenCalled();
+		expect(ctx.$panel.reload).not.toHaveBeenCalled();
 	});
 
 	it("aborts the switch and reports when unlocking throws", async () => {
@@ -68,6 +70,6 @@ describe("LanguagesDropdown.change()", () => {
 		await change.call(ctx, { code: "de", current: false });
 
 		expect(ctx.$panel.error).toHaveBeenCalledWith(error);
-		expect(ctx.$reload).not.toHaveBeenCalled();
+		expect(ctx.$panel.reload).not.toHaveBeenCalled();
 	});
 });

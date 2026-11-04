@@ -7,7 +7,7 @@ use Infinri\TestCase;
 
 class SiteRoutesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SiteRoutes';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SiteRoutes';
 
 	protected function setUp(): void
 	{
@@ -25,7 +25,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		Dir::make(static::TMP);
 	}
 
@@ -57,7 +57,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('site/children', 'GET');
 
@@ -87,7 +87,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// all
 		$response = $app->api()->call('site/children', 'GET', [
@@ -151,7 +151,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('site/files');
 
@@ -182,7 +182,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('site/files');
 
@@ -202,7 +202,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('site/files/a.jpg');
 
@@ -232,7 +232,7 @@ class SiteRoutesTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// find single
 		$result = $app->api()->call('site/find', 'POST', [
@@ -291,11 +291,11 @@ class SiteRoutesTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin']
+				['email' => 'admin@infinri.com', 'role' => 'admin']
 			],
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 
 		// find single
 		$result = $app->api()->call('site/find', 'POST', [
@@ -354,7 +354,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('site/search', 'GET', [
 			'query' => [
@@ -389,7 +389,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('site/search', 'POST', [
 			'body' => [
@@ -418,7 +418,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// filterBy slug = photography would normally return only 1 page;
 		// since filterBy is stripped from the body, both pages are returned
@@ -450,7 +450,7 @@ class SiteRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// sortBy in the body is stripped; default order (a, b) is preserved
 		$response = $app->api()->call('site/search', 'POST', [

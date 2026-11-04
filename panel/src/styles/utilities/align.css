@@ -1,4 +1,4 @@
-/** Legacy **/
+/** Alignment values of the data-align attribute **/
 [data-align="left"] {
 	--align: start;
 }

@@ -1,8 +1,8 @@
 {
-    "name": "getkirby/kirby-test-plugin-composer-noversionset",
+    "name": "infinri/infinri-test-plugin-composer-noversionset",
     "description": "Some really nice description",
     "type": "plugin",
     "license": "MIT",
-    "homepage": "https://getkirby.com",
+    "homepage": "https://infinri.com",
     "require": {}
 }

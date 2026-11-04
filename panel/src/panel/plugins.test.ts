@@ -247,12 +247,15 @@ describe("panel.plugins", () => {
 			expect(plugins.writerNodes).toStrictEqual({});
 		});
 
-		it("exposes helper functions", () => {
+		it("does not expose the component resolution helpers", () => {
 			const plugins = Plugins(Vue, {});
 
-			expect(plugins.resolveComponentExtension).toBe(resolveComponentExtension);
-			expect(plugins.resolveComponentMixins).toBe(resolveComponentMixins);
-			expect(plugins.resolveComponentRender).toBe(resolveComponentRender);
+			expect(plugins).not.toHaveProperty("resolveComponentExtension");
+			expect(plugins).not.toHaveProperty("resolveComponentMixins");
+			expect(plugins).not.toHaveProperty("resolveComponentRender");
+			expect(plugins.resolveComponentExtension).toBeUndefined();
+			expect(plugins.resolveComponentMixins).toBeUndefined();
+			expect(plugins.resolveComponentRender).toBeUndefined();
 		});
 
 		it("merges provided icons", () => {

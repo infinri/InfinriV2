@@ -26,7 +26,7 @@ class TestCase extends BaseTestCase
 				'index' => $this->hasTmp() ? static::TMP : '/dev/null',
 			],
 			'options' => [
-				'url' => 'https://getkirby.com'
+				'url' => 'https://infinri.com'
 			],
 			'site' => [
 				'children' => [

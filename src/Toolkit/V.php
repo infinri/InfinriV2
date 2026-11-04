@@ -38,7 +38,6 @@ class V
 	/**
 	 * Runs a number of validators on a set of data and
 	 * checks if the data is invalid
-	 * @since 3.7.0
 	 */
 	public static function invalid(
 		array $data = [],

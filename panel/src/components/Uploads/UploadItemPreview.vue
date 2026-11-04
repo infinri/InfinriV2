@@ -49,7 +49,6 @@ export const props = {
 /**
  * Preview an upload with its image or
  * a representative icon
- * @since 4.3.0
  */
 export default {
 	mixins: [props],

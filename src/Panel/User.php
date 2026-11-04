@@ -94,8 +94,8 @@ class User extends Model
 			'disabled' => $this->isDisabledDropdownOption('changePassword', $options, $permissions)
 		];
 
-		if ($this->model->kirby()->system()->is2FAWithTOTP() === true) {
-			if ($account || $this->model->kirby()->user()->isAdmin()) {
+		if ($this->model->infinri()->system()->is2FAWithTOTP() === true) {
+			if ($account || $this->model->infinri()->user()->isAdmin()) {
 				if ($this->model->secret('totp') !== null) {
 					$result[] = [
 						'dialog'   => $url . '/totp/disable',
@@ -122,20 +122,6 @@ class User extends Model
 		];
 
 		return $result;
-	}
-
-	/**
-	 * Returns the setup for a dropdown option
-	 * which is used in the changes dropdown
-	 * for example.
-	 *
-	 * @deprecated 5.1.4 Use the Infinri\Panel\Ui\Item\UserItem class instead
-	 */
-	public function dropdownOption(): array
-	{
-		return (new UserItem(user: $this->model))->props() + [
-			'icon' => 'user'
-		];
 	}
 
 	public function home(): string|null
@@ -228,40 +214,23 @@ class User extends Model
 	 */
 	public function props(): array
 	{
-		$props       = parent::props();
 		$user        = $this->model;
 		$permissions = $this->options();
-
-		// Additional model information
-		// @deprecated Use the top-level props instead
-		$model = [
-			'account'  => $user->isLoggedIn(),
-			'avatar'   => $user->avatar()?->url(),
-			'email'    => $user->email(),
-			'id'       => $props['id'],
-			'language' => $this->translation()->name(),
-			'link'     => $props['link'],
-			'name'     => $user->name()->toString(),
-			'role'     => $user->role()->title(),
-			'username' => $user->username(),
-			'uuid'     => $props['uuid'],
-		];
 
 		return [
 			...parent::props(),
 			...$this->prevNext(),
-			'avatar'            => $model['avatar'],
+			'avatar'            => $user->avatar()?->url(),
 			'blueprint'         => $this->model->role()->name(),
 			'canChangeEmail'    => $permissions['changeEmail'],
 			'canChangeLanguage' => $permissions['changeLanguage'],
 			'canChangeName'     => $permissions['changeName'],
 			'canChangeRole'     => $this->model->roles()->count() > 1,
-			'email'             => $model['email'],
-			'language'          => $model['language'],
-			'model'             => $model,
-			'name'              => $model['name'],
-			'role'              => $model['role'],
-			'username'          => $model['username'],
+			'email'             => $user->email(),
+			'language'          => $this->translation()->name(),
+			'name'              => $user->name()->toString(),
+			'role'              => $user->role()->title(),
+			'username'          => $user->username(),
 		];
 	}
 
@@ -271,9 +240,9 @@ class User extends Model
 	 */
 	public function translation(): Translation
 	{
-		$kirby = $this->model->kirby();
+		$infinri = $this->model->infinri();
 		$lang  = $this->model->language();
-		return $kirby->translation($lang);
+		return $infinri->translation($lang);
 	}
 
 	/**

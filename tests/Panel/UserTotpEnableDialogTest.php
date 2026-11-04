@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(UserTotpEnableDialog::class)]
 class UserTotpEnableDialogTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.UserTotpEnableDialog';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.UserTotpEnableDialog';
 
 	protected function setUp(): void
 	{
@@ -27,13 +27,13 @@ class UserTotpEnableDialogTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			],
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		Dir::make(static::TMP);
 	}
@@ -54,7 +54,7 @@ class UserTotpEnableDialogTest extends TestCase
 		$dialog = new UserTotpEnableDialog();
 
 		$this->assertSame($this->app->user(), $dialog->user);
-		$this->assertSame('test@getkirby.com', $dialog->user->email());
+		$this->assertSame('test@infinri.com', $dialog->user->email());
 	}
 
 	public function testLoad(): void
@@ -73,7 +73,7 @@ class UserTotpEnableDialogTest extends TestCase
 		$qr     = $dialog->qr();
 
 		$this->assertInstanceOf(QrCode::class, $qr);
-		$this->assertStringContainsString('otpauth://totp/:test%40getkirby.com?secret=', $qr->data);
+		$this->assertStringContainsString('otpauth://totp/:test%40infinri.com?secret=', $qr->data);
 	}
 
 	public function testSubmit(): void

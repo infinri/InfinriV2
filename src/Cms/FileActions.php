@@ -336,7 +336,7 @@ trait FileActions
 	}
 
 	/**
-	 * Resizes/crops the original file with Kirby's thumb handler
+	 * Resizes/crops the original file with Infinri's thumb handler
 	 */
 	#[BlockCollectionAccess]
 	public function manipulate(array|null $options = []): static
@@ -351,7 +351,7 @@ trait FileActions
 		$options = [...Darkroom::defaultOptions(), ...$options];
 
 		// generate image file and overwrite it in place
-		$this->kirby()->thumb($this->root(), $this->root(), $options);
+		$this->infinri()->thumb($this->root(), $this->root(), $options);
 
 		$file = $this->clone();
 

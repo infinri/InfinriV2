@@ -58,10 +58,10 @@ class IsFileTest extends TestCase
 		$this->assertInstanceOf(Image::class, $asset->asset());
 	}
 
-	public function testKirby(): void
+	public function testInfinri(): void
 	{
 		$asset = $this->_asset();
-		$this->assertInstanceOf(App::class, $asset->kirby());
+		$this->assertInstanceOf(App::class, $asset->infinri());
 	}
 
 	public function testCall(): void

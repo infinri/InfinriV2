@@ -1,8 +1,6 @@
-# Kirby Panel
+# Infinri Panel
 
 ## Installation
-
-Our setup expects that you are running [Kirby Sandbox](https://github.com/getkirby/sandbox), our our local test environment, at `https://sandbox.test`. You can reach the Panel at `https://sandbox.test/panel`.
 
 We are using [Herd](https://herd.laravel.com) to run our setup locally.
 
@@ -32,7 +30,7 @@ Replace `XYZ` with your username. Adapt the whole path if those Herd files are l
 
 ### `panel.dev` mode
 
-When developing, make sure to put Kirby into development mode by adding the following line to `site/config/config.php` of your Kirby project (unless you are using the Sandbox, which uses dev mode by default):
+When developing, make sure to put Infinri into development mode by adding the following line to `site/config/config.php` of your Infinri project (unless you are using the Sandbox, which uses dev mode by default):
 
 ```php
 return [

@@ -114,7 +114,7 @@ trait IsFile
 	/**
 	 * Returns the app instance
 	 */
-	public function kirby(): App
+	public function infinri(): App
 	{
 		return App::instance();
 	}

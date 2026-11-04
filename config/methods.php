@@ -163,7 +163,7 @@ return function (App $app) {
 			$files  = new Files([]);
 
 			foreach ($field->toData($separator) as $id) {
-				if (is_string($id) === true && $file = $parent->kirby()->file($id, $parent)) {
+				if (is_string($id) === true && $file = $parent->infinri()->file($id, $parent)) {
 					$files->add($file);
 				}
 			}
@@ -353,7 +353,6 @@ return function (App $app) {
 
 		/**
 		 * Applies the callback function to the field
-		 * @since 3.4.0
 		 */
 		'callback' => function (Field $field, Closure $callback): mixed {
 			return $callback($field);
@@ -381,7 +380,7 @@ return function (App $app) {
 			string $rep = ' …'
 		): Field {
 			$field->value = Str::excerpt(
-				$field->kirbytext()->value(),
+				$field->infinritext()->value(),
 				$chars,
 				$strip,
 				$rep
@@ -401,7 +400,6 @@ return function (App $app) {
 		 * Strips all block-level HTML elements from the field value,
 		 * it can be safely placed inside of other inline elements
 		 * without the risk of breaking the HTML structure.
-		 * @since 3.3.0
 		 */
 		'inline' => function (Field $field): Field {
 			// List of valid inline elements taken from: https://developer.mozilla.org/de/docs/Web/HTML/Inline_elemente
@@ -413,13 +411,13 @@ return function (App $app) {
 		},
 
 		/**
-		 * Converts the field content from Markdown/Kirbytext to valid HTML
+		 * Converts the field content from Markdown/Infinritext to valid HTML
 		 */
-		'kirbytext' => function (
+		'infinritext' => function (
 			Field $field,
 			array $options = []
 		) use ($app): Field {
-			$field->value = $app->kirbytext($field->value, A::merge($options, [
+			$field->value = $app->infinritext($field->value, A::merge($options, [
 				'parent' => $field->parent(),
 				'field'  => $field
 			]));
@@ -428,15 +426,14 @@ return function (App $app) {
 		},
 
 		/**
-		 * Converts the field content from inline Markdown/Kirbytext
+		 * Converts the field content from inline Markdown/Infinritext
 		 * to valid HTML
-		 * @since 3.1.0
 		 */
-		'kirbytextinline' => function (
+		'infinritextinline' => function (
 			Field $field,
 			array $options = []
 		) use ($app): Field {
-			$field->value = $app->kirbytext($field->value, A::merge($options, [
+			$field->value = $app->infinritext($field->value, A::merge($options, [
 				'parent'   => $field->parent(),
 				'field'    => $field,
 				'markdown' => [
@@ -448,10 +445,10 @@ return function (App $app) {
 		},
 
 		/**
-		 * Parses all KirbyTags without also parsing Markdown
+		 * Parses all InfinriTags without also parsing Markdown
 		 */
-		'kirbytags' => function (Field $field) use ($app): Field {
-			$field->value = $app->kirbytags($field->value, [
+		'infinritags' => function (Field $field) use ($app): Field {
+			$field->value = $app->infinritags($field->value, [
 				'parent' => $field->parent(),
 				'field'  => $field
 			]);
@@ -480,7 +477,6 @@ return function (App $app) {
 
 		/**
 		 * Converts all line breaks in the field content to `<br>` tags.
-		 * @since 3.3.0
 		 */
 		'nl2br' => function (Field $field): Field {
 			$field->value = nl2br($field->value ?? '', false);
@@ -523,7 +519,7 @@ return function (App $app) {
 		},
 
 		/**
-		 * Uses the field value as Kirby query
+		 * Uses the field value as Infinri query
 		 */
 		'query' => function (
 			Field $field,
@@ -534,7 +530,7 @@ return function (App $app) {
 			}
 
 			return Str::query($field->value, [
-				'kirby' => $app,
+				'infinri' => $app,
 				'site'  => $app->site(),
 				'page'  => $app->page()
 			]);
@@ -555,7 +551,7 @@ return function (App $app) {
 				$field->value = $parent->toString($field->value ?? '', $data, $fallback);
 			} else {
 				$field->value = Str::template($field->value, array_replace([
-					'kirby' => $app,
+					'infinri' => $app,
 					'site'  => $app->site(),
 					'page'  => $app->page()
 				], $data), ['fallback' => $fallback]);

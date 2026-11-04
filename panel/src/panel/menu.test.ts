@@ -100,13 +100,13 @@ describe("panel.menu", () => {
 		it("sets localStorage item on desktop", () => {
 			const menu = createMenu(false);
 			menu.close();
-			expect(localStorage.getItem("kirby$menu")).toStrictEqual("true");
+			expect(localStorage.getItem("infinri$menu")).toStrictEqual("true");
 		});
 
 		it("does not touch localStorage on mobile", () => {
 			const menu = createMenu(true);
 			menu.close();
-			expect(localStorage.getItem("kirby$menu")).toStrictEqual(null);
+			expect(localStorage.getItem("infinri$menu")).toStrictEqual(null);
 		});
 	});
 
@@ -134,17 +134,17 @@ describe("panel.menu", () => {
 		});
 
 		it("removes localStorage item on desktop", () => {
-			localStorage.setItem("kirby$menu", "true");
+			localStorage.setItem("infinri$menu", "true");
 			const menu = createMenu(false);
 			menu.open();
-			expect(localStorage.getItem("kirby$menu")).toStrictEqual(null);
+			expect(localStorage.getItem("infinri$menu")).toStrictEqual(null);
 		});
 
 		it("does not touch localStorage on mobile", () => {
-			localStorage.setItem("kirby$menu", "true");
+			localStorage.setItem("infinri$menu", "true");
 			const menu = createMenu(true);
 			menu.open();
-			expect(localStorage.getItem("kirby$menu")).toStrictEqual("true");
+			expect(localStorage.getItem("infinri$menu")).toStrictEqual("true");
 		});
 	});
 
@@ -163,7 +163,7 @@ describe("panel.menu", () => {
 		});
 
 		it("keeps menu closed on desktop when localStorage item is set", () => {
-			localStorage.setItem("kirby$menu", "true");
+			localStorage.setItem("infinri$menu", "true");
 			const menu = createMenu(false);
 			menu.resize();
 			expect(menu.isOpen).toStrictEqual(false);

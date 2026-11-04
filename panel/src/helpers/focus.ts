@@ -1,6 +1,5 @@
 /**
  * Helper to set the focus inside an HTML element
- * @since 4.0.0
  *
  * @example
  * const form = document.querySelector(".k-form");

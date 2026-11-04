@@ -24,7 +24,7 @@ class MediaTestTrackingDarkroom extends Darkroom
 class MediaTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.Media';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.Media';
 
 	public function testLinkSiteFile(): void
 	{
@@ -84,7 +84,7 @@ class MediaTest extends TestCase
 
 		F::write($src = static::TMP . '/content/test.jpg', 'nice jpg');
 		$file = new File([
-			'kirby'    => $this->app,
+			'infinri'    => $this->app,
 			'parent'   => $site,
 			'filename' => $filename = 'test.jpg'
 		]);
@@ -104,9 +104,11 @@ class MediaTest extends TestCase
 		$this->assertDirectoryExists($versionB2);
 		$this->assertFileExists($dest);
 
-		// older versions should be removed
-		$this->assertDirectoryDoesNotExist($versionA1);
-		$this->assertDirectoryDoesNotExist($versionA2);
+		// legacy crc32-named versions are no longer touched
+		$this->assertDirectoryExists($versionA1);
+		$this->assertDirectoryExists($versionA2);
+
+		// older versions with the media token should be removed
 		$this->assertDirectoryDoesNotExist($versionB1);
 	}
 
@@ -118,7 +120,7 @@ class MediaTest extends TestCase
 
 		F::write($src = static::TMP . '/content/test.jpg', 'nice jpg');
 		$file = new File([
-			'kirby'    => $this->app,
+			'infinri'    => $this->app,
 			'parent'   => $page,
 			'filename' => $filename = 'test.jpg'
 		]);
@@ -139,8 +141,9 @@ class MediaTest extends TestCase
 
 		Media::unpublish($directory, $file);
 
-		$this->assertDirectoryDoesNotExist($versionA1);
-		$this->assertDirectoryDoesNotExist($versionA2);
+		// legacy crc32-named versions are no longer removed
+		$this->assertDirectoryExists($versionA1);
+		$this->assertDirectoryExists($versionA2);
 		$this->assertDirectoryDoesNotExist($versionB1);
 		$this->assertDirectoryDoesNotExist($versionB2);
 	}
@@ -153,7 +156,7 @@ class MediaTest extends TestCase
 
 		F::write($src = static::TMP . '/content/test.jpg', 'nice jpg');
 		$file = new File([
-			'kirby'    => $this->app,
+			'infinri'    => $this->app,
 			'parent'   => $page,
 			'filename' => $filename = 'test.jpg'
 		]);
@@ -175,8 +178,8 @@ class MediaTest extends TestCase
 		Media::unpublish($directory, $file, $versionB1);
 
 		$this->assertDirectoryExists($versionB1);
-		$this->assertDirectoryDoesNotExist($versionA1);
-		$this->assertDirectoryDoesNotExist($versionA2);
+		$this->assertDirectoryExists($versionA1);
+		$this->assertDirectoryExists($versionA2);
 		$this->assertDirectoryDoesNotExist($versionB2);
 	}
 
@@ -189,7 +192,7 @@ class MediaTest extends TestCase
 		]);
 
 		$file = new File([
-			'kirby'    => $this->app,
+			'infinri'    => $this->app,
 			'parent'   => $page,
 			'filename' => 'does-not-exist.jpg'
 		]);

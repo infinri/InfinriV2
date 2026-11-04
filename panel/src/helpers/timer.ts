@@ -1,7 +1,6 @@
 /**
  * Wraps setInterval to manage the start/stop lifecycle
  * of a repeating timer
- * @since 4.0.0
  *
  * @example
  * const timer = new Timer();

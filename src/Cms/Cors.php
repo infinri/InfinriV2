@@ -7,24 +7,24 @@ use Infinri\Toolkit\Str;
 
 class Cors
 {
-	protected App $kirby;
+	protected App $infinri;
 	protected array $config;
 
 	public function __construct()
 	{
-		$this->kirby = App::instance();
+		$this->infinri = App::instance();
 
-		if ($this->kirby->isCorsEnabled() === false) {
+		if ($this->infinri->isCorsEnabled() === false) {
 			$this->config = [];
 			return;
 		}
 
 		// get and resolve config
-		$config = $this->kirby->option('cors', false);
+		$config = $this->infinri->option('cors', false);
 
 		// resolve closure
 		if ($config instanceof \Closure) {
-			$config = $config($this->kirby);
+			$config = $config($this->infinri);
 		}
 
 		// convert boolean to empty array (use defaults)
@@ -53,7 +53,7 @@ class Cors
 	public function toArray(bool $preflight = false): array
 	{
 		// empty array if CORS is disabled
-		if ($this->kirby->isCorsEnabled() === false) {
+		if ($this->infinri->isCorsEnabled() === false) {
 			return [];
 		}
 
@@ -86,7 +86,7 @@ class Cors
 	 */
 	protected function allowOrigin(): string|null
 	{
-		$requestOrigin = $this->kirby->request()->header('Origin');
+		$requestOrigin = $this->infinri->request()->header('Origin');
 		$configOrigin  = $this->config['allowOrigin'] ?? '*';
 
 		return match (true) {
@@ -202,7 +202,7 @@ class Cors
 
 		// reflect request headers only when explicitly enabled via `true`
 		if ($allowHeaders === true) {
-			$requestHeaders = $this->kirby->request()->header('Access-Control-Request-Headers');
+			$requestHeaders = $this->infinri->request()->header('Access-Control-Request-Headers');
 			$allowHeaders    = $requestHeaders !== null ? Str::split($requestHeaders, ',') : [];
 		}
 

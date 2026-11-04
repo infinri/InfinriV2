@@ -18,7 +18,7 @@ class LayoutFieldTest extends TestCase
 		$this->assertSame([], $field->value());
 		$this->assertSame([['1/1']], $field->layouts());
 		$this->assertNull($field->settings());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testExtends(): void
@@ -173,7 +173,7 @@ class LayoutFieldTest extends TestCase
 					]
 				],
 				'attrs' => [
-					'url' => 'https://getkirby.com/',
+					'url' => 'https://infinri.com/',
 				]
 			]
 		];
@@ -197,7 +197,7 @@ class LayoutFieldTest extends TestCase
 
 		$result = json_decode($store, true);
 
-		$this->assertSame(['url' => 'https://getkirby.com/'], $result[0]['attrs']);
+		$this->assertSame(['url' => 'https://infinri.com/'], $result[0]['attrs']);
 		$this->assertArrayHasKey('id', $result[0]);
 		$this->assertArrayHasKey('columns', $result[0]);
 		$this->assertIsArray($result[0]['columns']);
@@ -434,9 +434,9 @@ class LayoutFieldTest extends TestCase
 			]
 		]);
 
-		// we need to impersonate Kirby to get the correct form
+		// we need to impersonate Infinri to get the correct form
 		// without disabled fields for permission reasons
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$field = $this->field('layout', [
 			'settings' => [

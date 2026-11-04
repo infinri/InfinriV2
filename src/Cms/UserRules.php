@@ -102,7 +102,7 @@ class UserRules
 	{
 		// prevent non-admins making a user to admin
 		if (
-			$user->kirby()->user()->isAdmin() === false &&
+			$user->infinri()->user()->isAdmin() === false &&
 			$role === 'admin'
 		) {
 			throw new PermissionException(
@@ -136,7 +136,6 @@ class UserRules
 
 	/**
 	 * Validates if the TOTP can be changed
-	 * @since 4.0.0
 	 *
 	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the password
 	 */
@@ -145,7 +144,7 @@ class UserRules
 		#[SensitiveParameter]
 		string|null $secret
 	): void {
-		$currentUser = $user->kirby()->user();
+		$currentUser = $user->infinri()->user();
 
 		if (
 			$currentUser->is($user) === false &&
@@ -175,7 +174,7 @@ class UserRules
 		static::validLanguage($user, $user->language());
 
 		// the first user must have a password
-		if ($user->kirby()->users()->count() === 0 && empty($props['password'])) {
+		if ($user->infinri()->users()->count() === 0 && empty($props['password'])) {
 			// trigger invalid password error
 			static::validPassword($user, ' ');
 		}
@@ -185,7 +184,7 @@ class UserRules
 		}
 
 		// get the current user if it exists
-		$currentUser = $user->kirby()->user();
+		$currentUser = $user->infinri()->user();
 
 		// admins are allowed everything
 		if ($currentUser?->isAdmin() === true) {
@@ -193,15 +192,15 @@ class UserRules
 		}
 
 		// allow to create the first user
-		if ($user->kirby()->users()->count() === 0) {
+		if ($user->infinri()->users()->count() === 0) {
 			return;
 		}
 
 		// check user permissions
 		if ($user->permissions()->can('create') !== true) {
-			throw new PermissionException([
-				'key' => 'user.create.permission'
-			]);
+			throw new PermissionException(
+				key: 'user.create.permission'
+			);
 		}
 
 		$role = $props['role'] ?? null;
@@ -209,11 +208,11 @@ class UserRules
 		// prevent creating a role that is not available for user
 		if (
 			in_array($role, [null, 'default', 'nobody'], true) === false &&
-			$user->kirby()->roles()->canBeCreated()->find($role) instanceof Role === false
+			$user->infinri()->roles()->canBeCreated()->find($role) instanceof Role === false
 		) {
-			throw new InvalidArgumentException([
-				'key' => 'user.role.invalid',
-			]);
+			throw new InvalidArgumentException(
+				key: 'user.role.invalid'
+			);
 		}
 	}
 
@@ -351,8 +350,8 @@ class UserRules
 		}
 
 		$duplicate = match ($strict) {
-			true  => $user->kirby()->users()->find($email),
-			false => $user->kirby()->users()->not($user)->find($email)
+			true  => $user->infinri()->users()->find($email),
+			false => $user->infinri()->users()->not($user)->find($email)
 		};
 
 		if ($duplicate) {
@@ -398,13 +397,13 @@ class UserRules
 			);
 		}
 
-		if (in_array($id, ['account', 'kirby', 'nobody'], true) === true) {
+		if (in_array($id, ['account', 'infinri', 'nobody'], true) === true) {
 			throw new InvalidArgumentException(
 				message: '"' . $id . '" is a reserved word and cannot be used as user id'
 			);
 		}
 
-		if ($user->kirby()->users()->find($id)) {
+		if ($user->infinri()->users()->find($id)) {
 			throw new DuplicateException(
 				message: 'A user with this id exists'
 			);
@@ -418,7 +417,7 @@ class UserRules
 	 */
 	public static function validLanguage(User $user, string $language): void
 	{
-		if (in_array($language, $user->kirby()->translations()->keys(), true) === false) {
+		if (in_array($language, $user->infinri()->translations()->keys(), true) === false) {
 			throw new InvalidArgumentException(key: 'user.language.invalid');
 		}
 	}
@@ -444,21 +443,6 @@ class UserRules
 		// that cannot be used to log in)
 		if (Str::length($password) > 1000) {
 			throw new InvalidArgumentException(key: 'user.password.excessive');
-		}
-	}
-
-	/**
-	 * Validates a user role
-	 *
-	 * @throws \Infinri\Exception\InvalidArgumentException If the user role does not exist
-	 * @deprecated 4.5.0
-	 */
-	public static function validRole(User $user, string $role): void
-	{
-		if ($user->kirby()->roles()->find($role) instanceof Role === false) {
-			throw new InvalidArgumentException(
-				key: 'user.role.invalid',
-			);
 		}
 	}
 }

@@ -15,13 +15,9 @@
 						<td style="width: 12rem">
 							<k-text>
 								<code>{{ slot.name }}</code>
-								<div v-if="slot.since?.length" class="k-lab-docs-since">
-									since {{ slot.since }}
-								</div>
 							</k-text>
 						</td>
 						<td>
-							<k-lab-docs-warning title="Deprecated" :text="slot.deprecated" />
 							<k-text :html="slot.description" />
 						</td>
 						<td v-if="hasBindings">

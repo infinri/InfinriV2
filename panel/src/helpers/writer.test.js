@@ -136,7 +136,7 @@ describe("availableMarks", () => {
 
 	it("should rank interactive marks first for nesting priority", () => {
 		// link and email must come before decorative marks so that they
-		// are not split up by them (see #5481)
+		// are not split up by them
 		const keys = Object.keys(availableMarks());
 		expect(keys[0]).toBe("link");
 		expect(keys[1]).toBe("email");

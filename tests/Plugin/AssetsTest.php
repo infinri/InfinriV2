@@ -12,20 +12,20 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class AssetsTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/plugin-assets';
-	public const TMP      = KIRBY_TMP_DIR . '/Plugin.Assets';
+	public const TMP      = INFINRI_TMP_DIR . '/Plugin.Assets';
 
 	protected function setUp(): void
 	{
 		$a = static::TMP . '/site/plugins/a';
-		F::write($a . '/index.php', '<?php Kirby::plugin("getkirby/a", []);');
+		F::write($a . '/index.php', '<?php Infinri::plugin("infinri/a", []);');
 		F::write($a . '/assets/test.css', 'test');
 
 		$b = static::TMP . '/site/plugins/b';
-		F::write($b . '/index.php', '<?php Kirby::plugin("getkirby/b", ["assets" => ["' . $b . '/foo/bar.css"]]);');
+		F::write($b . '/index.php', '<?php Infinri::plugin("infinri/b", ["assets" => ["' . $b . '/foo/bar.css"]]);');
 		F::write($b . '/foo/bar.css', 'test');
 
 		$c = static::TMP . '/site/plugins/c';
-		F::write($c . '/index.php', '<?php Kirby::plugin("getkirby/c", ["assets" => ["test.css" => "' . $c . '/foo/bar.css"]]);');
+		F::write($c . '/index.php', '<?php Infinri::plugin("infinri/c", ["assets" => ["test.css" => "' . $c . '/foo/bar.css"]]);');
 		F::write($c . '/foo/bar.css', 'test');
 
 		$this->app = new App([
@@ -44,33 +44,52 @@ class AssetsTest extends TestCase
 	{
 		// create orphans
 		F::write(
-			$a = static::TMP . '/media/plugins/getkirby/a/orphan.css',
+			$a = static::TMP . '/media/plugins/infinri/a/orphan.css',
 			'test'
 		);
 		F::write(
-			$b = static::TMP . '/media/plugins/getkirby/a/assets/orphan.css',
+			$b = static::TMP . '/media/plugins/infinri/a/assets/orphan.css',
 			'test'
 		);
 
 		$this->assertFileExists($a);
 		$this->assertFileExists($b);
 
-		Assets::clean('getkirby/a');
+		Assets::clean('infinri/a');
 
 		$this->assertFileDoesNotExist($a);
 		$this->assertFileDoesNotExist($b);
 	}
 
+	public function testCleanRemovesLegacyUnhashedPaths(): void
+	{
+		touch(static::TMP . '/site/plugins/b/foo/bar.css', 1337000000);
+
+		F::write(
+			$legacy = static::TMP . '/media/plugins/infinri/b/foo/bar.css',
+			'test'
+		);
+
+		$this->assertFileExists($legacy);
+
+		Assets::clean('infinri/b');
+
+		$this->assertFileDoesNotExist($legacy);
+	}
+
 	public function testCss(): void
 	{
 		// assets defined in plugin config
-		$plugin = new Plugin('getkirby/test-plugin', [
-			'root'   => static::TMP,
-			'assets' => [
-				'test.css' => static::TMP . '/test.css',
-				'test.js'  => static::TMP . '/test.js'
-			]
-		]);
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			extends: [
+				'assets' => [
+					'test.css' => static::TMP . '/test.css',
+					'test.js'  => static::TMP . '/test.js'
+				]
+			],
+			root: static::TMP
+		);
 
 		$assets = Assets::factory($plugin);
 		$this->assertCount(2, $assets);
@@ -83,13 +102,16 @@ class AssetsTest extends TestCase
 	public function testFactory(): void
 	{
 		// assets defined in plugin config
-		$plugin = new Plugin('getkirby/test-plugin', [
-			'root'   => static::FIXTURES,
-			'assets' => [
-				'c.css' => static::FIXTURES . '/a.css',
-				'd.css' => static::FIXTURES . '/foo/b.css'
-			]
-		]);
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			extends: [
+				'assets' => [
+					'c.css' => static::FIXTURES . '/a.css',
+					'd.css' => static::FIXTURES . '/foo/b.css'
+				]
+			],
+			root: static::FIXTURES
+		);
 
 		$assets = Assets::factory($plugin);
 		$this->assertInstanceOf(Assets::class, $assets);
@@ -98,13 +120,16 @@ class AssetsTest extends TestCase
 		$this->assertSame(static::FIXTURES . '/foo/b.css', $assets->get('d.css')->root());
 
 		// assets defined as non-associative array in the plugin config
-		$plugin = new Plugin('getkirby/test-plugin', [
-			'root'   => static::FIXTURES,
-			'assets' => [
-				static::FIXTURES . '/a.css',
-				static::FIXTURES . '/foo/b.css'
-			]
-		]);
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			extends: [
+				'assets' => [
+					static::FIXTURES . '/a.css',
+					static::FIXTURES . '/foo/b.css'
+				]
+			],
+			root: static::FIXTURES
+		);
 
 		$assets = Assets::factory($plugin);
 		$this->assertInstanceOf(Assets::class, $assets);
@@ -113,13 +138,16 @@ class AssetsTest extends TestCase
 		$this->assertSame(static::FIXTURES . '/foo/b.css', $assets->get('foo/b.css')->root());
 
 		// assets defined als closure in the plugin config
-		$plugin = new Plugin('getkirby/test-plugin', [
-			'root'   => static::FIXTURES,
-			'assets' => fn () => [
-				static::FIXTURES . '/a.css',
-				static::FIXTURES . '/foo/b.css'
-			]
-		]);
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			extends: [
+				'assets' => fn () => [
+					static::FIXTURES . '/a.css',
+					static::FIXTURES . '/foo/b.css'
+				]
+			],
+			root: static::FIXTURES
+		);
 
 		$assets = Assets::factory($plugin);
 		$this->assertInstanceOf(Assets::class, $assets);
@@ -128,9 +156,10 @@ class AssetsTest extends TestCase
 		$this->assertSame(static::FIXTURES . '/foo/b.css', $assets->get('foo/b.css')->root());
 
 		// assets gathered from `assets` folder inside plugin root
-		$plugin = new Plugin('getkirby/test-plugin', [
-			'root' => static::FIXTURES
-		]);
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			root: static::FIXTURES
+		);
 
 		$assets = Assets::factory($plugin);
 		$this->assertInstanceOf(Assets::class, $assets);
@@ -140,9 +169,10 @@ class AssetsTest extends TestCase
 
 	public function testPlugin(): void
 	{
-		$plugin = new Plugin('getkirby/test-plugin', [
-			'root' => static::FIXTURES
-		]);
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			root: static::FIXTURES
+		);
 
 		$assets = Assets::factory($plugin);
 		$this->assertSame($plugin, $assets->plugin());
@@ -153,9 +183,9 @@ class AssetsTest extends TestCase
 		touch(static::TMP . '/site/plugins/b/foo/bar.css', 1337000000);
 
 		// right path and hash
-		$media    = static::TMP . '/media/plugins/getkirby/b/110971429-1337000000/foo/bar.css';
+		$media    = static::TMP . '/media/plugins/infinri/b/110971429-1337000000/foo/bar.css';
 		$response = Assets::resolve(
-			'getkirby/b',
+			'infinri/b',
 			'110971429-1337000000',
 			'foo/bar.css'
 		);
@@ -165,9 +195,9 @@ class AssetsTest extends TestCase
 		$this->assertSame('text/css', $response->type());
 
 		// wrong path
-		$media    = static::TMP . '/media/plugins/getkirby/b/110971429-1337000000/assets/foo.css';
+		$media    = static::TMP . '/media/plugins/infinri/b/110971429-1337000000/assets/foo.css';
 		$response = Assets::resolve(
-			'getkirby/b',
+			'infinri/b',
 			'110971429-1337000000',
 			'assets/foo.css'
 		);
@@ -177,9 +207,9 @@ class AssetsTest extends TestCase
 
 		// wrong hash
 		// TODO: remove when media hash is enforced as mandatory
-		// $media    = static::TMP . '/media/plugins/getkirby/b/110971429-1337000000/foo/bar.css';
+		// $media    = static::TMP . '/media/plugins/infinri/b/110971429-1337000000/foo/bar.css';
 		// $response = PluginAssets::resolve(
-		// 	'getkirby/b',
+		// 	'infinri/b',
 		// 	'110971429-12345678',
 		// 	'foo/bar.css'
 		// );
@@ -190,9 +220,9 @@ class AssetsTest extends TestCase
 		// correct: different path and root
 		touch(static::TMP . '/site/plugins/c/foo/bar.css', 1337000000);
 
-		$media    = static::TMP . '/media/plugins/getkirby/c/3526409702-1337000000/test.css';
+		$media    = static::TMP . '/media/plugins/infinri/c/3526409702-1337000000/test.css';
 		$response = Assets::resolve(
-			'getkirby/c',
+			'infinri/c',
 			'3526409702-1337000000',
 			'test.css'
 		);
@@ -202,13 +232,33 @@ class AssetsTest extends TestCase
 		$this->assertSame('text/css', $response->type());
 	}
 
+	public function testResolveWithoutHash(): void
+	{
+		touch(static::TMP . '/site/plugins/b/foo/bar.css', 1337000000);
+
+		$media = static::TMP . '/media/plugins/infinri/b/foo/bar.css';
+
+		$this->assertNull(Assets::resolve('infinri/b', '', 'foo/bar.css'));
+		$this->assertFalse(is_link($media));
+	}
+
+	public function testResolveWithWrongHash(): void
+	{
+		touch(static::TMP . '/site/plugins/b/foo/bar.css', 1337000000);
+
+		$media = static::TMP . '/media/plugins/infinri/b/110971429-12345678/foo/bar.css';
+
+		$this->assertNull(Assets::resolve('infinri/b', '110971429-12345678', 'foo/bar.css'));
+		$this->assertFalse(is_link($media));
+	}
+
 	public function testResolveAutomaticFromAssetsFolder(): void
 	{
 		touch(static::TMP . '/site/plugins/a/assets/test.css', 1337000000);
 
-		$media    = static::TMP . '/media/plugins/getkirby/a/3526409702-1337000000/test.css';
+		$media    = static::TMP . '/media/plugins/infinri/a/3526409702-1337000000/test.css';
 		$response = Assets::resolve(
-			'getkirby/a',
+			'infinri/a',
 			'3526409702-1337000000',
 			'test.css'
 		);
@@ -218,9 +268,9 @@ class AssetsTest extends TestCase
 		$this->assertSame('text/css', $response->type());
 
 
-		$media    = static::TMP . '/media/plugins/getkirby/a/3526409702-1337000000/assets/test.css';
+		$media    = static::TMP . '/media/plugins/infinri/a/3526409702-1337000000/assets/test.css';
 		$response = Assets::resolve(
-			'getkirby/a',
+			'infinri/a',
 			'3526409702-1337000000',
 			'assets/test.css'
 		);

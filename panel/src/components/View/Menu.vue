@@ -1,7 +1,7 @@
 <template>
 	<nav
 		class="k-panel-menu"
-		:aria-label="$t('menu')"
+		:aria-label="$panel.t('menu')"
 		:data-hover="$panel.menu.hover"
 		@mouseenter="$panel.menu.hover = true"
 		@mouseleave="$panel.menu.hover = false"
@@ -10,7 +10,7 @@
 			<!-- Search button -->
 			<k-button
 				v-if="hasSearch"
-				:text="$t('search')"
+				:text="$panel.t('search')"
 				icon="search"
 				class="k-panel-menu-search k-panel-menu-button"
 				@click="$panel.search()"
@@ -31,24 +31,12 @@
 					class="k-panel-menu-button"
 				/>
 			</menu>
-
-			<menu v-if="activationButton">
-				<k-button
-					v-bind="activationButton"
-					:disabled="$panel.permissions.access.system !== true"
-					class="k-activation-button k-panel-menu-button"
-					icon="key"
-					theme="love"
-					variant="filled"
-				/>
-				<k-activation :status="$panel.license" />
-			</menu>
 		</div>
 
 		<!-- Collapse/expand toggle -->
 		<k-button
 			:icon="$panel.menu.isOpen ? 'angle-left' : 'angle-right'"
-			:title="$panel.menu.isOpen ? $t('collapse') : $t('expand')"
+			:title="$panel.menu.isOpen ? $panel.t('collapse') : $panel.t('expand')"
 			size="xs"
 			class="k-panel-menu-toggle"
 			@click="$panel.menu.toggle()"
@@ -58,7 +46,6 @@
 
 <script>
 /**
- * @since 4.0.0
  * @unstable
  */
 export default {
@@ -68,23 +55,6 @@ export default {
 		};
 	},
 	computed: {
-		activationButton() {
-			if (this.$panel.license === "missing") {
-				return {
-					dialog: "registration",
-					text: this.$t("activate")
-				};
-			}
-
-			if (this.$panel.license === "legacy") {
-				return {
-					dialog: "license",
-					text: this.$t("renew")
-				};
-			}
-
-			return false;
-		},
 		hasSearch() {
 			return this.$helper.object.length(this.$panel.searches) > 0;
 		},
@@ -228,15 +198,6 @@ export default {
 	border-end-end-radius: var(--button-rounded);
 }
 
-@media (max-width: 60rem) {
-	.k-panel-menu .k-activation-button {
-		margin-bottom: var(--spacing-3);
-	}
-	.k-panel-menu .k-activation-toggle {
-		display: none;
-	}
-}
-
 /* Desktop size */
 @media (min-width: 60rem) {
 	/* The menu is always visible on desktop sizes */
@@ -275,31 +236,6 @@ export default {
 
 	.k-panel-menu-search[aria-disabled="true"] {
 		opacity: 0;
-	}
-
-	.k-panel-menu .k-activation {
-		position: absolute;
-		bottom: var(--menu-padding);
-		inset-inline-start: 100%;
-		height: var(--height-md);
-		width: max-content;
-		margin-left: var(--menu-padding);
-	}
-	.k-panel-menu .k-activation::before {
-		position: absolute;
-		content: "";
-		top: 50%;
-		left: -4px;
-		margin-top: -4px;
-		border-top: 4px solid transparent;
-		border-right: 4px solid var(--color-black);
-		border-bottom: 4px solid transparent;
-	}
-	.k-panel-menu .k-activation p :where(button, a) {
-		padding-inline: var(--spacing-1);
-	}
-	.k-panel-menu .k-activation-toggle {
-		border-left: 1px solid var(--dropdown-color-hr);
 	}
 }
 </style>

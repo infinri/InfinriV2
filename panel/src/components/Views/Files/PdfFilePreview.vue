@@ -26,7 +26,6 @@
 <script>
 /**
  * File view preview for PDF documents
- * @since 5.0.0
  */
 export default {
 	props: {

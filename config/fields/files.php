@@ -80,7 +80,7 @@ return [
 
 				if (
 					$id !== null &&
-					($file = $this->kirby()->file($id, $this->model()))
+					($file = $this->infinri()->file($id, $this->model()))
 				) {
 					// never disclose a file the current user must not list,
 					// but keep its ID to not drop it from the value on save

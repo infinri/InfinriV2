@@ -18,6 +18,6 @@ class SlugFieldTest extends TestCase
 		$this->assertNull($field->placeholder());
 		$this->assertNull($field->counter());
 		$this->assertFalse($field->wizard());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 }

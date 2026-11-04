@@ -24,10 +24,7 @@
 				<k-dialog-footer v-if="cancelButton || submitButton">
 					<k-dialog-buttons
 						:cancel-button="cancelButton"
-						:disabled="disabled"
-						:icon="icon"
 						:submit-button="submitButton"
-						:theme="theme"
 						@cancel="$emit('cancel')"
 					/>
 				</k-dialog-footer>
@@ -40,7 +37,7 @@
 import Dialog from "@/mixins/dialog.js";
 
 /**
- * Modal dialogs are used in Kirby's Panel in many places for quick actions like adding new pages, changing titles, etc. that don't necessarily need a full new view. You can create your own modals for your fields and other plugins or reuse our existing modals to invoke typical Panel actions.
+ * Modal dialogs are used in Infinri's Panel in many places for quick actions like adding new pages, changing titles, etc. that don't necessarily need a full new view. You can create your own modals for your fields and other plugins or reuse our existing modals to invoke typical Panel actions.
  */
 export default {
 	mixins: [Dialog]

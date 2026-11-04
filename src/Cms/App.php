@@ -27,8 +27,8 @@ use Infinri\Session\AutoSession;
 use Infinri\Session\Session;
 use Infinri\Template\Snippet;
 use Infinri\Template\Template;
-use Infinri\Text\KirbyTag;
-use Infinri\Text\KirbyTags;
+use Infinri\Text\InfinriTag;
+use Infinri\Text\InfinriTags;
 use Infinri\Toolkit\A;
 use Infinri\Toolkit\Config;
 use Infinri\Toolkit\Controller;
@@ -47,7 +47,7 @@ class App
 	use AppTranslations;
 	use AppUsers;
 
-	public const CLASS_ALIAS = 'kirby';
+	public const CLASS_ALIAS = 'infinri';
 
 	protected static App|null $instance = null;
 	protected static string|null $version = null;
@@ -131,7 +131,7 @@ class App
 
 		// set the singleton
 		if (static::$instance === null || $setInstance === true) {
-			static::$instance = ModelWithContent::$kirby = $this;
+			static::$instance = ModelWithContent::$infinri = $this;
 		}
 
 		// setup the I18n class with the translation loader
@@ -188,7 +188,7 @@ class App
 			return $this->api;
 		}
 
-		$root       = $this->root('kirby') . '/config/api';
+		$root       = $this->root('infinri') . '/config/api';
 		$extensions = $this->extensions['api'] ?? [];
 		$routes     = (include $root . '/routes.php')($this);
 
@@ -208,7 +208,7 @@ class App
 				...$routes,
 				...$extensions['routes'] ?? []
 			],
-			'kirby'          => $this,
+			'infinri'          => $this,
 		]);
 	}
 
@@ -324,7 +324,7 @@ class App
 	}
 
 	/**
-	 * Calls any Kirby route
+	 * Calls any Infinri route
 	 */
 	public function call(string|null $path = null, string|null $method = null): mixed
 	{
@@ -355,13 +355,13 @@ class App
 	 * automatically injected
 	 *
 	 * @return \Infinri\Toolkit\Collection|null
-	 * @todo 6.0 Add return type declaration
+	 * @todo Add return type declaration
 	 */
 	public function collection(string $name, array $options = [])
 	{
 		return $this->collections()->get($name, [
 			...$options,
-			'kirby' => $this,
+			'infinri' => $this,
 			'site'  => $site = $this->site(),
 			'pages' => new LazyValue(fn () => $site->children()),
 			'users' => new LazyValue(fn () => $this->users())
@@ -419,7 +419,7 @@ class App
 
 		// The content path is used as the default salt intentionally: there is
 		// no install step during which a random salt could be generated and
-		// persisted. Kirby goes live the moment files are present on the server,
+		// persisted. Infinri goes live the moment files are present on the server,
 		// so there is no defined point at which to write a one-time secret.
 		// Config files are typically kept in version control and cannot be
 		// written by the system without causing merge conflicts. No value in
@@ -500,7 +500,7 @@ class App
 
 	/**
 	 * Get access to object that lists
-	 * all parts of Kirby core
+	 * all parts of Infinri core
 	 */
 	public function core(): Core
 	{
@@ -509,7 +509,6 @@ class App
 
 	/**
 	 * Checks/returns a CSRF token
-	 * @since 3.7.0
 	 *
 	 * @param string|null $check Pass a token here to compare it to the one in the session
 	 * @return string|bool Either the token or a boolean check result
@@ -523,11 +522,11 @@ class App
 		// checking for null introduces a security issue because null could come
 		// from user input or bugs in the calling code!)
 		if (func_num_args() === 0) {
-			$token = $session->get('kirby.csrf');
+			$token = $session->get('infinri.csrf');
 
 			if (is_string($token) !== true) {
 				$token = bin2hex(random_bytes(32));
-				$session->set('kirby.csrf', $token);
+				$session->set('infinri.csrf', $token);
 			}
 
 			return $token;
@@ -536,9 +535,9 @@ class App
 		// argument has been passed, check the token
 		if (
 			is_string($check) === true &&
-			is_string($session->get('kirby.csrf')) === true
+			is_string($session->get('infinri.csrf')) === true
 		) {
-			return hash_equals($session->get('kirby.csrf'), $check) === true;
+			return hash_equals($session->get('infinri.csrf'), $check) === true;
 		}
 
 		return false;
@@ -546,7 +545,6 @@ class App
 
 	/**
 	 * Checks if CORS support is enabled
-	 * @since 5.2.0
 	 */
 	public function isCorsEnabled(): bool
 	{
@@ -682,7 +680,7 @@ class App
 	 * specified by the path
 	 *
 	 * Example:
-	 * <?= $kirby->image('some/page/myimage.jpg') ?>
+	 * <?= $infinri->image('some/page/myimage.jpg') ?>
 	 *
 	 * @todo merge with App::file()
 	 */
@@ -775,7 +773,6 @@ class App
 		if ($input instanceof Responder) {
 			// return the passed object unmodified (without injecting headers
 			// from the global object) to allow a complete response override
-			// https://github.com/getkirby/kirby/pull/4144#issuecomment-1034766726
 			return $input->send();
 		}
 
@@ -823,22 +820,22 @@ class App
 	}
 
 	/**
-	 * Renders a single KirbyTag with the given attributes
+	 * Renders a single InfinriTag with the given attributes
 	 *
 	 * @param string|array $type Tag type or array with all tag arguments
 	 *                           (the key of the first element becomes the type)
 	 */
-	public function kirbytag(
+	public function infinritag(
 		string|array $type,
 		string|null $value = null,
 		array $attr = [],
 		array $data = []
 	): string {
 		if (is_array($type) === true) {
-			$kirbytag = $type;
-			$type     = key($kirbytag);
-			$value    = current($kirbytag);
-			$attr     = $kirbytag;
+			$infinritag = $type;
+			$type     = key($infinritag);
+			$value    = current($infinritag);
+			$attr     = $infinritag;
 
 			// check data attribute and separate from attr data if exists
 			if (isset($attr['data']) === true) {
@@ -847,50 +844,50 @@ class App
 			}
 		}
 
-		$data['kirby']  ??= $this;
-		$data['site']   ??= $data['kirby']->site();
+		$data['infinri']  ??= $this;
+		$data['site']   ??= $data['infinri']->site();
 		$data['parent'] ??= $data['site']->page();
 
-		return (new KirbyTag($type, $value, $attr, $data))->render();
+		return (new InfinriTag($type, $value, $attr, $data))->render();
 	}
 
 	/**
-	 * Parses and resolves KirbyTags in text
+	 * Parses and resolves InfinriTags in text
 	 */
-	public function kirbytags(
+	public function infinritags(
 		string|null $text = null,
 		array $data = []
 	): string {
-		$data['kirby']  ??= $this;
-		$data['site']   ??= $data['kirby']->site();
+		$data['infinri']  ??= $this;
+		$data['site']   ??= $data['infinri']->site();
 		$data['parent'] ??= $data['site']->page();
 
 		$options = $this->options;
 		$debug   = ($options['debug'] ?? false) === true;
 
-		$text = $this->apply('kirbytags:before', compact('text', 'data', 'options'));
-		$text = KirbyTags::parse($text, $data, debug: $debug);
-		$text = $this->apply('kirbytags:after', compact('text', 'data', 'options'));
+		$text = $this->apply('infinritags:before', compact('text', 'data', 'options'));
+		$text = InfinriTags::parse($text, $data, debug: $debug);
+		$text = $this->apply('infinritags:after', compact('text', 'data', 'options'));
 
 		return $text;
 	}
 
 	/**
-	 * Parses KirbyTags first and Markdown afterwards
+	 * Parses InfinriTags first and Markdown afterwards
 	 */
-	public function kirbytext(
+	public function infinritext(
 		string|null $text = null,
 		array $options = []
 	): string {
-		$text = $this->apply('kirbytext:before', compact('text'));
-		$text = $this->kirbytags($text, $options);
+		$text = $this->apply('infinritext:before', compact('text'));
+		$text = $this->infinritags($text, $options);
 		$text = $this->markdown($text, $options['markdown'] ?? []);
 
 		if ($this->option('smartypants', false) !== false) {
 			$text = $this->smartypants($text);
 		}
 
-		$text = $this->apply('kirbytext:after', compact('text'));
+		$text = $this->apply('infinritext:after', compact('text'));
 
 		return $text;
 	}
@@ -941,7 +938,7 @@ class App
 	}
 
 	/**
-	 * Access Kirby's part loader
+	 * Access Infinri's part loader
 	 */
 	public function load(): Loader
 	{
@@ -964,7 +961,6 @@ class App
 
 	/**
 	 * Yields all models (site, pages, files and users) of this site
-	 * @since 4.0.0
 	 *
 	 * @return \Generator|\Infinri\Cms\ModelWithContent[]
 	 */
@@ -997,7 +993,6 @@ class App
 	/**
 	 * Returns the nonce, which is used
 	 * in the panel for inline scripts
-	 * @since 3.3.0
 	 */
 	public function nonce(): string
 	{
@@ -1080,7 +1075,7 @@ class App
 	}
 
 	/**
-	 * Inject options from Kirby instance props
+	 * Inject options from Infinri instance props
 	 */
 	protected function optionsFromProps(array $options = []): array
 	{
@@ -1194,7 +1189,7 @@ class App
 		string|null $path = null,
 		string|null $method = null
 	): Response|null {
-		if ((filter_var($_ENV['KIRBY_RENDER'] ?? true, FILTER_VALIDATE_BOOLEAN)) === false) {
+		if ((filter_var($_ENV['INFINRI_RENDER'] ?? true, FILTER_VALIDATE_BOOLEAN)) === false) {
 			return null;
 		}
 
@@ -1718,7 +1713,7 @@ class App
 	 * Returns the current version number from
 	 * the composer.json (Keep that up to date! :))
 	 *
-	 * @throws \Infinri\Exception\LogicException if the Kirby version cannot be detected
+	 * @throws \Infinri\Exception\LogicException if the Infinri version cannot be detected
 	 */
 	public static function version(): string|null
 	{
@@ -1726,7 +1721,7 @@ class App
 			return static::$version ??= Data::read(dirname(__DIR__, 2) . '/composer.json')['version'] ?? null;
 		} catch (Throwable) {
 			throw new LogicException(
-				message: 'The Kirby version cannot be detected. The composer.json is probably missing or not readable.'
+				message: 'The Infinri version cannot be detected. The composer.json is probably missing or not readable.'
 			);
 		}
 	}

@@ -154,7 +154,6 @@ class Response implements Stringable
 	 * Ensures safe MIME type handling by forcing plain text
 	 * for files without recognizable MIME types to harden
 	 * against attacks from malicious file uploads
-	 * @since 5.3.0
 	 * @internal
 	 */
 	public static function ensureSafeMimeType(array $props): array
@@ -201,7 +200,6 @@ class Response implements Stringable
 	/**
 	 * Redirects to the given Urls
 	 * Urls can be relative or absolute.
-	 * @since 3.7.0
 	 *
 	 * @codeCoverageIgnore
 	 */
@@ -221,7 +219,7 @@ class Response implements Stringable
 		$after  = headers_sent($file, $line);
 
 		if ($before === false && $after === true) {
-			throw new LogicException("Disallowed output from file $file:$line, possible accidental whitespace?");
+			throw new LogicException(message: "Disallowed output from file $file:$line, possible accidental whitespace?");
 		}
 
 		return $result;
@@ -286,8 +284,6 @@ class Response implements Stringable
 	 * Creates a refresh response, which will
 	 * send the visitor to the given location
 	 * after the specified number of seconds.
-	 *
-	 * @since 5.0.3
 	 */
 	public static function refresh(
 		string $location = '/',

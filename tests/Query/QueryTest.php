@@ -46,7 +46,42 @@ class QueryTest extends TestCase
 		]);
 
 		$query = new Query('');
-		$this->assertSame('legacy', $query->runner);
+		$this->assertInstanceOf(DefaultRunner::class, $query->runner);
+	}
+
+	public function test__ConstructWithLegacyRunner(): void
+	{
+		new App([
+			'options' => [
+				'query' => [
+					'runner' => 'legacy'
+				]
+			]
+		]);
+
+		$this->expectException(\Infinri\Exception\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Query runner legacy must extend Infinri\Query\Runners\Runner');
+
+		new Query('');
+	}
+
+	public function test__ConstructWithCustomRunner(): void
+	{
+		new App([
+			'options' => [
+				'query' => [
+					'runner' => QueryTestCustomRunner::class
+				]
+			]
+		]);
+
+		$query = new Query('');
+		$this->assertInstanceOf(QueryTestCustomRunner::class, $query->runner);
+	}
+
+	public function testResolveLegacyIsRemoved(): void
+	{
+		$this->assertFalse(method_exists(Query::class, 'resolveLegacy'));
 	}
 
 	public function test__ConstructWithInvalidConfig(): void
@@ -73,7 +108,7 @@ class QueryTest extends TestCase
 
 	public function testIntercept(): void
 	{
-		$query = new Query('kirby');
+		$query = new Query('infinri');
 		$this->assertSame('foo', $query->intercept('foo'));
 	}
 
@@ -215,7 +250,7 @@ class QueryTest extends TestCase
 	public function testDefaultEntries(): void
 	{
 		$expectedEntries = [
-			'kirby', 'collection', 'file', 'page', 'qr',
+			'infinri', 'collection', 'file', 'page', 'qr',
 			'site', 't', 'user', 'users'
 		];
 
@@ -224,4 +259,8 @@ class QueryTest extends TestCase
 			$this->assertInstanceOf(Closure::class, Query::$entries[$entryName]);
 		}
 	}
+}
+
+class QueryTestCustomRunner extends DefaultRunner
+{
 }

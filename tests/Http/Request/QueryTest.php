@@ -20,8 +20,8 @@ class QueryTest extends TestCase
 		$this->assertSame($data, $query->data());
 
 		// custom string
-		$string = 'foo=bar&kirby[]=bastian&kirby[]=allgeier';
-		$data  = ['foo' => 'bar', 'kirby' => ['bastian', 'allgeier']];
+		$string = 'foo=bar&infinri[]=bastian&infinri[]=allgeier';
+		$data  = ['foo' => 'bar', 'infinri' => ['bastian', 'allgeier']];
 		$query = new Query($string);
 		$this->assertSame($data, $query->data());
 	}

@@ -12,7 +12,7 @@ class CheckboxesFieldTest extends TestCase
 		$this->assertSame('checkboxes', $field->name());
 		$this->assertSame([], $field->value());
 		$this->assertSame([], $field->options());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testValue(): void
@@ -48,7 +48,7 @@ class CheckboxesFieldTest extends TestCase
 		]);
 
 		$this->assertSame(['a', 'b'], $field->default());
-		$this->assertSame('a, b', $field->data(true));
+		$this->assertSame('a, b', $field->fill($field->default())->toStoredValue());
 	}
 
 	public function testFillWithEmptyValue(): void
@@ -81,7 +81,7 @@ class CheckboxesFieldTest extends TestCase
 			'value' => 'a,b,c,d'
 		]);
 
-		$this->assertSame('a, b, c', $field->data());
+		$this->assertSame('a, b, c', $field->toStoredValue());
 	}
 
 	public function testIgnoreInvalidOptions(): void

@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Storage::class)]
 class StorageTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Content.Storage';
+	public const TMP = INFINRI_TMP_DIR . '/Content.Storage';
 
 	public function testAllMultiLanguageForFile(): void
 	{

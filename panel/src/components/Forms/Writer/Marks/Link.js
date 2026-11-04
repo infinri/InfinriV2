@@ -5,7 +5,7 @@ export default class Link extends Mark {
 	get button() {
 		return {
 			icon: "url",
-			label: window.panel.$t("toolbar.button.link")
+			label: window.panel.t("toolbar.button.link")
 		};
 	}
 

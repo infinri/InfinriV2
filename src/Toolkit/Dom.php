@@ -66,7 +66,7 @@ class Dom
 			}
 
 			// DOMDocument::loadHTML() historically assumes ISO-8859-1 input.
-			// To force UTF-8 parsing, Kirby injects an XML declaration.
+			// To force UTF-8 parsing, Infinri injects an XML declaration.
 			// The random ID allows us to reliably identify *our* injected node
 			// later and remove it again.
 			$xml  = 'encoding="UTF-8" id="' . Str::random(10) . '"';
@@ -341,8 +341,8 @@ class Dom
 		) {
 			// if a CMS instance is active, only allow the URL
 			// if it doesn't point outside of the index URL
-			if ($kirby = App::instance(null, true)) {
-				$indexUrl = $kirby->url('index', true)->path()->toString(true);
+			if ($infinri = App::instance(null, true)) {
+				$indexUrl = $infinri->url('index', true)->path()->toString(true);
 
 				// only the path is relevant for the comparison, as the
 				// query and fragment end the path instead of extending it
@@ -841,8 +841,6 @@ class Dom
 	 * document is embedded in an HTML page: whether the node sits in
 	 * foreign content (SVG/MathML) and which raw text element holds it
 	 *
-	 * @since 5.6.0
-	 *
 	 * @return array{foreign: bool, rawText: string|null}
 	 */
 	protected static function context(DOMNode $node): array
@@ -906,8 +904,6 @@ class Dom
 	 * Checks if the URL contains a directory traversal sequence;
 	 * a dot segment may be percent-encoded, which the browser
 	 * decodes before it resolves the path
-	 *
-	 * @since 5.6.0
 	 */
 	protected static function hasTraversal(string $url): bool
 	{
@@ -921,8 +917,6 @@ class Dom
 	/**
 	 * Checks if an element makes an HTML parser leave foreign content
 	 * (SVG/MathML) and continue in the HTML namespace
-	 *
-	 * @since 5.6.0
 	 */
 	protected static function isBreakout(DOMElement $node): bool
 	{
@@ -943,8 +937,6 @@ class Dom
 	/**
 	 * Checks if an element hands its children back to HTML content,
 	 * which only elements of its own foreign root can do
-	 *
-	 * @since 5.6.0
 	 */
 	protected static function isIntegration(
 		DOMElement $node,
@@ -987,7 +979,7 @@ class Dom
 		$allowed = static::isAllowedAttr($attr, $options);
 		if ($allowed !== true) {
 			$errors[] = new InvalidArgumentException(
-				'The "' . $name . '" attribute (line ' .
+				message: 'The "' . $name . '" attribute (line ' .
 				$attr->getLineNo() . ') is not allowed: ' .
 				$allowed
 			);
@@ -996,7 +988,7 @@ class Dom
 			$allowed = static::isAllowedUrl($value, $options);
 			if ($allowed !== true) {
 				$errors[] = new InvalidArgumentException(
-					'The URL is not allowed in attribute "' .
+					message: 'The URL is not allowed in attribute "' .
 					$name . '" (line ' . $attr->getLineNo() . '): ' .
 					$allowed
 				);
@@ -1008,7 +1000,7 @@ class Dom
 				$allowed = static::isAllowedUrl($url, $options);
 				if ($allowed !== true) {
 					$errors[] = new InvalidArgumentException(
-						'The URL is not allowed in attribute "' .
+						message: 'The URL is not allowed in attribute "' .
 						$name . '" (line ' . $attr->getLineNo() . '): ' .
 						$allowed
 					);
@@ -1020,7 +1012,6 @@ class Dom
 
 	/**
 	 * Sanitizes a comment or CDATA section node
-	 * @since 5.6.0
 	 *
 	 * @param array $errors Array to store additional errors in by reference
 	 */
@@ -1074,7 +1065,7 @@ class Dom
 
 		if ($isComment === true) {
 			$errors[] = new InvalidArgumentException(
-				'The comment (line ' . $node->getLineNo() . ') is not allowed'
+				message: 'The comment (line ' . $node->getLineNo() . ') is not allowed'
 			);
 
 			// comments carry no rendered content, so remove them entirely
@@ -1083,7 +1074,7 @@ class Dom
 		}
 
 		$errors[] = new InvalidArgumentException(
-			'The CDATA section (line ' . $node->getLineNo() . ') is not allowed'
+			message: 'The CDATA section (line ' . $node->getLineNo() . ') is not allowed'
 		);
 
 		// replace the CDATA section with an escaped text node so its
@@ -1136,7 +1127,7 @@ class Dom
 				if (array_search($value, $options['allowedNamespaces']) === false) {
 					$element->removeAttributeNS($value, $namespace);
 					$errors[] = new InvalidArgumentException(
-						'The namespace "' . $value . '" is not allowed' .
+						message: 'The namespace "' . $value . '" is not allowed' .
 						' (around line ' . $element->getLineNo() . ')'
 					);
 				}
@@ -1153,7 +1144,7 @@ class Dom
 			) !== false
 		) {
 			$errors[] = new InvalidArgumentException(
-				'The "' . $name . '" element (line ' .
+				message: 'The "' . $name . '" element (line ' .
 				$element->getLineNo() . ') is not allowed'
 			);
 			static::remove($element);
@@ -1167,7 +1158,7 @@ class Dom
 
 			if ($listedName === false) {
 				$errors[] = new InvalidArgumentException(
-					'The "' . $name . '" element (line ' .
+					message: 'The "' . $name . '" element (line ' .
 					$element->getLineNo() . ') is not allowed, ' .
 					'but its children can be kept'
 				);
@@ -1233,7 +1224,7 @@ class Dom
 		}
 
 		$errors[] = new InvalidArgumentException(
-			'The "' . $name . '" processing instruction (line ' .
+			message: 'The "' . $name . '" processing instruction (line ' .
 			$pi->getLineNo() . ') is not allowed'
 		);
 

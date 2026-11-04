@@ -121,7 +121,7 @@ export default {
 
 			// when replacing, show custom submit text
 			if (this.editing) {
-				return { submit: this.$t("replace.with") };
+				return { submit: this.$panel.t("replace.with") };
 			}
 
 			return true;
@@ -132,15 +132,15 @@ export default {
 			}
 
 			if (this.editing) {
-				return { placeholder: this.$t("replace.with"), ...this.search };
+				return { placeholder: this.$panel.t("replace.with"), ...this.search };
 			}
 
 			if (this.accept === "options") {
-				return { placeholder: this.$t("filter"), ...this.search };
+				return { placeholder: this.$panel.t("filter"), ...this.search };
 			}
 
 			return {
-				placeholder: this.$t("field.tags.placeholder") + "…",
+				placeholder: this.$panel.t("field.tags.placeholder") + "…",
 				...this.search
 			};
 		}

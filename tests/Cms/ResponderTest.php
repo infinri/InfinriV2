@@ -14,9 +14,9 @@ class ResponderTest extends TestCase
 {
 	protected function setUp(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'urls' => [
-				'index' => 'https://getkirby.test'
+				'index' => 'https://infinri.test'
 			]
 		]);
 	}
@@ -51,7 +51,7 @@ class ResponderTest extends TestCase
 
 	public function testCacheUsesAuth(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'server' => [
 				'HTTP_AUTHORIZATION' => 'Bearer brown-bearer'
 			]
@@ -230,7 +230,7 @@ class ResponderTest extends TestCase
 
 	public function testCacheHeadersRemovesCorsEntries(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'  => ['https://app1.com', 'https://app2.com'],
@@ -256,7 +256,7 @@ class ResponderTest extends TestCase
 
 	public function testCacheHeadersRemovesAllVaryWhenEmpty(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com']
@@ -276,7 +276,7 @@ class ResponderTest extends TestCase
 
 	public function testCacheHeadersWithNoVaryHeader(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => true
 			]
@@ -291,7 +291,7 @@ class ResponderTest extends TestCase
 
 	public function testCacheHeadersPreservesCustomHeaders(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com']
@@ -315,7 +315,7 @@ class ResponderTest extends TestCase
 
 	public function testCacheHeadersVaryNormalization(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com']
@@ -352,7 +352,7 @@ class ResponderTest extends TestCase
 
 	public function testVolatileHeadersResetOnFromArray(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => true
 			]
@@ -372,7 +372,7 @@ class ResponderTest extends TestCase
 
 	public function testVolatileHeadersResetOnHeadersSetter(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => true
 			]
@@ -404,7 +404,7 @@ class ResponderTest extends TestCase
 
 		// with dynamic data in environment
 		$_COOKIE['foo'] = 'bar';
-		$this->kirby([
+		$this->infinri([
 			'server' => [
 				'HTTP_AUTHORIZATION' => 'Bearer brown-bearer'
 			]
@@ -515,5 +515,10 @@ class ResponderTest extends TestCase
 
 		$this->assertSame($responder, $responder->usesCookies($cookies = ['bar']));
 		$this->assertSame($cookies, $responder->usesCookies());
+	}
+
+	public function testMarkVolatileHeaderIsRemoved(): void
+	{
+		$this->assertFalse(method_exists(Responder::class, 'markVolatileHeader'));
 	}
 }

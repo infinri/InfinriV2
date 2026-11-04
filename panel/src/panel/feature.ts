@@ -40,7 +40,6 @@ export function defaults(): FeatureState {
 /**
  * Feature objects isolate functionality and state of Panel features
  * like drawers, dialogs, notifications and views
- * @since 4.0.0
  *
  * @param panel - The Panel singleton
  * @param key - Identifies this state in backend responses
@@ -65,7 +64,6 @@ export default function Feature<T extends FeatureState>(
 
 		/**
 		 * Sends a get request to the backend route for this feature
-		 * @since 5.1.0
 		 */
 		async get(
 			url: string | URL,

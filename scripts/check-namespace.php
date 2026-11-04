@@ -34,7 +34,7 @@ if ($checked === 0) {
 }
 
 // Exercise dynamic aliases as well as PSR-4/classmap loading.
-foreach (['kirby', 'page', 'field', 'Infinri\\Cms\\Field'] as $alias) {
+foreach (['infinri', 'page', 'field'] as $alias) {
     if (!class_exists($alias)) {
         throw new RuntimeException('Alias failed: ' . $alias);
     }

@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class AuthProtectionTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.AuthProtection';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.AuthProtection';
 
 	protected Auth $auth;
 	public string|null $failedEmail = null;
@@ -99,11 +99,9 @@ class AuthProtectionTest extends TestCase
 		$this->assertFileDoesNotExist(static::TMP . '/site/accounts/.logins');
 	}
 
-	public function testIpHash(): void
+	public function testIpHashIsRemoved(): void
 	{
-		$this->app->visitor()->ip('10.1.123.234');
-
-		$this->assertSame('87084f11690867b977a611dd2c943a918c3197f4c02b25ab59', $this->auth->ipHash());
+		$this->assertFalse(method_exists(Auth::class, 'ipHash'));
 	}
 
 	public function testIsBlocked(): void

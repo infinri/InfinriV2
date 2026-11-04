@@ -6,29 +6,29 @@ use Infinri\Cms\Api\ApiModelTestCase;
 
 class UserApiModelTest extends ApiModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserApiModel';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserApiModel';
 
 	protected User $user;
 
 	protected function setUp(): void
 	{
 		parent::setUp();
-		$this->user = new User(['email' => 'test@getkirby.com']);
+		$this->user = new User(['email' => 'test@infinri.com']);
 	}
 
 	public function testFiles(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'files' => [
 				['filename' => 'a.jpg'],
 				['filename' => 'b.jpg'],
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$model = $this->api->resolve($user)->select('files')->toArray();
 

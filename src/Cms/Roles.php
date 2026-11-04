@@ -14,7 +14,7 @@ class Roles extends Collection
 	 * roles that can be changed by the
 	 * current user
 	 *
-	 * Use with `$kirby->roles()`. For retrieving
+	 * Use with `$infinri->roles()`. For retrieving
 	 * which roles are available for a specific user,
 	 * use `$user->roles()` without additional filters.
 	 *
@@ -26,7 +26,7 @@ class Roles extends Collection
 		if (App::instance()->user()?->isAdmin() !== true) {
 			return $this->filter('isAccessible', true)->filter(function ($role) {
 				$newUser = new User([
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => $role->id()
 				]);
 
@@ -42,7 +42,7 @@ class Roles extends Collection
 	 * roles that can be created by the
 	 * current user.
 	 *
-	 * Use with `$kirby->roles()`.
+	 * Use with `$infinri->roles()`.
 	 *
 	 * @return $this|static
 	 * @throws \Exception
@@ -52,7 +52,7 @@ class Roles extends Collection
 		if (App::instance()->user()?->isAdmin() !== true) {
 			return $this->filter('isAccessible', true)->filter(function ($role) {
 				$newUser = new User([
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => $role->id()
 				]);
 
@@ -84,18 +84,18 @@ class Roles extends Collection
 
 	public static function load(string|null $root = null, array $inject = []): static
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 		$roles = new static();
 
 		// load roles from plugins
-		foreach ($kirby->extensions('blueprints') as $name => $blueprint) {
+		foreach ($infinri->extensions('blueprints') as $name => $blueprint) {
 			if (str_starts_with($name, 'users/') === false) {
 				continue;
 			}
 
 			// callback option can be return array or blueprint file path
 			if (is_callable($blueprint) === true) {
-				$blueprint = $blueprint($kirby);
+				$blueprint = $blueprint($infinri);
 			}
 
 			$role = match (is_array($blueprint)) {

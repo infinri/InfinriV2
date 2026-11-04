@@ -6,7 +6,7 @@
 				<k-code language="js"
 					>window.panel.api.delete(path, data, options, silent=false)</k-code
 				>
-				<p>Sends a <code>DELETE</code> request to Kirby’s REST API</p>
+				<p>Sends a <code>DELETE</code> request to Infinri’s REST API</p>
 			</k-text>
 		</k-lab-example>
 		<k-lab-example label="get" :code="false">
@@ -14,7 +14,7 @@
 				<k-code language="js"
 					>window.panel.api.get(path, query, options, silent=false)</k-code
 				>
-				<p>Sends a <code>GET</code> request to Kirby’s REST API</p>
+				<p>Sends a <code>GET</code> request to Infinri’s REST API</p>
 			</k-text>
 		</k-lab-example>
 		<k-lab-example label="patch" :code="false">
@@ -22,7 +22,7 @@
 				<k-code language="js"
 					>window.panel.api.patch(path, data, options, silent=false)</k-code
 				>
-				<p>Sends a <code>PATCH</code> request to Kirby’s REST API</p>
+				<p>Sends a <code>PATCH</code> request to Infinri’s REST API</p>
 			</k-text>
 		</k-lab-example>
 		<k-lab-example label="post" :code="false">
@@ -30,7 +30,7 @@
 				<k-code language="js"
 					>window.panel.api.post(path, data, options, silent=false)</k-code
 				>
-				<p>Sends a <code>POST</code> request to Kirby’s REST API</p>
+				<p>Sends a <code>POST</code> request to Infinri’s REST API</p>
 			</k-text>
 		</k-lab-example>
 	</k-lab-examples>

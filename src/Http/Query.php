@@ -28,7 +28,6 @@ class Query extends Obj implements Stringable
 
 	/**
 	 * Merges the current query with the given query
-	 * @since 5.1.0
 	 *
 	 * @return $this
 	 */

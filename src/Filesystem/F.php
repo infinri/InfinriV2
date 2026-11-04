@@ -405,7 +405,6 @@ class F
 
 	/**
 	 * A super simple class autoloader
-	 * @since 3.7.0
 	 */
 	public static function loadClasses(
 		array $classmap,
@@ -617,7 +616,6 @@ class F
 
 	/**
 	 * Reads a specific byte range from a file
-	 * @since 5.3.0
 	 *
 	 * @param string $file The path to the file
 	 * @param int $offset The byte offset to start reading from
@@ -848,7 +846,6 @@ class F
 
 	/**
 	 * Sanitize a file's name (without extension)
-	 * @since 4.0.0
 	 */
 	public static function safeBasename(
 		string $string,
@@ -864,7 +861,6 @@ class F
 
 	/**
 	 * Sanitize a file's extension
-	 * @since 4.0.0
 	 */
 	public static function safeExtension(
 		string $string,
@@ -957,7 +953,6 @@ class F
 
 	/**
 	 * Ensures that a file or link is deleted (with race condition handling)
-	 * @since 3.7.4
 	 */
 	public static function unlink(string $file): bool
 	{
@@ -996,8 +991,6 @@ class F
 	 * that other writers (that lock the same way) cannot lose
 	 * each other's updates. The `$modifier` callback receives
 	 * the current file contents.
-	 *
-	 * @since 5.5.0
 	 */
 	public static function update(
 		string $file,

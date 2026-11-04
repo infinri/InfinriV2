@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(ImageFilePreview::class)]
 class ImageFilePreviewTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Ui.FilePreviews.ImageFilePreview';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Ui.FilePreviews.ImageFilePreview';
 
 	protected function setUp(): void
 	{

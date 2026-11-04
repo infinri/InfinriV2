@@ -11,7 +11,7 @@ use Infinri\Toolkit\Str;
 class AppTranslationsTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.AppTranslations';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.AppTranslations';
 
 	protected array $locale = [];
 	protected string|null $localeSuffix = null;
@@ -45,11 +45,11 @@ class AppTranslationsTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'language' => 'de'
 				]
 			],
-			'user' => 'admin@getkirby.com',
+			'user' => 'admin@infinri.com',
 			'translations' => [
 				'en' => [
 					'save'       => 'Save',

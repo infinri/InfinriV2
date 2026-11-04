@@ -8,7 +8,7 @@ use ReflectionClass;
 #[CoversClass(Site::class)]
 class SiteCommitTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SiteCommit';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SiteCommit';
 
 	public function testCommit(): void
 	{
@@ -53,7 +53,7 @@ class SiteCommitTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site   = new Site(['content' => ['title' => 'original']]);
 		$class  = new ReflectionClass($site);

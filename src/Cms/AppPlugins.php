@@ -11,9 +11,8 @@ use Infinri\Filesystem\F;
 use Infinri\Filesystem\Mime;
 use Infinri\Form\Field as FormField;
 use Infinri\Image\Image;
-use Infinri\Plugin\License;
 use Infinri\Plugin\Plugin;
-use Infinri\Text\KirbyTag;
+use Infinri\Text\InfinriTag;
 use Infinri\Toolkit\A;
 use Infinri\Toolkit\Collection as ToolkitCollection;
 use Infinri\Toolkit\I18n;
@@ -294,7 +293,6 @@ trait AppPlugins
 
 	/**
 	 * Registers additional file preview handlers
-	 * @since 5.0.0
 	 */
 	protected function extendFilePreviews(array $previews): array
 	{
@@ -615,12 +613,12 @@ trait AppPlugins
 	}
 
 	/**
-	 * Registers additional KirbyTags
+	 * Registers additional InfinriTags
 	 */
 	protected function extendTags(array $tags): array
 	{
-		return $this->extensions['tags'] = KirbyTag::$types = [
-			...KirbyTag::$types,
+		return $this->extensions['tags'] = InfinriTag::$types = [
+			...InfinriTag::$types,
 			...array_change_key_case($tags)
 		];
 	}
@@ -812,7 +810,7 @@ trait AppPlugins
 		Section::$mixins   = $this->core->sectionMixins();
 
 		// aliases
-		KirbyTag::$aliases = $this->core->kirbyTagAliases();
+		InfinriTag::$aliases = $this->core->infinriTagAliases();
 		Field::$aliases    = $this->core->fieldMethodAliases();
 
 		// blueprint presets
@@ -827,13 +825,12 @@ trait AppPlugins
 		$this->extendFilePreviews($this->core->filePreviews());
 		$this->extendSections($this->core->sections());
 		$this->extendSnippets($this->core->snippets());
-		$this->extendTags($this->core->kirbyTags());
+		$this->extendTags($this->core->infinriTags());
 		$this->extendTemplates($this->core->templates());
 	}
 
 	/**
 	 * Checks if a native component was extended
-	 * @since 3.7.0
 	 */
 	public function isNativeComponent(string $component): bool
 	{
@@ -850,7 +847,7 @@ trait AppPlugins
 	}
 
 	/**
-	 * Kirby plugin factory and getter
+	 * Infinri plugin factory and getter
 	 *
 	 * @param array|null $extends If null is passed it will be used as getter. Otherwise as factory.
 	 * @throws \Infinri\Exception\DuplicateException
@@ -861,7 +858,6 @@ trait AppPlugins
 		array $info = [],
 		string|null $root = null,
 		string|null $version = null,
-		Closure|string|array|null $license = null,
 	): Plugin|null {
 		if ($extends === null) {
 			return static::$plugins[$name] ?? null;
@@ -871,9 +867,7 @@ trait AppPlugins
 			name:    $name,
 			extends: $extends,
 			info:    $info,
-			license: $license,
-			// TODO: Remove fallback to $extends in v7
-			root:    $root ?? $extends['root'] ?? dirname(debug_backtrace()[0]['file']),
+			root:    $root ?? dirname(debug_backtrace()[0]['file']),
 			version: $version
 		);
 

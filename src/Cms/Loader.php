@@ -9,7 +9,7 @@ use Infinri\Filesystem\F;
 class Loader
 {
 	public function __construct(
-		protected App $kirby,
+		protected App $infinri,
 		protected bool $withPlugins = true
 	) {
 	}
@@ -30,13 +30,13 @@ class Loader
 	{
 		$areas      = [];
 		$extensions = match ($this->withPlugins) {
-			true  => $this->kirby->extensions('areas'),
+			true  => $this->infinri->extensions('areas'),
 			false => []
 		};
 
 		// load core areas and extend them with elements
 		// from plugins if they exist
-		foreach ($this->kirby->core()->areas() as $id => $area) {
+		foreach ($this->infinri->core()->areas() as $id => $area) {
 			$area = $this->resolveArea($area);
 
 			if (isset($extensions[$id]) === true) {
@@ -91,8 +91,8 @@ class Loader
 	public function extensions(string $type): array
 	{
 		return match ($this->withPlugins) {
-			true  => $this->kirby->extensions($type),
-			false => $this->kirby->core()->$type()
+			true  => $this->infinri->extensions($type),
+			false => $this->infinri->core()->$type()
 		};
 	}
 
@@ -106,7 +106,7 @@ class Loader
 	 *
 	 * 2.) arrays are untouched and returned
 	 *
-	 * 3.) closures will be called and the Kirby instance will be
+	 * 3.) closures will be called and the Infinri instance will be
 	 * passed as first argument
 	 */
 	public function resolve(mixed $item): mixed
@@ -119,7 +119,7 @@ class Loader
 		}
 
 		if (is_callable($item) === true) {
-			$item = $item($this->kirby);
+			$item = $item($this->infinri);
 		}
 
 		return $item;

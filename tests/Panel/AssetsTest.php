@@ -13,8 +13,8 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Assets::class)]
 class AssetsTest extends TestCase
 {
-	public const TMP               = KIRBY_TMP_DIR . '/Panel.Assets';
-	public const VITE_RUNNING_PATH = KIRBY_DIR . '/panel/.vite-running';
+	public const TMP               = INFINRI_TMP_DIR . '/Panel.Assets';
+	public const VITE_RUNNING_PATH = INFINRI_DIR . '/panel/.vite-running';
 
 	protected bool $hadViteRunning;
 
@@ -132,7 +132,7 @@ class AssetsTest extends TestCase
 		$this->app->clone([
 			'options' => [
 				'panel' => [
-					'css' => ['panel.css', 'foo.css', $url = 'https://getkirby.com/bar.css']
+					'css' => ['panel.css', 'foo.css', $url = 'https://infinri.com/bar.css']
 				]
 			]
 		]);
@@ -195,6 +195,15 @@ class AssetsTest extends TestCase
 		$this->assertTrue(Str::contains($external['js']['custom-0']['src'], 'assets/panel.js'));
 	}
 
+	public function testExternalHasNoPluginImports(): void
+	{
+		$assets   = new Assets();
+		$external = $assets->external();
+
+		$this->assertSame(['css', 'icons', 'import-maps', 'js'], array_keys($external));
+		$this->assertArrayNotHasKey('plugin-imports', $external);
+	}
+
 	public function testFavicons(): void
 	{
 		// default asset setup
@@ -254,6 +263,49 @@ class AssetsTest extends TestCase
 		// icons
 		$this->assertSame('/assets/my-favicon.svg', $favicons[0]['href']);
 		$this->assertSame('/assets/my-favicon.png', $favicons[1]['href']);
+	}
+
+	public function testFaviconsWithLegacyUrlAttribute(): void
+	{
+		$this->app->clone([
+			'options' => [
+				'panel' => [
+					'favicon' => [
+						[
+							'rel'  => 'shortcut icon',
+							'url'  => 'assets/legacy.svg',
+							'href' => 'assets/current.svg',
+						]
+					]
+				]
+			]
+		]);
+
+		$favicons = (new Assets())->favicons();
+
+		// the legacy `url` attribute is no longer converted to `href`
+		$this->assertSame('/assets/current.svg', $favicons[0]['href']);
+	}
+
+	public function testFaviconsWithRelAsArrayKey(): void
+	{
+		$this->app->clone([
+			'options' => [
+				'panel' => [
+					'favicon' => [
+						'shortcut icon' => [
+							'type' => 'image/svg+xml',
+							'href' => 'assets/my-favicon.svg',
+						]
+					]
+				]
+			]
+		]);
+
+		$favicons = (new Assets())->favicons();
+
+		// the string key is no longer converted to the `rel` attribute
+		$this->assertArrayNotHasKey('rel', $favicons[0]);
 	}
 
 	public function testFaviconsWithCustomStringSetup(): void
@@ -390,7 +442,7 @@ class AssetsTest extends TestCase
 		$this->app->clone([
 			'options' => [
 				'panel' => [
-					'js' => ['panel.js', 'foo.js', $url = 'https://getkirby.com/bar.js']
+					'js' => ['panel.js', 'foo.js', $url = 'https://infinri.com/bar.js']
 				]
 			]
 		]);

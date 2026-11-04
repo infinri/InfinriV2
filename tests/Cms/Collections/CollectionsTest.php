@@ -76,7 +76,7 @@ class CollectionsTest extends TestCase
 		$a = $collections->get('test');
 		$this->assertCount(0, $a);
 
-		$a->add('kirby');
+		$a->add('infinri');
 		$this->assertCount(1, $a);
 
 		$b = $collections->get('test');

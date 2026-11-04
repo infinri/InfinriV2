@@ -118,14 +118,12 @@ describe("panel.notification", () => {
 	});
 
 	describe("deprecated()", () => {
-		it("should log deprecation warnings", async () => {
+		it("should no longer exist", () => {
 			const notification = Notification({});
-			const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
 
-			notification.deprecated("OldMethod");
-
-			expect(warn).toHaveBeenCalledWith("Deprecated: OldMethod");
-			warn.mockRestore();
+			expect(
+				(notification as unknown as Record<string, unknown>).deprecated
+			).toBeUndefined();
 		});
 	});
 

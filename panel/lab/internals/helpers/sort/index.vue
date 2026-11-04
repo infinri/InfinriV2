@@ -2,12 +2,7 @@
 	<k-lab-examples class="k-lab-helpers-examples">
 		<k-lab-example label="$helper.object.isEmpty()" :code="false">
 			<k-text>
-				<p>
-					Natural sort algorithm with unicode support based on
-					<k-link to="https://github.com/bubkoo/natsort"
-						>github.com/bubkoo/natsort</k-link
-					>:
-				</p>
+				<p>Natural sort algorithm with unicode support based on natsort:</p>
 				<!-- prettier-ignore -->
 				<k-code language="javascript">this.$helper.sort(options): boolean</k-code>
 			</k-text>

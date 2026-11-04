@@ -8,7 +8,7 @@ import isComponent from "@/helpers/isComponent";
 import { isObject } from "@/helpers/object";
 
 /**
- * Extended component options type for the Kirby plugin API.
+ * Extended component options type for the Infinri plugin API.
  * Allows string references for `mixins` and `extends`, which are resolved
  * at install time by resolveComponentMixins and resolveComponentExtension.
  */
@@ -32,7 +32,6 @@ import Node from "@/components/Forms/Writer/Node";
 
 /**
  * Installs a plugin component
- * @since 4.0.0
  */
 export function installComponent(
 	app: typeof Vue,
@@ -69,7 +68,6 @@ export function installComponent(
 
 /**
  * Installs all components in the given object
- * @since 4.0.0
  */
 export function installComponents(
 	app: typeof Vue,
@@ -94,7 +92,6 @@ export function installComponents(
 
 /**
  * Installs plugins
- * @since 4.0.0
  */
 export function installPlugins(
 	app: typeof Vue,
@@ -113,7 +110,6 @@ export function installPlugins(
 
 /**
  * Resolves a component extension if defined as component name
- * @since 4.0.0
  */
 export function resolveComponentExtension(
 	app: typeof Vue,
@@ -157,7 +153,6 @@ export function resolveComponentExtension(
 
 /**
  * Resolve available mixins if they are defined
- * @since 4.0.0
  */
 export function resolveComponentMixins(component: Component): Component {
 	if (Array.isArray(component.mixins) === false) {
@@ -200,7 +195,6 @@ export function resolveComponentMixins(component: Component): Component {
 
 /**
  * Resolve a component's competing template/render options
- * @since 5.0.0
  */
 export function resolveComponentRender(component: Component): Component {
 	if (component.template) {
@@ -215,7 +209,6 @@ export function resolveComponentRender(component: Component): Component {
 /**
  * The plugin module installs all given plugins
  * and makes them accessible at window.panel.plugins
- * @since 4.0.0
  */
 export default function Plugins(
 	app: typeof Vue,
@@ -231,10 +224,6 @@ export default function Plugins(
 	}> = {}
 ) {
 	return {
-		// expose helper functions for kirbyup
-		resolveComponentExtension,
-		resolveComponentMixins,
-		resolveComponentRender,
 		// defaults
 		created: [],
 		icons: {},

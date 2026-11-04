@@ -34,11 +34,11 @@
 			icon="dashboard"
 			class="k-layout-empty"
 		>
-			{{ $t("field.blocks.fieldsets.empty") }}
+			{{ $panel.t("field.blocks.fieldsets.empty") }}
 		</k-empty>
 
 		<k-empty v-else icon="dashboard" class="k-layout-empty" @click="select(0)">
-			{{ empty ?? $t("field.layout.empty") }}
+			{{ empty ?? $panel.t("field.layout.empty") }}
 		</k-empty>
 	</div>
 </template>
@@ -103,7 +103,9 @@ export default {
 
 			// a sign that it has been pasted
 			this.$panel.notification.success({
-				message: this.$t("copy.success.multiple", { count: copy.length ?? 1 }),
+				message: this.$panel.t("copy.success.multiple", {
+					count: copy.length ?? 1
+				}),
 				icon: "template"
 			});
 		},
@@ -116,7 +118,7 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-layout-selector",
 				props: {
-					label: this.$t("field.layout.change"),
+					label: this.$panel.t("field.layout.change"),
 					layouts: this.layouts,
 					selector: this.selector,
 					value: this.layouts[layoutIndex]
@@ -145,9 +147,12 @@ export default {
 			this.save();
 		},
 		async onAdd(columns) {
-			let layout = await this.$api.post(this.endpoints.field + "/layout", {
-				columns: columns
-			});
+			let layout = await this.$panel.api.post(
+				this.endpoints.field + "/layout",
+				{
+					columns: columns
+				}
+			);
 
 			this.rows.splice(this.nextIndex, 0, layout);
 			this.save();
@@ -173,10 +178,13 @@ export default {
 			const oldLayout = payload.layout;
 
 			// create empty layout based on selected columns
-			const newLayout = await this.$api.post(this.endpoints.field + "/layout", {
-				attrs: oldLayout.attrs,
-				columns: columns
-			});
+			const newLayout = await this.$panel.api.post(
+				this.endpoints.field + "/layout",
+				{
+					attrs: oldLayout.attrs,
+					columns: columns
+				}
+			);
 
 			// filter columns that have blocks
 			const oldColumns = oldLayout.columns.filter(
@@ -224,9 +232,12 @@ export default {
 		},
 		async paste(e, index = this.rows.length) {
 			// pass json to the paste endpoint to validate
-			let rows = await this.$api.post(this.endpoints.field + "/layout/paste", {
-				json: this.$helper.clipboard.read(e)
-			});
+			let rows = await this.$panel.api.post(
+				this.endpoints.field + "/layout/paste",
+				{
+					json: this.$helper.clipboard.read(e)
+				}
+			);
 
 			if (rows.length) {
 				this.rows.splice(index, 0, ...rows);
@@ -235,7 +246,7 @@ export default {
 
 			// a sign that it has been pasted
 			this.$panel.notification.success({
-				message: this.$t("paste.success", { count: rows.length }),
+				message: this.$panel.t("paste.success", { count: rows.length }),
 				icon: "download"
 			});
 		},
@@ -260,7 +271,7 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-remove-dialog",
 				props: {
-					text: this.$t("field.layout.delete.confirm.all")
+					text: this.$panel.t("field.layout.delete.confirm.all")
 				},
 				on: {
 					submit: () => {

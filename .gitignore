@@ -41,4 +41,7 @@ phpunit.xml
 /vendor/**/*.pubkey
 /vendor/**/*.asc
 /vendor/**/*.sh
-/vendor/getkirby/composer-installer
+
+# plan artifacts
+.claude/plans/
+.claude/gates/

@@ -10,7 +10,7 @@ class ExifTest extends TestCase
 {
 	protected function _image($filename = 'image/cat.jpg')
 	{
-		return new Image(static::FIXTURES . '/' . $filename);
+		return new Image(['root' => static::FIXTURES . '/' . $filename]);
 	}
 
 	protected function _exif($filename = 'image/cat.jpg')

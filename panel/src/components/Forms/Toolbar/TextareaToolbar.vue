@@ -19,7 +19,6 @@ export const props = {
 
 /**
  * Toolbar for `k-textarea-input`
- * @since 4.0.0
  * @unstable
  */
 export default {
@@ -29,63 +28,63 @@ export default {
 		commands() {
 			return {
 				headlines: {
-					label: this.$t("toolbar.button.headings"),
+					label: this.$panel.t("toolbar.button.headings"),
 					icon: "title",
 					dropdown: [
 						{
-							label: this.$t("toolbar.button.heading.1"),
+							label: this.$panel.t("toolbar.button.heading.1"),
 							icon: "h1",
 							click: () => this.command("prepend", "#")
 						},
 						{
-							label: this.$t("toolbar.button.heading.2"),
+							label: this.$panel.t("toolbar.button.heading.2"),
 							icon: "h2",
 							click: () => this.command("prepend", "##")
 						},
 						{
-							label: this.$t("toolbar.button.heading.3"),
+							label: this.$panel.t("toolbar.button.heading.3"),
 							icon: "h3",
 							click: () => this.command("prepend", "###")
 						}
 					]
 				},
 				bold: {
-					label: this.$t("toolbar.button.bold"),
+					label: this.$panel.t("toolbar.button.bold"),
 					icon: "bold",
 					click: () => this.command("toggle", "**"),
 					shortcut: "b"
 				},
 				italic: {
-					label: this.$t("toolbar.button.italic"),
+					label: this.$panel.t("toolbar.button.italic"),
 					icon: "italic",
 					click: () => this.command("toggle", "*"),
 					shortcut: "i"
 				},
 				link: {
-					label: this.$t("toolbar.button.link"),
+					label: this.$panel.t("toolbar.button.link"),
 					icon: "url",
 					click: () => this.command("dialog", "link"),
 					shortcut: "k"
 				},
 				email: {
-					label: this.$t("toolbar.button.email"),
+					label: this.$panel.t("toolbar.button.email"),
 					icon: "email",
 					click: () => this.command("dialog", "email"),
 					shortcut: "e"
 				},
 				file: {
-					label: this.$t("toolbar.button.file"),
+					label: this.$panel.t("toolbar.button.file"),
 					icon: "attachment",
 					click: () => this.command("file"),
 					dropdown: this.uploads
 						? [
 								{
-									label: this.$t("toolbar.button.file.select"),
+									label: this.$panel.t("toolbar.button.file.select"),
 									icon: "check",
 									click: () => this.command("file")
 								},
 								{
-									label: this.$t("toolbar.button.file.upload"),
+									label: this.$panel.t("toolbar.button.file.upload"),
 									icon: "upload",
 									click: () => this.command("upload")
 								}
@@ -93,12 +92,12 @@ export default {
 						: undefined
 				},
 				code: {
-					label: this.$t("toolbar.button.code"),
+					label: this.$panel.t("toolbar.button.code"),
 					icon: "code",
 					click: () => this.command("toggle", "`")
 				},
 				ul: {
-					label: this.$t("toolbar.button.ul"),
+					label: this.$panel.t("toolbar.button.ul"),
 					icon: "list-bullet",
 					click: () =>
 						this.command("insert", (input, selection) =>
@@ -109,7 +108,7 @@ export default {
 						)
 				},
 				ol: {
-					label: this.$t("toolbar.button.ol"),
+					label: this.$panel.t("toolbar.button.ol"),
 					icon: "list-numbers",
 					click: () =>
 						this.command("insert", (input, selection) =>

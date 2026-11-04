@@ -12,7 +12,7 @@
 		<k-header
 			:editable="permissions.changeName && !isLocked"
 			class="k-file-view-header"
-			@edit="$dialog(api + '/changeName')"
+			@edit="$panel.dialog.open(api + '/changeName')"
 		>
 			{{ filename }}
 
@@ -46,7 +46,7 @@
 		<k-sections
 			:blueprint="blueprint"
 			:content="content"
-			:empty="$t('file.blueprint', { blueprint: $esc(blueprint) })"
+			:empty="$panel.t('file.blueprint', { blueprint: $esc(blueprint) })"
 			:lock="lock"
 			:parent="api"
 			:tab="tab"

@@ -13,10 +13,10 @@ return [
 		'method'  => 'GET',
 		'auth'    => false,
 		'action'  => function () {
-			$system = $this->kirby()->system();
+			$system = $this->infinri()->system();
 			$model  = $this->resolve($system);
 
-			if ($this->kirby()->user()) {
+			if ($this->infinri()->user()) {
 				return $model->view('panel');
 			}
 
@@ -27,21 +27,12 @@ return [
 		}
 	],
 	[
-		'pattern' => 'system/register',
-		'method'  => 'POST',
-		'action'  => function () {
-			$this->validateAreaAccess('system');
-
-			return $this->kirby()->system()->register($this->requestBody('license'), $this->requestBody('email'));
-		}
-	],
-	[
 		'pattern' => 'system/install',
 		'method'  => 'POST',
 		'auth'    => false,
 		'action'  => function () {
-			$system = $this->kirby()->system();
-			$auth   = $this->kirby()->auth();
+			$system = $this->infinri()->system();
+			$auth   = $this->infinri()->auth();
 
 			// csrf token check
 			if ($auth->type() === 'session' && $auth->csrf() === false) {

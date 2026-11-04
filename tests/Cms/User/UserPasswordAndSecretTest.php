@@ -11,18 +11,18 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(User::class)]
 class UserPasswordAndSecretTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserPasswordAndSecret';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserPasswordAndSecret';
 
 	public function testHasPassword(): void
 	{
 		$user = new User([
-			'email' => 'test@getkirby.com'
+			'email' => 'test@infinri.com'
 		]);
 
 		$this->assertFalse($user->hasPassword());
 
 		$user = new User([
-			'email'    => 'test@getkirby.com',
+			'email'    => 'test@infinri.com',
 			'password' => User::hashPassword('correct-horse-battery-staple')
 		]);
 
@@ -101,7 +101,7 @@ class UserPasswordAndSecretTest extends ModelTestCase
 	public function testValidatePassword($input, $valid): void
 	{
 		$user = new User([
-			'email'    => 'test@getkirby.com',
+			'email'    => 'test@infinri.com',
 			'password' => User::hashPassword('correct-horse-battery-staple')
 		]);
 
@@ -116,7 +116,7 @@ class UserPasswordAndSecretTest extends ModelTestCase
 	public function testValidatePasswordHttpCode(): void
 	{
 		$user = new User([
-			'email'    => 'test@getkirby.com',
+			'email'    => 'test@infinri.com',
 			'password' => User::hashPassword('correct-horse-battery-staple')
 		]);
 
@@ -158,7 +158,7 @@ class UserPasswordAndSecretTest extends ModelTestCase
 	public function testValidateUndefinedPassword(): void
 	{
 		$user = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 		]);
 
 		$this->expectException(NotFoundException::class);

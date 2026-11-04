@@ -43,10 +43,10 @@ class Panel
 	 */
 	public static function areas(): array
 	{
-		$kirby  = App::instance();
-		$system = $kirby->system();
-		$user   = $kirby->user();
-		$areas  = $kirby->load()->areas();
+		$infinri  = App::instance();
+		$system = $infinri->system();
+		$user   = $infinri->user();
+		$areas  = $infinri->load()->areas();
 
 		// the system is not ready
 		if (
@@ -75,7 +75,7 @@ class Panel
 		// Disable the language area for single-language installations
 		// This does not check for installed languages. Otherwise you'd
 		// not be able to add the first language through the view
-		if (!$kirby->option('languages')) {
+		if (!$infinri->option('languages')) {
 			unset($areas['languages']);
 		}
 
@@ -90,7 +90,6 @@ class Panel
 
 	/**
 	 * Collect all registered buttons from areas
-	 * @since 5.0.0
 	 */
 	public static function buttons(): array
 	{
@@ -150,7 +149,6 @@ class Panel
 	 * Garbage collection which runs with a probability
 	 * of 10% on each Panel request
 	 *
-	 * @since 5.0.0
 	 * @codeCoverageIgnore
 	 */
 	protected static function garbage(): void
@@ -226,8 +224,8 @@ class Panel
 	public static function multilang(): bool
 	{
 		// multilang setup check
-		$kirby = App::instance();
-		return $kirby->option('languages') || $kirby->multilang();
+		$infinri = App::instance();
+		return $infinri->option('languages') || $infinri->multilang();
 	}
 
 	/**
@@ -250,7 +248,7 @@ class Panel
 	 */
 	public static function response($result, array $options = []): Response
 	{
-		// pass responses directly down to the Kirby router
+		// pass responses directly down to the Infinri router
 		if ($result instanceof Response) {
 			return $result;
 		}
@@ -263,7 +261,7 @@ class Panel
 
 		// interpret strings as errors
 		} elseif (is_string($result) === true) {
-			$result = new Exception($result);
+			$result = new Exception(message: $result);
 		}
 
 		// handle different response types (view, dialog, ...)
@@ -282,9 +280,9 @@ class Panel
 	 */
 	public static function router(string|null $path = null): Response|null
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
-		if ($kirby->option('panel') === false) {
+		if ($infinri->option('panel') === false) {
 			return null;
 		}
 
@@ -303,7 +301,7 @@ class Panel
 		$routes = static::routes($areas);
 
 		// create a micro-router for the Panel
-		return Router::execute($path, $method = $kirby->request()->method(), $routes, function ($route) use ($areas, $kirby, $method, $path) {
+		return Router::execute($path, $method = $infinri->request()->method(), $routes, function ($route) use ($areas, $infinri, $method, $path) {
 			// route needs authentication?
 			$auth   = $route->attributes()['auth'] ?? true;
 			$areaId = $route->attributes()['area'] ?? null;
@@ -313,14 +311,14 @@ class Panel
 			// call the route action to check the result
 			try {
 				// trigger hook
-				$route = $kirby->apply(
+				$route = $infinri->apply(
 					'panel.route:before',
 					compact('route', 'path', 'method')
 				);
 
 				// check for access before executing area routes
 				if ($auth !== false) {
-					static::firewall($kirby->user(), $areaId);
+					static::firewall($infinri->user(), $areaId);
 				}
 
 				$result = $route->action()->call($route, ...$route->arguments());
@@ -335,7 +333,7 @@ class Panel
 				'type'  => $type
 			]);
 
-			return $kirby->apply(
+			return $infinri->apply(
 				'panel.route:after',
 				compact('route', 'path', 'method', 'response'),
 				'response'
@@ -349,7 +347,7 @@ class Panel
 	 */
 	public static function routes(array $areas): array
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// the browser incompatibility
 		// warning is always needed
@@ -358,7 +356,7 @@ class Panel
 				'pattern' => 'browser',
 				'auth'    => false,
 				'action'  => fn () => new Response(
-					Tpl::load($kirby->root('kirby') . '/views/browser.php')
+					Tpl::load($infinri->root('infinri') . '/views/browser.php')
 				),
 			]
 		];
@@ -503,10 +501,10 @@ class Panel
 				'type'    => 'search',
 				'area'    => $areaId,
 				'action'  => function () use ($params) {
-					$kirby   = App::instance();
-					$request = $kirby->request();
+					$infinri   = App::instance();
+					$request = $infinri->request();
 					$query   = $request->get('query');
-					$limit   = (int)$request->get('limit', $kirby->option('panel.search.limit', 10));
+					$limit   = (int)$request->get('limit', $infinri->option('panel.search.limit', 10));
 					$page    = (int)$request->get('page', 1);
 
 					return $params['query']($query, $limit, $page);
@@ -553,18 +551,18 @@ class Panel
 	 */
 	public static function setLanguage(): string|null
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// language switcher
 		if (static::multilang()) {
 			$fallback = 'en';
 
-			if ($defaultLanguage = $kirby->defaultLanguage()) {
+			if ($defaultLanguage = $infinri->defaultLanguage()) {
 				$fallback = $defaultLanguage->code();
 			}
 
-			$request         = $kirby->request();
-			$session         = $kirby->session();
+			$request         = $infinri->request();
+			$session         = $infinri->session();
 			$sessionLanguage = $session->get('panel.language', $fallback);
 
 			// the header carries the language of the requesting Panel tab,
@@ -579,8 +577,8 @@ class Panel
 				$session->set('panel.language', $language);
 			}
 
-			// activate the current language in Kirby
-			$kirby->setCurrentLanguage($language);
+			// activate the current language in Infinri
+			$infinri->setCurrentLanguage($language);
 
 			return $language;
 		}
@@ -594,14 +592,14 @@ class Panel
 	 */
 	public static function setTranslation(): string
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// use the user language for the default translation or
 		// fall back to the language from the config
-		$translation = $kirby->user()?->language() ??
-						$kirby->panelLanguage();
+		$translation = $infinri->user()?->language() ??
+						$infinri->panelLanguage();
 
-		$kirby->setCurrentTranslation($translation);
+		$infinri->setCurrentTranslation($translation);
 
 		return $translation;
 	}
@@ -614,11 +612,11 @@ class Panel
 	{
 		// only touch relative paths
 		if (Url::isAbsolute($url) === false) {
-			$kirby = App::instance();
-			$slug  = $kirby->option('panel.slug', 'panel');
+			$infinri = App::instance();
+			$slug  = $infinri->option('panel.slug', 'panel');
 			$path  = trim($url ?? '', '/');
 
-			$baseUri  = new Uri($kirby->url());
+			$baseUri  = new Uri($infinri->url());
 			$basePath = trim($baseUri->path()->toString(), '/');
 
 			// removes base path if relative path contains it

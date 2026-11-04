@@ -144,7 +144,7 @@ class Site extends ModelWithContent
 			return 'site';
 		}
 
-		return $this->kirby()->url('api') . '/site';
+		return $this->infinri()->url('api') . '/site';
 	}
 
 	/**
@@ -240,13 +240,13 @@ class Site extends ModelWithContent
 			return $this->inventory;
 		}
 
-		$kirby = $this->kirby();
+		$infinri = $this->infinri();
 
 		return $this->inventory = Inventory::for(
 			$this->root(),
-			$kirby->contentExtension(),
-			$kirby->contentIgnore(),
-			$kirby->multilang()
+			$infinri->contentExtension(),
+			$infinri->contentIgnore(),
+			$infinri->multilang()
 		);
 	}
 
@@ -264,7 +264,6 @@ class Site extends ModelWithContent
 
 	/**
 	 * Checks if the site is accessible to the current user
-	 * @since 5.4.0
 	 */
 	public function isAccessible(): bool
 	{
@@ -277,7 +276,7 @@ class Site extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function mediaDir(): string
 	{
-		return $this->kirby()->root('media') . '/site';
+		return $this->infinri()->root('media') . '/site';
 	}
 
 	/**
@@ -294,7 +293,7 @@ class Site extends ModelWithContent
 	 */
 	public function mediaUrl(): string
 	{
-		return $this->kirby()->url('media') . '/site';
+		return $this->infinri()->url('media') . '/site';
 	}
 
 	/**
@@ -373,13 +372,6 @@ class Site extends ModelWithContent
 			return null;
 		}
 
-		// the site preview defaults to the home page, so for backward
-		// compatibility we also check the home page's preview permission
-		// @todo Remove in 6.0.0, only check `site.preview`
-		if ($this->homePage()?->permissions()->can('preview') !== true) {
-			return null;
-		}
-
 		return $this->version($versionId)->url();
 	}
 
@@ -389,7 +381,7 @@ class Site extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function root(): string
 	{
-		return $this->root ??= $this->kirby()->root('content');
+		return $this->root ??= $this->infinri()->root('content');
 	}
 
 	/**
@@ -453,11 +445,11 @@ class Site extends ModelWithContent
 	 */
 	public function url(string|null $language = null): string
 	{
-		if ($language !== null || $this->kirby()->multilang() === true) {
+		if ($language !== null || $this->infinri()->multilang() === true) {
 			return $this->urlForLanguage($language);
 		}
 
-		return $this->url ?? $this->kirby()->url();
+		return $this->url ?? $this->infinri()->url();
 	}
 
 	/**
@@ -469,8 +461,8 @@ class Site extends ModelWithContent
 		array|null $options = null
 	): string {
 		return
-			$this->kirby()->language($languageCode)?->url() ??
-			$this->kirby()->url();
+			$this->infinri()->language($languageCode)?->url() ??
+			$this->infinri()->url();
 	}
 
 	/**
@@ -485,12 +477,12 @@ class Site extends ModelWithContent
 		// always set the locale; in single-language mode this
 		// applies the locale from config, in multi-language mode
 		// it falls back to the default language when `null` is passed
-		$this->kirby()->setCurrentLanguage($languageCode);
+		$this->infinri()->setCurrentLanguage($languageCode);
 
 		// only set translation when explicitly passed;
 		// otherwise it would always fall back to 'en'
 		if ($languageCode !== null) {
-			$this->kirby()->setCurrentTranslation($languageCode);
+			$this->infinri()->setCurrentTranslation($languageCode);
 		}
 
 		// convert ids to a Page object

@@ -2,7 +2,7 @@
 	<k-table
 		:class="['k-block-type-table-preview', $attrs.class]"
 		:columns="columns"
-		:empty="$t('field.structure.empty')"
+		:empty="$panel.t('field.structure.empty')"
 		:rows="rows"
 		:style="$attrs.style"
 		@dblclick.native="open"

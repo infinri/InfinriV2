@@ -29,7 +29,7 @@
 				>
 					<template v-if="!disabled" #options="{ index }">
 						<k-button
-							:title="$t('remove')"
+							:title="$panel.t('remove')"
 							icon="remove"
 							@click="remove(index)"
 						/>
@@ -78,7 +78,7 @@ export default {
 			return [
 				{
 					autofocus: this.autofocus,
-					text: this.$t("select"),
+					text: this.$panel.t("select"),
 					icon: "checklist",
 					responsive: true,
 					click: () => this.open()

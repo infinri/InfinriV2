@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(FilesCollector::class)]
 class FilesCollectorTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Collector.FilesCollector';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Collector.FilesCollector';
 
 	public function setUpFiles()
 	{
@@ -35,21 +35,21 @@ class FilesCollectorTest extends TestCase
 	public function testCollect(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertCollect(FilesCollector::class, ['image-a.jpg', 'image-b.jpg', 'image-c.jpg']);
 	}
 
 	public function testCollectByQuery(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertCollectByQuery(FilesCollector::class, 'site.files.template("hero")', ['image-b.jpg', 'image-c.jpg']);
 	}
 
 	public function testCollectSorted(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->app->site()->files()->find('image-c.jpg')->changeSort(1);
 		$this->app->site()->files()->find('image-a.jpg')->changeSort(2);
@@ -67,7 +67,7 @@ class FilesCollectorTest extends TestCase
 	public function testFilterByTemplates(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$collector = new FilesCollector(
 			template: 'hero'
@@ -79,7 +79,7 @@ class FilesCollectorTest extends TestCase
 	public function testFlip(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->assertFlip(FilesCollector::class, ['image-c.jpg', 'image-b.jpg', 'image-a.jpg']);
 	}
@@ -130,14 +130,14 @@ class FilesCollectorTest extends TestCase
 	public function testPagination(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertPagination(FilesCollector::class);
 	}
 
 	public function testSearch(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->app->site()->files()->find('image-c.jpg')->update([
 			'alt' => 'Searchword'
 		]);
@@ -148,7 +148,7 @@ class FilesCollectorTest extends TestCase
 	public function testSearchAndFlip(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->app->site()->files()->find('image-b.jpg')->update([
 			'alt' => 'Searchword'
@@ -165,7 +165,7 @@ class FilesCollectorTest extends TestCase
 	public function testSearchAndSortBy(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->app->site()->files()->find('image-b.jpg')->update([
 			'alt' => 'Searchword'
@@ -182,7 +182,7 @@ class FilesCollectorTest extends TestCase
 	public function testSortBy(): void
 	{
 		$this->setUpFiles();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertSortBy(FilesCollector::class, 'filename desc', ['image-c.jpg', 'image-b.jpg', 'image-a.jpg']);
 	}
 }

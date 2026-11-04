@@ -15,7 +15,7 @@ class Document
 	 */
 	public static function response(array $fiber): Response
 	{
-		$kirby  = App::instance();
+		$infinri  = App::instance();
 		$assets = new Assets();
 
 		// Full HTML response
@@ -23,7 +23,7 @@ class Document
 		try {
 			if ($assets->link() === true) {
 				usleep(1);
-				Response::go($kirby->url('base') . '/' . $kirby->path());
+				Response::go($infinri->url('base') . '/' . $infinri->path());
 			}
 		} catch (Throwable $e) {
 			die('The Panel assets cannot be installed properly. ' . $e->getMessage());
@@ -31,21 +31,21 @@ class Document
 		// @codeCoverageIgnoreEnd
 
 		// get the uri object for the panel url
-		$uri = new Uri($kirby->url('panel'));
+		$uri = new Uri($infinri->url('panel'));
 
 		// proper response code
 		$code = $fiber['$view']['code'] ?? 200;
 
 		// load the main Panel view template
-		$body = Tpl::load($kirby->root('kirby') . '/views/panel.php', [
+		$body = Tpl::load($infinri->root('infinri') . '/views/panel.php', [
 			'assets'   => $assets->external(),
 			'icons'    => $assets->icons(),
-			'nonce'    => $kirby->nonce(),
+			'nonce'    => $infinri->nonce(),
 			'fiber'    => $fiber,
 			'panelUrl' => $uri->path()->toString(true) . '/',
 		]);
 
-		$frameAncestors = $kirby->option('panel.frameAncestors');
+		$frameAncestors = $infinri->option('panel.frameAncestors');
 		$frameAncestors = match (true) {
 			$frameAncestors === true   => "'self'",
 			is_array($frameAncestors)  => "'self' " . implode(' ', $frameAncestors),

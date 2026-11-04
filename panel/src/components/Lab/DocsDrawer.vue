@@ -25,14 +25,6 @@ export default {
 				}
 			];
 
-			if (this.docs.github) {
-				options.unshift({
-					icon: "github",
-					link: this.docs.github,
-					target: "_blank"
-				});
-			}
-
 			return options;
 		}
 	}

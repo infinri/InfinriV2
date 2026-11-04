@@ -4,7 +4,7 @@
 		:class="['k-toggles-input', $attrs.class]"
 		:style="$attrs.style"
 	>
-		<legend class="sr-only">{{ $t("options") }}</legend>
+		<legend class="sr-only">{{ $panel.t("options") }}</legend>
 
 		<k-input-validator :required="required" :value="JSON.stringify(value)">
 			<ul
@@ -107,7 +107,7 @@ export default {
 }
 
 .k-toggles-input li {
-	height: var(--field-input-height);
+	height: var(--input-height);
 }
 .k-toggles-input label {
 	align-items: center;

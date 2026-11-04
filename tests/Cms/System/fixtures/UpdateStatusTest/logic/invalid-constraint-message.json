@@ -14,9 +14,9 @@
 	},
 	"urls": {
 		"*": {
-			"changes": "https://getkirby.com/releases/{{ version }}",
+			"changes": "https://infinri.com/releases/{{ version }}",
 			"download": "https://repoofthefuture.com/{{ version }}.zip",
-			"upgrade": "https://getkirby.com/releases/88888"
+			"upgrade": "https://infinri.com/releases/88888"
 		}
 	},
 	"php": {},
@@ -24,12 +24,12 @@
 	"messages": [
 		{
 			"text": "Message 1",
-			"kirby": "77777.6.0-77777.7.9",
+			"infinri": "77777.6.0-77777.7.9",
 			"php": "*"
 		},
 		{
 			"text": "Message 2",
-			"kirby": "*",
+			"infinri": "*",
 			"php": "7.4-8.2"
 		}
 	]

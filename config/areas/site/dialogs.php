@@ -163,8 +163,10 @@ return [
 							'required' => true
 						])
 					],
-					'theme' => 'notice',
-					'submitButton' => I18n::translate('change'),
+					'submitButton' => [
+						'text'  => I18n::translate('change'),
+						'theme' => 'notice'
+					],
 					'value' => [
 						'template' => $page->intendedTemplate()->name()
 					]
@@ -186,16 +188,16 @@ return [
 	'page.changeTitle' => [
 		'pattern' => 'pages/(:any)/changeTitle',
 		'load' => function (string $id) {
-			$kirby   = App::instance();
-			$request = $kirby->request();
+			$infinri   = App::instance();
+			$request = $infinri->request();
 
 			$page        = Find::page($id);
 			$permissions = $page->permissions();
 			$select      = $request->get('select', 'title');
 
 			// build the path prefix
-			$path = match ($kirby->multilang()) {
-				true  => Str::after($kirby->site()->url(), $kirby->url()) . '/',
+			$path = match ($infinri->multilang()) {
+				true  => Str::after($infinri->site()->url(), $infinri->url()) . '/',
 				false => '/'
 			};
 
@@ -334,9 +336,11 @@ return [
 							]
 						],
 						'size'         => 'medium',
-						'submitButton' => I18n::translate('delete'),
+						'submitButton' => [
+							'text'  => I18n::translate('delete'),
+							'theme' => 'negative'
+						],
 						'text'         => $text,
-						'theme'        => 'negative',
 					]
 				];
 			}
@@ -516,8 +520,8 @@ return [
 			];
 		},
 		'submit' => function (string $id) {
-			$kirby    = App::instance();
-			$parentId = $kirby->request()->get('parent');
+			$infinri    = App::instance();
+			$parentId = $infinri->request()->get('parent');
 			$parent   = (empty($parentId) === true || $parentId === '/' || $parentId === 'site://') ? Find::site() : Find::page($parentId);
 			$oldPage  = Find::page($id);
 			$newPage  = $oldPage->move($parent);
@@ -551,8 +555,8 @@ return [
 			];
 		},
 		'submit' => function () {
-			$kirby = App::instance();
-			Find::site()->changeTitle($kirby->request()->get('title'));
+			$infinri = App::instance();
+			Find::site()->changeTitle($infinri->request()->get('title'));
 
 			return [
 				'event' => 'site.changeTitle',

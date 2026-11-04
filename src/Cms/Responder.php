@@ -13,7 +13,7 @@ class Responder implements Stringable
 {
 	/**
 	 * Timestamp when the response expires
-	 * in Kirby's cache
+	 * in Infinri's cache
 	 */
 	protected int|null $expires = null;
 
@@ -29,7 +29,7 @@ class Responder implements Stringable
 
 	/**
 	 * Flag that defines whether the current
-	 * response can be cached by Kirby's cache
+	 * response can be cached by Infinri's cache
 	 */
 	protected bool $cache = true;
 
@@ -87,8 +87,7 @@ class Responder implements Stringable
 	/**
 	 * Setter and getter for the flag that defines
 	 * whether the current response can be cached
-	 * by Kirby's cache
-	 * @since 3.5.5
+	 * by Infinri's cache
 	 *
 	 * @return bool|$this
 	 */
@@ -111,7 +110,6 @@ class Responder implements Stringable
 	 * Setter and getter for the flag that defines
 	 * whether the current response uses the HTTP
 	 * `Authorization` request header
-	 * @since 3.7.0
 	 *
 	 * @return bool|$this
 	 */
@@ -128,7 +126,6 @@ class Responder implements Stringable
 	/**
 	 * Setter for a cookie name that is
 	 * used by the response
-	 * @since 3.7.0
 	 */
 	public function usesCookie(string $name): void
 	{
@@ -141,7 +138,6 @@ class Responder implements Stringable
 	/**
 	 * Setter and getter for the list of cookie
 	 * names the response relies on
-	 * @since 3.7.0
 	 *
 	 * @return array|$this
 	 */
@@ -157,8 +153,7 @@ class Responder implements Stringable
 
 	/**
 	 * Setter and getter for the cache expiry
-	 * timestamp for Kirby's cache
-	 * @since 3.5.5
+	 * timestamp for Infinri's cache
 	 *
 	 * @param int|string|null $expires Timestamp, number of minutes or time string to parse
 	 * @param bool $override If `true`, the already defined timestamp will be overridden
@@ -389,8 +384,6 @@ class Responder implements Stringable
 	/**
 	 * Converts the response configuration to an array
 	 * that can safely be cached
-	 *
-	 * @since 5.2.0
 	 */
 	public function toCacheArray(): array
 	{
@@ -430,14 +423,13 @@ class Responder implements Stringable
 	 * and/or cookies; the request data only matters if it
 	 * is actually used/relied on by the response
 	 *
-	 * @since 3.7.0
 	 * @unstable
 	 */
 	public static function isPrivate(bool $usesAuth, array $usesCookies): bool
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
-		if ($usesAuth === true && $kirby->request()->hasAuth() === true) {
+		if ($usesAuth === true && $infinri->request()->hasAuth() === true) {
 			return true;
 		}
 
@@ -451,20 +443,7 @@ class Responder implements Stringable
 	}
 
 	/**
-	 * Marks headers (or header parts) as request-dependent, so they
-	 * can be subtracted before caching a response snapshot
-	 *
-	 * @since 5.2.0
-	 * @deprecated 5.3.0 Use `::volatileHeaders()->mark($name, $values)` instead. Will be removed in Kirby 6.
-	 */
-	public function markVolatileHeader(string $name, array|null $values = null): void
-	{
-		$this->volatileHeaders()->mark($name, $values);
-	}
-
-	/**
 	 * Setter and getter for the volatile headers manager
-	 * @since 5.3.0
 	 */
 	public function volatileHeaders(VolatileHeaders|array|null $headers = null): VolatileHeaders
 	{

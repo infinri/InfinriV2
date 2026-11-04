@@ -8,7 +8,7 @@ use Infinri\TestCase;
 
 class FilesSectionTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FilesSection';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FilesSection';
 
 	protected function setUp(): void
 	{
@@ -32,7 +32,7 @@ class FilesSectionTest extends TestCase
 
 		// The file section will always be empty for
 		// unauthorized users
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		return $this->app;
 	}
@@ -293,7 +293,7 @@ class FilesSectionTest extends TestCase
 				]
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// already reached the max
 		$section = new Section('files', [
@@ -332,7 +332,7 @@ class FilesSectionTest extends TestCase
 
 	public function testSortBy(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$locale = setlocale(LC_ALL, 0);
 		setlocale(LC_ALL, ['de_DE.ISO8859-1', 'de_DE']);
@@ -548,7 +548,7 @@ class FilesSectionTest extends TestCase
 				'query' => ['searchterm' => 'bike']
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$model = new Page([
 			'slug'  => 'test',
@@ -577,7 +577,7 @@ class FilesSectionTest extends TestCase
 				'query' => ['searchterm' => 'mount']
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$model = new Page([
 			'slug'  => 'test',
@@ -606,7 +606,7 @@ class FilesSectionTest extends TestCase
 				'query' => ['searchterm' => 'mountain']
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$model = new Page([
 			'slug'  => 'test',
@@ -635,7 +635,7 @@ class FilesSectionTest extends TestCase
 				'query' => ['searchterm' => 'bike']
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$model = new Page([
 			'slug'  => 'test',
@@ -665,7 +665,7 @@ class FilesSectionTest extends TestCase
 				'query' => ['searchterm' => 'bike']
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$model = new Page([
 			'slug'  => 'test',

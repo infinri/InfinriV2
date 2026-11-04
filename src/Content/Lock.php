@@ -5,17 +5,14 @@ namespace Infinri\Content;
 use Infinri\Cms\App;
 use Infinri\Cms\Language;
 use Infinri\Cms\Languages;
-use Infinri\Cms\ModelWithContent;
 use Infinri\Cms\User;
-use Infinri\Data\Data;
 use Infinri\Toolkit\Str;
 
 class Lock
 {
 	public function __construct(
 		protected User|null $user = null,
-		protected int|null $modified = null,
-		protected bool $legacy = false
+		protected int|null $modified = null
 	) {
 	}
 
@@ -28,11 +25,6 @@ class Lock
 		Version $version,
 		Language|string $language = 'default'
 	): static {
-
-		if ($legacy = static::legacy($version->model())) {
-			return $legacy;
-		}
-
 		// wildcard to search for a lock in any language
 		// the first locked one will be preferred
 		if ($language === '*') {
@@ -93,14 +85,6 @@ class Lock
 	}
 
 	/**
-	 * Checks if the lock is coming from an old .lock file
-	 */
-	public function isLegacy(): bool
-	{
-		return $this->legacy;
-	}
-
-	/**
 	 * Checks if the lock is actually locked
 	 */
 	public function isLocked(): bool
@@ -131,52 +115,6 @@ class Lock
 	}
 
 	/**
-	 * Looks for old .lock files and tries to create a
-	 * usable lock instance from them
-	 */
-	public static function legacy(ModelWithContent $model): static|null
-	{
-		$kirby = $model->kirby();
-		$file  = static::legacyFile($model);
-		$id    = '/' . $model->id();
-
-		// no legacy lock file? no lock.
-		if (file_exists($file) === false) {
-			return null;
-		}
-
-		$data = Data::read($file, 'yml', fail: false)[$id] ?? [];
-
-		// no valid lock entry? no lock.
-		if (isset($data['lock']) === false) {
-			return null;
-		}
-
-		// has the lock been unlocked? no lock.
-		if (isset($data['unlock']) === true) {
-			return null;
-		}
-
-		return new static(
-			user: $kirby->user($data['lock']['user']),
-			modified: $data['lock']['time'],
-			legacy: true
-		);
-	}
-
-	/**
-	 * Returns the absolute path to a legacy lock file
-	 */
-	public static function legacyFile(ModelWithContent $model): string
-	{
-		$root = match ($model::CLASS_ALIAS) {
-			'file'  => dirname($model->root()),
-			default => $model->root()
-		};
-		return $root . '/.lock';
-	}
-
-	/**
 	 * Returns the timestamp when the locked content has
 	 * been updated. You can pass a format to get a useful,
 	 * formatted date back.
@@ -201,7 +139,6 @@ class Lock
 		$user = $this->user?->isListable() === true ? $this->user : null;
 
 		return [
-			'isLegacy' => $this->isLegacy(),
 			'isLocked' => $this->isLocked(),
 			'modified' => $this->modified('c', 'date'),
 			'user'     => [

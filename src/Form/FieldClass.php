@@ -150,7 +150,6 @@ abstract class FieldClass
 	}
 
 	/**
-	 * @since 5.2.0
 	 * @todo Move to `Value` mixin once array-based fields are unsupported
 	 */
 	#[BlockCollectionAccess]

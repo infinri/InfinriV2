@@ -71,7 +71,7 @@
 export const detect = {
 	data() {
 		return {
-			detect: "https://getkirby.com"
+			detect: "https://infinri.com"
 		};
 	}
 };
@@ -81,7 +81,7 @@ export const detect = {
 export const preview = {
 	data() {
 		return {
-			preview: "https://getkirby.com",
+			preview: "https://infinri.com",
 			previewResult: null
 		};
 	},

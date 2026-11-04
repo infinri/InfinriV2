@@ -19,7 +19,7 @@ class TextareaFieldTest extends TestCase
 		$this->assertNull($field->size());
 		$this->assertSame([], $field->files());
 		$this->assertSame(['accept' => '*'], $field->uploads());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testButtonsDisabled(): void

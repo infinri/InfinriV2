@@ -93,9 +93,9 @@ class LocaleTest extends TestCase
 	public function testGetInvalid1(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('Invalid locale category "KIRBY_AWESOME_LOCALE"');
+		$this->expectExceptionMessage('Invalid locale category "INFINRI_AWESOME_LOCALE"');
 
-		Locale::get('KIRBY_AWESOME_LOCALE');
+		Locale::get('INFINRI_AWESOME_LOCALE');
 	}
 
 	public function testGetInvalid2(): void

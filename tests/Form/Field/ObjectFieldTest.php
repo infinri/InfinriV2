@@ -17,7 +17,7 @@ class ObjectFieldTest extends TestCase
 			]
 		]);
 
-		$this->assertSame($value, $field->data());
+		$this->assertSame($value, $field->toStoredValue());
 	}
 
 	public function testDataWhenEmpty(): void
@@ -30,7 +30,7 @@ class ObjectFieldTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('', $field->data());
+		$this->assertSame('', $field->toStoredValue());
 	}
 
 	public function testDefaultProps(): void
@@ -47,7 +47,7 @@ class ObjectFieldTest extends TestCase
 		$this->assertSame('object', $field->name());
 		$this->assertIsArray($field->fields());
 		$this->assertSame('', $field->value());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testDefaultValue(): void
@@ -157,6 +157,6 @@ class ObjectFieldTest extends TestCase
 			'tags' => 'a, b'
 		];
 
-		$this->assertSame($expected, $field->data());
+		$this->assertSame($expected, $field->toStoredValue());
 	}
 }

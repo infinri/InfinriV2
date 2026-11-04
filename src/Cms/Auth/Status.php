@@ -26,9 +26,9 @@ class Status implements Stringable
 	protected string|null $email;
 
 	/**
-	 * Kirby instance for user lookup
+	 * Infinri instance for user lookup
 	 */
-	protected App $kirby;
+	protected App $infinri;
 
 	/**
 	 * Purpose of the challenge:
@@ -56,7 +56,7 @@ class Status implements Stringable
 			);
 		}
 
-		$this->kirby             = $props['kirby'];
+		$this->infinri             = $props['infinri'];
 		$this->challenge         = $props['challenge'] ?? null;
 		$this->challengeFallback = $props['challengeFallback'] ?? null;
 		$this->email             = $props['email'] ?? null;
@@ -100,7 +100,7 @@ class Status implements Stringable
 	public function clone(array $props = []): static
 	{
 		return new static(array_replace_recursive([
-			'kirby'             => $this->kirby,
+			'infinri'             => $this->infinri,
 			'challenge'         => $this->challenge,
 			'challengeFallback' => $this->challengeFallback,
 			'email'             => $this->email,
@@ -160,6 +160,6 @@ class Status implements Stringable
 			return null;
 		}
 
-		return $this->kirby->user($this->email());
+		return $this->infinri->user($this->email());
 	}
 }

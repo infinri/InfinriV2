@@ -9,7 +9,7 @@
 			<k-button-group layout="collapsed">
 				<k-button
 					:autofocus="autofocus"
-					:text="$t('add')"
+					:text="$panel.t('add')"
 					icon="add"
 					variant="filled"
 					size="xs"
@@ -39,7 +39,7 @@
 
 		<footer v-if="!disabled && hasFieldsets">
 			<k-button
-				:title="$t('add')"
+				:title="$panel.t('add')"
 				icon="add"
 				size="xs"
 				variant="filled"
@@ -70,19 +70,19 @@ export default {
 					click: () => this.$refs.layouts.copy(),
 					disabled: this.isEmpty,
 					icon: "template",
-					text: this.$t("copy.all")
+					text: this.$panel.t("copy.all")
 				},
 				{
 					click: () => this.$refs.layouts.pasteboard(),
 					icon: "download",
-					text: this.$t("paste")
+					text: this.$panel.t("paste")
 				},
 				"-",
 				{
 					click: () => this.$refs.layouts.removeAll(),
 					disabled: this.isEmpty,
 					icon: "trash",
-					text: this.$t("delete.all")
+					text: this.$panel.t("delete.all")
 				}
 			];
 		}

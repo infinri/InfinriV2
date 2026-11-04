@@ -138,15 +138,14 @@ class Request
 		}
 
 		// lazily request the instance for non-CMS use cases
-		$kirby = App::instance(lazy: true);
+		$infinri = App::instance(lazy: true);
 
 		// tell the CMS responder that the response relies on
 		// the `Authorization` header and its value (even if
 		// the header isn't set in the current request);
 		// this ensures that the response is only cached for
-		// unauthenticated visitors;
-		// https://github.com/getkirby/kirby/issues/4423#issuecomment-1166300526
-		$kirby?->response()->usesAuth(true);
+		// unauthenticated visitors
+		$infinri?->response()->usesAuth(true);
 
 		if ($auth = $this->authString()) {
 			$type = Str::lower(Str::before($auth, ' '));
@@ -280,7 +279,6 @@ class Request
 	/**
 	 * Returns whether the request contains
 	 * the `Authorization` header
-	 * @since 3.7.0
 	 */
 	public function hasAuth(): bool
 	{

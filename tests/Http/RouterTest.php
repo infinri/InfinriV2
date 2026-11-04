@@ -78,11 +78,11 @@ class RouterTest extends TestCase
 	public function testFindWithNonexistingMethod(): void
 	{
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('Invalid routing method: KIRBY');
+		$this->expectExceptionMessage('Invalid routing method: INFINRI');
 		$this->expectExceptionCode(400);
 
 		$router = new Router();
-		$router->find('a', 'KIRBY');
+		$router->find('a', 'INFINRI');
 	}
 
 	public function testFindNonexistingRoute(): void
@@ -254,5 +254,19 @@ class RouterTest extends TestCase
 		});
 
 		$this->assertSame('test', $result);
+	}
+
+	public function testFindWithNullIgnore(): void
+	{
+		$router = new Router([
+			[
+				'pattern' => '(:all)',
+				'action'  => fn () => 'test'
+			]
+		]);
+
+		$this->expectException(\TypeError::class);
+
+		$router->find('a', 'GET', null);
 	}
 }

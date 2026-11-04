@@ -35,7 +35,6 @@ import Block from "./Default.vue";
 
 /**
  * @displayName BlockTypeFields
- * @since 4.0.0
  */
 export default {
 	extends: Block,
@@ -61,7 +60,7 @@ export default {
 			this.$emit("open", this.tab);
 		},
 		state(collapsed) {
-			const id = `kirby.fieldsBlock.${this.endpoints.field}.${this.id}`;
+			const id = `infinri.fieldsBlock.${this.endpoints.field}.${this.id}`;
 
 			if (collapsed !== undefined) {
 				sessionStorage.setItem(id, collapsed);

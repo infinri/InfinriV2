@@ -8,7 +8,7 @@ use ReflectionClass;
 #[CoversClass(File::class)]
 class FileCommitTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileCommit';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileCommit';
 
 	public function testCommit(): void
 	{
@@ -70,7 +70,7 @@ class FileCommitTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$file = new File([
 			'filename' => 'test.jpg',

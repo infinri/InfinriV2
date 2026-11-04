@@ -3,7 +3,6 @@
 namespace Infinri\Panel;
 
 use Infinri\Cms\App;
-use Infinri\Cms\Helpers;
 use Infinri\Cms\Url;
 use Infinri\Exception\Exception;
 use Infinri\Exception\InvalidArgumentException;
@@ -14,7 +13,7 @@ use Infinri\Toolkit\A;
 class Assets
 {
 	protected bool $isDev;
-	protected App $kirby;
+	protected App $infinri;
 	protected string $nonce;
 	protected Plugins $plugins;
 	protected string $url;
@@ -22,18 +21,18 @@ class Assets
 
 	public function __construct()
 	{
-		$this->kirby   = App::instance();
-		$this->nonce   = $this->kirby->nonce();
+		$this->infinri   = App::instance();
+		$this->nonce   = $this->infinri->nonce();
 		$this->plugins = new Plugins();
 
-		$vite       = $this->kirby->roots()->panel() . '/.vite-running';
+		$vite       = $this->infinri->roots()->panel() . '/.vite-running';
 		$this->vite = is_file($vite) === true;
 
 		// Check if Panel is running in dev mode to
 		// get the assets from the Vite dev server;
 		// dev mode = explicitly enabled in the config AND Vite is running
 		$this->isDev =
-			$this->kirby->option('panel.dev', false) !== false &&
+			$this->infinri->option('panel.dev', false) !== false &&
 			$this->vite === true;
 
 		// Get the base URL
@@ -68,7 +67,7 @@ class Assets
 	{
 		$customs = [];
 
-		if ($assets = $this->kirby->option($option)) {
+		if ($assets = $this->infinri->option($option)) {
 			$assets  = A::wrap($assets);
 
 			foreach ($assets as $index => $path) {
@@ -95,13 +94,10 @@ class Assets
 	public function external(): array
 	{
 		return [
-			'css'            => $this->css(),
-			'icons'          => $this->favicons(),
-			'import-maps'    => $this->importMaps(),
-			'js'             => $this->js(),
-			// loader for plugins' index.dev.mjs files – inlined,
-			// so we provide the code instead of the asset URL
-			'plugin-imports' => $this->plugins->read('mjs'),
+			'css'         => $this->css(),
+			'icons'       => $this->favicons(),
+			'import-maps' => $this->importMaps(),
+			'js'          => $this->js(),
 		];
 	}
 
@@ -112,7 +108,7 @@ class Assets
 	 */
 	public function favicons(): array
 	{
-		$icons = $this->kirby->option('panel.favicon', [
+		$icons = $this->infinri->option('panel.favicon', [
 			[
 				'rel'   => 'apple-touch-icon',
 				'type'  => 'image/png',
@@ -144,22 +140,7 @@ class Assets
 
 		if (is_array($icons) === true) {
 			// normalize options
-			foreach ($icons as $rel => &$icon) {
-				// TODO: remove this backward compatibility check in v6
-				if (isset($icon['url']) === true) {
-					Helpers::deprecated('`panel.favicon` option: use `href` instead of `url` attribute');
-
-					$icon['href'] = $icon['url'];
-					unset($icon['url']);
-				}
-
-				// TODO: remove this backward compatibility check in v6
-				if (is_string($rel) === true && isset($icon['rel']) === false) {
-					Helpers::deprecated('`panel.favicon` option: use `rel` attribute instead of passing string as key');
-
-					$icon['rel'] = $rel;
-				}
-
+			foreach ($icons as &$icon) {
 				$icon['href']  = Url::to($icon['href']);
 				$icon['nonce'] = $this->nonce;
 			}
@@ -191,7 +172,7 @@ class Assets
 	 */
 	public function icons(): string
 	{
-		$dir   = $this->kirby->root('panel') . '/';
+		$dir   = $this->infinri->root('panel') . '/';
 		$dir  .= $this->isDev ? 'public' : 'dist';
 		$icons = F::read($dir . '/img/icons.svg');
 		$icons = preg_replace('/<!--(.|\s)*?-->/', '', $icons);
@@ -269,9 +250,9 @@ class Assets
 	 */
 	public function link(): bool
 	{
-		$mediaRoot   = $this->kirby->root('media') . '/panel';
-		$panelRoot   = $this->kirby->root('panel') . '/dist';
-		$versionHash = $this->kirby->versionHash();
+		$mediaRoot   = $this->infinri->root('media') . '/panel';
+		$panelRoot   = $this->infinri->root('panel') . '/dist';
+		$versionHash = $this->infinri->versionHash();
 		$versionRoot = $mediaRoot . '/' . $versionHash;
 
 		// check if the version already exists
@@ -302,18 +283,18 @@ class Assets
 	{
 		// vite is not running, use production assets
 		if ($this->isDev === false) {
-			return $this->kirby->url('media') . '/panel/' . $this->kirby->versionHash();
+			return $this->infinri->url('media') . '/panel/' . $this->infinri->versionHash();
 		}
 
 		// explicitly configured base URL
-		$dev = $this->kirby->option('panel.dev');
+		$dev = $this->infinri->option('panel.dev');
 
 		if (is_string($dev) === true) {
 			return $dev;
 		}
 
-		// port 3000 of the current Kirby request
-		return rtrim($this->kirby->request()->url([
+		// port 3000 of the current Infinri request
+		return rtrim($this->infinri->request()->url([
 			'port'   => 3000,
 			'path'   => null,
 			'params' => null,
@@ -332,7 +313,7 @@ class Assets
 			return $this->url . '/node_modules/vue/dist/vue.esm.browser.js';
 		}
 
-		if ($this->kirby->option('panel.vue.compiler', true) === true) {
+		if ($this->infinri->option('panel.vue.compiler', true) === true) {
 			return $this->url . '/js/vue.esm.browser.min.js';
 		}
 

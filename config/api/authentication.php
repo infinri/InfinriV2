@@ -3,8 +3,8 @@
 use Infinri\Exception\AuthException;
 
 return function () {
-	$auth               = $this->kirby()->auth();
-	$allowImpersonation = $this->kirby()->option('api.allowImpersonation') ?? false;
+	$auth               = $this->infinri()->auth();
+	$allowImpersonation = $this->infinri()->option('api.allowImpersonation') ?? false;
 
 	// csrf token check
 	if (

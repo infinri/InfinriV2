@@ -11,7 +11,6 @@ class Html extends \Infinri\Toolkit\Html
 {
 	/**
 	 * Creates one or multiple CSS link tags
-	 * @since 3.7.0
 	 *
 	 * @param string|array $url Relative or absolute URLs, an array of URLs or `@auto` for automatic template css loading
 	 * @param string|array|null $options Pass an array of attributes for the link tag or a media attribute string
@@ -37,7 +36,7 @@ class Html extends \Infinri\Toolkit\Html
 			$options = ['media' => $options];
 		}
 
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		if ($url === '@auto') {
 			if (!$url = Url::toTemplateAsset('css/templates', 'css')) {
@@ -54,7 +53,7 @@ class Html extends \Infinri\Toolkit\Html
 			$options['rel'] = 'stylesheet';
 		}
 
-		$url  = ($kirby->component('css'))($kirby, $url, $options);
+		$url  = ($infinri->component('css'))($infinri, $url, $options);
 		$url  = Url::to($url);
 		$attr = [...$options ?? [], 'href' => $url];
 
@@ -78,7 +77,6 @@ class Html extends \Infinri\Toolkit\Html
 
 	/**
 	 * Creates a script tag to load a javascript file
-	 * @since 3.7.0
 	 */
 	public static function js(
 		string|array|Plugin|Assets $url,
@@ -101,7 +99,7 @@ class Html extends \Infinri\Toolkit\Html
 			$options = ['async' => $options];
 		}
 
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		if ($url === '@auto') {
 			if (!$url = Url::toTemplateAsset('js/templates', 'js')) {
@@ -109,7 +107,7 @@ class Html extends \Infinri\Toolkit\Html
 			}
 		}
 
-		$url  = ($kirby->component('js'))($kirby, $url, $options);
+		$url  = ($infinri->component('js'))($infinri, $url, $options);
 		$url  = Url::to($url);
 		$attr = [...$options ?? [], 'src' => $url];
 
@@ -119,11 +117,10 @@ class Html extends \Infinri\Toolkit\Html
 	/**
 	 * Includes an SVG file by absolute or
 	 * relative file path.
-	 * @since 3.7.0
 	 */
 	public static function svg(string|File $file): string|false
 	{
-		// support for Kirby's file objects
+		// support for Infinri's file objects
 		if (
 			$file instanceof File &&
 			$file->extension() === 'svg'

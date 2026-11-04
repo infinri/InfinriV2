@@ -15,7 +15,6 @@
 <script>
 /**
  * General file view preview for files
- * @since 5.0.0
  */
 export default {
 	props: {

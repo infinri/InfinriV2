@@ -78,14 +78,14 @@ trait HasChildren
 			return $this->drafts;
 		}
 
-		$kirby = $this->kirby();
+		$infinri = $this->infinri();
 
 		// create the inventory for all drafts
 		$inventory = Inventory::for(
 			$this->root() . '/_drafts',
-			$kirby->contentExtension(),
-			$kirby->contentIgnore(),
-			$kirby->multilang()
+			$infinri->contentExtension(),
+			$infinri->contentIgnore(),
+			$infinri->multilang()
 		);
 
 		return $this->drafts = Pages::factory($inventory['children'], $this, true);

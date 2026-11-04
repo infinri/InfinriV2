@@ -13,15 +13,12 @@ class Prop
 		public string|null $type = null,
 		public string|null $description = null,
 		public string|null $default = null,
-		public string|null $deprecated = null,
 		public string|null $example = null,
 		public bool $required = false,
-		public string|null $since = null,
 		public string|null $value = null,
 		public array $values = []
 	) {
 		$this->description = Doc::kt($this->description ?? '');
-		$this->deprecated  = Doc::kt($this->deprecated ?? '');
 	}
 
 	public static function factory(array $data): static|null
@@ -41,10 +38,8 @@ class Prop
 			type:        $type,
 			default:     self::normalizeDefault($data['defaultValue']['value'] ?? null, $type),
 			description: $data['description'] ?? null,
-			deprecated:  $data['tags']['deprecated'][0]['description'] ?? null,
 			example:     $data['tags']['example'][0]['description'] ?? null,
 			required:    $data['required'] ?? false,
-			since:       $data['tags']['since'][0]['description'] ?? null,
 			value:       $data['tags']['value'][0]['description'] ?? null,
 			values:      $data['values'] ?? []
 		);
@@ -89,10 +84,8 @@ class Prop
 			'name'        => $this->name,
 			'default'     => $this->default,
 			'description' => $this->description,
-			'deprecated'  => $this->deprecated,
 			'example'     => $this->example,
 			'required'    => $this->required,
-			'since'       => $this->since,
 			'type'        => $this->type,
 			'value'       => $this->value,
 			'values'      => $this->values,

@@ -85,9 +85,9 @@ class Media
 		string $hash,
 		string $filename
 	): Response|false {
-		$kirby = App::instance();
-		$index = $kirby->root('index');
-		$media = $kirby->root('media');
+		$infinri = App::instance();
+		$index = $infinri->root('index');
+		$media = $infinri->root('media');
 
 		$root = match (true) {
 			// assets
@@ -151,7 +151,7 @@ class Media
 			};
 
 			// generate the thumbnail and save it in the media folder
-			$kirby->thumb($source, $thumb, $options);
+			$infinri->thumb($source, $thumb, $options);
 
 			// remove the job file once the thumbnail has been created
 			F::remove($job);
@@ -178,11 +178,7 @@ class Media
 			return true;
 		}
 
-		// get both old and new versions (pre and post Kirby 3.4.0)
-		$versions = [
-			...glob($directory . '/' . crc32($file->filename()) . '-*', GLOB_ONLYDIR),
-			...glob($directory . '/' . $file->mediaToken() . '-*', GLOB_ONLYDIR)
-		];
+		$versions = glob($directory . '/' . $file->mediaToken() . '-*', GLOB_ONLYDIR);
 
 		// delete all versions of the file
 		foreach ($versions as $version) {

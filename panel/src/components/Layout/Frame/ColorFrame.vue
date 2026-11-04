@@ -20,7 +20,6 @@ export const props = {
 
 /**
  * Use <k-color-frame> to display a color preview.
- * @since 4.0.0
  *
  * @example <k-color-frame color="#efefef" ratio="1/1" />
  */

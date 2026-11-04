@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(PageUuid::class)]
 class PageUuidTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Uuid.PageUuid';
+	public const TMP = INFINRI_TMP_DIR . '/Uuid.PageUuid';
 
 	public function testClearRecursiveIncludesDrafts(): void
 	{
@@ -180,9 +180,9 @@ class PageUuidTest extends TestCase
 	public function testToPermalink(): void
 	{
 		$page = $this->app->page('page-a');
-		$url  = 'https://getkirby.com/@/page/my-page';
+		$url  = 'https://infinri.com/@/page/my-page';
 		$this->assertSame($url, $page->uuid()->toPermalink());
-		$this->assertSame($url, $page->uuid()->url());
+		$this->assertFalse(method_exists($page->uuid(), 'url'));
 	}
 
 	public function testUrlWithLanguageWithCustomUrl(): void
@@ -192,7 +192,7 @@ class PageUuidTest extends TestCase
 				'index' => static::TMP
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'options' => [
 				'languages' => true
@@ -215,8 +215,8 @@ class PageUuidTest extends TestCase
 		]);
 
 		$page = $app->page('foo');
-		$url  = 'https://getkirby.com/@/page/my-page';
-		$this->assertSame($url, $page->uuid()->url());
+		$url  = 'https://infinri.com/@/page/my-page';
+		$this->assertSame($url, $page->uuid()->toPermalink());
 	}
 
 	public static function multilangProvider(): array
@@ -235,7 +235,7 @@ class PageUuidTest extends TestCase
 				'index' => static::TMP
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'options' => [
 				'languages' => true
@@ -295,6 +295,6 @@ class PageUuidTest extends TestCase
 		// the secondary language must not have the uuid in the content file
 		$this->assertNull($page->version()->read('de')['uuid'] ?? null);
 
-		$this->assertStringStartsWith('https://getkirby.com/' . $language . '/@/page/', $page->uuid()->url());
+		$this->assertStringStartsWith('https://infinri.com/' . $language . '/@/page/', $page->uuid()->toPermalink());
 	}
 }

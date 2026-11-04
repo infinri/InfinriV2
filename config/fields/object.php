@@ -43,7 +43,7 @@ return [
 				return '';
 			}
 
-			return $this->form($this->default)->values();
+			return $this->form($this->default)->toFormValues();
 		},
 		'fields' => function () {
 			if (empty($this->fields) === true) {
@@ -59,7 +59,7 @@ return [
 				return '';
 			}
 
-			return $this->form($data)->values();
+			return $this->form($data)->toFormValues();
 		}
 	],
 	'methods' => [
@@ -67,11 +67,12 @@ return [
 			return '';
 		},
 		'form' => function (array $values = []) {
-			return new Form([
-				'fields' => $this->attrs['fields'],
-				'values' => $values,
-				'model'  => $this->model
-			]);
+			$form = new Form(
+				fields: $this->attrs['fields'],
+				model: $this->model
+			);
+
+			return $form->fill(input: $values);
 		},
 	],
 	'save' => function ($value) {
@@ -79,7 +80,7 @@ return [
 			return '';
 		}
 
-		return $this->form($value)->content();
+		return $this->form($value)->toStoredValues();
 	},
 	'validations' => [
 		'object' => function ($value) {

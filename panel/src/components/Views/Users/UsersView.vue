@@ -1,7 +1,7 @@
 <template>
 	<k-panel-inside class="k-users-view">
 		<k-header class="k-users-view-header">
-			{{ $t("view.users") }}
+			{{ $panel.t("view.users") }}
 
 			<template #buttons>
 				<k-view-buttons :buttons="buttons" />
@@ -34,12 +34,12 @@ export default {
 		empty() {
 			return {
 				icon: "users",
-				text: this.$t("role.empty")
+				text: this.$panel.t("role.empty")
 			};
 		},
 		items() {
 			return this.users.data.map((user) => {
-				user.options = this.$dropdown(user.link);
+				user.options = this.$panel.dropdown.openAsync(user.link);
 				return user;
 			});
 		},
@@ -47,7 +47,7 @@ export default {
 			const roles = [
 				{
 					name: "all",
-					label: this.$t("role.all"),
+					label: this.$panel.t("role.all"),
 					link: "/users"
 				}
 			];
@@ -65,14 +65,14 @@ export default {
 	},
 	methods: {
 		create() {
-			this.$dialog("users/create", {
+			this.$panel.dialog.open("users/create", {
 				query: {
 					role: this.role?.id
 				}
 			});
 		},
 		paginate(pagination) {
-			this.$reload({
+			this.$panel.reload({
 				query: {
 					page: pagination.page
 				}

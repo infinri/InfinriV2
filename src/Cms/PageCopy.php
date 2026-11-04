@@ -131,10 +131,10 @@ class PageCopy
 	 */
 	public function languages(): Languages|iterable
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
-		if ($kirby->multilang() === true) {
-			return $kirby->languages();
+		if ($infinri->multilang() === true) {
+			return $infinri->languages();
 		}
 
 		return [null];

@@ -4,7 +4,10 @@
 			<k-prev-next :prev="prev" :next="next" />
 		</template>
 
-		<k-header :editable="canUpdate" @edit="$dialog(`languages/${id}/update`)">
+		<k-header
+			:editable="canUpdate"
+			@edit="$panel.dialog.open(`languages/${id}/update`)"
+		>
 			{{ name }}
 
 			<template #buttons>
@@ -12,7 +15,7 @@
 			</template>
 		</k-header>
 
-		<k-section :headline="$t('language.settings')">
+		<k-section :headline="$panel.t('language.settings')">
 			<k-stats :reports="info" size="small" />
 		</k-section>
 
@@ -25,21 +28,21 @@
 					click: createTranslation,
 					disabled: !canUpdate,
 					icon: 'add',
-					text: $t('add')
+					text: $panel.t('add')
 				}
 			]"
-			:headline="$t('language.variables')"
+			:headline="$panel.t('language.variables')"
 		>
 			<template v-if="translations.length">
 				<k-table
 					:columns="{
 						key: {
-							label: $t('language.variable.key'),
+							label: $panel.t('language.variable.key'),
 							mobile: true,
 							width: '1/4'
 						},
 						value: {
-							label: $t('language.variable.value'),
+							label: $panel.t('language.variable.value'),
 							mobile: true
 						}
 					}"
@@ -55,7 +58,7 @@
 					icon="translate"
 					@click="createTranslation"
 				>
-					{{ $t("language.variables.empty") }}
+					{{ $panel.t("language.variables.empty") }}
 				</k-empty>
 			</template>
 		</k-section>
@@ -65,7 +68,6 @@
 <script>
 /**
  * @internal
- * @since 4.0.0
  */
 export default {
 	props: {
@@ -92,7 +94,7 @@ export default {
 				return;
 			}
 
-			this.$dialog(`languages/${this.id}/translations/create`);
+			this.$panel.dialog.open(`languages/${this.id}/translations/create`);
 		},
 		option(option, row) {
 			if (!this.canUpdate) {
@@ -101,7 +103,7 @@ export default {
 
 			// for the compatibility of the encoded url in different environments,
 			// it is also encoded with base64 to reduce special characters
-			this.$dialog(
+			this.$panel.dialog.open(
 				`languages/${this.id}/translations/${window.btoa(
 					encodeURIComponent(row.key)
 				)}/${option}`
@@ -114,7 +116,7 @@ export default {
 
 			// for the compatibility of the encoded url in different environments,
 			// it is also encoded with base64 to reduce special characters
-			this.$dialog(
+			this.$panel.dialog.open(
 				`languages/${this.id}/translations/${window.btoa(
 					encodeURIComponent(row.key)
 				)}/update`

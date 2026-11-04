@@ -26,7 +26,7 @@ class Sessions
 	 * @param array $options Optional additional options:
 	 *                       - `mode`: Default token transmission mode (cookie, header or manual); defaults to `cookie`
 	 *                       - `cookieDomain`: Domain to set the cookie to (this disables the cookie path restriction); defaults to none (default browser behavior)
-	 *                       - `cookieName`: Name to use for the session cookie; defaults to `kirby_session`
+	 *                       - `cookieName`: Name to use for the session cookie; defaults to `infinri_session`
 	 *                       - `gcInterval`: How often should the garbage collector be run?; integer or `false` for never; defaults to `100`
 	 */
 	public function __construct(
@@ -40,7 +40,7 @@ class Sessions
 
 		$this->mode         = $options['mode']         ?? 'cookie';
 		$this->cookieDomain = $options['cookieDomain'] ?? null;
-		$this->cookieName   = $options['cookieName']   ?? 'kirby_session';
+		$this->cookieName   = $options['cookieName']   ?? 'infinri_session';
 		$gcInterval         = $options['gcInterval']   ?? 100;
 
 		// validate options

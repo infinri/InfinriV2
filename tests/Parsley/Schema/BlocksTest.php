@@ -244,7 +244,7 @@ class BlocksTest extends TestCase
 	public function testIframe(): void
 	{
 		$html = <<<HTML
-			<iframe src="https://getkirby.com"></iframe>
+			<iframe src="https://infinri.com"></iframe>
 			HTML;
 
 		$element = $this->element($html, '//iframe');
@@ -352,7 +352,7 @@ class BlocksTest extends TestCase
 	public function testImg(): void
 	{
 		$html = <<<HTML
-			<img src="https://getkirby.com/image.jpg">
+			<img src="https://infinri.com/image.jpg">
 			HTML;
 
 		$element  = $this->element($html, '//img');
@@ -362,7 +362,7 @@ class BlocksTest extends TestCase
 				'caption'  => null,
 				'link'     => null,
 				'location' => 'web',
-				'src'      => 'https://getkirby.com/image.jpg'
+				'src'      => 'https://infinri.com/image.jpg'
 			],
 			'type' => 'image',
 		];
@@ -373,7 +373,7 @@ class BlocksTest extends TestCase
 	public function testImgWithAlt(): void
 	{
 		$html = <<<HTML
-			<img src="https://getkirby.com/image.jpg" alt="Test">
+			<img src="https://infinri.com/image.jpg" alt="Test">
 			HTML;
 
 		$element  = $this->element($html, '//img');
@@ -383,7 +383,7 @@ class BlocksTest extends TestCase
 				'caption'  => null,
 				'link'     => null,
 				'location' => 'web',
-				'src'      => 'https://getkirby.com/image.jpg'
+				'src'      => 'https://infinri.com/image.jpg'
 			],
 			'type' => 'image',
 		];
@@ -394,8 +394,8 @@ class BlocksTest extends TestCase
 	public function testImgWithLink(): void
 	{
 		$html = <<<HTML
-			<a href="https://getkirby.com">
-				<img src="https://getkirby.com/image.jpg" alt="Test">
+			<a href="https://infinri.com">
+				<img src="https://infinri.com/image.jpg" alt="Test">
 			</a>
 			HTML;
 
@@ -404,9 +404,9 @@ class BlocksTest extends TestCase
 			'content' => [
 				'alt'      => 'Test',
 				'caption'  => null,
-				'link'     => 'https://getkirby.com',
+				'link'     => 'https://infinri.com',
 				'location' => 'web',
-				'src'      => 'https://getkirby.com/image.jpg'
+				'src'      => 'https://infinri.com/image.jpg'
 			],
 			'type' => 'image',
 		];
@@ -418,7 +418,7 @@ class BlocksTest extends TestCase
 	{
 		$html = <<<HTML
 			<a href="javascript://x%0Aalert(1)">
-				<img src="https://getkirby.com/image.jpg" alt="Test">
+				<img src="https://infinri.com/image.jpg" alt="Test">
 			</a>
 			HTML;
 
@@ -429,7 +429,7 @@ class BlocksTest extends TestCase
 				'caption'  => null,
 				'link'     => null,
 				'location' => 'web',
-				'src'      => 'https://getkirby.com/image.jpg'
+				'src'      => 'https://infinri.com/image.jpg'
 			],
 			'type' => 'image',
 		];
@@ -441,7 +441,7 @@ class BlocksTest extends TestCase
 	{
 		$html = <<<HTML
 			<figure>
-				<img src="https://getkirby.com/image.jpg" alt="Test">
+				<img src="https://infinri.com/image.jpg" alt="Test">
 				<figcaption>Test</figcaption>
 			</figure>
 			HTML;
@@ -453,7 +453,7 @@ class BlocksTest extends TestCase
 				'caption'  => 'Test',
 				'link'     => null,
 				'location' => 'web',
-				'src'      => 'https://getkirby.com/image.jpg'
+				'src'      => 'https://infinri.com/image.jpg'
 			],
 			'type' => 'image',
 		];
@@ -465,8 +465,8 @@ class BlocksTest extends TestCase
 	{
 		$html = <<<HTML
 			<figure>
-				<a href="https://getkirby.com">
-					<img src="https://getkirby.com/image.jpg" alt="Test">
+				<a href="https://infinri.com">
+					<img src="https://infinri.com/image.jpg" alt="Test">
 					<figcaption>Test</figcaption>
 				</a>
 			</figure>
@@ -477,9 +477,9 @@ class BlocksTest extends TestCase
 			'content' => [
 				'alt'      => 'Test',
 				'caption'  => 'Test',
-				'link'     => 'https://getkirby.com',
+				'link'     => 'https://infinri.com',
 				'location' => 'web',
-				'src'      => 'https://getkirby.com/image.jpg'
+				'src'      => 'https://infinri.com/image.jpg'
 			],
 			'type' => 'image',
 		];

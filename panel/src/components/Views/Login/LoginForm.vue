@@ -21,7 +21,7 @@
 		<footer class="k-login-buttons">
 			<k-checkbox-input
 				v-if="isResetForm === false"
-				:label="$t('login.remember')"
+				:label="$panel.t('login.remember')"
 				:checked="user.remember"
 				:value="user.remember"
 				@input="user.remember = $event"
@@ -112,7 +112,7 @@ export default {
 			const fields = {
 				email: {
 					autofocus: true,
-					label: this.$t("email"),
+					label: this.$panel.t("email"),
 					type: "email",
 					required: true,
 					link: false
@@ -121,7 +121,7 @@ export default {
 
 			if (this.form === "email-password") {
 				fields.password = {
-					label: this.$t("password"),
+					label: this.$panel.t("password"),
 					type: "password",
 					minLength: 8,
 					required: true,
@@ -150,13 +150,13 @@ export default {
 			const suffix = this.isLoading ? " …" : "";
 
 			if (this.isResetForm) {
-				return this.$t("login.reset") + suffix;
+				return this.$panel.t("login.reset") + suffix;
 			}
 
-			return this.$t("login") + suffix;
+			return this.$panel.t("login") + suffix;
 		},
 		toggleText() {
-			return this.$t(
+			return this.$panel.t(
 				"login.toggleText." + this.codeMode + "." + this.alternateMode
 			);
 		}
@@ -178,14 +178,14 @@ export default {
 			}
 
 			try {
-				await this.$api.auth.login(user);
+				await this.$panel.api.auth.login(user);
 
-				this.$reload({
+				this.$panel.reload({
 					globals: ["$system", "$translation"]
 				});
 
 				this.$panel.notification.success({
-					message: this.$t("welcome") + "!",
+					message: this.$panel.t("welcome") + "!",
 					icon: "smile"
 				});
 			} catch (error) {

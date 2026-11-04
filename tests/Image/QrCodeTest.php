@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class QrCodeTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/qr';
-	public const TMP      = KIRBY_TMP_DIR . '/Image.QrCode';
+	public const TMP      = INFINRI_TMP_DIR . '/Image.QrCode';
 
 	protected function tearDown(): void
 	{
@@ -29,7 +29,7 @@ class QrCodeTest extends TestCase
 		$expected = F::read(static::FIXTURES . '/alphanum.txt');
 		$this->assertSame($expected, $qr->toDataUri());
 
-		$qr = new QrCode('https://getkirby.com');
+		$qr = new QrCode('https://infinri.com');
 		$expected = F::read(static::FIXTURES . '/url.txt');
 		$this->assertSame($expected, $qr->toDataUri());
 
@@ -44,7 +44,7 @@ class QrCodeTest extends TestCase
 
 	public function testToImage(): void
 	{
-		$qr       = new QrCode('https://getkirby.com');
+		$qr       = new QrCode('https://infinri.com');
 		$image    = $qr->toImage();
 		$data     = $this->imageContent($image);
 		$expected = F::read(static::FIXTURES . '/image.png');
@@ -55,7 +55,7 @@ class QrCodeTest extends TestCase
 
 	public function testToImageSize(): void
 	{
-		$qr       = new QrCode('https://getkirby.com');
+		$qr       = new QrCode('https://infinri.com');
 		$image    = $qr->toImage(750);
 		$data     = $this->imageContent($image);
 		$expected = F::read(static::FIXTURES . '/image-size.png');
@@ -64,7 +64,7 @@ class QrCodeTest extends TestCase
 
 	public function testToImageColors(): void
 	{
-		$qr       = new QrCode('https://getkirby.com');
+		$qr       = new QrCode('https://infinri.com');
 		$image    = $qr->toImage(null, '#00ff00', '#0000ff');
 		$data     = $this->imageContent($image);
 		$expected = F::read(static::FIXTURES . '/image-colors.png');
@@ -73,7 +73,7 @@ class QrCodeTest extends TestCase
 
 	public function testToImageBorder(): void
 	{
-		$qr       = new QrCode('https://getkirby.com');
+		$qr       = new QrCode('https://infinri.com');
 		$image    = $qr->toImage(null, '#000000', '#ffffff', 0);
 		$data     = $this->imageContent($image);
 		$expected = F::read(static::FIXTURES . '/image-border.png');
@@ -90,7 +90,7 @@ class QrCodeTest extends TestCase
 		$expected = F::read(static::FIXTURES . '/alphanum.svg');
 		$this->assertSame($expected, $qr->toSvg());
 
-		$qr = new QrCode('https://getkirby.com');
+		$qr = new QrCode('https://infinri.com');
 		$expected = F::read(static::FIXTURES . '/url.svg');
 		$this->assertSame($expected, $qr->toSvg());
 
@@ -105,7 +105,7 @@ class QrCodeTest extends TestCase
 
 	public function testToSvgColors(): void
 	{
-		$qr = new QrCode('https://getkirby.com');
+		$qr = new QrCode('https://infinri.com');
 		$svg = $qr->toSvg(
 			color: '#ff0000',
 			back:  '#00ff00'
@@ -117,7 +117,7 @@ class QrCodeTest extends TestCase
 
 	public function testToSvgEscapesAttrs(): void
 	{
-		$qr = new QrCode('https://getkirby.com');
+		$qr = new QrCode('https://infinri.com');
 
 		// none of the attribute values may break out of their attribute
 		$svg = $qr->toSvg(
@@ -142,7 +142,7 @@ class QrCodeTest extends TestCase
 
 	public function testToString(): void
 	{
-		$qr = new QrCode('https://getkirby.com');
+		$qr = new QrCode('https://infinri.com');
 		$this->assertSame($qr->toSvg(), (string)$qr);
 	}
 
@@ -159,7 +159,7 @@ class QrCodeTest extends TestCase
 	{
 		Dir::make(static::TMP);
 
-		$qr = new QrCode('https://getkirby.com');
+		$qr = new QrCode('https://infinri.com');
 
 		$qr->write($file = static::TMP . '/test.svg');
 		$this->assertFileExists($file);
@@ -203,7 +203,7 @@ class QrCodeTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Cannot write QR code as docx');
 
-		$qr = new QrCode('https://getkirby.com');
+		$qr = new QrCode('https://infinri.com');
 		$qr->write('test.docx');
 	}
 

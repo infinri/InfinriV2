@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Language::class)]
 class LanguageConversionTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.LanguageConversion';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.LanguageConversion';
 
 	protected function setUp(): void
 	{
@@ -44,13 +44,13 @@ class LanguageConversionTest extends TestCase
 		$this->assertSame('Title', $page->content()->title()->value());
 
 		// create a new Language to switch to multi-language mode
-		$app->impersonate('kirby', function () {
+		$app->impersonate('infinri', function () {
 			Language::create([
 				'code' => 'en',
 			]);
 		});
 
-		// make sure that Kirby actually switched to multi-language mode
+		// make sure that Infinri actually switched to multi-language mode
 		$this->assertCount(1, $app->languages());
 		$this->assertTrue($app->multilang());
 
@@ -102,7 +102,7 @@ class LanguageConversionTest extends TestCase
 		$this->assertSame('German Title', $page->content('de')->title()->value());
 
 		// delete the first language to check file removal
-		$app->impersonate('kirby', function () use ($app) {
+		$app->impersonate('infinri', function () use ($app) {
 			$app->language('de')->delete();
 		});
 
@@ -113,7 +113,7 @@ class LanguageConversionTest extends TestCase
 		$this->assertFileExists($page->root() . '/test.en.txt');
 
 		// delete the last language to switch to single-language mode
-		$app->impersonate('kirby', function () use ($app) {
+		$app->impersonate('infinri', function () use ($app) {
 			$app->language('en')->delete();
 		});
 
@@ -123,7 +123,7 @@ class LanguageConversionTest extends TestCase
 		// … and should be replaced by the content file without language code
 		$this->assertFileExists($page->root() . '/test.txt');
 
-		// meanwhile, Kirby should have been switched to single language mode
+		// meanwhile, Infinri should have been switched to single language mode
 		$this->assertCount(0, $app->languages());
 		$this->assertFalse($app->multilang());
 

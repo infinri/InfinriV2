@@ -22,7 +22,6 @@ export const props = {
 
 /**
  * @displayName DrawerTabs
- * @since 4.0.0
  */
 export default {
 	mixins: [props],

@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(UserPermissions::class)]
 class UserPermissionsTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserPermissions';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserPermissions';
 
 	public static function actionProvider(): array
 	{
@@ -38,9 +38,9 @@ class UserPermissionsTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
-		$user  = new User(['email' => 'test@getkirby.com']);
+		$user  = new User(['email' => 'test@infinri.com']);
 		$perms = $user->permissions();
 
 		$this->assertTrue($perms->can($action));
@@ -56,7 +56,7 @@ class UserPermissionsTest extends ModelTestCase
 			]
 		]);
 
-		$user        = new User(['email' => 'test@getkirby.com']);
+		$user        = new User(['email' => 'test@infinri.com']);
 		$permissions = $user->permissions();
 
 		$this->assertFalse($permissions->can($action));
@@ -97,7 +97,7 @@ class UserPermissionsTest extends ModelTestCase
 		]);
 
 		$user1  = new User([
-			'email' => 'editor1@getkirby.com',
+			'email' => 'editor1@infinri.com',
 			'role'  => 'editor'
 		]);
 		$user1->loginPasswordless();
@@ -109,7 +109,7 @@ class UserPermissionsTest extends ModelTestCase
 
 		// `users` permissions are enabled
 		$user2  = new User([
-			'email' => 'editor2@getkirby.com',
+			'email' => 'editor2@infinri.com',
 			'role'  => 'editor'
 		]);
 		$perms2 = $user2->permissions();
@@ -166,9 +166,9 @@ class UserPermissionsTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
-		$user  = new User(['email' => 'test@getkirby.com', 'role' => 'admin']);
+		$user  = new User(['email' => 'test@infinri.com', 'role' => 'admin']);
 		$perms = $user->permissions();
 
 		$this->assertFalse($perms->can('changeRole'));

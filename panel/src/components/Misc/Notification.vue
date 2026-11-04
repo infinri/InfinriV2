@@ -13,7 +13,6 @@
 /**
  * Displays notification from `panel.notification`
  * @unstable
- * @since 4.0.0
  */
 export default {};
 </script>

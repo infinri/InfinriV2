@@ -18,7 +18,7 @@ export default {
 		emptyProps() {
 			return {
 				icon: "image",
-				text: this.$t("files.empty")
+				text: this.$panel.t("files.empty")
 			};
 		},
 		items() {
@@ -35,7 +35,7 @@ export default {
 						"data-id": file.id,
 						"data-template": file.template
 					},
-					options: this.$dropdown(file.link, {
+					options: this.$panel.dropdown.openAsync(file.link, {
 						query: {
 							delete: deletable,
 							sort: sortable,
@@ -58,10 +58,10 @@ export default {
 		}
 	},
 	mounted() {
-		this.$events.on("file.sort", this.reload);
+		this.$panel.events.on("file.sort", this.reload);
 	},
 	destroyed() {
-		this.$events.off("file.sort", this.reload);
+		this.$panel.events.off("file.sort", this.reload);
 	},
 	methods: {
 		onAction(action, file) {
@@ -87,12 +87,12 @@ export default {
 			this.isProcessing = true;
 
 			try {
-				await this.$api.patch(this.options.apiUrl + "/sort", {
+				await this.$panel.api.patch(this.options.apiUrl + "/sort", {
 					files: items.map((item) => item.id),
 					index: this.pagination.offset
 				});
 				this.$panel.notification.success();
-				this.$events.emit("file.sort");
+				this.$panel.events.emit("file.sort");
 			} catch (error) {
 				this.$panel.error(error);
 				this.reload();

@@ -18,7 +18,7 @@ class AutoSession
 	 *                       - `durationLong`: Duration of "remember me" sessions in seconds; defaults to 2 weeks
 	 *                       - `timeout`: Activity timeout in seconds (integer or false for none); *only* used for normal sessions; defaults to `1800` (half an hour)
 	 *                       - `cookieDomain`: Domain to set the cookie to (this disables the cookie path restriction); defaults to none (default browser behavior)
-	 *                       - `cookieName`: Name to use for the session cookie; defaults to `kirby_session`
+	 *                       - `cookieName`: Name to use for the session cookie; defaults to `infinri_session`
 	 *                       - `gcInterval`: How often should the garbage collector be run?; integer or `false` for never; defaults to `100`
 	 */
 	public function __construct(
@@ -31,7 +31,7 @@ class AutoSession
 			'durationLong'   => 1209600,
 			'timeout'        => 1800,
 			'cookieDomain'   => null,
-			'cookieName'     => 'kirby_session',
+			'cookieName'     => 'infinri_session',
 			'gcInterval'     => 100,
 			...$options
 		];
@@ -145,7 +145,6 @@ class AutoSession
 
 	/**
 	 * Returns the specified Session object
-	 * @since 3.3.1
 	 *
 	 * @param string $token Session token, either including or without the key
 	 */

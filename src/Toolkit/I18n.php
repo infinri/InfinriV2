@@ -35,8 +35,6 @@ class I18n
 	/**
 	 * Returns the entry for the key or `null`
 	 * if it is missing or an empty string
-	 *
-	 * @since 5.6.1
 	 */
 	protected static function entry(
 		array|string|null $values,

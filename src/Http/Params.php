@@ -92,7 +92,6 @@ class Params extends Obj implements Stringable
 
 	/**
 	 * Merges the current params with the given params
-	 * @since 5.1.0
 	 *
 	 * @return $this
 	 */

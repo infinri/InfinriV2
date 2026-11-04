@@ -12,7 +12,7 @@ describe("$helper.url.isSameOrigin", () => {
 	});
 
 	it("should detect different origin", () => {
-		const input = "https://getkirby.com";
+		const input = "https://infinri.com";
 		const result = url.isSameOrigin(input);
 
 		expect(result).toStrictEqual(false);

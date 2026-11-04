@@ -3,7 +3,7 @@
 		<k-box theme="text">
 			<k-text>
 				<p>
-					Kirby provides at <code>$library.colors</code> several methods to
+					Infinri provides at <code>$library.colors</code> several methods to
 					parse, format and convert colors in HEX, RGB and HSL formats.
 				</p>
 			</k-text>

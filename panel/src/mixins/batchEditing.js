@@ -10,14 +10,14 @@ export default {
 		selected: []
 	}),
 	created() {
-		this.$events.on(this.batchEditingEvent, this.stopSelectingCollision);
+		this.$panel.events.on(this.batchEditingEvent, this.stopSelectingCollision);
 	},
 	destroyed() {
-		this.$events.off(this.batchEditingEvent, this.stopSelectingCollision);
+		this.$panel.events.off(this.batchEditingEvent, this.stopSelectingCollision);
 	},
 	computed: {
 		batchDeleteConfirmMessage() {
-			return this.$t(`${this.type}.delete.confirm.selected`, {
+			return this.$panel.t(`${this.type}.delete.confirm.selected`, {
 				count: this.selected.length
 			});
 		},
@@ -27,7 +27,7 @@ export default {
 			buttons.push({
 				disabled: this.selected.length === 0,
 				icon: "trash",
-				text: this.$t("delete") + ` (${this.selected.length})`,
+				text: this.$panel.t("delete") + ` (${this.selected.length})`,
 				theme: "negative",
 				click: () => {
 					this.$panel.dialog.open({
@@ -54,7 +54,7 @@ export default {
 
 			buttons.push({
 				icon: "cancel",
-				text: this.$t("cancel"),
+				text: this.$panel.t("cancel"),
 				click: this.onSelectToggle,
 				responsive: true
 			});
@@ -71,7 +71,7 @@ export default {
 			return {
 				icon: "checklist",
 				click: this.onSelectToggle,
-				title: this.$t("select"),
+				title: this.$panel.t("select"),
 				responsive: true
 			};
 		},
@@ -100,7 +100,7 @@ export default {
 		startSelecting() {
 			this.isSelecting = true;
 			this.selected = [];
-			this.$events.emit(this.batchEditingEvent, this.name);
+			this.$panel.events.emit(this.batchEditingEvent, this.name);
 		},
 		stopSelecting() {
 			this.isSelecting = false;

@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Page::class)]
 class PageChangeTitleTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageChangeTitle';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageChangeTitle';
 
 	public function testChangeTitle(): void
 	{
@@ -75,7 +75,7 @@ class PageChangeTitleTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -104,7 +104,7 @@ class PageChangeTitleTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test'
@@ -133,7 +133,7 @@ class PageChangeTitleTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->app->setCurrentLanguage('de');
 
 		$page = Page::create([

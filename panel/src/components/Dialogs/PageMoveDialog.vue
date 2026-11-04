@@ -4,14 +4,14 @@
 		v-bind="$props"
 		:submit-button="{
 			icon: 'parent',
-			text: $t('move')
+			text: $panel.t('move')
 		}"
 		class="k-page-move-dialog"
 		size="medium"
 		@cancel="$emit('cancel')"
 		@submit="$emit('submit', value)"
 	>
-		<k-headline>{{ $t("page.move") }}</k-headline>
+		<k-headline>{{ $panel.t("page.move") }}</k-headline>
 		<div class="k-page-move-parent" tabindex="0" data-autofocus>
 			<k-page-tree
 				:current="value.parent"
@@ -26,9 +26,6 @@
 <script>
 import Dialog from "@/mixins/dialog.js";
 
-/**
- * @since 4.0.0
- */
 export default {
 	mixins: [Dialog],
 	props: {

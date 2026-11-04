@@ -3,7 +3,7 @@
 /**
  * Api Routes Definitions
  */
-return function ($kirby) {
+return function ($infinri) {
 	$routes = [
 		...include __DIR__ . '/routes/auth.php',
 		...include __DIR__ . '/routes/changes.php',
@@ -18,7 +18,7 @@ return function ($kirby) {
 
 	// only add the language routes if the
 	// multi language setup is activated
-	if ($kirby->option('languages', false) !== false) {
+	if ($infinri->option('languages', false) !== false) {
 		$routes = [
 			...$routes,
 			...include __DIR__ . '/routes/languages.php'

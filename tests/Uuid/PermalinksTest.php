@@ -4,7 +4,7 @@ namespace Infinri\Uuid;
 
 class PermalinksTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Uuid.Permalinks';
+	public const TMP = INFINRI_TMP_DIR . '/Uuid.Permalinks';
 
 	public function testRoute(): void
 	{
@@ -27,7 +27,7 @@ class PermalinksTest extends TestCase
 		$app->page('a')->uuid()->populate();
 		$response = $app->call('/@/page/my-id')->send();
 		$this->assertSame(302, $response->code());
-		$this->assertSame('https://getkirby.com/a', $response->header('Location'));
+		$this->assertSame('https://infinri.com/a', $response->header('Location'));
 
 		// check if ->url() populates cache
 		$uuid = $app->page('a')->uuid();
@@ -37,6 +37,6 @@ class PermalinksTest extends TestCase
 		$uuid->toPermalink();
 		$response = $app->call('/@/page/my-id')->send();
 		$this->assertSame(302, $response->code());
-		$this->assertSame('https://getkirby.com/a', $response->header('Location'));
+		$this->assertSame('https://infinri.com/a', $response->header('Location'));
 	}
 }

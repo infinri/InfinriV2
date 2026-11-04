@@ -3,9 +3,6 @@ export type SearchResponse = {
 	pagination: Record<string, unknown>;
 };
 
-/**
- * @since 4.4.0
- */
 export default function Search(panel: TODO) {
 	return {
 		controller: undefined as AbortController | undefined,

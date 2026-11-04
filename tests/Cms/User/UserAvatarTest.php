@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class UserAvatarTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/../Api/routes/fixtures';
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserAvatar';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserAvatar';
 
 	public function setUp(): void
 	{
@@ -19,11 +19,11 @@ class UserAvatarTest extends ModelTestCase
 		$this->app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			],
-			'user' => 'admin@getkirby.com'
+			'user' => 'admin@infinri.com'
 		]);
 	}
 
@@ -36,7 +36,7 @@ class UserAvatarTest extends ModelTestCase
 
 	public function testCreateAvatar(): void
 	{
-		$user   = $this->app->user('admin@getkirby.com');
+		$user   = $this->app->user('admin@infinri.com');
 		$result = $user->createAvatar($this->avatarSource(), 'jpg');
 
 		$this->assertInstanceOf(User::class, $result);
@@ -51,20 +51,20 @@ class UserAvatarTest extends ModelTestCase
 		$this->app = $this->app->clone([
 			'hooks' => [
 				'user.createAvatar:before' => function (User $user, string $source, string $extension) use ($phpunit, &$calls) {
-					$phpunit->assertSame('admin@getkirby.com', $user->email());
+					$phpunit->assertSame('admin@infinri.com', $user->email());
 					$phpunit->assertSame('jpg', $extension);
 					$calls++;
 				},
 				'user.createAvatar:after' => function (User $user) use ($phpunit, &$calls) {
-					$phpunit->assertSame('admin@getkirby.com', $user->email());
+					$phpunit->assertSame('admin@infinri.com', $user->email());
 					$calls++;
 				}
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
-		$this->app->user('admin@getkirby.com')->createAvatar($this->avatarSource(), 'jpg');
+		$this->app->user('admin@infinri.com')->createAvatar($this->avatarSource(), 'jpg');
 
 		$this->assertSame(2, $calls);
 	}
@@ -81,22 +81,22 @@ class UserAvatarTest extends ModelTestCase
 					]
 				]
 			],
-			'user'  => 'editor@getkirby.com',
+			'user'  => 'editor@infinri.com',
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin'],
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'admin@infinri.com', 'role' => 'admin'],
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			]
 		]);
 
 		$this->expectException(PermissionException::class);
-		$this->expectExceptionMessage('You are not allowed to update the user "editor@getkirby.com"');
+		$this->expectExceptionMessage('You are not allowed to update the user "editor@infinri.com"');
 
-		$this->app->user('editor@getkirby.com')->createAvatar($this->avatarSource(), 'jpg');
+		$this->app->user('editor@infinri.com')->createAvatar($this->avatarSource(), 'jpg');
 	}
 
 	public function testDeleteAvatar(): void
 	{
-		$user = $this->app->user('admin@getkirby.com');
+		$user = $this->app->user('admin@infinri.com');
 		$user->createAvatar($this->avatarSource(), 'jpg');
 
 		$this->assertFileExists($user->root() . '/profile.jpg');
@@ -115,20 +115,20 @@ class UserAvatarTest extends ModelTestCase
 		$this->app = $this->app->clone([
 			'hooks' => [
 				'user.deleteAvatar:before' => function (User $user) use ($phpunit, &$calls) {
-					$phpunit->assertSame('admin@getkirby.com', $user->email());
+					$phpunit->assertSame('admin@infinri.com', $user->email());
 					$calls++;
 				},
 				'user.deleteAvatar:after' => function (bool $status, User $user) use ($phpunit, &$calls) {
 					$phpunit->assertTrue($status);
-					$phpunit->assertSame('admin@getkirby.com', $user->email());
+					$phpunit->assertSame('admin@infinri.com', $user->email());
 					$calls++;
 				}
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
-		$user = $this->app->user('admin@getkirby.com');
+		$user = $this->app->user('admin@infinri.com');
 		$user->createAvatar($this->avatarSource(), 'jpg');
 		$user->deleteAvatar();
 
@@ -137,7 +137,7 @@ class UserAvatarTest extends ModelTestCase
 
 	public function testDeleteAvatarWithoutPermission(): void
 	{
-		$user = $this->app->user('admin@getkirby.com');
+		$user = $this->app->user('admin@infinri.com');
 		$user->createAvatar($this->avatarSource(), 'jpg');
 
 		$this->app = $this->app->clone([
@@ -150,22 +150,22 @@ class UserAvatarTest extends ModelTestCase
 					]
 				]
 			],
-			'user'  => 'editor@getkirby.com',
+			'user'  => 'editor@infinri.com',
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin'],
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'admin@infinri.com', 'role' => 'admin'],
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			]
 		]);
 
 		$this->expectException(PermissionException::class);
-		$this->expectExceptionMessage('You are not allowed to update the user "editor@getkirby.com"');
+		$this->expectExceptionMessage('You are not allowed to update the user "editor@infinri.com"');
 
-		$this->app->user('editor@getkirby.com')->deleteAvatar();
+		$this->app->user('editor@infinri.com')->deleteAvatar();
 	}
 
 	public function testReplaceAvatar(): void
 	{
-		$user = $this->app->user('admin@getkirby.com');
+		$user = $this->app->user('admin@infinri.com');
 		$user->createAvatar($this->avatarSource(), 'jpg');
 
 		$this->assertFileExists($user->root() . '/profile.jpg');
@@ -178,7 +178,7 @@ class UserAvatarTest extends ModelTestCase
 
 	public function testReplaceAvatarWithDifferentExtension(): void
 	{
-		$user = $this->app->user('admin@getkirby.com');
+		$user = $this->app->user('admin@infinri.com');
 		$user->createAvatar($this->avatarSource(), 'jpg');
 
 		$this->assertFileExists($user->root() . '/profile.jpg');
@@ -195,7 +195,7 @@ class UserAvatarTest extends ModelTestCase
 
 	public function testReplaceAvatarWithoutPermission(): void
 	{
-		$user = $this->app->user('admin@getkirby.com');
+		$user = $this->app->user('admin@infinri.com');
 		$user->createAvatar($this->avatarSource(), 'jpg');
 
 		$this->app = $this->app->clone([
@@ -208,17 +208,17 @@ class UserAvatarTest extends ModelTestCase
 					]
 				]
 			],
-			'user'  => 'editor@getkirby.com',
+			'user'  => 'editor@infinri.com',
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin'],
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'admin@infinri.com', 'role' => 'admin'],
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			]
 		]);
 
 		$this->expectException(PermissionException::class);
-		$this->expectExceptionMessage('You are not allowed to update the user "editor@getkirby.com"');
+		$this->expectExceptionMessage('You are not allowed to update the user "editor@infinri.com"');
 
-		$this->app->user('editor@getkirby.com')->replaceAvatar($this->avatarSource(), 'jpg');
+		$this->app->user('editor@infinri.com')->replaceAvatar($this->avatarSource(), 'jpg');
 	}
 
 	public function testReplaceAvatarHooks(): void
@@ -229,20 +229,20 @@ class UserAvatarTest extends ModelTestCase
 		$this->app = $this->app->clone([
 			'hooks' => [
 				'user.replaceAvatar:before' => function (User $user, string $source, string $extension) use ($phpunit, &$calls) {
-					$phpunit->assertSame('admin@getkirby.com', $user->email());
+					$phpunit->assertSame('admin@infinri.com', $user->email());
 					$phpunit->assertSame('jpg', $extension);
 					$calls++;
 				},
 				'user.replaceAvatar:after' => function (User $user) use ($phpunit, &$calls) {
-					$phpunit->assertSame('admin@getkirby.com', $user->email());
+					$phpunit->assertSame('admin@infinri.com', $user->email());
 					$calls++;
 				}
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
-		$user = $this->app->user('admin@getkirby.com');
+		$user = $this->app->user('admin@infinri.com');
 		$user->createAvatar($this->avatarSource(), 'jpg');
 		$user->replaceAvatar($this->avatarSource(), 'jpg');
 

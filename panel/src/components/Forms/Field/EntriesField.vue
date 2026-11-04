@@ -13,7 +13,7 @@
 					v-if="more"
 					:autofocus="autofocus"
 					:responsive="true"
-					:text="$t('add')"
+					:text="$panel.t('add')"
 					icon="add"
 					variant="filled"
 					size="xs"
@@ -36,7 +36,7 @@
 		>
 			<!-- Empty State -->
 			<k-empty v-if="entries.length === 0" icon="list-bullet" @click="add()">
-				{{ empty ?? $t("field.entries.empty") }}
+				{{ empty ?? $panel.t("field.entries.empty") }}
 			</k-empty>
 
 			<!-- Entries -->
@@ -54,7 +54,7 @@
 					<k-button
 						v-if="isSortable"
 						:ref="'entry-' + index + '-sort-handle'"
-						:title="$t('sort.drag')"
+						:title="$panel.t('sort.drag')"
 						icon="sort"
 						class="k-sort-handle k-entries-field-item-sort-handle"
 						size="sm"
@@ -78,21 +78,21 @@
 					>
 						<k-button
 							v-if="more"
-							:title="$t('add')"
+							:title="$panel.t('add')"
 							icon="add"
 							size="sm"
 							@click="add(index + 1)"
 						/>
 						<k-button
 							v-if="more"
-							:title="$t('duplicate')"
+							:title="$panel.t('duplicate')"
 							icon="copy"
 							size="sm"
 							@click="duplicate(index)"
 						/>
 						<k-button
 							v-if="!disabled"
-							:title="$t('remove')"
+							:title="$panel.t('remove')"
 							icon="trash"
 							size="sm"
 							@click="remove(index)"
@@ -104,7 +104,7 @@
 
 		<footer v-if="more" class="k-entries-field-footer">
 			<k-button
-				:title="$t('add')"
+				:title="$panel.t('add')"
 				icon="add"
 				size="xs"
 				variant="filled"
@@ -211,14 +211,14 @@ export default {
 				{
 					disabled: this.entries.length === 0 || this.disabled,
 					icon: "template",
-					text: this.$t("copy.all"),
+					text: this.$panel.t("copy.all"),
 					click: this.copyAll
 				},
 				"-",
 				{
 					disabled: this.entries.length === 0 || this.disabled,
 					icon: "trash",
-					text: this.$t("delete.all"),
+					text: this.$panel.t("delete.all"),
 					click: this.removeAll
 				}
 			];
@@ -270,7 +270,7 @@ export default {
 			const copy = this.values.map((value) => "- " + value).join("\n");
 
 			this.$helper.clipboard.write(copy);
-			this.$panel.notification.success(this.$t("copy.success"));
+			this.$panel.notification.success(this.$panel.t("copy.success"));
 		},
 		async duplicate(index) {
 			if (
@@ -312,7 +312,7 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-remove-dialog",
 				props: {
-					text: this.$t("field.entries.delete.confirm.all")
+					text: this.$panel.t("field.entries.delete.confirm.all")
 				},
 				on: {
 					submit: () => {

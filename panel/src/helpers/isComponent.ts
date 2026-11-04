@@ -6,7 +6,7 @@
  * isComponent("k-unknown") // => false
  */
 export default function (name: string): boolean {
-	// TODO: Type properly in v6
+	// TODO: Type properly
 	// @ts-expect-error VueConstructor does not fully cover the actual type
 	return typeof window.Vue.options.components[name] === "function";
 }

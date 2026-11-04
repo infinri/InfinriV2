@@ -29,7 +29,7 @@ class PageStatusButtonTest extends TestCase
 
 	public function testButtonUnlisted(): void
 	{
-		App::instance()->impersonate('kirby');
+		App::instance()->impersonate('infinri');
 		$page   = new Page(['slug' => 'test']);
 		$button = new PageStatusButton($page);
 

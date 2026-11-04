@@ -56,27 +56,33 @@ class BlocksTest extends TestCase
 		$this->assertSame('text', $blocks->last()->type());
 	}
 
-	/**
-	 * @todo block.converter remove eventually
-	 */
-	public function testFactoryFromBuilderWithColumns(): void
+	public function testFactoryDoesNotConvertEditorFormat(): void
 	{
-		$builder = [
+		$blocks = Blocks::factory([
+			[
+				'attrs'   => [],
+				'content' => 'Heading 1',
+				'id'      => '_qmcrq04f2',
+				'type'    => 'h1'
+			]
+		]);
+
+		$this->assertCount(1, $blocks);
+		$this->assertSame('h1', $blocks->first()->type());
+		$this->assertSame([], $blocks->first()->content()->toArray());
+	}
+
+	public function testFactoryDoesNotConvertBuilderBlocks(): void
+	{
+		$this->expectException(\Infinri\Exception\InvalidArgumentException::class);
+		$this->expectExceptionMessage('The block type is missing');
+
+		Blocks::factory([
 			[
 				'_key' => 'heading',
-				'columns' => 1,
-			],
-			[
-				'_key' => 'text',
-				'columns' => 2,
+				'heading' => 'Test'
 			]
-		];
-
-		$blocks = Blocks::factory($builder);
-
-		$this->assertCount(2, $blocks);
-		$this->assertSame('heading', $blocks->first()->type());
-		$this->assertSame('text', $blocks->last()->type());
+		]);
 	}
 
 	public function testHasType(): void
@@ -245,10 +251,7 @@ class BlocksTest extends TestCase
 		$this->assertSame($expected, (string)$blocks);
 	}
 
-	/**
-	 * @todo block.converter remove eventually
-	 */
-	public function testParseYaml(): void
+	public function testParseDoesNotImportYaml(): void
 	{
 		$input = [
 			[
@@ -257,6 +260,8 @@ class BlocksTest extends TestCase
 		];
 
 		$result = Blocks::parse(Yaml::encode($input));
-		$this->assertSame($input, $result);
+
+		$this->assertNotSame($input, $result);
+		$this->assertSame('text', $result[0]['type']);
 	}
 }

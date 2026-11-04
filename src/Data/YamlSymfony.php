@@ -13,12 +13,12 @@ class YamlSymfony
 	 */
 	public static function encode($data): string
 	{
-		$kirby  = App::instance(null, true);
+		$infinri  = App::instance(null, true);
 
 		return Symfony::dump(
 			$data,
-			$kirby?->option('yaml.params.inline') ?? 9999,
-			$kirby?->option('yaml.params.indent') ?? 2,
+			$infinri?->option('yaml.params.inline') ?? 9999,
+			$infinri?->option('yaml.params.indent') ?? 2,
 			Symfony::DUMP_MULTI_LINE_LITERAL_BLOCK | Symfony::DUMP_EMPTY_ARRAY_AS_SEQUENCE
 		);
 	}

@@ -14,7 +14,7 @@
 		<template v-if="invisible.length">
 			<k-button
 				:current="!!invisible.find((button) => tab === button.name)"
-				:title="$t('more')"
+				:title="$panel.t('more')"
 				class="k-tabs-button k-tabs-dropdown-button"
 				icon="dots"
 				variant="dimmed"

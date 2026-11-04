@@ -330,7 +330,7 @@ class MockSession extends Session
  */
 function time(): int
 {
-	if (defined('KIRBY_TESTING') !== true || KIRBY_TESTING !== true) {
+	if (defined('INFINRI_TESTING') !== true || INFINRI_TESTING !== true) {
 		throw new Exception('Mock time() function was loaded outside of the test environment. This should never happen.');
 	}
 

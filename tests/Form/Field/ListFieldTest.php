@@ -13,7 +13,7 @@ class ListFieldTest extends TestCase
 		$this->assertSame('', $field->value());
 		$this->assertNull($field->label());
 		$this->assertNull($field->text());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testValueSanitized(): void

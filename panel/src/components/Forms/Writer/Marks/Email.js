@@ -5,7 +5,7 @@ export default class Email extends Mark {
 	get button() {
 		return {
 			icon: "email",
-			label: window.panel.$t("toolbar.button.email")
+			label: window.panel.t("toolbar.button.email")
 		};
 	}
 

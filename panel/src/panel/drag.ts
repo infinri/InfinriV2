@@ -15,8 +15,6 @@ export function defaults(): DragState {
 
 /**
  * Tracks the current drag operation, including its type and payload
- *
- * @since 4.0.0
  */
 export default function Drag() {
 	const parent = State("drag", defaults());

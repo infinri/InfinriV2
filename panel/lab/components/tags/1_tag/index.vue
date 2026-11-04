@@ -72,25 +72,25 @@
 		</k-lab-example>
 		<k-lab-example :flex="true" label="Image & Link">
 			<k-tag
-				link="https://getkirby.com"
+				link="https://infinri.com"
 				:image="{ src: 'https://picsum.photos/100/100/', crop: true }"
 				:theme="theme"
 			/>
 			<k-tag
-				link="https://getkirby.com"
+				link="https://infinri.com"
 				:image="{ src: 'https://picsum.photos/100/100/', crop: true }"
 				:theme="theme"
 				text="Foo"
 			/>
 			<k-tag
-				link="https://getkirby.com"
+				link="https://infinri.com"
 				:image="{ src: 'https://picsum.photos/100/100/', crop: true }"
 				:removable="true"
 				:theme="theme"
 				text="Foo"
 			/>
 			<k-tag
-				link="https://getkirby.com"
+				link="https://infinri.com"
 				:disabled="true"
 				:image="{ src: 'https://picsum.photos/100/100/', crop: true }"
 				:removable="true"

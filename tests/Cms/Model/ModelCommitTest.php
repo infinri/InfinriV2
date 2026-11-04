@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(ModelCommit::class)]
 class ModelCommitTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.ModelCommit';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.ModelCommit';
 
 	protected function setUp(): void
 	{
@@ -463,7 +463,7 @@ class ModelCommitTest extends TestCase
 		]);
 
 		// needed to make the update call in the hook work
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// get the page from the app state
 		$page = $this->app->page('test');
@@ -485,7 +485,7 @@ class ModelCommitTest extends TestCase
 		$this->assertSame('Modified', $this->app->page('test')->title()->value(), 'The app state should be updated as well');
 	}
 
-	public function testHookWithModifiedModelLegacyMethod(): void
+	public function testHookWithModifiedModelWithoutReturnValue(): void
 	{
 		$this->app = $this->app->clone([
 			'site' => [
@@ -500,10 +500,8 @@ class ModelCommitTest extends TestCase
 			],
 			'hooks' => [
 				'page.test:after' => function (Page $page) {
-					// This is the legacy method to modify
-					// the model directly. It should not
-					// be used anymore and the model should be
-					// returned instead
+					// modifying the model without returning it
+					// does not replace the hook argument
 					$page->update([
 						'title' => 'Modified'
 					]);
@@ -512,7 +510,7 @@ class ModelCommitTest extends TestCase
 		]);
 
 		// needed to make the update call in the hook work
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// get the page from the app state
 		$page = $this->app->page('test');
@@ -530,8 +528,8 @@ class ModelCommitTest extends TestCase
 		);
 
 		$this->assertSame('Original', $page->title()->value(), 'The original model should not be modified');
-		$this->assertSame('Modified', $state['result']->title()->value(), 'The result should be the modified model');
-		$this->assertSame('Modified', $this->app->page('test')->title()->value(), 'The app state should be updated as well');
+		$this->assertSame($page, $state['result'], 'The result should be the unchanged hook argument');
+		$this->assertSame('Modified', $this->app->page('test')->title()->value(), 'The app state should be updated by the update call');
 	}
 
 	public function testHookWithMultipleHandlers(): void
@@ -564,65 +562,7 @@ class ModelCommitTest extends TestCase
 		]);
 
 		// needed to make the update call in the hook work
-		$this->app->impersonate('kirby');
-
-		// get the page from the app state
-		$page = $this->app->page('test');
-
-		$commit = new ModelCommit(
-			model: $page,
-			action: 'test'
-		);
-
-		$state = $commit->hook(
-			hook: 'after',
-			arguments: [
-				'page' => $page
-			]
-		);
-
-		// the original model should not be modified
-		$this->assertSame('Original', $page->title()->value());
-		$this->assertSame(null, $page->subtitle()->value());
-
-		// the result and the app state should be have the updated title and subtitle
-		$this->assertSame('Modified Title', $state['result']->title()->value());
-		$this->assertSame('Modified Subtitle', $state['result']->subtitle()->value());
-		$this->assertSame('Modified Title', $this->app->page('test')->title()->value());
-		$this->assertSame('Modified Subtitle', $this->app->page('test')->subtitle()->value());
-	}
-
-	public function testHookWithMultipleHandlersAndLegacyMethod(): void
-	{
-		$this->app = $this->app->clone([
-			'site' => [
-				'children' => [
-					[
-						'slug'    => 'test',
-						'content' => [
-							'title' => 'Original'
-						]
-					]
-				]
-			],
-			'hooks' => [
-				'page.test:after' => [
-					function (Page $page) {
-						$page->update([
-							'title' => 'Modified Title'
-						]);
-					},
-					function (Page $page) {
-						$page->update([
-							'subtitle' => 'Modified Subtitle'
-						]);
-					}
-				]
-			]
-		]);
-
-		// needed to make the update call in the hook work
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// get the page from the app state
 		$page = $this->app->page('test');

@@ -6,8 +6,6 @@ trait When
 {
 	/**
 	 * Conditions when the field will be shown
-	 *
-	 * @since 3.1.0
 	 */
 	protected array|null $when = null;
 

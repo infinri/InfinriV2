@@ -7,7 +7,7 @@ use Infinri\Filesystem\Dir;
 
 class RolesApiCollectionTest extends ApiCollectionTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.RolesApiCollection';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.RolesApiCollection';
 
 	protected function setUp(): void
 	{

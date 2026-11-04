@@ -12,7 +12,7 @@
 		<k-collection
 			:empty="{
 				...empty,
-				text: $panel.dialog.isLoading ? $t('loading') : empty.text
+				text: $panel.dialog.isLoading ? $panel.t('loading') : empty.text
 			}"
 			:items="items"
 			:link="false"
@@ -33,7 +33,7 @@
 					:checked="isSelected(row)"
 					:disabled="isDisabled(row)"
 					:type="multiple && max !== 1 ? 'checkbox' : 'radio'"
-					:title="isSelected(row) ? $t('remove') : $t('select')"
+					:title="isSelected(row) ? $panel.t('remove') : $panel.t('select')"
 					@click.stop="toggle(row)"
 				/>
 				<slot name="options" v-bind="{ item: row }" />
@@ -116,7 +116,7 @@ export default {
 
 			try {
 				this.$panel.dialog.isLoading = true;
-				const response = await this.$api.get(this.endpoint, params);
+				const response = await this.$panel.api.get(this.endpoint, params);
 				this.models = response.data;
 				this.pagination = response.pagination;
 				this.$emit("fetched", response);

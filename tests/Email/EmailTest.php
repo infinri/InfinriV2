@@ -151,7 +151,7 @@ class EmailTest extends TestCase
 		];
 		$transport = [
 			'type'     => 'smtp',
-			'host'     => 'mail.getkirby.com',
+			'host'     => 'mail.infinri.com',
 			'port'     => 465,
 			'security' => true,
 			'auth'     => true,
@@ -217,5 +217,10 @@ class EmailTest extends TestCase
 		$this->assertInstanceOf('Closure', $mail->beforeSend());
 
 		$mail->send(true);
+	}
+
+	public function testCloneIsRemoved(): void
+	{
+		$this->assertFalse(method_exists(Email::class, 'clone'));
 	}
 }

@@ -13,7 +13,7 @@
 		<!-- Error -->
 		<k-box v-if="error" icon="alert" theme="negative">
 			<k-text size="small">
-				<strong> {{ $t("error.section.notLoaded", { name: name }) }}: </strong>
+				<strong> {{ $panel.t("error.section.notLoaded", { name: name }) }}: </strong>
 				{{ error }}
 			</k-text>
 		</k-box>
@@ -24,7 +24,7 @@
 				<k-input
 					v-if="searching && options.search"
 					:autofocus="true"
-					:placeholder="$t('filter') + ' …'"
+					:placeholder="$panel.t('filter') + ' …'"
 					:value="searchterm"
 					icon="search"
 					type="text"
@@ -91,7 +91,7 @@ export default {
 			return "add";
 		},
 		batchDeleteConfirmMessage() {
-			return this.$t(`${this.type}.delete.confirm.selected`, {
+			return this.$panel.t(`${this.type}.delete.confirm.selected`, {
 				count: this.selected.length
 			});
 		},
@@ -108,7 +108,7 @@ export default {
 			if (this.canSearch) {
 				buttons.push({
 					icon: "filter",
-					text: this.$t("filter"),
+					text: this.$panel.t("filter"),
 					click: this.onSearchToggle,
 					responsive: true
 				});
@@ -121,7 +121,7 @@ export default {
 			if (this.canAdd) {
 				buttons.push({
 					icon: this.addIcon,
-					text: this.$t("add"),
+					text: this.$panel.t("add"),
 					click: this.onAdd,
 					responsive: true
 				});
@@ -158,14 +158,14 @@ export default {
 		emptyProps() {
 			return {
 				icon: "page",
-				text: this.$t("pages.empty")
+				text: this.$panel.t("pages.empty")
 			};
 		},
 		emptyPropsWithSearch() {
 			return {
 				...this.emptyProps,
 				text: this.searching
-					? this.$t("search.results.none")
+					? this.$panel.t("search.results.none")
 					: (this.options.empty ?? this.emptyProps.text)
 			};
 		},
@@ -203,7 +203,7 @@ export default {
 			return false;
 		},
 		paginationId() {
-			return "kirby$pagination$" + this.parent + "/" + this.name;
+			return "infinri$pagination$" + this.parent + "/" + this.name;
 		},
 		type() {
 			return "models";
@@ -220,10 +220,10 @@ export default {
 		}
 	},
 	created() {
-		this.$events.on("model.update", this.reload);
+		this.$panel.events.on("model.update", this.reload);
 	},
 	destroyed() {
-		this.$events.off("model.update", this.reload);
+		this.$panel.events.off("model.update", this.reload);
 	},
 	mounted() {
 		this.search = debounce(this.search, 200);
@@ -238,7 +238,7 @@ export default {
 			this.isProcessing = true;
 
 			try {
-				await this.$api.delete(
+				await this.$panel.api.delete(
 					this.parent + "/sections/" + this.name + "/delete",
 					{
 						ids: this.selected.map((item) => item.id)
@@ -264,7 +264,7 @@ export default {
 				null;
 
 			try {
-				const response = await this.$api.get(
+				const response = await this.$panel.api.get(
 					this.parent + "/sections/" + this.name,
 					{ page, searchterm: this.searchterm }
 				);
@@ -308,7 +308,7 @@ export default {
 		},
 		update() {
 			this.reload();
-			this.$events.emit("model.update");
+			this.$panel.events.emit("model.update");
 		}
 	}
 };

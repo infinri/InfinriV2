@@ -24,7 +24,7 @@ trait AppUsers
 	 *
 	 * @param string|null $who User ID or email address,
 	 *                         `null` to use the actual user again,
-	 *                         `'kirby'` for a virtual admin user or
+	 *                         `'infinri'` for a virtual admin user or
 	 *                         `'nobody'` to disable the actual user
 	 * @param Closure|null $callback Optional action function that will be run with
 	 *                               the permissions of the impersonated user; the

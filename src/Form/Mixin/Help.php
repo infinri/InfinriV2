@@ -13,7 +13,7 @@ trait Help
 	{
 		if (empty($this->help) === false) {
 			$help = $this->stringTemplate($this->help);
-			$help = $this->kirby()->kirbytext($help);
+			$help = $this->infinri()->infinritext($help);
 			return $help;
 		}
 

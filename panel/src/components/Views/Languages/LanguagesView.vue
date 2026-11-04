@@ -1,7 +1,7 @@
 <template>
 	<k-panel-inside class="k-languages-view">
 		<k-header>
-			{{ $t("view.languages") }}
+			{{ $panel.t("view.languages") }}
 
 			<template #buttons>
 				<k-view-buttons :buttons="buttons" />
@@ -9,11 +9,11 @@
 		</k-header>
 
 		<template v-if="languages.length > 0">
-			<k-section :headline="$t('languages.default')">
+			<k-section :headline="$panel.t('languages.default')">
 				<k-collection :items="primaryLanguage" />
 			</k-section>
 
-			<k-section :headline="$t('languages.secondary')">
+			<k-section :headline="$panel.t('languages.secondary')">
 				<k-collection
 					v-if="secondaryLanguages.length"
 					:items="secondaryLanguages"
@@ -22,9 +22,9 @@
 					v-else
 					icon="translate"
 					:disabled="!$panel.permissions.languages.create"
-					@click="$dialog('languages/create')"
+					@click="$panel.dialog.open('languages/create')"
 				>
-					{{ $t("languages.secondary.empty") }}
+					{{ $panel.t("languages.secondary.empty") }}
 				</k-empty>
 			</k-section>
 		</template>
@@ -33,9 +33,9 @@
 			<k-empty
 				icon="translate"
 				:disabled="!$panel.permissions.languages.create"
-				@click="$dialog('languages/create')"
+				@click="$panel.dialog.open('languages/create')"
 			>
-				{{ $t("languages.empty") }}
+				{{ $panel.t("languages.empty") }}
 			</k-empty>
 		</template>
 	</k-panel-inside>
@@ -71,25 +71,25 @@ export default {
 						return null;
 					}
 
-					this.$go(`languages/${language.id}`);
+					this.$panel.view.open(`languages/${language.id}`);
 				},
 				options: [
 					{
 						icon: "edit",
-						text: this.$t("edit"),
+						text: this.$panel.t("edit"),
 						disabled: this.variables === false,
-						click: () => this.$go(`languages/${language.id}`)
+						click: () => this.$panel.view.open(`languages/${language.id}`)
 					},
 					{
 						icon: "cog",
-						text: this.$t("settings"),
+						text: this.$panel.t("settings"),
 						dialog: `languages/${language.id}/update`,
 						disabled: !this.$panel.permissions.languages.update
 					},
 					{
 						when: language.deletable,
 						icon: "trash",
-						text: this.$t("delete"),
+						text: this.$panel.t("delete"),
 						dialog: `languages/${language.id}/delete`,
 						disabled: !this.$panel.permissions.languages.delete
 					}

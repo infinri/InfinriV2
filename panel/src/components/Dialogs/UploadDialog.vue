@@ -3,7 +3,7 @@
 		ref="dialog"
 		class="k-upload-dialog"
 		v-bind="$props"
-		:disabled="disabled || $panel.upload.files.length === 0"
+		:submit-button="uploadButton"
 		@cancel="$emit('cancel')"
 		@submit="$emit('submit')"
 	>
@@ -15,7 +15,7 @@
 				layout="cards"
 				@click="$panel.upload.pick()"
 			>
-				{{ $t("files.empty") }}
+				{{ $panel.t("files.empty") }}
 			</k-empty>
 
 			<!-- Files list -->
@@ -40,9 +40,6 @@
 <script>
 import Dialog from "@/mixins/dialog.js";
 
-/**
- * @since 4.0.0
- */
 export default {
 	mixins: [Dialog],
 	props: {
@@ -54,6 +51,31 @@ export default {
 					text: window.panel.t("upload")
 				};
 			}
+		}
+	},
+	computed: {
+		/**
+		 * Submit button which stays disabled
+		 * as long as no files are selected
+		 */
+		uploadButton() {
+			if (this.submitButton === false) {
+				return false;
+			}
+
+			let button = {};
+
+			if (typeof this.submitButton === "string") {
+				button = { text: this.submitButton };
+			} else if (this.$helper.object.isObject(this.submitButton)) {
+				button = this.submitButton;
+			}
+
+			return {
+				...button,
+				disabled:
+					button.disabled === true || this.$panel.upload.files.length === 0
+			};
 		}
 	}
 };

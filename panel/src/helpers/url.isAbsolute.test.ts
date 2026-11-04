@@ -3,8 +3,8 @@ import url from "./url";
 
 describe("$helper.url.isAbsolute", () => {
 	it("should work", () => {
-		expect(url.isAbsolute("https://getkirby.com")).toStrictEqual(true);
-		expect(url.isAbsolute("http://getkirby.com")).toStrictEqual(true);
+		expect(url.isAbsolute("https://infinri.com")).toStrictEqual(true);
+		expect(url.isAbsolute("http://infinri.com")).toStrictEqual(true);
 		expect(url.isAbsolute("/foo")).toStrictEqual(false);
 	});
 });

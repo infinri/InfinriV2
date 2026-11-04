@@ -9,14 +9,14 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(UserItem::class)]
 class UserItemTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Ui.UserItem';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Ui.UserItem';
 
 	protected User $model;
 
 	protected function setUp(): void
 	{
 		parent::setUp();
-		$this->model = new User(['email' => 'test@getkirby.com', 'id' => 'test']);
+		$this->model = new User(['email' => 'test@infinri.com', 'id' => 'test']);
 	}
 
 	public function testComponent(): void
@@ -52,7 +52,7 @@ class UserItemTest extends TestCase
 				'list'           => false,
 				'update'         => false,
 			],
-			'text'         => 'test@getkirby.com',
+			'text'         => 'test@infinri.com',
 			'uuid'         => 'user://test',
 		];
 

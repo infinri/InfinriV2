@@ -3,7 +3,6 @@
 namespace Infinri\Content;
 
 use Infinri\Cms\Language;
-use Infinri\Cms\Page;
 use Infinri\Exception\LogicException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
@@ -40,27 +39,9 @@ class ImmutableMemoryStorageTest extends TestCase
 		);
 	}
 
-	public function testNextModel(): void
+	public function testNextModelIsRemoved(): void
 	{
-		$model      = new Page(['slug' => 'test']);
-		$nextModel = $model->clone();
-
-		$storage = new ImmutableMemoryStorage(
-			model: $model,
-			nextModel: $nextModel
-		);
-
-		$this->assertSame($nextModel, $storage->nextModel());
-	}
-
-	public function testNextModelWithoutClone(): void
-	{
-		$model   = new Page(['slug' => 'test']);
-		$storage = new ImmutableMemoryStorage(
-			model: $model,
-		);
-
-		$this->assertNull($storage->nextModel());
+		$this->assertFalse(method_exists(ImmutableMemoryStorage::class, 'nextModel'));
 	}
 
 	public function testTouch(): void

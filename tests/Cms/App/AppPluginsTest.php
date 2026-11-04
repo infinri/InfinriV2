@@ -4,6 +4,7 @@ namespace Infinri\Cms;
 
 use Infinri\Cache\FileCache;
 use Infinri\Cms\Auth\Challenge;
+use Infinri\Content\Field;
 use Infinri\Filesystem\Dir;
 use Infinri\Filesystem\F;
 use Infinri\Filesystem\Mime;
@@ -56,14 +57,14 @@ class DummyFilePreview
 class AppPluginsTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.AppPlugins';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.AppPlugins';
 
 	// used for testPluginLoader()
 	public static bool $calledPluginsLoadedHook = false;
 
 	public function testApi(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -78,8 +79,8 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$kirby->impersonate('kirby');
-		$this->assertSame('nice', $kirby->call('api/awesome'));
+		$infinri->impersonate('infinri');
+		$this->assertSame('nice', $infinri->call('api/awesome'));
 	}
 
 	public function testApiRoutePlugins(): void
@@ -126,7 +127,7 @@ class AppPluginsTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$this->assertSame('a', $app->api()->call('a'));
 		$this->assertSame('b', $app->api()->call('b'));
@@ -137,10 +138,10 @@ class AppPluginsTest extends TestCase
 	{
 		App::plugin('test/a', [
 			'api' => [
-				'routes' => fn ($kirby) => [
+				'routes' => fn ($infinri) => [
 					[
 						'pattern' => 'a',
-						'action'  => fn () => $kirby->root('index')
+						'action'  => fn () => $infinri->root('index')
 					]
 				]
 			]
@@ -148,7 +149,7 @@ class AppPluginsTest extends TestCase
 
 		App::plugin('test/b', [
 			'api' => [
-				'routes' => fn ($kirby) => [
+				'routes' => fn ($infinri) => [
 					[
 						'pattern' => 'b',
 						'action'  => fn () => 'b'
@@ -177,7 +178,7 @@ class AppPluginsTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$this->assertSame('/dev/null', $app->api()->call('a'));
 		$this->assertSame('b', $app->api()->call('b'));
@@ -191,10 +192,10 @@ class AppPluginsTest extends TestCase
 				'test' => 'Test'
 			],
 			'api' => [
-				'routes' => fn ($kirby) => [
+				'routes' => fn ($infinri) => [
 					[
 						'pattern' => 'test',
-						'action'  => fn () => $kirby->option('your.plugin.test')
+						'action'  => fn () => $infinri->option('your.plugin.test')
 					]
 				]
 			]
@@ -209,13 +210,13 @@ class AppPluginsTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$this->assertSame('Test', $app->api()->call('test'));
 	}
 
 	public function testAuthChallenge(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => static::TMP
 			],
@@ -231,8 +232,8 @@ class AppPluginsTest extends TestCase
 				]
 			]
 		]);
-		$auth    = $kirby->auth();
-		$session = $kirby->session();
+		$auth    = $infinri->auth();
+		$session = $infinri->session();
 
 		$status = $auth->createChallenge('homer@simpsons.com');
 		$this->assertSame([
@@ -242,23 +243,23 @@ class AppPluginsTest extends TestCase
 			'status'    => 'pending'
 		], $status->toArray());
 		$this->assertSame('dummy', $status->challenge(false));
-		$this->assertSame('homer@simpsons.com', $session->get('kirby.challenge.email'));
-		$this->assertSame('login', $session->get('kirby.challenge.mode'));
-		$this->assertSame('dummy', $session->get('kirby.challenge.type'));
-		$this->assertTrue(password_verify('test', $session->get('kirby.challenge.code')));
-		$this->assertSame(MockTime::$time + 600, $session->get('kirby.challenge.timeout'));
+		$this->assertSame('homer@simpsons.com', $session->get('infinri.challenge.email'));
+		$this->assertSame('login', $session->get('infinri.challenge.mode'));
+		$this->assertSame('dummy', $session->get('infinri.challenge.type'));
+		$this->assertTrue(password_verify('test', $session->get('infinri.challenge.code')));
+		$this->assertSame(MockTime::$time + 600, $session->get('infinri.challenge.timeout'));
 
 		$this->assertSame(
-			$kirby->user('homer@simpsons.com'),
+			$infinri->user('homer@simpsons.com'),
 			$auth->verifyChallenge('test-verify')
 		);
 
-		$kirby->session()->destroy();
+		$infinri->session()->destroy();
 	}
 
 	public function testBlueprint(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -267,12 +268,12 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame($file, $kirby->extension('blueprints', 'pages/test'));
+		$this->assertSame($file, $infinri->extension('blueprints', 'pages/test'));
 	}
 
 	public function testCacheType(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => static::TMP
 			],
@@ -286,7 +287,7 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertInstanceOf(DummyCache::class, $kirby->cache('pages'));
+		$this->assertInstanceOf(DummyCache::class, $infinri->cache('pages'));
 	}
 
 	public function testCollection(): void
@@ -295,7 +296,7 @@ class AppPluginsTest extends TestCase
 			$page = new Page(['slug' => 'a', 'num' => 1])
 		]);
 
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -304,7 +305,7 @@ class AppPluginsTest extends TestCase
 			],
 		]);
 
-		$this->assertIsPage($page, $kirby->collection('test')->first());
+		$this->assertIsPage($page, $infinri->collection('test')->first());
 	}
 
 	public function testCollectionFilters(): void
@@ -314,7 +315,7 @@ class AppPluginsTest extends TestCase
 
 		Collection::$filters = [];
 
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -334,7 +335,7 @@ class AppPluginsTest extends TestCase
 	public function testCommands(): void
 	{
 		$pages = new Pages([]);
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -346,12 +347,12 @@ class AppPluginsTest extends TestCase
 			],
 		]);
 
-		$this->assertSame($command, $kirby->extension('commands', 'test'));
+		$this->assertSame($command, $infinri->extension('commands', 'test'));
 	}
 
 	public function testController(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -360,12 +361,12 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame(['foo' => 'bar'], $kirby->controller('test'));
+		$this->assertSame(['foo' => 'bar'], $infinri->controller('test'));
 	}
 
 	public function testFieldMethod(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -418,9 +419,9 @@ class AppPluginsTest extends TestCase
 		$this->assertCount(5, $app->extensions('filePreviews'));
 	}
 
-	public function testKirbyTag(): void
+	public function testInfinriTag(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -434,16 +435,16 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('test', $kirby->kirbytags('(test: foo)'));
-		$this->assertSame('test', $kirby->kirbytags('(TEST: foo)'));
+		$this->assertSame('test', $infinri->infinritags('(test: foo)'));
+		$this->assertSame('test', $infinri->infinritags('(TEST: foo)'));
 
-		$this->assertSame('test', $kirby->kirbytags('(foo: bar)'));
-		$this->assertSame('test', $kirby->kirbytags('(FOO: bar)'));
+		$this->assertSame('test', $infinri->infinritags('(foo: bar)'));
+		$this->assertSame('test', $infinri->infinritags('(FOO: bar)'));
 	}
 
 	public function testPageMethod(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -461,7 +462,7 @@ class AppPluginsTest extends TestCase
 
 	public function testPagesMethod(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -479,7 +480,7 @@ class AppPluginsTest extends TestCase
 
 	public function testPageModel(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -498,7 +499,7 @@ class AppPluginsTest extends TestCase
 
 	public function testPageModelFromFolder(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index'  => '/dev/null',
 				'models' => static::FIXTURES . '/models'
@@ -515,7 +516,7 @@ class AppPluginsTest extends TestCase
 
 	public function testPermission(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -537,24 +538,24 @@ class AppPluginsTest extends TestCase
 
 	public function testPermissionPlugin(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			]
 		]);
 
-		$plugin = new Plugin('kirby/manual', [
+		$plugin = new Plugin('infinri/manual', [
 			'permissions' => [
 				'test-action' => true,
 				'another'     => false
 			]
 		]);
 
-		$kirby->extend($plugin->extends(), $plugin);
+		$infinri->extend($plugin->extends(), $plugin);
 
 		$permissions = new Permissions([]);
-		$this->assertTrue($permissions->for('kirby.manual', 'test-action'));
-		$this->assertFalse($permissions->for('kirby.manual', 'another'));
+		$this->assertTrue($permissions->for('infinri.manual', 'test-action'));
+		$this->assertFalse($permissions->for('infinri.manual', 'another'));
 
 		// reset actions
 		Permissions::$extendedActions = [];
@@ -563,7 +564,7 @@ class AppPluginsTest extends TestCase
 	public function testOption(): void
 	{
 		// simple
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -572,7 +573,7 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('testValue', $kirby->option('testOption'));
+		$this->assertSame('testValue', $infinri->option('testOption'));
 	}
 
 	public function testExtensionsFromFolders(): void
@@ -580,7 +581,7 @@ class AppPluginsTest extends TestCase
 		Page::$models = [];
 		Dir::copy(static::FIXTURES . '/AppPluginsTest', static::TMP);
 
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => static::TMP
 			]
@@ -601,7 +602,7 @@ class AppPluginsTest extends TestCase
 		$calledRoute = false;
 		$calledHook  = false;
 
-		$kirby = new App([
+		$infinri = new App([
 			'options' => [
 				'routes' => [
 					[
@@ -619,10 +620,19 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$kirby->call('test');
-		$kirby->trigger('type.action:state');
+		$infinri->call('test');
+		$infinri->trigger('type.action:state');
 		$this->assertTrue($calledRoute);
 		$this->assertTrue($calledHook);
+	}
+
+	public function testPluginWithoutRootIgnoresExtendsRoot(): void
+	{
+		$plugin = App::plugin('test/rootless', [
+			'root' => '/some/other/root'
+		]);
+
+		$this->assertSame(__DIR__, $plugin->root());
 	}
 
 	public function testPluginOptions(): void
@@ -634,7 +644,7 @@ class AppPluginsTest extends TestCase
 		]);
 
 		// simple
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -645,8 +655,8 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('another-bar', $kirby->option('test.plugin.foo'));
-		$this->assertSame(['foo' => 'another-bar'], $kirby->option('test.plugin'));
+		$this->assertSame('another-bar', $infinri->option('test.plugin.foo'));
+		$this->assertSame(['foo' => 'another-bar'], $infinri->option('test.plugin'));
 	}
 
 	public function testPluginOptionsWithNonAssociativeArray(): void
@@ -658,7 +668,7 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -669,7 +679,7 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame(['three'], $kirby->option('test.plugin.foo'));
+		$this->assertSame(['three'], $infinri->option('test.plugin.foo'));
 	}
 
 	public function testPluginOptionsWithAssociativeArray(): void
@@ -684,7 +694,7 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -697,12 +707,12 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame(['a' => 'Custom A', 'b' => 'B'], $kirby->option('test.plugin.foo'));
+		$this->assertSame(['a' => 'Custom A', 'b' => 'B'], $infinri->option('test.plugin.foo'));
 	}
 
 	public function testRoutes(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -714,12 +724,12 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('test', $kirby->call('test'));
+		$this->assertSame('test', $infinri->call('test'));
 	}
 
 	public function testRoutesCallback(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -731,12 +741,12 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('test', $kirby->call('test'));
+		$this->assertSame('test', $infinri->call('test'));
 	}
 
 	public function testSnippet(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -745,12 +755,12 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame($file, $kirby->extension('snippets', 'header'));
+		$this->assertSame($file, $infinri->extension('snippets', 'header'));
 	}
 
 	public function testTemplate(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -759,12 +769,12 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame($file, $kirby->extension('templates', 'project'));
+		$this->assertSame($file, $infinri->extension('templates', 'project'));
 	}
 
 	public function testTranslation(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -817,7 +827,7 @@ class AppPluginsTest extends TestCase
 
 	public function testTranslationsWithWarmCache(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			]
@@ -826,10 +836,10 @@ class AppPluginsTest extends TestCase
 		// warm all translation caches before the strings are registered
 		I18n::$locale = 'de';
 		I18n::translate('test');
-		$kirby->translations();
-		$kirby->coreI18nStrings('de');
+		$infinri->translations();
+		$infinri->coreI18nStrings('de');
 
-		$kirby->extend([
+		$infinri->extend([
 			'translations' => [
 				'de' => [
 					'test' => 'Deutscher Test'
@@ -838,13 +848,13 @@ class AppPluginsTest extends TestCase
 		]);
 
 		$this->assertSame('Deutscher Test', I18n::translate('test'));
-		$this->assertSame('Deutscher Test', $kirby->translation('de')->get('test'));
-		$this->assertSame('Deutscher Test', $kirby->coreI18nStrings('de')['test']);
+		$this->assertSame('Deutscher Test', $infinri->translation('de')->get('test'));
+		$this->assertSame('Deutscher Test', $infinri->coreI18nStrings('de')['test']);
 	}
 
 	public function testUserMethod(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -854,7 +864,7 @@ class AppPluginsTest extends TestCase
 		]);
 
 		$user = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'name'  => 'Test User'
 		]);
 		$this->assertSame('test', $user->test());
@@ -865,7 +875,7 @@ class AppPluginsTest extends TestCase
 
 	public function testUserModel(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -884,7 +894,7 @@ class AppPluginsTest extends TestCase
 
 	public function testUsersMethod(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -907,7 +917,7 @@ class AppPluginsTest extends TestCase
 
 		Dir::copy(static::FIXTURES . '/AppPluginsTest', $tmp = static::TMP);
 
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index'   => static::TMP,
 				'plugins' => static::TMP . '/site/plugins-loader'
@@ -916,20 +926,19 @@ class AppPluginsTest extends TestCase
 				'system.loadPlugins:after' => function () use ($phpUnit, &$executed, $tmp) {
 					if (count($this->plugins()) === 2) {
 						$phpUnit->assertSame([
-							'kirby/manual1' => new Plugin('kirby/manual1', []),
-							'kirby/manual2' => new Plugin('kirby/manual2', [])
+							'infinri/manual1' => new Plugin('infinri/manual1', []),
+							'infinri/manual2' => new Plugin('infinri/manual2', [])
 						], $this->plugins());
 					} else {
 						// cannot use strict assertion (test for object contents)
 						$phpUnit->assertEquals([
-							'kirby/test1' => new Plugin('kirby/test1', [
+							'infinri/test1' => new Plugin('infinri/test1', [
 								'hooks' => [
 									'system.loadPlugins:after' => function () {
 										// just a dummy closure to compare against
 									}
-								],
-								'root' => $tmp . '/site/plugins-loader/test1'
-							])
+								]
+							], root: $tmp . '/site/plugins-loader/test1')
 						], $this->plugins());
 					}
 
@@ -942,14 +951,14 @@ class AppPluginsTest extends TestCase
 		$this->assertTrue(static::$calledPluginsLoadedHook);
 
 		// try loading again (which should *not* trigger the hooks again)
-		$kirby->plugins();
+		$infinri->plugins();
 
 		// overwrite plugins with a custom array
 		$expected = [
-			'kirby/manual1' => new Plugin('kirby/manual1', []),
-			'kirby/manual2' => new Plugin('kirby/manual2', [])
+			'infinri/manual1' => new Plugin('infinri/manual1', []),
+			'infinri/manual2' => new Plugin('infinri/manual2', [])
 		];
-		$this->assertSame($expected, $kirby->plugins($expected));
+		$this->assertSame($expected, $infinri->plugins($expected));
 
 		// hook should have been called only once after the first initialization
 		$this->assertSame(1, $executed);
@@ -959,14 +968,14 @@ class AppPluginsTest extends TestCase
 	{
 		Dir::copy(static::FIXTURES . '/AppPluginsTest', static::TMP);
 
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index'   => static::TMP,
 				'plugins' => $dir = static::TMP . '/site/plugins-loader-anonymous'
 			]
 		]);
 
-		$plugins = $kirby->plugins();
+		$plugins = $infinri->plugins();
 		$this->assertCount(1, $plugins);
 
 		$plugin = array_pop($plugins);
@@ -976,7 +985,7 @@ class AppPluginsTest extends TestCase
 
 	public function testThirdPartyExtensions(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null',
 			],
@@ -992,33 +1001,33 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame($testTag, $kirby->extensions('tags')['test']);
-		$this->assertSame($testBlock, $kirby->extensions('thirdParty')['blocks']['test']);
+		$this->assertSame($testTag, $infinri->extensions('tags')['test']);
+		$this->assertSame($testBlock, $infinri->extensions('thirdParty')['blocks']['test']);
 	}
 
 	public function testNativeComponents(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null',
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'components' => [
-				'url' => function ($kirby, $path) {
-					return 'https://rewritten.getkirby.com/' . $path;
+				'url' => function ($infinri, $path) {
+					return 'https://rewritten.infinri.com/' . $path;
 				},
 			]
 		]);
 
-		$this->assertSame('https://rewritten.getkirby.com/test', $kirby->component('url')($kirby, 'test'));
-		$this->assertSame('https://getkirby.com/test', $kirby->nativeComponent('url')($kirby, 'test'));
+		$this->assertSame('https://rewritten.infinri.com/test', $infinri->component('url')($infinri, 'test'));
+		$this->assertSame('https://infinri.com/test', $infinri->nativeComponent('url')($infinri, 'test'));
 	}
 
 	public function testAreas(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
@@ -1027,7 +1036,7 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$areas = $kirby->extensions('areas');
+		$areas = $infinri->extensions('areas');
 
 		$this->assertCount(1, $areas);
 		$this->assertArrayHasKey('todos', $areas);
@@ -1036,7 +1045,7 @@ class AppPluginsTest extends TestCase
 
 	public function testFileTypes(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => '/dev/null',
 			],
@@ -1064,7 +1073,7 @@ class AppPluginsTest extends TestCase
 			]
 		]);
 
-		$fileTypes = $kirby->extensions('fileTypes');
+		$fileTypes = $infinri->extensions('fileTypes');
 		$this->assertSame($fileTypes['type'], F::$types);
 		$this->assertSame($fileTypes['mime'], Mime::$types);
 		$this->assertSame($fileTypes['resizable'], Image::$resizableTypes);

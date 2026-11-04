@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Panel::class)]
 class PanelTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Panel';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Panel';
 
 	protected function setUp(): void
 	{
@@ -81,7 +81,7 @@ class PanelTest extends TestCase
 		$this->app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			]
@@ -95,7 +95,7 @@ class PanelTest extends TestCase
 		$this->assertCount(2, $areas);
 
 		// simulate a logged in user
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		// authenticated
 		$areas = Panel::areas();
@@ -116,7 +116,7 @@ class PanelTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$areas = Panel::areas();
 
@@ -129,13 +129,13 @@ class PanelTest extends TestCase
 		$this->app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 		$core = Panel::buttons();
 
 		// add custom buttons
@@ -150,7 +150,7 @@ class PanelTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 		$withCustoms = Panel::buttons();
 
 		$this->assertSame(2, count($withCustoms) - count($core));
@@ -183,7 +183,7 @@ class PanelTest extends TestCase
 	public function testFirewallWithAcceptedUser(): void
 	{
 		// accepted user
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// general access
 		$result = Panel::firewall($this->app->user());
@@ -205,7 +205,7 @@ class PanelTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -223,7 +223,7 @@ class PanelTest extends TestCase
 		]);
 
 		// accepted user
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		// general access
 		$result = Panel::firewall($app->user());
@@ -461,7 +461,7 @@ class PanelTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			],
@@ -472,7 +472,7 @@ class PanelTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$response = Panel::router('does-not-exist');
 		$json     = json_decode($response->body(), true);
@@ -931,14 +931,14 @@ class PanelTest extends TestCase
 		$this->app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'language' => 'de',
 					'role' => 'admin'
 				]
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$translation = Panel::setTranslation($this->app);
 

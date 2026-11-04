@@ -15,19 +15,19 @@ class UrlFieldTest extends TestCase
 		$this->assertSame('https://example.com', $field->placeholder());
 		$this->assertNull($field->counter());
 		$this->assertSame('url', $field->autocomplete());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testUrlValidation(): void
 	{
 		$field = $this->field('url', [
-			'value' => 'https://getkirby.com'
+			'value' => 'https://infinri.com'
 		]);
 
 		$this->assertTrue($field->isValid());
 
 		$field = $this->field('url', [
-			'value' => 'getkirby.com'
+			'value' => 'infinri.com'
 		]);
 
 		$this->assertFalse($field->isValid());

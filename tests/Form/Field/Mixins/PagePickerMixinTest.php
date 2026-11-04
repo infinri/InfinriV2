@@ -6,7 +6,7 @@ use Infinri\Cms\Page;
 
 class PagePickerMixinTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Form.Fields.PagePickerMixin';
+	public const TMP = INFINRI_TMP_DIR . '/Form.Fields.PagePickerMixin';
 
 	public function testPagesWithoutParent(): void
 	{
@@ -31,7 +31,7 @@ class PagePickerMixinTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$field = $this->field('test', [
 			'model' => $this->app->site()
@@ -81,7 +81,7 @@ class PagePickerMixinTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$field = $this->field('test', [
 			'model' => $this->app->site()
@@ -114,7 +114,7 @@ class PagePickerMixinTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = new Page([
 			'slug' => 'test',
@@ -167,7 +167,7 @@ class PagePickerMixinTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = new Page([
 			'slug' => 'test',
@@ -216,7 +216,7 @@ class PagePickerMixinTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = new Page([
 			'slug' => 'test',

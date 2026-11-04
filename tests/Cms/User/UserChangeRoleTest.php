@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserChangeRoleTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserChangeRole';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserChangeRole';
 
 	protected function setUp(): void
 	{
@@ -20,7 +20,7 @@ class UserChangeRoleTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testChangeRole(): void
@@ -52,7 +52,7 @@ class UserChangeRoleTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = new User([
 			'email' => 'editor@domain.com',

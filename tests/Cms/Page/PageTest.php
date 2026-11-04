@@ -9,13 +9,13 @@ use TypeError;
 #[CoversClass(Page::class)]
 class PageTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Page';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Page';
 
 	public function testApiUrl(): void
 	{
 		$this->app = $this->app->clone([
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'site' => [
 				'children' => [
@@ -33,7 +33,7 @@ class PageTest extends ModelTestCase
 
 		$page = $this->app->page('mother/child');
 
-		$this->assertSame('https://getkirby.com/api/pages/mother+child', $page->apiUrl());
+		$this->assertSame('https://infinri.com/api/pages/mother+child', $page->apiUrl());
 		$this->assertSame('pages/mother+child', $page->apiUrl(true));
 	}
 

@@ -36,7 +36,7 @@ export default {
 					// into a separate component and `buttons` support has been added
 					flag,
 					deletable,
-					options: this.$dropdown(page.link, {
+					options: this.$panel.dropdown.openAsync(page.link, {
 						query: {
 							view: "list",
 							delete: deletable,
@@ -53,17 +53,17 @@ export default {
 		}
 	},
 	mounted() {
-		this.$events.on("page.changeStatus", this.reload);
-		this.$events.on("page.sort", this.reload);
+		this.$panel.events.on("page.changeStatus", this.reload);
+		this.$panel.events.on("page.sort", this.reload);
 	},
 	destroyed() {
-		this.$events.off("page.changeStatus", this.reload);
-		this.$events.off("page.sort", this.reload);
+		this.$panel.events.off("page.changeStatus", this.reload);
+		this.$panel.events.off("page.sort", this.reload);
 	},
 	methods: {
 		onAdd() {
 			if (this.canAdd) {
-				this.$dialog("pages/create", {
+				this.$panel.dialog.open("pages/create", {
 					query: {
 						parent: this.options.link ?? this.parent,
 						view: this.parent,
@@ -90,9 +90,13 @@ export default {
 				const position = event[type].newIndex + 1 + this.pagination.offset;
 
 				try {
-					await this.$api.pages.changeStatus(element.id, "listed", position);
+					await this.$panel.api.pages.changeStatus(
+						element.id,
+						"listed",
+						position
+					);
 					this.$panel.notification.success();
-					this.$events.emit("page.sort", element);
+					this.$panel.events.emit("page.sort", element);
 				} catch (error) {
 					this.$panel.error({
 						message: error.message,

@@ -10,7 +10,7 @@
 			<header class="k-pages-dialog-navbar">
 				<k-button
 					:disabled="!model.id"
-					:title="$t('back')"
+					:title="$panel.t('back')"
 					icon="angle-left"
 					@click="parent = model.parent"
 				/>
@@ -21,7 +21,7 @@
 		<template v-if="model" #options="{ item: page }">
 			<k-button
 				:disabled="!page.hasChildren"
-				:title="$t('open')"
+				:title="$panel.t('open')"
 				icon="angle-right"
 				class="k-pages-dialog-option"
 				@click.stop="parent = page.id"

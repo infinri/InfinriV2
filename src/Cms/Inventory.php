@@ -107,7 +107,7 @@ class Inventory
 		bool $multilang = false
 	): array {
 		// extract the slug and num of the directory
-		// TODO: Switch to static::$numSeparator in v6
+		// TODO: Switch to static::$numSeparator
 		if ($separator = strpos($item, Dir::$numSeparator)) {
 			$num  = (int)substr($item, 0, $separator);
 			$slug = substr($item, $separator + 1);

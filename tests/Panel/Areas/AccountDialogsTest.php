@@ -20,13 +20,13 @@ class AccountDialogsTest extends AreaTestCase
 
 		$this->assertSame('Email', $props['fields']['email']['label']);
 		$this->assertSame('Change', $props['submitButton']);
-		$this->assertSame('test@getkirby.com', $props['value']['email']);
+		$this->assertSame('test@infinri.com', $props['value']['email']);
 	}
 
 	public function testChangeEmailOnSubmit(): void
 	{
 		$this->submit([
-			'email' => 'test2@getkirby.com'
+			'email' => 'test2@infinri.com'
 		]);
 
 		$dialog = $this->dialog('account/changeEmail');
@@ -34,7 +34,7 @@ class AccountDialogsTest extends AreaTestCase
 		$this->assertSame('user.changeEmail', $dialog['event']);
 		$this->assertSame(200, $dialog['code']);
 
-		$this->assertSame('test2@getkirby.com', $this->app->user('test')->email());
+		$this->assertSame('test2@infinri.com', $this->app->user('test')->email());
 	}
 
 	public function testChangeLanguage(): void
@@ -178,7 +178,7 @@ class AccountDialogsTest extends AreaTestCase
 		// create a second user to be deleted
 		$this->app->users()->create([
 			'id'    => 'admin2',
-			'email' => 'admin2@getkirby.com',
+			'email' => 'admin2@infinri.com',
 			'role'  => 'admin'
 		]);
 
@@ -198,7 +198,7 @@ class AccountDialogsTest extends AreaTestCase
 		// create a second user to be deleted
 		$this->app->users()->create([
 			'id'    => 'admin2',
-			'email' => 'admin2@getkirby.com',
+			'email' => 'admin2@infinri.com',
 			'role'  => 'admin'
 		]);
 

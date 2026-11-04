@@ -233,22 +233,6 @@ class TranslationTest extends TestCase
 		$this->assertSame($this->model, $translation->model());
 	}
 
-	public function testParent(): void
-	{
-		$this->setUpSingleLanguage();
-
-		$translation = new Translation(
-			model: $this->model,
-			version: $version = $this->model->version(),
-			language: Language::ensure('default')
-		);
-
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('`$translation->parent()` has been deprecated. Please use `$translation->model()` instead');
-
-		$translation->parent();
-	}
-
 	public function testSlugExists(): void
 	{
 		$this->setUpMultiLanguage();
@@ -284,20 +268,14 @@ class TranslationTest extends TestCase
 		$this->assertNull($translation->slug());
 	}
 
-	public function testUpdate(): void
+	public function testCompatibilityMethodsAreRemoved(): void
 	{
-		$this->setUpSingleLanguage();
-
-		$translation = new Translation(
-			model: $this->model,
-			version: $version = $this->model->version(),
-			language: Language::ensure('default')
-		);
-
-		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('`$translation->update()` has been deprecated. Please use `$model->version()->update()` instead');
-
-		$translation->update();
+		foreach (['contentFile', 'isDefault', 'parent', 'update'] as $method) {
+			$this->assertFalse(
+				method_exists(Translation::class, $method),
+				'Translation::' . $method . '() should be removed'
+			);
+		}
 	}
 
 	public function testToArray(): void

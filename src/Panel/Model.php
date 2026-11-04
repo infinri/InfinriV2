@@ -25,26 +25,16 @@ abstract class Model
 	abstract public function buttons(): array;
 
 	/**
-	 * Get the content values for the model
-	 *
-	 * @deprecated 5.0.0 Use `self::versions()` instead
-	 */
-	public function content(): array
-	{
-		return $this->versions()['changes'];
-	}
-
-	/**
 	 * Returns the drag text from a custom callback
 	 * if the callback is defined in the config
 	 * @internal
 	 *
-	 * @param string $type markdown or kirbytext
+	 * @param string $type markdown or infinritext
 	 */
 	public function dragTextFromCallback(string $type, ...$args): string|null
 	{
 		$option   = 'panel.' . $type . '.' . $this->model::CLASS_ALIAS . 'DragText';
-		$callback = $this->model->kirby()->option($option);
+		$callback = $this->model->infinri()->option($option);
 
 		if ($callback instanceof Closure) {
 			return $callback($this->model, ...$args);
@@ -60,18 +50,18 @@ abstract class Model
 	 *
 	 * @internal
 	 *
-	 * @param string|null $type (`auto`|`kirbytext`|`markdown`)
+	 * @param string|null $type (`auto`|`infinritext`|`markdown`)
 	 */
 	public function dragTextType(string|null $type = 'auto'): string
 	{
 		$type ??= 'auto';
 
 		if ($type === 'auto') {
-			$kirby = $this->model->kirby();
-			$type  = $kirby->option('panel.kirbytext', true) ? 'kirbytext' : 'markdown';
+			$infinri = $this->model->infinri();
+			$type  = $infinri->option('panel.infinritext', true) ? 'infinritext' : 'markdown';
 		}
 
-		return $type === 'markdown' ? 'markdown' : 'kirbytext';
+		return $type === 'markdown' ? 'markdown' : 'infinritext';
 	}
 
 	/**
@@ -297,7 +287,6 @@ abstract class Model
 
 	/**
 	 * Returns the corresponding model object
-	 * @since 5.0.0
 	 */
 	public function model(): ModelWithContent
 	{
@@ -361,7 +350,7 @@ abstract class Model
 	{
 		$blueprint = $this->model->blueprint();
 		$link      = $this->url(true);
-		$request   = $this->model->kirby()->request();
+		$request   = $this->model->infinri()->request();
 		$tabs      = $blueprint->tabs();
 		$tab       = $blueprint->tab($request->get('tab')) ?? $tabs[0] ?? null;
 		$versions  = $this->versions();
@@ -418,7 +407,7 @@ abstract class Model
 
 		$data = $model->panel()->toLink($title);
 
-		if ($tab = $model->kirby()->request()->get('tab')) {
+		if ($tab = $model->infinri()->request()->get('tab')) {
 			$uri = new Uri($data['link'], [
 				'query' => ['tab' => $tab]
 			]);
@@ -439,7 +428,7 @@ abstract class Model
 			return '/' . $this->path();
 		}
 
-		return $this->model->kirby()->url('panel') . '/' . $this->path();
+		return $this->model->infinri()->url('panel') . '/' . $this->path();
 	}
 
 	/**

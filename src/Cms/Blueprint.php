@@ -384,8 +384,8 @@ class Blueprint
 			return static::$loaded[$name];
 		}
 
-		$kirby = App::instance();
-		$root  = $kirby->root('blueprints');
+		$infinri = App::instance();
+		$root  = $infinri->root('blueprints');
 		$file  = $root . '/' . $name . '.yml';
 
 		// first try to find the blueprint in the `site/blueprints` root,
@@ -393,12 +393,12 @@ class Blueprint
 		// core blueprints (e.g. page, file, site and block defaults)
 		// as well as blueprints provided by plugins
 		if (F::exists($file, $root) !== true) {
-			$file = $kirby->extension('blueprints', $name);
+			$file = $infinri->extension('blueprints', $name);
 		}
 
 		// callback option can be return array or blueprint file path
 		if (is_callable($file) === true) {
-			$file = $file($kirby);
+			$file = $file($infinri);
 		}
 
 		// now ensure that we always return the data array

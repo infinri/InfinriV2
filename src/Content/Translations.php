@@ -16,7 +16,6 @@ class Translations extends Collection
 	 * normalize an array definition.
 	 *
 	 * @todo Needs to be refactored as soon as Version::create becomes static
-	 * 		 (see https://github.com/getkirby/kirby/pull/6491#discussion_r1652264408)
 	 */
 	public static function create(
 		ModelWithContent $model,

@@ -118,7 +118,7 @@ class InlineTest extends TestCase
 
 	public function testParseNodeWithKnownMarksWithAttrs(): void
 	{
-		$dom  = new Dom('<p><a href="https://getkirby.com">Test</a></p>');
+		$dom  = new Dom('<p><a href="https://infinri.com">Test</a></p>');
 		$p    = $dom->query('//p')[0];
 		$html = Inline::parseNode($p, [
 			'a' => [
@@ -126,12 +126,12 @@ class InlineTest extends TestCase
 			],
 		]);
 
-		$this->assertSame('<a href="https://getkirby.com">Test</a>', $html);
+		$this->assertSame('<a href="https://infinri.com">Test</a>', $html);
 	}
 
 	public function testParseNodeWithKnownMarksWithAttrDefaults(): void
 	{
-		$dom  = new Dom('<p><a href="https://getkirby.com">Test</a></p>');
+		$dom  = new Dom('<p><a href="https://infinri.com">Test</a></p>');
 		$p    = $dom->query('//p')[0];
 		$html = Inline::parseNode($p, [
 			'a' => [
@@ -142,7 +142,7 @@ class InlineTest extends TestCase
 			],
 		]);
 
-		$this->assertSame('<a href="https://getkirby.com" rel="test">Test</a>', $html);
+		$this->assertSame('<a href="https://infinri.com" rel="test">Test</a>', $html);
 	}
 
 	public function testSkipsDangerousHref(): void

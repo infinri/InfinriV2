@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class FileCreateTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/files';
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileCreate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileCreate';
 
 	public function testCreate(): void
 	{
@@ -167,7 +167,7 @@ class FileCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = new Page(['slug' => 'test']);
 		$source = static::TMP . '/source.md';
@@ -204,7 +204,7 @@ class FileCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = new Page(['slug' => 'test']);
 		$source = static::TMP . '/source.md';
@@ -223,9 +223,6 @@ class FileCreateTest extends ModelTestCase
 		$this->assertSame('B', $result->b()->value());
 	}
 
-	/**
-	 * @see https://github.com/getkirby/kirby/issues/8411
-	 */
 	public function testCreateWithSaveHandlers(): void
 	{
 		$this->app = $this->app->clone([
@@ -241,7 +238,7 @@ class FileCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = new Page(['slug' => 'test']);
 		$source = static::TMP . '/source.md';
@@ -290,7 +287,7 @@ class FileCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = new Page(['slug' => 'test']);
 		$source = static::FIXTURES . '/test.jpg';
@@ -334,7 +331,7 @@ class FileCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = new Page(['slug' => 'test']);
 		$source = static::FIXTURES . '/test.jpg';
@@ -366,7 +363,7 @@ class FileCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = new Page(['slug' => 'test']);
 		$source = static::FIXTURES . '/test.pdf';
@@ -403,7 +400,7 @@ class FileCreateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// create the dummy source
 		F::write($source = static::TMP . '/source.md', '# Test');

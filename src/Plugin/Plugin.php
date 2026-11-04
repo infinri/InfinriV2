@@ -2,10 +2,8 @@
 
 namespace Infinri\Plugin;
 
-use Closure;
 use Composer\InstalledVersions;
 use Infinri\Cms\App;
-use Infinri\Cms\Helpers;
 use Infinri\Cms\System\UpdateStatus;
 use Infinri\Data\Data;
 use Infinri\Exception\InvalidArgumentException;
@@ -18,11 +16,10 @@ use Throwable;
 class Plugin
 {
 	protected Assets $assets;
-	protected License|Closure|array|string $license;
 	protected UpdateStatus|null $updateStatus = null;
 
 	/**
-	 * @param string $name Plugin name within Kirby (`vendor/plugin`)
+	 * @param string $name Plugin name within Infinri (`vendor/plugin`)
 	 * @param array $extends Associative array of plugin extensions
 	 *
 	 * @throws \Infinri\Exception\InvalidArgumentException If the plugin name has an invalid format
@@ -31,36 +28,16 @@ class Plugin
 		protected string $name,
 		protected array $extends = [],
 		protected array $info = [],
-		Closure|string|array|null $license = null,
 		protected string|null $root = null,
 		protected string|null $version = null,
 	) {
 		static::validateName($name);
 
-		// TODO: Remove in v7
-		if ($root = $extends['root'] ?? null) {
-			Helpers::deprecated('Plugin "' . $name . '": Passing the `root` inside the `extends` array has been deprecated. Pass it directly as named argument `root`.', 'plugin-extends-root');
-			$this->root ??= $root;
-			unset($this->extends['root']);
-		}
-
 		$this->root ??= dirname(debug_backtrace()[0]['file']);
 
-		// TODO: Remove in v7
-		if ($info = $extends['info'] ?? null) {
-			Helpers::deprecated('Plugin "' . $name . '": Passing an `info` array inside the `extends` array has been deprecated. Pass the individual entries directly as named `info` argument.', 'plugin-extends-root');
-
-			if (is_array($info) === true && $info !== []) {
-				$this->info = [...$info, ...$this->info];
-			}
-
-			unset($this->extends['info']);
-		}
-
 		// read composer.json and use as info fallback
-		$info          = Data::read($this->manifest(), fail: false);
-		$this->info    = [...$info, ...$this->info];
-		$this->license = $license ?? $this->info['license'] ?? '-';
+		$info       = Data::read($this->manifest(), fail: false);
+		$this->info = [...$info, ...$this->info];
 	}
 
 	/**
@@ -136,9 +113,9 @@ class Plugin
 	}
 
 	/**
-	 * Current $kirby instance
+	 * Current $infinri instance
 	 */
-	public function kirby(): App
+	public function infinri(): App
 	{
 		return App::instance();
 	}
@@ -152,7 +129,7 @@ class Plugin
 		$status = $this->updateStatus()?->status();
 
 		if ($status !== 'error' && $status !== null) {
-			return 'https://plugins.getkirby.com/' . $this->name();
+			return 'https://plugins.infinri.com/' . $this->name();
 		}
 
 		// Fallback to plugin info
@@ -162,18 +139,6 @@ class Plugin
 		$link ??= $info['support']['source'] ?? null;
 
 		return V::url($link) ? $link : null;
-	}
-
-	/**
-	 * Returns the license object
-	 */
-	public function license(): License
-	{
-		// resolve license info from Closure, array or string
-		return License::from(
-			plugin: $this,
-			license: $this->license
-		);
 	}
 
 	/**
@@ -191,7 +156,7 @@ class Plugin
 	#[BlockCollectionAccess]
 	public function mediaRoot(): string
 	{
-		return $this->kirby()->root('media') . '/plugins/' . $this->name();
+		return $this->infinri()->root('media') . '/plugins/' . $this->name();
 	}
 
 	/**
@@ -199,7 +164,7 @@ class Plugin
 	 */
 	public function mediaUrl(): string
 	{
-		return $this->kirby()->url('media') . '/plugins/' . $this->name();
+		return $this->infinri()->url('media') . '/plugins/' . $this->name();
 	}
 
 	/**
@@ -211,11 +176,11 @@ class Plugin
 	}
 
 	/**
-	 * Returns a Kirby option value for this plugin
+	 * Returns an Infinri option value for this plugin
 	 */
 	public function option(string $key)
 	{
-		return $this->kirby()->option($this->prefix() . '.' . $key);
+		return $this->infinri()->option($this->prefix() . '.' . $key);
 	}
 
 	/**
@@ -245,7 +210,6 @@ class Plugin
 			'authors'     => $this->authors(),
 			'description' => $this->description(),
 			'name'        => $this->name(),
-			'license'     => $this->license()->toArray(),
 			'link'        => $this->link(),
 			'root'        => $this->root(),
 			'version'     => $this->version()
@@ -255,9 +219,8 @@ class Plugin
 	/**
 	 * Returns the update status object unless the
 	 * update check has been disabled for the plugin
-	 * @since 3.8.0
 	 *
-	 * @param array|null $data Custom override for the getkirby.com update data
+	 * @param array|null $data Custom override for the infinri.com update data
 	 */
 	public function updateStatus(array|null $data = null): UpdateStatus|null
 	{
@@ -265,8 +228,8 @@ class Plugin
 			return $this->updateStatus;
 		}
 
-		$kirby  = $this->kirby();
-		$option = $kirby->option('updates.plugins');
+		$infinri  = $this->infinri();
+		$option = $infinri->option('updates.plugins');
 
 		// specific configuration per plugin
 		if (is_array($option) === true) {
@@ -289,7 +252,7 @@ class Plugin
 			}
 		}
 
-		$option ??= $kirby->option('updates') ?? true;
+		$option ??= $infinri->option('updates') ?? true;
 
 		if ($option !== true) {
 			return null;

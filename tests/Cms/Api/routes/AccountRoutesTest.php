@@ -10,7 +10,7 @@ use Infinri\TestCase;
 class AccountRoutesTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.AccountRoutes';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.AccountRoutes';
 
 	protected function setUp(): void
 	{
@@ -33,18 +33,18 @@ class AccountRoutesTest extends TestCase
 			],
 			'users' => [
 				[
-					'email'    => 'test@getkirby.com',
+					'email'    => 'test@infinri.com',
 					'role'     => 'admin',
 					'password' => password_hash('12345678', PASSWORD_DEFAULT)
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 		Dir::make(static::TMP);
 	}
 
@@ -96,7 +96,7 @@ class AccountRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$response = $app->api()->call('account/blueprint');
 
@@ -130,7 +130,7 @@ class AccountRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$response = $app->api()->call('account/blueprints');
 
@@ -143,12 +143,12 @@ class AccountRoutesTest extends TestCase
 	{
 		$response = $this->app->api()->call('account/email', 'PATCH', [
 			'body' => [
-				'email' => 'admin@getkirby.de'
+				'email' => 'admin@infinri.de'
 			]
 		]);
 
 		$this->assertSame('ok', $response['status']);
-		$this->assertSame('admin@getkirby.de', $response['data']['email']);
+		$this->assertSame('admin@infinri.de', $response['data']['email']);
 	}
 
 	public function testChangeLanguage(): void
@@ -216,7 +216,7 @@ class AccountRoutesTest extends TestCase
 	public function testChangePasswordReset(): void
 	{
 		$this->app->session()->set(
-			'kirby.resetPassword',
+			'infinri.resetPassword',
 			$this->app->user()->id()
 		);
 
@@ -228,7 +228,7 @@ class AccountRoutesTest extends TestCase
 
 		$this->assertSame('ok', $response['status']);
 		$this->assertTrue($this->app->user()->validatePassword('super-secure-new-password'));
-		$this->assertNull($this->app->session()->get('kirby.resetPassword'));
+		$this->assertNull($this->app->session()->get('infinri.resetPassword'));
 	}
 
 	public function testChangePasswordResetForOtherUser(): void
@@ -239,8 +239,8 @@ class AccountRoutesTest extends TestCase
 		$this->expectExceptionMessage('Please enter a valid password. Passwords must be at least 8 characters long.');
 
 		$this->app->session()->set(
-			'kirby.resetPassword',
-			$this->app->user('editor@getkirby.com')->id()
+			'infinri.resetPassword',
+			$this->app->user('editor@infinri.com')->id()
 		);
 
 		$this->app->api()->call('account/password', 'PATCH', [
@@ -296,7 +296,7 @@ class AccountRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$response = $app->api()->call('account/fields/test');
 
@@ -312,7 +312,7 @@ class AccountRoutesTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 					'files' => [
 						[
@@ -323,7 +323,7 @@ class AccountRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$response = $app->api()->call('account/files/a.jpg');
 
@@ -335,7 +335,7 @@ class AccountRoutesTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 					'files' => [
 						[
@@ -352,7 +352,7 @@ class AccountRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$response = $app->api()->call('account/files');
 
@@ -367,7 +367,7 @@ class AccountRoutesTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 					'files' => [
 						[
@@ -387,7 +387,7 @@ class AccountRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$response = $app->api()->call('account/files');
 
@@ -401,7 +401,7 @@ class AccountRoutesTest extends TestCase
 
 		$response = $app->api()->call('account');
 
-		$this->assertSame('test@getkirby.com', $response['data']['email']);
+		$this->assertSame('test@infinri.com', $response['data']['email']);
 	}
 
 	public function testRoles(): void
@@ -436,7 +436,7 @@ class AccountRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$response = $app->api()->call('account/sections/test');
 		$expected = [

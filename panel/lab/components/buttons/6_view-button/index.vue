@@ -4,7 +4,7 @@
 			<k-view-button
 				icon="info"
 				text="A simple button"
-				link="https://getkirby.com"
+				link="https://infinri.com"
 				target="_blank"
 			/>
 		</k-lab-example>

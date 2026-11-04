@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Find::class)]
 class FindTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Find';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Find';
 
 	protected function setUp(): void
 	{
@@ -46,7 +46,7 @@ class FindTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$this->assertSame('a.jpg', Find::file('pages/a', 'a.jpg')->filename());
 		$this->assertSame('aa.jpg', Find::file('pages/a+aa', 'aa.jpg')->filename());
 	}
@@ -61,7 +61,7 @@ class FindTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$this->assertSame('test.jpg', Find::file('site', 'test.jpg')->filename());
 	}
 
@@ -70,7 +70,7 @@ class FindTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						['filename' => 'test.jpg']
 					]
@@ -78,13 +78,13 @@ class FindTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
-		$this->assertSame('test.jpg', Find::file('users/test@getkirby.com', 'test.jpg')->filename());
+		$app->impersonate('infinri');
+		$this->assertSame('test.jpg', Find::file('users/test@infinri.com', 'test.jpg')->filename());
 	}
 
 	public function testFileNotFound(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The file "nope.jpg" cannot be found');
@@ -110,13 +110,13 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The file "protected.jpg" cannot be found');
@@ -140,7 +140,7 @@ class FindTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$this->assertSame('en', Find::language('en')->code());
 		$this->assertSame('de', Find::language('de')->code());
@@ -148,7 +148,7 @@ class FindTest extends TestCase
 
 	public function testLanguageNotFound(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The language could not be found');
@@ -177,7 +177,7 @@ class FindTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$a  = $app->page('a');
 		$aa = $app->page('a/aa');
@@ -235,13 +235,13 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$this->assertSame('editor-' . $uuid, Find::role('editor-' . $uuid)->name());
 	}
 
@@ -260,13 +260,13 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			]
 		]);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The role "editor-' . $uuid . '" cannot be found');
@@ -292,13 +292,13 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'author@getkirby.com',
+					'email' => 'author@infinri.com',
 					'role'  => 'author-' . $uuid
 				]
 			]
 		]);
 
-		$app->impersonate('author@getkirby.com');
+		$app->impersonate('author@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The role "editor-' . $uuid . '" cannot be found');
@@ -308,7 +308,7 @@ class FindTest extends TestCase
 
 	public function testRoleNotFound(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The role "does-not-exist" cannot be found');
@@ -327,13 +327,13 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$this->assertSame(3, $app->roles()->count()); // admin + editor + author
 		$this->assertSame(3, Find::roles()->count());
 	}
@@ -366,31 +366,31 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'author@getkirby.com',
+					'email' => 'author@infinri.com',
 					'role'  => 'author-' . $uuid
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			]
 		]);
 
 		// admin + editor both accessible to admin
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$this->assertSame(3, Find::roles()->count());
 
 		// only their own role is accessible for the editor
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$this->assertSame(1, Find::roles()->count());
 		$this->assertSame('editor-' . $uuid, Find::roles()->first()->name());
 
 		// the author has no access to any role
-		$app->impersonate('author@getkirby.com');
+		$app->impersonate('author@infinri.com');
 		$this->assertSame(0, Find::roles()->count());
 	}
 
@@ -423,11 +423,11 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'current@getkirby.com',
+					'email' => 'current@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						['filename' => 'userfile.jpg']
 					]
@@ -440,10 +440,10 @@ class FindTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('current@getkirby.com');
+		$app->impersonate('current@infinri.com');
 
 		$this->assertIsUser(Find::parent('account'));
-		$this->assertIsUser(Find::parent('users/test@getkirby.com'));
+		$this->assertIsUser(Find::parent('users/test@infinri.com'));
 		$this->assertIsSite(Find::parent('site'));
 		$this->assertIsSite(Find::parent('/site'));
 		$this->assertIsPage(Find::parent('pages/a+aa'));
@@ -451,7 +451,7 @@ class FindTest extends TestCase
 		$this->assertIsFile(Find::parent('site/files/sitefile.jpg'));
 		$this->assertIsFile(Find::parent('pages/a/files/a-regular-file.jpg'));
 		$this->assertIsFile(Find::parent('pages/files/files/file-in-files-page.jpg'));
-		$this->assertIsFile(Find::parent('users/test@getkirby.com/files/userfile.jpg'));
+		$this->assertIsFile(Find::parent('users/test@infinri.com/files/userfile.jpg'));
 	}
 
 	public function testParentWithInvalidModelType(): void
@@ -481,13 +481,13 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The site is not accessible');
@@ -504,7 +504,7 @@ class FindTest extends TestCase
 
 	public function testSite(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->assertIsSite(Find::site());
 	}
 
@@ -521,13 +521,13 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The site is not accessible');
@@ -546,22 +546,22 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$this->expectException(NotFoundException::class);
-		$this->expectExceptionMessage('The user "admin@getkirby.com" cannot be found');
+		$this->expectExceptionMessage('The user "admin@infinri.com" cannot be found');
 
-		Find::parent('users/admin@getkirby.com');
+		Find::parent('users/admin@infinri.com');
 	}
 
 	public function testUser(): void
@@ -569,14 +569,14 @@ class FindTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$app->impersonate('kirby');
-		$this->assertSame('test@getkirby.com', Find::user('test@getkirby.com')->email());
+		$app->impersonate('infinri');
+		$this->assertSame('test@infinri.com', Find::user('test@infinri.com')->email());
 	}
 
 	public function testUserWithAuthentication(): void
@@ -584,7 +584,7 @@ class FindTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			],
@@ -595,8 +595,8 @@ class FindTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
-		$this->assertSame('test@getkirby.com', Find::user()->email());
+		$app->impersonate('test@infinri.com');
+		$this->assertSame('test@infinri.com', Find::user()->email());
 	}
 
 	public function testUserWithAuthenticationNotAccessible(): void
@@ -612,7 +612,7 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -623,7 +623,7 @@ class FindTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The user cannot be found');
@@ -636,12 +636,12 @@ class FindTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 				]
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The user cannot be found');
@@ -659,14 +659,14 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
-		$this->assertSame('test@getkirby.com', Find::user('account')->email());
+		$app->impersonate('test@infinri.com');
+		$this->assertSame('test@infinri.com', Find::user('account')->email());
 	}
 
 	public function testUserNotAccessible(): void
@@ -680,30 +680,30 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$this->expectException(NotFoundException::class);
-		$this->expectExceptionMessage('The user "admin@getkirby.com" cannot be found');
+		$this->expectExceptionMessage('The user "admin@infinri.com" cannot be found');
 
-		Find::user('admin@getkirby.com');
+		Find::user('admin@infinri.com');
 	}
 
 	public function testUserNotFound(): void
 	{
 		$this->expectException(NotFoundException::class);
-		$this->expectExceptionMessage('The user "nope@getkirby.com" cannot be found');
+		$this->expectExceptionMessage('The user "nope@infinri.com" cannot be found');
 
-		Find::user('nope@getkirby.com');
+		Find::user('nope@infinri.com');
 	}
 
 	public function testUsers(): void
@@ -711,15 +711,15 @@ class FindTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 				]
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$this->assertSame($app->users()->pluck('email'), Find::users()->pluck('email'));
 	}
@@ -745,23 +745,23 @@ class FindTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin-' . $uuid
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 			]
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 
 		$this->assertSame(2, $app->users()->count());
 		$this->assertSame(2, Find::users()->count());
 
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$this->assertSame(2, $app->users()->count());
 		$this->assertSame(1, Find::users()->count());
 		$this->assertSame('editor-' . $uuid, Find::users()->first()->role()->name());

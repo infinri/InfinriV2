@@ -9,9 +9,9 @@ class ResponseTest extends TestCase
 {
 	protected function setUp(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'urls' => [
-				'index' => 'https://getkirby.test'
+				'index' => 'https://infinri.test'
 			]
 		]);
 	}
@@ -21,15 +21,15 @@ class ResponseTest extends TestCase
 		$response = Response::redirect();
 		$this->assertSame('', $response->body());
 		$this->assertSame(302, $response->code());
-		$this->assertEquals(['Location' => 'https://getkirby.test'], $response->headers()); // cannot use strict assertion (Uri object)
+		$this->assertEquals(['Location' => 'https://infinri.test'], $response->headers()); // cannot use strict assertion (Uri object)
 	}
 
 	public function testRedirectWithLocation(): void
 	{
-		$response = Response::redirect('https://getkirby.com');
+		$response = Response::redirect('https://infinri.com');
 		$this->assertSame('', $response->body());
 		$this->assertSame(302, $response->code());
-		$this->assertEquals(['Location' => 'https://getkirby.com'], $response->headers()); // cannot use strict assertion (Uri object)
+		$this->assertEquals(['Location' => 'https://infinri.com'], $response->headers()); // cannot use strict assertion (Uri object)
 	}
 
 	public function testRedirectWithInternationalLocation(): void
@@ -45,6 +45,6 @@ class ResponseTest extends TestCase
 		$response = Response::redirect('/uri', 301);
 		$this->assertSame('', $response->body());
 		$this->assertSame(301, $response->code());
-		$this->assertEquals(['Location' => 'https://getkirby.test/uri'], $response->headers()); // cannot use strict assertion (Uri object)
+		$this->assertEquals(['Location' => 'https://infinri.test/uri'], $response->headers()); // cannot use strict assertion (Uri object)
 	}
 }

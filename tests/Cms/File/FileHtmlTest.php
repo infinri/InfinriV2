@@ -7,13 +7,13 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(File::class)]
 class FileHtmlTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileHtml';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileHtml';
 
 	public function testHtml(): void
 	{
 		$file = new File([
 			'filename' => 'test.jpg',
-			'url'      => 'http://getkirby.com/test.jpg',
+			'url'      => 'http://infinri.com/test.jpg',
 			'parent'   => $this->app->site(),
 			'content' => [
 				'alt' => 'This is the alt text'
@@ -21,7 +21,7 @@ class FileHtmlTest extends ModelTestCase
 		]);
 
 		$this->assertSame(
-			'<img alt="This is the alt text" src="http://getkirby.com/test.jpg">',
+			'<img alt="This is the alt text" src="http://infinri.com/test.jpg">',
 			$file->html()
 		);
 	}

@@ -17,7 +17,7 @@ class TogglesFieldTest extends TestCase
 		$this->assertTrue($field->labels());
 		$this->assertTrue($field->reset());
 		$this->assertSame([], $field->options());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testGrow(): void

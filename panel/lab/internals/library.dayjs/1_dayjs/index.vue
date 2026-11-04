@@ -3,14 +3,14 @@
 		<k-box theme="text">
 			<k-text>
 				<p>
-					Kirby ships with <code>dayjs</code> bundled: a minimalist JavaScript
+					Infinri ships with <code>dayjs</code> bundled: a minimalist JavaScript
 					library that parses, validates, manipulates, and displays dates and
 					times.
 				</p>
 
 				<p>
 					In addition to exposing all the
-					<a href="https://day.js.org/">core functionality</a>, Kirby also
+					<a href="https://day.js.org/">core functionality</a>, Infinri also
 					provides some methods to parse/interpret, format and validate dates
 					and times.
 				</p>

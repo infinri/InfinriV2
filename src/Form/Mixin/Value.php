@@ -19,22 +19,6 @@ trait Value
 	protected mixed $value = null;
 
 	/**
-	 * @deprecated 5.0.0 Use `::toStoredValue()` instead to receive
-	 * the value in the format that will be needed for content files.
-	 *
-	 * If you need to get the value with the default as fallback, you should use
-	 * the fill method first `$field->fill($field->default())->toStoredValue()`
-	 */
-	public function data(bool $default = false): mixed
-	{
-		if ($default === true && $this->isEmpty() === true) {
-			$this->fill($this->default());
-		}
-
-		return $this->toStoredValue();
-	}
-
-	/**
 	 * Returns the default value of the field
 	 */
 	public function default(): mixed
@@ -152,15 +136,6 @@ trait Value
 		return true;
 	}
 
-	/**
-	 * Checks if the field is saveable
-	 * @deprecated 5.0.0 Use `::hasValue()` instead
-	 */
-	public function save(): bool
-	{
-		return $this->hasValue();
-	}
-
 	protected function setDefault(mixed $default = null): void
 	{
 		$this->default = $default;
@@ -172,8 +147,6 @@ trait Value
 	 * submit logic. This is useful if the field component
 	 * sends data that needs to be processed before being
 	 * stored.
-	 *
-	 * @since 5.0.0
 	 */
 	#[BlockCollectionAccess]
 	public function submit(mixed $value): static
@@ -208,7 +181,7 @@ trait Value
 	 * otherwise it returns null
 	 *
 	 * @see `self::toFormValue()`
-	 * @todo might get deprecated or reused later. Use `self::toFormValue()` instead.
+	 * @todo might get removed or reused later. Use `self::toFormValue()` instead.
 	 *
 	 * If you need the form value with the default as fallback, you should use
 	 * the fill method first `$field->fill($field->default())->toFormValue()`

@@ -22,7 +22,7 @@
 						:autofocus="autofocus"
 						:disabled="!more"
 						:responsive="true"
-						:text="$t('add')"
+						:text="$panel.t('add')"
 						icon="add"
 						variant="filled"
 						size="xs"
@@ -41,13 +41,13 @@
 								click: () => add(),
 								disabled: !more,
 								icon: 'add',
-								text: $t('add')
+								text: $panel.t('add')
 							},
 							{
 								click: () => removeAll(),
 								disabled: items.length === 0 || disabled,
 								icon: 'trash',
-								text: $t('delete.all')
+								text: $panel.t('delete.all')
 							}
 						]"
 						align-x="end"
@@ -63,7 +63,7 @@
 			<template v-if="hasFields">
 				<!-- Empty State -->
 				<k-empty v-if="items.length === 0" icon="list-bullet" @click="add()">
-					{{ empty ?? $t("field.structure.empty") }}
+					{{ empty ?? $panel.t("field.structure.empty") }}
 				</k-empty>
 
 				<!-- Table -->
@@ -72,7 +72,7 @@
 						:columns="columns"
 						:disabled="disabled"
 						:fields="fields"
-						:empty="$t('field.structure.empty')"
+						:empty="$panel.t('field.structure.empty')"
 						:index="index"
 						:options="options"
 						:pagination="limit && !isSelecting ? pagination : false"
@@ -88,7 +88,7 @@
 
 					<footer v-if="more">
 						<k-button
-							:title="$t('add')"
+							:title="$panel.t('add')"
 							icon="add"
 							size="xs"
 							variant="filled"
@@ -98,7 +98,7 @@
 				</template>
 			</template>
 			<template v-else>
-				<k-empty icon="list-bullet">{{ $t("fields.empty") }}</k-empty>
+				<k-empty icon="list-bullet">{{ $panel.t("fields.empty") }}</k-empty>
 			</template>
 		</k-input-validator>
 	</k-field>
@@ -183,7 +183,7 @@ export default {
 	},
 	computed: {
 		batchDeleteConfirmMessage() {
-			return this.$t(`field.structure.delete.confirm.selected`, {
+			return this.$panel.t(`field.structure.delete.confirm.selected`, {
 				count: this.selected.length
 			});
 		},
@@ -267,19 +267,19 @@ export default {
 			return [
 				{
 					icon: "edit",
-					text: this.$t("edit"),
+					text: this.$panel.t("edit"),
 					click: "edit"
 				},
 				{
 					disabled: !this.duplicate || !this.more,
 					icon: "copy",
-					text: this.$t("duplicate"),
+					text: this.$panel.t("duplicate"),
 					click: "duplicate"
 				},
 				"-",
 				{
 					icon: "trash",
-					text: this.$t("delete"),
+					text: this.$panel.t("delete"),
 					click: "remove"
 				}
 			];
@@ -524,7 +524,7 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-remove-dialog",
 				props: {
-					text: this.$t("field.structure.delete.confirm")
+					text: this.$panel.t("field.structure.delete.confirm")
 				},
 				on: {
 					submit: () => {
@@ -549,7 +549,7 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-remove-dialog",
 				props: {
-					text: this.$t("field.structure.delete.confirm.all")
+					text: this.$panel.t("field.structure.delete.confirm.all")
 				},
 				on: {
 					submit: () => {

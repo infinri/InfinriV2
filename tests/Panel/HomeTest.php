@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Home::class)]
 class HomeTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Home';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Home';
 
 	protected function setUp(): void
 	{
@@ -49,11 +49,11 @@ class HomeTest extends TestCase
 	{
 		$this->app = $this->app->clone([
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'admin']
+				['email' => 'test@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$user = $this->app->impersonate('test@getkirby.com');
+		$user = $this->app->impersonate('test@infinri.com');
 
 		$this->assertSame('/panel/site', Home::alternative($user));
 	}
@@ -77,11 +77,11 @@ class HomeTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$user = $this->app->impersonate('test@getkirby.com');
+		$user = $this->app->impersonate('test@infinri.com');
 
 		$this->assertSame('/panel/users', Home::alternative($user));
 	}
@@ -107,11 +107,11 @@ class HomeTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$user = $this->app->impersonate('test@getkirby.com');
+		$user = $this->app->impersonate('test@infinri.com');
 
 		$this->assertSame('/panel/account', Home::alternative($user));
 	}
@@ -130,11 +130,11 @@ class HomeTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$user = $this->app->impersonate('test@getkirby.com');
+		$user = $this->app->impersonate('test@infinri.com');
 
 		$this->assertSame('/', Home::alternative($user));
 	}
@@ -157,11 +157,11 @@ class HomeTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$user = $this->app->impersonate('test@getkirby.com');
+		$user = $this->app->impersonate('test@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('There’s no available Panel page to redirect to');
@@ -178,20 +178,20 @@ class HomeTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'admin']
+				['email' => 'test@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$user = $this->app->impersonate('test@getkirby.com');
+		$user = $this->app->impersonate('test@infinri.com');
 
 		$this->assertTrue(Home::hasAccess($user, 'site'));
 		$this->assertTrue(Home::hasAccess($user, 'pages/test'));
-		$this->assertTrue(Home::hasAccess($user, 'users/test@getkirby.com'));
+		$this->assertTrue(Home::hasAccess($user, 'users/test@infinri.com'));
 		$this->assertTrue(Home::hasAccess($user, 'account'));
 
 		// dialogs and dropdowns never get access
 		$this->assertFalse(Home::hasAccess($user, 'dialogs/users/create'));
-		$this->assertFalse(Home::hasAccess($user, 'dropdowns/users/test@getkirby.com'));
+		$this->assertFalse(Home::hasAccess($user, 'dropdowns/users/test@infinri.com'));
 
 		// invalid routes return false
 		$this->assertFalse(Home::hasAccess($user, 'does/not/exist/at/all'));
@@ -219,15 +219,15 @@ class HomeTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$user = $this->app->impersonate('test@getkirby.com');
+		$user = $this->app->impersonate('test@infinri.com');
 
 		$this->assertFalse(Home::hasAccess($user, 'site'));
 		$this->assertFalse(Home::hasAccess($user, 'pages/test'));
-		$this->assertTrue(Home::hasAccess($user, 'users/test@getkirby.com'));
+		$this->assertTrue(Home::hasAccess($user, 'users/test@infinri.com'));
 		$this->assertTrue(Home::hasAccess($user, 'account'));
 	}
 
@@ -239,7 +239,7 @@ class HomeTest extends TestCase
 		$uri = new Uri('/');
 		$this->assertTrue(Home::hasValidDomain($uri));
 
-		$uri = new Uri('https://getkirby.com');
+		$uri = new Uri('https://infinri.com');
 		$this->assertFalse(Home::hasValidDomain($uri));
 	}
 
@@ -272,11 +272,11 @@ class HomeTest extends TestCase
 	{
 		$this->app = $this->app->clone([
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'admin']
+				['email' => 'test@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$this->assertSame('/panel/site', Home::url());
 	}
@@ -291,12 +291,12 @@ class HomeTest extends TestCase
 			['{{ site.find("blog").panel.url }}', '/panel/pages/blog'],
 			['{{ site.url }}', '/'],
 
-			// site url: https://getkirby.com
-			['panel/pages/blog', 'https://getkirby.com/panel/pages/blog', 'https://getkirby.com'],
-			['panel/pages/blog?mean=attack', 'https://getkirby.com/panel/pages/blog', 'https://getkirby.com'],
-			['panel/pages/blog/mean:attack', 'https://getkirby.com/panel/pages/blog', 'https://getkirby.com'],
-			['{{ site.find("blog").panel.url }}', 'https://getkirby.com/panel/pages/blog', 'https://getkirby.com'],
-			['{{ site.url }}', 'https://getkirby.com', 'https://getkirby.com'],
+			// site url: https://infinri.com
+			['panel/pages/blog', 'https://infinri.com/panel/pages/blog', 'https://infinri.com'],
+			['panel/pages/blog?mean=attack', 'https://infinri.com/panel/pages/blog', 'https://infinri.com'],
+			['panel/pages/blog/mean:attack', 'https://infinri.com/panel/pages/blog', 'https://infinri.com'],
+			['{{ site.find("blog").panel.url }}', 'https://infinri.com/panel/pages/blog', 'https://infinri.com'],
+			['{{ site.url }}', 'https://infinri.com', 'https://infinri.com'],
 		];
 	}
 
@@ -319,11 +319,11 @@ class HomeTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'admin']
+				['email' => 'test@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$this->assertSame($expected, Home::url());
 	}
@@ -342,15 +342,15 @@ class HomeTest extends TestCase
 			'blueprints' => [
 				'users/admin' => [
 					'name' => 'admin',
-					'home' => 'https://getkirby.com'
+					'home' => 'https://infinri.com'
 				]
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'admin']
+				['email' => 'test@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('External URLs are not allowed for Panel redirects');
@@ -362,11 +362,11 @@ class HomeTest extends TestCase
 	{
 		$this->app = $this->app->clone([
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'admin']
+				['email' => 'test@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 		$this->app->session()->set('panel.path', 'users');
 
 		$this->assertSame('/panel/users', Home::url());
@@ -376,11 +376,11 @@ class HomeTest extends TestCase
 	{
 		$this->app = $this->app->clone([
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'admin']
+				['email' => 'test@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 		$this->app->session()->set('panel.path', 'login');
 
 		$this->assertSame('/panel/site', Home::url());
@@ -400,11 +400,11 @@ class HomeTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$this->app->impersonate('editor@getkirby.com');
+		$this->app->impersonate('editor@infinri.com');
 		$this->assertSame('/panel/users', Home::url());
 	}
 
@@ -424,11 +424,11 @@ class HomeTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			]
 		]);
 
-		$this->app->impersonate('editor@getkirby.com');
+		$this->app->impersonate('editor@infinri.com');
 
 		$this->assertSame('/panel/account', Home::url());
 	}

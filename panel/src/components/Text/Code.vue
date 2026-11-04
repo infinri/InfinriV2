@@ -12,7 +12,6 @@
 <script>
 /**
  * A code block with syntax highlighting
- * @since 4.0.0
  * @example <k-code language="html"><p>Hello World</p></k-code>
  */
 export default {

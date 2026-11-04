@@ -17,25 +17,25 @@ class UsersFieldTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'leonardo@getkirby.com',
+					'email' => 'leonardo@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'raphael@getkirby.com',
+					'email' => 'raphael@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'michelangelo@getkirby.com',
+					'email' => 'michelangelo@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'donatello@getkirby.com',
+					'email' => 'donatello@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testDefaultProps(): void
@@ -50,12 +50,12 @@ class UsersFieldTest extends TestCase
 		$this->assertSame([], $field->default());
 		$this->assertNull($field->max());
 		$this->assertTrue($field->multiple());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testDefaultUser(): void
 	{
-		$this->app->impersonate('raphael@getkirby.com');
+		$this->app->impersonate('raphael@infinri.com');
 
 		$field = $this->field('users', [
 			'model' => new Page(['slug' => 'test'])
@@ -66,35 +66,35 @@ class UsersFieldTest extends TestCase
 
 	public function testCurrentDefaultUser(): void
 	{
-		$this->app->impersonate('raphael@getkirby.com');
+		$this->app->impersonate('raphael@infinri.com');
 
 		$field = $this->field('users', [
 			'model'   => new Page(['slug' => 'test']),
 			'default' => true
 		]);
 
-		$this->assertSame('raphael@getkirby.com', $field->default()[0]['email']);
+		$this->assertSame('raphael@infinri.com', $field->default()[0]['email']);
 	}
 
 	public function testMultipleDefaultUsers(): void
 	{
-		$this->app->impersonate('raphael@getkirby.com');
+		$this->app->impersonate('raphael@infinri.com');
 
 		$field = $this->field('users', [
 			'model' => new Page(['slug' => 'test']),
 			'default' => [
-				'raphael@getkirby.com',
-				'donatello@getkirby.com'
+				'raphael@infinri.com',
+				'donatello@infinri.com'
 			]
 		]);
 
-		$this->assertSame('raphael@getkirby.com', $field->default()[0]['email']);
-		$this->assertSame('donatello@getkirby.com', $field->default()[1]['email']);
+		$this->assertSame('raphael@infinri.com', $field->default()[0]['email']);
+		$this->assertSame('donatello@infinri.com', $field->default()[1]['email']);
 	}
 
 	public function testDefaultUserDisabled(): void
 	{
-		$this->app->impersonate('raphael@getkirby.com');
+		$this->app->impersonate('raphael@infinri.com');
 
 		$field = $this->field('users', [
 			'model' => new Page(['slug' => 'test']),
@@ -109,9 +109,9 @@ class UsersFieldTest extends TestCase
 		$field = $this->field('users', [
 			'model' => new Page(['slug' => 'test']),
 			'value' => [
-				'leonardo@getkirby.com', // exists
-				'raphael@getkirby.com', // exists
-				'homer@getkirby.com'  // does not exist
+				'leonardo@infinri.com', // exists
+				'raphael@infinri.com', // exists
+				'homer@infinri.com'  // does not exist
 			]
 		]);
 
@@ -119,8 +119,8 @@ class UsersFieldTest extends TestCase
 		$ids   = array_column($value, 'email');
 
 		$expected = [
-			'leonardo@getkirby.com',
-			'raphael@getkirby.com'
+			'leonardo@infinri.com',
+			'raphael@infinri.com'
 		];
 
 		$this->assertSame($expected, $ids);
@@ -147,39 +147,39 @@ class UsersFieldTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
 					'id'    => 'admin',
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			],
-			'user' => 'editor@getkirby.com'
+			'user' => 'editor@infinri.com'
 		]);
 
 		$field = $this->field('users', [
 			'model' => new Page(['slug' => 'test']),
 			'store' => 'id',
-			'value' => ['editor@getkirby.com', 'admin@getkirby.com']
+			'value' => ['editor@infinri.com', 'admin@infinri.com']
 		]);
 
 		$value = $field->value();
 
 		// the editor may list themselves
 		$this->assertSame('editor', $value[0]['id']);
-		$this->assertSame('editor@getkirby.com', $value[0]['email']);
+		$this->assertSame('editor@infinri.com', $value[0]['email']);
 
 		// the user that must not be listed only echoes back
 		// the ID that is already stored in the content file
 		$this->assertSame(['id', 'uuid', 'image', 'info', 'link', 'permissions', 'sortable', 'text'], array_keys($value[1]));
-		$this->assertSame('admin@getkirby.com', $value[1]['id']);
+		$this->assertSame('admin@infinri.com', $value[1]['id']);
 		$this->assertSame('–', $value[1]['text']);
 		$this->assertFalse($value[1]['link']);
 
 		// ... and is still kept when the value is stored again
-		$this->assertSame(['editor', 'admin@getkirby.com'], $field->toStoredValue());
+		$this->assertSame(['editor', 'admin@infinri.com'], $field->toStoredValue());
 	}
 
 	public function testMin(): void
@@ -187,8 +187,8 @@ class UsersFieldTest extends TestCase
 		$field = $this->field('users', [
 			'model' => new Page(['slug' => 'test']),
 			'value' => [
-				'leonardo@getkirby.com',
-				'raphael@getkirby.com'
+				'leonardo@infinri.com',
+				'raphael@infinri.com'
 			],
 			'min' => 3
 		]);
@@ -204,8 +204,8 @@ class UsersFieldTest extends TestCase
 		$field = $this->field('users', [
 			'model' => new Page(['slug' => 'test']),
 			'value' => [
-				'leonardo@getkirby.com',
-				'raphael@getkirby.com'
+				'leonardo@infinri.com',
+				'raphael@infinri.com'
 			],
 			'max' => 1
 		]);
@@ -262,7 +262,7 @@ class UsersFieldTest extends TestCase
 			'model'    => new Page(['slug' => 'test']),
 			'required' => true,
 			'value' => [
-				'leonardo@getkirby.com',
+				'leonardo@infinri.com',
 			],
 		]);
 
@@ -291,16 +291,16 @@ class UsersFieldTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$api = $app->api()->call('pages/test/fields/authors');
 
 		$this->assertCount(2, $api);
 		$this->assertArrayHasKey('data', $api);
 		$this->assertArrayHasKey('pagination', $api);
 		$this->assertCount(4, $api['data']);
-		$this->assertSame('donatello@getkirby.com', $api['data'][0]['email']);
-		$this->assertSame('leonardo@getkirby.com', $api['data'][1]['email']);
-		$this->assertSame('michelangelo@getkirby.com', $api['data'][2]['email']);
-		$this->assertSame('raphael@getkirby.com', $api['data'][3]['email']);
+		$this->assertSame('donatello@infinri.com', $api['data'][0]['email']);
+		$this->assertSame('leonardo@infinri.com', $api['data'][1]['email']);
+		$this->assertSame('michelangelo@infinri.com', $api['data'][2]['email']);
+		$this->assertSame('raphael@infinri.com', $api['data'][3]['email']);
 	}
 }

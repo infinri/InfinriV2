@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(File::class)]
 class FilePreviewUrlTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FilePreviewUrl';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FilePreviewUrl';
 
 	public function testPreviewUrlRedirects(): void
 	{
@@ -15,7 +15,7 @@ class FilePreviewUrlTest extends ModelTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -33,7 +33,7 @@ class FilePreviewUrlTest extends ModelTestCase
 		]);
 
 		// authenticate
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$page = new Page([
 			'slug'  => 'test',
@@ -93,13 +93,13 @@ class FilePreviewUrlTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$page = new Page([
 			'slug'    => 'test',
@@ -129,13 +129,13 @@ class FilePreviewUrlTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$page = new Page([
 			'slug'    => 'test',
@@ -152,7 +152,7 @@ class FilePreviewUrlTest extends ModelTestCase
 
 	public function testPreviewUrlForUserFile(): void
 	{
-		$user = new User(['email' => 'test@getkirby.com']);
+		$user = new User(['email' => 'test@infinri.com']);
 		$file = new File([
 			'filename' => 'test.pdf',
 			'parent'   => $user
@@ -165,17 +165,17 @@ class FilePreviewUrlTest extends ModelTestCase
 	{
 		$this->app = $this->app->clone([
 			'components' => [
-				'file::url' => fn ($kirby, $file, array $options = []) => 'https://getkirby.com/' . $file->filename()
+				'file::url' => fn ($infinri, $file, array $options = []) => 'https://infinri.com/' . $file->filename()
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$page = new Page(['slug' => 'test']);
 		$file = new File([
@@ -183,6 +183,6 @@ class FilePreviewUrlTest extends ModelTestCase
 			'parent'   => $page
 		]);
 
-		$this->assertSame('https://getkirby.com/test.pdf', $file->previewUrl());
+		$this->assertSame('https://infinri.com/test.pdf', $file->previewUrl());
 	}
 }

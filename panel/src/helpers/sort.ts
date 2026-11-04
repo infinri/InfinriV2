@@ -1,5 +1,5 @@
 /**
- * Adapted from https://github.com/bubkoo/natsort
+ * Adapted from natsort
  *
  * Copyright (c) 2016 W.Y.
  *

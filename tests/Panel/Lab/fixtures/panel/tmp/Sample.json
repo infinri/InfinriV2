@@ -1,0 +1,50 @@
+{
+	"description": "A sample component",
+	"displayName": "Sample",
+	"sourceFile": "src/components/Sample.vue",
+	"tags": {
+		"deprecated": [{ "description": "Use something else" }],
+		"since": [{ "description": "9.9.9" }]
+	},
+	"props": [
+		{
+			"name": "label",
+			"type": { "name": "string" },
+			"description": "The label",
+			"tags": {
+				"deprecated": [{ "description": "Use text" }],
+				"since": [{ "description": "9.9.9" }]
+			}
+		}
+	],
+	"methods": [
+		{
+			"name": "focus",
+			"description": "Focuses the sample",
+			"tags": {
+				"deprecated": [{ "description": "Use blur" }],
+				"since": [{ "description": "9.9.9" }]
+			}
+		}
+	],
+	"events": [
+		{
+			"name": "input",
+			"description": "Fires on input",
+			"tags": {
+				"deprecated": [{ "description": "Use change" }],
+				"since": [{ "description": "9.9.9" }]
+			}
+		}
+	],
+	"slots": [
+		{
+			"name": "default",
+			"description": "The default slot",
+			"tags": {
+				"deprecated": [{ "description": "Use content" }],
+				"since": [{ "description": "9.9.9" }]
+			}
+		}
+	]
+}

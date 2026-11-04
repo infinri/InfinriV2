@@ -7,7 +7,7 @@ use Infinri\Filesystem\Dir;
 
 class LanguagesApiCollectionTest extends ApiCollectionTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.LanguagesApiCollection';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.LanguagesApiCollection';
 
 	protected function setUp(): void
 	{

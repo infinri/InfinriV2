@@ -1,10 +1,10 @@
 <template>
 	<k-section
 		v-if="issues.length"
-		:headline="$t('security')"
+		:headline="$panel.t('security')"
 		:buttons="[
 			{
-				title: $t('retry'),
+				title: $panel.t('retry'),
 				icon: 'refresh',
 				click: retry
 			}
@@ -30,7 +30,6 @@
 <script>
 /**
  * @internal
- * @since 4.0.0
  */
 export default {
 	props: {
@@ -82,14 +81,14 @@ export default {
 			if (status < 400) {
 				this.issues.push({
 					id: key,
-					text: this.$t("system.issues." + key),
-					link: "https://getkirby.com/security/" + key,
+					text: this.$panel.t("system.issues." + key),
+					link: "https://infinri.com/security/" + key,
 					icon: "folder"
 				});
 			}
 		},
 		retry() {
-			this.$go(window.location.href);
+			this.$panel.view.open(window.location.href);
 		}
 	}
 };

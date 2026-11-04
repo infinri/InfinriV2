@@ -9,26 +9,17 @@ return [
 	'system' => [
 		'pattern' => 'system',
 		'action'  => function () {
-			$kirby        = App::instance();
-			$system       = $kirby->system();
+			$infinri        = App::instance();
+			$system       = $infinri->system();
 			$updateStatus = $system->updateStatus();
-			$license      = $system->license();
-			$debugMode    = $kirby->option('debug', false) === true;
+			$debugMode    = $infinri->option('debug', false) === true;
 			$isLocal      = $system->isLocal();
 
 			$environment = [
 				[
-					'label'  => $license->status()->label(),
-					'value'  => $license->label(),
-					'theme'  => $license->status()->theme(),
-					'icon'   => $license->status()->icon(),
-					'dialog' => $license->status()->dialog()
-				],
-				[
 					'label' => $updateStatus?->label() ?? I18n::translate('version'),
-					'value' => $kirby->version(),
-					'link'  => $updateStatus?->url() ??
-						'https://github.com/getkirby/kirby/releases/tag/' . $kirby->version(),
+					'value' => $infinri->version(),
+					'link'  => $updateStatus?->url(),
 					'theme' => $updateStatus?->theme(),
 					'icon'  => $updateStatus?->icon() ?? 'info'
 				],
@@ -61,12 +52,10 @@ return [
 
 				return [
 					'author'  => empty($authors) ? '–' : $authors,
-					'license' => $plugin->license()->toArray(),
 					'name'    => [
 						'text' => $plugin->name() ?? '–',
 						'href' => $plugin->link(),
 					],
-					'status'  => $plugin->license()->status()->toArray(),
 					'version' => $version,
 				];
 			});
@@ -88,43 +77,43 @@ return [
 					'icon'  => $isLocal ? 'info' : 'alert',
 					'theme' => $isLocal ? 'info' : 'negative',
 					'text'  => I18n::translate('system.issues.debug'),
-					'link'  => 'https://getkirby.com/security/debug'
+					'link'  => 'https://infinri.com/security/debug'
 				];
 			}
 
 			if (
 				$isLocal === false &&
-				$kirby->environment()->https() !== true
+				$infinri->environment()->https() !== true
 			) {
 				$security[] = [
 					'id'   => 'https',
 					'text' => I18n::translate('system.issues.https'),
-					'link' => 'https://getkirby.com/security/https'
+					'link' => 'https://infinri.com/security/https'
 				];
 			}
 
-			if ($kirby->option('panel.vue.compiler', null) === null) {
+			if ($infinri->option('panel.vue.compiler', null) === null) {
 				$security[] = [
 					'id'    => 'vue-compiler',
-					'link'  => 'https://getkirby.com/security/vue-compiler',
+					'link'  => 'https://infinri.com/security/vue-compiler',
 					'text'  => I18n::translate('system.issues.vue.compiler'),
 					'theme' => 'notice'
 				];
 			}
 
-			if ($kirby->option('content.salt') === null) {
+			if ($infinri->option('content.salt') === null) {
 				$security[] = [
 					'id'    => 'content-salt',
-					'link'  => 'https://getkirby.com/security/content-salt',
+					'link'  => 'https://infinri.com/security/content-salt',
 					'text'  => I18n::translate('system.issues.content.salt'),
 					'theme' => 'notice'
 				];
 			}
 
-			if (($kirby->option('cookie.key') ?? Cookie::$key) === 'KirbyHttpCookieKey') {
+			if (($infinri->option('cookie.key') ?? Cookie::$key) === 'InfinriHttpCookieKey') {
 				$security[] = [
 					'id'    => 'cookie-key',
-					'link'  => 'https://getkirby.com/security/cookie-key',
+					'link'  => 'https://infinri.com/security/cookie-key',
 					'text'  => I18n::translate('system.issues.cookie.key'),
 					'theme' => 'notice'
 				];
@@ -135,7 +124,7 @@ return [
 				$sensitive = [
 					'content' => $system->exposedFileUrl('content'),
 					'git'     => $system->exposedFileUrl('git'),
-					'kirby'   => $system->exposedFileUrl('kirby'),
+					'infinri'   => $system->exposedFileUrl('infinri'),
 					'site'    => $system->exposedFileUrl('site')
 				];
 			}

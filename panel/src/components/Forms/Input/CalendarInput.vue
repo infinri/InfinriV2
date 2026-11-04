@@ -4,13 +4,13 @@
 		:style="$attrs.style"
 		@click.stop
 	>
-		<legend class="sr-only">{{ $t("date.select") }}</legend>
+		<legend class="sr-only">{{ $panel.t("date.select") }}</legend>
 		<!-- Month + year selects -->
 		<nav>
-			<k-button :title="$t('prev')" icon="angle-left" @click="onPrev" />
+			<k-button :title="$panel.t('prev')" icon="angle-left" @click="onPrev" />
 			<span class="k-calendar-selects">
 				<k-select-input
-					:aria-label="$t('month')"
+					:aria-label="$panel.t('month')"
 					:autofocus="autofocus"
 					:options="months"
 					:empty="false"
@@ -19,7 +19,7 @@
 					@input="month = Number($event)"
 				/>
 				<k-select-input
-					:aria-label="$t('year')"
+					:aria-label="$panel.t('year')"
 					:options="years"
 					:empty="false"
 					:required="true"
@@ -27,14 +27,14 @@
 					@input="year = Number($event)"
 				/>
 			</span>
-			<k-button :title="$t('next')" icon="angle-right" @click="onNext" />
+			<k-button :title="$panel.t('next')" icon="angle-right" @click="onNext" />
 		</nav>
 		<table :key="year + '-' + month" class="k-calendar-table">
 			<!-- Weekdays -->
 			<thead>
 				<tr>
 					<th v-for="day in weekdays" :key="'weekday_' + day">
-						{{ $t("days." + day) }}
+						{{ $panel.t("days." + day) }}
 					</th>
 				</tr>
 			</thead>
@@ -63,7 +63,7 @@
 					<td class="k-calendar-today" colspan="7">
 						<k-button
 							:disabled="disabled"
-							:text="$t('today')"
+							:text="$panel.t('today')"
 							@click="
 								show(today);
 								select(today);
@@ -98,7 +98,6 @@ const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
 /**
  * The Calendar component is mainly used for our `DateInput` component, but it could be used as stand-alone calendar as well with a little CSS love.
- * @since 4.0.0
  *
  * @example <k-calendar-input :value="value" @input="value = $event" />
  */
@@ -168,7 +167,7 @@ export default {
 				"october",
 				"november",
 				"december"
-			].map((day) => this.$t("months." + day));
+			].map((day) => this.$panel.t("months." + day));
 		},
 		/**
 		 * Select options for all months

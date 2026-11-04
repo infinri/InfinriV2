@@ -1,0 +1,34 @@
+{
+	"latest": "88888.8.8",
+	"versions": {
+		"88888.8.8": {
+			"status": "latest"
+		},
+		">=77777.5.5": {
+			"status": "no-vulnerabilities"
+		},
+		"88888.*": {
+			"status": "active-support",
+			"initialRelease": "2027-10-05"
+		},
+		"77777.*": {
+			"latest": "77777.7.7",
+			"status": "active-support",
+			"initialRelease": "2026-10-05"
+		},
+		"<77777.0.0": {
+			"latest": "66666.6.6",
+			"status": "end-of-life"
+		}
+	},
+	"urls": {
+		"*": {
+			"changes": "https://infinri.com/releases/{{ version }}",
+			"download": "https://repoofthefuture.com/{{ version }}.zip",
+			"upgrade": "https://infinri.com/releases/88888"
+		}
+	},
+	"php": {},
+	"incidents": [],
+	"messages": []
+}

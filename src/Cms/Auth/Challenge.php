@@ -42,7 +42,7 @@ abstract class Challenge
 		#[SensitiveParameter]
 		string $code
 	): bool {
-		$hash = $user->kirby()->session()->get('kirby.challenge.code');
+		$hash = $user->infinri()->session()->get('infinri.challenge.code');
 		if (is_string($hash) !== true) {
 			return false;
 		}

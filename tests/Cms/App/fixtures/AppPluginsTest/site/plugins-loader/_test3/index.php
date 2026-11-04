@@ -1,3 +1,3 @@
 <?php
 
-Kirby::plugin('kirby/test3', []);
+Infinri::plugin('infinri/test3', []);

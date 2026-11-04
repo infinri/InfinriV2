@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(File::class)]
 class FileChangeSortTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileChangeSort';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileChangeSort';
 
 	public function testChangeSortHooks(): void
 	{
@@ -49,7 +49,7 @@ class FileChangeSortTest extends ModelTestCase
 			'content'  => ['sort' => 3]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$file1->changeSort(1);
 		$this->assertSame(0, $calls);
@@ -87,7 +87,7 @@ class FileChangeSortTest extends ModelTestCase
 	public function testChangeSortInMultiLanguage(): void
 	{
 		$this->setUpMultiLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test'

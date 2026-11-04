@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(PageTree::class)]
 class PageTreeTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Controller.PageTree';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Controller.PageTree';
 	public PageTree $tree;
 
 	protected function setUp(): void
@@ -66,7 +66,7 @@ class PageTreeTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->tree = new PageTree($this->app->site());
 	}
 

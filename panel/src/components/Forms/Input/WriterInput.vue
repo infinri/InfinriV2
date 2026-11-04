@@ -263,12 +263,6 @@ export default {
 		createMarks() {
 			return Object.values(this.$helper.writer.createMarks(this.marks));
 		},
-		/**
-		 * @deprecated 5.4.0 Use this.$helper.writer.availableMarksFromPlugins() instead.
-		 */
-		createMarksFromPanelPlugins() {
-			return this.$helper.writer.availableMarksFromPlugins();
-		},
 		createNodes() {
 			let nodes = this.nodes;
 
@@ -304,27 +298,8 @@ export default {
 
 			return result;
 		},
-		/**
-		 * @deprecated 5.4.0 Use this.$helper.writer.availableNodesFromPlugins() instead.
-		 */
-		createNodesFromPanelPlugins() {
-			return this.$helper.writer.availableNodesFromPlugins();
-		},
 		getHTML() {
 			return this.editor.getHTML();
-		},
-		/**
-		 * @deprecated 5.4.0 Use this.$helper.writer.filterExtensions() instead.
-		 */
-		filterExtensions(available, allowed, postFilter) {
-			allowed = this.$helper.writer.allowedExtensions(available, allowed);
-			let installed = this.$helper.writer.filterExtensions(available, allowed);
-
-			if (typeof postFilter === "function") {
-				installed = postFilter(allowed, installed);
-			}
-
-			return installed;
 		},
 		focus() {
 			this.editor.focus();
@@ -351,7 +326,7 @@ export default {
 				this.minlength &&
 				this.characters < this.minlength
 			) {
-				error = this.$t("error.validation.minlength", {
+				error = this.$panel.t("error.validation.minlength", {
 					min: this.minlength
 				});
 			} else if (
@@ -359,7 +334,7 @@ export default {
 				this.maxlength &&
 				this.characters > this.maxlength
 			) {
-				error = this.$t("error.validation.maxlength", {
+				error = this.$panel.t("error.validation.maxlength", {
 					max: this.maxlength
 				});
 			}

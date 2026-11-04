@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserChangeLanguageTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserChangeLanguage';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserChangeLanguage';
 
 	public function testChangeLanguage(): void
 	{
@@ -37,7 +37,7 @@ class UserChangeLanguageTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = new User(['email' => 'editor@domain.com']);
 		$user->changeLanguage('de');

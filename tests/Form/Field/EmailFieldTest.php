@@ -15,19 +15,19 @@ class EmailFieldTest extends TestCase
 		$this->assertSame('mail@example.com', $field->placeholder());
 		$this->assertNull($field->counter());
 		$this->assertSame('email', $field->autocomplete());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testEmailValidation(): void
 	{
 		$field = $this->field('email', [
-			'value' => 'mail@getkirby.com'
+			'value' => 'mail@infinri.com'
 		]);
 
 		$this->assertTrue($field->isValid());
 
 		$field = $this->field('email', [
-			'value' => 'mail[at]getkirby.com'
+			'value' => 'mail[at]infinri.com'
 		]);
 
 		$this->assertFalse($field->isValid());

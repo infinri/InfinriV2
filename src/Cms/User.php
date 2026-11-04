@@ -130,7 +130,7 @@ class User extends ModelWithContent
 			return 'users/' . $this->id();
 		}
 
-		return $this->kirby()->url('api') . '/users/' . $this->id();
+		return $this->infinri()->url('api') . '/users/' . $this->id();
 	}
 
 	/**
@@ -231,7 +231,6 @@ class User extends ModelWithContent
 
 	/**
 	 * Checks if the user has a stored password
-	 * @since 5.3.0
 	 */
 	public function hasPassword(): bool
 	{
@@ -258,13 +257,13 @@ class User extends ModelWithContent
 			return $this->inventory;
 		}
 
-		$kirby = $this->kirby();
+		$infinri = $this->infinri();
 
 		return $this->inventory = Inventory::for(
 			$this->root(),
-			$kirby->contentExtension(),
-			$kirby->contentIgnore(),
-			$kirby->multilang()
+			$infinri->contentExtension(),
+			$infinri->contentIgnore(),
+			$infinri->multilang()
 		);
 	}
 
@@ -282,7 +281,6 @@ class User extends ModelWithContent
 
 	/**
 	 * Checks if the user is accessible to the current user
-	 * @since 5.4.0
 	 */
 	public function isAccessible(): bool
 	{
@@ -299,16 +297,15 @@ class User extends ModelWithContent
 
 	/**
 	 * Checks if the current user is the virtual
-	 * Kirby user
+	 * Infinri user
 	 */
-	public function isKirby(): bool
+	public function isInfinri(): bool
 	{
-		return $this->isAdmin() && $this->id() === 'kirby';
+		return $this->isAdmin() && $this->id() === 'infinri';
 	}
 
 	/**
 	 * Checks if the user is listable by the current user
-	 * @since 5.4.0
 	 */
 	public function isListable(): bool
 	{
@@ -325,7 +322,7 @@ class User extends ModelWithContent
 	 */
 	public function isLoggedIn(): bool
 	{
-		return $this->is($this->kirby()->user());
+		return $this->is($this->infinri()->user());
 	}
 
 	/**
@@ -336,7 +333,7 @@ class User extends ModelWithContent
 	{
 		return
 			$this->role()->isAdmin() === true &&
-			$this->kirby()->users()->filter('role', 'admin')->count() <= 1;
+			$this->infinri()->users()->filter('role', 'admin')->count() <= 1;
 	}
 
 	/**
@@ -344,7 +341,7 @@ class User extends ModelWithContent
 	 */
 	public function isLastUser(): bool
 	{
-		return $this->kirby()->users()->count() === 1;
+		return $this->infinri()->users()->count() === 1;
 	}
 
 	/**
@@ -363,7 +360,7 @@ class User extends ModelWithContent
 	{
 		return $this->language ??=
 			$this->credentials()['language'] ??
-			$this->kirby()->panelLanguage();
+			$this->infinri()->panelLanguage();
 	}
 
 	/**
@@ -392,30 +389,30 @@ class User extends ModelWithContent
 	public function loginPasswordless(
 		Session|array|null $session = null
 	): void {
-		if ($this->id() === 'kirby') {
+		if ($this->id() === 'infinri') {
 			throw new PermissionException(
-				message: 'The almighty user "kirby" cannot be used for login, only for raising permissions in code via `$kirby->impersonate()`'
+				message: 'The almighty user "infinri" cannot be used for login, only for raising permissions in code via `$infinri->impersonate()`'
 			);
 		}
 
-		$kirby   = $this->kirby();
+		$infinri   = $this->infinri();
 		$session = $this->sessionFromOptions($session);
 
-		$kirby->trigger(
+		$infinri->trigger(
 			'user.login:before',
 			['user' => $this, 'session' => $session]
 		);
 
 		$session->regenerateToken(); // privilege change
-		$session->data()->set('kirby.userId', $this->id());
+		$session->data()->set('infinri.userId', $this->id());
 
 		if ($this->passwordTimestamp() !== null) {
-			$session->data()->set('kirby.loginTimestamp', time());
+			$session->data()->set('infinri.loginTimestamp', time());
 		}
 
-		$kirby->auth()->setUser($this);
+		$infinri->auth()->setUser($this);
 
-		$kirby->trigger(
+		$infinri->trigger(
 			'user.login:after',
 			['user' => $this, 'session' => $session]
 		);
@@ -429,28 +426,28 @@ class User extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function logout(Session|array|null $session = null): void
 	{
-		$kirby   = $this->kirby();
+		$infinri   = $this->infinri();
 		$session = $this->sessionFromOptions($session);
 
-		$kirby->trigger('user.logout:before', ['user' => $this, 'session' => $session]);
+		$infinri->trigger('user.logout:before', ['user' => $this, 'session' => $session]);
 
 		// remove the user from the session for future requests
-		$session->data()->remove('kirby.userId');
-		$session->data()->remove('kirby.loginTimestamp');
+		$session->data()->remove('infinri.userId');
+		$session->data()->remove('infinri.loginTimestamp');
 
 		// clear the cached user object from the app state of the current request
-		$this->kirby()->auth()->flush();
+		$this->infinri()->auth()->flush();
 
 		if ($session->data()->get() === []) {
 			// session is now empty, we might as well destroy it
 			$session->destroy();
 
-			$kirby->trigger('user.logout:after', ['user' => $this, 'session' => null]);
+			$infinri->trigger('user.logout:after', ['user' => $this, 'session' => null]);
 		} else {
 			// privilege change
 			$session->regenerateToken();
 
-			$kirby->trigger('user.logout:after', ['user' => $this, 'session' => $session]);
+			$infinri->trigger('user.logout:after', ['user' => $this, 'session' => $session]);
 		}
 	}
 
@@ -460,7 +457,7 @@ class User extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function mediaDir(): string
 	{
-		return $this->kirby()->root('media') . '/users/' . $this->id();
+		return $this->infinri()->root('media') . '/users/' . $this->id();
 	}
 
 	/**
@@ -477,7 +474,7 @@ class User extends ModelWithContent
 	 */
 	public function mediaUrl(): string
 	{
-		return $this->kirby()->url('media') . '/users/' . $this->id();
+		return $this->infinri()->url('media') . '/users/' . $this->id();
 	}
 
 	/**
@@ -522,7 +519,7 @@ class User extends ModelWithContent
 	public static function nobody(): static
 	{
 		return new static([
-			'email' => 'nobody@getkirby.com',
+			'email' => 'nobody@infinri.com',
 			'role'  => 'nobody'
 		]);
 	}
@@ -582,7 +579,7 @@ class User extends ModelWithContent
 		$name = $this->role ?? $this->credentials()['role'] ?? 'default';
 
 		return $this->role =
-			$this->kirby()->roles()->find($name) ??
+			$this->infinri()->roles()->find($name) ??
 			Role::defaultNobody();
 	}
 
@@ -621,19 +618,19 @@ class User extends ModelWithContent
 	 *
 	 * For all roles the authenticated user can assign
 	 * independent of a specific user context,
-	 * use `$kirby->roles()->canBeCreated()`.
+	 * use `$infinri->roles()->canBeCreated()`.
 	 */
 	public function roles(): Roles
 	{
-		$kirby = $this->kirby();
+		$infinri = $this->infinri();
 
 		// if the authenticated user doesn't have the permission to change
 		// the role of this user, only the current role is available
 		if ($this->permissions()->can('changeRole') === false) {
-			return $kirby->roles()->filter('isAccessible', true)->filter('id', $this->role()->id());
+			return $infinri->roles()->filter('isAccessible', true)->filter('id', $this->role()->id());
 		}
 
-		return $kirby->roles()->canBeCreated();
+		return $infinri->roles()->canBeCreated();
 	}
 
 	/**
@@ -642,7 +639,7 @@ class User extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function root(): string
 	{
-		return $this->kirby()->root('accounts') . '/' . $this->id();
+		return $this->infinri()->root('accounts') . '/' . $this->id();
 	}
 
 	/**
@@ -656,7 +653,6 @@ class User extends ModelWithContent
 
 	/**
 	 * Reads a specific secret from the user secrets file on disk
-	 * @since 4.0.0
 	 */
 	#[BlockCollectionAccess]
 	public function secret(string $key): mixed
@@ -692,7 +688,7 @@ class User extends ModelWithContent
 		$session ??= ['detect' => true];
 
 		if ($session instanceof Session === false) {
-			$session = $this->kirby()->session($session);
+			$session = $this->infinri()->session($session);
 		}
 
 		return $session;
@@ -703,7 +699,7 @@ class User extends ModelWithContent
 	 */
 	protected function siblingsCollection(): Users
 	{
-		return $this->kirby()->users()->sortBy('username', 'asc');
+		return $this->infinri()->users()->sortBy('username', 'asc');
 	}
 
 	/**
@@ -800,7 +796,6 @@ class User extends ModelWithContent
 	/**
 	 * Returns the path to the file containing
 	 * all user secrets, including the password
-	 * @since 4.0.0
 	 */
 	protected function secretsFile(): string
 	{

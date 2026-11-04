@@ -10,14 +10,12 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Helpers::class)]
 class HelpersTest extends TestCase
 {
-	protected array $deprecations = [];
 	protected string $locale;
 
 	protected function setUp(): void
 	{
 		parent::setUp();
 
-		$this->deprecations = Helpers::$deprecations;
 		$this->locale       = setlocale(LC_MESSAGES, 0);
 	}
 
@@ -25,52 +23,13 @@ class HelpersTest extends TestCase
 	{
 		parent::tearDown();
 
-		Helpers::$deprecations = $this->deprecations;
 		setlocale(LC_MESSAGES, $this->locale);
 	}
 
-	public function testDeprecated(): void
+	public function testDeprecatedMechanismIsRemoved(): void
 	{
-		$this->assertError(
-			E_USER_DEPRECATED,
-			'The xyz method is deprecated.',
-			fn () => Helpers::deprecated('The xyz method is deprecated.')
-		);
-	}
-
-	public function testDeprecatedKeyUndefined(): void
-	{
-		$this->assertError(
-			E_USER_DEPRECATED,
-			'The xyz method is deprecated.',
-			fn () => Helpers::deprecated('The xyz method is deprecated.', 'my-key')
-		);
-	}
-
-	public function testDeprecatedActivated(): void
-	{
-		$this->assertError(
-			E_USER_DEPRECATED,
-			'The xyz method is deprecated.',
-			function () {
-				Helpers::$deprecations = ['my-key' => true];
-				Helpers::deprecated('The xyz method is deprecated.', 'my-key');
-			}
-		);
-	}
-
-	public function testDeprecatedKeyDeactivated(): void
-	{
-		$result = $this->assertError(
-			E_USER_DEPRECATED,
-			'The xyz method is deprecated.',
-			function () {
-				Helpers::$deprecations = ['my-key' => false];
-				return Helpers::deprecated('The xyz method is deprecated.', 'my-key');
-			},
-			false
-		);
-		$this->assertFalse($result);
+		$this->assertFalse(method_exists(Helpers::class, 'deprecated'));
+		$this->assertFalse(property_exists(Helpers::class, 'deprecations'));
 	}
 
 	public function testDumpOnCli(): void

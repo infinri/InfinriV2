@@ -34,7 +34,7 @@
 		<!-- Don't warn about missing override attribute -->
 		<MissingOverrideAttribute errorLevel="suppress" />
 
-		<!-- Don't warn about possibly unused parts, Psalm cannot know what Kirby parts are used by developers -->
+		<!-- Don't warn about possibly unused parts, Psalm cannot know what Infinri parts are used by developers -->
 		<PossiblyUnusedMethod errorLevel="suppress" />
 		<PossiblyUnusedParam errorLevel="suppress" />
 		<PossiblyUnusedProperty errorLevel="suppress" />

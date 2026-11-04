@@ -35,9 +35,6 @@
 </template>
 
 <script>
-/**
- * @since 4.0.0
- */
 export default {
 	props: {
 		limit: {
@@ -81,9 +78,9 @@ export default {
 			const parent =
 				model.id === "/"
 					? "/site/files"
-					: "/pages/" + this.$api.pages.id(model.id) + "/files";
+					: "/pages/" + this.$panel.api.pages.id(model.id) + "/files";
 
-			const { data, pagination } = await this.$api.get(parent, {
+			const { data, pagination } = await this.$panel.api.get(parent, {
 				select: "filename,id,panelImage,url,uuid",
 				limit: this.limit,
 				page: page

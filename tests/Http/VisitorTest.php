@@ -26,13 +26,13 @@ class VisitorTest extends TestCase
 	{
 		$visitor = new Visitor([
 			'ip'               => '192.168.1.1',
-			'userAgent'        => 'Kirby',
+			'userAgent'        => 'Infinri',
 			'acceptedLanguage' => 'en-US',
 			'acceptedMimeType' => 'text/html'
 		]);
 
 		$this->assertSame('192.168.1.1', $visitor->ip());
-		$this->assertSame('Kirby', $visitor->userAgent());
+		$this->assertSame('Infinri', $visitor->userAgent());
 		$this->assertInstanceOf(Obj::class, $visitor->acceptedLanguage());
 		$this->assertSame('en_US', $visitor->acceptedLanguage()->locale());
 		$this->assertInstanceOf(Obj::class, $visitor->acceptedMimeType());
@@ -58,8 +58,8 @@ class VisitorTest extends TestCase
 	public function testUserAgent(): void
 	{
 		$visitor = new Visitor();
-		$this->assertInstanceOf(Visitor::class, $visitor->userAgent('Kirby'));
-		$this->assertSame('Kirby', $visitor->userAgent());
+		$this->assertInstanceOf(Visitor::class, $visitor->userAgent('Infinri'));
+		$this->assertSame('Infinri', $visitor->userAgent());
 	}
 
 	public function testAcceptsMimeType(): void

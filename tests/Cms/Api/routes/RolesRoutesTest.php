@@ -27,7 +27,7 @@ class RolesRoutesTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testList(): void

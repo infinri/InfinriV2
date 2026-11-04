@@ -9,7 +9,7 @@ return [
 		'method'  => 'GET',
 		'auth'    => false,
 		'action'  => function () {
-			return $this->kirby()->translations();
+			return $this->infinri()->translations();
 		}
 	],
 	[
@@ -17,7 +17,7 @@ return [
 		'method'  => 'GET',
 		'auth'    => false,
 		'action'  => function (string $code) {
-			return $this->kirby()->translations()->find($code);
+			return $this->infinri()->translations()->find($code);
 		}
 	]
 

@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Page::class)]
 class PageChangeSortTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageChangeSort';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageChangeSort';
 
 	public function site(): Site
 	{
@@ -65,7 +65,7 @@ class PageChangeSortTest extends ModelTestCase
 				'pages/zerobased' => ['title' => 'ZeroBased', 'num' => 'zero'],
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Page::create(['slug' => 'a', 'num' => 1]);
 		Page::create(['slug' => 'b', 'num' => 2]);

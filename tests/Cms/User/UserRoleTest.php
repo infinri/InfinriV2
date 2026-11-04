@@ -7,47 +7,47 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserRoleTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserRole';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserRole';
 
 	public function testIsAdmin(): void
 	{
 		$user = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'role'  => 'admin'
 		]);
 
 		$this->assertTrue($user->isAdmin());
 
 		$user = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'role'  => 'editor'
 		]);
 
 		$this->assertFalse($user->isAdmin());
 	}
 
-	public function testIsKirby(): void
+	public function testIsInfinri(): void
 	{
 		$user = new User([
-			'id'   => 'kirby',
+			'id'   => 'infinri',
 			'role' => 'admin'
 		]);
-		$this->assertTrue($user->isKirby());
+		$this->assertTrue($user->isInfinri());
 
 		$user = new User([
 			'role' => 'admin'
 		]);
-		$this->assertFalse($user->isKirby());
+		$this->assertFalse($user->isInfinri());
 
 		$user = new User([
-			'id'   => 'kirby',
+			'id'   => 'infinri',
 		]);
-		$this->assertFalse($user->isKirby());
+		$this->assertFalse($user->isInfinri());
 
 		$user = new User([
-			'emai' => 'kirby@getkirby.com',
+			'emai' => 'infinri@infinri.com',
 		]);
-		$this->assertFalse($user->isKirby());
+		$this->assertFalse($user->isInfinri());
 	}
 
 	public function testIsNobody(): void
@@ -78,28 +78,28 @@ class UserRoleTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				],
 				[
-					'email' => 'foo@getkirby.com',
+					'email' => 'foo@infinri.com',
 					'role'  => 'foo'
 				]
 			],
 		]);
 
-		$user  = $this->app->user('editor@getkirby.com');
+		$user  = $this->app->user('editor@infinri.com');
 		$this->assertSame('editor', $user->role()->id());
 
-		$user  = $this->app->user('admin@getkirby.com');
+		$user  = $this->app->user('admin@infinri.com');
 		$this->assertSame('admin', $user->role()->id());
 
 		// non-existing role
-		$user  = $this->app->user('foo@getkirby.com');
+		$user  = $this->app->user('foo@infinri.com');
 		$this->assertSame('nobody', $user->role()->id());
 	}
 }

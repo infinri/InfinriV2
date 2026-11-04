@@ -12,7 +12,6 @@ export default {
 		lock: {
 			type: [Boolean, Object]
 		},
-		model: Object,
 		next: Object,
 		prev: Object,
 		permissions: {
@@ -71,22 +70,22 @@ export default {
 		}
 	},
 	mounted() {
-		this.$events.on("beforeunload", this.onBeforeUnload);
-		this.$events.on("content.save", this.onContentSave);
-		this.$events.on("keydown.left", this.toPrev);
-		this.$events.on("keydown.right", this.toNext);
-		this.$events.on("model.reload", this.$reload);
-		this.$events.on("model.update", this.onModelUpdate);
-		this.$events.on("view.save", this.onViewSave);
+		this.$panel.events.on("beforeunload", this.onBeforeUnload);
+		this.$panel.events.on("content.save", this.onContentSave);
+		this.$panel.events.on("keydown.left", this.toPrev);
+		this.$panel.events.on("keydown.right", this.toNext);
+		this.$panel.events.on("model.reload", this.$panel.reload);
+		this.$panel.events.on("model.update", this.onModelUpdate);
+		this.$panel.events.on("view.save", this.onViewSave);
 	},
 	destroyed() {
-		this.$events.off("beforeunload", this.onBeforeUnload);
-		this.$events.off("content.save", this.onContentSave);
-		this.$events.off("keydown.left", this.toPrev);
-		this.$events.off("keydown.right", this.toNext);
-		this.$events.off("model.reload", this.$reload);
-		this.$events.off("model.update", this.onModelUpdate);
-		this.$events.off("view.save", this.onViewSave);
+		this.$panel.events.off("beforeunload", this.onBeforeUnload);
+		this.$panel.events.off("content.save", this.onContentSave);
+		this.$panel.events.off("keydown.left", this.toPrev);
+		this.$panel.events.off("keydown.right", this.toNext);
+		this.$panel.events.off("model.reload", this.$panel.reload);
+		this.$panel.events.off("model.update", this.onModelUpdate);
+		this.$panel.events.off("view.save", this.onViewSave);
 
 		// the view component gets discarded when a different view
 		// is being opened, so let's unlock this view.
@@ -153,7 +152,7 @@ export default {
 				this.isSaved = true;
 
 				this.$panel.notification.success();
-				this.$events.emit("model.update");
+				this.$panel.events.emit("model.update");
 
 				// the view needs to be refreshed to get an updated set of props
 				// this will also rerender sections if needed
@@ -169,12 +168,12 @@ export default {
 		},
 		toNext(e) {
 			if (this.next && e.target.localName === "body") {
-				this.$go(this.next.link);
+				this.$panel.view.open(this.next.link);
 			}
 		},
 		toPrev(e) {
 			if (this.prev && e.target.localName === "body") {
-				this.$go(this.prev.link);
+				this.$panel.view.open(this.prev.link);
 			}
 		},
 		unlock(api) {

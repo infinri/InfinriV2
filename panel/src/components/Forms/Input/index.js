@@ -34,9 +34,6 @@ import WriterInput from "./WriterInput.vue";
 
 import Validator from "./Validator.js";
 
-/** @deprecated */
-import Writer from "../Writer/Writer.vue";
-
 export default {
 	install(app) {
 		customElements.define("k-input-validator", Validator);
@@ -74,12 +71,5 @@ export default {
 		app.component("k-toggles-input", TogglesInput);
 		app.component("k-url-input", UrlInput);
 		app.component("k-writer-input", WriterInput);
-
-		/** Keep k-calendar and k-times as legacy aliases */
-		app.component("k-calendar", CalendarInput);
-		app.component("k-times", TimeoptionsInput);
-
-		/** @deprecated */
-		app.component("k-writer", Writer);
 	}
 };

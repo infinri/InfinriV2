@@ -12,8 +12,8 @@ use TypeError;
 #[CoversClass(Uri::class)]
 class UriTest extends TestCase
 {
-	protected static string $example1 = 'https://getkirby.com';
-	protected static string $example2 = 'https://testuser:weakpassword@getkirby.com:3000/docs/getting-started/with:kirby/?q=awesome#top';
+	protected static string $example1 = 'https://infinri.com';
+	protected static string $example2 = 'https://testuser:weakpassword@infinri.com:3000/docs/getting-started/with:infinri/?q=awesome#top';
 
 	protected function setUp(): void
 	{
@@ -24,7 +24,7 @@ class UriTest extends TestCase
 	public function testClone(): void
 	{
 		$uri = new Uri([
-			'host' => 'getkirby.com',
+			'host' => 'infinri.com',
 			'path' => 'test'
 		]);
 
@@ -33,8 +33,8 @@ class UriTest extends TestCase
 			'query' => ['foo' => 'bar']
 		]);
 
-		$this->assertSame('http://getkirby.com/test', $uri->toString());
-		$this->assertSame('http://getkirby.com/yay?foo=bar', $clone->toString());
+		$this->assertSame('http://infinri.com/test', $uri->toString());
+		$this->assertSame('http://infinri.com/yay?foo=bar', $clone->toString());
 	}
 
 	public function testCurrent(): void
@@ -42,7 +42,7 @@ class UriTest extends TestCase
 		new App([
 			'cli' => false,
 			'options' => [
-				'url' => 'https://getkirby.com'
+				'url' => 'https://infinri.com'
 			],
 			'server' => [
 				'REQUEST_URI' => '/docs/reference'
@@ -50,7 +50,7 @@ class UriTest extends TestCase
 		]);
 
 		$uri = Uri::current();
-		$this->assertSame('https://getkirby.com/docs/reference', $uri->toString());
+		$this->assertSame('https://infinri.com/docs/reference', $uri->toString());
 	}
 
 	public function testCurrentInCli(): void
@@ -120,10 +120,10 @@ class UriTest extends TestCase
 
 	public function testFragment(): void
 	{
-		$uri = new Uri('https://getkirby.com#top');
+		$uri = new Uri('https://infinri.com#top');
 		$this->assertSame('top', $uri->fragment());
 
-		$uri = new Uri('https://getkirby.com');
+		$uri = new Uri('https://infinri.com');
 		$this->assertNull($uri->fragment());
 	}
 
@@ -158,12 +158,12 @@ class UriTest extends TestCase
 		new App([
 			'cli' => false,
 			'options' => [
-				'url' => 'https://getkirby.com'
+				'url' => 'https://infinri.com'
 			]
 		]);
 
 		$uri = Uri::index();
-		$this->assertSame('https://getkirby.com', $uri->toString());
+		$this->assertSame('https://infinri.com', $uri->toString());
 	}
 
 	public function testIndexInCli(): void
@@ -174,17 +174,17 @@ class UriTest extends TestCase
 
 	public function testInherit(): void
 	{
-		$base = new Uri('https://getkirby.com');
+		$base = new Uri('https://infinri.com');
 
 		$uri = $base->inherit('https://foo.com/this/is/a/path');
-		$this->assertSame('https://getkirby.com', $uri->toString());
+		$this->assertSame('https://infinri.com', $uri->toString());
 
 		$uri = $base->inherit('https://foo.com/fox:bax?foo=bar#anchor');
-		$this->assertSame('https://getkirby.com/fox:bax?foo=bar#anchor', $uri->toString());
+		$this->assertSame('https://infinri.com/fox:bax?foo=bar#anchor', $uri->toString());
 
-		$base = new Uri('https://getkirby.com?one=two');
+		$base = new Uri('https://infinri.com?one=two');
 		$uri  = $base->inherit('https://foo.com/?foo=bar');
-		$this->assertSame('https://getkirby.com?one=two&foo=bar', $uri->toString());
+		$this->assertSame('https://infinri.com?one=two&foo=bar', $uri->toString());
 	}
 
 	public function testInvalidScheme(): void
@@ -200,8 +200,8 @@ class UriTest extends TestCase
 	{
 		$url = new Uri();
 
-		$url->setHost('getkirby.com');
-		$this->assertSame('getkirby.com', $url->host());
+		$url->setHost('infinri.com');
+		$this->assertSame('infinri.com', $url->host());
 	}
 
 	public function testMissingHost(): void
@@ -320,16 +320,16 @@ class UriTest extends TestCase
 
 	public function testBase(): void
 	{
-		$url = new Uri(['scheme' => 'https', 'host' => 'getkirby.com']);
-		$this->assertSame('https://getkirby.com', $url->base());
+		$url = new Uri(['scheme' => 'https', 'host' => 'infinri.com']);
+		$this->assertSame('https://infinri.com', $url->base());
 
 		$url->username = 'testuser';
 		$url->password = 'weakpassword';
 
-		$this->assertSame('https://testuser:weakpassword@getkirby.com', $url->base());
+		$this->assertSame('https://testuser:weakpassword@infinri.com', $url->base());
 
 		$url->port = 3000;
-		$this->assertSame('https://testuser:weakpassword@getkirby.com:3000', $url->base());
+		$this->assertSame('https://testuser:weakpassword@infinri.com:3000', $url->base());
 	}
 
 	public function testBaseWithoutHost(): void
@@ -343,9 +343,9 @@ class UriTest extends TestCase
 		$url = new Uri(static::$example2);
 		$result = $url->toArray();
 		$this->assertSame('top', $result['fragment']);
-		$this->assertSame('getkirby.com', $result['host']);
+		$this->assertSame('infinri.com', $result['host']);
 		$this->assertSame('weakpassword', $result['password']);
-		$this->assertSame(['with' => 'kirby'], $result['params']);
+		$this->assertSame(['with' => 'infinri'], $result['params']);
 		$this->assertSame(['docs', 'getting-started'], $result['path']);
 		$this->assertSame(3000, $result['port']);
 		$this->assertSame(['q' => 'awesome'], $result['query']);
@@ -406,75 +406,75 @@ class UriTest extends TestCase
 
 			// path + adding params + query
 			[
-				'https://getkirby.com/search',
+				'https://infinri.com/search',
 				[
 					'params' => ['page' => 2],
 					'query'  => ['q' => 'something']
 				],
-				'https://getkirby.com/search/page:2?q=something'
+				'https://infinri.com/search/page:2?q=something'
 			],
 
 			// path + params + query
 			[
-				'https://getkirby.com/search?q=something',
+				'https://infinri.com/search?q=something',
 				[
 					'params' => ['page' => 2]
 				],
-				'https://getkirby.com/search/page:2?q=something'
+				'https://infinri.com/search/page:2?q=something'
 			],
 
 			// path + slash + params + query
 			[
-				'https://getkirby.com/search/?q=something',
+				'https://infinri.com/search/?q=something',
 				[
 					'params' => ['page' => 2]
 				],
-				'https://getkirby.com/search/page:2/?q=something'
+				'https://infinri.com/search/page:2/?q=something'
 			],
 
 			// params replacement
 			[
-				'https://getkirby.com/search/page:2?q=something',
+				'https://infinri.com/search/page:2?q=something',
 				[
 					'params' => ['page' => 3]
 				],
-				'https://getkirby.com/search/page:3?q=something'
+				'https://infinri.com/search/page:3?q=something'
 			],
 
 			// params removal without slash
 			[
-				'https://getkirby.com/search/page:2?q=something',
+				'https://infinri.com/search/page:2?q=something',
 				[
 					'params' => []
 				],
-				'https://getkirby.com/search?q=something'
+				'https://infinri.com/search?q=something'
 			],
 
 			// params removal with slash
 			[
-				'https://getkirby.com/search/page:2/?q=something',
+				'https://infinri.com/search/page:2/?q=something',
 				[
 					'params' => []
 				],
-				'https://getkirby.com/search/?q=something'
+				'https://infinri.com/search/?q=something'
 			],
 
 			// URL with disabled params (treated as normal path)
 			[
-				'https://getkirby.com/search/page:2/?q=something',
+				'https://infinri.com/search/page:2/?q=something',
 				[
 					'params' => false
 				],
-				'https://getkirby.com/search/page:2/?q=something'
+				'https://infinri.com/search/page:2/?q=something'
 			],
 
 			// URL with disabled params without slash
 			[
-				'https://getkirby.com/search/page:2?q=something',
+				'https://infinri.com/search/page:2?q=something',
 				[
 					'params' => false
 				],
-				'https://getkirby.com/search/page:2?q=something'
+				'https://infinri.com/search/page:2?q=something'
 			],
 		];
 	}
@@ -490,13 +490,13 @@ class UriTest extends TestCase
 	public function testConstructParamsDisabled(): void
 	{
 		// with slash
-		$url = new Uri('https://getkirby.com/search/page:2/?q=something', ['params' => false]);
+		$url = new Uri('https://infinri.com/search/page:2/?q=something', ['params' => false]);
 		$this->assertTrue($url->slash());
 		$this->assertSame('', $url->params()->toString());
 		$this->assertSame('search/page:2', $url->path()->toString());
 
 		// without slash
-		$url = new Uri('https://getkirby.com/search/page:2?q=something', ['params' => false]);
+		$url = new Uri('https://infinri.com/search/page:2?q=something', ['params' => false]);
 		$this->assertFalse($url->slash());
 		$this->assertSame('', $url->params()->toString());
 		$this->assertSame('search/page:2', $url->path()->toString());
@@ -525,28 +525,28 @@ class UriTest extends TestCase
 
 	public function testHasFragment(): void
 	{
-		$uri = new Uri('https://getkirby.com/#footer');
+		$uri = new Uri('https://infinri.com/#footer');
 		$this->assertTrue($uri->hasFragment());
 
-		$uri = new Uri('https://getkirby.com');
+		$uri = new Uri('https://infinri.com');
 		$this->assertFalse($uri->hasFragment());
 	}
 
 	public function testHasPath(): void
 	{
-		$uri = new Uri('https://getkirby.com/docs');
+		$uri = new Uri('https://infinri.com/docs');
 		$this->assertTrue($uri->hasPath());
 
-		$uri = new Uri('https://getkirby.com');
+		$uri = new Uri('https://infinri.com');
 		$this->assertFalse($uri->hasPath());
 	}
 
 	public function testHasQuery(): void
 	{
-		$uri = new Uri('https://getkirby.com?search=foo');
+		$uri = new Uri('https://infinri.com?search=foo');
 		$this->assertTrue($uri->hasQuery());
 
-		$uri = new Uri('https://getkirby.com');
+		$uri = new Uri('https://infinri.com');
 		$this->assertFalse($uri->hasQuery());
 	}
 

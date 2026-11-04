@@ -8,7 +8,7 @@
 			<k-button-group>
 				<template v-if="versionId === 'changes'">
 					<p v-if="hasDiff === false" class="k-preview-browser-message">
-						{{ $t("lock.unsaved.empty") }}
+						{{ $panel.t("lock.unsaved.empty") }}
 					</p>
 					<k-form-controls
 						v-else
@@ -49,12 +49,12 @@ export default {
 		}
 	},
 	mounted() {
-		this.$events.on("content.discard", this.reload);
-		this.$events.on("content.publish", this.reload);
+		this.$panel.events.on("content.discard", this.reload);
+		this.$panel.events.on("content.publish", this.reload);
 	},
 	destroyed() {
-		this.$events.off("content.discard", this.reload);
-		this.$events.off("content.publish", this.reload);
+		this.$panel.events.off("content.discard", this.reload);
+		this.$panel.events.off("content.publish", this.reload);
 	},
 	methods: {
 		onLoad() {

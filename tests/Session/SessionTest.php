@@ -491,14 +491,14 @@ class SessionTest extends TestCase
 	public function testDestroy(): void
 	{
 		$token = '9999999999.valid2.' . $this->store->validKey;
-		Cookie::set('kirby_session', $token);
+		Cookie::set('infinri_session', $token);
 		$session = new Session($this->sessions, $token, []);
 
 		$this->assertTrue(isset($this->store->sessions['9999999999.valid2']));
-		$this->assertTrue(Cookie::exists('kirby_session'));
+		$this->assertTrue(Cookie::exists('infinri_session'));
 		$session->destroy();
 		$this->assertFalse(isset($this->store->sessions['9999999999.valid2']));
-		$this->assertFalse(Cookie::exists('kirby_session'));
+		$this->assertFalse(Cookie::exists('infinri_session'));
 
 		// the instance should now be inactive
 		$session->data()->set('someKey', 'someValue');
@@ -510,10 +510,10 @@ class SessionTest extends TestCase
 
 		// the cookie shouldn't be deleted in header/manual mode
 		$token = '9999999999.valid.' . $this->store->validKey;
-		Cookie::set('kirby_session', $token);
+		Cookie::set('infinri_session', $token);
 		$session = new Session($this->sessions, $token, ['mode' => 'manual']);
 		$session->destroy();
-		$this->assertTrue(Cookie::exists('kirby_session'));
+		$this->assertTrue(Cookie::exists('infinri_session'));
 		$this->assertFalse(isset($this->store->sessions['9999999999.valid']));
 	}
 
@@ -605,7 +605,7 @@ class SessionTest extends TestCase
 		$this->assertSame($expected, $actual);
 
 		// validate that a cookie has been set
-		$this->assertSame($newToken, Cookie::get('kirby_session'));
+		$this->assertSame($newToken, Cookie::get('infinri_session'));
 
 		// validate that the new session is cached in the $sessions object
 		$this->assertArrayHasKey($newToken, $cache->getValue($this->sessions));
@@ -620,12 +620,12 @@ class SessionTest extends TestCase
 		$token = '9999999999.valid.' . $this->store->validKey;
 		$session = new Session($this->sessions, $token, ['mode' => 'header']);
 
-		Cookie::remove('kirby_session');
+		Cookie::remove('infinri_session');
 		$this->assertFalse($session->needsRetransmission());
 		$session->regenerateToken();
 		$this->assertNotSame($token, $newToken = $session->token());
 		$this->assertTrue($session->needsRetransmission());
-		$this->assertNull(Cookie::get('kirby_session'));
+		$this->assertNull(Cookie::get('infinri_session'));
 
 		// validate that the new session is cached in the $sessions object
 		$this->assertArrayHasKey($newToken, $cache->getValue($this->sessions));

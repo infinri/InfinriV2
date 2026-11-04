@@ -210,7 +210,7 @@ class Field
 		array $props = [],
 		Roles|null $roles = null
 	): array {
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// if no $roles where provided, fall back to all accessible roles
 		$roles ??= Find::roles();
@@ -220,7 +220,7 @@ class Field
 		$roles = $roles->filter(
 			fn ($role) =>
 				$role->name() !== 'admin' ||
-				$kirby->user()?->isAdmin() === true
+				$infinri->user()?->isAdmin() === true
 		);
 
 		// turn roles into radio field options

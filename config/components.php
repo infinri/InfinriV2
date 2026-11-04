@@ -36,13 +36,13 @@ return [
 	 * @param string $url Relative or absolute URL
 	 * @param string|array $options An array of attributes for the link tag or a media attribute string
 	 */
-	'css' => fn (App $kirby, string $url, $options = null): string => $url,
+	'css' => fn (App $infinri, string $url, $options = null): string => $url,
 
 	/**
 	 * Add your own email provider
 	 */
 	'email' => function (
-		App $kirby,
+		App $infinri,
 		array $props = [],
 		bool $debug = false
 	) {
@@ -55,7 +55,7 @@ return [
 	 * @param \Infinri\Cms\File $file The original file object
 	 */
 	'file::url' => function (
-		App $kirby,
+		App $infinri,
 		File $file
 	): string {
 		return $file->mediaUrl();
@@ -67,7 +67,7 @@ return [
 	 * @param array $options All thumb options (width, height, crop, blur, grayscale)
 	 */
 	'file::version' => function (
-		App $kirby,
+		App $infinri,
 		File|Asset $file,
 		array $options = []
 	): File|Asset|FileVersion {
@@ -87,7 +87,7 @@ return [
 		// e.g. from dynamic user-controlled file or asset objects
 		// or malicious data in the `$options`; we check both for `../` and `..\` (Windows)
 		if (Str::contains(Str::replace($thumbRoot, '\\', '/'), '../') === true) {
-			throw new InvalidArgumentException('Received unexpected generated thumb root');
+			throw new InvalidArgumentException(message: 'Received unexpected generated thumb root');
 		}
 
 		// check if the thumb or job file already exists
@@ -122,7 +122,7 @@ return [
 	 * @param string $url Relative or absolute URL
 	 * @param string|array $options An array of attributes for the link tag or a media attribute string
 	 */
-	'js' => fn (App $kirby, string $url, $options = null): string => $url,
+	'js' => fn (App $infinri, string $url, $options = null): string => $url,
 
 	/**
 	 * Add your own Markdown parser
@@ -131,7 +131,7 @@ return [
 	 * @param array $options Markdown options
 	 */
 	'markdown' => function (
-		App $kirby,
+		App $infinri,
 		string|null $text = null,
 		array $options = []
 	): string {
@@ -154,7 +154,7 @@ return [
 	 * @param \Infinri\Cms\Collection $collection Collection of searchable models
 	 */
 	'search' => function (
-		App $kirby,
+		App $infinri,
 		Collection $collection,
 		string|null $query = null,
 		string|array $params = []
@@ -279,8 +279,8 @@ return [
 	/**
 	 * Add your own session store
 	 */
-	'session::store' => function (App $kirby): string|SessionStore {
-		return $kirby->root('sessions');
+	'session::store' => function (App $infinri): string|SessionStore {
+		return $infinri->root('sessions');
 	},
 
 	/**
@@ -290,7 +290,7 @@ return [
 	 * @param array $options SmartyPants options
 	 */
 	'smartypants' => function (
-		App $kirby,
+		App $infinri,
 		string|null $text = null,
 		array $options = []
 	): string {
@@ -314,7 +314,7 @@ return [
 	 * @param array $data Data array for the snippet
 	 */
 	'snippet' => function (
-		App $kirby,
+		App $infinri,
 		string|array|null $name,
 		array $data = [],
 		bool $slots = false
@@ -326,7 +326,7 @@ return [
 	 * Create a new storage object for the given model
 	 */
 	'storage' => function (
-		App $kirby,
+		App $infinri,
 		ModelWithContent $model
 	): Storage {
 		return new PlainTextStorage(model: $model);
@@ -341,7 +341,7 @@ return [
 	 * @return \Infinri\Template\Template
 	 */
 	'template' => function (
-		App $kirby,
+		App $infinri,
 		string $name,
 		string $type = 'html',
 		string $defaultType = 'html'
@@ -357,14 +357,14 @@ return [
 	 * @param array $options All thumb options that should be applied: `width`, `height`, `crop`, `blur`, `grayscale`
 	 */
 	'thumb' => function (
-		App $kirby,
+		App $infinri,
 		string $src,
 		string $dst,
 		array $options
 	): string {
 		$darkroom = Darkroom::factory(
-			$kirby->option('thumbs.driver', 'gd'),
-			$kirby->option('thumbs', [])
+			$infinri->option('thumbs.driver', 'gd'),
+			$infinri->option('thumbs', [])
 		);
 		$options   = $darkroom->preprocess($src, $options);
 		$root      = (new Filename($src, $dst, $options))->toString();
@@ -404,7 +404,7 @@ return [
 	 * @throws \Infinri\Exception\NotFoundException If an invalid UUID was passed
 	 */
 	'url' => function (
-		App $kirby,
+		App $infinri,
 		string|null $path = null,
 		$options = null
 	): string {
@@ -423,16 +423,16 @@ return [
 		}
 
 		// get a language url for the linked page, if the page can be found
-		if ($kirby->multilang() === true) {
+		if ($infinri->multilang() === true) {
 			$parts = Str::split($path, '#');
 
 			if ($parts[0] ?? null) {
-				$page = $kirby->site()->find($parts[0]);
+				$page = $infinri->site()->find($parts[0]);
 
 				// get the extension of the url, if there is one, to add it back later
 				$extension = F::extension($parts[0]);
 			} else {
-				$page = $kirby->site()->page();
+				$page = $infinri->site()->page();
 			}
 
 			if ($page) {
@@ -473,7 +473,7 @@ return [
 			$path = $model->url();
 		}
 
-		$url = Url::makeAbsolute($path, $kirby->url());
+		$url = Url::makeAbsolute($path, $infinri->url());
 
 		if ($options === null) {
 			return $url;

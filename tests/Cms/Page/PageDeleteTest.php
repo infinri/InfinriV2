@@ -11,13 +11,13 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Page::class)]
 class PageDeleteTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageDelete';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageDelete';
 
 	protected function setUp(): void
 	{
 		parent::setUp();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function site(): Site
@@ -62,7 +62,7 @@ class PageDeleteTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test'
@@ -180,11 +180,11 @@ class PageDeleteTest extends ModelTestCase
 				'pages/undeletable' => ['options' => ['delete' => false]]
 			],
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin']
+				['email' => 'admin@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		F::write($source = static::TMP . '/source.md', '');
 
@@ -210,7 +210,7 @@ class PageDeleteTest extends ModelTestCase
 			'draft'    => false
 		]);
 
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
 		try {
 			$page->delete(force: true);
@@ -236,7 +236,7 @@ class PageDeleteTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		F::write($source = static::TMP . '/source.md', '');
 
@@ -275,7 +275,7 @@ class PageDeleteTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page        = Page::create(['slug' => 'test']);
 		$uuid        = $page->uuid()->id();

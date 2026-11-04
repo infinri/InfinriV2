@@ -89,7 +89,6 @@ class Role implements Stringable
 
 	/**
 	 * Compares the current object with the given role object
-	 * @since 5.4.0
 	 */
 	public function is(Role|null $role = null): bool
 	{
@@ -102,7 +101,6 @@ class Role implements Stringable
 
 	/**
 	 * Checks if the role is accessible to the current user
-	 * @since 5.4.0
 	 */
 	public function isAccessible(): bool
 	{
@@ -122,7 +120,7 @@ class Role implements Stringable
 		// check `users.access` for different roles
 		// (also ensures `access` option of the target role)
 		$tmpUser = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'role'  => $this->id()
 		]);
 

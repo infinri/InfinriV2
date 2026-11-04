@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(UserTotpDisableDialog::class)]
 class UserTotpDisableDialogTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.UserTotpDisableDialog';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.UserTotpDisableDialog';
 
 	protected function setUp(): void
 	{
@@ -31,7 +31,7 @@ class UserTotpDisableDialogTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				],
 				[
@@ -42,7 +42,7 @@ class UserTotpDisableDialogTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		Dir::make(static::TMP);
 	}
@@ -62,7 +62,7 @@ class UserTotpDisableDialogTest extends TestCase
 	{
 		$dialog = new UserTotpDisableDialog();
 		$this->assertSame($this->app->user(), $dialog->user);
-		$this->assertSame('test@getkirby.com', $dialog->user->email());
+		$this->assertSame('test@infinri.com', $dialog->user->email());
 
 		$dialog = new UserTotpDisableDialog('homer');
 		$this->assertSame('homer@simpson.com', $dialog->user->email());
