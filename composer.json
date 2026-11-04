@@ -1,11 +1,11 @@
 {
 	"name": "infinri/infinri",
 	"description": "The Kirby core",
-	"license": "",
-	"type": "kirby-cms",
+	"license": "public",
+	"type": "infinri",
 	"version": "5.6.2",
 	"keywords": [
-		"kirby",
+		"infinri",
 		"cms",
 		"core"
 	],
@@ -16,12 +16,11 @@
 			"homepage": "https://infinri.com"
 		}
 	],
-	"homepage": "https://getkirby.com",
+	"homepage": "https://infinri.com",
 	"support": {
 		"email": "support@getkirby.com",
-		"issues": "https://github.com/getkirby/kirby/issues",
-		"forum": "https://forum.getkirby.com",
-		"source": "https://github.com/getkirby/kirby"
+		"issues": "https://github.com/infinri/Infinri/issues",
+		"source": "https://github.com/infinri/Infinri"
 	},
 	"require": {
 		"php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0",
@@ -68,7 +67,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Kirby\\": "src/"
+			"Infinri\\": "src/"
 		},
 		"classmap": [
 			"dependencies/"
