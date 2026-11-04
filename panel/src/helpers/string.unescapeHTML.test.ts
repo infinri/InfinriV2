@@ -1,0 +1,24 @@
+import { describe, expect, it } from "vitest";
+import string from "./string";
+
+describe("$helper.string.unescapeHTML", () => {
+	it("should unescape HTML entities", () => {
+		const result = string.unescapeHTML(
+			"&lt;div class&#x3D;&quot;button&quot;&gt;This text includes &#x60;&amp;&lt;&gt;&quot;&#039;&#x2F;&#x3D;&#x60; characters&lt;&#x2F;div&gt;"
+		);
+		expect(result).toBe(
+			'<div class="button">This text includes `&<>"\'/=` characters</div>'
+		);
+	});
+
+	it("should not unescape an escaped entity twice", () => {
+		expect(string.unescapeHTML("&amp;lt;b&amp;gt;")).toBe("&lt;b&gt;");
+		expect(string.unescapeHTML("a &amp;amp; b")).toBe("a &amp; b");
+	});
+
+	it("should reverse escapeHTML", () => {
+		for (const value of ["&lt;b&gt;", "a &amp; b", '<a href="#">x</a>']) {
+			expect(string.unescapeHTML(string.escapeHTML(value))).toBe(value);
+		}
+	});
+});

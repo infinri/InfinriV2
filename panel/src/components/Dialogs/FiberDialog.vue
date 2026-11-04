@@ -1,0 +1,13 @@
+<template>
+	<component
+		:is="$panel.dialog.component"
+		:key="$panel.dialog.timestamp"
+		:visible="true"
+		v-bind="$panel.dialog.props"
+		v-on="$panel.dialog.listeners()"
+	/>
+</template>
+
+<script>
+export default {};
+</script>

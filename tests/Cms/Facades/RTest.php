@@ -1,0 +1,20 @@
+<?php
+
+namespace Kirby\Cms;
+
+class RTest extends TestCase
+{
+	protected function setUp(): void
+	{
+		$this->app = new App([
+			'roots' => [
+				'index' => '/dev/null'
+			]
+		]);
+	}
+
+	public function testInstance(): void
+	{
+		$this->assertSame($this->app->request(), R::instance());
+	}
+}

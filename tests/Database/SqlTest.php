@@ -1,0 +1,713 @@
+<?php
+
+namespace Kirby\Database;
+
+use Kirby\Database\Sql\Sqlite;
+use Kirby\Exception\InvalidArgumentException;
+use Kirby\Toolkit\A;
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(Sql::class)]
+class SqlTest extends TestCase
+{
+	protected Sql $sql;
+
+	protected function setUp(): void
+	{
+		$this->database = new Database([
+			'type'     => 'sqlite',
+			'database' => ':memory:'
+		]);
+		$this->database->execute('CREATE TABLE test (id INTEGER)');
+		$this->database->execute('CREATE TABLE another (id INTEGER)');
+
+		$this->sql = new MockSql($this->database);
+	}
+
+	public function testBindingName(): void
+	{
+		$result = $this->sql->bindingName('test_binding1');
+		$this->assertMatchesRegularExpression('/^:test_binding1_[a-zA-Z0-9]{8}$/', $result);
+
+		$result = $this->sql->bindingName('"; inject something');
+		$this->assertMatchesRegularExpression('/^:invalid_[a-zA-Z0-9]{8}$/', $result);
+
+		$result = $this->sql->bindingName('');
+		$this->assertMatchesRegularExpression('/^:invalid_[a-zA-Z0-9]{8}$/', $result);
+	}
+
+	public function testColumnDefault(): void
+	{
+		$this->assertSame([
+			'query'    => null,
+			'bindings' => []
+		], $this->sql->columnDefault('test_col', []));
+
+		$result = $this->sql->columnDefault('test_col', ['default' => 'amazing default']);
+		$this->assertMatchesRegularExpression('/^DEFAULT :test_col_default_[a-zA-Z0-9]{8}$/', $result['query']);
+		$this->assertSame('amazing default', A::first($result['bindings']));
+	}
+
+	public function testColumnName(): void
+	{
+		// test with the SQLite class because of its more
+		// complex `combineIdentifier()` implementation
+		$sql = new Sqlite($this->database);
+
+		$this->assertSame('"id"', $sql->columnName('test', 'id'));
+		$this->assertSame('"test"."id"', $sql->columnName('test', 'id', true));
+		$this->assertSame('"id"', $sql->columnName('test', 'another.id'));
+		$this->assertSame('"another"."id"', $sql->columnName('test', 'another.id', true));
+		$this->assertNull($sql->columnName('test', 'invalid.id', true));
+	}
+
+	public function testCombineIdentifier(): void
+	{
+		$this->assertSame('`test`.`id`', $this->sql->combineIdentifier('test', 'id'));
+		$this->assertSame('`test`.*', $this->sql->combineIdentifier('test', '*'));
+		$this->assertSame('`test`.`some``column`', $this->sql->combineIdentifier('test', 'some`column'));
+		$this->assertSame('`test`.`id`', $this->sql->combineIdentifier('test', 'id', true));
+	}
+
+	public function testCreateColumn(): void
+	{
+		// basic example
+		$column = $this->sql->createColumn('test', [
+			'type' => 'varchar'
+		]);
+		$this->assertSame('`test` varchar(255) NULL', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertNull($column['key']);
+		$this->assertFalse($column['unique']);
+
+		// explicit NULL value
+		$column = $this->sql->createColumn('test', [
+			'type' => 'varchar',
+			'null' => true
+		]);
+		$this->assertSame('`test` varchar(255) NULL', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertNull($column['key']);
+		$this->assertFalse($column['unique']);
+
+		// NULL = false
+		$column = $this->sql->createColumn('test', [
+			'type' => 'varchar',
+			'null' => false
+		]);
+		$this->assertSame('`test` varchar(255) NOT NULL', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertNull($column['key']);
+		$this->assertFalse($column['unique']);
+
+		// key
+		$column = $this->sql->createColumn('test', [
+			'type' => 'varchar',
+			'key'  => 'PRIMARY'
+		]);
+		$this->assertSame('`test` varchar(255) NULL', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertSame('primary', $column['key']);
+		$this->assertFalse($column['unique']);
+
+		// automatic key
+		$column = $this->sql->createColumn('test', [
+			'type' => 'varchar',
+			'key'  => true
+		]);
+		$this->assertSame('`test` varchar(255) NULL', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertSame('test_index', $column['key']);
+		$this->assertFalse($column['unique']);
+
+		// explicitly not unique
+		$column = $this->sql->createColumn('test', [
+			'type'   => 'varchar',
+			'unique' => false
+		]);
+		$this->assertSame('`test` varchar(255) NULL', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertNull($column['key']);
+		$this->assertFalse($column['unique']);
+
+		// unique without key
+		$column = $this->sql->createColumn('test', [
+			'type'   => 'varchar',
+			'unique' => true
+		]);
+		$this->assertSame('`test` varchar(255) NULL  UNIQUE', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertNull($column['key']);
+		$this->assertFALSE($column['unique']);
+
+		// unique with key
+		$column = $this->sql->createColumn('test', [
+			'type'   => 'varchar',
+			'key'    => 'a_test',
+			'unique' => true
+		]);
+		$this->assertSame('`test` varchar(255) NULL', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertSame('a_test', $column['key']);
+		$this->assertTrue($column['unique']);
+
+		// unique with automatic key
+		$column = $this->sql->createColumn('test', [
+			'type'   => 'varchar',
+			'key'    => true,
+			'unique' => true
+		]);
+		$this->assertSame('`test` varchar(255) NULL', $column['query']);
+		$this->assertSame([], $column['bindings']);
+		$this->assertSame('test_index', $column['key']);
+		$this->assertTrue($column['unique']);
+
+		// default
+		$column = $this->sql->createColumn('test', [
+			'type'    => 'varchar',
+			'default' => 'amazing default'
+		]);
+		$this->assertStringStartsWith('`test` varchar(255) NULL DEFAULT :', $column['query']);
+		$this->assertSame('amazing default', A::first($column['bindings']));
+		$this->assertNull($column['key']);
+		$this->assertFalse($column['unique']);
+
+		// fail with no type
+		$this->expectException(InvalidArgumentException::class);
+		$this->sql->createColumn('test', [
+			'default' => 'amazing default'
+		]);
+
+		// fail with invalid type
+		$this->expectException(InvalidArgumentException::class);
+		$this->sql->createColumn('test', [
+			'type'    => 'nonexisting',
+			'default' => 'amazing default'
+		]);
+	}
+
+	public function testCreateColumnNoType(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('No column type given for column test');
+
+		$this->sql->createColumn('test', []);
+	}
+
+	public function testCreateColumnInvalidType(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Unsupported column type: invalid');
+
+		$this->sql->createColumn('test', ['type' => 'invalid']);
+	}
+
+	public function testCreateTableInner(): void
+	{
+		// basic example
+		$inner = $this->sql->createTableInner([
+			'test'    => ['type' => 'varchar'],
+			'another' => ['type' => 'varchar', 'null' => false]
+		]);
+		$this->assertSame('`test` varchar(255) NULL,' . PHP_EOL . '`another` varchar(255) NOT NULL', $inner['query']);
+		$this->assertSame([], $inner['bindings']);
+		$this->assertSame([], $inner['keys']);
+		$this->assertSame([], $inner['unique']);
+
+		// with default values
+		$inner = $this->sql->createTableInner([
+			'test'    => ['type' => 'varchar', 'default' => 'test default'],
+			'another' => ['type' => 'varchar', 'default' => 'another default']
+		]);
+		$this->assertMatchesRegularExpression('/^`test` varchar\(255\) NULL DEFAULT :(.*?),' . PHP_EOL . '`another` varchar\(255\) NULL DEFAULT :(.*)$/m', $inner['query']);
+		$this->assertCount(2, $inner['bindings']);
+		$this->assertSame('test default', A::first($inner['bindings']));
+		$this->assertSame('another default', A::last($inner['bindings']));
+		$this->assertSame([], $inner['keys']);
+		$this->assertSame([], $inner['unique']);
+
+		// with keys
+		$inner = $this->sql->createTableInner([
+			'test'    => ['type' => 'varchar', 'key' => 'test'],
+			'another' => ['type' => 'varchar', 'key' => 'another']
+		]);
+		$this->assertSame('`test` varchar(255) NULL,' . PHP_EOL . '`another` varchar(255) NULL', $inner['query']);
+		$this->assertSame([], $inner['bindings']);
+		$this->assertSame(['test' => ['test'], 'another' => ['another']], $inner['keys']);
+		$this->assertSame([], $inner['unique']);
+
+		// with a multi-column key
+		$inner = $this->sql->createTableInner([
+			'test'    => ['type' => 'varchar', 'key' => 'test'],
+			'another' => ['type' => 'varchar', 'key' => 'test']
+		]);
+		$this->assertSame('`test` varchar(255) NULL,' . PHP_EOL . '`another` varchar(255) NULL', $inner['query']);
+		$this->assertSame([], $inner['bindings']);
+		$this->assertSame(['test' => ['test', 'another']], $inner['keys']);
+		$this->assertSame([], $inner['unique']);
+
+		// with a multi-column unique key
+		$inner = $this->sql->createTableInner([
+			'test'    => ['type' => 'varchar', 'key' => 'test', 'unique' => true],
+			'another' => ['type' => 'varchar', 'key' => 'test']
+		]);
+		$this->assertSame('`test` varchar(255) NULL,' . PHP_EOL . '`another` varchar(255) NULL', $inner['query']);
+		$this->assertSame([], $inner['bindings']);
+		$this->assertSame(['test' => ['test', 'another']], $inner['keys']);
+		$this->assertSame(['test' => true], $inner['unique']);
+	}
+
+	public function testCreateTable(): void
+	{
+		// basic example
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'varchar'],
+			'another' => ['type' => 'varchar', 'null' => false]
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` varchar(255) NULL,' . PHP_EOL .
+			'`another` varchar(255) NOT NULL' . PHP_EOL .
+			')',
+			$table['query']
+		);
+		$this->assertSame([], $table['bindings']);
+
+		// with default values
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'varchar', 'default' => 'test default'],
+			'another' => ['type' => 'varchar', 'default' => 'another default']
+		]);
+		$this->assertMatchesRegularExpression(
+			'/^CREATE TABLE `table` \(' . PHP_EOL .
+			'`test` varchar\(255\) NULL DEFAULT :(.*?),' . PHP_EOL .
+			'`another` varchar\(255\) NULL DEFAULT :(.*)' . PHP_EOL .
+			'\)$/m',
+			$table['query']
+		);
+		$this->assertCount(2, $table['bindings']);
+		$this->assertSame('test default', A::first($table['bindings']));
+		$this->assertSame('another default', A::last($table['bindings']));
+
+		// with key
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'varchar', 'key' => 'test'],
+			'another' => ['type' => 'varchar', 'key' => 'test']
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` varchar(255) NULL,' . PHP_EOL .
+			'`another` varchar(255) NULL,' . PHP_EOL .
+			'INDEX `test` (`test`, `another`)' . PHP_EOL .
+			')',
+			$table['query']
+		);
+		$this->assertSame([], $table['bindings']);
+
+		// with primary key
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'varchar', 'key' => 'primary'],
+			'another' => ['type' => 'varchar', 'key' => 'test']
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` varchar(255) NULL,' . PHP_EOL .
+			'`another` varchar(255) NULL,' . PHP_EOL .
+			'PRIMARY KEY (`test`),' . PHP_EOL .
+			'INDEX `test` (`another`)' . PHP_EOL .
+			')',
+			$table['query']
+		);
+		$this->assertSame([], $table['bindings']);
+
+		// with unique key
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'varchar', 'key' => 'test', 'unique' => true],
+			'another' => ['type' => 'varchar', 'key' => 'test', 'unique' => true]
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` varchar(255) NULL,' . PHP_EOL .
+			'`another` varchar(255) NULL,' . PHP_EOL .
+			'UNIQUE INDEX `test` (`test`, `another`)' . PHP_EOL .
+			')',
+			$table['query']
+		);
+		$this->assertSame([], $table['bindings']);
+
+		// with varchar and size
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'varchar', 'size' => 50],
+			'another' => ['type' => 'varchar', 'size' => 100, 'null' => false]
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` varchar(50) NULL,' . PHP_EOL .
+			'`another` varchar(100) NOT NULL' . PHP_EOL .
+			')',
+			$table['query']
+		);
+
+		// int type signed and unsigned
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'int'],
+			'another' => ['type' => 'int', 'unsigned' => false, 'null' => false]
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` INT(11) UNSIGNED NULL,' . PHP_EOL .
+			'`another` INT(11)  NOT NULL' . PHP_EOL .
+			')',
+			$table['query']
+		);
+
+		// float type
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'float'],
+			'another' => ['type' => 'float', 'null' => false]
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` DOUBLE NULL,' . PHP_EOL .
+			'`another` DOUBLE NOT NULL' . PHP_EOL .
+			')',
+			$table['query']
+		);
+
+		// decimal type
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'decimal'],
+			'another' => ['type' => 'decimal', 'null' => false]
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` DECIMAL(14, 4) NULL,' . PHP_EOL .
+			'`another` DECIMAL(14, 4) NOT NULL' . PHP_EOL .
+			')',
+			$table['query']
+		);
+
+		// decimal type with precision and decimalPlaces
+		$table = $this->sql->createTable('table', [
+			'test'    => ['type' => 'decimal', 'precision' => 10],
+			'another' => ['type' => 'decimal', 'precision' => 12, 'decimalPlaces' => 2, 'null' => false]
+		]);
+		$this->assertSame(
+			'CREATE TABLE `table` (' . PHP_EOL .
+			'`test` DECIMAL(10, 4) NULL,' . PHP_EOL .
+			'`another` DECIMAL(12, 2) NOT NULL' . PHP_EOL .
+			')',
+			$table['query']
+		);
+	}
+
+	public function testQuoteIdentifier(): void
+	{
+		$this->assertSame('*', $this->sql->quoteIdentifier('*'));
+		$this->assertSame('`test`', $this->sql->quoteIdentifier('test'));
+		$this->assertSame('`another``test`', $this->sql->quoteIdentifier('another`test'));
+		$this->assertSame('`another"test`', $this->sql->quoteIdentifier('another"test'));
+		$this->assertSame("`another'test`", $this->sql->quoteIdentifier("another'test"));
+	}
+
+	public function testSplitIdentifier(): void
+	{
+		$result = $this->sql->splitIdentifier('table', 'table.column');
+		$this->assertSame(['table', 'column'], $result);
+
+		$result = $this->sql->splitIdentifier('table', 'table2.column');
+		$this->assertSame(['table2', 'column'], $result);
+
+		$result = $this->sql->splitIdentifier('table', 'column');
+		$this->assertSame(['table', 'column'], $result);
+
+		$result = $this->sql->splitIdentifier('table', '"table.column"');
+		$this->assertSame(['table', 'table.column'], $result);
+
+		$result = $this->sql->splitIdentifier('table', '`table.column`');
+		$this->assertSame(['table', 'table.column'], $result);
+
+		$result = $this->sql->splitIdentifier('table', 'table."table.column"');
+		$this->assertSame(['table', 'table.column'], $result);
+
+		$result = $this->sql->splitIdentifier('table', 'table.`table.column`');
+		$this->assertSame(['table', 'table.column'], $result);
+
+		$result = $this->sql->splitIdentifier('table', '`table.name`.`column.name`');
+		$this->assertSame(['table.name', 'column.name'], $result);
+
+		$result = $this->sql->splitIdentifier('table', '"table.name"."column.name"');
+		$this->assertSame(['table.name', 'column.name'], $result);
+
+		$result = $this->sql->splitIdentifier('table', '`table.name`."column.name"');
+		$this->assertSame(['table.name', 'column.name'], $result);
+
+		$result = $this->sql->splitIdentifier('table', '"table.name".`column.name`');
+		$this->assertSame(['table.name', 'column.name'], $result);
+	}
+
+	public function testSplitIdentifierInvalid(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid identifier table.column.invalid');
+
+		$this->sql->splitIdentifier('table', 'table.column.invalid');
+	}
+
+	public function testFrom(): void
+	{
+		$this->database->createTable('users', [
+			'test' => ['type' => 'varchar']
+		]);
+
+		$this->assertSame([
+			'query'    => 'FROM `users`',
+			'bindings' => []
+		], $this->sql->from('users'));
+	}
+
+	public function testGroup(): void
+	{
+		$this->database->createTable('users', [
+			'test' => ['type' => 'varchar']
+		]);
+
+		$this->assertSame([
+			'query'    => 'GROUP BY test',
+			'bindings' => []
+		], $this->sql->group('test'));
+	}
+
+	public function testHaving(): void
+	{
+		$this->database->createTable('users', [
+			'test' => ['type' => 'varchar']
+		]);
+
+		$this->assertSame([
+			'query'    => 'HAVING test < :value',
+			'bindings' => []
+		], $this->sql->having('test < :value'));
+	}
+
+	public function testSelect(): void
+	{
+		$this->database->createTable('users', [
+			'id'   => ['type' => 'int'],
+			'name' => ['type' => 'varchar']
+		]);
+		$this->database->createTable('roles', [
+			'id' => ['type' => 'int']
+		]);
+
+		$select = $this->sql->select([
+			'table'    => 'users',
+			'columns'  => ['users.id', 'name'],
+			'distinct' => true,
+			'join'     => [[
+				'type'  => 'left join',
+				'table' => 'roles',
+				'on'    => 'roles.id = users.id'
+			]],
+			'where'    => ['users.id' => 1],
+			'group'    => 'users.id',
+			'having'   => 'COUNT(*) > 0',
+			'order'    => 'users.id DESC',
+			'offset'   => 5,
+			'limit'    => 10,
+			'bindings' => []
+		]);
+
+		$this->assertStringContainsString('SELECT DISTINCT `users`.`id`, `users`.`name`', $select['query']);
+		$this->assertStringContainsString('FROM `users`', $select['query']);
+		$this->assertStringContainsString('LEFT JOIN `roles` ON roles.id = users.id', $select['query']);
+		$this->assertStringContainsString('WHERE users.id = ', $select['query']);
+		$this->assertStringContainsString('GROUP BY users.id', $select['query']);
+		$this->assertStringContainsString('HAVING COUNT(*) > 0', $select['query']);
+		$this->assertStringContainsString('ORDER BY users.id DESC', $select['query']);
+		$this->assertStringContainsString('LIMIT ', $select['query']);
+		$this->assertCount(3, $select['bindings']);
+	}
+
+	public function testInsertUpdateAndDelete(): void
+	{
+		$this->database->createTable('users', [
+			'id'      => ['type' => 'int'],
+			'name'    => ['type' => 'varchar'],
+			'meta'    => ['type' => 'text'],
+			'updated' => ['type' => 'timestamp']
+		]);
+
+		$insert = $this->sql->insert([
+			'table'    => 'users',
+			'values'   => [
+				'name'    => 'John Doe',
+				'meta'    => ['role' => 'admin'],
+				'updated' => 'NOW()'
+			],
+			'bindings' => []
+		]);
+
+		$this->assertStringStartsWith('INSERT INTO `users` (`users`.`name`, `users`.`meta`, `users`.`updated`) VALUES (', $insert['query']);
+		$this->assertCount(2, $insert['bindings']);
+		$this->assertSame('John Doe', array_values($insert['bindings'])[0]);
+		$this->assertSame('{"role":"admin"}', array_values($insert['bindings'])[1]);
+
+		$update = $this->sql->update([
+			'table'    => 'users',
+			'values'   => [
+				'name'    => 'Jane Doe',
+				'updated' => null
+			],
+			'where'    => ['id' => 1],
+			'bindings' => []
+		]);
+
+		$this->assertStringContainsString('UPDATE `users` SET `users`.`name` = ', $update['query']);
+		$this->assertStringContainsString('`users`.`updated` = null', $update['query']);
+		$this->assertStringContainsString('WHERE id = ', $update['query']);
+		$this->assertCount(2, $update['bindings']);
+		$this->assertSame('Jane Doe', array_values($update['bindings'])[0]);
+		$this->assertSame(1, array_values($update['bindings'])[1]);
+
+		$delete = $this->sql->delete([
+			'table'    => 'users',
+			'where'    => 'id = :id',
+			'bindings' => ['id' => 1]
+		]);
+
+		$this->assertSame('DELETE FROM `users` WHERE id = :id', $delete['query']);
+		$this->assertSame(['id' => 1], $delete['bindings']);
+	}
+
+	public function testInsertWithoutBindings(): void
+	{
+		$this->database->createTable('users', [
+			'id'   => ['type' => 'int'],
+			'name' => ['type' => 'varchar']
+		]);
+
+		$insert = $this->sql->insert([
+			'table'  => 'users',
+			'values' => ['name' => 'John Doe']
+		]);
+
+		$this->assertStringStartsWith('INSERT INTO `users` (`users`.`name`) VALUES (', $insert['query']);
+		$this->assertCount(1, $insert['bindings']);
+		$this->assertSame('John Doe', array_values($insert['bindings'])[0]);
+	}
+
+	public function testSelectHelpers(): void
+	{
+		$this->database->createTable('users', [
+			'name' => ['type' => 'varchar']
+		]);
+
+		$this->assertSame('*', $this->sql->selected('users'));
+		$this->assertSame('COUNT(*)', $this->sql->selected('users', 'COUNT(*)'));
+		$this->assertSame('`users`.`name`', $this->sql->selected('users', ['name']));
+		$this->assertSame([
+			'query'    => null,
+			'bindings' => []
+		], $this->sql->order());
+		$this->assertSame([
+			'query'    => null,
+			'bindings' => []
+		], $this->sql->limit());
+	}
+
+	public function testJoinInvalid(): void
+	{
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid join type SIDEWAYS JOIN');
+
+		$this->sql->join('SIDEWAYS JOIN', 'test', 'test.id = another.id');
+	}
+
+	public function testJoinsPropagatesBindings(): void
+	{
+		// Sql::join() never returns bindings, but a driver registered
+		// via Database::$types can parameterise the ON value
+		$sql = new class ($this->database) extends MockSql {
+			public function join(string $type, string $table, string $on): array
+			{
+				return [
+					'query'    => $type . ' ' . $table . ' ON ' . $on,
+					'bindings' => ['join_' . $table => $table]
+				];
+			}
+		};
+
+		$result = $sql->joins([
+			['table' => 'roles', 'on' => 'roles.id = users.id'],
+			['table' => 'teams', 'on' => 'teams.id = users.id']
+		]);
+
+		$this->assertSame([
+			'join_roles' => 'roles',
+			'join_teams' => 'teams'
+		], $result['bindings']);
+
+		$this->assertSame(
+			'JOIN roles ON roles.id = users.id JOIN teams ON teams.id = users.id',
+			$result['query']
+		);
+	}
+
+	public function testUnquoteIdentifierRequiresMatchingQuotes(): void
+	{
+		// matching pairs
+		$this->assertSame('table`name', $this->sql->unquoteIdentifier('`table``name`'));
+		$this->assertSame('table"name', $this->sql->unquoteIdentifier('"table""name"'));
+
+		// mismatched pair
+		$this->assertSame('`foo"', $this->sql->unquoteIdentifier('`foo"'));
+		$this->assertSame('"foo`', $this->sql->unquoteIdentifier('"foo`'));
+
+		// a single stray quote
+		$this->assertSame('"', $this->sql->unquoteIdentifier('"'));
+		$this->assertSame('`', $this->sql->unquoteIdentifier('`'));
+
+		// the non-wrapping quote is not an escape and must survive
+		foreach (['a"b', 'a""b', 'a`b', 'a``b', 'plain'] as $name) {
+			$this->assertSame(
+				$name,
+				$this->sql->unquoteIdentifier($this->sql->quoteIdentifier($name))
+			);
+		}
+	}
+
+	public function testValueSet(): void
+	{
+		$this->database->createTable('users', [
+			'name' => ['type' => 'varchar']
+		]);
+
+		$values = $this->sql->values('users', [
+			'name' => 'John Doe',
+			'nonexisting' => 'test',
+		], ', ', true);
+
+		$this->assertArrayHasKey('query', $values);
+		$this->assertArrayHasKey('bindings', $values);
+		$this->assertCount(1, $values['bindings']);
+		$this->assertSame('John Doe', current($values['bindings']));
+	}
+
+	public function testValueList(): void
+	{
+		$this->database->createTable('users', [
+			'name' => ['type' => 'varchar']
+		]);
+
+		$values = $this->sql->values('users', [
+			'name' => 'John Doe',
+			'nonexisting' => 'test',
+		], ', ', false);
+
+		$this->assertArrayHasKey('query', $values);
+		$this->assertArrayHasKey('bindings', $values);
+		$this->assertCount(1, $values['bindings']);
+		$this->assertSame('John Doe', current($values['bindings']));
+	}
+}

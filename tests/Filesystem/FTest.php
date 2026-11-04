@@ -1,0 +1,1027 @@
+<?php
+
+namespace Kirby\Filesystem;
+
+use Exception;
+use Kirby\Exception\LogicException;
+use Kirby\Http\HeadersSent;
+use Kirby\TestCase;
+use Kirby\Toolkit\I18n;
+use Kirby\Toolkit\Str;
+use PHPUnit\Framework\Attributes\CoversClass;
+use stdClass;
+
+#[CoversClass(F::class)]
+class FTest extends TestCase
+{
+	public const FIXTURES = __DIR__ . '/fixtures/f';
+	public const TMP      = KIRBY_TMP_DIR . '/Filesystem.F';
+
+	protected bool $hasErrorHandler = false;
+	protected string $sample;
+	protected string $test;
+
+	protected function setUp(): void
+	{
+		$this->sample = static::FIXTURES . '/test.txt';
+		$this->test   = static::TMP . '/moved.txt';
+
+		Dir::remove(static::TMP);
+		Dir::make(static::TMP);
+	}
+
+	protected function tearDown(): void
+	{
+		Dir::remove(static::TMP);
+
+		if ($this->hasErrorHandler === true) {
+			restore_error_handler();
+			$this->hasErrorHandler = false;
+		}
+
+		HeadersSent::$value = false;
+		F::$loadCache = [];
+	}
+
+	public function testAppend(): void
+	{
+		F::copy($this->sample, $this->test);
+		$this->assertTrue(F::append($this->test, ' is awesome'));
+	}
+
+	public function testBase64(): void
+	{
+		F::write($this->test, 'test');
+		$expected = base64_encode('test');
+
+		$this->assertSame($expected, F::base64($this->test));
+	}
+
+	public function testCopy(): void
+	{
+		$origin = static::TMP . '/a.txt';
+		F::write($origin, 'test');
+
+		$this->assertFileDoesNotExist($this->test);
+		$this->assertTrue(F::copy($origin, $this->test));
+		$this->assertFileExists($this->test);
+	}
+
+	public function testDirname(): void
+	{
+		$this->assertSame(dirname($this->test), F::dirname($this->test));
+	}
+
+	public function testExists(): void
+	{
+		$this->assertFalse(F::exists($this->test));
+		touch($this->test);
+		$this->assertTrue(F::exists($this->test));
+	}
+
+	public function testExistsIn(): void
+	{
+		$this->assertFalse(F::exists($this->test, static::TMP));
+		touch($this->test);
+		$this->assertTrue(F::exists($this->test, static::TMP));
+		$this->assertTrue(F::exists(static::TMP . '/../Filesystem.F/moved.txt', static::TMP));
+		$this->assertTrue(F::exists($this->test, dirname(static::TMP)));
+		$this->assertFalse(F::exists($this->test, static::FIXTURES));
+	}
+
+	public function testExtension(): void
+	{
+		$this->assertSame('php', F::extension(__FILE__));
+		$this->assertSame('test.jpg', F::extension($this->sample, 'jpg'));
+	}
+
+	public function testExtensionToType(): void
+	{
+		$this->assertSame('image', F::extensionToType('jpg'));
+		$this->assertFalse(F::extensionToType('something'));
+	}
+
+	public function testExtensions(): void
+	{
+		$this->assertSame(array_keys(Mime::types()), F::extensions());
+		$this->assertSame(F::$types['image'], F::extensions('image'));
+		$this->assertSame([], F::extensions('unknown-type'));
+	}
+
+	public function testFilename(): void
+	{
+		$this->assertSame('test.txt', F::filename($this->sample));
+	}
+
+	public function testIs(): void
+	{
+		F::write($this->test, 'test');
+
+		$this->assertTrue(F::is($this->test, 'txt'));
+		$this->assertTrue(F::is($this->test, 'text/plain'));
+		$this->assertFalse(F::is($this->test, 'something/weird'));
+		$this->assertFalse(F::is($this->test, 'no-clue'));
+	}
+
+	public function testIsReadable(): void
+	{
+		F::write($this->test, 'test');
+		$this->assertSame(is_readable($this->test), F::isReadable($this->test));
+	}
+
+	public function testIsWritable(): void
+	{
+		F::write($this->test, 'test');
+		$this->assertSame(is_writable($this->test), F::isWritable($this->test));
+	}
+
+	public function testLink(): void
+	{
+		$src  = static::TMP . '/a.txt';
+		$link = static::TMP . '/b.txt';
+
+		F::write($src, 'test');
+
+		$this->assertTrue(F::link($src, $link));
+		$this->assertFileExists($link);
+	}
+
+	public function testRealpath(): void
+	{
+		$path = F::realpath(__DIR__ . '/../Filesystem/FTest.php');
+		$this->assertSame(__FILE__, $path);
+	}
+
+	public function testRealpathToMissingFile(): void
+	{
+		$path = __DIR__ . '/../does-not-exist.php';
+
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('The file does not exist at the given path: "' . $path . '"');
+
+		F::realpath($path);
+	}
+
+	public function testRealpathToParent(): void
+	{
+		$parent = __DIR__ . '/..';
+		$file   = $parent . '/Filesystem/FTest.php';
+		$path   = F::realpath($file, $parent);
+
+		$this->assertSame(__FILE__, $path);
+	}
+
+	public function testRealpathToNonExistingParent(): void
+	{
+		$parent = __DIR__ . '/../does-not-exist';
+		$file   = __DIR__ . '/../Filesystem/FTest.php';
+
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('The parent directory does not exist: "' . $parent . '"');
+
+		F::realpath($file, $parent);
+	}
+
+	public function testRealpathToInvalidParent(): void
+	{
+		$parent = __DIR__ . '/../Cms';
+		$file   = __DIR__ . '/../Filesystem/FTest.php';
+
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('The file is not within the parent directory');
+
+		F::realpath($file, $parent);
+	}
+
+	public function testRealpathToSiblingWithSharedPrefix(): void
+	{
+		// a sibling directory whose name starts with
+		// the parent's name (`site2` vs `site`) must not
+		// pass the containment check
+		Dir::make(static::TMP . '/site');
+		F::write($file = static::TMP . '/site2/secret.txt', 'secret');
+
+		$this->expectException(Exception::class);
+		$this->expectExceptionMessage('The file is not within the parent directory');
+
+		F::realpath($file, static::TMP . '/site');
+	}
+
+	public function testRelativePath(): void
+	{
+		$path = F::relativepath(__FILE__, __DIR__);
+		$this->assertSame('/' . basename(__FILE__), $path);
+
+		$path = F::relativepath(__FILE__, __DIR__ . '/');
+		$this->assertSame('/' . basename(__FILE__), $path);
+	}
+
+	public function testRelativePathWithEmptyBase(): void
+	{
+		$path = F::relativepath(__FILE__, '');
+		$this->assertSame(basename(__FILE__), $path);
+
+		$path = F::relativepath(__FILE__, null);
+		$this->assertSame(basename(__FILE__), $path);
+	}
+
+	public function testRelativePathWithUnrelatedBase(): void
+	{
+		$path = F::relativepath(__DIR__ . '/fruits/apples/fuji.txt', __DIR__ . '/fruits/pineapples');
+		$this->assertSame('../apples/fuji.txt', $path);
+
+		$path = F::relativepath(__DIR__ . '/fruits/apples/gala.txt', __DIR__ . '/vegetables');
+		$this->assertSame('../fruits/apples/gala.txt', $path);
+
+		$path = F::relativepath(__DIR__ . '/fruits/apples/granny-smith.txt', __DIR__ . '/vegetables/');
+		$this->assertSame('../fruits/apples/granny-smith.txt', $path);
+
+		$path = F::relativepath(__DIR__ . '/fruits/apples/', __DIR__ . '/vegetables/');
+		$this->assertSame('../fruits/apples', $path);
+
+		$path = F::relativepath(__DIR__ . '/fruits/oranges/', __DIR__ . '/vegetables');
+		$this->assertSame('../fruits/oranges', $path);
+
+		$path = F::relativepath(__DIR__ . '/fruits/apples/honeycrisp.txt', __DIR__ . '/vegetables/squash');
+		$this->assertSame('../../fruits/apples/honeycrisp.txt', $path);
+
+		$path = F::relativepath(__DIR__ . '/test.txt', __DIR__ . '/foo/bar/baz');
+		$this->assertSame('../../../test.txt', $path);
+
+		$path = F::relativepath('foo/path-extra/file.txt', 'foo/path');
+		$this->assertSame('../path-extra/file.txt', $path);
+	}
+
+	public function testRelativePathOnWindows(): void
+	{
+		$file = 'C:\xampp\htdocs\index.php';
+		$in   = 'C:/xampp/htdocs';
+
+		$path = F::relativepath($file, $in);
+		$this->assertSame('/index.php', $path);
+	}
+
+	public function testLinkSymlink(): void
+	{
+		$src  = static::TMP . '/a.txt';
+		$link = static::TMP . '/b.txt';
+
+		F::write($src, 'test');
+
+		$this->assertTrue(F::link($src, $link, 'symlink'));
+		$this->assertTrue(is_link($link));
+	}
+
+	public function testLinkExistingLink(): void
+	{
+		$src  = static::TMP . '/a.txt';
+		$link = static::TMP . '/b.txt';
+
+		F::write($src, 'test');
+		F::link($src, $link);
+
+		$this->assertTrue(F::link($src, $link));
+	}
+
+	public function testLinkWithMissingSource(): void
+	{
+		$src  = static::TMP . '/a.txt';
+		$link = static::TMP . '/b.txt';
+
+		$this->expectExceptionMessage('Expection');
+		$this->expectExceptionMessage('The file "' . $src . '" does not exist and cannot be linked');
+
+		F::link($src, $link);
+	}
+
+	public function testLoad(): void
+	{
+		// basic behavior
+		F::write($file = static::TMP . '/test.php', '<?php return "foo";');
+		$this->assertSame('foo', F::load($file));
+
+		// non-existing file
+		$this->assertSame('foo', F::load('does-not-exist.php', 'foo'));
+
+		// type mismatch
+		F::write($file = static::TMP . '/test.php', '<?php return "foo";');
+		$expected = ['a' => 'b'];
+		$this->assertSame($expected, F::load($file, $expected));
+
+		// type mismatch with overwritten $fallback
+		F::write($file = static::TMP . '/test.php', '<?php $fallback = "test"; return "foo";');
+		$expected = ['a' => 'b'];
+		$this->assertSame($expected, F::load($file, $expected));
+
+		// with data
+		F::write($file = static::TMP . '/test.php', '<?php return $variable;');
+		$this->assertSame('foobar', F::load($file, null, ['variable' => 'foobar']));
+
+		// with overwritten $data
+		$this->assertSame('foobar', F::load($file, null, ['variable' => 'foobar', 'data' => []]));
+
+		// with overwritten $file
+		$this->assertSame('foobar', F::load($file, null, ['variable' => 'foobar', 'file' => null]));
+
+		// protection against accidental output (without output)
+		F::write($file = static::TMP . '/test.php', '<?php return "foo";');
+		$this->assertSame('foo', F::load($file, allowOutput: false));
+
+		// no protection against accidental output (with output)
+		F::write($file = static::TMP . '/test.php', '<?php Kirby\Http\HeadersSent::$value = true; return "foo";');
+		$this->assertSame('foo', F::load($file));
+	}
+
+	public function testLoadAccidentalOutput(): void
+	{
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage('Disallowed output from file file.php:123, possible accidental whitespace?');
+
+		F::write($file = static::TMP . '/test.php', '<?php Kirby\Http\HeadersSent::$value = true; return "foo";');
+
+		F::load($file, allowOutput: false);
+	}
+
+	public function testLoadCache(): void
+	{
+		// create a file that uses require_once internally
+		// (simulating a config file that splits config into multiple files)
+		F::write(
+			static::TMP . '/included.php',
+			'<?php return ["foo" => "bar"];'
+		);
+		F::write(
+			$file = static::TMP . '/config.php',
+			'<?php return require_once __DIR__ . "/included.php";'
+		);
+
+		// first load returns the array
+		$result = F::load($file, [], cache: true);
+		$this->assertSame(['foo' => 'bar'], $result);
+
+		// second load with cache returns cached result
+		// (not `true` from require_once)
+		$result = F::load($file, [], cache: true);
+		$this->assertSame(['foo' => 'bar'], $result);
+
+		// without cache, require_once returns true on second load
+		F::$loadCache = [];
+		F::load($file);
+		$result = F::load($file);
+		$this->assertSame(true, $result);
+	}
+
+	public function testLoadClasses(): void
+	{
+		F::loadClasses([
+			'ftest\\a' => static::FIXTURES . '/load/a/a.php',
+			'ftest\\output' => static::FIXTURES . '/load/output.php'
+		]);
+
+		F::loadClasses([
+			'FTest\\B' => 'B.php',
+		], static::FIXTURES . '/load/B');
+
+		$this->assertTrue(class_exists('FTest\\A'));
+		$this->assertTrue(class_exists('FTest\\B'));
+		$this->assertFalse(class_exists('FTest\\C'));
+
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage('Disallowed output from file file.php:123, possible accidental whitespace?');
+		class_exists('FTest\\Output');
+	}
+
+	public function testLoadOnce(): void
+	{
+		// basic behavior
+		F::write($file = static::TMP . '/test1.php', '<?php return "foo";');
+		$this->assertTrue(F::loadOnce($file));
+
+		// non-existing file
+		$this->assertFalse(F::loadOnce('does-not-exist.php'));
+
+		// protection against accidental output (without output)
+		F::write($file = static::TMP . '/test2.php', '<?php return "foo";');
+		$this->assertTrue(F::loadOnce($file, allowOutput: false));
+
+		// no protection against accidental output (with output)
+		F::write($file = static::TMP . '/test3.php', '<?php Kirby\Http\HeadersSent::$value = true; return "foo";');
+		$this->assertTrue(F::loadOnce($file));
+	}
+
+	public function testLoadOnceAccidentalOutput(): void
+	{
+		$this->expectException(LogicException::class);
+		$this->expectExceptionMessage('Disallowed output from file file.php:123, possible accidental whitespace?');
+
+		F::write($file = static::TMP . '/test4.php', '<?php Kirby\Http\HeadersSent::$value = true; return "foo";');
+
+		F::loadOnce($file, allowOutput: false);
+	}
+
+	public function testMove(): void
+	{
+		F::write($origin = static::TMP . '/a.txt', 'test');
+
+		// simply move file
+		$this->assertFileDoesNotExist($this->test);
+		$this->assertFileExists($origin);
+
+		$this->assertTrue(F::move($origin, $this->test));
+
+		$this->assertFileExists($this->test);
+		$this->assertFileDoesNotExist($origin);
+		$this->assertSame('test', file_get_contents($this->test));
+
+		// replace file via moving
+		F::copy($this->test, $origin);
+
+		$this->assertFileExists($origin);
+		$this->assertFileExists($this->test);
+
+		$this->assertFalse(F::move($this->test, $origin));
+		$this->assertTrue(F::move($this->test, $origin, true));
+
+		$this->assertFileDoesNotExist($this->test);
+		$this->assertFileExists($origin);
+		$this->assertSame('test', file_get_contents($origin));
+	}
+
+	public function testMoveAcrossDevices(): void
+	{
+		// try to find a suitable path on a different device (filesystem)
+		if (is_dir('/dev/shm') === true) {
+			// use tmpfs mount point on GitHub Actions
+			$tmpDir = '/dev/shm';
+		} else {
+			// no luck, try the system temp dir,
+			// which often also uses tmpfs
+			$tmpDir = sys_get_temp_dir();
+		}
+
+		if (stat(static::TMP)['dev'] === stat($tmpDir)['dev']) {
+			$this->markTestSkipped('Temporary directory "' . $tmpDir . '" is on the same filesystem');
+			return;
+		}
+
+		F::write($origin = static::TMP . '/a.txt', 'test');
+		$this->test = $tmpDir . '/kirby-test-' . uniqid();
+
+		// simply move file
+		$this->assertFileDoesNotExist($this->test);
+		$this->assertFileExists($origin);
+
+		$this->assertTrue(F::move($origin, $this->test));
+
+		$this->assertFileExists($this->test);
+		$this->assertFileDoesNotExist($origin);
+		$this->assertSame('test', file_get_contents($this->test));
+
+		// replace file via moving
+		F::copy($this->test, $origin);
+
+		$this->assertFileExists($origin);
+		$this->assertFileExists($this->test);
+
+		$this->assertFalse(F::move($this->test, $origin));
+		$this->assertTrue(F::move($this->test, $origin, true));
+
+		$this->assertFileDoesNotExist($this->test);
+		$this->assertFileExists($origin);
+		$this->assertSame('test', file_get_contents($origin));
+	}
+
+	public function testMime(): void
+	{
+		F::write($this->test, 'test');
+		$this->assertSame('text/plain', F::mime($this->test));
+	}
+
+	public function testMimeToExtension(): void
+	{
+		$this->assertSame('jpg', F::mimeToExtension('image/jpeg'));
+		$this->assertFalse(F::mimeToExtension('image/something'));
+	}
+
+	public function testMimeToType(): void
+	{
+		$this->assertSame('image', F::mimeToType('image/jpeg'));
+		$this->assertFalse(F::mimeToType('image/something'));
+	}
+
+	public function testModified(): void
+	{
+		F::write($this->test, 'test');
+		$this->assertSame(filemtime($this->test), F::modified($this->test));
+	}
+
+	public function testName(): void
+	{
+		$this->assertSame('test', F::name($this->sample));
+	}
+
+	public function testNiceSize(): void
+	{
+		$locale = I18n::$locale;
+
+		F::write($a = static::TMP . '/a.txt', 'test');
+		F::write($b = static::TMP . '/b.txt', 'test');
+
+		// for file path
+		$this->assertSame('4 B', F::niceSize($a));
+
+		// for array of file paths
+		$this->assertSame('8 B', F::niceSize([$a, $b]));
+
+		// for int
+		$this->assertSame('4 B', F::niceSize(4));
+		$this->assertSame('4 KB', F::niceSize(4096));
+		$this->assertSame('4 KB', F::niceSize(4100));
+		$this->assertSame('4.1 KB', F::niceSize(4200));
+		$this->assertSame('4 MB', F::niceSize(4194304));
+		$this->assertSame('4.29 MB', F::niceSize(4500000));
+		$this->assertSame('4 GB', F::niceSize(4294967296));
+
+		// default locale
+		I18n::$locale = 'de';
+		$this->assertSame('4,29 MB', F::niceSize(4500000));
+
+		// custom locale
+		$this->assertSame('4.29 MB', F::niceSize(4500000, 'en_US'));
+		$this->assertSame('4,29 MB', F::niceSize(4500000, 'fr_FR'));
+
+		// disable locale formatting
+		$this->assertSame('4.29 MB', F::niceSize(4500000, false));
+
+		// reset locale
+		I18n::$locale = $locale;
+	}
+
+
+	public function testRange(): void
+	{
+		file_put_contents($this->test, 'my content is awesome');
+
+		// read from offset 3 to end
+		$this->assertSame('content is awesome', F::range($this->test, offset: 3));
+
+		// read from offset 11
+		$this->assertSame('is awesome', F::range($this->test, offset: 11));
+
+		// read first 10 bytes
+		$this->assertSame('my content', F::range($this->test, length: 10));
+
+		// read first 2 bytes
+		$this->assertSame('my', F::range($this->test, length: 2));
+
+		// read 7 bytes starting from offset 3
+		$this->assertSame('content', F::range($this->test, offset: 3, length: 7));
+
+		// read 2 bytes starting from offset 11
+		$this->assertSame('is', F::range($this->test, offset: 11, length: 2));
+
+		// read 6 bytes starting from offset 14 (edge case - reads to end)
+		$this->assertSame('awesome', F::range($this->test, offset: 14, length: 7));
+
+		// remote path
+		$this->assertFalse(F::range('https://example.com/file.txt'));
+
+		// empty path
+		$this->assertFalse(F::range(''));
+	}
+
+	public function testRead(): void
+	{
+		file_put_contents($this->test, $content = 'my content is awesome');
+
+		$this->assertSame($content, F::read($this->test));
+	}
+
+	public function testReadInvalidFile(): void
+	{
+		$this->assertFalse(F::read('invalid file'));
+	}
+
+	public function testReadRemoteFile(): void
+	{
+		$this->assertFalse(F::read('https://example.com/some-file.jpg'));
+	}
+
+	public function testRemove(): void
+	{
+		F::write($a = static::TMP . '/a.jpg', '');
+
+		$this->assertFileExists($a);
+
+		$this->assertTrue(F::remove($a));
+
+		$this->assertFileDoesNotExist($a);
+	}
+
+	public function testRemoveAlreadyRemoved(): void
+	{
+		$this->assertFileDoesNotExist($a = static::TMP . '/a.jpg');
+
+		$this->assertTrue(F::remove($a));
+
+		$this->assertFileDoesNotExist($a);
+	}
+
+	public function testRemoveDirectory(): void
+	{
+		Dir::make($a = static::TMP . '/a');
+
+		$this->assertDirectoryExists($a);
+
+		$this->assertFalse(@F::remove($a));
+
+		$this->assertDirectoryExists($a);
+	}
+
+	public function testRemoveLink(): void
+	{
+		F::write($a = static::TMP . '/a.jpg', '');
+		symlink($a, $b = static::TMP . '/b.jpg');
+
+		$this->assertFileExists($a);
+		$this->assertTrue(is_link($b));
+
+		$this->assertTrue(F::remove($b));
+
+		$this->assertFileDoesNotExist($a);
+		$this->assertTrue(is_link($b));
+	}
+
+	public function testRemoveGlob(): void
+	{
+		F::write($a = static::TMP . '/a.jpg', '');
+		F::write($b = static::TMP . '/a.1234.jpg', '');
+		F::write($c = static::TMP . '/a.3456.jpg', '');
+
+		$this->assertFileExists($a);
+		$this->assertFileExists($b);
+		$this->assertFileExists($c);
+
+		F::remove(static::TMP . '/a*.jpg');
+
+		$this->assertFileDoesNotExist($a);
+		$this->assertFileDoesNotExist($b);
+		$this->assertFileDoesNotExist($c);
+	}
+
+	public function testRename(): void
+	{
+		F::write($origin = static::TMP . '/a.txt', 'test');
+
+		// simply rename file
+		$this->assertFileDoesNotExist($this->test);
+		$this->assertFileExists($origin);
+
+		$this->assertSame($this->test, F::rename($origin, 'moved'));
+
+		$this->assertFileExists($this->test);
+		$this->assertFileDoesNotExist($origin);
+
+		// rename file with same name
+
+		$this->assertFileExists($this->test);
+		$this->assertFileDoesNotExist($origin);
+
+		$this->assertSame($this->test, F::rename($this->test, 'moved'));
+		$this->assertSame($this->test, F::rename($this->test, 'moved', true));
+
+		$this->assertFileExists($this->test);
+		$this->assertFileDoesNotExist($origin);
+
+		// replace file via renaming
+		F::copy($this->test, $origin);
+
+		$this->assertFileExists($this->test);
+		$this->assertFileExists($origin);
+
+		$this->assertFalse(F::rename($this->test, 'a'));
+		$this->assertSame($origin, F::rename($this->test, 'a', true));
+
+		$this->assertFileDoesNotExist($this->test);
+		$this->assertFileExists($origin);
+	}
+
+	public function testSafeName(): void
+	{
+		// make sure no language rules are still set
+		Str::$language = [];
+
+		// with extension
+		$this->assertSame('uber-genious.txt', F::safeName('über genious.txt'));
+
+		// with unsafe extension
+		$this->assertSame('uber-genious.taxt', F::safeName('über genious.täxt'));
+
+		// without extension
+		$this->assertSame('uber-genious', F::safeName('über genious'));
+
+		// with leading and trailing dash
+		$this->assertSame('super.jpg', F::safeName('-super.jpg-'));
+
+		// with leading and trailing underscore
+		$this->assertSame('super.jpg', F::safeName('_super.jpg_'));
+
+		// with leading and trailing dot
+		$this->assertSame('super.jpg', F::safeName('.super.jpg.'));
+
+		// leave allowed characters untouched
+		$this->assertSame('file.a@b_c-d.jpg', F::safeName('file.a@b_c-d.jpg'));
+	}
+
+	public function testSafeBasename(): void
+	{
+		// make sure no language rules are still set
+		Str::$language = [];
+
+		// with extension
+		$this->assertSame('uber-genious', F::safeBasename('über genious.txt'));
+
+		// without extension
+		$this->assertSame('uber-genious', F::safeBasename('über genious'));
+		$this->assertSame('uber', F::safeBasename('über.genious'));
+		$this->assertSame('uber.genious', F::safeBasename('über.genious', false));
+
+		// with leading dash
+		$this->assertSame('super', F::safeBasename('-super.jpg'));
+	}
+
+	public function testSafeExtension(): void
+	{
+		// make sure no language rules are still set
+		Str::$language = [];
+
+		$this->assertSame('txt', F::safeExtension('über genious.txt'));
+		$this->assertSame('taxt', F::safeExtension('über genious.täxt'));
+		$this->assertSame('taxt', F::safeExtension('täxt', false));
+		$this->assertSame('', F::safeExtension('über genious'));
+		$this->assertSame('jpg', F::safeExtension('-super.jpg'));
+	}
+
+	public function testSize(): void
+	{
+		F::write($a = static::TMP . '/a.txt', 'test');
+		F::write($b = static::TMP . '/b.txt', 'test');
+
+		$this->assertSame(4, F::size($a));
+		$this->assertSame(4, F::size($b));
+		$this->assertSame(8, F::size([$a, $b]));
+	}
+
+	public function testType(): void
+	{
+		$this->assertSame('image', F::type('jpg'));
+		$this->assertSame('document', F::type('pdf'));
+		$this->assertSame('archive', F::type('zip'));
+		$this->assertSame('code', F::type('css'));
+		$this->assertSame('code', F::type('content.php'));
+		$this->assertSame('code', F::type('py'));
+		$this->assertSame('code', F::type('java'));
+		$this->assertNull(F::type('foo'));
+		$this->assertNull(F::type('tmp'));
+	}
+
+	public function testTypeWithoutExtension(): void
+	{
+		F::write($file = static::TMP . '/test', '<?php echo "foo"; ?>');
+
+		$this->assertSame('text/x-php', F::mime($file));
+		$this->assertSame('code', F::type($file));
+	}
+
+	public function testTypeWithTmpExtension(): void
+	{
+		F::write($file = static::TMP . '/test.tmp', '<?php echo "foo"; ?>');
+
+		$this->assertSame('text/x-php', F::mime($file));
+		$this->assertSame('code', F::type($file));
+	}
+
+	public function testTypeToExtensions(): void
+	{
+		$this->assertSame(F::$types['audio'], F::typeToExtensions('audio'));
+		$this->assertSame(F::$types['document'], F::typeToExtensions('document'));
+		$this->assertNull(F::typeToExtensions('invalid'));
+	}
+
+	public function testUnlink(): void
+	{
+		touch(static::TMP . '/file');
+		symlink(static::TMP . '/file', static::TMP . '/link-exists');
+		symlink(static::TMP . '/invalid', static::TMP . '/link-invalid');
+
+		$this->assertTrue(F::unlink(static::TMP . '/file'));
+		$this->assertTrue(F::unlink(static::TMP . '/link-exists'));
+		$this->assertTrue(F::unlink(static::TMP . '/link-invalid'));
+
+		$this->assertFileDoesNotExist(static::TMP . '/file');
+		$this->assertFalse(is_link(static::TMP . '/link-exists'));
+		$this->assertFalse(is_link(static::TMP . '/link-invalid'));
+	}
+
+	public function testUnlinkAlredyDeleted(): void
+	{
+		$this->assertTrue(F::unlink(static::TMP . '/does-not-exist'));
+	}
+
+	public function testUnlinkFolder(): void
+	{
+		$this->hasErrorHandler = true;
+
+		$called = false;
+		set_error_handler(function (int $errno, string $errstr) use (&$called) {
+			$called = true;
+
+			$this->assertSame(E_WARNING, $errno);
+
+			$expectedPrefix = 'unlink(' . static::TMP . '/folder): ';
+			$expected = [
+				$expectedPrefix . 'Is a directory',
+				$expectedPrefix . 'Operation not permitted'
+			];
+
+			$this->assertTrue(in_array($errstr, $expected, true));
+		});
+
+		mkdir(static::TMP . '/folder');
+
+		$this->assertFalse(F::unlink(static::TMP . '/folder'));
+
+		$this->assertTrue($called);
+	}
+
+	public function testUpdateCreatesFileAndParentDir(): void
+	{
+		$target = static::TMP . '/nested/dir/new.txt';
+		$this->assertFileDoesNotExist($target);
+
+		$received = null;
+		$result = F::update($target, function (string $contents) use (&$received): string {
+			$received = $contents;
+			return 'fresh';
+		});
+
+		$this->assertTrue($result);
+		$this->assertSame('', $received);
+		$this->assertSame('fresh', file_get_contents($target));
+	}
+
+	public function testUpdateExistingFileTruncatesToNewContents(): void
+	{
+		F::write($this->test, 'a long original content');
+
+		$result = F::update(
+			$this->test,
+			fn (string $contents) => strtoupper($contents) . '!'
+		);
+
+		$this->assertTrue($result);
+		$this->assertSame('A LONG ORIGINAL CONTENT!', file_get_contents($this->test));
+	}
+
+	public function testUpdateShorterReplacementIsNotPaddedFromOldContents(): void
+	{
+		F::write($this->test, 'the original is much longer than the replacement');
+
+		F::update($this->test, fn () => 'short');
+
+		// must not contain trailing bytes from the original
+		$this->assertSame('short', file_get_contents($this->test));
+	}
+
+	public function testUpdateAbortsWhenModifierReturnsNull(): void
+	{
+		F::write($this->test, 'untouched');
+
+		$result = F::update($this->test, fn () => null);
+
+		$this->assertFalse($result);
+		$this->assertSame('untouched', file_get_contents($this->test));
+	}
+
+	public function testUpdateAbortsWhenModifierReturnsNonString(): void
+	{
+		F::write($this->test, 'untouched');
+
+		// only a string is written; any other return value
+		// (here an int) aborts the write like `null` does
+		$result = F::update($this->test, fn () => 123);
+
+		$this->assertFalse($result);
+		$this->assertSame('untouched', file_get_contents($this->test));
+	}
+
+	public function testUpdateReturnsFalseWhenFileCannotBeOpened(): void
+	{
+		// a directory cannot be opened with `fopen()` in `c+` mode,
+		// so `modify()` returns false without invoking the modifier
+		Dir::make($dir = static::TMP . '/a-directory');
+
+		$called = false;
+		$result = F::update($dir, function () use (&$called) {
+			$called = true;
+			return 'nope';
+		});
+
+		$this->assertFalse($result);
+		$this->assertFalse($called);
+	}
+
+	public function testUpdatePropagatesModifierException(): void
+	{
+		F::write($this->test, 'before');
+
+		try {
+			F::update($this->test, function (): string {
+				throw new Exception('boom');
+			});
+			$this->fail('Expected exception was not thrown');
+
+		} catch (Exception $e) {
+			$this->assertSame('boom', $e->getMessage());
+		}
+
+		// file should remain unchanged
+		$this->assertSame('before', file_get_contents($this->test));
+
+		// lock must have been released, a new modify succeeds
+		$this->assertTrue(F::update($this->test, fn () => 'after'));
+		$this->assertSame('after', file_get_contents($this->test));
+	}
+
+	public function testUpdateSerializesSequentialReadModifyWrites(): void
+	{
+		F::write($this->test, '0');
+
+		for ($i = 0; $i < 50; $i++) {
+			F::update(
+				$this->test,
+				fn ($content): string => (string)((int)$content + 1)
+			);
+		}
+
+		$this->assertSame('50', file_get_contents($this->test));
+	}
+
+	public function testURI(): void
+	{
+		F::write($this->test, 'test');
+
+		$expected = 'dGVzdA==';
+		$this->assertSame($expected, F::base64($this->test));
+
+		$expected = 'data:text/plain;base64,dGVzdA==';
+		$this->assertSame($expected, F::uri($this->test));
+	}
+
+	public function testUriOfNonExistingFile(): void
+	{
+		$this->assertFalse(F::uri('/does-not-exist'));
+	}
+
+	public function testWrite(): void
+	{
+		$this->assertTrue(F::write($this->test, 'my content'));
+	}
+
+	public function testWriteArray(): void
+	{
+		$input = ['a' => 'a'];
+
+		F::write($this->test, $input);
+
+		$result = unserialize(F::read($this->test));
+		$this->assertSame($input, $result);
+	}
+
+	public function testWriteObject(): void
+	{
+		$input = new stdClass([
+			'a' => 'b'
+		]);
+
+		F::write($this->test, $input);
+
+		$result = unserialize(F::read($this->test));
+		$this->assertEquals($input, $result); // cannot use strict assertion (serialization)
+	}
+
+	public function testSimilar(): void
+	{
+		F::write($a = static::TMP . '/a.jpg', '');
+		F::write($b = static::TMP . '/a.1234.jpg', '');
+		F::write($c = static::TMP . '/a.3456.jpg', '');
+
+		$expected = [
+			$b,
+			$c,
+			$a
+		];
+
+		$this->assertSame($expected, F::similar($a));
+	}
+}
