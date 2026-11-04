@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Query\AST;
+namespace Infinri\Query\AST;
 
-use Kirby\Query\Visitors\Visitor;
+use Infinri\Query\Visitors\Visitor;
 
 class ClosureNode extends Node
 {

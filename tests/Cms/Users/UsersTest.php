@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\F;
 
 class UsersTest extends TestCase
 {

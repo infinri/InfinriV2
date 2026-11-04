@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\User;
-use Kirby\Panel\Ui\Buttons\ViewButton;
+use Infinri\Cms\App;
+use Infinri\Cms\User;
+use Infinri\Panel\Ui\Buttons\ViewButton;
 
 return [
 	'user.theme' => function (App $kirby, User $user) {

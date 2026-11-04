@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Query\Runners;
+namespace Infinri\Query\Runners;
 
 use ArrayAccess;
 use Closure;
-use Kirby\Query\Query;
+use Infinri\Query\Query;
 
 abstract class Runner
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class Txt extends Handler
 {

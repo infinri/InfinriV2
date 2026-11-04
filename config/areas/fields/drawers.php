@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\Find;
-use Kirby\Panel\Field;
+use Infinri\Cms\Find;
+use Infinri\Panel\Field;
 
 return [
 	'model' => [

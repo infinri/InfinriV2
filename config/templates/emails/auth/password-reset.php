@@ -1,9 +1,9 @@
 <?php
 
-use Kirby\Toolkit\I18n;
+use Infinri\Toolkit\I18n;
 
 /**
- * @var \Kirby\Cms\User $user
+ * @var \Infinri\Cms\User $user
  * @var string $site
  * @var string $code
  * @var int $timeout

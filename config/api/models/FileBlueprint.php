@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\FileBlueprint;
+use Infinri\Cms\FileBlueprint;
 
 /**
  * FileBlueprint

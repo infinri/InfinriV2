@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
 use FilesystemIterator;
-use Kirby\Exception\Exception;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\Exception;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Str;
 
 class FileSessionStore extends SessionStore
 {

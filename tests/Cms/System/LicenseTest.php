@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionClass;

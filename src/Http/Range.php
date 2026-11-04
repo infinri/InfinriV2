@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Filesystem\F;
+use Infinri\Filesystem\F;
 
 class Range
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Parsley\Schema;
+namespace Infinri\Parsley\Schema;
 
-use Kirby\Parsley\Element;
-use Kirby\Parsley\Schema;
-use Kirby\Toolkit\Str;
+use Infinri\Parsley\Element;
+use Infinri\Parsley\Schema;
+use Infinri\Toolkit\Str;
 
 class Plain extends Schema
 {

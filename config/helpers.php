@@ -1,27 +1,27 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Helpers;
-use Kirby\Cms\Html;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Page;
-use Kirby\Cms\Pages;
-use Kirby\Cms\Response;
-use Kirby\Cms\Site;
-use Kirby\Cms\Url;
-use Kirby\Filesystem\Asset;
-use Kirby\Filesystem\F;
-use Kirby\Http\Router;
-use Kirby\Image\QrCode;
-use Kirby\Plugin\Assets as PluginAssets;
-use Kirby\Plugin\Plugin;
-use Kirby\Template\Slot;
-use Kirby\Template\Snippet;
-use Kirby\Toolkit\Date;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Helpers;
+use Infinri\Cms\Html;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Page;
+use Infinri\Cms\Pages;
+use Infinri\Cms\Response;
+use Infinri\Cms\Site;
+use Infinri\Cms\Url;
+use Infinri\Filesystem\Asset;
+use Infinri\Filesystem\F;
+use Infinri\Http\Router;
+use Infinri\Image\QrCode;
+use Infinri\Plugin\Assets as PluginAssets;
+use Infinri\Plugin\Plugin;
+use Infinri\Template\Slot;
+use Infinri\Template\Snippet;
+use Infinri\Toolkit\Date;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
 
 if (Helpers::hasOverride('asset') === false) { // @codeCoverageIgnore
 	/**
@@ -54,7 +54,7 @@ if (Helpers::hasOverride('collection') === false) { // @codeCoverageIgnore
 	/**
 	 * Returns the result of a collection by name
 	 *
-	 * @return \Kirby\Toolkit\Collection|null
+	 * @return \Infinri\Toolkit\Collection|null
 	 * @todo 6.0 Add return type declaration
 	 */
 	function collection(string $name, array $options = [])

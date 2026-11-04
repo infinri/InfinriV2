@@ -1,18 +1,18 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\File as CmsFile;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Filesystem\Asset;
-use Kirby\Panel\Ui\Buttons\ViewButtons;
-use Kirby\Panel\Ui\Item\PageItem;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\File as CmsFile;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Filesystem\Asset;
+use Infinri\Panel\Ui\Buttons\ViewButtons;
+use Infinri\Panel\Ui\Item\PageItem;
+use Infinri\Toolkit\I18n;
 
 class Page extends Model
 {
 	/**
-	 * @var \Kirby\Cms\Page
+	 * @var \Infinri\Cms\Page
 	 */
 	protected ModelWithContent $model;
 
@@ -214,7 +214,7 @@ class Page extends Model
 	 * which is used in the changes dropdown
 	 * for example.
 	 *
-	 * @deprecated 5.1.4 Use the Kirby\Panel\Ui\Item\PageItem class instead
+	 * @deprecated 5.1.4 Use the Infinri\Panel\Ui\Item\PageItem class instead
 	 */
 	public function dropdownOption(): array
 	{

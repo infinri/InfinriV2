@@ -1,7 +1,7 @@
 <?php
-use Kirby\Cms\Html;
+use Infinri\Cms\Html;
 
-/** @var \Kirby\Cms\Block $block */
+/** @var \Infinri\Cms\Block $block */
 $caption = $block->caption();
 
 if (

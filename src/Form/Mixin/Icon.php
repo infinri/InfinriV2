@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Form\Mixin;
+namespace Infinri\Form\Mixin;
 
 trait Icon
 {

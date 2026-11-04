@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Language;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Cms\TestCase;
-use Kirby\Cms\User;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Language;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Cms\TestCase;
+use Infinri\Cms\User;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Fields::class)]

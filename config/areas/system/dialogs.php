@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\LicenseType;
-use Kirby\Exception\LogicException;
-use Kirby\Panel\Field;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\LicenseType;
+use Infinri\Exception\LogicException;
+use Infinri\Panel\Field;
+use Infinri\Toolkit\I18n;
 
 return [
 	// license key

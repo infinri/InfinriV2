@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Panel\Ui\Stats;
+use Infinri\Panel\Ui\Stats;
 
 return [
 	'mixins' => [

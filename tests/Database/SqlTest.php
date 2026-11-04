@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
-use Kirby\Database\Sql\Sqlite;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\A;
+use Infinri\Database\Sql\Sqlite;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\A;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Sql::class)]

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\File;
-use Kirby\Cms\Language;
-use Kirby\Cms\Page;
+use Infinri\Cms\File;
+use Infinri\Cms\Language;
+use Infinri\Cms\Page;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(VersionCache::class)]

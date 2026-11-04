@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 class TextFieldTest extends TestCase

@@ -155,7 +155,7 @@
 	"error.language.name": "لطفاً یک نام معتبر برای زبان وارد کنید",
 	"error.language.notFound": "زبان پیدا نشد",
 	"error.language.update.permission": "شما اجازه به‌روزرسانی این زبان را ندارید",
-	"error.language.variable.core": "کلید «{key}» یکی از رشته‌های ترجمه داخلی Kirby است و نمی‌توان آن را با متغیر زبان بازنویسی کرد",
+	"error.language.variable.core": "کلید «{key}» یکی از رشته‌های ترجمه داخلی Infinri است و نمی‌توان آن را با متغیر زبان بازنویسی کرد",
 	"error.language.variable.duplicate": "متغیری با کلید «{key}» از قبل وجود دارد",
 	"error.language.variable.key": "لطفاً یک کلید معتبر برای متغیر وارد کنید",
 	"error.language.variable.notFound": "متغیر پیدا نشد",

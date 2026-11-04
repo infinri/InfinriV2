@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
-use Kirby\Exception\LogicException;
-use Kirby\TestCase;
+use Infinri\Exception\LogicException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(SessionData::class)]

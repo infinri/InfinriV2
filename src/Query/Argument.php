@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
 use Closure;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 
 class Argument
 {

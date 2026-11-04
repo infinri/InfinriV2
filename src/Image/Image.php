@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
-use Kirby\Cms\FileVersion;
-use Kirby\Content\Content;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\File;
-use Kirby\Toolkit\Html;
+use Infinri\Cms\FileVersion;
+use Infinri\Content\Content;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\File;
+use Infinri\Toolkit\Html;
 
 class Image extends File
 {

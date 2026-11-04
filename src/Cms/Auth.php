@@ -1,20 +1,20 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cms\Auth\Challenge;
-use Kirby\Cms\Auth\Status;
-use Kirby\Data\Data;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\F;
-use Kirby\Http\Idn;
-use Kirby\Http\Request\Auth\BasicAuth;
-use Kirby\Session\Session;
-use Kirby\Toolkit\A;
+use Infinri\Cms\Auth\Challenge;
+use Infinri\Cms\Auth\Status;
+use Infinri\Data\Data;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\F;
+use Infinri\Http\Idn;
+use Infinri\Http\Request\Auth\BasicAuth;
+use Infinri\Session\Session;
+use Infinri\Toolkit\A;
 use SensitiveParameter;
 use Throwable;
 
@@ -64,9 +64,9 @@ class Auth
 	 * @param bool $long If `true`, a long session will be created
 	 * @param 'login'|'password-reset'|'2fa' $mode Purpose of the code
 	 *
-	 * @throws \Kirby\Exception\LogicException If there is no suitable authentication challenge (only in debug mode)
-	 * @throws \Kirby\Exception\NotFoundException If the user does not exist (only in debug mode)
-	 * @throws \Kirby\Exception\PermissionException If the rate limit is exceeded
+	 * @throws \Infinri\Exception\LogicException If there is no suitable authentication challenge (only in debug mode)
+	 * @throws \Infinri\Exception\NotFoundException If the user does not exist (only in debug mode)
+	 * @throws \Infinri\Exception\PermissionException If the rate limit is exceeded
 	 */
 	public function createChallenge(
 		string $email,
@@ -194,8 +194,8 @@ class Auth
 	 * for a basic authentication header with
 	 * valid credentials
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException if the authorization header is invalid
-	 * @throws \Kirby\Exception\PermissionException if basic authentication is not allowed
+	 * @throws \Infinri\Exception\InvalidArgumentException if the authorization header is invalid
+	 * @throws \Infinri\Exception\PermissionException if basic authentication is not allowed
 	 */
 	public function currentUserFromBasicAuth(BasicAuth|null $auth = null): User|null
 	{
@@ -320,7 +320,7 @@ class Auth
 	 *                         `null` to use the actual user again,
 	 *                         `'kirby'` for a virtual admin user or
 	 *                         `'nobody'` to disable the actual user
-	 * @throws \Kirby\Exception\NotFoundException if the given user cannot be found
+	 * @throws \Infinri\Exception\NotFoundException if the given user cannot be found
 	 */
 	public function impersonate(string|null $who = null): User|null
 	{
@@ -405,9 +405,9 @@ class Auth
 	/**
 	 * Login a user by email and password
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
-	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
+	 * @throws \Infinri\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
+	 * @throws \Infinri\Exception\NotFoundException If the email was invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
 	public function login(
 		string $email,
@@ -435,9 +435,9 @@ class Auth
 	 * Login a user by email, password and auth challenge
 	 * @since 3.5.0
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
-	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
+	 * @throws \Infinri\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
+	 * @throws \Infinri\Exception\NotFoundException If the email was invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
 	public function login2fa(
 		string $email,
@@ -520,7 +520,7 @@ class Auth
 	/**
 	 * Ensures that the rate limit was not exceeded
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded
+	 * @throws \Infinri\Exception\PermissionException If the rate limit was exceeded
 	 */
 	protected function checkRateLimit(string $email): void
 	{
@@ -539,9 +539,9 @@ class Auth
 	 * Validates the user credentials and returns the user object on success;
 	 * otherwise logs the failed attempt
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the email was invalid
-	 * @throws \Kirby\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
+	 * @throws \Infinri\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
+	 * @throws \Infinri\Exception\NotFoundException If the email was invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the password is not valid (via `$user->login()`)
 	 */
 	public function validatePassword(
 		string $email,
@@ -811,13 +811,13 @@ class Auth
 	 * @since 3.5.0
 	 *
 	 * @param string $code User-provided auth code to verify
-	 * @return \Kirby\Cms\User User object of the logged-in user
+	 * @return \Infinri\Cms\User User object of the logged-in user
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the rate limit was exceeded, the challenge timed out, the code
+	 * @throws \Infinri\Exception\PermissionException If the rate limit was exceeded, the challenge timed out, the code
 	 *                                              is incorrect or if any other error occurred with debug mode off
-	 * @throws \Kirby\Exception\NotFoundException If the user from the challenge doesn't exist
-	 * @throws \Kirby\Exception\InvalidArgumentException If no authentication challenge is active
-	 * @throws \Kirby\Exception\LogicException If the authentication challenge is invalid
+	 * @throws \Infinri\Exception\NotFoundException If the user from the challenge doesn't exist
+	 * @throws \Infinri\Exception\InvalidArgumentException If no authentication challenge is active
+	 * @throws \Infinri\Exception\LogicException If the authentication challenge is invalid
 	 */
 	public function verifyChallenge(
 		#[SensitiveParameter]

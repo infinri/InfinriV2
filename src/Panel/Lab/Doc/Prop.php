@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel\Lab\Doc;
+namespace Infinri\Panel\Lab\Doc;
 
-use Kirby\Panel\Lab\Doc;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Panel\Lab\Doc;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class Prop
 {

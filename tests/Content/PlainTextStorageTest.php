@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\File;
-use Kirby\Cms\Language;
-use Kirby\Cms\Page;
-use Kirby\Cms\User;
-use Kirby\Data\Data;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\File;
+use Infinri\Cms\Language;
+use Infinri\Cms\Page;
+use Infinri\Cms\User;
+use Infinri\Data\Data;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\Dir;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

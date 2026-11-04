@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
-use Kirby\Cms\App;
-use Kirby\Cms\Site;
+use Infinri\Cms\App;
+use Infinri\Cms\Site;
 
 class SiteUuid extends Uuid
 {
@@ -22,7 +22,7 @@ class SiteUuid extends Uuid
 	/**
 	 * Generator for the one and only site object
 	 *
-	 * @return \Generator|\Kirby\Cms\Site[]
+	 * @return \Generator|\Infinri\Cms\Site[]
 	 */
 	public static function index(): Generator
 	{

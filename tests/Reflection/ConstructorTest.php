@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Reflection;
+namespace Infinri\Reflection;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class ReflectableTestClass

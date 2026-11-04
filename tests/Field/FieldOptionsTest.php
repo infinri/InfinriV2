@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Field;
+namespace Infinri\Field;
 
-use Kirby\Cms\Page;
-use Kirby\Option\Options;
-use Kirby\Option\OptionsApi;
-use Kirby\Option\OptionsQuery;
+use Infinri\Cms\Page;
+use Infinri\Option\Options;
+use Infinri\Option\OptionsApi;
+use Infinri\Option\OptionsQuery;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(FieldOptions::class)]

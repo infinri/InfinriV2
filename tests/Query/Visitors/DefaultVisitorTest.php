@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Query\Visitors;
+namespace Infinri\Query\Visitors;
 
 use Exception;
-use Kirby\Query\AST\ClosureNode;
-use Kirby\Query\AST\CoalesceNode;
-use Kirby\Query\AST\VariableNode;
-use Kirby\TestCase;
+use Infinri\Query\AST\ClosureNode;
+use Infinri\Query\AST\CoalesceNode;
+use Infinri\Query\AST\VariableNode;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(DefaultVisitor::class)]

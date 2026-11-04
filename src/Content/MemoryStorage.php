@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cache\MemoryCache;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
+use Infinri\Cache\MemoryCache;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
 
 class MemoryStorage extends Storage
 {
@@ -72,7 +72,7 @@ class MemoryStorage extends Storage
 	/**
 	 * Updates the modification timestamp of an existing version
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the version does not exist
+	 * @throws \Infinri\Exception\NotFoundException If the version does not exist
 	 */
 	public function touch(VersionId $versionId, Language $language): void
 	{

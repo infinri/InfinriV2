@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Site as ModelSite;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Site as ModelSite;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversClass(\Kirby\Panel\Site::class)]
+#[CoversClass(\Infinri\Panel\Site::class)]
 #[CoversClass(Model::class)]
 class SiteTest extends TestCase
 {

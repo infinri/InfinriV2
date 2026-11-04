@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Api;
+namespace Infinri\Api;
 
 use Closure;
 use Exception;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Str;
 
 class Model
 {
@@ -118,7 +118,7 @@ class Model
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 * @throws \Exception
 	 */
 	public function toArray(): array
@@ -166,7 +166,7 @@ class Model
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 * @throws \Exception
 	 */
 	public function toResponse(): array

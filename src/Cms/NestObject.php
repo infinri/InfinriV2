@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Field;
-use Kirby\Toolkit\Obj;
+use Infinri\Content\Field;
+use Infinri\Toolkit\Obj;
 
 class NestObject extends Obj
 {

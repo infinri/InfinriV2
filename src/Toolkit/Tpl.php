@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
-use Kirby\Filesystem\F;
+use Infinri\Filesystem\F;
 use Throwable;
 
 class Tpl

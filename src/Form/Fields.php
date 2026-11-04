@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
 use Closure;
-use Kirby\Cms\App;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Str;
 
 class Fields extends Collection
 {
@@ -36,7 +36,7 @@ class Fields extends Collection
 	 * This takes care of validation and of setting
 	 * the collection prop on each object correctly.
 	 *
-	 * @param \Kirby\Form\Field|\Kirby\Form\FieldClass|array $field
+	 * @param \Infinri\Form\Field|\Infinri\Form\FieldClass|array $field
 	 */
 	public function __set(string $name, $field): void
 	{
@@ -86,7 +86,7 @@ class Fields extends Collection
 	 * and handle nested fields correctly
 	 *
 	 * @since 5.0.0
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 */
 	public function field(string $name): Field|FieldClass
 	{
@@ -409,7 +409,7 @@ class Fields extends Collection
 	 * exception if there are any
 	 *
 	 * @since 5.0.0
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function validate(): void
 	{

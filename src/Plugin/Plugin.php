@@ -1,18 +1,18 @@
 <?php
 
-namespace Kirby\Plugin;
+namespace Infinri\Plugin;
 
 use Closure;
 use Composer\InstalledVersions;
-use Kirby\Cms\App;
-use Kirby\Cms\Helpers;
-use Kirby\Cms\System\UpdateStatus;
-use Kirby\Data\Data;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
+use Infinri\Cms\App;
+use Infinri\Cms\Helpers;
+use Infinri\Cms\System\UpdateStatus;
+use Infinri\Data\Data;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
 use Throwable;
 
 class Plugin
@@ -25,7 +25,7 @@ class Plugin
 	 * @param string $name Plugin name within Kirby (`vendor/plugin`)
 	 * @param array $extends Associative array of plugin extensions
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the plugin name has an invalid format
+	 * @throws \Infinri\Exception\InvalidArgumentException If the plugin name has an invalid format
 	 */
 	public function __construct(
 		protected string $name,
@@ -302,7 +302,7 @@ class Plugin
 	 * Checks if the name follows the required pattern
 	 * and throws an exception if not
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public static function validateName(string $name): void
 	{

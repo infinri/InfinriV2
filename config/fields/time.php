@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Date;
-use Kirby\Toolkit\I18n;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Date;
+use Infinri\Toolkit\I18n;
 
 return [
 	'mixins' => ['datetime'],

@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Blueprint;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\Http\Uri;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\Blueprint;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\Http\Uri;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

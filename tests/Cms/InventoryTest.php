@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
-use Kirby\Toolkit\A;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
+use Infinri\Toolkit\A;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Inventory::class)]

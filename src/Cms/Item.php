@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Field;
-use Kirby\Toolkit\Str;
+use Infinri\Content\Field;
+use Infinri\Toolkit\Str;
 
 class Item
 {

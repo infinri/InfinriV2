@@ -47,7 +47,7 @@ export function buildUrl(
 
 /**
  * Checks if a URL starts with a dangerous URI scheme (e.g. javascript:).
- * Mirrors `Kirby\Http\Url::hasDangerousScheme()`.
+ * Mirrors `Infinri\Http\Url::hasDangerousScheme()`.
  *
  * @since 5.4.4
  */

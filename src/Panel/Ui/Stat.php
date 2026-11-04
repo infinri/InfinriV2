@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Panel\Ui;
+namespace Infinri\Panel\Ui;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Http\Url;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Http\Url;
+use Infinri\Toolkit\I18n;
 
 class Stat extends Component
 {

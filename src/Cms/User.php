@@ -1,18 +1,18 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
 use Exception;
-use Kirby\Content\Field;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\F;
-use Kirby\Panel\User as Panel;
-use Kirby\Session\Session;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Content\Field;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\F;
+use Infinri\Panel\User as Panel;
+use Infinri\Session\Session;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 use SensitiveParameter;
 
 class User extends ModelWithContent
@@ -369,7 +369,7 @@ class User extends ModelWithContent
 	/**
 	 * Logs the user in
 	 *
-	 * @param \Kirby\Session\Session|array|null $session Session options or session object to set the user in
+	 * @param \Infinri\Session\Session|array|null $session Session options or session object to set the user in
 	 */
 	#[BlockCollectionAccess]
 	public function login(
@@ -386,7 +386,7 @@ class User extends ModelWithContent
 	/**
 	 * Logs the user in without checking the password
 	 *
-	 * @param \Kirby\Session\Session|array|null $session Session options or session object to set the user in
+	 * @param \Infinri\Session\Session|array|null $session Session options or session object to set the user in
 	 */
 	#[BlockCollectionAccess]
 	public function loginPasswordless(
@@ -424,7 +424,7 @@ class User extends ModelWithContent
 	/**
 	 * Logs the user out
 	 *
-	 * @param \Kirby\Session\Session|array|null $session Session options or session object to unset the user in
+	 * @param \Infinri\Session\Session|array|null $session Session options or session object to unset the user in
 	 */
 	#[BlockCollectionAccess]
 	public function logout(Session|array|null $session = null): void
@@ -684,7 +684,7 @@ class User extends ModelWithContent
 	/**
 	 * Converts session options into a session object
 	 *
-	 * @param \Kirby\Session\Session|array $session Session options or session object to unset the user in
+	 * @param \Infinri\Session\Session|array $session Session options or session object to unset the user in
 	 */
 	protected function sessionFromOptions(Session|array|null $session): Session
 	{
@@ -757,8 +757,8 @@ class User extends ModelWithContent
 	/**
 	 * Compares the given password with the stored one
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the user has no password
-	 * @throws \Kirby\Exception\InvalidArgumentException If the entered password is not valid
+	 * @throws \Infinri\Exception\NotFoundException If the user has no password
+	 * @throws \Infinri\Exception\InvalidArgumentException If the entered password is not valid
 	 *                                                   or does not match the user password
 	 */
 	#[BlockCollectionAccess]

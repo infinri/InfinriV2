@@ -1,32 +1,32 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Collection;
-use Kirby\Cms\File;
-use Kirby\Cms\FileVersion;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Page;
-use Kirby\Cms\User;
-use Kirby\Content\PlainTextStorage;
-use Kirby\Content\Storage;
-use Kirby\Data\Data;
-use Kirby\Email\PHPMailer as Emailer;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Asset;
-use Kirby\Filesystem\F;
-use Kirby\Filesystem\Filename;
-use Kirby\Http\Uri;
-use Kirby\Http\Url;
-use Kirby\Image\Darkroom;
-use Kirby\Session\SessionStore;
-use Kirby\Template\Snippet;
-use Kirby\Template\Template;
-use Kirby\Text\Markdown;
-use Kirby\Text\SmartyPants;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuid;
+use Infinri\Cms\App;
+use Infinri\Cms\Collection;
+use Infinri\Cms\File;
+use Infinri\Cms\FileVersion;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Page;
+use Infinri\Cms\User;
+use Infinri\Content\PlainTextStorage;
+use Infinri\Content\Storage;
+use Infinri\Data\Data;
+use Infinri\Email\PHPMailer as Emailer;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Asset;
+use Infinri\Filesystem\F;
+use Infinri\Filesystem\Filename;
+use Infinri\Http\Uri;
+use Infinri\Http\Url;
+use Infinri\Image\Darkroom;
+use Infinri\Session\SessionStore;
+use Infinri\Template\Snippet;
+use Infinri\Template\Template;
+use Infinri\Text\Markdown;
+use Infinri\Text\SmartyPants;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Uuid;
 
 return [
 
@@ -52,7 +52,7 @@ return [
 	/**
 	 * Modify URLs for file objects
 	 *
-	 * @param \Kirby\Cms\File $file The original file object
+	 * @param \Infinri\Cms\File $file The original file object
 	 */
 	'file::url' => function (
 		App $kirby,
@@ -151,7 +151,7 @@ return [
 	/**
 	 * Add your own search engine
 	 *
-	 * @param \Kirby\Cms\Collection $collection Collection of searchable models
+	 * @param \Infinri\Cms\Collection $collection Collection of searchable models
 	 */
 	'search' => function (
 		App $kirby,
@@ -338,7 +338,7 @@ return [
 	 * @param string $name Template name
 	 * @param string $type Extension type
 	 * @param string $defaultType Default extension type
-	 * @return \Kirby\Template\Template
+	 * @return \Infinri\Template\Template
 	 */
 	'template' => function (
 		App $kirby,
@@ -401,7 +401,7 @@ return [
 	 *
 	 * @param string|null $path URL path
 	 * @param array|string|null $options Array of options for the Uri class
-	 * @throws \Kirby\Exception\NotFoundException If an invalid UUID was passed
+	 * @throws \Infinri\Exception\NotFoundException If an invalid UUID was passed
 	 */
 	'url' => function (
 		App $kirby,

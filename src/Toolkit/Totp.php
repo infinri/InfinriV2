@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Base32\Base32;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 use SensitiveParameter;
 class Totp
 {

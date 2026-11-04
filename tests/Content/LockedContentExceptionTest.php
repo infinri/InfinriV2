@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\User;
+use Infinri\Cms\User;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(LockedContentException::class)]

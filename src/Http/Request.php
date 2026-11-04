@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\App;
-use Kirby\Http\Request\Auth;
-use Kirby\Http\Request\Auth\BasicAuth;
-use Kirby\Http\Request\Auth\BearerAuth;
-use Kirby\Http\Request\Auth\SessionAuth;
-use Kirby\Http\Request\Body;
-use Kirby\Http\Request\Files;
-use Kirby\Http\Request\Query;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Http\Request\Auth;
+use Infinri\Http\Request\Auth\BasicAuth;
+use Infinri\Http\Request\Auth\BearerAuth;
+use Infinri\Http\Request\Auth\SessionAuth;
+use Infinri\Http\Request\Body;
+use Infinri\Http\Request\Files;
+use Infinri\Http\Request\Query;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class Request
 {

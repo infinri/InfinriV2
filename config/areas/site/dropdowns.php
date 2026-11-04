@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\Find;
-use Kirby\Panel\Ui\Buttons\LanguagesDropdown;
+use Infinri\Cms\Find;
+use Infinri\Panel\Ui\Buttons\LanguagesDropdown;
 
 $files = require __DIR__ . '/../files/dropdowns.php';
 

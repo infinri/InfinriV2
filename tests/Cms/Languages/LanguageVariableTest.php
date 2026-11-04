@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\DuplicateException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Exception\DuplicateException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(LanguageVariable::class)]
@@ -87,7 +87,7 @@ class LanguageVariableTest extends TestCase
 		$this->app->impersonate('kirby');
 
 		$this->expectException(DuplicateException::class);
-		$this->expectExceptionMessage('"date" is one of Kirby\'s own translation strings and cannot be overwritten by a language variable');
+		$this->expectExceptionMessage('"date" is one of Infinri\'s own translation strings and cannot be overwritten by a language variable');
 
 		LanguageVariable::create('date', 'bar');
 	}

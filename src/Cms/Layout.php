@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Content;
+use Infinri\Content\Content;
 
 class Layout extends Item
 {

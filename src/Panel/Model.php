@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
 use Closure;
-use Kirby\Cms\File as CmsFile;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Filesystem\Asset;
-use Kirby\Form\Fields;
-use Kirby\Http\Uri;
-use Kirby\Panel\Ui\Item\ModelItem;
-use Kirby\Toolkit\A;
+use Infinri\Cms\File as CmsFile;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Filesystem\Asset;
+use Infinri\Form\Fields;
+use Infinri\Http\Uri;
+use Infinri\Panel\Ui\Item\ModelItem;
+use Infinri\Toolkit\A;
 
 abstract class Model
 {

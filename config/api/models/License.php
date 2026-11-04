@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\License;
-use Kirby\Exception\PermissionException;
+use Infinri\Cms\License;
+use Infinri\Exception\PermissionException;
 
 /**
  * Page

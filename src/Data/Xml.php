@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Xml as XmlConverter;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Xml as XmlConverter;
 
 class Xml extends Handler
 {

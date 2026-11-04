@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms\Auth;
+namespace Infinri\Cms\Auth;
 
-use Kirby\Cms\App;
-use Kirby\Cms\TestCase;
-use Kirby\Cms\User;
-use Kirby\Filesystem\Dir;
-use Kirby\Session\Session;
+use Infinri\Cms\App;
+use Infinri\Cms\TestCase;
+use Infinri\Cms\User;
+use Infinri\Filesystem\Dir;
+use Infinri\Session\Session;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class MockChallenge extends Challenge

@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Countable;
 use Exception;
-use Kirby\Content\Field;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Http\Idn;
-use Kirby\Uuid\Uuid;
+use Infinri\Content\Field;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Http\Idn;
+use Infinri\Uuid\Uuid;
 use ReflectionFunction;
 use Stringable;
 class V

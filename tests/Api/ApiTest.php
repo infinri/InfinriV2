@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Api;
+namespace Infinri\Api;
 
 use Exception;
-use Kirby\Cms\Response;
-use Kirby\Cms\User;
-use Kirby\Exception\NotFoundException;
-use Kirby\Http\Response as HttpResponse;
-use Kirby\TestCase;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Obj;
+use Infinri\Cms\Response;
+use Infinri\Cms\User;
+use Infinri\Exception\NotFoundException;
+use Infinri\Http\Response as HttpResponse;
+use Infinri\TestCase;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Obj;
 use stdClass;
 
 class MockModel

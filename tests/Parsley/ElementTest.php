@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Parsley;
+namespace Infinri\Parsley;
 
-use Kirby\TestCase;
-use Kirby\Toolkit\Dom;
+use Infinri\TestCase;
+use Infinri\Toolkit\Dom;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Element::class)]

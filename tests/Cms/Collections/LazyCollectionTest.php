@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Iterator;
-use Kirby\Toolkit\Obj;
+use Infinri\Toolkit\Obj;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class MockLazyCollection extends LazyCollection

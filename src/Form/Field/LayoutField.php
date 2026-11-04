@@ -1,18 +1,18 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Blueprint;
-use Kirby\Cms\Fieldset;
-use Kirby\Cms\Layout;
-use Kirby\Cms\Layouts;
-use Kirby\Data\Data;
-use Kirby\Data\Json;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Form\Form;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Blueprint;
+use Infinri\Cms\Fieldset;
+use Infinri\Cms\Layout;
+use Infinri\Cms\Layouts;
+use Infinri\Data\Data;
+use Infinri\Data\Json;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Form\Form;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class LayoutField extends BlocksField

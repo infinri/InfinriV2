@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\Page;
+use Infinri\Cms\Page;
 
 class PagePickerMixinTest extends TestCase
 {

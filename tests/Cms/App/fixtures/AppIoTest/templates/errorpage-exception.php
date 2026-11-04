@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Exception\ErrorPageException;
+use Infinri\Exception\ErrorPageException;
 
 throw new ErrorPageException(
 	fallback: 'Exception message',

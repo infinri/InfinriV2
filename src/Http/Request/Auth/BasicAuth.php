@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http\Request\Auth;
+namespace Infinri\Http\Request\Auth;
 
-use Kirby\Http\Request\Auth;
-use Kirby\Toolkit\Str;
+use Infinri\Http\Request\Auth;
+use Infinri\Toolkit\Str;
 use SensitiveParameter;
 
 class BasicAuth extends Auth

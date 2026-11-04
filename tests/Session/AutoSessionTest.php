@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
-use Kirby\Cms\App;
-use Kirby\Http\Cookie;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Http\Cookie;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionClass;
 

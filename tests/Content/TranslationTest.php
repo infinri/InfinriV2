@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Language;
-use Kirby\Data\Data;
-use Kirby\Exception\Exception;
+use Infinri\Cms\Language;
+use Infinri\Data\Data;
+use Infinri\Exception\Exception;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Translation::class)]

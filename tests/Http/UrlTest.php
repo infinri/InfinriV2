@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Cms\App;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

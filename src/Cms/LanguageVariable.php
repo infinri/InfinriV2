@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\DuplicateException;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\DuplicateException;
+use Infinri\Exception\InvalidArgumentException;
 
 class LanguageVariable
 {

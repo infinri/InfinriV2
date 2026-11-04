@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Field;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Asset;
-use Kirby\Toolkit\BlockCollectionAccess;
+use Infinri\Content\Field;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Asset;
+use Infinri\Toolkit\BlockCollectionAccess;
 
 trait FileModifications
 {
@@ -89,7 +89,7 @@ trait FileModifications
 	 * Resizes the file with the given width and height
 	 * while keeping the aspect ratio.
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	#[BlockCollectionAccess]
 	public function resize(
@@ -167,7 +167,7 @@ trait FileModifications
 	 * could potentially also be a CDN or any other
 	 * place.
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	#[BlockCollectionAccess]
 	public function thumb(

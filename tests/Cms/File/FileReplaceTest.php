@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\F;
-use Kirby\Filesystem\File as BaseFile;
-use Kirby\Image\Image;
+use Infinri\Filesystem\F;
+use Infinri\Filesystem\File as BaseFile;
+use Infinri\Image\Image;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(File::class)]

@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Option;
+namespace Infinri\Option;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Nest;
-use Kirby\Content\Field;
-use Kirby\Data\Json;
-use Kirby\Exception\NotFoundException;
-use Kirby\Http\Remote;
-use Kirby\Http\Url;
-use Kirby\Query\Query;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Nest;
+use Infinri\Content\Field;
+use Infinri\Data\Json;
+use Infinri\Exception\NotFoundException;
+use Infinri\Http\Remote;
+use Infinri\Http\Url;
+use Infinri\Query\Query;
 
 class OptionsApi extends OptionsProvider
 {

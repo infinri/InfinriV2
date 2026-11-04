@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
 use Closure;
 use GdImage;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Escape;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Escape;
 use Stringable;
 
 class QrCode implements Stringable

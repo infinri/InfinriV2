@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\File;
-use Kirby\Exception\PermissionException;
+use Infinri\Cms\File;
+use Infinri\Exception\PermissionException;
 
 // routing pattern to match all models with files
 $filePattern   = '(account/|pages/[^/]+/|site/|users/[^/]+/|)files/(:any)';

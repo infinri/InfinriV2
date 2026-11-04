@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Language;
-use Kirby\Cms\Languages;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Form\Fields;
-use Kirby\Http\Uri;
-use Kirby\Toolkit\BlockCollectionAccess;
+use Infinri\Cms\Language;
+use Infinri\Cms\Languages;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Form\Fields;
+use Infinri\Http\Uri;
+use Infinri\Toolkit\BlockCollectionAccess;
 
 class Version
 {
@@ -293,7 +293,7 @@ class Version
 	/**
 	 * Moves the version to a new language and/or version
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the version does not exist
+	 * @throws \Infinri\Exception\NotFoundException If the version does not exist
 	 */
 	#[BlockCollectionAccess]
 	public function move(
@@ -526,7 +526,7 @@ class Version
 	 *
 	 * @param array<string, string> $fields Content fields
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the version does not exist
+	 * @throws \Infinri\Exception\NotFoundException If the version does not exist
 	 */
 	#[BlockCollectionAccess]
 	public function replace(
@@ -585,7 +585,7 @@ class Version
 	/**
 	 * Updates the modification timestamp of an existing version
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the version does not exist
+	 * @throws \Infinri\Exception\NotFoundException If the version does not exist
 	 */
 	#[BlockCollectionAccess]
 	public function touch(Language|string $language = 'default'): void
@@ -631,7 +631,7 @@ class Version
 	 *
 	 * @param array<string, string> $fields Content fields
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the version does not exist
+	 * @throws \Infinri\Exception\NotFoundException If the version does not exist
 	 */
 	#[BlockCollectionAccess]
 	public function update(

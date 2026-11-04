@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Option;
+namespace Infinri\Option;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Toolkit\I18n;
 
 class Option
 {

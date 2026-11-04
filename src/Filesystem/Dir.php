@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
 use Exception;
-use Kirby\Cms\Helpers;
-use Kirby\Cms\Inventory;
-use Kirby\Cms\Page;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\Helpers;
+use Infinri\Cms\Inventory;
+use Infinri\Cms\Page;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Dir
@@ -193,13 +193,13 @@ class Dir
 	/**
 	 * Scans the directory and analyzes files,
 	 * content, meta info and children. This is used
-	 * in `Kirby\Cms\Page`, `Kirby\Cms\Site` and
-	 * `Kirby\Cms\User` objects to fetch all
+	 * in `Infinri\Cms\Page`, `Infinri\Cms\Site` and
+	 * `Infinri\Cms\User` objects to fetch all
 	 * relevant information.
 	 *
 	 * Don't use outside the Cms context.
 	 *
-	 * @deprecated 5.6.0 Use `Kirby\Cms\Inventory::for()` instead. Will be removed in Kirby 6.
+	 * @deprecated 5.6.0 Use `Infinri\Cms\Inventory::for()` instead. Will be removed in Kirby 6.
 	 */
 	public static function inventory(
 		string $dir,
@@ -207,7 +207,7 @@ class Dir
 		array|null $contentIgnore = null,
 		bool $multilang = false
 	): array {
-		Helpers::deprecated('`Kirby\Filesystem\Dir::inventory()` has been deprecated. Please use `Kirby\Cms\Inventory::for()` instead.', 'dir-inventory');
+		Helpers::deprecated('`Infinri\Filesystem\Dir::inventory()` has been deprecated. Please use `Infinri\Cms\Inventory::for()` instead.', 'dir-inventory');
 
 		return Inventory::for(
 			$dir,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Http\Request;
+namespace Infinri\Http\Request;
 
 trait Data
 {

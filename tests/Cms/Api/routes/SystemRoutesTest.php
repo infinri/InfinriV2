@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\PermissionException;
-use Kirby\TestCase;
+use Infinri\Exception\PermissionException;
+use Infinri\TestCase;
 
 class SystemRoutesTest extends TestCase
 {

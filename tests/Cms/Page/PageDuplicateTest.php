@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Translation;
-use Kirby\Filesystem\F;
+use Infinri\Content\Translation;
+use Infinri\Filesystem\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Page::class)]

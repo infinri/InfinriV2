@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\PhpUnitExtension;
+use Infinri\PhpUnitExtension;
 
 // enable all error handling as early as possible to
 // make debugging of issues in the test setup easier

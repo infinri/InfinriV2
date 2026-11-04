@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 
 class Json extends Handler
 {

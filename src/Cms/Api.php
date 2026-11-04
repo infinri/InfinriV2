@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Api\Api as BaseApi;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Form\Form;
-use Kirby\Session\Session;
+use Infinri\Api\Api as BaseApi;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Form\Form;
+use Infinri\Session\Session;
 
 class Api extends BaseApi
 {
@@ -54,7 +54,7 @@ class Api extends BaseApi
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException if the field type cannot be found or the field cannot be loaded
+	 * @throws \Infinri\Exception\NotFoundException if the field type cannot be found or the field cannot be loaded
 	 */
 	public function fieldApi(
 		ModelWithContent $model,
@@ -80,7 +80,7 @@ class Api extends BaseApi
 	 * parent path and filename
 	 *
 	 * @param string $path Path to file's parent model
-	 * @throws \Kirby\Exception\NotFoundException if the file cannot be found
+	 * @throws \Infinri\Exception\NotFoundException if the file cannot be found
 	 */
 	public function file(
 		string $path,
@@ -93,7 +93,7 @@ class Api extends BaseApi
 	 * Returns the all readable files for the parent
 	 *
 	 * @param string $path Path to file's parent model
-	 * @throws \Kirby\Exception\NotFoundException if the file cannot be found
+	 * @throws \Infinri\Exception\NotFoundException if the file cannot be found
 	 */
 	public function files(string $path): Files
 	{
@@ -104,8 +104,8 @@ class Api extends BaseApi
 	 * Returns the model's object for the given path
 	 *
 	 * @param string $path Path to parent model
-	 * @throws \Kirby\Exception\InvalidArgumentException if the model type is invalid
-	 * @throws \Kirby\Exception\NotFoundException if the model cannot be found
+	 * @throws \Infinri\Exception\InvalidArgumentException if the model type is invalid
+	 * @throws \Infinri\Exception\NotFoundException if the model cannot be found
 	 */
 	public function parent(string $path): ModelWithContent|null
 	{
@@ -134,7 +134,7 @@ class Api extends BaseApi
 	 * Returns the page object for the given id
 	 *
 	 * @param string $id Page's id
-	 * @throws \Kirby\Exception\NotFoundException if the page cannot be found
+	 * @throws \Infinri\Exception\NotFoundException if the page cannot be found
 	 */
 	public function page(string $id): Page|null
 	{
@@ -184,7 +184,7 @@ class Api extends BaseApi
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException if the section type cannot be found or the section cannot be loaded
+	 * @throws \Infinri\Exception\NotFoundException if the section type cannot be found or the section cannot be loaded
 	 */
 	public function sectionApi(
 		ModelWithContent $model,
@@ -222,7 +222,7 @@ class Api extends BaseApi
 	/**
 	 * Returns the site object
 	 *
-	 * @throws \Kirby\Exception\NotFoundException if the site cannot be accessed
+	 * @throws \Infinri\Exception\NotFoundException if the site cannot be accessed
 	 * @since 5.4.0
 	 */
 	public function site(): Site
@@ -235,7 +235,7 @@ class Api extends BaseApi
 	 * returns the current authenticated user if no
 	 * id is passed
 	 *
-	 * @throws \Kirby\Exception\NotFoundException if the user for the given id cannot be found
+	 * @throws \Infinri\Exception\NotFoundException if the user for the given id cannot be found
 	 */
 	public function user(string|null $id = null): User|null
 	{
@@ -261,7 +261,7 @@ class Api extends BaseApi
 	/**
 	 * Validates that the acting user has access to the given area.
 	 *
-	 * @throws \Kirby\Exception\PermissionException
+	 * @throws \Infinri\Exception\PermissionException
 	 */
 	public function validateAreaAccess(string $area): void
 	{

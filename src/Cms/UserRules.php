@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\DuplicateException;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\Totp;
-use Kirby\Toolkit\V;
+use Infinri\Exception\DuplicateException;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\Totp;
+use Infinri\Toolkit\V;
 use SensitiveParameter;
 
 class UserRules
@@ -26,7 +26,7 @@ class UserRules
 	/**
 	 * Validates if the email address can be changed
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the address
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the address
 	 */
 	public static function changeEmail(User $user, string $email): void
 	{
@@ -43,7 +43,7 @@ class UserRules
 	/**
 	 * Validates if the language can be changed
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the language
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the language
 	 */
 	public static function changeLanguage(User $user, string $language): void
 	{
@@ -60,7 +60,7 @@ class UserRules
 	/**
 	 * Validates if the name can be changed
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the name
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the name
 	 */
 	public static function changeName(User $user, string $name): void
 	{
@@ -75,7 +75,7 @@ class UserRules
 	/**
 	 * Validates if the password can be changed
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the password
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the password
 	 */
 	public static function changePassword(
 		User $user,
@@ -95,8 +95,8 @@ class UserRules
 	/**
 	 * Validates if the role can be changed
 	 *
-	 * @throws \Kirby\Exception\LogicException If the user is the last admin
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the role
+	 * @throws \Infinri\Exception\LogicException If the user is the last admin
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the role
 	 */
 	public static function changeRole(User $user, string $role): void
 	{
@@ -138,7 +138,7 @@ class UserRules
 	 * Validates if the TOTP can be changed
 	 * @since 4.0.0
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the password
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the password
 	 */
 	public static function changeTotp(
 		User $user,
@@ -166,7 +166,7 @@ class UserRules
 	/**
 	 * Validates if the user can be created
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to create a new user
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to create a new user
 	 */
 	public static function create(User $user, array $props = []): void
 	{
@@ -220,7 +220,7 @@ class UserRules
 	/**
 	 * Validates if a new avatar can be created
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to create a new avatar
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to create a new avatar
 	 */
 	public static function createAvatar(User $user, string $source, string $extension): void
 	{
@@ -244,8 +244,8 @@ class UserRules
 	/**
 	 * Validates if the user can be deleted
 	 *
-	 * @throws \Kirby\Exception\LogicException If this is the last user or last admin, which cannot be deleted
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to delete this user
+	 * @throws \Infinri\Exception\LogicException If this is the last user or last admin, which cannot be deleted
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to delete this user
 	 */
 	public static function delete(User $user): void
 	{
@@ -272,7 +272,7 @@ class UserRules
 	/**
 	 * Validates if the avatar for the user can be deleted
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to delete this user's avatar
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to delete this user's avatar
 	 */
 	public static function deleteAvatar(User $user): void
 	{
@@ -294,7 +294,7 @@ class UserRules
 	/**
 	 * Validates if the avatar can be replaced
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the avatar
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the avatar
 	 */
 	public static function replaceAvatar(User $user, string $source, string $extension): void
 	{
@@ -318,7 +318,7 @@ class UserRules
 	/**
 	 * Validates if the user can be updated
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user it not allowed to update this user
+	 * @throws \Infinri\Exception\PermissionException If the user it not allowed to update this user
 	 */
 	public static function update(
 		User $user,
@@ -336,8 +336,8 @@ class UserRules
 	/**
 	 * Validates an email address
 	 *
-	 * @throws \Kirby\Exception\DuplicateException If the email address already exists
-	 * @throws \Kirby\Exception\InvalidArgumentException If the email address is invalid
+	 * @throws \Infinri\Exception\DuplicateException If the email address already exists
+	 * @throws \Infinri\Exception\InvalidArgumentException If the email address is invalid
 	 */
 	public static function validEmail(
 		User $user,
@@ -387,8 +387,8 @@ class UserRules
 	/**
 	 * Validates a user id
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the id contains unsafe characters
-	 * @throws \Kirby\Exception\DuplicateException If the user already exists
+	 * @throws \Infinri\Exception\InvalidArgumentException If the id contains unsafe characters
+	 * @throws \Infinri\Exception\DuplicateException If the user already exists
 	 */
 	public static function validId(User $user, string $id): void
 	{
@@ -414,7 +414,7 @@ class UserRules
 	/**
 	 * Validates a user language code
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the language does not exist
+	 * @throws \Infinri\Exception\InvalidArgumentException If the language does not exist
 	 */
 	public static function validLanguage(User $user, string $language): void
 	{
@@ -426,7 +426,7 @@ class UserRules
 	/**
 	 * Validates a password
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the password is too short
+	 * @throws \Infinri\Exception\InvalidArgumentException If the password is too short
 	 */
 	public static function validPassword(
 		User $user,
@@ -450,7 +450,7 @@ class UserRules
 	/**
 	 * Validates a user role
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the user role does not exist
+	 * @throws \Infinri\Exception\InvalidArgumentException If the user role does not exist
 	 * @deprecated 4.5.0
 	 */
 	public static function validRole(User $user, string $role): void

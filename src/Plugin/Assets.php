@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Plugin;
+namespace Infinri\Plugin;
 
 use Closure;
-use Kirby\Cms\App;
-use Kirby\Cms\Collection;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Http\Response;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Collection;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Http\Response;
+use Infinri\Toolkit\Str;
 
 class Assets extends Collection
 {

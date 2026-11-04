@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Data;
-use Kirby\Filesystem\Dir;
+use Infinri\Data\Data;
+use Infinri\Filesystem\Dir;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Language::class)]

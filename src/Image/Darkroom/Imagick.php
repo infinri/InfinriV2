@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Image\Darkroom;
+namespace Infinri\Image\Darkroom;
 
 use Exception;
 use Imagick as Image;
-use Kirby\Filesystem\F;
-use Kirby\Image\Darkroom;
-use Kirby\Image\Focus;
+use Infinri\Filesystem\F;
+use Infinri\Image\Darkroom;
+use Infinri\Image\Focus;
 
 class Imagick extends Darkroom
 {

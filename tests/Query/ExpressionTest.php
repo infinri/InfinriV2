@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
-use Kirby\Exception\LogicException;
-use Kirby\TestCase;
+use Infinri\Exception\LogicException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

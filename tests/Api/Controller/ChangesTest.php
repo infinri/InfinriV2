@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Api\Controller;
+namespace Infinri\Api\Controller;
 
-use Kirby\Cms\Page;
-use Kirby\Data\Data;
-use Kirby\Exception\PermissionException;
-use Kirby\TestCase;
+use Infinri\Cms\Page;
+use Infinri\Data\Data;
+use Infinri\Exception\PermissionException;
+use Infinri\TestCase;
 
 class ChangesTest extends TestCase
 {

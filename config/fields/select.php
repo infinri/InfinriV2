@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Field\FieldOptions;
-use Kirby\Toolkit\I18n;
+use Infinri\Field\FieldOptions;
+use Infinri\Toolkit\I18n;
 
 return [
 	'extends' => 'radio',

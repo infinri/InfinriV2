@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Closure;
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(LazyValue::class)]

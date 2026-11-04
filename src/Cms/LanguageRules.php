@@ -1,20 +1,20 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\DuplicateException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\PermissionException;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\DuplicateException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\PermissionException;
+use Infinri\Toolkit\Str;
 
 class LanguageRules
 {
 	/**
 	 * Validates if the language can be created
 	 *
-	 * @throws \Kirby\Exception\DuplicateException If the language already exists
-	 * @throws \Kirby\Exception\PermissionException If current user has not sufficient permissions
+	 * @throws \Infinri\Exception\DuplicateException If the language already exists
+	 * @throws \Infinri\Exception\PermissionException If current user has not sufficient permissions
 	 */
 	public static function create(Language $language): void
 	{
@@ -51,8 +51,8 @@ class LanguageRules
 	/**
 	 * Validates if the language can be deleted
 	 *
-	 * @throws \Kirby\Exception\LogicException If the language cannot be deleted
-	 * @throws \Kirby\Exception\PermissionException If current user has not sufficient permissions
+	 * @throws \Infinri\Exception\LogicException If the language cannot be deleted
+	 * @throws \Infinri\Exception\PermissionException If current user has not sufficient permissions
 	 */
 	public static function delete(Language $language): void
 	{
@@ -98,7 +98,7 @@ class LanguageRules
 	/**
 	 * Validates if the language code is formatted correctly
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the language code is not valid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the language code is not valid
 	 */
 	public static function validLanguageCode(Language $language): void
 	{
@@ -116,7 +116,7 @@ class LanguageRules
 	/**
 	 * Validates if the language name is formatted correctly
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the language name is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the language name is invalid
 	 */
 	public static function validLanguageName(Language $language): void
 	{
@@ -136,7 +136,7 @@ class LanguageRules
 	 * new or whose value changed are checked, so that a variable which
 	 * is already stored never blocks an unrelated update.
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If a variable key is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If a variable key is invalid
 	 * @since 5.6.0
 	 */
 	public static function validLanguageVariables(

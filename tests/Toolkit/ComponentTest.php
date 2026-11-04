@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use ArgumentCountError;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use TypeError;
 

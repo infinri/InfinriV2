@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Mime::class)]

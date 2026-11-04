@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
-use Kirby\Toolkit\F;
+use Infinri\Toolkit\F;
 
 class FileDropdownsTest extends AreaTestCase
 {

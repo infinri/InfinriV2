@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Query\Runners;
+namespace Infinri\Query\Runners;
 
 use Exception;
 use PHPUnit\Framework\Attributes\CoversClass;

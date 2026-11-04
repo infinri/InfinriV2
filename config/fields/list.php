@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Sane\Sane;
+use Infinri\Sane\Sane;
 
 return [
 	'props' => [

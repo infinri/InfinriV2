@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Sane\Sane;
-use Kirby\Toolkit\V;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Sane\Sane;
+use Infinri\Toolkit\V;
 
 return [
 	'props' => [

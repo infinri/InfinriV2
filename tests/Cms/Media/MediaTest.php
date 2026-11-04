@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Http\Response;
-use Kirby\Image\Darkroom;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Http\Response;
+use Infinri\Image\Darkroom;
 
 class MediaTestTrackingDarkroom extends Darkroom
 {

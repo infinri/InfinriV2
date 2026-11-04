@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use DateInterval;
 use DateTime;
@@ -9,8 +9,8 @@ use DateTimeZone;
 use Exception;
 use IntlCalendar;
 use IntlDateFormatter;
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
 use Stringable;
 
 class Date extends DateTime implements Stringable
@@ -50,7 +50,7 @@ class Date extends DateTime implements Stringable
 	 * @param string $unit `year`, `month`, `day`, `hour`, `minute` or `second`
 	 * @return $this
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the unit name is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the unit name is invalid
 	 */
 	public function ceil(string $unit): static
 	{
@@ -126,7 +126,7 @@ class Date extends DateTime implements Stringable
 	 * @param string $unit `year`, `month`, `day`, `hour`, `minute` or `second`
 	 * @return $this
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the unit name is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the unit name is invalid
 	 */
 	public function floor(string $unit): static
 	{
@@ -345,7 +345,7 @@ class Date extends DateTime implements Stringable
 	 * @param int $size Rounding step starting at `0` of the specified unit
 	 * @return $this
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the unit name or size is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the unit name or size is invalid
 	 */
 	public function round(string $unit, int $size = 1): static
 	{
@@ -506,7 +506,7 @@ class Date extends DateTime implements Stringable
 	 * @param string $mode `date`, `time` or `datetime`
 	 * @param bool $timezone Whether the timezone is printed as well
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the mode is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the mode is invalid
 	 */
 	public function toString(
 		string $mode = 'datetime',
@@ -544,7 +544,7 @@ class Date extends DateTime implements Stringable
 	/**
 	 * Ensures that the provided string is a valid unit name
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	protected static function validateUnit(string $unit): void
 	{

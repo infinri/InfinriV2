@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Option;
+namespace Infinri\Option;
 
-use Kirby\Cms\Collection;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Toolkit\A;
+use Infinri\Cms\Collection;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Toolkit\A;
 
 class Options extends Collection
 {

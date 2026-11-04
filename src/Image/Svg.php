@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Dom;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Dom;
+use Infinri\Toolkit\Str;
 
 class Svg
 {

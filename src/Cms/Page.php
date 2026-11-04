@@ -1,21 +1,21 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Content\Field;
-use Kirby\Content\VersionId;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\Http\Response;
-use Kirby\Panel\Page as Panel;
-use Kirby\Template\Template;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\LazyValue;
-use Kirby\Toolkit\Str;
+use Infinri\Content\Field;
+use Infinri\Content\VersionId;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\Http\Response;
+use Infinri\Panel\Page as Panel;
+use Infinri\Template\Template;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\LazyValue;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Page extends ModelWithContent
@@ -283,7 +283,7 @@ class Page extends ModelWithContent
 	/**
 	 * Call the page controller
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the controller returns invalid objects for `kirby`, `site`, `pages` or `page`
+	 * @throws \Infinri\Exception\InvalidArgumentException If the controller returns invalid objects for `kirby`, `site`, `pages` or `page`
 	 */
 	#[BlockCollectionAccess]
 	public function controller(
@@ -408,7 +408,7 @@ class Page extends ModelWithContent
 	 *
 	 * @since 3.4.0
 	 *
-	 * @param array $options Options for `Kirby\Http\Uri` to create URL parts
+	 * @param array $options Options for `Infinri\Http\Uri` to create URL parts
 	 * @param int $code HTTP status code
 	 */
 	#[BlockCollectionAccess]
@@ -481,7 +481,7 @@ class Page extends ModelWithContent
 	/**
 	 * Compares the current object with the given page object
 	 *
-	 * @param \Kirby\Cms\Page|string $page
+	 * @param \Infinri\Cms\Page|string $page
 	 */
 	public function is($page): bool
 	{
@@ -591,7 +591,7 @@ class Page extends ModelWithContent
 	/**
 	 * Checks if the page is a child of the given page
 	 *
-	 * @param \Kirby\Cms\Page|string $parent
+	 * @param \Infinri\Cms\Page|string $parent
 	 */
 	public function isChildOf($parent): bool
 	{
@@ -601,7 +601,7 @@ class Page extends ModelWithContent
 	/**
 	 * Checks if the page is a descendant of the given page
 	 *
-	 * @param \Kirby\Cms\Page|string $parent
+	 * @param \Infinri\Cms\Page|string $parent
 	 */
 	public function isDescendantOf($parent): bool
 	{
@@ -897,8 +897,8 @@ class Page extends ModelWithContent
 	 * the default template.
 	 *
 	 * @param string $contentType
-	 * @param \Kirby\Content\VersionId|string|null $versionId Optional override for the auto-detected version to render
-	 * @throws \Kirby\Exception\NotFoundException If the default template cannot be found
+	 * @param \Infinri\Content\VersionId|string|null $versionId Optional override for the auto-detected version to render
+	 * @throws \Infinri\Exception\NotFoundException If the default template cannot be found
 	 */
 	#[BlockCollectionAccess]
 	public function render(
@@ -1033,7 +1033,7 @@ class Page extends ModelWithContent
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException If the content representation cannot be found
+	 * @throws \Infinri\Exception\NotFoundException If the content representation cannot be found
 	 */
 	#[BlockCollectionAccess]
 	public function representation(mixed $type): Template

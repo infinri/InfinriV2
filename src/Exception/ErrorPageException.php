@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Exception;
+namespace Infinri\Exception;
 
 class ErrorPageException extends Exception
 {

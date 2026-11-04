@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Data;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
+use Infinri\Data\Data;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

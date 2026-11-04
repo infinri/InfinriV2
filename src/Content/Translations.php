@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Collection;
-use Kirby\Cms\Language;
-use Kirby\Cms\Languages;
-use Kirby\Cms\ModelWithContent;
+use Infinri\Cms\Collection;
+use Infinri\Cms\Language;
+use Infinri\Cms\Languages;
+use Infinri\Cms\ModelWithContent;
 
 class Translations extends Collection
 {

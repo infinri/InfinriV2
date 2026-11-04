@@ -1,23 +1,23 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
 use IntlDateFormatter;
-use Kirby\Cms\App;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Http\Response;
-use Kirby\Sane\Sane;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\Html;
-use Kirby\Toolkit\V;
+use Infinri\Cms\App;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Http\Response;
+use Infinri\Sane\Sane;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\Html;
+use Infinri\Toolkit\V;
 use Stringable;
 
 class File implements Stringable
 {
 	/**
 	 * Parent file model
-	 * The model object must use the `\Kirby\Filesystem\IsFile` trait
+	 * The model object must use the `\Infinri\Filesystem\IsFile` trait
 	 */
 	protected object|null $model;
 
@@ -45,14 +45,14 @@ class File implements Stringable
 	 * @param array|string|null $props Properties or deprecated `$root` string
 	 * @param string|null $url Deprecated argument, use `$props['url']` instead
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException When the model does not use the `Kirby\Filesystem\IsFile` trait
+	 * @throws \Infinri\Exception\InvalidArgumentException When the model does not use the `Infinri\Filesystem\IsFile` trait
 	 */
 	public function __construct(
 		array|string|null $props = null,
 		string|null $url = null
 	) {
 		// Legacy support for old constructor of
-		// the `Kirby\Image\Image` class
+		// the `Infinri\Image\Image` class
 		if (is_array($props) === false) {
 			$props = [
 				'root' => $props,
@@ -69,7 +69,7 @@ class File implements Stringable
 			method_exists($this->model, 'hasIsFileTrait') !== true
 		) {
 			throw new InvalidArgumentException(
-				message: 'The model object must use the "Kirby\Filesystem\IsFile" trait'
+				message: 'The model object must use the "Infinri\Filesystem\IsFile" trait'
 			);
 		}
 	}
@@ -265,7 +265,7 @@ class File implements Stringable
 	 * Runs a set of validations on the file object
 	 * (mainly for images).
 	 *
-	 * @throws \Kirby\Exception\Exception
+	 * @throws \Infinri\Exception\Exception
 	 */
 	public function match(array $rules): bool
 	{
@@ -468,10 +468,10 @@ class File implements Stringable
 	 *                              `true` for lazy autodetection or
 	 *                              `false` for normal autodetection
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file didn't pass validation
-	 * @throws \Kirby\Exception\LogicException If more than one handler applies
-	 * @throws \Kirby\Exception\NotFoundException If the handler was not found
-	 * @throws \Kirby\Exception\Exception On other errors
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file didn't pass validation
+	 * @throws \Infinri\Exception\LogicException If more than one handler applies
+	 * @throws \Infinri\Exception\NotFoundException If the handler was not found
+	 * @throws \Infinri\Exception\Exception On other errors
 	 */
 	public function sanitizeContents(string|bool $typeLazy = false): void
 	{
@@ -544,9 +544,9 @@ class File implements Stringable
 	 *                              `true` for lazy autodetection or
 	 *                              `false` for normal autodetection
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file didn't pass validation
-	 * @throws \Kirby\Exception\NotFoundException If the handler was not found
-	 * @throws \Kirby\Exception\Exception On other errors
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file didn't pass validation
+	 * @throws \Infinri\Exception\NotFoundException If the handler was not found
+	 * @throws \Infinri\Exception\Exception On other errors
 	 */
 	public function validateContents(string|bool $typeLazy = false): void
 	{

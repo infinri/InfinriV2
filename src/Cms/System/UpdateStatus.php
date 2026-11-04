@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Cms\System;
+namespace Infinri\Cms\System;
 
 use Composer\Semver\Semver;
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Exception\Exception as KirbyException;
-use Kirby\Http\Remote;
-use Kirby\Plugin\Plugin;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Exception\Exception as KirbyException;
+use Infinri\Http\Remote;
+use Infinri\Plugin\Plugin;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 class UpdateStatus
 {

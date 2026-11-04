@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 return [
 	'props' => [

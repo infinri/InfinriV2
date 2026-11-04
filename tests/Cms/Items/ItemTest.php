@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Field;
-use Kirby\TestCase;
+use Infinri\Content\Field;
+use Infinri\TestCase;
 
 class ItemTest extends TestCase
 {

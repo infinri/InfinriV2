@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Data\Data;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\F;
-use Kirby\Form\Field;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Data;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\F;
+use Infinri\Form\Field;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Blueprint
@@ -30,7 +30,7 @@ class Blueprint
 	/**
 	 * Creates a new blueprint object with the given props
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the blueprint model is missing
+	 * @throws \Infinri\Exception\InvalidArgumentException If the blueprint model is missing
 	 */
 	public function __construct(array $props)
 	{
@@ -376,7 +376,7 @@ class Blueprint
 	/**
 	 * Find a blueprint by name
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the blueprint cannot be found
+	 * @throws \Infinri\Exception\NotFoundException If the blueprint cannot be found
 	 */
 	public static function find(string $name): array
 	{
@@ -523,7 +523,7 @@ class Blueprint
 	/**
 	 * Normalize field props for a single field
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the filed name is missing or the field type is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the filed name is missing or the field type is invalid
 	 */
 	public static function fieldProps(array|string $props): array
 	{

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Template\Template;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Template\Template;
 
 class Email
 {
@@ -15,7 +15,7 @@ class Email
 
 	/**
 	 * Props for the email object; will be passed to the
-	 * \Kirby\Email\Email class
+	 * \Infinri\Email\Email class
 	 */
 	protected array $props;
 
@@ -55,7 +55,7 @@ class Email
 	 * prop arrays in case a preset is not needed
 	 *
 	 * @param string|array $preset Preset name or simple prop array
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 */
 	protected function preset(string|array $preset): array
 	{
@@ -79,7 +79,7 @@ class Email
 	 * Renders the email template(s) and sets the body props
 	 * to the result
 	 *
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 */
 	protected function template(): void
 	{

@@ -1,13 +1,13 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Cms\Language;
-use Kirby\Cms\LanguageVariable;
-use Kirby\Exception\NotFoundException;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Cms\Language;
+use Infinri\Cms\LanguageVariable;
+use Infinri\Exception\NotFoundException;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\I18n;
 
 $languageDialogFields = [
 	'name' => [

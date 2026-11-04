@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Filesystem\Mime;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Obj;
-use Kirby\Toolkit\Str;
+use Infinri\Filesystem\Mime;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Obj;
+use Infinri\Toolkit\Str;
 
 class Visitor
 {
@@ -43,7 +43,7 @@ class Visitor
 	 * provided or returns the user's
 	 * accepted language otherwise
 	 *
-	 * @return $this|\Kirby\Toolkit\Obj|null
+	 * @return $this|\Infinri\Toolkit\Obj|null
 	 */
 	public function acceptedLanguage(
 		string|null $acceptedLanguage = null
@@ -60,7 +60,7 @@ class Visitor
 	 * Returns an array of all accepted languages
 	 * including their quality and locale
 	 *
-	 * @return \Kirby\Toolkit\Collection<\Kirby\Toolkit\Obj>
+	 * @return \Infinri\Toolkit\Collection<\Infinri\Toolkit\Obj>
 	 */
 	public function acceptedLanguages(): Collection
 	{
@@ -107,7 +107,7 @@ class Visitor
 	 * provided or returns the user's
 	 * accepted mime type otherwise
 	 *
-	 * @return $this|\Kirby\Toolkit\Obj|null
+	 * @return $this|\Infinri\Toolkit\Obj|null
 	 */
 	public function acceptedMimeType(
 		string|null $acceptedMimeType = null

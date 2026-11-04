@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Panel\Lab\Doc;
-use Kirby\Panel\Lab\Docs;
-use Kirby\Panel\Lab\Responses;
+use Infinri\Panel\Lab\Doc;
+use Infinri\Panel\Lab\Docs;
+use Infinri\Panel\Lab\Responses;
 
 return [
 	'lab.docs' => [

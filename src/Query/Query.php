@@ -1,19 +1,19 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
 use Closure;
-use Kirby\Cms\App;
-use Kirby\Cms\Collection;
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
-use Kirby\Cms\Users;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Image\QrCode;
-use Kirby\Query\Runners\Runner;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\Collection;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
+use Infinri\Cms\Users;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Image\QrCode;
+use Infinri\Query\Runners\Runner;
+use Infinri\Toolkit\I18n;
 
 class Query
 {
@@ -65,8 +65,8 @@ class Query
 	 * Returns the query result if anything
 	 * can be found, otherwise returns null
 	 *
-	 * @throws \Kirby\Exception\BadMethodCallException If an invalid method is accessed by the query
-	 * @throws \Kirby\Exception\InvalidArgumentException If an invalid query runner is set in the config option
+	 * @throws \Infinri\Exception\BadMethodCallException If an invalid method is accessed by the query
+	 * @throws \Infinri\Exception\InvalidArgumentException If an invalid query runner is set in the config option
 	 */
 	public function resolve(array|object $data = []): mixed
 	{

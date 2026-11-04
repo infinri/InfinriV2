@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Exception\Exception;
+use Infinri\Exception\Exception;
 
 class ModelCommit
 {

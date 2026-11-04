@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\File;
-use Kirby\Panel\Collector\FilesCollector;
-use Kirby\Panel\Ui\Item\FileItem;
-use Kirby\Panel\Ui\Upload;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\File;
+use Infinri\Panel\Collector\FilesCollector;
+use Infinri\Panel\Ui\Item\FileItem;
+use Infinri\Panel\Ui\Upload;
+use Infinri\Toolkit\I18n;
 
 return [
 	'mixins' => [

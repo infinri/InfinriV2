@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby;
+namespace Infinri;
 
 use Closure;
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
+use Infinri\Filesystem\Dir;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase

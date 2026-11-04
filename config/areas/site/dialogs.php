@@ -1,20 +1,20 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Cms\PageRules;
-use Kirby\Cms\Url;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\PermissionException;
-use Kirby\Panel\ChangesDialog;
-use Kirby\Panel\Field;
-use Kirby\Panel\PageCreateDialog;
-use Kirby\Panel\Panel;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuids;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Cms\PageRules;
+use Infinri\Cms\Url;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\PermissionException;
+use Infinri\Panel\ChangesDialog;
+use Infinri\Panel\Field;
+use Infinri\Panel\PageCreateDialog;
+use Infinri\Panel\Panel;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Uuids;
 
 $fields = require __DIR__ . '/../fields/dialogs.php';
 $files = require __DIR__ . '/../files/dialogs.php';

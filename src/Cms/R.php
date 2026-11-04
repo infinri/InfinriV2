@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Http\Request;
-use Kirby\Toolkit\Facade;
+use Infinri\Http\Request;
+use Infinri\Toolkit\Facade;
 
 class R extends Facade
 {

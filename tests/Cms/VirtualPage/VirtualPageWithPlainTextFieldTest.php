@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Content;
-use Kirby\Content\Field;
-use Kirby\Content\PlainTextStorage;
-use Kirby\Content\VersionId;
-use Kirby\Data\Data;
+use Infinri\Content\Content;
+use Infinri\Content\Field;
+use Infinri\Content\PlainTextStorage;
+use Infinri\Content\VersionId;
+use Infinri\Data\Data;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class VirtualPageWithPlainTextField extends Page

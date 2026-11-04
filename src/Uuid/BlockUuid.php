@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
-use Kirby\Cms\Blocks;
-use Kirby\Content\Field;
+use Infinri\Cms\Blocks;
+use Infinri\Content\Field;
 class BlockUuid extends FieldUuid
 {
 	protected const TYPE  = 'block';

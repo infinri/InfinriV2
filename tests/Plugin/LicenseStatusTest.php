@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Plugin;
+namespace Infinri\Plugin;
 
-use Kirby\Cms\TestCase;
+use Infinri\Cms\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(LicenseStatus::class)]

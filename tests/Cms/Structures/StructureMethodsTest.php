@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 
 class StructureMethodsTest extends TestCase
 {

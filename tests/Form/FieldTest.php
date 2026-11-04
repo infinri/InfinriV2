@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Page;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\Page;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 

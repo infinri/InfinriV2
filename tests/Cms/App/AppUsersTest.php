@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Http\Request\Auth\BasicAuth;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Http\Request\Auth\BasicAuth;
 
 class AppUsersTest extends TestCase
 {

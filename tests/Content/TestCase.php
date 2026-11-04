@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\App;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Data\Data;
-use Kirby\FileSystem\Dir;
-use Kirby\TestCase as BaseTestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Data\Data;
+use Infinri\FileSystem\Dir;
+use Infinri\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {

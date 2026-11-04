@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 
 class UserPicker extends Picker
 {
@@ -20,7 +20,7 @@ class UserPicker extends Picker
 	/**
 	 * Search all users for the picker
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function items(): Users|null
 	{

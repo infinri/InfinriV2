@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms\Auth;
+namespace Infinri\Cms\Auth;
 
-use Kirby\Cms\User;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\User;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 class EmailChallenge extends Challenge
 {
@@ -12,7 +12,7 @@ class EmailChallenge extends Challenge
 	 * Checks whether the challenge is available
 	 * for the passed user and purpose
 	 *
-	 * @param \Kirby\Cms\User $user User the code will be generated for
+	 * @param \Infinri\Cms\User $user User the code will be generated for
 	 * @param 'login'|'password-reset'|'2fa' $mode Purpose of the code
 	 */
 	public static function isAvailable(User $user, string $mode): bool
@@ -24,7 +24,7 @@ class EmailChallenge extends Challenge
 	 * Generates a random one-time auth code and returns that code
 	 * for later verification
 	 *
-	 * @param \Kirby\Cms\User $user User to generate the code for
+	 * @param \Infinri\Cms\User $user User to generate the code for
 	 * @param array $options Details of the challenge request:
 	 *                       - 'mode': Purpose of the code ('login', 'password-reset' or '2fa')
 	 *                       - 'timeout': Number of seconds the code will be valid for

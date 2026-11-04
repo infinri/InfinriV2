@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cms\App as Kirby;
-use Kirby\Filesystem\Asset;
-use Kirby\Filesystem\Dir;
-use Kirby\Image\QrCode;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Obj;
+use Infinri\Cms\App as Kirby;
+use Infinri\Filesystem\Asset;
+use Infinri\Filesystem\Dir;
+use Infinri\Image\QrCode;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Obj;
 
 class HelperFunctionsTest extends TestCase
 {

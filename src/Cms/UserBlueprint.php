@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 class UserBlueprint extends Blueprint
 {
 	/**
 	 * UserBlueprint constructor.
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function __construct(array $props)
 	{

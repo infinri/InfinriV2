@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Data;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Data;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 
 class Translation
 {

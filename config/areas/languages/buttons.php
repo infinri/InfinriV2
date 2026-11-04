@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\Language;
-use Kirby\Panel\Ui\Buttons\LanguageCreateButton;
-use Kirby\Panel\Ui\Buttons\LanguageDeleteButton;
-use Kirby\Panel\Ui\Buttons\LanguageSettingsButton;
-use Kirby\Panel\Ui\Buttons\OpenButton;
+use Infinri\Cms\Language;
+use Infinri\Panel\Ui\Buttons\LanguageCreateButton;
+use Infinri\Panel\Ui\Buttons\LanguageDeleteButton;
+use Infinri\Panel\Ui\Buttons\LanguageSettingsButton;
+use Infinri\Panel\Ui\Buttons\OpenButton;
 
 return [
 	'languages.create' => fn () =>

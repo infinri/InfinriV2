@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
 use Closure;
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\F;
+use Infinri\Cms\App;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\F;
 use Stringable;
 
 class Response implements Stringable

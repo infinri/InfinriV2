@@ -1,23 +1,23 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Content\Field;
-use Kirby\Exception\DuplicateException;
-use Kirby\Filesystem\Asset;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Filesystem\Mime;
-use Kirby\Form\Field as FormField;
-use Kirby\Image\Image;
-use Kirby\Plugin\License;
-use Kirby\Plugin\Plugin;
-use Kirby\Text\KirbyTag;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Collection as ToolkitCollection;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\V;
+use Infinri\Content\Field;
+use Infinri\Exception\DuplicateException;
+use Infinri\Filesystem\Asset;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Filesystem\Mime;
+use Infinri\Form\Field as FormField;
+use Infinri\Image\Image;
+use Infinri\Plugin\License;
+use Infinri\Plugin\Plugin;
+use Infinri\Text\KirbyTag;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Collection as ToolkitCollection;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\V;
 
 trait AppPlugins
 {
@@ -89,7 +89,7 @@ trait AppPlugins
 	/**
 	 * Register all given extensions
 	 *
-	 * @param \Kirby\Plugin\Plugin|null $plugin The plugin which defined those extensions
+	 * @param \Infinri\Plugin\Plugin|null $plugin The plugin which defined those extensions
 	 */
 	public function extend(
 		array $extensions,
@@ -853,7 +853,7 @@ trait AppPlugins
 	 * Kirby plugin factory and getter
 	 *
 	 * @param array|null $extends If null is passed it will be used as getter. Otherwise as factory.
-	 * @throws \Kirby\Exception\DuplicateException
+	 * @throws \Infinri\Exception\DuplicateException
 	 */
 	public static function plugin(
 		string $name,

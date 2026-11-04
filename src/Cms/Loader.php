@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Data\Data;
-use Kirby\Filesystem\F;
+use Infinri\Data\Data;
+use Infinri\Filesystem\F;
 
 class Loader
 {

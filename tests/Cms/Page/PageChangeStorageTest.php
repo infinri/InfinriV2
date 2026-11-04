@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\MemoryStorage;
-use Kirby\Content\PlainTextStorage;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Content\MemoryStorage;
+use Infinri\Content\PlainTextStorage;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Page::class)]

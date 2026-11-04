@@ -1,21 +1,21 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\File;
-use Kirby\Cms\Find;
-use Kirby\Cms\Page;
-use Kirby\Cms\PageBlueprint;
-use Kirby\Cms\PageRules;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
-use Kirby\Content\MemoryStorage;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Form\Form;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\I18n;
-use Kirby\Uuid\Uuid;
-use Kirby\Uuid\Uuids;
+use Infinri\Cms\File;
+use Infinri\Cms\Find;
+use Infinri\Cms\Page;
+use Infinri\Cms\PageBlueprint;
+use Infinri\Cms\PageRules;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
+use Infinri\Content\MemoryStorage;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Form\Form;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\I18n;
+use Infinri\Uuid\Uuid;
+use Infinri\Uuid\Uuids;
 
 class PageCreateDialog
 {

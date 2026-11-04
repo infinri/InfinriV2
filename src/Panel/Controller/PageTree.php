@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Panel\Controller;
+namespace Infinri\Panel\Controller;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Toolkit\I18n;
 
 class PageTree
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Form\Mixin;
+namespace Infinri\Form\Mixin;
 
-use Kirby\Cms\Language;
+use Infinri\Cms\Language;
 
 trait Translatable
 {

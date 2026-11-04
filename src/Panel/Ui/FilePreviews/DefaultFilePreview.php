@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Ui\FilePreviews;
+namespace Infinri\Panel\Ui\FilePreviews;
 
-use Kirby\Cms\File;
-use Kirby\Panel\Ui\FilePreview;
+use Infinri\Cms\File;
+use Infinri\Panel\Ui\FilePreview;
 
 class DefaultFilePreview extends FilePreview
 {

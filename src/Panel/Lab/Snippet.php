@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Lab;
+namespace Infinri\Panel\Lab;
 
-use Kirby\Template\Snippet as BaseSnippet;
+use Infinri\Template\Snippet as BaseSnippet;
 
 class Snippet extends BaseSnippet
 {

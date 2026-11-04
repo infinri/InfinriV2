@@ -2,7 +2,7 @@
 
   <p class="notice">
     We are really sorry, but your browser does not support
-    all features required for the Kirby Panel.
+    all features required for the Infinri Admin.
   </p>
 
   <div class="admin-advice">

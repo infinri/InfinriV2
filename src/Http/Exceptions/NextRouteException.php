@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Http\Exceptions;
+namespace Infinri\Http\Exceptions;
 
 class NextRouteException extends \Exception
 {

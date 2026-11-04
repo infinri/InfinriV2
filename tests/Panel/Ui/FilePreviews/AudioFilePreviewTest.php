@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Panel\Ui\FilePreviews;
+namespace Infinri\Panel\Ui\FilePreviews;
 
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Panel\Ui\FilePreview;
-use Kirby\TestCase;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Panel\Ui\FilePreview;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(AudioFilePreview::class)]

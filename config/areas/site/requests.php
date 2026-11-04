@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Panel\Controller\PageTree;
+use Infinri\Cms\App;
+use Infinri\Panel\Controller\PageTree;
 
 return [
 	'tree' => [

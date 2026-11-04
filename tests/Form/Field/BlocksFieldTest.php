@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Fieldsets;
-use Kirby\Cms\Page;
-use Kirby\Exception\NotFoundException;
-use Kirby\Form\Fields;
+use Infinri\Cms\App;
+use Infinri\Cms\Fieldsets;
+use Infinri\Cms\Page;
+use Infinri\Exception\NotFoundException;
+use Infinri\Form\Fields;
 
 class BlocksFieldTest extends TestCase
 {

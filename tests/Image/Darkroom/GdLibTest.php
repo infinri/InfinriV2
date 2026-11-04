@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Image\Darkroom;
+namespace Infinri\Image\Darkroom;
 
 use claviska\SimpleImage;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionMethod;
 

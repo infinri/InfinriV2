@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
-use Kirby\Cms\App;
-use Kirby\Cms\System\UpdateStatus;
-use Kirby\Http\Cookie;
+use Infinri\Cms\App;
+use Infinri\Cms\System\UpdateStatus;
+use Infinri\Http\Cookie;
 
 class SystemTest extends AreaTestCase
 {

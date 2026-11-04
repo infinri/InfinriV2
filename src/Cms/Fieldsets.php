@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 class Fieldsets extends Items
 {

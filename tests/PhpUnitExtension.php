@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby;
+namespace Infinri;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Core;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\App;
+use Infinri\Cms\Core;
+use Infinri\Filesystem\Dir;
 use PHPUnit\Event\TestRunner\ExecutionFinished;
 use PHPUnit\Event\TestRunner\ExecutionFinishedSubscriber;
 use PHPUnit\Runner\Extension\Extension;

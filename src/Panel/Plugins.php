@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Data\Json;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Data\Json;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class Plugins
 {

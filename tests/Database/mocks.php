@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
 class MockSql extends Sql
 {

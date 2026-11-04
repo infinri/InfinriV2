@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Parsley;
+namespace Infinri\Parsley;
 
 use DOMElement;
 use DOMNode;
 use DOMNodeList;
 use DOMText;
-use Kirby\Http\Url;
-use Kirby\Toolkit\Html;
+use Infinri\Http\Url;
+use Infinri\Toolkit\Html;
 
 class Inline
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Cms\User;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\PermissionException;
-use Kirby\Toolkit\Escape;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Cms\User;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\PermissionException;
+use Infinri\Toolkit\Escape;
+use Infinri\Toolkit\I18n;
 
 class UserTotpDisableDialog
 {

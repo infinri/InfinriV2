@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\Page;
-use Kirby\Content\MemoryStorage;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Panel\Areas\AreaTestCase;
-use Kirby\Uuid\PageUuid;
+use Infinri\Cms\Page;
+use Infinri\Content\MemoryStorage;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Panel\Areas\AreaTestCase;
+use Infinri\Uuid\PageUuid;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(PageCreateDialog::class)]

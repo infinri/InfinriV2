@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
 use Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
@@ -59,7 +59,7 @@ class DataTest extends TestCase
 		Data::$handlers['invalid'] = CustomInvalidHandler::class;
 
 		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('Handler for type: "invalid" needs to extend Kirby\Data\Handler');
+		$this->expectExceptionMessage('Handler for type: "invalid" needs to extend Infinri\Data\Handler');
 
 		Data::handler('invalid');
 	}

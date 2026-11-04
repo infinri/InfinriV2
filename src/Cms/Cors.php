@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Str;
 
 class Cors
 {

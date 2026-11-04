@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Field;
+use Infinri\Content\Field;
 use PHPUnit\Framework\Attributes\CoversClass;
 use TypeError;
 

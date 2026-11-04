@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
 use Closure;
-use Kirby\Cms\Api;
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
+use Infinri\Cms\Api;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
 
 class FilesFieldTestApi extends Api
 {

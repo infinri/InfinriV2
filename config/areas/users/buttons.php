@@ -1,9 +1,9 @@
 <?php
 
-use Kirby\Cms\User;
-use Kirby\Panel\Ui\Buttons\SettingsButton;
-use Kirby\Panel\Ui\Buttons\ViewButton;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\User;
+use Infinri\Panel\Ui\Buttons\SettingsButton;
+use Infinri\Panel\Ui\Buttons\ViewButton;
+use Infinri\Toolkit\I18n;
 
 return [
 	'users.create' => function (User $user, string|null $role = null) {

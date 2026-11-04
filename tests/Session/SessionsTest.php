@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Http\Cookie;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Http\Cookie;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionClass;
 use TypeError;

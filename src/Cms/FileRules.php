@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\DuplicateException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\File as BaseFile;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
+use Infinri\Exception\DuplicateException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\File as BaseFile;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
 
 class FileRules
 {
@@ -16,9 +16,9 @@ class FileRules
 	 * Validates if the filename can be changed
 	 *
 	 * @param string|null $extension If not passed, the current extension is kept
-	 * @throws \Kirby\Exception\DuplicateException If a file with this name exists
-	 * @throws \Kirby\Exception\InvalidArgumentException If the new extension or filename is forbidden
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to rename the file
+	 * @throws \Infinri\Exception\DuplicateException If a file with this name exists
+	 * @throws \Infinri\Exception\InvalidArgumentException If the new extension or filename is forbidden
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to rename the file
 	 */
 	public static function changeName(
 		File $file,
@@ -72,8 +72,8 @@ class FileRules
 	/**
 	 * Validates if the template of the file can be changed
 	 *
-	 * @throws \Kirby\Exception\LogicException If the template of the page cannot be changed at all
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the template
+	 * @throws \Infinri\Exception\LogicException If the template of the page cannot be changed at all
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the template
 	 */
 	public static function changeTemplate(File $file, string $template): void
 	{
@@ -106,8 +106,8 @@ class FileRules
 	/**
 	 * Validates if the file can be created
 	 *
-	 * @throws \Kirby\Exception\DuplicateException If a file with the same name exists
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to create the file
+	 * @throws \Infinri\Exception\DuplicateException If a file with the same name exists
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to create the file
 	 */
 	public static function create(File $file, BaseFile $upload): void
 	{
@@ -152,7 +152,7 @@ class FileRules
 	/**
 	 * Validates if the file can be deleted
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to delete the file
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to delete the file
 	 */
 	public static function delete(File $file): void
 	{
@@ -166,8 +166,8 @@ class FileRules
 	/**
 	 * Validates if the file can be replaced
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to replace the file
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file type of the new file is different
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to replace the file
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file type of the new file is different
 	 */
 	public static function replace(File $file, BaseFile $upload): void
 	{
@@ -196,7 +196,7 @@ class FileRules
 	/**
 	 * Validates if the file can be updated
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to update the file
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to update the file
 	 */
 	public static function update(File $file, array $content = []): void
 	{
@@ -210,7 +210,7 @@ class FileRules
 	/**
 	 * Validates the file extension
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the extension is missing or forbidden
+	 * @throws \Infinri\Exception\InvalidArgumentException If the extension is missing or forbidden
 	 */
 	public static function validExtension(File $file, string $extension): void
 	{
@@ -255,7 +255,7 @@ class FileRules
 	 *
 	 * @param string|false|null $mime If not passed, the MIME type is detected from the file,
 	 *                                if `false`, the MIME type is not validated for performance reasons
-	 * @throws \Kirby\Exception\InvalidArgumentException If the extension, MIME type or filename is missing or forbidden
+	 * @throws \Infinri\Exception\InvalidArgumentException If the extension, MIME type or filename is missing or forbidden
 	 */
 	public static function validFile(
 		File $file,
@@ -273,7 +273,7 @@ class FileRules
 	/**
 	 * Validates the filename
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the filename is missing or forbidden
+	 * @throws \Infinri\Exception\InvalidArgumentException If the filename is missing or forbidden
 	 */
 	public static function validFilename(File $file, string $filename): void
 	{
@@ -307,7 +307,7 @@ class FileRules
 	/**
 	 * Validates the MIME type
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the MIME type is missing or forbidden
+	 * @throws \Infinri\Exception\InvalidArgumentException If the MIME type is missing or forbidden
 	 */
 	public static function validMime(File $file, string|null $mime = null): void
 	{

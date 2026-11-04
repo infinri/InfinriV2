@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Database\Sql;
+namespace Infinri\Database\Sql;
 
-use Kirby\Database\Sql;
+use Infinri\Database\Sql;
 
 class Mysql extends Sql
 {

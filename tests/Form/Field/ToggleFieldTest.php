@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Toolkit\I18n;
+use Infinri\Toolkit\I18n;
 
 class ToggleFieldTest extends TestCase
 {

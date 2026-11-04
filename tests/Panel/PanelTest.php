@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Blueprint;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
-use Kirby\Http\Response;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\Blueprint;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\Dir;
+use Infinri\Http\Response;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Panel::class)]

@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Parsley\Schema;
+namespace Infinri\Parsley\Schema;
 
-use Kirby\Parsley\Element;
-use Kirby\Parsley\Schema;
-use Kirby\Toolkit\Dom;
+use Infinri\Parsley\Element;
+use Infinri\Parsley\Schema;
+use Infinri\Toolkit\Dom;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
 #[CoversClass(Blocks::class)]
 class BlocksTest extends TestCase
 {
-	/** @var \Kirby\Parsley\Schema\Blocks */
+	/** @var \Infinri\Parsley\Schema\Blocks */
 	protected Schema $schema;
 
 	protected function setUp(): void

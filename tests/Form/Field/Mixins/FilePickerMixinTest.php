@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
-use Kirby\Form\Field;
+use Infinri\Cms\App;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
+use Infinri\Form\Field;
 
 class FilePickerMixinTest extends TestCase
 {

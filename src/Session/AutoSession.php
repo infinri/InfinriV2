@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
 class AutoSession
 {
@@ -12,7 +12,7 @@ class AutoSession
 	/**
 	 * Creates a new AutoSession instance
 	 *
-	 * @param \Kirby\Session\SessionStore|string $store SessionStore object or a path to the storage directory (uses the FileSessionStore)
+	 * @param \Infinri\Session\SessionStore|string $store SessionStore object or a path to the storage directory (uses the FileSessionStore)
 	 * @param array $options Optional additional options:
 	 *                       - `durationNormal`: Duration of normal sessions in seconds; defaults to 2 hours
 	 *                       - `durationLong`: Duration of "remember me" sessions in seconds; defaults to 2 weeks

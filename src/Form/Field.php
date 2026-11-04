@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
 use Closure;
-use Kirby\Cms\HasSiblings;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Component;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\HasSiblings;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Component;
+use Infinri\Toolkit\I18n;
 
 class Field extends Component
 {
@@ -37,7 +37,7 @@ class Field extends Component
 	public static array $types = [];
 
 	/**
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function __construct(
 		string $type,
@@ -160,19 +160,19 @@ class Field extends Component
 			],
 			'computed' => [
 				'after' => function () {
-					/** @var \Kirby\Form\Field $this */
+					/** @var \Infinri\Form\Field $this */
 					if ($this->after !== null) {
 						return $this->model()->toString($this->after);
 					}
 				},
 				'before' => function () {
-					/** @var \Kirby\Form\Field $this */
+					/** @var \Infinri\Form\Field $this */
 					if ($this->before !== null) {
 						return $this->model()->toString($this->before);
 					}
 				},
 				'default' => function () {
-					/** @var \Kirby\Form\Field $this */
+					/** @var \Infinri\Form\Field $this */
 					if ($this->default === null) {
 						return;
 					}
@@ -184,7 +184,7 @@ class Field extends Component
 					return $this->model()->toString($this->default);
 				},
 				'help' => function () {
-					/** @var \Kirby\Form\Field $this */
+					/** @var \Infinri\Form\Field $this */
 					if ($this->help) {
 						$help = $this->model()->toSafeString($this->help);
 						$help = $this->kirby()->kirbytext($help);
@@ -192,13 +192,13 @@ class Field extends Component
 					}
 				},
 				'label' => function () {
-					/** @var \Kirby\Form\Field $this */
+					/** @var \Infinri\Form\Field $this */
 					if ($this->label !== null) {
 						return $this->model()->toString($this->label);
 					}
 				},
 				'placeholder' => function () {
-					/** @var \Kirby\Form\Field $this */
+					/** @var \Infinri\Form\Field $this */
 					if ($this->placeholder !== null) {
 						return $this->model()->toString($this->placeholder);
 					}

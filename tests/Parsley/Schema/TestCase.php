@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Parsley\Schema;
+namespace Infinri\Parsley\Schema;
 
-use Kirby\Parsley\Schema;
-use Kirby\TestCase as BaseTestCase;
+use Infinri\Parsley\Schema;
+use Infinri\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {

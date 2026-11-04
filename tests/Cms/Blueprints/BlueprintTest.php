@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Data\Data;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
-use Kirby\Toolkit\I18n;
+use Infinri\Data\Data;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
+use Infinri\Toolkit\I18n;
 use PHPUnit\Framework\Attributes\CoversClass;
 use stdClass;
 

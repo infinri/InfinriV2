@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\F;
-use Kirby\Uuid\HasUuids;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\F;
+use Infinri\Uuid\HasUuids;
 use Throwable;
 
 class Files extends Collection
@@ -19,7 +19,7 @@ class Files extends Collection
 	public static array $methods = [];
 
 	/**
-	 * @var \Kirby\Cms\Page|\Kirby\Cms\Site|\Kirby\Cms\User
+	 * @var \Infinri\Cms\Page|\Infinri\Cms\Site|\Infinri\Cms\User
 	 */
 	protected object|null $parent = null;
 
@@ -28,9 +28,9 @@ class Files extends Collection
 	 * an entire second collection to the
 	 * current collection
 	 *
-	 * @param \Kirby\Cms\Files<TFile>|TFile|string $object
+	 * @param \Infinri\Cms\Files<TFile>|TFile|string $object
 	 * @return $this
-	 * @throws \Kirby\Exception\InvalidArgumentException When no `File` or `Files` object or an ID of an existing file is passed
+	 * @throws \Infinri\Exception\InvalidArgumentException When no `File` or `Files` object or an ID of an existing file is passed
 	 */
 	public function add($object): static
 	{
@@ -84,7 +84,7 @@ class Files extends Collection
 	 * Deletes the files with the given IDs
 	 * if they exist in the collection
 	 *
-	 * @throws \Kirby\Exception\Exception If not all files could be deleted
+	 * @throws \Infinri\Exception\Exception If not all files could be deleted
 	 */
 	public function delete(array $ids): void
 	{
@@ -178,7 +178,7 @@ class Files extends Collection
 	/**
 	 * Returns the collection sorted by
 	 * the sort number and the filename
-	 * @return \Kirby\Cms\Files<TFile>
+	 * @return \Infinri\Cms\Files<TFile>
 	 */
 	public function sorted(): static
 	{

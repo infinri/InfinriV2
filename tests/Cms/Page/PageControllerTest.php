@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Page::class)]
@@ -112,7 +112,7 @@ class PageControllerTest extends ModelTestCase
 		]);
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The returned variable "page" from the controller "default" is not of the required type "Kirby\Cms\Page"');
+		$this->expectExceptionMessage('The returned variable "page" from the controller "default" is not of the required type "Infinri\Cms\Page"');
 
 		$page->controller();
 	}

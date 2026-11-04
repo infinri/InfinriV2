@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
-use Kirby\Cms\FileModifications;
-use Kirby\Cms\HasMethods;
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\FileModifications;
+use Infinri\Cms\HasMethods;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Str;
 
 class Asset
 {
@@ -49,7 +49,7 @@ class Asset
 	/**
 	 * Magic caller for asset methods
 	 *
-	 * @throws \Kirby\Exception\BadMethodCallException
+	 * @throws \Infinri\Exception\BadMethodCallException
 	 */
 	public function __call(string $method, array $arguments = []): mixed
 	{

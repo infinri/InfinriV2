@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Option;
+namespace Infinri\Option;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Page;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Field\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\Page;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Field\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversNothing;
 
@@ -301,7 +301,7 @@ class OptionsQueryTest extends TestCase
 		]);
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('Invalid query result data: Kirby\Content\Field');
+		$this->expectExceptionMessage('Invalid query result data: Infinri\Content\Field');
 
 		$options = (new OptionsQuery('site.foo'))->render($app->site());
 	}

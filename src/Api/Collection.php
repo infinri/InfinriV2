@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Api;
+namespace Infinri\Api;
 
 use Closure;
 use Exception;
-use Kirby\Toolkit\Collection as BaseCollection;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Collection as BaseCollection;
+use Infinri\Toolkit\Str;
 
 class Collection
 {
@@ -65,7 +65,7 @@ class Collection
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 * @throws \Exception
 	 */
 	public function toArray(): array
@@ -90,7 +90,7 @@ class Collection
 	}
 
 	/**
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 * @throws \Exception
 	 */
 	public function toResponse(): array

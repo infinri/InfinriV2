@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\File;
-use Kirby\Form\Form;
+use Infinri\Cms\File;
+use Infinri\Form\Form;
 
 /**
  * File

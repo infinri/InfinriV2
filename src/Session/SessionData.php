@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Session;
+namespace Infinri\Session;
 
-use Kirby\Exception\LogicException;
-use Kirby\Toolkit\A;
+use Infinri\Exception\LogicException;
+use Infinri\Toolkit\A;
 
 class SessionData
 {
@@ -11,7 +11,7 @@ class SessionData
 	 * Creates a new SessionData instance
 	 *
 	 * @codeCoverageIgnore
-	 * @param \Kirby\Session\Session $session Session object this data belongs to
+	 * @param \Infinri\Session\Session $session Session object this data belongs to
 	 * @param array $data Currently stored session data
 	 */
 	public function __construct(

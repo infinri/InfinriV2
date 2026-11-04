@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Database\Sql;
+namespace Infinri\Database\Sql;
 
-use Kirby\Database\Sql;
-use Kirby\Database\TestCase as BaseTestCase;
+use Infinri\Database\Sql;
+use Infinri\Database\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {

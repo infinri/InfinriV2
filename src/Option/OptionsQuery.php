@@ -1,18 +1,18 @@
 <?php
 
-namespace Kirby\Option;
+namespace Infinri\Option;
 
-use Kirby\Cms\Block;
-use Kirby\Cms\File;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Page;
-use Kirby\Cms\StructureObject;
-use Kirby\Cms\User;
-use Kirby\Content\Field;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Obj;
+use Infinri\Cms\Block;
+use Infinri\Cms\File;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Page;
+use Infinri\Cms\StructureObject;
+use Infinri\Cms\User;
+use Infinri\Content\Field;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Obj;
 
 class OptionsQuery extends OptionsProvider
 {

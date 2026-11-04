@@ -155,7 +155,7 @@
 	"error.language.name": "Por favor entre um nome válido para o idioma",
 	"error.language.notFound": "O idioma não foi encontrado",
 	"error.language.update.permission": "Não tem permissões para atualizar o idioma",
-	"error.language.variable.core": "\"{key}\" is one of Kirby's own translation strings and cannot be overwritten by a language variable",
+	"error.language.variable.core": "\"{key}\" is one of Infinri's own translation strings and cannot be overwritten by a language variable",
 	"error.language.variable.duplicate": "A variable for \"{key}\" already exists",
 	"error.language.variable.key": "Please enter a valid key for the variable",
 	"error.language.variable.notFound": "A variável não foi encontrada",
@@ -819,7 +819,7 @@
 
 	"users": "Usuários",
 
-	"version": "Vers\u00e3o do Kirby",
+	"version": "Versão do Infinri",
 	"version.changes": "Versão alterada",
 	"version.compare": "Comparar versões",
 	"version.current": "Versão atual",

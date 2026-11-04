@@ -1,19 +1,19 @@
 <?php
 
-namespace Kirby\Api;
+namespace Infinri\Api;
 
 use Closure;
 use Exception;
-use Kirby\Cms\User;
-use Kirby\Exception\Exception as ExceptionException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\F;
-use Kirby\Http\Response;
-use Kirby\Http\Route;
-use Kirby\Http\Router;
-use Kirby\Toolkit\Collection as BaseCollection;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Pagination;
+use Infinri\Cms\User;
+use Infinri\Exception\Exception as ExceptionException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\F;
+use Infinri\Http\Response;
+use Infinri\Http\Route;
+use Infinri\Http\Router;
+use Infinri\Toolkit\Collection as BaseCollection;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Pagination;
 use Throwable;
 
 class Api
@@ -95,7 +95,7 @@ class Api
 	/**
 	 * Magic accessor for any given data
 	 *
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 */
 	public function __call(string $method, array $args = [])
 	{
@@ -123,7 +123,7 @@ class Api
 	 * Execute an API call for the given path,
 	 * request method and optional request data
 	 *
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 * @throws \Exception
 	 */
 	public function call(
@@ -215,7 +215,7 @@ class Api
 	/**
 	 * Setter and getter for an API collection
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If no collection for `$name` exists
+	 * @throws \Infinri\Exception\NotFoundException If no collection for `$name` exists
 	 * @throws \Exception
 	 */
 	public function collection(
@@ -243,7 +243,7 @@ class Api
 	 * Returns the injected data array
 	 * or certain parts of it by key
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If no data for `$key` exists
+	 * @throws \Infinri\Exception\NotFoundException If no data for `$key` exists
 	 */
 	public function data(string|null $key = null, ...$args): mixed
 	{
@@ -304,7 +304,7 @@ class Api
 	/**
 	 * Returns an API model instance by name
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If no model for `$name` exists
+	 * @throws \Infinri\Exception\NotFoundException If no model for `$name` exists
 	 */
 	public function model(
 		string|null $name = null,
@@ -406,7 +406,7 @@ class Api
 	 * Turns a Kirby object into an
 	 * API model or collection representation
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If `$object` cannot be resolved
+	 * @throws \Infinri\Exception\NotFoundException If `$object` cannot be resolved
 	 */
 	public function resolve($object): Model|Collection
 	{

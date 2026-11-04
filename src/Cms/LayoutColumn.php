@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Str;
 
 class LayoutColumn extends Item
 {

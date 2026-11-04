@@ -1,11 +1,11 @@
 <?php
 
-use Kirby\Data\Data;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Form\Form;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Data;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Form\Form;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 return [
 	'mixins' => ['min'],

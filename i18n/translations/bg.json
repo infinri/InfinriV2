@@ -155,7 +155,7 @@
 	"error.language.name": "Please enter a valid name for the language",
 	"error.language.notFound": "The language could not be found",
 	"error.language.update.permission": "You are not allowed to update the language",
-	"error.language.variable.core": "\"{key}\" is one of Kirby's own translation strings and cannot be overwritten by a language variable",
+	"error.language.variable.core": "\"{key}\" is one of Infinri's own translation strings and cannot be overwritten by a language variable",
 	"error.language.variable.duplicate": "A variable for \"{key}\" already exists",
 	"error.language.variable.key": "Please enter a valid key for the variable",
 	"error.language.variable.notFound": "The variable could not be found",
@@ -819,7 +819,7 @@
 
 	"users": "Потребители",
 
-	"version": "\u0412\u0435\u0440\u0441\u0438\u044f \u043d\u0430 Kirby",
+	"version": "Версия на Infinri",
 	"version.changes": "Changed version",
 	"version.compare": "Compare versions",
 	"version.current": "Current version",

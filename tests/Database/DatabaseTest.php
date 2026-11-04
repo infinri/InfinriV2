@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\InvalidArgumentException;
 use PDO;
 use PDOException;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -327,7 +327,7 @@ class DatabaseTest extends TestCase
 		$database->execute('CREATE TABLE "kirby_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE)');
 
 		$this->assertSame('kirby_', $database->prefix());
-		$this->assertInstanceOf(\Kirby\Database\Sql\Sqlite::class, $database->sql());
+		$this->assertInstanceOf(\Infinri\Database\Sql\Sqlite::class, $database->sql());
 		$this->assertSame(
 			'SELECT * FROM "kirby_users"',
 			$database->table('users')->build('select')['query']

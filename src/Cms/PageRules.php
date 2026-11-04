@@ -1,20 +1,20 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\DuplicateException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\PermissionException;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\DuplicateException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\PermissionException;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class PageRules
 {
 	/**
 	 * Validates if the sorting number of the page can be changed
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the given number is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the given number is invalid
 	 */
 	public static function changeNum(Page $page, int|null $num = null): void
 	{
@@ -26,8 +26,8 @@ class PageRules
 	/**
 	 * Validates if the slug for the page can be changed
 	 *
-	 * @throws \Kirby\Exception\DuplicateException If a page with this slug already exists
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the slug
+	 * @throws \Infinri\Exception\DuplicateException If a page with this slug already exists
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the slug
 	 */
 	public static function changeSlug(Page $page, string $slug): void
 	{
@@ -62,7 +62,7 @@ class PageRules
 	/**
 	 * Validates if the status for the page can be changed
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the given status is invalid
+	 * @throws \Infinri\Exception\InvalidArgumentException If the given status is invalid
 	 */
 	public static function changeStatus(
 		Page $page,
@@ -86,7 +86,7 @@ class PageRules
 	/**
 	 * Validates if a page can be converted to a draft
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the status or the page cannot be converted to a draft
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the status or the page cannot be converted to a draft
 	 */
 	public static function changeStatusToDraft(Page $page): void
 	{
@@ -108,8 +108,8 @@ class PageRules
 	/**
 	 * Validates if the status of a page can be changed to listed
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the given position is invalid
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the status or the status for the page cannot be changed by any user
+	 * @throws \Infinri\Exception\InvalidArgumentException If the given position is invalid
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the status or the status for the page cannot be changed by any user
 	 */
 	public static function changeStatusToListed(Page $page, int $position): void
 	{
@@ -136,7 +136,7 @@ class PageRules
 	/**
 	 * Validates if the status of a page can be changed to unlisted
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the status
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the status
 	 */
 	public static function changeStatusToUnlisted(Page $page)
 	{
@@ -146,8 +146,8 @@ class PageRules
 	/**
 	 * Validates if the template of the page can be changed
 	 *
-	 * @throws \Kirby\Exception\LogicException If the template of the page cannot be changed at all
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the template
+	 * @throws \Infinri\Exception\LogicException If the template of the page cannot be changed at all
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the template
 	 */
 	public static function changeTemplate(Page $page, string $template): void
 	{
@@ -174,8 +174,8 @@ class PageRules
 	/**
 	 * Validates if the title of the page can be changed
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the new title is empty
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to change the title
+	 * @throws \Infinri\Exception\InvalidArgumentException If the new title is empty
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to change the title
 	 */
 	public static function changeTitle(Page $page, string $title): void
 	{
@@ -192,9 +192,9 @@ class PageRules
 	/**
 	 * Validates if the page can be created
 	 *
-	 * @throws \Kirby\Exception\DuplicateException If the same page or a draft already exists
-	 * @throws \Kirby\Exception\InvalidArgumentException If the slug is invalid
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to create this page
+	 * @throws \Infinri\Exception\DuplicateException If the same page or a draft already exists
+	 * @throws \Infinri\Exception\InvalidArgumentException If the slug is invalid
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to create this page
 	 */
 	public static function create(Page $page): void
 	{
@@ -243,8 +243,8 @@ class PageRules
 	/**
 	 * Validates if the page can be deleted
 	 *
-	 * @throws \Kirby\Exception\LogicException If the page has children and should not be force-deleted
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to delete the page, one of its files or subpages
+	 * @throws \Infinri\Exception\LogicException If the page has children and should not be force-deleted
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to delete the page, one of its files or subpages
 	 */
 	public static function delete(Page $page, bool $force = false): void
 	{
@@ -273,7 +273,7 @@ class PageRules
 	/**
 	 * Validates if the page can be duplicated
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to duplicate the page
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to duplicate the page
 	 */
 	public static function duplicate(
 		Page $page,
@@ -403,7 +403,7 @@ class PageRules
 	/**
 	 * Validates if the page can be updated
 	 *
-	 * @throws \Kirby\Exception\PermissionException If the user is not allowed to update the page
+	 * @throws \Infinri\Exception\PermissionException If the user is not allowed to update the page
 	 */
 	public static function update(Page $page, array $content = []): void
 	{
@@ -419,7 +419,7 @@ class PageRules
 	 * Ensures that the slug is not empty and doesn't exceed the maximum length
 	 * to make sure that the directory name will be accepted by the filesystem
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the slug is empty or too long
+	 * @throws \Infinri\Exception\InvalidArgumentException If the slug is empty or too long
 	 */
 	public static function validateSlugLength(string $slug): void
 	{
@@ -446,7 +446,7 @@ class PageRules
 	 * Ensure that a top-level page path does not start with one of
 	 * the reserved URL paths, e.g. for API or the Panel
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the page ID starts as one of the disallowed paths
+	 * @throws \Infinri\Exception\InvalidArgumentException If the page ID starts as one of the disallowed paths
 	 */
 	protected static function validateSlugProtectedPaths(
 		Page $page,
@@ -477,7 +477,7 @@ class PageRules
 	/**
 	 * Ensures that the page title is not empty
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the title is empty
+	 * @throws \Infinri\Exception\InvalidArgumentException If the title is empty
 	 */
 	public static function validateTitleLength(string $title): void
 	{

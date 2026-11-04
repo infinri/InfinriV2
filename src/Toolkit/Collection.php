@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Closure;
 use Exception;
 use InvalidArgumentException;
-use Kirby\Cms\App;
+use Infinri\Cms\App;
 use ReflectionFunction;
 use ReflectionMethod;
 use Stringable;
@@ -27,7 +27,7 @@ class Collection extends Iterator implements Stringable
 	protected bool $caseSensitive = false;
 
 	/**
-	 * @var \Kirby\Toolkit\Pagination|null
+	 * @var \Infinri\Toolkit\Pagination|null
 	 */
 	protected $pagination;
 
@@ -507,7 +507,7 @@ class Collection extends Iterator implements Stringable
 		if ($cache[$key] === false) {
 			// throw in debug mode so developers get a clear signal instead of a silent null
 			if (
-				class_exists('Kirby\Cms\App', false) === true &&
+				class_exists('Infinri\Cms\App', false) === true &&
 				App::instance(lazy: true)?->option('debug') === true
 			) {
 				throw new InvalidArgumentException(

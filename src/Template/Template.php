@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Template;
+namespace Infinri\Template;
 
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\Tpl;
+use Infinri\Cms\App;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\Tpl;
 use Stringable;
 
 class Template implements Stringable

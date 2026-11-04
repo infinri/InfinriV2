@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Exception;
+namespace Infinri\Exception;
 
-use Kirby\Cms\App;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
+use Infinri\Toolkit\I18n;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class WillFail

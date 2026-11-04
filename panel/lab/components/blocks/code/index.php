@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Fieldsets;
+use Infinri\Cms\Fieldsets;
 
 $fieldset = Fieldsets::factory()->get('code');
 $defaults = $fieldset->form($fieldset->fields())->data(true);

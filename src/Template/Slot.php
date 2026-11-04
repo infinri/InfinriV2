@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Template;
+namespace Infinri\Template;
 
-use Kirby\Exception\LogicException;
+use Infinri\Exception\LogicException;
 use Stringable;
 
 class Slot implements Stringable

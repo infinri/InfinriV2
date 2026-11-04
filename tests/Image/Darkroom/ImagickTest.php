@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Image\Darkroom;
+namespace Infinri\Image\Darkroom;
 
 use Imagick as Image;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionClass;

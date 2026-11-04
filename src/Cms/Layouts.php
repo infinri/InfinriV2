@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Json;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Json;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Layouts extends Items

@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\System;
-use Kirby\Exception\PermissionException;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\System;
+use Infinri\Exception\PermissionException;
+use Infinri\Toolkit\Str;
 
 /**
  * System

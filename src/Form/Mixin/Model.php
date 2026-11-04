@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Form\Mixin;
+namespace Infinri\Form\Mixin;
 
-use Kirby\Cms\App;
-use Kirby\Cms\ModelWithContent;
+use Infinri\Cms\App;
+use Infinri\Cms\ModelWithContent;
 
 trait Model
 {

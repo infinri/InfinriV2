@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
-use Kirby\Cms\File;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Data\Data;
-use Kirby\Toolkit\A;
+use Infinri\Cms\File;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Data\Data;
+use Infinri\Toolkit\A;
 
 class Form
 {
@@ -104,7 +104,7 @@ class Form
 	 * Get the field object by name
 	 * and handle nested fields correctly
 	 *
-	 * @throws \Kirby\Exception\NotFoundException
+	 * @throws \Infinri\Exception\NotFoundException
 	 */
 	public function field(string $name): Field|FieldClass
 	{
@@ -369,7 +369,7 @@ class Form
 	/**
 	 * Validates the form and throws an exception if there are any errors
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function validate(): void
 	{

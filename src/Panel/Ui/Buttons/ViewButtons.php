@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Panel\Model;
+use Infinri\Cms\App;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Panel\Model;
 
 class ViewButtons
 {

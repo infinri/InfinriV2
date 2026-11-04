@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\App;
+use Infinri\Cms\App;
 
 return [
 	'search' => [

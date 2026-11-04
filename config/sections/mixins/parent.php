@@ -1,10 +1,10 @@
 <?php
 
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Cms\User;
-use Kirby\Exception\Exception;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Cms\User;
+use Infinri\Exception\Exception;
 
 return [
 	'props' => [

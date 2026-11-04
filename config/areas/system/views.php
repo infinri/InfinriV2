@@ -1,9 +1,9 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Http\Cookie;
-use Kirby\Panel\Ui\Buttons\ViewButtons;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Http\Cookie;
+use Infinri\Panel\Ui\Buttons\ViewButtons;
+use Infinri\Toolkit\I18n;
 
 return [
 	'system' => [

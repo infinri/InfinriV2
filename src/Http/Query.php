@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Toolkit\Obj;
+use Infinri\Toolkit\Obj;
 use Stringable;
 
 class Query extends Obj implements Stringable

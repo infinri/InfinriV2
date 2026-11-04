@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms\Auth;
+namespace Infinri\Cms\Auth;
 
-use Kirby\Cms\App;
-use Kirby\Cms\TestCase;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Cms\App;
+use Infinri\Cms\TestCase;
+use Infinri\Exception\InvalidArgumentException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Status::class)]

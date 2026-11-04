@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Query\Visitors;
+namespace Infinri\Query\Visitors;
 
 use Closure;
 use Exception;
-use Kirby\Query\AST\ClosureNode;
-use Kirby\Query\Runners\Scope;
+use Infinri\Query\AST\ClosureNode;
+use Infinri\Query\Runners\Scope;
 
 class DefaultVisitor extends Visitor
 {

@@ -155,7 +155,7 @@
 	"error.language.name": "Unesi važeći naziv za jezik",
 	"error.language.notFound": "Jezik nije pronađen",
 	"error.language.update.permission": "Nemate dozvolu da ažurirate jezik",
-	"error.language.variable.core": "\"{key}\" is one of Kirby's own translation strings and cannot be overwritten by a language variable",
+	"error.language.variable.core": "\"{key}\" is one of Infinri's own translation strings and cannot be overwritten by a language variable",
 	"error.language.variable.duplicate": "A variable for \"{key}\" already exists",
 	"error.language.variable.key": "Please enter a valid key for the variable",
 	"error.language.variable.notFound": "Varijablu nije moguće pronaći",

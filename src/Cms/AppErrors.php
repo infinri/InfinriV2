@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Exception\Exception;
-use Kirby\Http\Response;
-use Kirby\Toolkit\I18n;
+use Infinri\Exception\Exception;
+use Infinri\Http\Response;
+use Infinri\Toolkit\I18n;
 use Throwable;
 use Whoops\Handler\CallbackHandler;
 use Whoops\Handler\Handler;

@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Cms\Helpers;
-use Kirby\Cms\Page;
-use Kirby\TestCase;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Helpers;
+use Infinri\Cms\Page;
+use Infinri\TestCase;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class DirFlakyRemoveRecursive extends Dir

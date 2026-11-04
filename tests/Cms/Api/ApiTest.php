@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Exception\AuthException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
-use Kirby\Http\Response;
-use Kirby\Toolkit\I18n;
+use Infinri\Exception\AuthException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\Dir;
+use Infinri\Http\Response;
+use Infinri\Toolkit\I18n;
 
 class ApiTest extends TestCase
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Panel\Ui;
+namespace Infinri\Panel\Ui;
 
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Panel\Ui\FilePreviews\DefaultFilePreview;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Panel\Ui\FilePreviews\DefaultFilePreview;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class DummyFilePreview extends FilePreview
@@ -119,7 +119,7 @@ class FilePreviewTest extends TestCase
 		$file = new File(['filename' => 'test.jpg', 'parent' => $page]);
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('File preview handler "Kirby\Panel\Ui\InvalidFilePreview" must extend Kirby\Panel\Ui\FilePreview');
+		$this->expectExceptionMessage('File preview handler "Infinri\Panel\Ui\InvalidFilePreview" must extend Infinri\Panel\Ui\FilePreview');
 
 		FilePreview::factory($file);
 	}

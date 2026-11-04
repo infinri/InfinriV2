@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms\Auth;
+namespace Infinri\Cms\Auth;
 
-use Kirby\Cms\App;
-use Kirby\Cms\TestCase;
-use Kirby\Email\Email;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\App;
+use Infinri\Cms\TestCase;
+use Infinri\Email\Email;
+use Infinri\Filesystem\Dir;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(EmailChallenge::class)]

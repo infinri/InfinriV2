@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\Pages;
-use Kirby\Content\Changes;
-use Kirby\Panel\Areas\AreaTestCase;
-use Kirby\Uuid\Uuids;
+use Infinri\Cms\Pages;
+use Infinri\Content\Changes;
+use Infinri\Panel\Areas\AreaTestCase;
+use Infinri\Uuid\Uuids;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(ChangesDialog::class)]

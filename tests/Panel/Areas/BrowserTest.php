@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
-use Kirby\Http\Response;
+use Infinri\Http\Response;
 
 class BrowserTest extends AreaTestCase
 {

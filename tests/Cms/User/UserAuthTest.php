@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\F;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(User::class)]

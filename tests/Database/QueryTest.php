@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
 use InvalidArgumentException;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Pagination;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Pagination;
 use PDOException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
@@ -414,7 +414,7 @@ class QueryTest extends TestCase
 		);
 		$this->assertSame(
 			'John Lennon',
-			(clone $query)->fetch('\Kirby\Database\MockClassWithCallable::fromDb')->first()->name()
+			(clone $query)->fetch('\Infinri\Database\MockClassWithCallable::fromDb')->first()->name()
 		);
 	}
 

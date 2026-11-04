@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Panel\Lab;
+namespace Infinri\Panel\Lab;
 
-use Kirby\Cms\App;
-use Kirby\Data\Data;
-use Kirby\Panel\Lab\Doc\Event;
-use Kirby\Panel\Lab\Doc\Method;
-use Kirby\Panel\Lab\Doc\Prop;
-use Kirby\Panel\Lab\Doc\Slot;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Data\Data;
+use Infinri\Panel\Lab\Doc\Event;
+use Infinri\Panel\Lab\Doc\Method;
+use Infinri\Panel\Lab\Doc\Prop;
+use Infinri\Panel\Lab\Doc\Slot;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Doc

@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\Exception;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
-use Kirby\TestCase;
+use Infinri\Exception\Exception;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
 
 class BatchSectionMixinTest extends TestCase
 {

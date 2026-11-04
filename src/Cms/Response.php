@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-class Response extends \Kirby\Http\Response
+class Response extends \Infinri\Http\Response
 {
 	/**
 	 * Adjusted redirect creation which

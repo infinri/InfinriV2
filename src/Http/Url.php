@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Str;
 use Whoops\Handler\PrettyPageHandler;
 
 class Url
@@ -281,7 +281,7 @@ class Url
 
 	/**
 	 * Smart resolver for internal and external urls
-	 * @deprecated 5.3.0 Use `Kirby\Cms\Url::to()` instead
+	 * @deprecated 5.3.0 Use `Infinri\Cms\Url::to()` instead
 	 */
 	public static function to(
 		string|null $path = null,

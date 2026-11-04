@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cms\Api\ApiModelTestCase;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\Api\ApiModelTestCase;
+use Infinri\Filesystem\Dir;
 
 class FileVersionApiModelTest extends ApiModelTestCase
 {

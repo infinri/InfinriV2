@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
 
 class Locale
 {
@@ -46,8 +46,8 @@ class Locale
 	 * @param int|string $category Locale category constant or constant name
 	 * @return array|string Associative array if `LC_ALL` was passed (default), otherwise string
 	 *
-	 * @throws \Kirby\Exception\Exception If the locale cannot be determined
-	 * @throws \Kirby\Exception\InvalidArgumentException If the provided locale category is invalid
+	 * @throws \Infinri\Exception\Exception If the locale cannot be determined
+	 * @throws \Infinri\Exception\InvalidArgumentException If the provided locale category is invalid
 	 */
 	public static function get(int|string $category = LC_ALL): array|string
 	{

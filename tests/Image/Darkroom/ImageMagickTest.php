@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Image\Darkroom;
+namespace Infinri\Image\Darkroom;
 
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F as FilesystemF;
-use Kirby\TestCase;
-use Kirby\Toolkit\F;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F as FilesystemF;
+use Infinri\TestCase;
+use Infinri\Toolkit\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionMethod;

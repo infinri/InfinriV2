@@ -57,6 +57,6 @@
 	<coverage ignoreDeprecatedCodeUnits="true" />
 
 	<extensions>
-		<bootstrap class="Kirby\PhpUnitExtension"/>
+		<bootstrap class="Infinri\PhpUnitExtension"/>
 	</extensions>
 </phpunit>

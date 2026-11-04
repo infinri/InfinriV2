@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Reflection;
+namespace Infinri\Reflection;
 
 use ReflectionMethod;
 use ReflectionParameter;

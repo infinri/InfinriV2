@@ -1,14 +1,14 @@
 <?php
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Page;
-use Kirby\Cms\Site;
-use Kirby\Panel\Ui\Buttons\LanguagesDropdown;
-use Kirby\Panel\Ui\Buttons\OpenButton;
-use Kirby\Panel\Ui\Buttons\PageStatusButton;
-use Kirby\Panel\Ui\Buttons\PreviewButton;
-use Kirby\Panel\Ui\Buttons\SettingsButton;
-use Kirby\Panel\Ui\Buttons\VersionsButton;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Page;
+use Infinri\Cms\Site;
+use Infinri\Panel\Ui\Buttons\LanguagesDropdown;
+use Infinri\Panel\Ui\Buttons\OpenButton;
+use Infinri\Panel\Ui\Buttons\PageStatusButton;
+use Infinri\Panel\Ui\Buttons\PreviewButton;
+use Infinri\Panel\Ui\Buttons\SettingsButton;
+use Infinri\Panel\Ui\Buttons\VersionsButton;
 
 return [
 	'site.open' => function (Site $site, string $versionId = 'latest') {

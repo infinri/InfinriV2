@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Cms\Language;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\Http\Response;
-use Kirby\TestCase;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Language;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\Http\Response;
+use Infinri\TestCase;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(View::class)]

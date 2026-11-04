@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Database;
+namespace Infinri\Database;
 
 use Closure;
 use InvalidArgumentException;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\Obj;
-use Kirby\Toolkit\Pagination;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\Obj;
+use Infinri\Toolkit\Pagination;
+use Infinri\Toolkit\Str;
 
 class Query
 {
@@ -193,7 +193,7 @@ class Query
 	 * Sets the name of the table, which should be queried
 	 *
 	 * @return $this
-	 * @throws \Kirby\Exception\InvalidArgumentException if the table does not exist
+	 * @throws \Infinri\Exception\InvalidArgumentException if the table does not exist
 	 */
 	public function table(string $table): static
 	{

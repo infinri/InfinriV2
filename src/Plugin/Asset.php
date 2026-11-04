@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Plugin;
+namespace Infinri\Plugin;
 
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\BlockCollectionAccess;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\BlockCollectionAccess;
 use Stringable;
 
 class Asset implements Stringable

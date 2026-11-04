@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Cms\Auth\ErrorneousChallenge;
-use Kirby\Email\Email;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\Auth\ErrorneousChallenge;
+use Infinri\Email\Email;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\Dir;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Throwable;
 

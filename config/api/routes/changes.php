@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Api\Controller\Changes;
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
+use Infinri\Api\Controller\Changes;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
 
 return [
 	[

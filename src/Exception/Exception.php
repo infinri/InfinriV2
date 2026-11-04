@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Exception;
+namespace Infinri\Exception;
 
-use Kirby\Http\Environment;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Http\Environment;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Exception extends \Exception

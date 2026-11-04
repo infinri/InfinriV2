@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Page;
+use Infinri\Cms\Page;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Versions::class)]

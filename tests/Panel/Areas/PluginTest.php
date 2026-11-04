@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Areas;
+namespace Infinri\Panel\Areas;
 
-use Kirby\Cms\App;
+use Infinri\Cms\App;
 
 class PluginTest extends AreaTestCase
 {

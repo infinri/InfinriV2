@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use IntlDateFormatter;
-use Kirby\Data\Json;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\F;
-use Kirby\Http\Remote;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\V;
+use Infinri\Data\Json;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\F;
+use Infinri\Http\Remote;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\V;
 use Throwable;
 class License
 {

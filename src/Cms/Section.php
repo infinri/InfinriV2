@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Component;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Component;
 
 class Section extends Component
 {
@@ -19,7 +19,7 @@ class Section extends Component
 	public static array $types = [];
 
 	/**
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function __construct(string $type, array $attrs = [])
 	{

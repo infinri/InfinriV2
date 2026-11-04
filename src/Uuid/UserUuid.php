@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
-use Kirby\Cms\App;
-use Kirby\Cms\User;
+use Infinri\Cms\App;
+use Infinri\Cms\User;
 
 class UserUuid extends Uuid
 {
@@ -23,7 +23,7 @@ class UserUuid extends Uuid
 	/**
 	 * Generator for all users
 	 *
-	 * @return \Generator|\Kirby\Cms\User[]
+	 * @return \Generator|\Infinri\Cms\User[]
 	 */
 	public static function index(): Generator
 	{

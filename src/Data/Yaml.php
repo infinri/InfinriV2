@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
-use Kirby\Cms\App;
-use Kirby\Exception\InvalidArgumentException;
+use Infinri\Cms\App;
+use Infinri\Exception\InvalidArgumentException;
 
 class Yaml extends Handler
 {

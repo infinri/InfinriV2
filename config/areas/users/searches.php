@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Panel\Controller\Search;
-use Kirby\Toolkit\I18n;
+use Infinri\Panel\Controller\Search;
+use Infinri\Toolkit\I18n;
 
 return [
 	'users' => [

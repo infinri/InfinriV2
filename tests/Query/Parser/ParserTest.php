@@ -1,20 +1,20 @@
 <?php
 
-namespace Kirby\Query\Parser;
+namespace Infinri\Query\Parser;
 
 use Exception;
-use Kirby\Query\AST\ArgumentListNode;
-use Kirby\Query\AST\ArithmeticNode;
-use Kirby\Query\AST\ArrayListNode;
-use Kirby\Query\AST\ClosureNode;
-use Kirby\Query\AST\CoalesceNode;
-use Kirby\Query\AST\ComparisonNode;
-use Kirby\Query\AST\GlobalFunctionNode;
-use Kirby\Query\AST\LiteralNode;
-use Kirby\Query\AST\MemberAccessNode;
-use Kirby\Query\AST\TernaryNode;
-use Kirby\Query\AST\VariableNode;
-use Kirby\TestCase;
+use Infinri\Query\AST\ArgumentListNode;
+use Infinri\Query\AST\ArithmeticNode;
+use Infinri\Query\AST\ArrayListNode;
+use Infinri\Query\AST\ClosureNode;
+use Infinri\Query\AST\CoalesceNode;
+use Infinri\Query\AST\ComparisonNode;
+use Infinri\Query\AST\GlobalFunctionNode;
+use Infinri\Query\AST\LiteralNode;
+use Infinri\Query\AST\MemberAccessNode;
+use Infinri\Query\AST\TernaryNode;
+use Infinri\Query\AST\VariableNode;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionClass;

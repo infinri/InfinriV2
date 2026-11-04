@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
 use Exception;
-use Kirby\Exception\LogicException;
-use Kirby\Http\HeadersSent;
-use Kirby\TestCase;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\LogicException;
+use Infinri\Http\HeadersSent;
+use Infinri\TestCase;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 use stdClass;
 
@@ -328,7 +328,7 @@ class FTest extends TestCase
 		$this->assertSame('foo', F::load($file, allowOutput: false));
 
 		// no protection against accidental output (with output)
-		F::write($file = static::TMP . '/test.php', '<?php Kirby\Http\HeadersSent::$value = true; return "foo";');
+		F::write($file = static::TMP . '/test.php', '<?php Infinri\Http\HeadersSent::$value = true; return "foo";');
 		$this->assertSame('foo', F::load($file));
 	}
 
@@ -337,7 +337,7 @@ class FTest extends TestCase
 		$this->expectException(LogicException::class);
 		$this->expectExceptionMessage('Disallowed output from file file.php:123, possible accidental whitespace?');
 
-		F::write($file = static::TMP . '/test.php', '<?php Kirby\Http\HeadersSent::$value = true; return "foo";');
+		F::write($file = static::TMP . '/test.php', '<?php Infinri\Http\HeadersSent::$value = true; return "foo";');
 
 		F::load($file, allowOutput: false);
 	}
@@ -405,7 +405,7 @@ class FTest extends TestCase
 		$this->assertTrue(F::loadOnce($file, allowOutput: false));
 
 		// no protection against accidental output (with output)
-		F::write($file = static::TMP . '/test3.php', '<?php Kirby\Http\HeadersSent::$value = true; return "foo";');
+		F::write($file = static::TMP . '/test3.php', '<?php Infinri\Http\HeadersSent::$value = true; return "foo";');
 		$this->assertTrue(F::loadOnce($file));
 	}
 
@@ -414,7 +414,7 @@ class FTest extends TestCase
 		$this->expectException(LogicException::class);
 		$this->expectExceptionMessage('Disallowed output from file file.php:123, possible accidental whitespace?');
 
-		F::write($file = static::TMP . '/test4.php', '<?php Kirby\Http\HeadersSent::$value = true; return "foo";');
+		F::write($file = static::TMP . '/test4.php', '<?php Infinri\Http\HeadersSent::$value = true; return "foo";');
 
 		F::loadOnce($file, allowOutput: false);
 	}

@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
 use Closure;
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
 
 class Segment
 {
@@ -25,7 +25,7 @@ class Segment
 	 * @param string $name Name of the method/property that was accessed
 	 * @param string $label Type of the name (`method`, `property` or `method/property`)
 	 *
-	 * @throws \Kirby\Exception\BadMethodCallException
+	 * @throws \Infinri\Exception\BadMethodCallException
 	 */
 	#[BlockCollectionAccess]
 	public static function error(

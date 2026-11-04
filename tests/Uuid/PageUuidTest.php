@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
-use Kirby\Cms\App;
+use Infinri\Cms\App;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

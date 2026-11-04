@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Uuid\Uuid;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Uuid\Uuid;
 
 trait HasFiles
 {

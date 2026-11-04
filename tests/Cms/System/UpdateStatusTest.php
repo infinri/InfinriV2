@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms\System;
+namespace Infinri\Cms\System;
 
-use Kirby\Cms\License;
-use Kirby\Data\Json;
-use Kirby\Filesystem\Dir;
-use Kirby\Plugin\Plugin;
-use Kirby\TestCase;
+use Infinri\Cms\License;
+use Infinri\Data\Json;
+use Infinri\Filesystem\Dir;
+use Infinri\Plugin\Plugin;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionProperty;

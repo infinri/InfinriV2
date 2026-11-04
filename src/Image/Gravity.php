@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
 enum Gravity: string
 {

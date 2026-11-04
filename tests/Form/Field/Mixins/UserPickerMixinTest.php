@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Page;
-use Kirby\Form\Field;
+use Infinri\Cms\App;
+use Infinri\Cms\Page;
+use Infinri\Form\Field;
 
 class UserPickerMixinTest extends TestCase
 {

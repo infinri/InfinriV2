@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Fieldsets;
+use Infinri\Cms\Fieldsets;
 
 $fieldset = Fieldsets::factory()->get('quote');
 $defaults = $fieldset->form($fieldset->fields())->data(true);

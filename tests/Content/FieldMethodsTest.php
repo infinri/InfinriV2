@@ -1,23 +1,23 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Blocks;
-use Kirby\Cms\Collection;
-use Kirby\Cms\Files;
-use Kirby\Cms\Layouts;
-use Kirby\Cms\Page;
-use Kirby\Cms\Pages;
-use Kirby\Cms\Site;
-use Kirby\Cms\Users;
-use Kirby\Data\Data;
-use Kirby\Data\Json;
-use Kirby\Data\Yaml;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\Image\QrCode;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\Blocks;
+use Infinri\Cms\Collection;
+use Infinri\Cms\Files;
+use Infinri\Cms\Layouts;
+use Infinri\Cms\Page;
+use Infinri\Cms\Pages;
+use Infinri\Cms\Site;
+use Infinri\Cms\Users;
+use Infinri\Data\Data;
+use Infinri\Data\Json;
+use Infinri\Data\Yaml;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
+use Infinri\Image\QrCode;
+use Infinri\TestCase;
 
 class FieldMethodsTest extends TestCase
 {

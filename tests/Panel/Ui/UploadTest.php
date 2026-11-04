@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Ui;
+namespace Infinri\Panel\Ui;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Upload::class)]

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Query\Runners;
+namespace Infinri\Query\Runners;
 
-use Kirby\TestCase as BaseTestCase;
+use Infinri\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {

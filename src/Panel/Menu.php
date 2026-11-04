@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
 use Closure;
-use Kirby\Cms\App;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Toolkit\I18n;
 
 class Menu
 {

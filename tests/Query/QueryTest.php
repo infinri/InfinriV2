@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
 use Closure;
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Query\Runners\DefaultRunner;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Query\Runners\DefaultRunner;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -60,7 +60,7 @@ class QueryTest extends TestCase
 		]);
 
 		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('Query runner foo must extend Kirby\Query\Runners\Runner');
+		$this->expectExceptionMessage('Query runner foo must extend Infinri\Query\Runners\Runner');
 
 		new Query('');
 	}

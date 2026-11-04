@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 /**

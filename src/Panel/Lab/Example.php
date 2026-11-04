@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Panel\Lab;
+namespace Infinri\Panel\Lab;
 
-use Kirby\Cms\Inventory;
-use Kirby\Exception\NotFoundException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Http\Response;
+use Infinri\Cms\Inventory;
+use Infinri\Exception\NotFoundException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Http\Response;
 
 class Example
 {

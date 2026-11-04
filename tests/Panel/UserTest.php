@@ -1,15 +1,15 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Blueprint;
-use Kirby\Cms\User as ModelUser;
-use Kirby\Content\Lock;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Blueprint;
+use Infinri\Cms\User as ModelUser;
+use Infinri\Content\Lock;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class UserForceLocked extends ModelUser
@@ -23,7 +23,7 @@ class UserForceLocked extends ModelUser
 	}
 }
 
-#[CoversClass(\Kirby\Panel\User::class)]
+#[CoversClass(\Infinri\Panel\User::class)]
 #[CoversClass(Model::class)]
 class UserTest extends TestCase
 {

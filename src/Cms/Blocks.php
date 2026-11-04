@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Data\Json;
-use Kirby\Data\Yaml;
-use Kirby\Parsley\Parsley;
-use Kirby\Parsley\Schema\Blocks as BlockSchema;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Data\Json;
+use Infinri\Data\Yaml;
+use Infinri\Parsley\Parsley;
+use Infinri\Parsley\Schema\Blocks as BlockSchema;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class Blocks extends Items

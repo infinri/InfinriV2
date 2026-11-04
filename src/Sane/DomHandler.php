@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Sane;
+namespace Infinri\Sane;
 
 use DOMAttr;
 use DOMDocumentType;
 use DOMElement;
-use Kirby\Toolkit\Dom;
+use Infinri\Toolkit\Dom;
 
 class DomHandler extends Handler
 {
@@ -55,7 +55,7 @@ class DomHandler extends Handler
 	 * @param bool $isExternal Whether the string is from an external file
 	 *                         that may be accessed directly
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file couldn't be parsed
 	 */
 	public static function sanitize(
 		string $string,
@@ -72,8 +72,8 @@ class DomHandler extends Handler
 	 * @param bool $isExternal Whether the string is from an external file
 	 *                         that may be accessed directly
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file didn't pass validation
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file couldn't be parsed
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file didn't pass validation
 	 */
 	public static function validate(
 		string $string,
@@ -159,7 +159,7 @@ class DomHandler extends Handler
 	/**
 	 * Parses the given string into a `Toolkit\Dom` object
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the file couldn't be parsed
+	 * @throws \Infinri\Exception\InvalidArgumentException If the file couldn't be parsed
 	 */
 	protected static function parse(string $string): Dom
 	{

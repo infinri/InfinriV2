@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Content\Field;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Asset;
+use Infinri\Content\Field;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Asset;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

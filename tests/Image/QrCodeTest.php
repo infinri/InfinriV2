@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
 use GdImage;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(QrCode::class)]

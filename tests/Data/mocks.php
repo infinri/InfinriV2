@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
 class CustomHandler extends Json
 {

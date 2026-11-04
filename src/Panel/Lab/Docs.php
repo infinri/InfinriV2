@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Panel\Lab;
+namespace Infinri\Panel\Lab;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Inventory;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Inventory;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class Docs
 {

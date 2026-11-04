@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
 use Closure;
 use PHPUnit\Framework\Attributes\CoversClass;

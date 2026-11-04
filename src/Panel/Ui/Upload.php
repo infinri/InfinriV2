@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Panel\Ui;
+namespace Infinri\Panel\Ui;
 
 class Upload
 {

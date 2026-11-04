@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\NotFoundException;
-use Kirby\Template\Template;
+use Infinri\Exception\NotFoundException;
+use Infinri\Template\Template;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Page::class)]

@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
 use Generator;
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\HasFiles;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\HasFiles;
 
 class FileUuid extends ModelUuid
 {
@@ -43,7 +43,7 @@ class FileUuid extends ModelUuid
 	 * Generator for all files in the site
 	 * (of all pages, users and site)
 	 *
-	 * @return \Generator|\Kirby\Cms\File[]
+	 * @return \Generator|\Infinri\Cms\File[]
 	 */
 	public static function index(): Generator
 	{

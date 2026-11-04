@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Collector;
+namespace Infinri\Panel\Collector;
 
-use Kirby\Cms\Pages;
+use Infinri\Cms\Pages;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(PagesCollector::class)]

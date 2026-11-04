@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Text;
+namespace Infinri\Text;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(SmartyPants::class)]

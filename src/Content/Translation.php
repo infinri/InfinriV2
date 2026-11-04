@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Helpers;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Exception\Exception;
-use Kirby\Toolkit\BlockCollectionAccess;
+use Infinri\Cms\Helpers;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Exception\Exception;
+use Infinri\Toolkit\BlockCollectionAccess;
 
 class Translation
 {

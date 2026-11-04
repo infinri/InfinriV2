@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
-use Kirby\Cms\App;
-use Kirby\Toolkit\A;
+use Infinri\Cms\App;
+use Infinri\Toolkit\A;
 use Symfony\Component\Yaml\Yaml as Symfony;
 
 class YamlSymfony

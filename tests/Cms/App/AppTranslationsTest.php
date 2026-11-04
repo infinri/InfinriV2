@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\Exception;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Locale;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\Exception;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Locale;
+use Infinri\Toolkit\Str;
 
 class AppTranslationsTest extends TestCase
 {

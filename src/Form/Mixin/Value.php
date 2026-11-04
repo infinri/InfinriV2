@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Form\Mixin;
+namespace Infinri\Form\Mixin;
 
-use Kirby\Cms\Language;
-use Kirby\Toolkit\BlockCollectionAccess;
+use Infinri\Cms\Language;
+use Infinri\Toolkit\BlockCollectionAccess;
 use ReflectionProperty;
 
 trait Value

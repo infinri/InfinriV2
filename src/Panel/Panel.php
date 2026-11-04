@@ -1,22 +1,22 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
 use Closure;
-use Kirby\Api\Upload;
-use Kirby\Cms\App;
-use Kirby\Cms\Url as CmsUrl;
-use Kirby\Cms\User;
-use Kirby\Exception\Exception;
-use Kirby\Exception\NotFoundException;
-use Kirby\Exception\PermissionException;
-use Kirby\Http\Response;
-use Kirby\Http\Router;
-use Kirby\Http\Uri;
-use Kirby\Http\Url;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
-use Kirby\Toolkit\Tpl;
+use Infinri\Api\Upload;
+use Infinri\Cms\App;
+use Infinri\Cms\Url as CmsUrl;
+use Infinri\Cms\User;
+use Infinri\Exception\Exception;
+use Infinri\Exception\NotFoundException;
+use Infinri\Exception\PermissionException;
+use Infinri\Http\Response;
+use Infinri\Http\Router;
+use Infinri\Http\Uri;
+use Infinri\Http\Url;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
+use Infinri\Toolkit\Tpl;
 use Throwable;
 
 class Panel
@@ -165,7 +165,7 @@ class Panel
 	/**
 	 * Redirect to a Panel url
 	 *
-	 * @throws \Kirby\Panel\Redirect
+	 * @throws \Infinri\Panel\Redirect
 	 * @codeCoverageIgnore
 	 */
 	public static function go(string|null $url = null, int $code = 302, int|false $refresh = false): void

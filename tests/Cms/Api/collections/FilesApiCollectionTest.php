@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cms\Api\ApiCollectionTestCase;
+use Infinri\Cms\Api\ApiCollectionTestCase;
 
 class FilesApiCollectionTest extends ApiCollectionTestCase
 {

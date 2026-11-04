@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Panel\Ui\Item;
+namespace Infinri\Panel\Ui\Item;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Panel\Model as Panel;
-use Kirby\Panel\Ui\Component;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Panel\Model as Panel;
+use Infinri\Panel\Ui\Component;
 
 class ModelItem extends Component
 {

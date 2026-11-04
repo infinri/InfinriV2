@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Exception\PermissionException;
+use Infinri\Exception\PermissionException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(SiteRules::class)]

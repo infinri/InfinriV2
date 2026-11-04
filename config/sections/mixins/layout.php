@@ -1,9 +1,9 @@
 <?php
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Form\Form;
-use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Form\Form;
+use Infinri\Toolkit\I18n;
+use Infinri\Toolkit\Str;
 
 return [
 	'props' => [

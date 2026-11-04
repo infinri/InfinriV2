@@ -155,7 +155,7 @@
 	"error.language.name": "Lütfen dil için geçerli bir isim girin",
 	"error.language.notFound": "Dil bulunamadı",
 	"error.language.update.permission": "Dili güncellemenize izin verilmiyor",
-	"error.language.variable.core": "\"{key}\", Kirby'nin kendi çeviri dizelerinden biridir ve bir dil değişkeniyle üzerine yazılamaz",
+	"error.language.variable.core": "\"{key}\", Infinri'nin kendi çeviri dizelerinden biridir ve bir dil değişkeniyle üzerine yazılamaz",
 	"error.language.variable.duplicate": "\"{key}\" için bir değişken zaten mevcut",
 	"error.language.variable.key": "Lütfen değişken için geçerli bir anahtar girin",
 	"error.language.variable.notFound": "Değişken bulunamadı",

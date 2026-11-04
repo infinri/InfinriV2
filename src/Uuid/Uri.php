@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
-use Kirby\Http\Uri as BaseUri;
-use Kirby\Toolkit\Str;
+use Infinri\Http\Uri as BaseUri;
+use Infinri\Toolkit\Str;
 
 class Uri extends BaseUri
 {

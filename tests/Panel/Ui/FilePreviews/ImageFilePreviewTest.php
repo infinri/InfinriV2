@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Panel\Ui\FilePreviews;
+namespace Infinri\Panel\Ui\FilePreviews;
 
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Page;
-use Kirby\Filesystem\F;
-use Kirby\Panel\Ui\FilePreview;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Page;
+use Infinri\Filesystem\F;
+use Infinri\Panel\Ui\FilePreview;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

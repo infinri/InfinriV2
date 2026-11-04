@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Toolkit\Collection;
+use Infinri\Toolkit\Collection;
 
 trait HasSiblings
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Focus::class)]

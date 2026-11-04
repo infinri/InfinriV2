@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\File;
-use Kirby\Cms\Language;
-use Kirby\Cms\Page;
-use Kirby\Data\Data;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\File;
+use Infinri\Cms\Language;
+use Infinri\Cms\Page;
+use Infinri\Data\Data;
+use Infinri\Filesystem\Dir;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Storage::class)]

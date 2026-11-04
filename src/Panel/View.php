@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Api\Upload;
-use Kirby\Cms\App;
-use Kirby\Exception\Exception;
-use Kirby\Http\Response;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Date;
-use Kirby\Toolkit\Str;
+use Infinri\Api\Upload;
+use Infinri\Cms\App;
+use Infinri\Exception\Exception;
+use Infinri\Http\Response;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Date;
+use Infinri\Toolkit\Str;
 use Throwable;
 
 class View
@@ -280,7 +280,7 @@ class View
 					'isLocal' => $kirby->system()->isLocal(),
 					'locales' => $locales,
 					'slugs'   => Str::$language,
-					'title'   => $kirby->site()->title()->or('Kirby Panel')->toString()
+					'title'   => $kirby->site()->title()->or('Infinri Admin')->toString()
 				];
 			},
 			'$translation' => function () use ($kirby) {

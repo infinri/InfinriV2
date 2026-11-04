@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Query\Parser;
+namespace Infinri\Query\Parser;
 
 use Exception;
 use Generator;

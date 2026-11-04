@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Panel\Ui;
+namespace Infinri\Panel\Ui;
 
-use Kirby\Exception\LogicException;
-use Kirby\Toolkit\Str;
+use Infinri\Exception\LogicException;
+use Infinri\Toolkit\Str;
 
 abstract class Component
 {

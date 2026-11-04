@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Form\Field;
+namespace Infinri\Form\Field;
 
 class TelFieldTest extends TestCase
 {

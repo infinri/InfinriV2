@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Exception;
 use PHPUnit\Framework\Attributes\CoversClass;

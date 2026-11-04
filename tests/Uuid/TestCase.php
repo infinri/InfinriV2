@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Uuid;
+namespace Infinri\Uuid;
 
-use Kirby\Cms\App;
-use Kirby\TestCase as BaseTestCase;
+use Infinri\Cms\App;
+use Infinri\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {

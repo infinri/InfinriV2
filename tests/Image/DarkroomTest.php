@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
 use Exception;
-use Kirby\Image\Darkroom\GdLib;
-use Kirby\Image\Darkroom\ImageMagick;
-use Kirby\Image\Darkroom\Imagick;
-use Kirby\TestCase;
+use Infinri\Image\Darkroom\GdLib;
+use Infinri\Image\Darkroom\ImageMagick;
+use Infinri\Image\Darkroom\Imagick;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionMethod;
 

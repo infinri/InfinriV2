@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Language;
-use Kirby\Filesystem\F;
+use Infinri\Cms\Language;
+use Infinri\Filesystem\F;
 
 /**
  * Plain text storage that simulates a parallel request

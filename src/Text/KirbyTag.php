@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Text;
+namespace Infinri\Text;
 
 use AllowDynamicProperties;
 use Closure;
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Helpers;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Exception\BadMethodCallException;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Uuid\Uri as UuidUri;
-use Kirby\Uuid\Uuid;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Helpers;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Exception\BadMethodCallException;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Uuid\Uri as UuidUri;
+use Infinri\Uuid\Uuid;
 
 #[AllowDynamicProperties]
 class KirbyTag

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Http\Uri;
-use Kirby\Toolkit\Pagination as BasePagination;
+use Infinri\Http\Uri;
+use Infinri\Toolkit\Pagination as BasePagination;
 
 class Pagination extends BasePagination
 {

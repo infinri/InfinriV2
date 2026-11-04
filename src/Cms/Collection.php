@@ -1,19 +1,19 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Toolkit\Collection as BaseCollection;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Uuid;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Toolkit\Collection as BaseCollection;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Uuid;
 
 class Collection extends BaseCollection
 {
 	use HasMethods;
 
 	/**
-	 * @var \Kirby\Cms\Pagination|null
+	 * @var \Infinri\Cms\Pagination|null
 	 */
 	protected $pagination;
 
@@ -71,7 +71,7 @@ class Collection extends BaseCollection
 	 * an entire second collection to the
 	 * current collection
 	 *
-	 * @param \Kirby\Cms\Collection<TValue>|array<TValue>|TValue $object
+	 * @param \Infinri\Cms\Collection<TValue>|array<TValue>|TValue $object
 	 * @return $this
 	 */
 	public function add($object): static
@@ -140,7 +140,7 @@ class Collection extends BaseCollection
 	 *
 	 * @param string|\Closure $field
 	 * @param bool $caseInsensitive Ignore upper/lowercase for group names
-	 * @throws \Kirby\Exception\Exception
+	 * @throws \Infinri\Exception\Exception
 	 */
 	public function group(
 		$field,

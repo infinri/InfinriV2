@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Helpers;
-use Kirby\Cms\Url;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\Asset;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Toolkit\A;
+use Infinri\Cms\App;
+use Infinri\Cms\Helpers;
+use Infinri\Cms\Url;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\Asset;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Toolkit\A;
 class Assets
 {
 	protected bool $isDev;
@@ -108,7 +108,7 @@ class Assets
 	/**
 	 * Returns array of favicon icons based on config option
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\InvalidArgumentException
 	 */
 	public function favicons(): array
 	{
@@ -265,7 +265,7 @@ class Assets
 	 * Links all dist files in the media folder
 	 * and returns the link to the requested asset
 	 *
-	 * @throws \Kirby\Exception\Exception If Panel assets could not be moved to the public directory
+	 * @throws \Infinri\Exception\Exception If Panel assets could not be moved to the public directory
 	 */
 	public function link(): bool
 	{

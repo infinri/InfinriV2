@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Plugin;
+namespace Infinri\Plugin;
 
 use Closure;
 use Stringable;

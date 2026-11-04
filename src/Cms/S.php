@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Session\Session;
-use Kirby\Toolkit\Facade;
+use Infinri\Session\Session;
+use Infinri\Toolkit\Facade;
 
 class S extends Facade
 {

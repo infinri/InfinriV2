@@ -1,12 +1,12 @@
 <?php
 
-namespace Kirby\Parsley;
+namespace Infinri\Parsley;
 
 use DOMDocument;
-use Kirby\Filesystem\F;
-use Kirby\Parsley\Schema\Blocks;
-use Kirby\TestCase;
-use Kirby\Toolkit\Dom;
+use Infinri\Filesystem\F;
+use Infinri\Parsley\Schema\Blocks;
+use Infinri\TestCase;
+use Infinri\Toolkit\Dom;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 

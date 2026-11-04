@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Filesystem\F;
+use Infinri\Filesystem\F;
 
 class LanguageRoutes
 {
@@ -54,7 +54,7 @@ class LanguageRoutes
 
 					// jump through to the fallback if nothing
 					// can be found for this language
-					/** @var \Kirby\Http\Route $this */
+					/** @var \Infinri\Http\Route $this */
 					$this->next();
 				}
 			];

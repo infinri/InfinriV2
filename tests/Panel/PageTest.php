@@ -1,16 +1,16 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Page as ModelPage;
-use Kirby\Cms\Site as ModelSite;
-use Kirby\Cms\User as ModelUser;
-use Kirby\Content\Lock;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\TestCase;
-use Kirby\Toolkit\Str;
+use Infinri\Cms\App;
+use Infinri\Cms\Page as ModelPage;
+use Infinri\Cms\Site as ModelSite;
+use Infinri\Cms\User as ModelUser;
+use Infinri\Content\Lock;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\TestCase;
+use Infinri\Toolkit\Str;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class PageForceLocked extends ModelPage
@@ -24,7 +24,7 @@ class PageForceLocked extends ModelPage
 	}
 }
 
-#[CoversClass(\Kirby\Panel\Page::class)]
+#[CoversClass(\Infinri\Panel\Page::class)]
 #[CoversClass(Model::class)]
 class PageTest extends TestCase
 {

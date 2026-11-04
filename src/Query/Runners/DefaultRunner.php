@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Query\Runners;
+namespace Infinri\Query\Runners;
 
 use Closure;
-use Kirby\Query\Parser\Parser;
-use Kirby\Query\Query;
-use Kirby\Query\Visitors\DefaultVisitor;
+use Infinri\Query\Parser\Parser;
+use Infinri\Query\Query;
+use Infinri\Query\Visitors\DefaultVisitor;
 
 class DefaultRunner extends Runner
 {

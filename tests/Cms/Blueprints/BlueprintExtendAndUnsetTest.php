@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\TestCase;
+use Infinri\TestCase;
 
 class BlueprintExtendAndUnsetTest extends TestCase
 {

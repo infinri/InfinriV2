@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Exception;
-use Kirby\Cms\App;
-use Kirby\Content\Field;
-use Kirby\Data\Data;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Content\Field;
+use Infinri\Data\Data;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 

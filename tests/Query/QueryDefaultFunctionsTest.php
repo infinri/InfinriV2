@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Query;
+namespace Infinri\Query;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Pages;
-use Kirby\Filesystem\Dir;
-use Kirby\Image\QrCode;
-use Kirby\Query\Runners\DefaultRunner;
-use Kirby\TestCase;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\Pages;
+use Infinri\Filesystem\Dir;
+use Infinri\Image\QrCode;
+use Infinri\Query\Runners\DefaultRunner;
+use Infinri\TestCase;
+use Infinri\Toolkit\I18n;
 
 class QueryDefaultFunctionsTest extends TestCase
 {

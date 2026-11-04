@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Toolkit\I18n;
+use Infinri\Toolkit\I18n;
 
 return function (array $props) {
 	$props['sections'] = [

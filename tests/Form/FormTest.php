@@ -1,14 +1,14 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
-use Kirby\Cms\App;
-use Kirby\Cms\File;
-use Kirby\Cms\Language;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Cms\Page;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Cms\File;
+use Infinri\Cms\Language;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Cms\Page;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Form::class)]

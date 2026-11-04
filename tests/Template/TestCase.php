@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Template;
+namespace Infinri\Template;
 
-use Kirby\Cms\App;
+use Infinri\Cms\App;
 
-class TestCase extends \Kirby\TestCase
+class TestCase extends \Infinri\TestCase
 {
 	protected function tearDown(): void
 	{

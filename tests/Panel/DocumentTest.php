@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Panel;
+namespace Infinri\Panel;
 
-use Kirby\Cms\App;
-use Kirby\Filesystem\Dir;
-use Kirby\Http\Response;
-use Kirby\TestCase;
+use Infinri\Cms\App;
+use Infinri\Filesystem\Dir;
+use Infinri\Http\Response;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Document::class)]

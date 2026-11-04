@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Plugin;
+namespace Infinri\Plugin;
 
-use Kirby\Cms\LicenseStatus as SystemLicenseStatus;
+use Infinri\Cms\LicenseStatus as SystemLicenseStatus;
 use Stringable;
 
 class LicenseStatus implements Stringable

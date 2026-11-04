@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Exception\Exception;
-use Kirby\Exception\PermissionException;
-use Kirby\Toolkit\I18n;
+use Infinri\Exception\Exception;
+use Infinri\Exception\PermissionException;
+use Infinri\Toolkit\I18n;
 
 return [
 	'props' => [

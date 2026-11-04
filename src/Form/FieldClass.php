@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Form;
+namespace Infinri\Form;
 
-use Kirby\Cms\HasSiblings;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\HasSiblings;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\I18n;
 
 abstract class FieldClass
 {

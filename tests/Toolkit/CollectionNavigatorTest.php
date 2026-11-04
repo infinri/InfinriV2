@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 class CollectionNavigatorTest extends TestCase
 {

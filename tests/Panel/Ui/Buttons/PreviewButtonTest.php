@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Ui\Buttons;
+namespace Infinri\Panel\Ui\Buttons;
 
-use Kirby\TestCase;
+use Infinri\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(PreviewButton::class)]

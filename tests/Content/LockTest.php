@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\App;
-use Kirby\Cms\Language;
-use Kirby\Cms\User;
-use Kirby\Data\Data;
+use Infinri\Cms\App;
+use Infinri\Cms\Language;
+use Infinri\Cms\User;
+use Infinri\Data\Data;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Lock::class)]

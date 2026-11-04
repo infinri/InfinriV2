@@ -1,17 +1,17 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cache\FileCache;
-use Kirby\Cms\Auth\Challenge;
-use Kirby\Filesystem\Dir;
-use Kirby\Filesystem\F;
-use Kirby\Filesystem\Mime;
-use Kirby\Form\Field as FormField;
-use Kirby\Image\Image;
-use Kirby\Plugin\Plugin;
-use Kirby\Toolkit\Collection;
-use Kirby\Toolkit\I18n;
+use Infinri\Cache\FileCache;
+use Infinri\Cms\Auth\Challenge;
+use Infinri\Filesystem\Dir;
+use Infinri\Filesystem\F;
+use Infinri\Filesystem\Mime;
+use Infinri\Form\Field as FormField;
+use Infinri\Image\Image;
+use Infinri\Plugin\Plugin;
+use Infinri\Toolkit\Collection;
+use Infinri\Toolkit\I18n;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 class DummyAuthChallenge extends Challenge
@@ -220,7 +220,7 @@ class AppPluginsTest extends TestCase
 				'index' => static::TMP
 			],
 			'authChallenges' => [
-				'dummy' => 'Kirby\Cms\DummyAuthChallenge'
+				'dummy' => 'Infinri\Cms\DummyAuthChallenge'
 			],
 			'options' => [
 				'auth.challenges' => ['dummy']

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Image;
+namespace Infinri\Image;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use ReflectionClass;

@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Exception;
-use Kirby\Content\LockedContentException;
-use Kirby\Content\PlainTextStorage;
-use Kirby\Content\VersionId;
-use Kirby\Data\Data;
-use Kirby\Exception\PermissionException;
+use Infinri\Content\LockedContentException;
+use Infinri\Content\PlainTextStorage;
+use Infinri\Content\VersionId;
+use Infinri\Data\Data;
+use Infinri\Exception\PermissionException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(Page::class)]

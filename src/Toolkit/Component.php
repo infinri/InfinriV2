@@ -1,13 +1,13 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use AllowDynamicProperties;
 use ArgumentCountError;
 use Closure;
-use Kirby\Exception\Exception;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Filesystem\F;
+use Infinri\Exception\Exception;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Filesystem\F;
 use TypeError;
 
 #[AllowDynamicProperties]

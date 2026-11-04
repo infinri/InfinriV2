@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Cms\Api\ApiCollectionTestCase;
-use Kirby\Filesystem\Dir;
+use Infinri\Cms\Api\ApiCollectionTestCase;
+use Infinri\Filesystem\Dir;
 
 class RolesApiCollectionTest extends ApiCollectionTestCase
 {

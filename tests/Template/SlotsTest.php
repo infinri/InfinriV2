@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Template;
+namespace Infinri\Template;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 

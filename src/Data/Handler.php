@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Data;
+namespace Infinri\Data;
 
-use Kirby\Exception\Exception;
-use Kirby\Filesystem\F;
+use Infinri\Exception\Exception;
+use Infinri\Filesystem\F;
 
 abstract class Handler
 {

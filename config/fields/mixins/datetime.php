@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Toolkit\Date;
+use Infinri\Toolkit\Date;
 
 return [
 	'props' => [

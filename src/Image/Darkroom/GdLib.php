@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Image\Darkroom;
+namespace Infinri\Image\Darkroom;
 
 use claviska\SimpleImage;
-use Kirby\Filesystem\Mime;
-use Kirby\Image\Darkroom;
-use Kirby\Image\Focus;
+use Infinri\Filesystem\Mime;
+use Infinri\Image\Darkroom;
+use Infinri\Image\Focus;
 
 class GdLib extends Darkroom
 {

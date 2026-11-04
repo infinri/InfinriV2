@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Infinri\Toolkit;
 
 use Exception;
-use Kirby\Filesystem\F;
+use Infinri\Filesystem\F;
 use Stringable;
 use Throwable;
 class View implements Stringable

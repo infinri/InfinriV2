@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Toolkit\Collection as BaseCollection;
+use Infinri\Toolkit\Collection as BaseCollection;
 
 class NestCollection extends BaseCollection
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kirby\Scripts;
+namespace Infinri\Scripts;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

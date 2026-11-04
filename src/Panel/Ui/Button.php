@@ -1,8 +1,8 @@
 <?php
 
-namespace Kirby\Panel\Ui;
+namespace Infinri\Panel\Ui;
 
-use Kirby\Toolkit\I18n;
+use Infinri\Toolkit\I18n;
 
 class Button extends Component
 {

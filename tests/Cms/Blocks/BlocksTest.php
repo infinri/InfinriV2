@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
-use Kirby\Data\Yaml;
-use Kirby\TestCase;
+use Infinri\Data\Yaml;
+use Infinri\TestCase;
 
 class BlocksTest extends TestCase
 {

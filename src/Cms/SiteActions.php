@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\BlockCollectionAccess;
 
 trait SiteActions
 {

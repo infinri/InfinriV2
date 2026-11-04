@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\Find;
-use Kirby\Exception\PermissionException;
-use Kirby\Filesystem\F;
+use Infinri\Cms\Find;
+use Infinri\Exception\PermissionException;
+use Infinri\Filesystem\F;
 
 /**
  * User Routes

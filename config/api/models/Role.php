@@ -1,6 +1,6 @@
 <?php
 
-use Kirby\Cms\Role;
+use Infinri\Cms\Role;
 
 /**
  * Role

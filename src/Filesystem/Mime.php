@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Filesystem;
+namespace Infinri\Filesystem;
 
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\Str;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\Str;
 
 class Mime
 {

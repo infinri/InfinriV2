@@ -1,18 +1,18 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Content\ImmutableMemoryStorage;
-use Kirby\Content\MemoryStorage;
-use Kirby\Content\VersionCache;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\LogicException;
-use Kirby\Filesystem\F;
-use Kirby\Image\Darkroom;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Uuid\Uuid;
-use Kirby\Uuid\Uuids;
+use Infinri\Content\ImmutableMemoryStorage;
+use Infinri\Content\MemoryStorage;
+use Infinri\Content\VersionCache;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Exception\LogicException;
+use Infinri\Filesystem\F;
+use Infinri\Image\Darkroom;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Uuid\Uuid;
+use Infinri\Uuid\Uuids;
 
 trait FileActions
 {
@@ -27,7 +27,7 @@ trait FileActions
 	 * Renames the file (optionally also the extension).
 	 * The store is used to actually execute this.
 	 *
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	#[BlockCollectionAccess]
 	public function changeName(
@@ -201,8 +201,8 @@ trait FileActions
 	 * way of generating files.
 	 *
 	 * @param bool $move If set to `true`, the source will be deleted
-	 * @throws \Kirby\Exception\InvalidArgumentException
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\InvalidArgumentException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	#[BlockCollectionAccess]
 	public static function create(array $props, bool $move = false): static
@@ -413,7 +413,7 @@ trait FileActions
 	 * source.
 	 *
 	 * @param bool $move If set to `true`, the source will be deleted
-	 * @throws \Kirby\Exception\LogicException
+	 * @throws \Infinri\Exception\LogicException
 	 */
 	#[BlockCollectionAccess]
 	public function replace(string $source, bool $move = false): static
@@ -471,7 +471,7 @@ trait FileActions
 	 * Updates the file's data and ensures that
 	 * media files get wiped if `focus` changed
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the input array contains invalid values
+	 * @throws \Infinri\Exception\InvalidArgumentException If the input array contains invalid values
 	 */
 	#[BlockCollectionAccess]
 	public function update(

@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Blueprint;
-use Kirby\Cms\File;
-use Kirby\Cms\ModelWithContent;
-use Kirby\Form\Form;
+use Infinri\Cms\Blueprint;
+use Infinri\Cms\File;
+use Infinri\Cms\ModelWithContent;
+use Infinri\Form\Form;
 
 class Content
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Kirby\Api;
+namespace Infinri\Api;
 
 use Exception;
-use Kirby\TestCase;
+use Infinri\TestCase;
 use stdClass;
 
 class ModelTest extends TestCase

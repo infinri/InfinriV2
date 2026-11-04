@@ -1,28 +1,28 @@
 <?php
 
-namespace Kirby\Cms;
+namespace Infinri\Cms;
 
 use Closure;
-use Kirby\Content\Content;
-use Kirby\Content\ImmutableMemoryStorage;
-use Kirby\Content\Lock;
-use Kirby\Content\LockedContentException;
-use Kirby\Content\MemoryStorage;
-use Kirby\Content\Storage;
-use Kirby\Content\Translation;
-use Kirby\Content\Translations;
-use Kirby\Content\Version;
-use Kirby\Content\VersionId;
-use Kirby\Content\Versions;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Form\Fields;
-use Kirby\Form\Form;
-use Kirby\Panel\Model;
-use Kirby\Toolkit\A;
-use Kirby\Toolkit\BlockCollectionAccess;
-use Kirby\Toolkit\Str;
-use Kirby\Uuid\Identifiable;
-use Kirby\Uuid\Uuid;
+use Infinri\Content\Content;
+use Infinri\Content\ImmutableMemoryStorage;
+use Infinri\Content\Lock;
+use Infinri\Content\LockedContentException;
+use Infinri\Content\MemoryStorage;
+use Infinri\Content\Storage;
+use Infinri\Content\Translation;
+use Infinri\Content\Translations;
+use Infinri\Content\Version;
+use Infinri\Content\VersionId;
+use Infinri\Content\Versions;
+use Infinri\Exception\InvalidArgumentException;
+use Infinri\Form\Fields;
+use Infinri\Form\Form;
+use Infinri\Panel\Model;
+use Infinri\Toolkit\A;
+use Infinri\Toolkit\BlockCollectionAccess;
+use Infinri\Toolkit\Str;
+use Infinri\Uuid\Identifiable;
+use Infinri\Uuid\Uuid;
 use Stringable;
 use Throwable;
 
@@ -160,7 +160,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	/**
 	 * Returns the content
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the language for the given code does not exist
+	 * @throws \Infinri\Exception\InvalidArgumentException If the language for the given code does not exist
 	 */
 	public function content(string|null $languageCode = null): Content
 	{
@@ -724,7 +724,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 * Returns a single translation by language code
 	 * If no code is specified the current translation is returned
 	 *
-	 * @throws \Kirby\Exception\NotFoundException If the language does not exist
+	 * @throws \Infinri\Exception\NotFoundException If the language does not exist
 	 */
 	public function translation(
 		string|null $languageCode = null
@@ -752,7 +752,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	/**
 	 * Updates the model data
 	 *
-	 * @throws \Kirby\Exception\InvalidArgumentException If the input array contains invalid values
+	 * @throws \Infinri\Exception\InvalidArgumentException If the input array contains invalid values
 	 */
 	#[BlockCollectionAccess]
 	public function update(

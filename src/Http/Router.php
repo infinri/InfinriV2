@@ -1,11 +1,11 @@
 <?php
 
-namespace Kirby\Http;
+namespace Infinri\Http;
 
 use Closure;
 use Exception;
 use InvalidArgumentException;
-use Kirby\Toolkit\A;
+use Infinri\Toolkit\A;
 
 class Router
 {

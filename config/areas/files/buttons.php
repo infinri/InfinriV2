@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\File;
-use Kirby\Panel\Ui\Buttons\OpenButton;
-use Kirby\Panel\Ui\Buttons\SettingsButton;
+use Infinri\Cms\File;
+use Infinri\Panel\Ui\Buttons\OpenButton;
+use Infinri\Panel\Ui\Buttons\SettingsButton;
 
 return [
 	'file.open' => function (File $file) {

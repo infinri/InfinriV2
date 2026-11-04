@@ -1,7 +1,7 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Toolkit\Pagination;
+use Infinri\Cms\App;
+use Infinri\Toolkit\Pagination;
 
 return [
 	'props' => [

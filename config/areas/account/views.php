@@ -1,8 +1,8 @@
 <?php
 
-use Kirby\Cms\App;
-use Kirby\Cms\Find;
-use Kirby\Toolkit\I18n;
+use Infinri\Cms\App;
+use Infinri\Cms\Find;
+use Infinri\Toolkit\I18n;
 
 return [
 	'account' => [

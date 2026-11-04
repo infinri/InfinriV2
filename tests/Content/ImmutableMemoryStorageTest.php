@@ -1,10 +1,10 @@
 <?php
 
-namespace Kirby\Content;
+namespace Infinri\Content;
 
-use Kirby\Cms\Language;
-use Kirby\Cms\Page;
-use Kirby\Exception\LogicException;
+use Infinri\Cms\Language;
+use Infinri\Cms\Page;
+use Infinri\Exception\LogicException;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 #[CoversClass(ImmutableMemoryStorage::class)]
