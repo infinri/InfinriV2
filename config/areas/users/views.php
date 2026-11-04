@@ -10,8 +10,8 @@ return [
 	'users' => [
 		'pattern' => 'users',
 		'action'  => function () {
-			$kirby = App::instance();
-			$role  = $kirby->request()->get('role');
+			$infinri = App::instance();
+			$role  = $infinri->request()->get('role');
 			$roles = Find::roles()->toArray(fn ($role) => [
 				'id'    => $role->id(),
 				'title' => $role->title(),
@@ -31,10 +31,10 @@ return [
 						}
 					},
 					'roles' => array_values($roles),
-					'users' => function () use ($kirby, $role) {
+					'users' => function () use ($infinri, $role) {
 						$collector = new UsersCollector(
 							limit: 20,
-							page: $kirby->request()->get('page', 1),
+							page: $infinri->request()->get('page', 1),
 							role: $role,
 							sortBy: 'username asc',
 						);

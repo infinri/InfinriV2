@@ -13,7 +13,7 @@
 export default {
 	computed: {
 		options() {
-			return [{ text: "Website", icon: "open", link: "https://getkirby.com" }];
+			return [{ text: "Website", icon: "open", link: "https://infinri.com" }];
 		}
 	}
 };

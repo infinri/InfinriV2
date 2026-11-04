@@ -21,8 +21,8 @@ class Collection extends Iterator implements Stringable
 	 * Whether the collection keys should be
 	 * treated as case-sensitive
 	 *
-	 * @todo 6.0 Check if case-sensitive can become the
-	 * default mode, see https://github.com/getkirby/kirby/pull/5635
+	 * @todo Check if case-sensitive can become the
+	 * default mode
 	 */
 	protected bool $caseSensitive = false;
 
@@ -607,7 +607,6 @@ class Collection extends Iterator implements Stringable
 
 	/**
 	 * Returns a Collection with the intersection of the given elements
-	 * @since 3.3.0
 	 */
 	public function intersection(Collection $other): static
 	{
@@ -616,7 +615,6 @@ class Collection extends Iterator implements Stringable
 
 	/**
 	 * Checks if there is an intersection between the given collection and this collection
-	 * @since 3.3.0
 	 */
 	public function intersects(Collection $other): bool
 	{
@@ -664,7 +662,6 @@ class Collection extends Iterator implements Stringable
 	/**
 	 * Joins the collection elements into a string,
 	 * optionally using a Closure to transform the elements
-	 * @since 5.1.0
 	 */
 	public function join(
 		string $separator = ', ',
@@ -1182,7 +1179,6 @@ class Collection extends Iterator implements Stringable
 	 * You may pass another Closure as the third parameter to the when method.
 	 * This Closure will execute if the first parameter evaluates as false
 	 *
-	 * @since 3.3.0
 	 * @param mixed $condition a truthy or falsy value
 	 */
 	public function when(

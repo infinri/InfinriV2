@@ -15,7 +15,7 @@ return [
 		'help' => function () {
 			if ($this->help) {
 				$help = $this->model()->toSafeString($this->help);
-				$help = $this->kirby()->kirbytext($help);
+				$help = $this->infinri()->infinritext($help);
 				return $help;
 			}
 		}

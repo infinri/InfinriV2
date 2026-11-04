@@ -97,19 +97,19 @@ class FieldClassTest extends TestCase
 	public function testData(): void
 	{
 		$field = new TestField();
-		$this->assertNull($field->data());
+		$this->assertNull($field->toStoredValue());
 
 		// use default value
 		$field = new TestField(['default' => 'default value']);
-		$this->assertSame('default value', $field->data(true));
+		$this->assertSame('default value', $field->fill($field->default())->toStoredValue());
 
 		// don't use default value
 		$field = new TestField(['default' => 'default value']);
-		$this->assertNull($field->data());
+		$this->assertNull($field->toStoredValue());
 
 		// use existing value
 		$field = new TestField(['value' => 'test']);
-		$this->assertSame('test', $field->data());
+		$this->assertSame('test', $field->toStoredValue());
 	}
 
 	public function testDefault(): void
@@ -461,10 +461,10 @@ class FieldClassTest extends TestCase
 		$this->assertSame('test-id', $field->id());
 	}
 
-	public function testKirby(): void
+	public function testInfinri(): void
 	{
 		$field = new TestField();
-		$this->assertSame(kirby(), $field->kirby());
+		$this->assertSame(infinri(), $field->infinri());
 	}
 
 	public function testLabel(): void
@@ -576,12 +576,6 @@ class FieldClassTest extends TestCase
 	{
 		$field = new TestField();
 		$this->assertSame([], $field->routes());
-	}
-
-	public function testSave(): void
-	{
-		$field = new TestField();
-		$this->assertTrue($field->save());
 	}
 
 	public function testSiblings(): void

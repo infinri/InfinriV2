@@ -7,7 +7,7 @@ use Infinri\TestCase;
 
 class LanguagesRoutesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.LanguagesRoutes';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.LanguagesRoutes';
 
 	protected function setUp(): void
 	{
@@ -32,7 +32,7 @@ class LanguagesRoutesTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testList(): void

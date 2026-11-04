@@ -150,10 +150,10 @@ class VTest extends TestCase
 	public function testBetween(): void
 	{
 		$this->assertTrue(V::between(4, 3, 5));
-		$this->assertTrue(V::between('kirby', 4, 6));
+		$this->assertTrue(V::between('infinri', 6, 8));
 
 		$this->assertFalse(V::between(3, 4, 5));
-		$this->assertFalse(V::between('kirby', 2, 4));
+		$this->assertFalse(V::between('infinri', 4, 6));
 	}
 
 	public function testDate(): void
@@ -215,9 +215,9 @@ class VTest extends TestCase
 
 	public function testEmail(): void
 	{
-		$this->assertTrue(V::email('bastian@getkirby.com'));
-		$this->assertTrue(V::email('bastian-v3@getkirby.com'));
-		$this->assertTrue(V::email('bastian.allgeier@getkirby.com'));
+		$this->assertTrue(V::email('bastian@infinri.com'));
+		$this->assertTrue(V::email('bastian-v3@infinri.com'));
+		$this->assertTrue(V::email('bastian.allgeier@infinri.com'));
 		$this->assertTrue(V::email('bastian@getkürby.com'));
 		$this->assertTrue(V::email(new class () {
 			public function __toString(): string
@@ -226,13 +226,13 @@ class VTest extends TestCase
 			}
 		}));
 
-		$this->assertFalse(V::email('bastian@getkirby'));
-		$this->assertFalse(V::email('bastiangetkirby.com'));
-		$this->assertFalse(V::email('bastian[at]getkirby.com'));
+		$this->assertFalse(V::email('bastian@infinri'));
+		$this->assertFalse(V::email('bastianinfinri.com'));
+		$this->assertFalse(V::email('bastian[at]infinri.com'));
 		$this->assertFalse(V::email('bastian@getkürby'));
-		$this->assertFalse(V::email('@getkirby.com'));
+		$this->assertFalse(V::email('@infinri.com'));
 		$this->assertFalse(V::email(null));
-		$this->assertFalse(V::email(['bastian@getkirby.com']));
+		$this->assertFalse(V::email(['bastian@infinri.com']));
 	}
 
 	public function testEmpty(): void
@@ -505,29 +505,29 @@ class VTest extends TestCase
 
 	public function testMaxLength(): void
 	{
-		$this->assertTrue(V::maxLength('Kirby', 10));
-		$this->assertTrue(V::maxLength('Kirby', 5));
-		$this->assertTrue(V::maxLength(' Kirby ', 5));
+		$this->assertTrue(V::maxLength('Infinri', 10));
+		$this->assertTrue(V::maxLength('Infinri', 7));
+		$this->assertTrue(V::maxLength(' Infinri ', 7));
 
-		$this->assertFalse(V::maxLength('Kirby', 3));
+		$this->assertFalse(V::maxLength('Infinri', 5));
 	}
 
 	public function testMinLength(): void
 	{
-		$this->assertTrue(V::minLength('Kirby', 2));
-		$this->assertTrue(V::minLength('Kirby', 5));
+		$this->assertTrue(V::minLength('Infinri', 4));
+		$this->assertTrue(V::minLength('Infinri', 7));
 
-		$this->assertFalse(V::minLength('Kirby', 6));
-		$this->assertFalse(V::minLength(' Kirby ', 6));
+		$this->assertFalse(V::minLength('Infinri', 8));
+		$this->assertFalse(V::minLength(' Infinri ', 8));
 	}
 
 	public function testMaxWords(): void
 	{
-		$this->assertTrue(V::maxWords('This is Kirby', 10));
-		$this->assertTrue(V::maxWords('This is Kirby', 3));
-		$this->assertTrue(V::maxWords('This is Kirby ', 3));
+		$this->assertTrue(V::maxWords('This is Infinri', 10));
+		$this->assertTrue(V::maxWords('This is Infinri', 3));
+		$this->assertTrue(V::maxWords('This is Infinri ', 3));
 
-		$this->assertFalse(V::maxWords('This is Kirby', 2));
+		$this->assertFalse(V::maxWords('This is Infinri', 2));
 
 		// double spaces don't introduce a third word
 		$this->assertTrue(V::maxWords('hello  world', 2));
@@ -546,11 +546,11 @@ class VTest extends TestCase
 
 	public function testMinWords(): void
 	{
-		$this->assertTrue(V::minWords('This is Kirby', 2));
-		$this->assertTrue(V::minWords('This is Kirby', 3));
+		$this->assertTrue(V::minWords('This is Infinri', 2));
+		$this->assertTrue(V::minWords('This is Infinri', 3));
 
-		$this->assertFalse(V::minWords('This is Kirby', 4));
-		$this->assertFalse(V::minWords('This is Kirby ', 4));
+		$this->assertFalse(V::minWords('This is Infinri', 4));
+		$this->assertFalse(V::minWords('This is Infinri ', 4));
 
 		// double spaces don't introduce a third word
 		$this->assertFalse(V::minWords('hello  world', 3));
@@ -797,10 +797,10 @@ class VTest extends TestCase
 
 	public function testValue(): void
 	{
-		$result = V::value('test@getkirby.com', [
+		$result = V::value('test@infinri.com', [
 			'email',
-			'maxLength' => 17,
-			'minLength' => 17
+			'maxLength' => 16,
+			'minLength' => 16
 		]);
 
 		$this->assertTrue($result);

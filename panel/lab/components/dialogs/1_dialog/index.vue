@@ -106,7 +106,9 @@
 					$panel.dialog.open({
 						component: 'k-dialog',
 						props: {
-							disabled: true
+							submitButton: {
+								disabled: true
+							}
 						}
 					})
 				"

@@ -5,7 +5,7 @@ use Infinri\Cms\Html;
 $caption = $block->caption();
 
 if (
-	$block->location() == 'kirby' &&
+	$block->location() == 'infinri' &&
 	$video = $block->video()->toFile()
 ) {
 	$url   = $video->url();

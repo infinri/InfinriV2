@@ -164,9 +164,9 @@ class EntriesFieldTest extends TestCase
 		$field = $this->field('entries', [
 			'max'   => 3,
 			'value' => [
-				'https://getkirby.com',
-				'https://forum.getkirby.com',
-				'https://plugins.getkirby.com',
+				'https://infinri.com',
+				'https://forum.infinri.com',
+				'https://plugins.infinri.com',
 			],
 		]);
 
@@ -179,9 +179,9 @@ class EntriesFieldTest extends TestCase
 		$field = $this->field('entries', [
 			'max'   => 1,
 			'value' => [
-				'https://getkirby.com',
-				'https://forum.getkirby.com',
-				'https://plugins.getkirby.com',
+				'https://infinri.com',
+				'https://forum.infinri.com',
+				'https://plugins.infinri.com',
 			],
 		]);
 
@@ -208,8 +208,8 @@ class EntriesFieldTest extends TestCase
 		$field = $this->field('entries', [
 			'min'   => 2,
 			'value' => [
-				'https://getkirby.com',
-				'https://forum.getkirby.com'
+				'https://infinri.com',
+				'https://forum.infinri.com'
 			]
 		]);
 
@@ -223,7 +223,7 @@ class EntriesFieldTest extends TestCase
 		$field = $this->field('entries', [
 			'min'   => 3,
 			'value' => [
-				'https://getkirby.com'
+				'https://infinri.com'
 			]
 		]);
 
@@ -237,7 +237,7 @@ class EntriesFieldTest extends TestCase
 	{
 		$field = $this->field('entries', [
 			'value'    => [
-				'https://getkirby.com'
+				'https://infinri.com'
 			],
 			'required' => true
 		]);
@@ -259,9 +259,9 @@ class EntriesFieldTest extends TestCase
 	public function testReset(): void
 	{
 		$value = [
-			'https://getkirby.com',
-			'https://forum.getkirby.com',
-			'https://plugins.getkirby.com',
+			'https://infinri.com',
+			'https://forum.infinri.com',
+			'https://plugins.infinri.com',
 		];
 
 		$field = $this->field('entries');
@@ -339,7 +339,7 @@ class EntriesFieldTest extends TestCase
 
 			['date', '2025-02-01', true],
 
-			['email', 'support@getkirby.com', true],
+			['email', 'infinri@gmail.com', true],
 			['email', 'invalid@host', false],
 
 			['number', 1, true],
@@ -354,7 +354,7 @@ class EntriesFieldTest extends TestCase
 
 			['time', '20:00', true],
 
-			['url', 'https://getkirby.com', true],
+			['url', 'https://infinri.com', true],
 			['url', 'invalid.host', false],
 		];
 	}

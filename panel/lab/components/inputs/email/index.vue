@@ -50,9 +50,9 @@
 				<k-email-input :maxlength="5" :value="value" @input="value = $event" />
 			</k-lab-example>
 
-			<k-lab-example label="Pattern: must end @getkirby.com">
+			<k-lab-example label="Pattern: must end @infinri.com">
 				<k-email-input
-					pattern="[a-z]+@getkirby\.com"
+					pattern="[a-z]+@infinri\.com"
 					:value="value"
 					@input="value = $event"
 				/>

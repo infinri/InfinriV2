@@ -42,24 +42,10 @@ class File implements Stringable
 	/**
 	 * Constructor sets all file properties
 	 *
-	 * @param array|string|null $props Properties or deprecated `$root` string
-	 * @param string|null $url Deprecated argument, use `$props['url']` instead
-	 *
 	 * @throws \Infinri\Exception\InvalidArgumentException When the model does not use the `Infinri\Filesystem\IsFile` trait
 	 */
-	public function __construct(
-		array|string|null $props = null,
-		string|null $url = null
-	) {
-		// Legacy support for old constructor of
-		// the `Infinri\Image\Image` class
-		if (is_array($props) === false) {
-			$props = [
-				'root' => $props,
-				'url'  => $url
-			];
-		}
-
+	public function __construct(array $props = [])
+	{
 		$this->root  = $props['root'] ?? null;
 		$this->url   = $props['url'] ?? null;
 		$this->model = $props['model'] ?? null;
@@ -110,7 +96,7 @@ class File implements Stringable
 			);
 		}
 
-		return new static($target);
+		return new static(['root' => $target]);
 	}
 
 	/**
@@ -256,7 +242,7 @@ class File implements Stringable
 	/**
 	 * Returns the app instance if it exists
 	 */
-	public function kirby(): App|null
+	public function infinri(): App|null
 	{
 		return App::instance(null, true);
 	}
@@ -380,7 +366,7 @@ class File implements Stringable
 			);
 		}
 
-		return new static($newRoot);
+		return new static(['root' => $newRoot]);
 	}
 
 	/**
@@ -437,7 +423,7 @@ class File implements Stringable
 			);
 		}
 
-		return new static($newRoot);
+		return new static(['root' => $newRoot]);
 	}
 
 	/**
@@ -462,7 +448,6 @@ class File implements Stringable
 	/**
 	 * Sanitizes the file contents depending on the file type
 	 * by overwriting the file with the sanitized version
-	 * @since 3.6.0
 	 *
 	 * @param string|bool $typeLazy Explicit sane handler type string,
 	 *                              `true` for lazy autodetection or
@@ -480,7 +465,6 @@ class File implements Stringable
 
 	/**
 	 * Returns the sha1 hash of the file
-	 * @since 3.6.0
 	 */
 	public function sha1(): string
 	{

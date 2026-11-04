@@ -24,15 +24,15 @@ class LanguageRouter
 
 	/**
 	 * Fetches all scoped routes for the
-	 * current language from the Kirby instance
+	 * current language from the Infinri instance
 	 *
 	 * @throws \Infinri\Exception\NotFoundException
 	 */
 	public function routes(): array
 	{
 		$language = $this->language;
-		$kirby    = $language->kirby();
-		$routes   = $kirby->routes();
+		$infinri    = $language->infinri();
+		$routes   = $infinri->routes();
 
 		// only keep the scoped language routes
 		$routes = array_values(array_filter($routes, function ($route) use ($language) {
@@ -56,7 +56,7 @@ class LanguageRouter
 		// add the page-scope if necessary
 		foreach ($routes as $index => $route) {
 			if ($pageId = ($route['page'] ?? null)) {
-				if ($page = $kirby->page($pageId)) {
+				if ($page = $infinri->page($pageId)) {
 					// convert string patterns to arrays
 					$patterns = A::wrap($route['pattern']);
 
@@ -82,13 +82,13 @@ class LanguageRouter
 			'pattern' => '@/(page|file)/(:all)',
 			'method'  => 'ALL',
 			'env'     => 'site',
-			'action'  => function (string $languageCode, string $type, string $id) use ($kirby, $language) {
+			'action'  => function (string $languageCode, string $type, string $id) use ($infinri, $language) {
 				// try to resolve to model, but only from UUID cache;
 				// this ensures that only existing UUIDs can be queried
-				// and attackers can't force Kirby to go through the whole
+				// and attackers can't force Infinri to go through the whole
 				// site index with a non-existing UUID
 				if ($model = Uuid::for($type . '://' . $id)?->model(true)) {
-					return $kirby
+					return $infinri
 						->response()
 						->redirect($model->url($language->code()));
 				}
@@ -109,13 +109,13 @@ class LanguageRouter
 	public function call(string|null $path = null): mixed
 	{
 		$language       = $this->language;
-		$kirby          = $language->kirby();
+		$infinri          = $language->infinri();
 		$this->router ??= new Router($this->routes());
 
 		try {
-			return $this->router->call($path, $kirby->request()->method(), function ($route) use ($kirby, $language) {
-				$kirby->setCurrentTranslation($language);
-				$kirby->setCurrentLanguage($language);
+			return $this->router->call($path, $infinri->request()->method(), function ($route) use ($infinri, $language) {
+				$infinri->setCurrentTranslation($language);
+				$infinri->setCurrentLanguage($language);
 
 				if ($page = $route->page()) {
 					return $route->action()->call(
@@ -133,7 +133,7 @@ class LanguageRouter
 				);
 			});
 		} catch (Exception) {
-			return $kirby->resolve($path, $language->code());
+			return $infinri->resolve($path, $language->code());
 		}
 	}
 }

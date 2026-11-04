@@ -63,15 +63,6 @@ export default {
 		input(value) {
 			this.$emit("input", value);
 		},
-		/**
-		 * Opens the dialog and triggers the `@open` event.
-		 * Use ready to fire events that should be run as
-		 * soon as the dialog is open
-		 * @public
-		 */
-		open() {
-			this.$panel.dialog.open(this);
-		},
 		submit() {
 			/**
 			 * The submit button is clicked or the form is submitted.

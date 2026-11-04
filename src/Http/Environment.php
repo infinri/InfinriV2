@@ -628,7 +628,7 @@ class Environment
 	 * Gets a value from the server environment array
 	 *
 	 * ```php
-	 * // sample output: /var/www/kirby
+	 * // sample output: /var/www/infinri
 	 * $server->get('document_root');
 	 *
 	 * // returns the whole server array

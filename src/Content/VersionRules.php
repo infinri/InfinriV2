@@ -47,12 +47,12 @@ class VersionRules
 			return;
 		}
 
-		$message = match($version->model()->kirby()->multilang()) {
+		$message = match($version->model()->infinri()->multilang()) {
 			true  => 'Version "' . $version->id() . ' (' . $language->code() . ')" does not already exist',
 			false => 'Version "' . $version->id() . '" does not already exist',
 		};
 
-		throw new NotFoundException($message);
+		throw new NotFoundException(message: $message);
 	}
 
 	public static function delete(

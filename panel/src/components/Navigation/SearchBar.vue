@@ -17,7 +17,7 @@
 			<!-- Input -->
 			<k-search-input
 				ref="input"
-				:aria-label="$t('search')"
+				:aria-label="$panel.t('search')"
 				:autofocus="true"
 				:value="query"
 				@input="query = $event"
@@ -27,7 +27,7 @@
 			/>
 			<k-button
 				:icon="isLoading ? 'loader' : 'cancel'"
-				:title="$t('close')"
+				:title="$panel.t('close')"
 				class="k-search-bar-close"
 				@click="$emit('close')"
 			/>
@@ -45,7 +45,7 @@
 			<footer class="k-search-bar-footer">
 				<!-- No results -->
 				<p v-if="results.length === 0">
-					{{ $t("search.results.none") }}
+					{{ $panel.t("search.results.none") }}
 				</p>
 
 				<!-- More results then displayed -->
@@ -55,7 +55,7 @@
 					variant="dimmed"
 					@click="$emit('more', { type, query })"
 				>
-					{{ $t("search.all", { count: pagination.total }) }}
+					{{ $panel.t("search.all", { count: pagination.total }) }}
 				</k-button>
 			</footer>
 		</div>
@@ -65,9 +65,6 @@
 <script>
 import Search from "@/mixins/search.js";
 
-/**
- * @since 4.4.0
- */
 export default {
 	mixins: [Search],
 	props: {

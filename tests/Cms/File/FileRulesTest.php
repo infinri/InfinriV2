@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class FileRulesTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/files';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.FileRules';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.FileRules';
 
 	public function testChangeName(): void
 	{
@@ -203,7 +203,7 @@ class FileRulesTest extends ModelTestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$this->expectNotToPerformAssertions();
 
@@ -310,7 +310,7 @@ class FileRulesTest extends ModelTestCase
 
 		$this->expectNotToPerformAssertions();
 
-		$upload = new BaseFile($testImage);
+		$upload = new BaseFile(['root' => $testImage]);
 		FileRules::create($newFile, $upload);
 	}
 
@@ -348,7 +348,7 @@ class FileRulesTest extends ModelTestCase
 		$this->expectException(DuplicateException::class);
 		$this->expectExceptionMessage('A file with the name "test.jpg" already exists');
 
-		$upload = new BaseFile($testImage);
+		$upload = new BaseFile(['root' => $testImage]);
 		FileRules::create($newFile, $upload);
 	}
 
@@ -386,7 +386,7 @@ class FileRulesTest extends ModelTestCase
 		$this->expectException(DuplicateException::class);
 		$this->expectExceptionMessage('A file with the name "test.jpg" already exists');
 
-		$upload = new BaseFile(static::FIXTURES . '/cat.jpg');
+		$upload = new BaseFile(['root' => static::FIXTURES . '/cat.jpg']);
 		FileRules::create($newFile, $upload);
 	}
 
@@ -406,7 +406,7 @@ class FileRulesTest extends ModelTestCase
 		$file->method('filename')->willReturn('test.svg');
 		$file->method('__call')->with('extension')->willReturn('svg');
 
-		$upload = new BaseFile(static::FIXTURES . '/test.svg');
+		$upload = new BaseFile(['root' => static::FIXTURES . '/test.svg']);
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('The URL is not allowed in attribute "xlink:href" (line 2)');
@@ -505,7 +505,7 @@ class FileRulesTest extends ModelTestCase
 			'mime'      => 'image/svg+xml'
 		});
 
-		$upload = new BaseFile(static::FIXTURES . '/test.svg');
+		$upload = new BaseFile(['root' => static::FIXTURES . '/test.svg']);
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('The URL is not allowed in attribute "xlink:href" (line 2)');

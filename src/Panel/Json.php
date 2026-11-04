@@ -53,7 +53,7 @@ abstract class Json
 			];
 		}
 
-		// handle Kirby exceptions
+		// handle Infinri exceptions
 		if ($data instanceof Exception) {
 			return static::error($data->getMessage(), $data->getHttpCode(), $data->getDetails());
 		}

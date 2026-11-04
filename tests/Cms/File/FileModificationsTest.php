@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(FileModifications::class)]
 class FileModificationsTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileModifications';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileModifications';
 
 	protected function setUp(): void
 	{
@@ -36,7 +36,7 @@ class FileModificationsTest extends ModelTestCase
 
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) use ($input) {
+				'file::version' => function ($infinri, $file, $options = []) use ($input) {
 					$this->assertSame($input, $options);
 					return $file;
 				}
@@ -70,7 +70,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$expected = [
 						'width' => 300
 					];
@@ -97,7 +97,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$expected = [
 						'width' => 300
 					];
@@ -123,7 +123,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => fn ($kirby, $file, $options = []) => 'image'
+				'file::version' => fn ($infinri, $file, $options = []) => 'image'
 			]
 		]);
 
@@ -138,7 +138,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$this->assertSame('webp', $options['format']);
 					return $file;
 				}
@@ -156,7 +156,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$this->assertSame('70%, 30%', $options['crop']);
 					return $file;
 				}
@@ -185,7 +185,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$this->assertSame(['blur' => 5], $options);
 					return $file;
 				}
@@ -200,7 +200,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$this->assertSame(['grayscale' => true], $options);
 					return $file;
 				}
@@ -278,7 +278,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) use ($expected) {
+				'file::version' => function ($infinri, $file, $options = []) use ($expected) {
 					$this->assertSame($expected, $options);
 					return $file;
 				}
@@ -293,7 +293,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$this->assertSame(['quality' => 10], $options);
 					return $file;
 				}
@@ -308,7 +308,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$this->assertSame([
 						'width' => 100,
 						'height' => 200,
@@ -327,7 +327,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$this->assertSame(['sharpen' => 50], $options);
 					return $file;
 				}
@@ -342,7 +342,7 @@ class FileModificationsTest extends ModelTestCase
 	{
 		$app = $this->app->clone([
 			'components' => [
-				'file::version' => function ($kirby, $file, $options = []) {
+				'file::version' => function ($infinri, $file, $options = []) {
 					$this->assertSame(['sharpen' => 20], $options);
 					return $file;
 				}

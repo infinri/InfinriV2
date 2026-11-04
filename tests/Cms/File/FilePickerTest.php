@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(FilePicker::class)]
 class FilePickerTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FilePicker';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FilePicker';
 
 	protected function setUp(): void
 	{
@@ -34,7 +34,7 @@ class FilePickerTest extends ModelTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						['filename' => 'f.jpg']
 					]
@@ -42,7 +42,7 @@ class FilePickerTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testDefaults(): void
@@ -73,7 +73,7 @@ class FilePickerTest extends ModelTestCase
 	public function testQueryPage(): void
 	{
 		$picker = new FilePicker([
-			'query' => 'kirby.page("test")'
+			'query' => 'infinri.page("test")'
 		]);
 
 		$this->assertCount(2, $picker->items());
@@ -82,7 +82,7 @@ class FilePickerTest extends ModelTestCase
 	public function testQueryUser(): void
 	{
 		$picker = new FilePicker([
-			'query' => 'kirby.user("test")'
+			'query' => 'infinri.user("test")'
 		]);
 
 		$this->assertCount(1, $picker->items());

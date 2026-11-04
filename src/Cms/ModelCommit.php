@@ -7,14 +7,14 @@ use Infinri\Exception\Exception;
 
 class ModelCommit
 {
-	protected App $kirby;
+	protected App $infinri;
 	protected string $prefix;
 
 	public function __construct(
 		protected ModelWithContent $model,
 		protected string $action
 	) {
-		$this->kirby  = $this->model->kirby();
+		$this->infinri  = $this->model->infinri();
 		$this->prefix = $this->model::CLASS_ALIAS;
 	}
 
@@ -28,7 +28,7 @@ class ModelCommit
 		$hook      = $this->hook('after', $arguments);
 
 		// flush the page cache after any model action
-		$this->kirby->cache('pages')->flush();
+		$this->infinri->cache('pages')->flush();
 
 		return $hook['result'];
 	}
@@ -50,7 +50,7 @@ class ModelCommit
 			$this->model instanceof User =>
 				$this->afterHookArgumentsForUserActions($this->model, $this->action, $state),
 			default =>
-				throw new Exception('Invalid model class')
+				throw new Exception(message: 'Invalid model class')
 		};
 	}
 
@@ -207,7 +207,7 @@ class ModelCommit
 		$appliedTo = array_key_first($arguments);
 
 		// run the hook and modify the first argument
-		$arguments[$appliedTo] = $this->kirby->apply(
+		$arguments[$appliedTo] = $this->infinri->apply(
 			// e.g. page.create:before
 			$this->prefix . '.' . $this->action . ':' . $hook,
 			$arguments,
@@ -231,7 +231,7 @@ class ModelCommit
 			$this->model instanceof Page => PageRules::class,
 			$this->model instanceof Site => SiteRules::class,
 			$this->model instanceof User => UserRules::class,
-			default => throw new Exception('Invalid model class') // @codeCoverageIgnore
+			default => throw new Exception(message: 'Invalid model class') // @codeCoverageIgnore
 		};
 
 		if (method_exists($rules, $this->action) === true) {

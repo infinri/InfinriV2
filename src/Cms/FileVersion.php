@@ -56,11 +56,11 @@ class FileVersion
 	}
 
 	/**
-	 * Returns the parent Kirby App instance
+	 * Returns the parent Infinri App instance
 	 */
-	public function kirby(): App
+	public function infinri(): App
 	{
-		return $this->original()->kirby();
+		return $this->original()->infinri();
 	}
 
 	/**
@@ -87,7 +87,7 @@ class FileVersion
 	 */
 	public function save(): static
 	{
-		$this->kirby()->thumb(
+		$this->infinri()->thumb(
 			$this->original()->root(),
 			$this->root(),
 			$this->modifications()

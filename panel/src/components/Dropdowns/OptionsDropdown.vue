@@ -26,7 +26,7 @@
 			:icon="icon"
 			:size="size"
 			:text="text !== true && text !== false ? text : null"
-			:title="$t('options')"
+			:title="$panel.t('options')"
 			:variant="variant"
 			class="k-options-dropdown-toggle"
 			@click="$refs.options.toggle()"

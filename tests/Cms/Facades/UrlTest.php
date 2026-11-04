@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Url::class)]
 class UrlTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Url';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Url';
 
 	protected function setUp(): void
 	{
@@ -17,14 +17,14 @@ class UrlTest extends TestCase
 				'index' => '/dev/null'
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			]
 		]);
 	}
 
 	public function testHome(): void
 	{
-		$this->assertSame('https://getkirby.com', Url::home());
+		$this->assertSame('https://infinri.com', Url::home());
 	}
 
 	public function testSlug(): void
@@ -62,10 +62,10 @@ class UrlTest extends TestCase
 
 	public function testTo(): void
 	{
-		$this->assertSame('https://getkirby.com', Url::to());
-		$this->assertSame('https://getkirby.com', Url::to(''));
-		$this->assertSame('https://getkirby.com', Url::to('/'));
-		$this->assertSame('https://getkirby.com/projects', Url::to('projects'));
+		$this->assertSame('https://infinri.com', Url::to());
+		$this->assertSame('https://infinri.com', Url::to(''));
+		$this->assertSame('https://infinri.com', Url::to('/'));
+		$this->assertSame('https://infinri.com/projects', Url::to('projects'));
 	}
 
 	public function testToWithLanguage(): void
@@ -98,15 +98,15 @@ class UrlTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('https://getkirby.com/en/a', Url::to('a'));
-		$this->assertSame('https://getkirby.com/en/a', Url::to('a', 'en'));
-		$this->assertSame('https://getkirby.com/de/a', Url::to('a', 'de'));
+		$this->assertSame('https://infinri.com/en/a', Url::to('a'));
+		$this->assertSame('https://infinri.com/en/a', Url::to('a', 'en'));
+		$this->assertSame('https://infinri.com/de/a', Url::to('a', 'de'));
 
-		$this->assertSame('https://getkirby.com/en/a', Url::to('a', ['language' => 'en']));
-		$this->assertSame('https://getkirby.com/de/a', Url::to('a', ['language' => 'de']));
+		$this->assertSame('https://infinri.com/en/a', Url::to('a', ['language' => 'en']));
+		$this->assertSame('https://infinri.com/de/a', Url::to('a', ['language' => 'de']));
 
 		// translated slug
-		$this->assertSame('https://getkirby.com/de/custom', Url::to('c', 'de'));
+		$this->assertSame('https://infinri.com/de/custom', Url::to('c', 'de'));
 	}
 
 	public function testToTemplateAsset(): void
@@ -116,7 +116,7 @@ class UrlTest extends TestCase
 				'index' => static::TMP
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'site' => [
 				'children' => [
@@ -131,13 +131,13 @@ class UrlTest extends TestCase
 
 		F::write($app->root('assets') . '/css/default.css', 'test');
 
-		$expected = 'https://getkirby.com/assets/css/default.css';
+		$expected = 'https://infinri.com/assets/css/default.css';
 
 		$this->assertSame($expected, Url::toTemplateAsset('css', 'css'));
 
 		F::write($app->root('assets') . '/js/default.js', 'test');
 
-		$expected = 'https://getkirby.com/assets/js/default.js';
+		$expected = 'https://infinri.com/assets/js/default.js';
 
 		$this->assertSame($expected, Url::toTemplateAsset('js', 'js'));
 	}

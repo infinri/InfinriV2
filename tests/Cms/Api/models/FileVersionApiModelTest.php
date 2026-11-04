@@ -7,7 +7,7 @@ use Infinri\Filesystem\Dir;
 
 class FileVersionApiModelTest extends ApiModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileVersionApiModel';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileVersionApiModel';
 
 	protected File $file;
 	protected Site|Page|User $parent;

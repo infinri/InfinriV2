@@ -9,7 +9,7 @@
 			...$attrs.style
 		}"
 	>
-		<legend class="sr-only">{{ $t("color") }}</legend>
+		<legend class="sr-only">{{ $panel.t("color") }}</legend>
 		<k-coords-input
 			ref="coords"
 			:autofocus="autofocus"
@@ -18,7 +18,7 @@
 			:value="coords"
 			@input="setCoords($event)"
 		/>
-		<label :aria-label="$t('hue')">
+		<label :aria-label="$panel.t('hue')">
 			<k-hue-input
 				:disabled="disabled"
 				:required="required"
@@ -26,7 +26,7 @@
 				@input="setHue($event)"
 			/>
 		</label>
-		<label v-if="alpha" :aria-label="$t('alpha')">
+		<label v-if="alpha" :aria-label="$panel.t('alpha')">
 			<k-alpha-input
 				:disabled="disabled"
 				:required="required"
@@ -81,9 +81,6 @@ export const props = {
 	}
 };
 
-/**
- * @since 4.0.0
- */
 export default {
 	mixins: [Input, props],
 	data() {

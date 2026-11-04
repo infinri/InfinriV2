@@ -4,7 +4,6 @@ namespace Infinri\Filesystem;
 
 use Exception;
 use Infinri\Cms\Helpers;
-use Infinri\Cms\Inventory;
 use Infinri\Cms\Page;
 use Infinri\Toolkit\Str;
 use Throwable;
@@ -127,15 +126,13 @@ class Dir
 	/**
 	 * Read the directory and all subdirectories
 	 *
-	 * @todo Remove support for `$ignore = null` in v6
-	 * @param array|false|null $ignore Array of absolute file paths;
-	 *                                 `false` to disable `Dir::$ignore` list
-	 *                                 (passing null is deprecated)
+	 * @param array|false $ignore Array of absolute file paths;
+	 *                            `false` to disable `Dir::$ignore` list
 	 */
 	public static function index(
 		string $dir,
 		bool $recursive = false,
-		array|false|null $ignore = [],
+		array|false $ignore = [],
 		string|null $path = null
 	): array {
 		$result = [];
@@ -188,33 +185,6 @@ class Dir
 	public static function isWritable(string $dir): bool
 	{
 		return is_writable($dir);
-	}
-
-	/**
-	 * Scans the directory and analyzes files,
-	 * content, meta info and children. This is used
-	 * in `Infinri\Cms\Page`, `Infinri\Cms\Site` and
-	 * `Infinri\Cms\User` objects to fetch all
-	 * relevant information.
-	 *
-	 * Don't use outside the Cms context.
-	 *
-	 * @deprecated 5.6.0 Use `Infinri\Cms\Inventory::for()` instead. Will be removed in Kirby 6.
-	 */
-	public static function inventory(
-		string $dir,
-		string $contentExtension = 'txt',
-		array|null $contentIgnore = null,
-		bool $multilang = false
-	): array {
-		Helpers::deprecated('`Infinri\Filesystem\Dir::inventory()` has been deprecated. Please use `Infinri\Cms\Inventory::for()` instead.', 'dir-inventory');
-
-		return Inventory::for(
-			$dir,
-			$contentExtension,
-			$contentIgnore,
-			$multilang
-		);
 	}
 
 	/**
@@ -384,7 +354,6 @@ class Dir
 
 	/**
 	 * Returns the absolute path to the directory if the directory can be found.
-	 * @since 4.7.1
 	 */
 	public static function realpath(string $dir, string|null $in = null): string
 	{
@@ -407,11 +376,7 @@ class Dir
 			// cannot pass the containment check
 			$parent = rtrim($parent, '/\\');
 
-			// TODO: Tighten to only allow **inside** $parent in v6
-			if (
-				$realpath !== $parent &&
-				str_starts_with($realpath, $parent . DIRECTORY_SEPARATOR) === false
-			) {
+			if (str_starts_with($realpath, $parent . DIRECTORY_SEPARATOR) === false) {
 				throw new Exception('The directory is not within the parent directory');
 			}
 		}

@@ -2,7 +2,7 @@
  * Resolves CSS property alias to proper CSS color values
  *
  * @example
- * color("red") // => "var(--color-red)"
+ * color("red-600") // => "var(--color-red-600)"
  * color("#ff0000") // => "#ff0000"
  * color("pattern") // => "var(--pattern)"
  */

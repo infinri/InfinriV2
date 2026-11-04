@@ -415,62 +415,62 @@ class DomTest extends TestCase
 
 			// one URL
 			[
-				'url(https://getkirby.com)',
-				['https://getkirby.com']
+				'url(https://infinri.com)',
+				['https://infinri.com']
 			],
 			[
-				'url("https://getkirby.com/?test=test&another=test")',
-				['https://getkirby.com/?test=test&another=test']
+				'url("https://infinri.com/?test=test&another=test")',
+				['https://infinri.com/?test=test&another=test']
 			],
 			[
-				'url(\'https://getkirby.com\')',
-				['https://getkirby.com']
+				'url(\'https://infinri.com\')',
+				['https://infinri.com']
 			],
 			[
-				'url(\'https://getkirby.com)',
-				['https://getkirby.com']
+				'url(\'https://infinri.com)',
+				['https://infinri.com']
 			],
 			[
-				'url(https://getkirby.com")',
-				['https://getkirby.com']
+				'url(https://infinri.com")',
+				['https://infinri.com']
 			],
 			[
-				'url(  https://getkirby.com   )',
-				['https://getkirby.com']
+				'url(  https://infinri.com   )',
+				['https://infinri.com']
 			],
 			[
-				'url(  "https://getkirby.com"   )',
-				['https://getkirby.com']
+				'url(  "https://infinri.com"   )',
+				['https://infinri.com']
 			],
 			[
-				'url(  "  https://getkirby.com "   )',
-				['  https://getkirby.com ']
+				'url(  "  https://infinri.com "   )',
+				['  https://infinri.com ']
 			],
 			[
-				'UrL(  "  https://getkirby.com "   )',
-				['  https://getkirby.com ']
+				'UrL(  "  https://infinri.com "   )',
+				['  https://infinri.com ']
 			],
 
 			// multiple URLs
 			[
-				'url(https://getkirby.com); url(https://getkirby.com/test)',
-				['https://getkirby.com', 'https://getkirby.com/test']
+				'url(https://infinri.com); url(https://infinri.com/test)',
+				['https://infinri.com', 'https://infinri.com/test']
 			],
 			[
-				'url("https://getkirby.com/?test=test&another=test"), url(https://getkirby.com/test)',
-				['https://getkirby.com/?test=test&another=test', 'https://getkirby.com/test']
+				'url("https://infinri.com/?test=test&another=test"), url(https://infinri.com/test)',
+				['https://infinri.com/?test=test&another=test', 'https://infinri.com/test']
 			],
 			[
-				'This is a test with an url(\'https://getkirby.com\') and another url("https://getkirby.com/test").',
-				['https://getkirby.com', 'https://getkirby.com/test']
+				'This is a test with an url(\'https://infinri.com\') and another url("https://infinri.com/test").',
+				['https://infinri.com', 'https://infinri.com/test']
 			],
 			[
-				'An url(\'https://getkirby.com) and another url(https://getkirby.com/test")',
-				['https://getkirby.com', 'https://getkirby.com/test']
+				'An url(\'https://infinri.com) and another url(https://infinri.com/test")',
+				['https://infinri.com', 'https://infinri.com/test']
 			],
 			[
-				'url(  https://getkirby.com   ) and URl(  "https://getkirby.com/test"   ) and uRl(  "  https://getkirby.com/another-test "   )',
-				['https://getkirby.com', 'https://getkirby.com/test', '  https://getkirby.com/another-test ']
+				'url(  https://infinri.com   ) and URl(  "https://infinri.com/test"   ) and uRl(  "  https://infinri.com/another-test "   )',
+				['https://infinri.com', 'https://infinri.com/test', '  https://infinri.com/another-test ']
 			],
 
 			// invisible characters
@@ -481,64 +481,64 @@ class DomTest extends TestCase
 
 			// @import string form
 			[
-				'@import "https://getkirby.com/style.css"',
-				['https://getkirby.com/style.css']
+				'@import "https://infinri.com/style.css"',
+				['https://infinri.com/style.css']
 			],
 			[
-				'@import \'https://getkirby.com/style.css\'',
-				['https://getkirby.com/style.css']
+				'@import \'https://infinri.com/style.css\'',
+				['https://infinri.com/style.css']
 			],
 			[
-				'@import   "  https://getkirby.com/style.css  "',
-				['https://getkirby.com/style.css']
+				'@import   "  https://infinri.com/style.css  "',
+				['https://infinri.com/style.css']
 			],
 
 			// @import without whitespace before the string
 			[
-				'@import"https://getkirby.com/style.css"',
-				['https://getkirby.com/style.css']
+				'@import"https://infinri.com/style.css"',
+				['https://infinri.com/style.css']
 			],
 
 			// @import with a CSS comment instead of whitespace
 			[
-				'@import/**/"https://getkirby.com/style.css"',
-				['https://getkirby.com/style.css']
+				'@import/**/"https://infinri.com/style.css"',
+				['https://infinri.com/style.css']
 			],
 
 			// @import with a tab (stripped by the ASCII filter → becomes no-space)
 			[
-				"@import\t\"https://getkirby.com/style.css\"",
-				['https://getkirby.com/style.css']
+				"@import\t\"https://infinri.com/style.css\"",
+				['https://infinri.com/style.css']
 			],
 
 			// @import url() form
 			[
-				'@import url("https://getkirby.com/style.css")',
-				['https://getkirby.com/style.css']
+				'@import url("https://infinri.com/style.css")',
+				['https://infinri.com/style.css']
 			],
 
 			// mixed url() and @import string form
 			[
-				'@import "https://getkirby.com/a.css"; text { background: url(https://getkirby.com/b.png); }',
-				['https://getkirby.com/b.png', 'https://getkirby.com/a.css']
+				'@import "https://infinri.com/a.css"; text { background: url(https://infinri.com/b.png); }',
+				['https://infinri.com/b.png', 'https://infinri.com/a.css']
 			],
 
 			// `/*` inside a quoted string is not a CSS comment, but part of
 			// the URL; it must not swallow the closing quote of the string
 			// when a real comment follows later in the value
 			[
-				'@import "https://getkirby.com/style.css/*"; text {} /* comment */',
-				['https://getkirby.com/style.css/*']
+				'@import "https://infinri.com/style.css/*"; text {} /* comment */',
+				['https://infinri.com/style.css/*']
 			],
 
 			// URLs that legitimately contain `/*...*/` must not be rewritten
 			[
-				'@import "https://getkirby.com/a/*b*/c.css"',
-				['https://getkirby.com/a/*b*/c.css']
+				'@import "https://infinri.com/a/*b*/c.css"',
+				['https://infinri.com/a/*b*/c.css']
 			],
 			[
-				'text { background: url("https://getkirby.com/a/*b*/c.png") }',
-				['https://getkirby.com/a/*b*/c.png']
+				'text { background: url("https://infinri.com/a/*b*/c.png") }',
+				['https://infinri.com/a/*b*/c.png']
 			],
 
 			// CSS escapes are decoded like the browser's tokenizer does
@@ -931,14 +931,14 @@ class DomTest extends TestCase
 			]],
 
 			// allowed URL when all domains are accepted
-			['http://getkirby.com', true, [
+			['http://infinri.com', true, [
 				'allowedDomains' => true
 			]],
 
 			// allowed URL when the domain is accepted
-			['http://getkirby.com', true, [
+			['http://infinri.com', true, [
 				'allowedDomains' => [
-					'getkirby.com'
+					'infinri.com'
 				]
 			]],
 
@@ -946,7 +946,7 @@ class DomTest extends TestCase
 			['mailto:', true],
 
 			// allowed valid email address
-			['mailto:test@getkirby.com', true],
+			['mailto:test@infinri.com', true],
 
 			// allowed empty phone number
 			['tel:', true],
@@ -980,14 +980,14 @@ class DomTest extends TestCase
 			]],
 
 			// forbidden URL when no domains are accepted
-			['https://getkirby.com', 'The hostname "getkirby.com" is not allowed', [
+			['https://infinri.com', 'The hostname "infinri.com" is not allowed', [
 				'allowedDomains' => []
 			]],
 
 			// forbidden URL when the particular domain is not accepted
 			['https://google.com', 'The hostname "google.com" is not allowed', [
 				'allowedDomains' => [
-					'getkirby.com'
+					'infinri.com'
 				]
 			]],
 
@@ -1058,24 +1058,24 @@ class DomTest extends TestCase
 			["java\tscript:alert()", 'Unknown URL type'],
 
 			// forbidden URL when no domains are accepted, with leading whitespace
-			[' https://getkirby.com', 'The hostname "getkirby.com" is not allowed', [
+			[' https://infinri.com', 'The hostname "infinri.com" is not allowed', [
 				'allowedDomains' => []
 			]],
 
 			// the browser ends the host at a backslash, so the
 			// allowlist must be checked against that same host
-			['https://malicious.com\\@getkirby.com', 'The hostname "malicious.com" is not allowed', [
-				'allowedDomains' => ['getkirby.com']
+			['https://malicious.com\\@infinri.com', 'The hostname "malicious.com" is not allowed', [
+				'allowedDomains' => ['infinri.com']
 			]],
-			['https://getkirby.com\\@malicious.com', true, [
-				'allowedDomains' => ['getkirby.com']
+			['https://infinri.com\\@malicious.com', true, [
+				'allowedDomains' => ['infinri.com']
 			]],
 
 			// allowed values are unaffected by the normalization
 			[' #test-fragment', true],
 			[' some/path', true],
 			['  ', true],
-			[' mailto:test@getkirby.com', true],
+			[' mailto:test@infinri.com', true],
 			[' data:image/jpeg;base64,test', true, [
 				'allowedDataUris' => [
 					'data:image/jpeg;base64'
@@ -1097,22 +1097,22 @@ class DomTest extends TestCase
 	{
 		return [
 			// allowed URL with site at the domain root
-			['https://getkirby.com', '/some/path', false, true],
+			['https://infinri.com', '/some/path', false, true],
 
 			// allowed URL with site at the domain root
 			['/', '/some/path', false, true],
 
 			// allowed URL with site in a subfolder
-			['https://getkirby.com/some', '/some/path', false, true],
+			['https://infinri.com/some', '/some/path', false, true],
 
 			// allowed URL with site in a subfolder
 			['/some', '/some/path', false, true],
 
 			// disallowed URL with site in a subfolder
-			['https://getkirby.com/site', '/some/path', false, 'The URL points outside of the site index URL'],
+			['https://infinri.com/site', '/some/path', false, 'The URL points outside of the site index URL'],
 
 			// generally disallowed URL with site in a subfolder (but allowed)
-			['https://getkirby.com/site', '/some/path', true, true],
+			['https://infinri.com/site', '/some/path', true, true],
 
 			// disallowed URL with site in a subfolder
 			['/site', '/some/path', false, 'The URL points outside of the site index URL'],
@@ -1121,7 +1121,7 @@ class DomTest extends TestCase
 			['/site', '/some/path', true, true],
 
 			// the index URL must match up to a path segment boundary
-			['https://getkirby.com/site', '/sitemap.xml', false, 'The URL points outside of the site index URL'],
+			['https://infinri.com/site', '/sitemap.xml', false, 'The URL points outside of the site index URL'],
 			['/site', '/sitemap.xml', false, 'The URL points outside of the site index URL'],
 
 			// the index URL itself is allowed
@@ -1130,13 +1130,13 @@ class DomTest extends TestCase
 
 			// a query or fragment ends the path and must not
 			// make the index URL itself fail the check
-			['/site', '/site?q=kirby', false, true],
+			['/site', '/site?q=infinri', false, true],
 			['/site', '/site#contact', false, true],
-			['/site', '/site/about?q=kirby', false, true],
-			['/', '/?q=kirby', false, true],
+			['/site', '/site/about?q=infinri', false, true],
+			['/', '/?q=infinri', false, true],
 
 			// but they must not open up the check either
-			['/site', '/sitemap?q=kirby', false, 'The URL points outside of the site index URL'],
+			['/site', '/sitemap?q=infinri', false, 'The URL points outside of the site index URL'],
 			['/site', '/sitemap#contact', false, 'The URL points outside of the site index URL'],
 
 			// percent-encoded dot segments must not skip the traversal check
@@ -1144,13 +1144,13 @@ class DomTest extends TestCase
 			['/site', '/site/.%2e/some/path', false, 'The ../ sequence is not allowed in relative URLs'],
 
 			// disallowed URL with directory traversal
-			['https://getkirby.com/site', '/site/../some/path', false, 'The ../ sequence is not allowed in relative URLs'],
+			['https://infinri.com/site', '/site/../some/path', false, 'The ../ sequence is not allowed in relative URLs'],
 
 			// disallowed URL with directory traversal
 			['/site', '/site/../some/path', false, 'The ../ sequence is not allowed in relative URLs'],
 
 			// leading whitespace must not skip the site index URL check
-			['https://getkirby.com/site', ' /some/path', false, 'The URL points outside of the site index URL'],
+			['https://infinri.com/site', ' /some/path', false, 'The URL points outside of the site index URL'],
 			['/site', "\t/some/path", false, 'The URL points outside of the site index URL'],
 
 			// whitespace must not skip the directory traversal check
@@ -1181,7 +1181,7 @@ class DomTest extends TestCase
 	 *
 	 * Whenever a browser resolves a URL to a host other than the one
 	 * the site is served from, the sanitizer must not allow it. The
-	 * opposite direction is deliberately not asserted, as Kirby blocks
+	 * opposite direction is deliberately not asserted, as Infinri blocks
 	 * more than the browser on purpose (e.g. `../` sequences), which
 	 * is the safe direction.
 	 */
@@ -1515,17 +1515,17 @@ class DomTest extends TestCase
 				[]
 			],
 			[
-				'<a href="https://getkirby.com/test">Link</a>',
+				'<a href="https://infinri.com/test">Link</a>',
 				[],
 
-				'<a href="https://getkirby.com/test">Link</a>',
+				'<a href="https://infinri.com/test">Link</a>',
 				[]
 			],
 			[
-				'<p style="background: url(https://getkirby.com/test)">Lorem ipsum</p>',
+				'<p style="background: url(https://infinri.com/test)">Lorem ipsum</p>',
 				[],
 
-				'<p style="background: url(https://getkirby.com/test)">Lorem ipsum</p>',
+				'<p style="background: url(https://infinri.com/test)">Lorem ipsum</p>',
 				[]
 			],
 			[
@@ -1550,10 +1550,10 @@ class DomTest extends TestCase
 				['The URL is not allowed in attribute "src" (line 2): Unknown URL type']
 			],
 			[
-				'<a xmlns:xlink="https://example.com" xlink:href="https://getkirby.com">Link</a>',
+				'<a xmlns:xlink="https://example.com" xlink:href="https://infinri.com">Link</a>',
 				[],
 
-				'<a xmlns:xlink="https://example.com" xlink:href="https://getkirby.com">Link</a>',
+				'<a xmlns:xlink="https://example.com" xlink:href="https://infinri.com">Link</a>',
 				[]
 			],
 			[
@@ -1630,12 +1630,12 @@ class DomTest extends TestCase
 
 			// allowedDomains
 			[
-				'<a href="https://getkirby.com/test" src="http://example.com/">Link</a>',
+				'<a href="https://infinri.com/test" src="http://example.com/">Link</a>',
 				[
-					'allowedDomains' => ['getkirby.com']
+					'allowedDomains' => ['infinri.com']
 				],
 
-				'<a href="https://getkirby.com/test">Link</a>',
+				'<a href="https://infinri.com/test">Link</a>',
 				['The URL is not allowed in attribute "src" (line 1): The hostname "example.com" is not allowed']
 			],
 
@@ -1700,17 +1700,17 @@ class DomTest extends TestCase
 				[]
 			],
 			[
-				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:href="https://getkirby.com">Link</a>',
+				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:href="https://infinri.com">Link</a>',
 				[
 					'allowedAttrs' => ['xlink:href'],
 					'allowedNamespaces' => ['' => 'https://example.com/test', 'xlink' => 'http://www.w3.org/1999/xlink']
 				],
 
-				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:href="https://getkirby.com">Link</a>',
+				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:href="https://infinri.com">Link</a>',
 				[]
 			],
 			[
-				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:test="https://getkirby.com">Link</a>',
+				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:test="https://infinri.com">Link</a>',
 				[
 					'allowedAttrs' => ['xlink:href'],
 					'allowedNamespaces' => ['' => 'https://example.com/test', 'xlink' => 'http://www.w3.org/1999/xlink']
@@ -1720,14 +1720,14 @@ class DomTest extends TestCase
 				['The "mylink:test" attribute (line 1) is not allowed: Not included in the global allowlist']
 			],
 			[
-				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:href="https://getkirby.com" mylink:test="https://getkirby.com">Link</a>',
+				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:href="https://infinri.com" mylink:test="https://infinri.com">Link</a>',
 				[
 					'allowedAttrs' => [],
 					'allowedNamespaces' => ['xlink' => 'http://www.w3.org/1999/xlink'],
 					'allowedTags' => ['a' => ['xlink:href']]
 				],
 
-				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:href="https://getkirby.com">Link</a>',
+				'<a xmlns:mylink="http://www.w3.org/1999/xlink" mylink:href="https://infinri.com">Link</a>',
 				['The "mylink:test" attribute (line 1) is not allowed: Not allowed by the "a" element']
 			],
 			[

@@ -20,8 +20,6 @@ export function defaults(): UserState {
 
 /**
  * Represents the currently authenticated Panel user
- *
- * @since 4.0.0
  */
 export default function User() {
 	return State("user", defaults());

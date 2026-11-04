@@ -60,7 +60,6 @@ class Layout extends Item
 
 	/**
 	 * Checks if the layout is empty
-	 * @since 3.5.2
 	 */
 	public function isEmpty(): bool
 	{
@@ -72,7 +71,6 @@ class Layout extends Item
 
 	/**
 	 * Checks if the layout is not empty
-	 * @since 3.5.2
 	 */
 	public function isNotEmpty(): bool
 	{

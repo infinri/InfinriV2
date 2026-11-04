@@ -2,6 +2,7 @@
 
 namespace Infinri\Cms;
 
+use Infinri\Content\Field;
 use TypeError;
 
 class StructureObjectTest extends TestCase

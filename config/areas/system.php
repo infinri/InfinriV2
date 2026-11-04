@@ -2,12 +2,11 @@
 
 use Infinri\Toolkit\I18n;
 
-return function ($kirby) {
+return function ($infinri) {
 	return [
-		'icon'    => 'settings',
-		'label'   => I18n::translate('view.system'),
-		'menu'    => true,
-		'dialogs' => require __DIR__ . '/system/dialogs.php',
-		'views'   => require __DIR__ . '/system/views.php'
+		'icon'  => 'settings',
+		'label' => I18n::translate('view.system'),
+		'menu'  => true,
+		'views' => require __DIR__ . '/system/views.php'
 	];
 };

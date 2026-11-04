@@ -441,7 +441,7 @@ class ApiTest extends TestCase
 
 		$expected = [
 			'status'   => 'error',
-			'message'  => 'An unexpected error occurred! Enable debug mode for more info: https://getkirby.com/docs/reference/system/options/debug',
+			'message'  => 'An unexpected error occurred! Enable debug mode for more info: https://infinri.com/docs/reference/system/options/debug',
 			'code'     => 500,
 			'key'      => null,
 			'details'  => []
@@ -489,7 +489,7 @@ class ApiTest extends TestCase
 		unset($_SERVER['DOCUMENT_ROOT']);
 	}
 
-	public function testRenderKirbyException(): void
+	public function testRenderInfinriException(): void
 	{
 		$api = new Api([
 			'routes' => [
@@ -521,7 +521,7 @@ class ApiTest extends TestCase
 		$this->assertSame(json_encode($expected), $result->body());
 	}
 
-	public function testRenderKirbyExceptionWithDebugging(): void
+	public function testRenderInfinriExceptionWithDebugging(): void
 	{
 		$api = new Api([
 			'debug' => true,
@@ -613,7 +613,7 @@ class ApiTest extends TestCase
 				'files' => [
 					[
 						'name'     => 'test.txt',
-						'tmp_name' => KIRBY_TMP_DIR . '/api.api/abc',
+						'tmp_name' => INFINRI_TMP_DIR . '/api.api/abc',
 						'size'     => 123,
 						'error'    => 0
 					]

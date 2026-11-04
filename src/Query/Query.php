@@ -2,7 +2,6 @@
 
 namespace Infinri\Query;
 
-use Closure;
 use Infinri\Cms\App;
 use Infinri\Cms\Collection;
 use Infinri\Cms\File;
@@ -12,6 +11,7 @@ use Infinri\Cms\User;
 use Infinri\Cms\Users;
 use Infinri\Exception\InvalidArgumentException;
 use Infinri\Image\QrCode;
+use Infinri\Query\Runners\DefaultRunner;
 use Infinri\Query\Runners\Runner;
 use Infinri\Toolkit\I18n;
 
@@ -20,7 +20,7 @@ class Query
 	public static array $cache = [];
 	public static array $entries = [];
 
-	public Runner|string $runner;
+	public Runner $runner;
 
 	/**
 	 * Creates a new Query object
@@ -32,16 +32,13 @@ class Query
 			$this->query = trim($query);
 		}
 
-		$this->runner = App::instance()->option('query.runner', 'legacy');
+		$runner = App::instance()->option('query.runner') ?? DefaultRunner::class;
 
-		if ($this->runner !== 'legacy') {
-
-			if (is_subclass_of($this->runner, Runner::class) === false) {
-				throw new InvalidArgumentException("Query runner $this->runner must extend " . Runner::class);
-			}
-
-			$this->runner = $this->runner::for($this);
+		if (is_subclass_of($runner, Runner::class) === false) {
+			throw new InvalidArgumentException(message: "Query runner $runner must extend " . Runner::class);
 		}
+
+		$this->runner = $runner::for($this);
 	}
 
 	/**
@@ -74,52 +71,14 @@ class Query
 			return $data;
 		}
 
-		// TODO: switch to 'interpreted' as default in v6
-		// TODO: remove in v7
-		// @codeCoverageIgnoreStart
-
-		if ($this->runner === 'legacy') {
-			return $this->resolveLegacy($data);
-		}
-		// @codeCoverageIgnoreEnd
-
 		return $this->runner->run($this->query, (array)$data);
-	}
-
-	/**
-	 * @deprecated 5.1.0
-	 * @codeCoverageIgnore
-	 */
-	private function resolveLegacy(array|object $data = []): mixed
-	{
-		// merge data with default entries
-		if (is_array($data) === true) {
-			$data = [...static::$entries, ...$data];
-		}
-
-		// direct data array access via key
-		if (
-			is_array($data) === true &&
-			array_key_exists($this->query, $data) === true
-		) {
-			$value = $data[$this->query];
-
-			if ($value instanceof Closure) {
-				$value = $value();
-			}
-
-			return $value;
-		}
-
-		// loop through all segments to resolve query
-		return Expression::factory($this->query, $this)->resolve($data);
 	}
 }
 
 /**
  * Default entries/functions
  */
-Query::$entries['kirby'] = function (): App {
+Query::$entries['infinri'] = function (): App {
 	return App::instance();
 };
 

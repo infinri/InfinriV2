@@ -31,9 +31,6 @@ export function defaults(): ViewState {
 	};
 }
 
-/**
- * @since 4.0.0
- */
 export default function View(panel: TODO) {
 	const parent = Feature(panel, "view", defaults());
 

@@ -7,7 +7,7 @@ use Infinri\TestCase;
 
 class PagesRoutesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PagesRoutes';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PagesRoutes';
 
 	protected function setUp(): void
 	{
@@ -44,7 +44,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('pages/a');
 
@@ -75,7 +75,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('pages/parent/children');
 
@@ -110,7 +110,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// all
 		$response = $app->api()->call('pages/parent/children', 'GET', [
@@ -179,7 +179,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('pages/a/files');
 
@@ -212,7 +212,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('pages/files/files');
 
@@ -248,7 +248,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('pages/a/files');
 
@@ -273,7 +273,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$response = $app->api()->call('pages/a/files/a.jpg');
 
@@ -302,7 +302,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// filterBy slug == photography would normally return only 1 page;
 		// since filterBy is stripped from the body, both pages are returned
@@ -339,7 +339,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// sortBy in the body is stripped; default order (a, b) is preserved
 		$response = $app->api()->call('pages/parent/children/search', 'POST', [
@@ -369,7 +369,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// filterBy filename == photo.jpg would normally return only 1 file;
 		// since filterBy is stripped from the body, both files are returned
@@ -400,7 +400,7 @@ class PagesRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// sortBy in the body is stripped; default sorted order (a, b) is preserved
 		$response = $app->api()->call('pages/a/files/search', 'POST', [

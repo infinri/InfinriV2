@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class UserRulesTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserRules';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserRules';
 
 	protected function setUp(): void
 	{
@@ -146,7 +146,7 @@ class UserRulesTest extends ModelTestCase
 		$permissions->method('can')->with('changeRole')->willReturn(false);
 
 		$user = $this->createMock(User::class);
-		$user->method('kirby')->willReturn($this->app);
+		$user->method('infinri')->willReturn($this->app);
 		$user->method('permissions')->willReturn($permissions);
 		$user->method('username')->willReturn('test');
 
@@ -262,7 +262,7 @@ class UserRulesTest extends ModelTestCase
 			'email'    => 'new-user@domain.com',
 			'password' => '12345678',
 			'language' => 'en',
-			'kirby'    => $this->app
+			'infinri'    => $this->app
 		]);
 
 		$this->expectNotToPerformAssertions();
@@ -278,7 +278,7 @@ class UserRulesTest extends ModelTestCase
 			'email'    => 'new-user@domain.com',
 			'password' => '',
 			'language' => 'en',
-			'kirby'    => $app
+			'infinri'    => $app
 		]);
 
 		$this->expectException(InvalidArgumentException::class);
@@ -296,7 +296,7 @@ class UserRulesTest extends ModelTestCase
 				'password' => '12345678',
 				'language' => 'en',
 				'role'     => 'admin',
-				'kirby'    => $app
+				'infinri'    => $app
 			]
 		);
 
@@ -314,7 +314,7 @@ class UserRulesTest extends ModelTestCase
 			'password' => '12345678',
 			'language' => 'en',
 			'role'     => 'admin',
-			'kirby'    => $this->app
+			'infinri'    => $this->app
 		]);
 
 		$this->expectException(PermissionException::class);
@@ -331,10 +331,10 @@ class UserRulesTest extends ModelTestCase
 		$permissions->method('can')->with('create')->willReturn(false);
 
 		$user = $this->createMock(User::class);
-		$user->method('kirby')->willReturn($this->app);
+		$user->method('infinri')->willReturn($this->app);
 		$user->method('permissions')->willReturn($permissions);
 		$user->method('id')->willReturn('test');
-		$user->method('email')->willReturn('test@getkirby.com');
+		$user->method('email')->willReturn('test@infinri.com');
 		$user->method('language')->willReturn('en');
 
 		$this->expectException(PermissionException::class);
@@ -354,10 +354,10 @@ class UserRulesTest extends ModelTestCase
 		$permissions->method('can')->with('create')->willReturn(true);
 
 		$user = $this->createMock(User::class);
-		$user->method('kirby')->willReturn($this->app);
+		$user->method('infinri')->willReturn($this->app);
 		$user->method('permissions')->willReturn($permissions);
 		$user->method('id')->willReturn('test');
-		$user->method('email')->willReturn('test@getkirby.com');
+		$user->method('email')->willReturn('test@infinri.com');
 		$user->method('language')->willReturn('en');
 
 		// no role
@@ -633,7 +633,7 @@ class UserRulesTest extends ModelTestCase
 	public function testValidIdWhenValid(string $id): void
 	{
 		$this->expectNotToPerformAssertions();
-		$user = new User(['email' => 'test@getkirby.com']);
+		$user = new User(['email' => 'test@infinri.com']);
 		UserRules::validId($user, $id);
 	}
 
@@ -642,7 +642,7 @@ class UserRulesTest extends ModelTestCase
 		return [
 			// reserved words
 			['account', 'a reserved word and cannot be used as user id'],
-			['kirby', 'a reserved word and cannot be used as user id'],
+			['infinri', 'a reserved word and cannot be used as user id'],
 			['nobody', 'a reserved word and cannot be used as user id'],
 			// unsafe characters
 			['homer%1', 'not a valid user id'],
@@ -665,7 +665,7 @@ class UserRulesTest extends ModelTestCase
 	#[DataProvider('invalidIdProvider')]
 	public function testValidIdWhenInvalid(string $id, string $error): void
 	{
-		$user = new User(['email' => 'test@getkirby.com']);
+		$user = new User(['email' => 'test@infinri.com']);
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('"' . $id . '" is ' . $error);
@@ -675,11 +675,16 @@ class UserRulesTest extends ModelTestCase
 
 	public function testValidIdWhenDuplicateIsFound(): void
 	{
-		$user = new User(['email' => 'test@getkirby.com']);
+		$user = new User(['email' => 'test@infinri.com']);
 
 		$this->expectException(DuplicateException::class);
 		$this->expectExceptionMessage('A user with this id exists');
 
 		UserRules::validId($user, 'admin');
+	}
+
+	public function testValidRoleIsRemoved(): void
+	{
+		$this->assertFalse(method_exists(UserRules::class, 'validRole'));
 	}
 }

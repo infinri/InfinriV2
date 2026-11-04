@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserChangeNameTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserChangeName';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserChangeName';
 
 	public function testChangeName(): void
 	{
@@ -37,7 +37,7 @@ class UserChangeNameTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = new User(['email' => 'editor@domain.com']);
 		$user->changeName('Edith Thor');

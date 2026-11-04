@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class PHPTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/php';
-	public const TMP      = KIRBY_TMP_DIR . '/Data.PHP';
+	public const TMP      = INFINRI_TMP_DIR . '/Data.PHP';
 
 	public function testEncode(): void
 	{

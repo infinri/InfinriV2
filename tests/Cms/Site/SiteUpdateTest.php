@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Site::class)]
 class SiteUpdateTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SiteUpdate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SiteUpdate';
 
 	public function testUpdate(): void
 	{
@@ -24,7 +24,7 @@ class SiteUpdateTest extends ModelTestCase
 		$calls = 0;
 		$phpunit = $this;
 		$input = [
-			'copyright' => 'Kirby'
+			'copyright' => 'Infinri'
 		];
 
 		$this->app = $this->app->clone([
@@ -36,14 +36,14 @@ class SiteUpdateTest extends ModelTestCase
 					$calls++;
 				},
 				'site.update:after' => function (Site $newSite, Site $oldSite) use ($phpunit, &$calls) {
-					$phpunit->assertSame('Kirby', $newSite->copyright()->value());
+					$phpunit->assertSame('Infinri', $newSite->copyright()->value());
 					$phpunit->assertNull($oldSite->copyright()->value());
 					$calls++;
 				}
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = new Site();
 		$site = $site->update($input);

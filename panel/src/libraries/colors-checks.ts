@@ -10,7 +10,6 @@ export const RE_HSL =
 
 /**
  * Checks if input is a HEX/A string
- * @since 4.0.0
  */
 export function isHex(color: unknown): color is HexColor {
 	return (
@@ -20,7 +19,6 @@ export function isHex(color: unknown): color is HexColor {
 
 /**
  * Checks if input is an RGB object
- * @since 4.0.0
  */
 export function isRgb(color: unknown): color is RgbColor {
 	return isObject(color) && "r" in color && "g" in color && "b" in color;
@@ -28,7 +26,6 @@ export function isRgb(color: unknown): color is RgbColor {
 
 /**
  * Checks if input is an HSL object
- * @since 4.0.0
  */
 export function isHsl(color: unknown): color is HslColor {
 	return isObject(color) && "h" in color && "s" in color && "l" in color;
@@ -36,7 +33,6 @@ export function isHsl(color: unknown): color is HslColor {
 
 /**
  * Checks if input is an HSV object
- * @since 4.0.0
  */
 export function isHsv(color: unknown): color is HsvColor {
 	return isObject(color) && "h" in color && "s" in color && "v" in color;

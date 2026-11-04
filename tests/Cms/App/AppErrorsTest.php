@@ -224,7 +224,7 @@ class AppErrorsTest extends TestCase
 		$handlers = $whoops->getHandlers();
 		$this->assertCount(2, $handlers);
 		$this->assertInstanceOf('Whoops\Handler\CallbackHandler', $handlers[0]);
-		$this->assertSame($this->_getBufferedContent($app->root('kirby') . '/views/fatal.php'), $this->_getBufferedContent($handlers[0]));
+		$this->assertSame($this->_getBufferedContent($app->root('infinri') . '/views/fatal.php'), $this->_getBufferedContent($handlers[0]));
 		$this->assertInstanceOf('Whoops\Handler\CallbackHandler', $handlers[1]);
 
 		// without fatal closure
@@ -253,7 +253,7 @@ class AppErrorsTest extends TestCase
 		$handlers = $whoops->getHandlers();
 		$this->assertCount(2, $handlers);
 		$this->assertInstanceOf('Whoops\Handler\PrettyPageHandler', $handlers[0]);
-		$this->assertSame('Kirby CMS Debugger', $handlers[0]->getPageTitle());
+		$this->assertSame('Infinri CMS Debugger', $handlers[0]->getPageTitle());
 		$this->assertSame(dirname(__DIR__, 3) . '/assets', $handlers[0]->getResourcePaths()[0]);
 		$this->assertFalse($handlers[0]->getEditorHref('test', 1));
 		$this->assertInstanceOf('Whoops\Handler\CallbackHandler', $handlers[1]);
@@ -266,7 +266,7 @@ class AppErrorsTest extends TestCase
 		$this->assertCount(2, $handlers);
 
 		$this->assertInstanceOf('Whoops\Handler\PrettyPageHandler', $handlers[0]);
-		$this->assertSame('Kirby CMS Debugger', $handlers[0]->getPageTitle());
+		$this->assertSame('Infinri CMS Debugger', $handlers[0]->getPageTitle());
 		$this->assertSame(dirname(__DIR__, 3) . '/assets', $handlers[0]->getResourcePaths()[0]);
 		$this->assertSame('vscode://file/test:1', $handlers[0]->getEditorHref('test', 1));
 		$this->assertInstanceOf('Whoops\Handler\CallbackHandler', $handlers[1]);
@@ -299,7 +299,7 @@ class AppErrorsTest extends TestCase
 			'status' => 'error',
 			'code' => 500,
 			'details' => null,
-			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://getkirby.com/docs/reference/system/options/debug'
+			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://infinri.com/docs/reference/system/options/debug'
 		]), $this->_getBufferedContent($handlers[0]));
 
 		// test CallbackHandler with \Exception class
@@ -310,7 +310,7 @@ class AppErrorsTest extends TestCase
 			'status' => 'error',
 			'code' => 30,
 			'details' => null,
-			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://getkirby.com/docs/reference/system/options/debug'
+			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://infinri.com/docs/reference/system/options/debug'
 		]), $this->_getBufferedContent($handlers[0]));
 
 		// test CallbackHandler with \Infinri\Exception\Exception class
@@ -326,7 +326,7 @@ class AppErrorsTest extends TestCase
 			'details' => [
 				'Some error message'
 			],
-			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://getkirby.com/docs/reference/system/options/debug'
+			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://infinri.com/docs/reference/system/options/debug'
 		]), $this->_getBufferedContent($handlers[0]));
 
 		// with debugging enabled
@@ -344,7 +344,7 @@ class AppErrorsTest extends TestCase
 			'details' => [
 				'Some error message'
 			],
-			'file' => '{kirby}/tests/Cms/App/AppErrorsTest.php',
+			'file' => '{infinri}/tests/Cms/App/AppErrorsTest.php',
 			'line' => $exception->getLine()
 		]), $this->_getBufferedContent($handlers[0]));
 		$this->assertInstanceOf('Whoops\Handler\CallbackHandler', $handlers[1]);

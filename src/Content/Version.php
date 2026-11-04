@@ -347,7 +347,7 @@ class Version
 			Lock::isEnabled() === true &&
 			$this->id->is('changes') === true
 		) {
-			$fields['lock'] = $this->model->kirby()->user()?->id();
+			$fields['lock'] = $this->model->infinri()->user()?->id();
 
 		// remove the lock field for any other version or
 		// if locking is disabled
@@ -398,14 +398,14 @@ class Version
 			$homePage = $this->model->homePage();
 
 			if ($homePage === null) {
-				throw new NotFoundException('The home page does not exist');
+				throw new NotFoundException(message: 'The home page does not exist');
 			}
 
 			return $homePage->version($this->id)->previewToken();
 		}
 
 		if (($this->model instanceof Page) === false) {
-			throw new LogicException('Invalid model type');
+			throw new LogicException(message: 'Invalid model type');
 		}
 
 		// bind the token to the custom preview URL so it still matches
@@ -433,7 +433,7 @@ class Version
 			'versionId' => $this->id->value()
 		];
 
-		$token = $this->model->kirby()->contentToken(
+		$token = $this->model->infinri()->contentToken(
 			null,
 			json_encode($data, JSON_UNESCAPED_SLASHES)
 		);
@@ -611,7 +611,7 @@ class Version
 		$fields = $this->read($language);
 
 		// only remove the lock if the current user holds it
-		if (($fields['lock'] ?? null) !== $this->model->kirby()->user()?->id()) {
+		if (($fields['lock'] ?? null) !== $this->model->infinri()->user()?->id()) {
 			return;
 		}
 
@@ -681,7 +681,7 @@ class Version
 		if (
 			($this->model instanceof Page || $this->model instanceof Site) === false
 		) {
-			throw new LogicException('Only pages and the site have a content preview URL');
+			throw new LogicException(message: 'Only pages and the site have a content preview URL');
 		}
 
 		$url = $this->model->blueprint()->preview();

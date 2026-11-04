@@ -16,7 +16,7 @@ class DateFieldTest extends TestCase
 		$this->assertNull($field->min());
 		$this->assertNull($field->max());
 		$this->assertFalse($field->time());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testEmptyDate(): void
@@ -157,19 +157,16 @@ class DateFieldTest extends TestCase
 			'value' => '12.12.2012',
 		]);
 
-		$this->assertSame('2012-12-12', $field->data());
+		$this->assertSame('2012-12-12', $field->toStoredValue());
 
 		// empty value
 		$field = $this->field('date', [
 			'value'  => null,
 		]);
 
-		$this->assertSame('', $field->data());
+		$this->assertSame('', $field->toStoredValue());
 	}
 
-	/**
-	 * @link https://github.com/getkirby/kirby/issues/3642
-	 */
 	public function testTimeWithDefaultNow(): void
 	{
 		$field = $this->field('date', [

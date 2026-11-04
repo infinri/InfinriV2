@@ -52,7 +52,7 @@
 					icon="angle-down"
 					@click="display = true"
 				>
-					{{ $t("options.all", { count: filteredOptions.length }) }}
+					{{ $panel.t("options.all", { count: filteredOptions.length }) }}
 				</k-button>
 			</div>
 		</template>
@@ -60,7 +60,7 @@
 		<template v-else-if="showEmpty">
 			<div class="k-picklist-input-body">
 				<p class="k-picklist-input-empty">
-					{{ $t("options.none") }}
+					{{ $panel.t("options.none") }}
 				</p>
 			</div>
 		</template>
@@ -129,7 +129,6 @@ export const props = {
 /**
  * A filterable list of checkbox/radio options
  * with an optional create button
- * @since 4.0.0
  *
  * @example <k-picklist-input
  * 		:create="create"
@@ -203,10 +202,10 @@ export default {
 			}
 
 			if (this.options.length > 0) {
-				return this.$t("filter") + "…";
+				return this.$panel.t("filter") + "…";
 			}
 
-			return this.$t("enter") + "…";
+			return this.$panel.t("enter") + "…";
 		},
 		showCreate() {
 			if (this.create === false) {

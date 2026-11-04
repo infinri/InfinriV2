@@ -42,7 +42,9 @@
 							:key="
 								parent + '-column-' + columnIndex + '-section-' + sectionIndex
 							"
-							:text="$t('error.section.type.invalid', { type: section.type })"
+							:text="
+								$panel.t('error.section.type.invalid', { type: section.type })
+							"
 							icon="alert"
 							theme="negative"
 						/>

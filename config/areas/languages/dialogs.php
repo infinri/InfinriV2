@@ -97,15 +97,15 @@ return [
 			];
 		},
 		'submit' => function () {
-			$kirby = App::instance();
+			$infinri = App::instance();
 
-			$data = $kirby->request()->get([
+			$data = $infinri->request()->get([
 				'code',
 				'direction',
 				'locale',
 				'name'
 			]);
-			$kirby->languages()->create($data);
+			$infinri->languages()->create($data);
 
 			return [
 				'event' => 'language.create'
@@ -181,9 +181,9 @@ return [
 			];
 		},
 		'submit' => function (string $id) {
-			$kirby = App::instance();
+			$infinri = App::instance();
 
-			$data = $kirby->request()->get(['direction', 'locale', 'name']);
+			$data = $infinri->request()->get(['direction', 'locale', 'name']);
 			$language = Find::language($id)->update($data);
 
 			return [

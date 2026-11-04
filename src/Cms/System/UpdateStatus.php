@@ -5,7 +5,7 @@ namespace Infinri\Cms\System;
 use Composer\Semver\Semver;
 use Exception;
 use Infinri\Cms\App;
-use Infinri\Exception\Exception as KirbyException;
+use Infinri\Exception\Exception as InfinriException;
 use Infinri\Http\Remote;
 use Infinri\Plugin\Plugin;
 use Infinri\Toolkit\I18n;
@@ -16,7 +16,7 @@ class UpdateStatus
 	/**
 	 * Host to request the update data from
 	 */
-	public static string $host = 'https://getkirby.com';
+	public static string $host = 'https://infinri.com';
 
 	/**
 	 * Marker that stores whether a previous remote
@@ -42,7 +42,7 @@ class UpdateStatus
 	protected array $vulnerabilities;
 
 	/**
-	 * @param array|null $data Custom override for the getkirby.com update data
+	 * @param array|null $data Custom override for the infinri.com update data
 	 */
 	public function __construct(
 		App|Plugin $package,
@@ -53,7 +53,7 @@ class UpdateStatus
 			$this->app        = $package;
 			$this->pluginName = null;
 		} else {
-			$this->app        = $package->kirby();
+			$this->app        = $package->infinri();
 			$this->pluginName = $package->name();
 		}
 
@@ -143,11 +143,11 @@ class UpdateStatus
 			return null;
 		}
 
-		$type = $this->pluginName ? 'plugin' : 'kirby';
+		$type = $this->pluginName ? 'plugin' : 'infinri';
 
 		// collect all matching custom messages
 		$filters = [
-			'kirby' => $this->app->version(),
+			'infinri' => $this->app->version(),
 			// some PHP version strings contain extra info that makes them
 			// invalid so we need to strip it off
 			'php'   => preg_replace('/^([^~+-]+).*$/', '$1', phpversion())
@@ -191,9 +191,9 @@ class UpdateStatus
 						null,
 						['plugin' => $this->pluginName]
 					),
-					default => I18n::translate('system.issues.eol.kirby')
+					default => I18n::translate('system.issues.eol.infinri')
 				},
-				'link' => $versionEntry['status-link'] ?? 'https://getkirby.com/security/end-of-life',
+				'link' => $versionEntry['status-link'] ?? 'https://infinri.com/security/end-of-life',
 				'icon' => 'bell'
 			];
 		}
@@ -206,7 +206,7 @@ class UpdateStatus
 			if ($eolTime < time()) {
 				$messages[] = [
 					'text' => I18n::template('system.issues.eol.php', null, ['release' => $phpMajor]),
-					'link' => 'https://getkirby.com/security/php-end-of-life',
+					'link' => 'https://infinri.com/security/php-end-of-life',
 					'icon' => 'bell'
 				];
 			}
@@ -340,7 +340,7 @@ class UpdateStatus
 		try {
 			return Semver::satisfies($version, $constraint);
 		} catch (Exception $e) {
-			$this->exceptions[] = new KirbyException(
+			$this->exceptions[] = new InfinriException(
 				previous: $e,
 				fallback: 'Error comparing version constraint for ' . $this->packageName() . ' ' . $reason . ': ' . $e->getMessage(),
 			);
@@ -364,8 +364,8 @@ class UpdateStatus
 			foreach ($filters as $key => $version) {
 				if (isset($item[$key]) !== true) {
 					$package = $this->packageName();
-					$this->exceptions[] = new KirbyException(
-						'Missing constraint ' . $key . ' for ' . $package . ' ' . $reason
+					$this->exceptions[] = new InfinriException(
+						message: 'Missing constraint ' . $key . ' for ' . $package . ' ' . $reason
 					);
 
 					return false;
@@ -381,43 +381,36 @@ class UpdateStatus
 	}
 
 	/**
-	 * Finds the maximum possible major update
-	 * that is included with the current license
+	 * Finds the newest available release
+	 * that is newer than the current version
 	 *
 	 * @return string|null Version number of the update or
-	 *                     `null` if no free update is possible
+	 *                     `null` if no newer release is available
 	 */
-	protected function findMaximumFreeUpdate(): string|null
+	protected function findMaximumUpdate(): string|null
 	{
-		// get the timestamp of included updates
-		$renewal = $this->app->system()->license()->renewal();
-
-		if ($renewal === null || $this->data === null) {
+		if ($this->data === null) {
 			return null;
 		}
 
-		foreach ($this->data['versions'] ?? [] as $entry) {
-			$initialRelease = $entry['initialRelease'] ?? null;
-			$latest         = $entry['latest'] ?? '';
+		$maximum = null;
 
-			// skip entries of irrelevant releases
+		foreach ($this->data['versions'] ?? [] as $entry) {
+			$latest = $entry['latest'] ?? null;
+
 			if (
-				is_string($initialRelease) !== true ||
+				is_string($latest) !== true ||
 				version_compare($latest, $this->currentVersion, '<=') === true
 			) {
 				continue;
 			}
 
-			$timestamp = strtotime($initialRelease);
-
-			// update is free if the initial release was before the
-			// license renewal date
-			if (is_int($timestamp) === true && $timestamp < $renewal) {
-				return $latest;
+			if ($maximum === null || version_compare($latest, $maximum, '>') === true) {
+				$maximum = $latest;
 			}
 		}
 
-		return null;
+		return $maximum;
 	}
 
 	/**
@@ -425,7 +418,7 @@ class UpdateStatus
 	 * to fix all known vulnerabilities
 	 *
 	 * @return string|null Version number of the update or
-	 *                     `null` if no free update is possible
+	 *                     `null` if no newer version is available
 	 */
 	protected function findMinimumSecurityUpdate(): string|null
 	{
@@ -501,7 +494,7 @@ class UpdateStatus
 	}
 
 	/**
-	 * Loads the getkirby.com update data
+	 * Loads the infinri.com update data
 	 * from cache or via HTTP
 	 */
 	protected function loadData(): array|null
@@ -527,7 +520,7 @@ class UpdateStatus
 		// exception message (on previous request error)
 		if (is_string($data) === true) {
 			// restore the exception to make it visible when debugging
-			$this->exceptions[] = new KirbyException($data);
+			$this->exceptions[] = new InfinriException(message: $data);
 
 			return null;
 		}
@@ -535,7 +528,7 @@ class UpdateStatus
 		// before we request the data, ensure we have a writable cache;
 		// this reduces strain on the CDN from repeated requests
 		if ($cache->enabled() === false) {
-			$this->exceptions[] = new KirbyException(
+			$this->exceptions[] = new InfinriException(
 				message: 'Cannot check for updates without a working "updates" cache'
 			);
 
@@ -568,7 +561,7 @@ class UpdateStatus
 			$package = $this->packageName();
 			$message = 'Could not load update data for ' . $package . ': ' . $e->getMessage();
 
-			$exception = new KirbyException(
+			$exception = new InfinriException(
 				fallback: $message,
 				previous: $e
 			);
@@ -583,7 +576,7 @@ class UpdateStatus
 				// different error than timeout;
 				// prevent additional requests in the
 				// next three days (e.g. if a plugin
-				// does not have a page on getkirby.com)
+				// does not have a page on infinri.com)
 				// by caching the exception message
 				// instead of the data array
 				$cache->set($key, $exception->getMessage(), 3 * 24 * 60);
@@ -610,7 +603,7 @@ class UpdateStatus
 	 */
 	protected function packageName(): string
 	{
-		return $this->pluginName ? 'plugin ' . $this->pluginName : 'Kirby';
+		return $this->pluginName ? 'plugin ' . $this->pluginName : 'Infinri';
 	}
 
 	/**
@@ -660,7 +653,7 @@ class UpdateStatus
 			$update = $this->findMinimumSecurityUpdate();
 
 			if ($update !== null) {
-				// a free security update was found
+				// a security update was found
 				return $this->targetData = [
 					'status'  => 'security-update',
 					'url'     => $this->urlFor($update, 'changes'),
@@ -668,7 +661,7 @@ class UpdateStatus
 				];
 			}
 
-			// only a paid security upgrade is possible
+			// only a security upgrade to a newer major version is possible
 			return $this->targetData = [
 				'status'  => 'security-upgrade',
 				'url'     => $this->urlFor($this->currentVersion, 'upgrade'),
@@ -695,8 +688,8 @@ class UpdateStatus
 			];
 		}
 
-		// check if the license includes updates to a newer major version
-		if ($version = $this->findMaximumFreeUpdate()) {
+		// check if an update to a newer major version is available
+		if ($version = $this->findMaximumUpdate()) {
 			// extract the part before the first dot
 			// to find the major release page URL
 			preg_match('/^(\w+)\./', $version, $matches);
@@ -708,7 +701,7 @@ class UpdateStatus
 			];
 		}
 
-		// no free update is possible, but we are not on the latest version,
+		// no newer release entry exists, but we are not on the latest version,
 		// so the overall latest version must be an upgrade
 		return $this->targetData = [
 			'status'  => 'upgrade',
@@ -745,7 +738,7 @@ class UpdateStatus
 			$package = $this->packageName();
 			$message = 'No matching URL found for ' . $package . '@' . $version;
 
-			$this->exceptions[] = new KirbyException($message);
+			$this->exceptions[] = new InfinriException(message: $message);
 
 			return null;
 		}
@@ -819,7 +812,7 @@ class UpdateStatus
 			$package = $this->packageName();
 			$message = 'No matching version entry found for ' . $package . '@' . $this->currentVersion;
 
-			$this->exceptions[] = new KirbyException($message);
+			$this->exceptions[] = new InfinriException(message: $message);
 		}
 
 		$this->versionEntry = $versionEntry ?? false;

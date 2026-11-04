@@ -69,7 +69,20 @@ class MockLazyCollectionWithInitialization extends MockLazyCollection
 #[CoversClass(LazyCollection::class)]
 class LazyCollectionTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.LazyCollection';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.LazyCollection';
+
+	public function testRemovedMembers(): void
+	{
+		foreach (['current', 'next', 'prev'] as $method) {
+			$this->assertFalse(
+				method_exists(LazyCollection::class, $method),
+				'LazyCollection::' . $method . '() should be removed'
+			);
+		}
+
+		$call = new \ReflectionMethod(LazyCollection::class, '__call');
+		$this->assertNotSame(LazyCollection::class, $call->getDeclaringClass()->getName());
+	}
 
 	public function testHydrate(): void
 	{

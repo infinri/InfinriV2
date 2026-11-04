@@ -6,11 +6,11 @@ use Infinri\Cms\Api\ApiModelTestCase;
 
 class FileApiModelTest extends ApiModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileApiModel';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileApiModel';
 
 	public function testNext(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'  => 'test',
@@ -63,7 +63,7 @@ class FileApiModelTest extends ApiModelTestCase
 
 	public function testNextWithTemplate(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'  => 'test',
@@ -167,7 +167,7 @@ class FileApiModelTest extends ApiModelTestCase
 
 	public function testPrev(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'  => 'test',
@@ -220,7 +220,7 @@ class FileApiModelTest extends ApiModelTestCase
 
 	public function testPrevWithTemplate(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'  => 'test',

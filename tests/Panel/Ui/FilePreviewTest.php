@@ -40,7 +40,7 @@ class FilePreviewTest extends TestCase
 		]);
 
 		// authenticate for preview URL
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testDetails(): void

@@ -36,22 +36,22 @@ class Pagination extends BasePagination
 	 *     'total'    => 120,
 	 *     'method'   => 'query',
 	 *     'variable' => 'p',
-	 *     'url'      => new Uri('https://getkirby.com/blog')
+	 *     'url'      => new Uri('https://infinri.com/blog')
 	 * ]);
 	 * ```
 	 */
 	public function __construct(array $params = [])
 	{
-		$kirby   = App::instance();
-		$config  = $kirby->option('pagination', []);
-		$request = $kirby->request();
+		$infinri   = App::instance();
+		$config  = $infinri->option('pagination', []);
+		$request = $infinri->request();
 
 		$params['limit']    ??= $config['limit']    ?? 20;
 		$params['method']   ??= $config['method']   ?? 'param';
 		$params['variable'] ??= $config['variable'] ?? 'page';
 
 		if (empty($params['url']) === true) {
-			$params['url'] = new Uri($kirby->url('current'), [
+			$params['url'] = new Uri($infinri->url('current'), [
 				'params' => $request->params(),
 				'query'  => $request->query()->toArray(),
 			]);

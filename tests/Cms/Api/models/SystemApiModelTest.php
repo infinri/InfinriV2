@@ -6,7 +6,7 @@ use Infinri\Cms\Api\ApiModelTestCase;
 
 class SystemApiModelTest extends ApiModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SystemApiModel';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SystemApiModel';
 
 	public function testTranslationWithInaccessibleUser(): void
 	{

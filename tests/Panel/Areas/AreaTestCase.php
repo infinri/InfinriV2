@@ -13,7 +13,7 @@ use Infinri\Toolkit\Str;
 
 abstract class AreaTestCase extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Areas.AreaTestCase';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Areas.AreaTestCase';
 
 	protected function setUp(): void
 	{
@@ -137,7 +137,7 @@ abstract class AreaTestCase extends TestCase
 			'users' => [
 				[
 					'id'       => 'test',
-					'email'    => 'test@getkirby.com',
+					'email'    => 'test@infinri.com',
 					'role'     => 'admin',
 					'password' => User::hashPassword('12345678')
 				]
@@ -175,12 +175,12 @@ abstract class AreaTestCase extends TestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 				],
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			]
@@ -205,7 +205,7 @@ abstract class AreaTestCase extends TestCase
 		]);
 	}
 
-	protected function login(string $user = 'test@getkirby.com'): void
+	protected function login(string $user = 'test@infinri.com'): void
 	{
 		$this->app->impersonate($user);
 	}

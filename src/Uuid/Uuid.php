@@ -393,7 +393,6 @@ abstract class Uuid implements Stringable
 
 	/**
 	 * Returns the URL of the model, including the query and fragment
-	 * @since 5.1.0
 	 */
 	public function toUrl(): string|null
 	{

@@ -35,14 +35,14 @@ class RequestTest extends TestCase
 			'body'   => ['a' => 'a'],
 			'query'  => ['b' => 'b'],
 			'files'  => ['upload' => $file],
-			'url'    => 'https://getkirby.com'
+			'url'    => 'https://infinri.com'
 		]);
 
 		$this->assertTrue($request->is('POST'));
 		$this->assertSame('a', $request->body()->get('a'));
 		$this->assertSame('b', $request->query()->get('b'));
 		$this->assertSame($file, $request->file('upload'));
-		$this->assertSame('https://getkirby.com', $request->url()->toString());
+		$this->assertSame('https://infinri.com', $request->url()->toString());
 
 		// with instances
 		$request = new Request([
@@ -50,14 +50,14 @@ class RequestTest extends TestCase
 			'body'   => new Body(['a' => 'a']),
 			'query'  => new Query(['b' => 'b']),
 			'files'  => new Files(['upload' => $file]),
-			'url'    => new Uri('https://getkirby.com')
+			'url'    => new Uri('https://infinri.com')
 		]);
 
 		$this->assertTrue($request->is('POST'));
 		$this->assertSame('a', $request->body()->get('a'));
 		$this->assertSame('b', $request->query()->get('b'));
 		$this->assertSame($file, $request->file('upload'));
-		$this->assertSame('https://getkirby.com', $request->url()->toString());
+		$this->assertSame('https://infinri.com', $request->url()->toString());
 	}
 
 	public function testData(): void
@@ -270,7 +270,7 @@ class RequestTest extends TestCase
 		$uriBefore = $request->url();
 
 		$clone = $request->url([
-			'host'  => 'getkirby.com',
+			'host'  => 'infinri.com',
 			'path'  => 'yay',
 			'query' => ['foo' => 'bar'],
 			'slash' => false,
@@ -280,7 +280,7 @@ class RequestTest extends TestCase
 
 		$this->assertNotSame($uriBefore, $clone);
 		$this->assertSame($uriBefore, $uriAfter);
-		$this->assertSame('http://getkirby.com/yay?foo=bar', $clone->toString());
+		$this->assertSame('http://infinri.com/yay?foo=bar', $clone->toString());
 	}
 
 	public function testPath(): void
@@ -292,9 +292,9 @@ class RequestTest extends TestCase
 	public function testDomain(): void
 	{
 		$request = new Request([
-			'url' => 'https://getkirby.com/a/b'
+			'url' => 'https://infinri.com/a/b'
 		]);
 
-		$this->assertSame('getkirby.com', $request->domain());
+		$this->assertSame('infinri.com', $request->domain());
 	}
 }

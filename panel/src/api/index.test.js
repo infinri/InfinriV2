@@ -50,7 +50,7 @@ describe("api.csrf", () => {
 
 		panel.system.csrf = "token-b";
 
-		await api.post("auth/login", { email: "test@getkirby.com" });
+		await api.post("auth/login", { email: "test@infinri.com" });
 
 		expect(fetch.mock.calls[0][0].headers.get("x-csrf")).toBe("token-b");
 	});

@@ -27,7 +27,7 @@ class NewUncreatablePage extends Page
 #[CoversClass(Page::class)]
 class PageCreateTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageCreate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageCreate';
 
 	protected function setUp(): void
 	{
@@ -76,7 +76,7 @@ class PageCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'new-page',
@@ -106,7 +106,7 @@ class PageCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'content'  => ['a' => 'Custom A'],
@@ -118,9 +118,6 @@ class PageCreateTest extends ModelTestCase
 		$this->assertSame('B', $page->b()->value());
 	}
 
-	/**
-	 * @see https://github.com/getkirby/kirby/issues/8411
-	 */
 	public function testCreateDraftWithSaveHandlers(): void
 	{
 		$this->app = $this->app->clone([
@@ -136,7 +133,7 @@ class PageCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'content'  => ['categories' => ['one', 'two']],
@@ -264,7 +261,7 @@ class PageCreateTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		Page::create([
 			'slug' => 'test',
@@ -335,7 +332,7 @@ class PageCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$value = [
 			'title'    => 'Test page',
@@ -370,7 +367,7 @@ class PageCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->app->setCurrentLanguage('de');
 
 		$this->assertSame('de', $this->app->language()->code());
@@ -408,7 +405,7 @@ class PageCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->app->setCurrentLanguage('de');
 
 		$this->assertSame('de', $this->app->language()->code());
@@ -446,7 +443,7 @@ class PageCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->app->setCurrentLanguage('de');
 
 		$this->assertSame('de', $this->app->language()->code());
@@ -473,7 +470,7 @@ class PageCreateTest extends ModelTestCase
 	{
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Page::create([
 			'slug' => 'test',
@@ -503,7 +500,7 @@ class PageCreateTest extends ModelTestCase
 	{
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Page::create([
 			'slug' => 'test',
@@ -526,9 +523,6 @@ class PageCreateTest extends ModelTestCase
 		$this->assertSame('Title DE', $page->content('de')->title()->value());
 	}
 
-	/**
-	 * @see https://github.com/getkirby/kirby/issues/8411
-	 */
 	public function testCreateWithTranslationsAndSaveHandlers(): void
 	{
 		$this->setupMultiLanguage();
@@ -545,7 +539,7 @@ class PageCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Page::create([
 			'slug' => 'test',
@@ -585,9 +579,6 @@ class PageCreateTest extends ModelTestCase
 		);
 	}
 
-	/**
-	 * Issue: https://github.com/getkirby/kirby/issues/7084
-	 */
 	public function testCreateWithCustomModel(): void
 	{
 		$this->setupSingleLanguage();
@@ -599,7 +590,7 @@ class PageCreateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = $this->app->site()->createChild([
 			'slug'     => 'parent',
@@ -676,7 +667,7 @@ class PageCreateTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		Page::create(['slug' => 'test']);
 
@@ -705,7 +696,7 @@ class PageCreateTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		Page::create(['slug' => 'test']);
 

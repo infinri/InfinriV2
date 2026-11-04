@@ -85,7 +85,7 @@ class BlocksField extends FieldClass
 		}
 
 		throw new NotFoundException(
-			'The fieldset ' . $type . ' could not be found'
+			message: 'The fieldset ' . $type . ' could not be found'
 		);
 	}
 
@@ -107,7 +107,7 @@ class BlocksField extends FieldClass
 
 	/**
 	 * @psalm-suppress MethodSignatureMismatch
-	 * @todo Remove psalm suppress after https://github.com/vimeo/psalm/issues/8673 is fixed
+	 * @todo Remove psalm suppress once the related psalm bug is fixed
 	 */
 	#[BlockCollectionAccess]
 	public function fill(mixed $value): static

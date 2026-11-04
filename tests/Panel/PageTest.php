@@ -18,7 +18,7 @@ class PageForceLocked extends ModelPage
 	public function lock(): Lock
 	{
 		return new Lock(
-			user: new ModelUser(['email' => 'test@getkirby.com']),
+			user: new ModelUser(['email' => 'test@infinri.com']),
 			modified: time()
 		);
 	}
@@ -29,7 +29,7 @@ class PageForceLocked extends ModelPage
 class PageTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Page';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Page';
 
 	protected function setUp(): void
 	{
@@ -55,7 +55,7 @@ class PageTest extends TestCase
 
 	public function testBreadcrumb(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = new ModelSite([
 			'children' => [
@@ -126,11 +126,11 @@ class PageTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
-			'user' => 'editor@getkirby.com'
+			'user' => 'editor@infinri.com'
 		]);
 
 		// the title of the parent must not leak into the breadcrumb
@@ -186,11 +186,11 @@ class PageTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
-			'user' => 'editor@getkirby.com'
+			'user' => 'editor@infinri.com'
 		]);
 
 		$this->assertSame([
@@ -233,7 +233,7 @@ class PageTest extends TestCase
 		$app = $this->app->clone([
 			'options' => [
 				'panel' => [
-					'kirbytext' => false
+					'infinritext' => false
 				]
 			],
 			'site' => [
@@ -265,7 +265,7 @@ class PageTest extends TestCase
 		$app = $this->app->clone([
 			'options' => [
 				'panel' => [
-					'kirbytext' => false,
+					'infinritext' => false,
 					'markdown' => [
 						'pageDragText' => function (ModelPage $page) {
 							return sprintf('Links sind toll: %s', $page->url());
@@ -289,12 +289,12 @@ class PageTest extends TestCase
 		$this->assertSame('Links sind toll: /test', $panel->dragText());
 	}
 
-	public function testDragTextCustomKirbytext(): void
+	public function testDragTextCustomInfinritext(): void
 	{
 		$app = $this->app->clone([
 			'options' => [
 				'panel' => [
-					'kirbytext' => [
+					'infinritext' => [
 						'pageDragText' => function (ModelPage $page) {
 							return sprintf('Links sind toll: %s', $page->url());
 						},
@@ -317,21 +317,11 @@ class PageTest extends TestCase
 		$this->assertSame('Links sind toll: /test', $panel->dragText());
 	}
 
-	public function testDropdownOption(): void
+	public function testDropdownOptionIsNotOverridden(): void
 	{
-		$page = new ModelPage([
-			'slug'    => 'test',
-			'content' => [
-				'title' => 'Test page'
-			]
-		]);
+		$declaring = (new \ReflectionMethod(Page::class, 'dropdownOption'))->getDeclaringClass()->getName();
 
-		$panel  = new Page($page);
-		$option = $panel->dropdownOption();
-
-		$this->assertSame('page', $option['icon']);
-		$this->assertSame('Test page', $option['text']);
-		$this->assertSame('/pages/test', $option['link']);
+		$this->assertNotSame(Page::class, $declaring);
 	}
 
 	public function testIconFromBlueprint(): void
@@ -362,7 +352,7 @@ class PageTest extends TestCase
 
 	public function testImage(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new ModelPage([
 			'slug'  => 'test',
@@ -405,7 +395,7 @@ class PageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page  = $app->page('test');
 
@@ -446,7 +436,7 @@ class PageTest extends TestCase
 			'slug' => 'test',
 		]);
 
-		$page->kirby()->impersonate('kirby');
+		$page->infinri()->impersonate('infinri');
 
 		$expected = [
 			'access'         => true,
@@ -475,7 +465,7 @@ class PageTest extends TestCase
 			'slug' => 'test',
 		]);
 
-		$page->kirby()->impersonate('kirby');
+		$page->infinri()->impersonate('infinri');
 
 		// without override
 		$expected = [
@@ -581,12 +571,9 @@ class PageTest extends TestCase
 		$panel = new Page($page);
 		$props = $panel->props();
 
-		$this->assertArrayHasKey('model', $props);
-		$this->assertArrayHasKey('id', $props['model']);
-		$this->assertArrayHasKey('parent', $props['model']);
-		$this->assertArrayHasKey('previewUrl', $props['model']);
-		$this->assertArrayHasKey('status', $props['model']);
-		$this->assertArrayHasKey('title', $props['model']);
+		$this->assertArrayNotHasKey('model', $props);
+		$this->assertArrayHasKey('id', $props);
+		$this->assertArrayHasKey('title', $props);
 
 		// inherited props
 		$this->assertArrayHasKey('blueprint', $props);
@@ -611,7 +598,7 @@ class PageTest extends TestCase
 				]
 			],
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$props = (new Page($app->page('foo')))->props();
 		$this->assertNull($props['prev']());
@@ -637,7 +624,7 @@ class PageTest extends TestCase
 				]
 			],
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$props = (new Page($app->page('foo')))->props();
 		$this->assertSame('/pages/baz', $props['next']()['link']);
@@ -661,7 +648,7 @@ class PageTest extends TestCase
 				]
 			],
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$props = (new Page($app->page('foo')))->props();
 		$this->assertSame('/pages/baz', $props['next']()['link']);
@@ -685,7 +672,7 @@ class PageTest extends TestCase
 				]
 			],
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$_GET['tab'] = 'test';
 
@@ -715,7 +702,7 @@ class PageTest extends TestCase
 	{
 		$app = $this->app->clone([
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'site' => [
 				'children' => [
@@ -734,7 +721,7 @@ class PageTest extends TestCase
 		$page  = $app->page('mother/child');
 		$panel = new Page($page);
 
-		$this->assertSame('https://getkirby.com/panel/pages/mother+child', $panel->url());
+		$this->assertSame('https://infinri.com/panel/pages/mother+child', $panel->url());
 		$this->assertSame('/pages/mother+child', $panel->url(true));
 	}
 
@@ -762,7 +749,7 @@ class PageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$parent = ModelPage::create([
 			'slug' => 'test'
@@ -825,7 +812,7 @@ class PageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$parent = ModelPage::create([
 			'slug' => 'test'
@@ -901,7 +888,7 @@ class PageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$parent = ModelPage::create([
 			'slug' => 'test'
@@ -979,7 +966,7 @@ class PageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$parent = ModelPage::create([
 			'slug' => 'test'

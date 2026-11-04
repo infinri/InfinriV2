@@ -78,7 +78,7 @@
 					class="k-link-input-body"
 				>
 					<k-file-browser
-						:opened="$panel.view.props.model.uuid ?? $panel.view.props.model.id"
+						:opened="openedModel"
 						:selected="$helper.link.getFileUUID(value)"
 						@select="selectModel($event)"
 					/>
@@ -105,7 +105,6 @@ export const props = {
 };
 
 /**
- * @since 4.0.0
  * @example <k-link-field :value="link" @input="link = $event" name="link" label="Link" />
  */
 export default {
@@ -165,6 +164,13 @@ export default {
 			return (
 				this.activeTypes[this.linkType] ?? Object.values(this.activeTypes)[0]
 			);
+		},
+		/**
+		 * UUID or id of the model of the current view,
+		 * used to open the file browser at that model
+		 */
+		openedModel() {
+			return this.$panel.view.props.uuid ?? this.$panel.view.props.id;
 		}
 	},
 	watch: {
@@ -190,10 +196,10 @@ export default {
 		}
 	},
 	mounted() {
-		this.$events.on("click", this.onOutsideClick);
+		this.$panel.events.on("click", this.onOutsideClick);
 	},
 	destroyed() {
-		this.$events.off("click", this.onOutsideClick);
+		this.$panel.events.off("click", this.onOutsideClick);
 	},
 	methods: {
 		clear() {

@@ -61,7 +61,6 @@ import { props as Preview } from "./UploadItemPreview.vue";
 
 /**
  * Represents one file to upload in an upload dialog
- * @since 4.3.0
  */
 export default {
 	mixins: [Preview],

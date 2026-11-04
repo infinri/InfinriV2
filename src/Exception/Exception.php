@@ -46,8 +46,6 @@ class Exception extends \Exception
 	private static string $prefix = 'error';
 
 	public function __construct(
-		array|string $args = [], // @deprecated
-
 		string|null $key = null,
 		array|null $data = null,
 		array|null $details = null,
@@ -57,24 +55,9 @@ class Exception extends \Exception
 		Throwable|null $previous = null,
 		bool $translate = true
 	) {
-		$key      ??= $args['key'] ?? null;
-		$fallback ??= $args['fallback'] ?? null;
-		$previous ??= $args['previous'] ?? null;
-
-		$this->data =
-			$data ??
-			$args['data'] ??
-			static::$defaultData;
-
-		$this->httpCode =
-			$httpCode ??
-			$args['httpCode'] ??
-			static::$defaultHttpCode;
-
-		$this->details =
-			$details ??
-			$args['details'] ??
-			static::$defaultDetails;
+		$this->data     = $data ?? static::$defaultData;
+		$this->httpCode = $httpCode ?? static::$defaultHttpCode;
+		$this->details  = $details ?? static::$defaultDetails;
 
 		// set the Exception code to the key
 		$this->code = $key ?? static::$defaultKey;
@@ -83,18 +66,11 @@ class Exception extends \Exception
 			$this->code = self::$prefix . '.' . $this->code;
 		}
 
-		if (is_string($args) === true) {
-			$message ??= $args;
-		}
-
 		if ($message !== null) {
 			$this->isTranslated = false;
 			parent::__construct($message);
 			return;
 		}
-
-		// define whether message can/should be translated
-		$translate = $args['translate'] ?? $translate;
 
 		// a. translation for provided key in current language
 		// b. translation for provided key in default language

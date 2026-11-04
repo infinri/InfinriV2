@@ -7,12 +7,12 @@
 					:value="[
 						{
 							image: { icon: 'user', back: 'black', color: 'white' },
-							email: 'marge@getkirby.com',
+							email: 'marge@infinri.com',
 							link: '/'
 						},
 						{
 							image: { icon: 'user', back: 'black', color: 'white' },
-							email: 'maggie@getkirby.com',
+							email: 'maggie@infinri.com',
 							link: '/'
 						}
 					]"
@@ -28,7 +28,7 @@
 					:value="
 						Array(20).fill({
 							image: { icon: 'user', back: 'black', color: 'white' },
-							email: 'marge@getkirby.com',
+							email: 'marge@infinri.com',
 							link: '/'
 						})
 					"
@@ -52,7 +52,7 @@
 					:value="[
 						{
 							image: { icon: 'user', back: 'black', color: 'white' },
-							email: '<b>marge@getkirby.com</b> (Marge Simpson)',
+							email: '<b>marge@infinri.com</b> (Marge Simpson)',
 							link: '/'
 						}
 					]"

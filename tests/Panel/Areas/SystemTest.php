@@ -37,7 +37,7 @@ class SystemTest extends AreaTestCase
 
 	protected function tearDown(): void
 	{
-		Cookie::$key = 'KirbyHttpCookieKey';
+		Cookie::$key = 'InfinriHttpCookieKey';
 		parent::tearDown();
 	}
 
@@ -45,7 +45,7 @@ class SystemTest extends AreaTestCase
 	{
 		return [
 			'id'    => 'vue-compiler',
-			'link'  => 'https://getkirby.com/security/vue-compiler',
+			'link'  => 'https://infinri.com/security/vue-compiler',
 			'text'  => 'The Vue template compiler is enabled',
 			'theme' => 'notice'
 		];
@@ -55,7 +55,7 @@ class SystemTest extends AreaTestCase
 	{
 		return [
 			'id'    => 'content-salt',
-			'link'  => 'https://getkirby.com/security/content-salt',
+			'link'  => 'https://infinri.com/security/content-salt',
 			'text'  => 'The content salt has not been changed from its default value',
 			'theme' => 'notice'
 		];
@@ -65,7 +65,7 @@ class SystemTest extends AreaTestCase
 	{
 		return [
 			'id'    => 'cookie-key',
-			'link'  => 'https://getkirby.com/security/cookie-key',
+			'link'  => 'https://infinri.com/security/cookie-key',
 			'text'  => 'The cookie signing key has not been changed from its default value',
 			'theme' => 'notice'
 		];
@@ -75,31 +75,20 @@ class SystemTest extends AreaTestCase
 	{
 		return [
 			'text'  => 'This is a very important announcement!',
-			'kirby' => '*',
+			'infinri' => '*',
 			'php'   => '*'
 		];
 	}
 
-	protected function unknownLicense(): array
+	public function testLicenseDialogsAreNotRegistered(): void
 	{
-		return [
-			'link'   => null,
-			'name'   => '-',
-			'status' => $this->unknownLicenseStatus()
-		];
-	}
+		$this->login();
 
-	protected function unknownLicenseStatus(): array
-	{
-		return [
-			'dialog' => null,
-			'drawer' => null,
-			'icon'   => 'question',
-			'label'  => 'Unknown',
-			'link'	 => null,
-			'theme'  => 'passive',
-			'value'  => 'unknown',
-		];
+		$areas = \Infinri\Panel\Panel::areas();
+
+		$this->assertArrayHasKey('system', $areas);
+		$this->assertArrayNotHasKey('dialogs', $areas['system']);
+		$this->assertSame([], \Infinri\Panel\Panel::routesForDialogs('system', $areas['system']));
 	}
 
 	public function testViewWithoutAuthentication(): void
@@ -119,16 +108,9 @@ class SystemTest extends AreaTestCase
 		$this->assertSame('k-system-view', $view['component']);
 		$this->assertSame([
 			[
-				'label'  => 'Please activate your license',
-				'value'  => 'Unregistered',
-				'theme'  => 'love',
-				'icon'   => 'key',
-				'dialog' => 'registration'
-			],
-			[
 				'label' => 'Free update 88888.8.8 available',
 				'value' => $this->app->version(),
-				'link'  => 'https://getkirby.com/releases/88888.8.8',
+				'link'  => 'https://infinri.com/releases/88888.8.8',
 				'theme' => 'info',
 				'icon'  => 'info'
 			],
@@ -143,17 +125,19 @@ class SystemTest extends AreaTestCase
 				'icon'  => 'server'
 			],
 		], $props['environment']);
+		$this->assertCount(3, $props['environment']);
+		$this->assertSame(['Free update 88888.8.8 available', 'PHP', 'Server'], array_column($props['environment'], 'label'));
 		$this->assertSame([], $props['exceptions']);
 		$this->assertSame([], $props['plugins']);
 		$this->assertSame([
 			[
 				'text'  => 'This is a very important announcement!',
-				'kirby' => '*',
+				'infinri' => '*',
 				'php'   => '*'
 			],
 			[
 				'id'    => 'vue-compiler',
-				'link' => 'https://getkirby.com/security/vue-compiler',
+				'link' => 'https://infinri.com/security/vue-compiler',
 				'text' => 'The Vue template compiler is enabled',
 				'theme' => 'notice',
 			],
@@ -163,7 +147,7 @@ class SystemTest extends AreaTestCase
 		$this->assertSame([
 			'content' => 'https://example.com/content/site.txt',
 			'git'     => null,
-			'kirby'   => null,
+			'infinri'   => null,
 			'site'    => 'https://example.com/site'
 		], $props['urls']);
 	}
@@ -217,7 +201,7 @@ class SystemTest extends AreaTestCase
 				'icon'  => 'alert',
 				'theme' => 'negative',
 				'text'  => 'Debugging must be turned off in production',
-				'link'  => 'https://getkirby.com/security/debug'
+				'link'  => 'https://infinri.com/security/debug'
 			],
 			$this->compilerWarning(),
 			$this->contentSaltWarning(),
@@ -346,7 +330,7 @@ class SystemTest extends AreaTestCase
 			[
 				'id'   => 'https',
 				'text' => 'We recommend HTTPS for all your sites',
-				'link' => 'https://getkirby.com/security/https'
+				'link' => 'https://infinri.com/security/https'
 			],
 			$this->compilerWarning(),
 			$this->contentSaltWarning(),
@@ -356,12 +340,16 @@ class SystemTest extends AreaTestCase
 
 	public function testViewWithPlugins(): void
 	{
-		App::plugin('getkirby/private', [
-			'info' => []
-		]);
+		App::plugin(
+			name: 'infinri/private',
+			extends: [],
+			info: []
+		);
 
-		App::plugin('getkirby/public', [
-			'info' => [
+		App::plugin(
+			name: 'infinri/public',
+			extends: [],
+			info: [
 				'authors' => [
 					[
 						'name' => 'A'
@@ -370,16 +358,18 @@ class SystemTest extends AreaTestCase
 						'name' => 'B'
 					]
 				],
-				'homepage' => 'https://getkirby.com',
+				'homepage' => 'https://infinri.com',
 				'version'  => '1.0.0',
 			]
-		]);
+		);
 
-		App::plugin('getkirby/unknown', [
-			'info' => [
+		App::plugin(
+			name: 'infinri/unknown',
+			extends: [],
+			info: [
 				'version' => '1.0.0'
 			]
-		]);
+		);
 
 		$this->login();
 
@@ -387,54 +377,48 @@ class SystemTest extends AreaTestCase
 		$expected = [
 			[
 				'author'  => '–',
-				'license' => $this->unknownLicense(),
 				'name'    => [
-					'text' => 'getkirby/private',
+					'text' => 'infinri/private',
 					'href' => null
 				],
-				'status'  => $this->unknownLicenseStatus(),
 				'version' => [
 					'currentVersion' => '?',
 					'icon' => 'question',
 					'label' => 'Could not check for updates',
 					'latestVersion' => '?',
-					'pluginName' => 'getkirby/private',
+					'pluginName' => 'infinri/private',
 					'theme' => 'passive',
 					'url' => null
 				]
 			],
 			[
 				'author'  => 'A, B',
-				'license' => $this->unknownLicense(),
 				'name'    => [
-					'text' => 'getkirby/public',
-					'href' => 'https://plugins.getkirby.com/getkirby/public'
+					'text' => 'infinri/public',
+					'href' => 'https://plugins.infinri.com/infinri/public'
 				],
-				'status'  => $this->unknownLicenseStatus(),
 				'version' => [
 					'currentVersion' => '1.0.0',
 					'icon' => 'info',
 					'label' => 'Free update 88888.8.8 available',
 					'latestVersion' => '99999.9.9',
-					'pluginName' => 'getkirby/public',
+					'pluginName' => 'infinri/public',
 					'theme' => 'info',
-					'url' => 'https://github.com/getkirby/public-plugin/releases/tag/88888.8.8'
+					'url' => 'https://example.com/public-plugin/releases/tag/88888.8.8'
 				]
 			],
 			[
 				'author'  => '–',
-				'license' => $this->unknownLicense(),
 				'name'    => [
-					'text' => 'getkirby/unknown',
+					'text' => 'infinri/unknown',
 					'href' => null
 				],
-				'status'  => $this->unknownLicenseStatus(),
 				'version' => [
 					'currentVersion' => '1.0.0',
 					'icon' => 'question',
 					'label' => 'Could not check for updates',
 					'latestVersion' => '?',
-					'pluginName' => 'getkirby/unknown',
+					'pluginName' => 'infinri/unknown',
 					'theme' => 'passive',
 					'url' => null
 				]
@@ -443,16 +427,26 @@ class SystemTest extends AreaTestCase
 
 		$this->assertSame($expected, $view['props']['plugins']);
 		$this->assertSame([], $view['props']['exceptions']);
+
+		foreach ($view['props']['plugins'] as $row) {
+			$this->assertSame(['author', 'name', 'version'], array_keys($row));
+			$this->assertArrayNotHasKey('license', $row);
+			$this->assertArrayNotHasKey('status', $row);
+		}
 	}
 
 	public function testViewWithPluginsDebug(): void
 	{
-		App::plugin('getkirby/private', [
-			'info' => []
-		]);
+		App::plugin(
+			name: 'infinri/private',
+			extends: [],
+			info: []
+		);
 
-		App::plugin('getkirby/public', [
-			'info' => [
+		App::plugin(
+			name: 'infinri/public',
+			extends: [],
+			info: [
 				'authors' => [
 					[
 						'name' => 'A'
@@ -461,16 +455,18 @@ class SystemTest extends AreaTestCase
 						'name' => 'B'
 					]
 				],
-				'homepage' => 'https://getkirby.com',
+				'homepage' => 'https://infinri.com',
 				'version'  => '1.0.0',
 			]
-		]);
+		);
 
-		App::plugin('getkirby/unknown', [
-			'info' => [
+		App::plugin(
+			name: 'infinri/unknown',
+			extends: [],
+			info: [
 				'version' => '1.0.0'
 			]
-		]);
+		);
 
 		$this->app([
 			'options' => [
@@ -484,54 +480,48 @@ class SystemTest extends AreaTestCase
 		$expected = [
 			[
 				'author'  => '–',
-				'license' => $this->unknownLicense(),
 				'name'    => [
-					'text' => 'getkirby/private',
+					'text' => 'infinri/private',
 					'href' => null
 				],
-				'status'  => $this->unknownLicenseStatus(),
 				'version' => [
 					'currentVersion' => '?',
 					'icon' => 'question',
 					'label' => 'Could not check for updates',
 					'latestVersion' => '?',
-					'pluginName' => 'getkirby/private',
+					'pluginName' => 'infinri/private',
 					'theme' => 'passive',
 					'url' => null
 				]
 			],
 			[
 				'author'  => 'A, B',
-				'license' => $this->unknownLicense(),
 				'name'    => [
-					'text' => 'getkirby/public',
-					'href' => 'https://plugins.getkirby.com/getkirby/public'
+					'text' => 'infinri/public',
+					'href' => 'https://plugins.infinri.com/infinri/public'
 				],
-				'status'  => $this->unknownLicenseStatus(),
 				'version' => [
 					'currentVersion' => '1.0.0',
 					'icon' => 'info',
 					'label' => 'Free update 88888.8.8 available',
 					'latestVersion' => '99999.9.9',
-					'pluginName' => 'getkirby/public',
+					'pluginName' => 'infinri/public',
 					'theme' => 'info',
-					'url' => 'https://github.com/getkirby/public-plugin/releases/tag/88888.8.8'
+					'url' => 'https://example.com/public-plugin/releases/tag/88888.8.8'
 				]
 			],
 			[
 				'author'  => '–',
-				'license' => $this->unknownLicense(),
 				'name'    => [
-					'text' => 'getkirby/unknown',
+					'text' => 'infinri/unknown',
 					'href' => null
 				],
-				'status' => $this->unknownLicenseStatus(),
 				'version' => [
 					'currentVersion' => '1.0.0',
 					'icon' => 'question',
 					'label' => 'Could not check for updates',
 					'latestVersion' => '?',
-					'pluginName' => 'getkirby/unknown',
+					'pluginName' => 'infinri/unknown',
 					'theme' => 'passive',
 					'url' => null
 				]
@@ -543,10 +533,10 @@ class SystemTest extends AreaTestCase
 		// curl's wording for a missing local file differs between
 		// versions ("Couldn't open file" vs. "Could not open file")
 		$this->assertSame([
-			'Could not load update data for plugin getkirby/private: Couldn\'t open file ' .
-			static::FIXTURES . '/plugins/getkirby/private.json',
-			'Could not load update data for plugin getkirby/unknown: Couldn\'t open file ' .
-			static::FIXTURES . '/plugins/getkirby/unknown.json',
+			'Could not load update data for plugin infinri/private: Couldn\'t open file ' .
+			static::FIXTURES . '/plugins/infinri/private.json',
+			'Could not load update data for plugin infinri/unknown: Couldn\'t open file ' .
+			static::FIXTURES . '/plugins/infinri/unknown.json',
 		], str_replace(
 			'Could not open file',
 			'Couldn\'t open file',
@@ -566,8 +556,10 @@ class SystemTest extends AreaTestCase
 
 		Cookie::$key = 'custom-cookie-key';
 
-		App::plugin('getkirby/public', [
-			'info' => [
+		App::plugin(
+			name: 'infinri/public',
+			extends: [],
+			info: [
 				'authors' => [
 					[
 						'name' => 'A'
@@ -576,10 +568,10 @@ class SystemTest extends AreaTestCase
 						'name' => 'B'
 					]
 				],
-				'homepage' => 'https://getkirby.com',
+				'homepage' => 'https://infinri.com',
 				'version'  => '1.0.0',
 			]
-		]);
+		);
 
 		$this->login();
 
@@ -588,16 +580,9 @@ class SystemTest extends AreaTestCase
 
 		$this->assertSame([
 			[
-				'label'  => 'Please activate your license',
-				'value'  => 'Unregistered',
-				'theme'  => 'love',
-				'icon'   => 'key',
-				'dialog' => 'registration'
-			],
-			[
 				'label' => 'Version',
 				'value' => $this->app->version(),
-				'link'  => 'https://github.com/getkirby/kirby/releases/tag/' . $this->app->version(),
+				'link'  => null,
 				'theme' => null,
 				'icon'  => 'info'
 			],
@@ -618,12 +603,10 @@ class SystemTest extends AreaTestCase
 		$this->assertSame([
 			[
 				'author'  => 'A, B',
-				'license' => $this->unknownLicense(),
 				'name'    => [
-					'text' => 'getkirby/public',
-					'href' => 'https://getkirby.com'
+					'text' => 'infinri/public',
+					'href' => 'https://infinri.com'
 				],
-				'status'  => $this->unknownLicenseStatus(),
 				'version' => '1.0.0'
 			]
 		], $props['plugins']);

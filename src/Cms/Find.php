@@ -61,8 +61,8 @@ class Find
 	{
 		// decode API ID encoding
 		$id    = str_replace(['+', ' '], '/', rawurldecode($id));
-		$kirby = App::instance();
-		$page  = $kirby->page($id, null, true);
+		$infinri = App::instance();
+		$page  = $infinri->page($id, null, true);
 
 		if ($page?->isAccessible() === true) {
 			return $page;
@@ -101,7 +101,7 @@ class Find
 			$modelName = 'file';
 		}
 
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		$model = match ($modelName) {
 			'site'    => static::site(),
@@ -144,8 +144,6 @@ class Find
 
 	/**
 	 * Returns all accessible roles
-	 *
-	 * @since 5.4.0
 	 */
 	public static function roles(): Roles
 	{
@@ -156,7 +154,6 @@ class Find
 	 * Returns the site object if the site is accessible
 	 *
 	 * @throws \Infinri\Exception\NotFoundException if the site cannot be accessed
-	 * @since 5.4.0
 	 */
 	public static function site(): Site
 	{
@@ -187,13 +184,13 @@ class Find
 			$id = null;
 		}
 
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// get the authenticated user
 		if ($id === null) {
-			$user = $kirby->user(
+			$user = $infinri->user(
 				null,
-				$kirby->option('api.allowImpersonation', false)
+				$infinri->option('api.allowImpersonation', false)
 			);
 
 			if ($user?->isAccessible() === true) {
@@ -206,7 +203,7 @@ class Find
 		}
 
 		// get a specific user by id
-		$user = $kirby->user($id);
+		$user = $infinri->user($id);
 
 		if ($user?->isAccessible() === true) {
 			return $user;
@@ -220,8 +217,6 @@ class Find
 
 	/**
 	 * Returns all accessible users
-	 *
-	 * @since 5.4.0
 	 */
 	public static function users(): Users
 	{

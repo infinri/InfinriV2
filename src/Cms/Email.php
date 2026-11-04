@@ -137,7 +137,7 @@ class Email
 	}
 
 	/**
-	 * Transforms Kirby models to a simplified collection
+	 * Transforms Infinri models to a simplified collection
 	 *
 	 * @param string $prop Prop to transform
 	 * @param string $class Fully qualified class name of the supported model

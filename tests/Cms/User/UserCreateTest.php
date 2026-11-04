@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserCreateTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserCreate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserCreate';
 
 	protected function setUp(): void
 	{
@@ -21,11 +21,11 @@ class UserCreateTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			],
-			'user' => 'admin@getkirby.com'
+			'user' => 'admin@infinri.com'
 		]);
 	}
 
@@ -110,7 +110,7 @@ class UserCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = User::create([
 			'email' => 'new@domain.com',
@@ -140,7 +140,7 @@ class UserCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = User::create([
 			'email'   => 'new@domain.com',
@@ -152,9 +152,6 @@ class UserCreateTest extends ModelTestCase
 		$this->assertSame('B', $user->b()->value());
 	}
 
-	/**
-	 * @see https://github.com/getkirby/kirby/issues/8411
-	 */
 	public function testCreateWithSaveHandlers(): void
 	{
 		$this->app = $this->app->clone([
@@ -170,7 +167,7 @@ class UserCreateTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = User::create([
 			'content' => ['categories' => ['one', 'two']],
@@ -269,7 +266,7 @@ class UserCreateTest extends ModelTestCase
 		]);
 
 		User::create([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'translations' => [
 				[
 					'code' => 'en',
@@ -286,7 +283,7 @@ class UserCreateTest extends ModelTestCase
 			],
 		]);
 
-		$user = $this->app->user('test@getkirby.com');
+		$user = $this->app->user('test@infinri.com');
 
 		$this->assertSame('Title EN', $user->content('en')->title()->value());
 		$this->assertSame('Title DE', $user->content('de')->title()->value());
@@ -307,7 +304,7 @@ class UserCreateTest extends ModelTestCase
 		]);
 
 		User::create([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'content' => [
 				'title' => 'Title EN',
 			],
@@ -321,7 +318,7 @@ class UserCreateTest extends ModelTestCase
 			],
 		]);
 
-		$user = $this->app->user('test@getkirby.com');
+		$user = $this->app->user('test@infinri.com');
 
 		$this->assertSame('Title EN', $user->content('en')->title()->value());
 		$this->assertSame('Title DE', $user->content('de')->title()->value());
@@ -341,10 +338,10 @@ class UserCreateTest extends ModelTestCase
 					]
 				]
 			],
-			'user'  => 'editor@getkirby.com',
+			'user'  => 'editor@infinri.com',
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin'],
-				['email' => 'editor@getkirby.com', 'role' => 'editor']
+				['email' => 'admin@infinri.com', 'role' => 'admin'],
+				['email' => 'editor@infinri.com', 'role' => 'editor']
 			]
 		]);
 

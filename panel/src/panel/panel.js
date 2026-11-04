@@ -1,4 +1,3 @@
-import Activation from "./activation";
 import Api from "@/api/index.js";
 import Content from "./content.js";
 import Dialog from "./dialog.js";
@@ -33,7 +32,6 @@ import RedirectError from "@/errors/RedirectError";
 export const globals = {
 	config: {},
 	languages: [],
-	license: "missing",
 	multilang: false,
 	permissions: {},
 	searches: {},
@@ -66,7 +64,6 @@ export const states = [
  * The global panel object serves as a singleton
  * to access any functionality the panel offers
  * and handles the reactive, global state of the panel.
- * @since 4.0.0
  */
 export default {
 	create(plugins = {}) {
@@ -74,7 +71,6 @@ export default {
 		this.isLoading = false;
 		this.isOffline = false;
 
-		this.activation = Activation(this);
 		this.drag = Drag(this);
 		this.events = Events(this);
 		this.searcher = Search(this);
@@ -144,15 +140,6 @@ export default {
 	 */
 	get debug() {
 		return this.config.debug === true;
-	},
-
-	/**
-	 * Shortcut to trigger a deprecation warning
-	 *
-	 * @param {String} message
-	 */
-	deprecated(message) {
-		this.notification.deprecated(message);
 	},
 
 	/**

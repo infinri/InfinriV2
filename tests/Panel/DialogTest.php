@@ -35,7 +35,7 @@ class TestDialogWithFor extends TestDialog
 #[CoversClass(Dialog::class)]
 class DialogTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Dialog';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Dialog';
 
 	protected function setUp(): void
 	{
@@ -146,7 +146,7 @@ class DialogTest extends TestCase
 		$this->assertSame($expected, json_decode($response->body(), true));
 	}
 
-	public function testResponseFromKirbyException(): void
+	public function testResponseFromInfinriException(): void
 	{
 		$exception = new NotFoundException(message: 'Test');
 		$response  = Dialog::response($exception);

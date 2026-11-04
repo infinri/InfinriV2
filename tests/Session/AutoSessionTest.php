@@ -48,12 +48,12 @@ class AutoSessionTest extends TestCase
 		$this->assertNull($sessionsProperty->getValue($autoSession)->cookieDomain());
 
 		// custom cookie domain
-		$autoSession = new AutoSession($this->store, ['cookieDomain' => 'getkirby.com']);
-		$this->assertSame('getkirby.com', $sessionsProperty->getValue($autoSession)->cookieDomain());
+		$autoSession = new AutoSession($this->store, ['cookieDomain' => 'infinri.com']);
+		$this->assertSame('infinri.com', $sessionsProperty->getValue($autoSession)->cookieDomain());
 
 		// default cookie name
 		$autoSession = new AutoSession($this->store);
-		$this->assertSame('kirby_session', $sessionsProperty->getValue($autoSession)->cookieName());
+		$this->assertSame('infinri_session', $sessionsProperty->getValue($autoSession)->cookieName());
 
 		// custom cookie name
 		$autoSession = new AutoSession($this->store, ['cookieName' => 'my_cookie']);
@@ -72,7 +72,7 @@ class AutoSessionTest extends TestCase
 
 	public function testGet(): void
 	{
-		Cookie::set('kirby_session', '9999999999.valid.' . $this->store->validKey);
+		Cookie::set('infinri_session', '9999999999.valid.' . $this->store->validKey);
 		$this->setAuthorization('Session 9999999999.valid2.' . $this->store->validKey);
 		$autoSession = new AutoSession($this->store);
 
@@ -85,7 +85,7 @@ class AutoSessionTest extends TestCase
 		$this->assertSame('9999999999.valid2.' . $this->store->validKey, $session->token());
 
 		// newly created session
-		Cookie::remove('kirby_session');
+		Cookie::remove('infinri_session');
 		$this->setAuthorization('');
 		$session = $autoSession->get();
 		$this->assertNull($session->token());
@@ -148,12 +148,12 @@ class AutoSessionTest extends TestCase
 		$this->assertSame(1800, $session->timeout());
 		$session->data()->set('id', 'awesome session');
 		$session->commit();
-		Cookie::set('kirby_session', $session->token());
+		Cookie::set('infinri_session', $session->token());
 		$session = $autoSession->get(['long' => true]);
 		$this->assertSame('awesome session', $session->data()->get('id'));
 		$this->assertSame(1209600, $session->duration());
 		$this->assertFalse($session->timeout());
-		Cookie::remove('kirby_session');
+		Cookie::remove('infinri_session');
 
 		// custom duration and timeout (normal session)
 		$autoSession = new AutoSession($this->store, [
@@ -187,7 +187,7 @@ class AutoSessionTest extends TestCase
 		$this->assertSame(1800, $session->timeout());
 		$session->data()->set('id', 'awesome session');
 		$session->commit();
-		Cookie::set('kirby_session', $session->token());
+		Cookie::set('infinri_session', $session->token());
 
 		// lower values: shouldn't change anything
 		$autoSession = new AutoSession($this->store, ['durationNormal' => 7100, 'timeout' => 1000]);
@@ -211,7 +211,7 @@ class AutoSessionTest extends TestCase
 		$this->assertSame('awesome session', $session->data()->get('id'));
 		$this->assertSame(7300, $session->duration());
 		$this->assertFalse($session->timeout());
-		Cookie::remove('kirby_session');
+		Cookie::remove('infinri_session');
 
 		// timeout for the first time: shouldn't change anything
 		$autoSession = new AutoSession($this->store);
@@ -220,7 +220,7 @@ class AutoSessionTest extends TestCase
 		$this->assertFalse($session->timeout());
 		$session->data()->set('id', 'awesome session');
 		$session->commit();
-		Cookie::set('kirby_session', $session->token());
+		Cookie::set('infinri_session', $session->token());
 		$session = $autoSession->get();
 		$this->assertSame('awesome session', $session->data()->get('id'));
 		$this->assertSame(1209600, $session->duration());

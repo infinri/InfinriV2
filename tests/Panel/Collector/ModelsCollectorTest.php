@@ -49,7 +49,7 @@ class ModelsCollectorMock extends ModelsCollector
 #[CoversClass(ModelsCollector::class)]
 class ModelsCollectorTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Collector.ModelsCollector';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Collector.ModelsCollector';
 
 	public function testFlip(): void
 	{

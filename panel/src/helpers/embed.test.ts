@@ -148,7 +148,7 @@ describe("$helper.embed()", () => {
 		],
 
 		// invalid URLs
-		["https://getkirby.com", false, false],
+		["https://infinri.com", false, false],
 		["https://youtube.com/imprint", false, false],
 		["https://www.youtu.be", false, false],
 		["https://www.youtube.com/watch?list=zv=21HuwjmuS7A&index=1", false, false],

@@ -10,7 +10,6 @@ class Idn
 	/**
 	 * Converts the domain of an email address and keeps
 	 * the email as is if the domain cannot be converted
-	 * @since 5.6.2
 	 */
 	protected static function convertEmail(string $email, Closure $converter): string
 	{

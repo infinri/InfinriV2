@@ -573,11 +573,11 @@ trait PageActions
 				return $num;
 			default:
 				// get instance with default language
-				$app = $this->kirby()->clone([], false);
+				$app = $this->infinri()->clone([], false);
 				$app->setCurrentLanguage();
 
 				$template = Str::template($mode, [
-					'kirby' => $app,
+					'infinri' => $app,
 					'page'  => $this,
 					'site'  => $app->site(),
 				], ['fallback' => '']);
@@ -979,24 +979,5 @@ trait PageActions
 		}
 
 		return $page;
-	}
-
-	/**
-	 * Updates parent collections with the new page object
-	 * after a page action
-	 *
-	 * @deprecated 5.0.0 Use ModelState::update instead
-	 */
-	protected static function updateParentCollections(
-		Page $page,
-		string|false $method,
-		Page|Site|null $parentModel = null
-	): void {
-		ModelState::update(
-			method: $method,
-			current: $page,
-			next: $page,
-			parent: $parentModel
-		);
 	}
 }

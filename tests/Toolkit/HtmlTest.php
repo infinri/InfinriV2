@@ -18,8 +18,8 @@ class HtmlTest extends TestCase
 
 	public function testA(): void
 	{
-		$html = Html::a('https://getkirby.com');
-		$expected = '<a href="https://getkirby.com">getkirby.com</a>';
+		$html = Html::a('https://infinri.com');
+		$expected = '<a href="https://infinri.com">infinri.com</a>';
 		$this->assertSame($expected, $html);
 
 		$html = Html::a('mailto:mail@company.com');
@@ -36,49 +36,49 @@ class HtmlTest extends TestCase
 
 	public function testAWithText(): void
 	{
-		$html = Html::a('https://getkirby.com', 'Kirby');
-		$expected = '<a href="https://getkirby.com">Kirby</a>';
+		$html = Html::a('https://infinri.com', 'Infinri');
+		$expected = '<a href="https://infinri.com">Infinri</a>';
 		$this->assertSame($expected, $html);
 
-		$html = Html::a('mailto:mail@company.com', 'Kirby');
-		$expected = '!^<a href="mailto:(.*?)">Kirby</a>$!';
+		$html = Html::a('mailto:mail@company.com', 'Infinri');
+		$expected = '!^<a href="mailto:(.*?)">Infinri</a>$!';
 		$this->assertMatchesRegularExpression($expected, $html);
 		preg_match($expected, $html, $matches);
 		$this->assertSame('mail@company.com', Html::decode($matches[1]));
 
-		$html = Html::a('tel:1234', 'Kirby');
-		$expected = '<a href="tel:1234">Kirby</a>';
+		$html = Html::a('tel:1234', 'Infinri');
+		$expected = '<a href="tel:1234">Infinri</a>';
 		$this->assertSame($expected, $html);
 	}
 
 	public function testAWithAttributes(): void
 	{
-		$html = Html::a('https://getkirby.com', 'Kirby', ['class' => 'test']);
-		$expected = '<a class="test" href="https://getkirby.com">Kirby</a>';
+		$html = Html::a('https://infinri.com', 'Infinri', ['class' => 'test']);
+		$expected = '<a class="test" href="https://infinri.com">Infinri</a>';
 		$this->assertSame($expected, $html);
 
-		$html = Html::a('mailto:mail@company.com', 'Kirby', ['class' => 'test']);
-		$expected = '!^<a class="test" href="mailto:(.*?)">Kirby</a>$!';
+		$html = Html::a('mailto:mail@company.com', 'Infinri', ['class' => 'test']);
+		$expected = '!^<a class="test" href="mailto:(.*?)">Infinri</a>$!';
 		$this->assertMatchesRegularExpression($expected, $html);
 		preg_match($expected, $html, $matches);
 		$this->assertSame('mail@company.com', Html::decode($matches[1]));
 
-		$html = Html::a('tel:1234', 'Kirby', ['class' => 'test']);
-		$expected = '<a class="test" href="tel:1234">Kirby</a>';
+		$html = Html::a('tel:1234', 'Infinri', ['class' => 'test']);
+		$expected = '<a class="test" href="tel:1234">Infinri</a>';
 		$this->assertSame($expected, $html);
 	}
 
 	public function testAWithTarget(): void
 	{
-		$html = Html::a('https://getkirby.com', 'Kirby', ['target' => '_blank']);
-		$expected = '<a href="https://getkirby.com" rel="noreferrer" target="_blank">Kirby</a>';
+		$html = Html::a('https://infinri.com', 'Infinri', ['target' => '_blank']);
+		$expected = '<a href="https://infinri.com" rel="noreferrer" target="_blank">Infinri</a>';
 		$this->assertSame($expected, $html);
 	}
 
 	public function testAWithTargetAndRel(): void
 	{
-		$html = Html::a('https://getkirby.com', 'Kirby', ['target' => '_blank', 'rel' => 'noopener']);
-		$expected = '<a href="https://getkirby.com" rel="noopener" target="_blank">Kirby</a>';
+		$html = Html::a('https://infinri.com', 'Infinri', ['target' => '_blank', 'rel' => 'noopener']);
+		$expected = '<a href="https://infinri.com" rel="noopener" target="_blank">Infinri</a>';
 		$this->assertSame($expected, $html);
 	}
 
@@ -92,12 +92,12 @@ class HtmlTest extends TestCase
 
 	public function testLink(): void
 	{
-		$html = Html::link('https://getkirby.com');
-		$expected = '<a href="https://getkirby.com">getkirby.com</a>';
+		$html = Html::link('https://infinri.com');
+		$expected = '<a href="https://infinri.com">infinri.com</a>';
 		$this->assertSame($expected, $html);
 
-		$html = Html::link('https://getkirby.com', 'Kirby');
-		$expected = '<a href="https://getkirby.com">Kirby</a>';
+		$html = Html::link('https://infinri.com', 'Infinri');
+		$expected = '<a href="https://infinri.com">Infinri</a>';
 		$this->assertSame($expected, $html);
 	}
 
@@ -151,11 +151,11 @@ class HtmlTest extends TestCase
 		$this->assertStringNotContainsString('javascript:', $html);
 
 		// safe schemes must still work
-		$html = Html::link('https://getkirby.com', 'Kirby');
-		$this->assertStringContainsString('href="https://getkirby.com"', $html);
+		$html = Html::link('https://infinri.com', 'Infinri');
+		$this->assertStringContainsString('href="https://infinri.com"', $html);
 
-		$html = Html::link('custom://getkirby.com', 'Kirby');
-		$this->assertStringContainsString('href="custom://getkirby.com"', $html);
+		$html = Html::link('custom://infinri.com', 'Infinri');
+		$this->assertStringContainsString('href="custom://infinri.com"', $html);
 
 		$html = Html::link('/relative/path', 'link');
 		$this->assertStringContainsString('href="/relative/path"', $html);
@@ -328,20 +328,54 @@ class HtmlTest extends TestCase
 
 	public function testGist(): void
 	{
-		$html = Html::gist($url = 'https://gist.github.com/bastianallgeier/dfb2a889ae73c7c318ea300efd2df6ff');
-		$expected = '<script src="' . $url . '.js"></script>';
-		$this->assertSame($expected, $html);
+		$domains = Html::$gistDomains;
+		Html::$gistDomains = ['gist.example.com'];
 
-		$html = Html::gist($url = 'https://gist.github.com/bastianallgeier/dfb2a889ae73c7c318ea300efd2df6ff', 'kirbycontent.txt');
-		$expected = '<script src="' . $url . '.js?file=kirbycontent.txt"></script>';
-		$this->assertSame($expected, $html);
+		try {
+			$html = Html::gist($url = 'https://gist.example.com/user/abc123');
+			$expected = '<script src="' . $url . '.js"></script>';
+			$this->assertSame($expected, $html);
+
+			$html = Html::gist($url = 'https://gist.example.com/user/abc123', 'infinricontent.txt');
+			$expected = '<script src="' . $url . '.js?file=infinricontent.txt"></script>';
+			$this->assertSame($expected, $html);
+		} finally {
+			Html::$gistDomains = $domains;
+		}
+	}
+
+	public function testGistDomainsDefaultToEmptyList(): void
+	{
+		$defaults = (new \ReflectionClass(Html::class))->getDefaultProperties();
+
+		$this->assertSame([], $defaults['gistDomains']);
+	}
+
+	public function testGistWithDefaultDomains(): void
+	{
+		$domains = Html::$gistDomains;
+		Html::$gistDomains = (new \ReflectionClass(Html::class))->getDefaultProperties()['gistDomains'];
+
+		try {
+			$this->assertSame('', Html::gist('https://gist.example.com/user/abc123'));
+			$this->assertSame('', Html::gist('https://gist.other.example/user/abc123'));
+		} finally {
+			Html::$gistDomains = $domains;
+		}
 	}
 
 	public function testGistWithDisallowedDomain(): void
 	{
-		$this->assertSame('', Html::gist('https://example.com/foo/bar'));
-		$this->assertSame('', Html::gist('https://gist.github.com.evil.com/foo'));
-		$this->assertSame('', Html::gist('javascript:alert(1)'));
+		$domains = Html::$gistDomains;
+		Html::$gistDomains = ['gist.example.com'];
+
+		try {
+			$this->assertSame('', Html::gist('https://example.com/foo/bar'));
+			$this->assertSame('', Html::gist('https://gist.example.com.evil.com/foo'));
+			$this->assertSame('', Html::gist('javascript:alert(1)'));
+		} finally {
+			Html::$gistDomains = $domains;
+		}
 	}
 
 	public function testGistWithCustomDomain(): void
@@ -357,14 +391,14 @@ class HtmlTest extends TestCase
 
 	public function testIframe(): void
 	{
-		$html = Html::iframe($url = 'https://getkirby.com');
+		$html = Html::iframe($url = 'https://infinri.com');
 		$expected = '<iframe src="' . $url . '"></iframe>';
 		$this->assertSame($expected, $html);
 	}
 
 	public function testImg(): void
 	{
-		$html = Html::img($src = 'https://getkirby.com/image.jpg');
+		$html = Html::img($src = 'https://infinri.com/image.jpg');
 		$expected = '<img alt="" src="' . $src . '">';
 		$this->assertSame($expected, $html);
 	}
@@ -545,13 +579,13 @@ class HtmlTest extends TestCase
 
 	public function testVideoFile(): void
 	{
-		$html = Html::video('https://getkirby.com/myvideo.mp4');
-		$expected = '<video><source src="https://getkirby.com/myvideo.mp4" type="video/mp4"></video>';
+		$html = Html::video('https://infinri.com/myvideo.mp4');
+		$expected = '<video><source src="https://infinri.com/myvideo.mp4" type="video/mp4"></video>';
 		$this->assertSame($expected, $html);
 
 		// with attributes
-		$html = Html::video('https://getkirby.com/myvideo.mp4', [], ['controls' => true, 'autoplay' => true]);
-		$expected = '<video autoplay controls><source src="https://getkirby.com/myvideo.mp4" type="video/mp4"></video>';
+		$html = Html::video('https://infinri.com/myvideo.mp4', [], ['controls' => true, 'autoplay' => true]);
+		$expected = '<video autoplay controls><source src="https://infinri.com/myvideo.mp4" type="video/mp4"></video>';
 		$this->assertSame($expected, $html);
 
 		// relative path
@@ -560,7 +594,7 @@ class HtmlTest extends TestCase
 		$this->assertSame($expected, $html);
 
 		// invalid file type
-		$html = Html::video('https://getkirby.com/myvideo.mp3');
+		$html = Html::video('https://infinri.com/myvideo.mp3');
 		$this->assertNull($html);
 	}
 
@@ -718,7 +752,7 @@ class HtmlTest extends TestCase
 
 			// invalid URLs
 			[
-				'https://getkirby.com',
+				'https://infinri.com',
 				false
 			],
 			[
@@ -758,11 +792,11 @@ class HtmlTest extends TestCase
 
 	public function testVimeoInvalidUrl(): void
 	{
-		$this->assertNull(Html::vimeo('https://getkirby.com'));
+		$this->assertNull(Html::vimeo('https://infinri.com'));
 	}
 
 	public function testYoutubeInvalidUrl(): void
 	{
-		$this->assertNull(Html::youtube('https://getkirby.com'));
+		$this->assertNull(Html::youtube('https://infinri.com'));
 	}
 }

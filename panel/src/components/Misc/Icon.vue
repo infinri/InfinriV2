@@ -29,7 +29,7 @@ export const props = {
 		color: String,
 		/**
 		 * Name of the chosen icon
-		 * @see https://getkirby.com/docs/reference/panel/icons
+		 * @see https://infinri.com/docs/reference/panel/icons
 		 */
 		type: String
 	}

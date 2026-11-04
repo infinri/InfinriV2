@@ -23,7 +23,7 @@ export const props = {
 
 		/**
 		 * Name of the chosen icon
-		 * @see https://getkirby.com/docs/reference/panel/icons
+		 * @see https://infinri.com/docs/reference/panel/icons
 		 */
 		icon: String
 	}
@@ -31,7 +31,6 @@ export const props = {
 
 /**
  * Use <k-icon-frame> to display an icon in a fixed ratio with background etc.
- * @since 4.0.0
  *
  * @example <k-icon-frame icon="home" ratio="1/1" back="black" />
  */

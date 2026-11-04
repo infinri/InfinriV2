@@ -5,7 +5,7 @@ import { defineConfig, loadEnv } from "vite";
 import { minify } from "terser";
 import vue from "@vitejs/plugin-vue2";
 import { viteStaticCopy } from "vite-plugin-static-copy";
-import kirby from "./scripts/vite-kirby";
+import infinri from "./scripts/vite-infinri";
 import postcssLightDarkFunction from "@csstools/postcss-light-dark-function";
 
 /**
@@ -60,7 +60,7 @@ async function createCustomServer() {
  * depending on the mode (development or build)
  */
 function createPlugins(mode) {
-	const plugins = [vue(), kirby()];
+	const plugins = [vue(), infinri()];
 
 	// when building…
 	if (mode === "production") {

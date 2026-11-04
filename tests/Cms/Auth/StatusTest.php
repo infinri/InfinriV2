@@ -28,7 +28,7 @@ class StatusTest extends TestCase
 	public function testToString(): void
 	{
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'status' => 'active'
 		]);
 
@@ -39,7 +39,7 @@ class StatusTest extends TestCase
 	{
 		// no challenge when not in pending status
 		$status = new Status([
-			'kirby'             => $this->app,
+			'infinri'             => $this->app,
 			'challenge'         => 'totp',
 			'challengeFallback' => 'email',
 			'status'            => 'active'
@@ -48,7 +48,7 @@ class StatusTest extends TestCase
 
 		// with pending challenge
 		$status = new Status([
-			'kirby'             => $this->app,
+			'infinri'             => $this->app,
 			'challenge'         => 'totp',
 			'challengeFallback' => 'email',
 			'status'            => 'pending'
@@ -57,7 +57,7 @@ class StatusTest extends TestCase
 
 		// with faked challenge
 		$status = new Status([
-			'kirby'             => $this->app,
+			'infinri'             => $this->app,
 			'challenge'         => null,
 			'challengeFallback' => 'email',
 			'status'            => 'pending'
@@ -66,7 +66,7 @@ class StatusTest extends TestCase
 
 		// with faked challenge, but without automatic fallback
 		$status = new Status([
-			'kirby'             => $this->app,
+			'infinri'             => $this->app,
 			'challenge'         => null,
 			'challengeFallback' => 'email',
 			'status'            => 'pending'
@@ -77,13 +77,13 @@ class StatusTest extends TestCase
 	public function testEmail(): void
 	{
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'status' => 'inactive'
 		]);
 		$this->assertNull($status->email());
 
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'email'  => 'homer@simpsons.com',
 			'status' => 'active'
 		]);
@@ -93,13 +93,13 @@ class StatusTest extends TestCase
 	public function testMode(): void
 	{
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'status' => 'inactive'
 		]);
 		$this->assertNull($status->mode());
 
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'mode'   => 'password-reset',
 			'status' => 'active'
 		]);
@@ -109,25 +109,25 @@ class StatusTest extends TestCase
 	public function testStatus(): void
 	{
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'status' => 'active'
 		]);
 		$this->assertSame('active', $status->status());
 
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'status' => 'impersonated'
 		]);
 		$this->assertSame('impersonated', $status->status());
 
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'status' => 'pending'
 		]);
 		$this->assertSame('pending', $status->status());
 
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'status' => 'inactive'
 		]);
 		$this->assertSame('inactive', $status->status());
@@ -135,7 +135,7 @@ class StatusTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid argument "$props[\'status\']" in method "Status::__construct"');
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'status' => 'invalid'
 		]);
 	}
@@ -143,7 +143,7 @@ class StatusTest extends TestCase
 	public function testToArray(): void
 	{
 		$status = new Status([
-			'kirby'             => $this->app,
+			'infinri'             => $this->app,
 			'challenge'         => null,
 			'challengeFallback' => 'email',
 			'email'             => 'homer@simpsons.com',
@@ -163,7 +163,7 @@ class StatusTest extends TestCase
 	{
 		// only return active users
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'email'  => 'homer@simpsons.com',
 			'status' => 'pending'
 		]);
@@ -171,7 +171,7 @@ class StatusTest extends TestCase
 
 		// existing active user
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'email'  => 'homer@simpsons.com',
 			'status' => 'active'
 		]);
@@ -179,7 +179,7 @@ class StatusTest extends TestCase
 
 		// existing impersonated user
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'email'  => 'homer@simpsons.com',
 			'status' => 'impersonated'
 		]);
@@ -187,7 +187,7 @@ class StatusTest extends TestCase
 
 		// invalid active user
 		$status = new Status([
-			'kirby'  => $this->app,
+			'infinri'  => $this->app,
 			'email'  => 'invalid@simpsons.com',
 			'status' => 'active'
 		]);

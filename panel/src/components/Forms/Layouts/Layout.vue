@@ -31,7 +31,7 @@
 
 			<k-button
 				v-if="settings"
-				:title="$t('settings')"
+				:title="$panel.t('settings')"
 				class="k-layout-toolbar-button"
 				icon="settings"
 				@click="openSettings"
@@ -87,47 +87,47 @@ export default {
 				{
 					click: () => this.$emit("prepend"),
 					icon: "angle-up",
-					text: this.$t("insert.before")
+					text: this.$panel.t("insert.before")
 				},
 				{
 					click: () => this.$emit("append"),
 					icon: "angle-down",
-					text: this.$t("insert.after")
+					text: this.$panel.t("insert.after")
 				},
 				"-",
 				{
 					click: () => this.openSettings(),
 					icon: "settings",
-					text: this.$t("settings"),
+					text: this.$panel.t("settings"),
 					when: this.$helper.object.isEmpty(this.settings) === false
 				},
 				{
 					click: () => this.$emit("duplicate"),
 					icon: "copy",
-					text: this.$t("duplicate")
+					text: this.$panel.t("duplicate")
 				},
 				{
 					click: () => this.$emit("change"),
 					disabled: this.layouts.length === 1,
 					icon: "dashboard",
-					text: this.$t("field.layout.change")
+					text: this.$panel.t("field.layout.change")
 				},
 				"-",
 				{
 					click: () => this.$emit("copy"),
 					icon: "template",
-					text: this.$t("copy")
+					text: this.$panel.t("copy")
 				},
 				{
 					click: () => this.$emit("paste"),
 					icon: "download",
-					text: this.$t("paste.after")
+					text: this.$panel.t("paste.after")
 				},
 				"-",
 				{
 					click: () => this.remove(),
 					icon: "trash",
-					text: this.$t("field.layout.delete")
+					text: this.$panel.t("field.layout.delete")
 				}
 			];
 		},
@@ -154,7 +154,7 @@ export default {
 				props: {
 					icon: "settings",
 					tabs: this.tabs,
-					title: this.$t("settings"),
+					title: this.$panel.t("settings"),
 					value: this.attrs
 				},
 				on: {
@@ -166,7 +166,7 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-remove-dialog",
 				props: {
-					text: this.$t("field.layout.delete.confirm")
+					text: this.$panel.t("field.layout.delete.confirm")
 				},
 				on: {
 					submit: () => {

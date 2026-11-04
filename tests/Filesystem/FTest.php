@@ -15,7 +15,7 @@ use stdClass;
 class FTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/f';
-	public const TMP      = KIRBY_TMP_DIR . '/Filesystem.F';
+	public const TMP      = INFINRI_TMP_DIR . '/Filesystem.F';
 
 	protected bool $hasErrorHandler = false;
 	protected string $sample;
@@ -465,7 +465,7 @@ class FTest extends TestCase
 		}
 
 		F::write($origin = static::TMP . '/a.txt', 'test');
-		$this->test = $tmpDir . '/kirby-test-' . uniqid();
+		$this->test = $tmpDir . '/infinri-test-' . uniqid();
 
 		// simply move file
 		$this->assertFileDoesNotExist($this->test);

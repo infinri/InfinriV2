@@ -9,7 +9,7 @@ use Exception;
  */
 function error_log(string $message): bool
 {
-	if (defined('KIRBY_TESTING') !== true || KIRBY_TESTING !== true) {
+	if (defined('INFINRI_TESTING') !== true || INFINRI_TESTING !== true) {
 		throw new Exception('Mock error_log() function was loaded outside of the test environment. This should never happen.');
 	}
 

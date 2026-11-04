@@ -73,7 +73,6 @@ trait HasSiblings
 	 * Returns the next item in the collection if available
 	 * @todo `static` return type hint is not 100% accurate because of
 	 *       quirks in the `Form` classes; would break if enforced
-	 *       (https://github.com/getkirby/kirby/pull/5175)
 	 *
 	 * @param TCollection|null $collection
 	 * @return static|null
@@ -100,7 +99,6 @@ trait HasSiblings
 	 * Returns the previous item in the collection if available
 	 * @todo `static` return type hint is not 100% accurate because of
 	 *       quirks in the `Form` classes; would break if enforced
-	 *       (https://github.com/getkirby/kirby/pull/5175)
 	 *
 	 * @param TCollection|null $collection
 	 * @return static|null

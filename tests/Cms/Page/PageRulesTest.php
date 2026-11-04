@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(PageRules::class)]
 class PageRulesTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageRules';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageRules';
 
 	public function testChangeNum(): void
 	{
@@ -48,7 +48,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'  => 'test',
@@ -90,7 +90,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		PageRules::changeSlug($this->app->page('home'), 'test-a');
 	}
@@ -108,7 +108,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		PageRules::changeSlug($this->app->page('error'), 'test-a');
 	}
@@ -126,7 +126,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		PageRules::changeSlug($this->app->page('a'), 'api');
 	}
@@ -186,7 +186,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		PageRules::changeStatusToDraft($this->app->page('home'));
 	}
@@ -204,7 +204,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectNotToPerformAssertions();
 
@@ -228,7 +228,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'  => 'test',
@@ -366,7 +366,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectException(DuplicateException::class);
 		$this->expectExceptionCode('error.page.duplicate');
@@ -395,7 +395,7 @@ class PageRulesTest extends ModelTestCase
 		$permissions->method('can')->with('create')->willReturn(true);
 
 		$page = $this->createMock(Page::class);
-		$page->method('kirby')->willReturn($this->app);
+		$page->method('infinri')->willReturn($this->app);
 		$page->method('isDraft')->willReturn(true);
 		$page->method('permissions')->willReturn($permissions);
 		$page->method('slug')->willReturn('api');
@@ -472,7 +472,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		PageRules::delete($this->app->page('home'));
 	}
@@ -490,7 +490,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		PageRules::delete($this->app->page('error'));
 	}
@@ -549,11 +549,11 @@ class PageRulesTest extends ModelTestCase
 				]
 			],
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin']
+				['email' => 'admin@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
 		$this->expectException(PermissionException::class);
 		$this->expectExceptionMessage('You are not allowed to delete "c"');
@@ -581,11 +581,11 @@ class PageRulesTest extends ModelTestCase
 				]
 			],
 			'users' => [
-				['email' => 'admin@getkirby.com', 'role' => 'admin']
+				['email' => 'admin@infinri.com', 'role' => 'admin']
 			]
 		]);
 
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
 		$this->expectException(PermissionException::class);
 		$this->expectExceptionMessage('The file cannot be deleted');
@@ -660,7 +660,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectNotToPerformAssertions();
 
@@ -700,10 +700,10 @@ class PageRulesTest extends ModelTestCase
 	public function testValidateSlugMaxlength(): void
 	{
 		$this->app = $this->app->clone([
-			'user' => 'test@getkirby.com',
+			'user' => 'test@infinri.com',
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			],
@@ -788,7 +788,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectNotToPerformAssertions();
 
@@ -829,7 +829,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$child = $this->app->page('parent-a/panel');
 
@@ -872,7 +872,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectNotToPerformAssertions();
 
@@ -907,7 +907,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parentB = $this->app->page('parent-b');
 		$child   = $this->app->page('parent-a/child');
@@ -957,7 +957,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parentB = $this->app->page('parent-b');
 		$child   = $this->app->page('parent-a/child');
@@ -1001,7 +1001,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parentB = $this->app->page('parent-b');
 		$child   = $this->app->page('parent-a/child');
@@ -1046,7 +1046,7 @@ class PageRulesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parentB = $this->app->page('parent-b');
 		$child   = $this->app->page('parent-a/child');

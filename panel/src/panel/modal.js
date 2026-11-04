@@ -50,7 +50,6 @@ export function save(panel, key) {
  * A modal is a feature that can be opened and
  * closed and will be placed in the Panel by the matching
  * Modal component
- * @since 4.0.0
  *
  * @param {any} panel
  * @param {string} key
@@ -291,10 +290,8 @@ export default (panel, key, defaults) => {
 		},
 
 		/**
-		 * This is rebuilding the previous
-		 * behaviours from the dialog mixin.
-		 * Most of the response handling should
-		 * be redone. But we keep it for compatibility
+		 * Handles the response of a submitted
+		 * dialog or drawer
 		 *
 		 * @param {Object|String} success
 		 * @returns

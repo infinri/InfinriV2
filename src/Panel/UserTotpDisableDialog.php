@@ -12,13 +12,13 @@ use Infinri\Toolkit\I18n;
 
 class UserTotpDisableDialog
 {
-	public App $kirby;
+	public App $infinri;
 	public User $user;
 
 	public function __construct(
 		string|null $id = null
 	) {
-		$this->kirby = App::instance();
+		$this->infinri = App::instance();
 		$this->user  = Find::user($id);
 	}
 
@@ -27,7 +27,7 @@ class UserTotpDisableDialog
 	 */
 	public function load(): array
 	{
-		$currentUser = $this->kirby->user();
+		$currentUser = $this->infinri->user();
 		$submitBtn   = [
 			'text'  => I18n::translate('disable'),
 			'icon'  => 'protected',
@@ -74,12 +74,12 @@ class UserTotpDisableDialog
 	 */
 	public function submit(): array
 	{
-		$password = $this->kirby->request()->get('password');
+		$password = $this->infinri->request()->get('password');
 
 		try {
-			if ($this->kirby->user()->is($this->user) === true) {
+			if ($this->infinri->user()->is($this->user) === true) {
 				$this->user->validatePassword($password);
-			} elseif ($this->kirby->user()->isAdmin() === false) {
+			} elseif ($this->infinri->user()->isAdmin() === false) {
 				throw new PermissionException(
 					message: 'You are not allowed to disable TOTP for other users'
 				);

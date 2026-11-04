@@ -237,7 +237,7 @@ return [
 			$blueprints  = empty($this->create) === false ? A::wrap($this->create) : $this->templates;
 
 			if (empty($blueprints) === true) {
-				$blueprints = $this->kirby()->blueprints();
+				$blueprints = $this->infinri()->blueprints();
 			}
 
 			// excludes ignored templates

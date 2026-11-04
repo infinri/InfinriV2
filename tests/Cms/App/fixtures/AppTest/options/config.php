@@ -3,5 +3,5 @@
 return [
 	'option1' => 'global',
 	'option2' => 'global',
-	'url'     => ['https://getkirby.com', 'https://trykirby.com']
+	'url'     => ['https://infinri.com', 'https://tryinfinri.com']
 ];

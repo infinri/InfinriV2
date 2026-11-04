@@ -23,7 +23,7 @@ class MockChallenge extends Challenge
 #[CoversClass(Challenge::class)]
 class ChallengeTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Auth.Challenge';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Auth.Challenge';
 
 	protected Session $session;
 
@@ -55,10 +55,10 @@ class ChallengeTest extends TestCase
 
 		$this->assertFalse(MockChallenge::verify($user, '123 456'));
 
-		$this->session->set('kirby.challenge.code', 'test');
+		$this->session->set('infinri.challenge.code', 'test');
 		$this->assertFalse(MockChallenge::verify($user, '123 456'));
 
-		$this->session->set('kirby.challenge.code', password_hash('123456', PASSWORD_DEFAULT));
+		$this->session->set('infinri.challenge.code', password_hash('123456', PASSWORD_DEFAULT));
 		$this->assertTrue(MockChallenge::verify($user, '123456'));
 		$this->assertTrue(MockChallenge::verify($user, '12 34 56'));
 		$this->assertFalse(MockChallenge::verify($user, '654321'));

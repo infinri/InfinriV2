@@ -13,7 +13,6 @@
 
 <script>
 /**
- * @since 4.0.0
  * @unstable
  */
 export default {

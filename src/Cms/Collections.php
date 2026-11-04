@@ -27,7 +27,7 @@ class Collections
 	 * `$collections->myCollection()`
 	 *
 	 * @return \Infinri\Toolkit\Collection|null
-	 * @todo 6.0 Add return type declaration
+	 * @todo Add return type declaration
 	 */
 	public function __call(string $name, array $arguments = [])
 	{
@@ -38,8 +38,8 @@ class Collections
 	 * Loads a collection by name if registered
 	 *
 	 * @return \Infinri\Toolkit\Collection|null
-	 * @todo 6.0 Add deprecation warning when anything else than a Collection is returned
-	 * @todo 7.0 Add PHP return type declaration for `Toolkit\Collection`
+	 * @todo Only allow a Collection as result and add the PHP
+	 *       return type declaration for `Toolkit\Collection`
 	 */
 	public function get(string $name, array $data = [])
 	{
@@ -89,10 +89,10 @@ class Collections
 	 */
 	public function load(string $name): mixed
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// first check for collection file in the `collections` root
-		$root = $kirby->root('collections');
+		$root = $infinri->root('collections');
 		$file = $root . '/' . $name . '.php';
 
 		if (F::exists($file, $root) === true) {
@@ -104,7 +104,7 @@ class Collections
 		}
 
 		// fallback to collections from plugins
-		$collections = $kirby->extensions('collections');
+		$collections = $infinri->extensions('collections');
 
 		if ($collection = $collections[$name] ?? null) {
 			return $collection;

@@ -303,11 +303,11 @@ class File extends ModelWithContent
 
 	/**
 	 * Checks if the file is accessible to the current user
-	 * This permission depends on the `read` option until v6
+	 * This permission depends on the `read` option
 	 */
 	public function isAccessible(): bool
 	{
-		// TODO: remove this check when `read` option deprecated in v6
+		// TODO: remove this check when the `read` option is removed
 		if ($this->isReadable() === false) {
 			return false;
 		}
@@ -317,11 +317,11 @@ class File extends ModelWithContent
 
 	/**
 	 * Check if the file can be listable by the current user
-	 * This permission depends on the `read` option until v6
+	 * This permission depends on the `read` option
 	 */
 	public function isListable(): bool
 	{
-		// TODO: remove this check when `read` option deprecated in v6
+		// TODO: remove this check when the `read` option is removed
 		if ($this->isReadable() === false) {
 			return false;
 		}
@@ -337,12 +337,12 @@ class File extends ModelWithContent
 	/**
 	 * Check if the file can be read by the current user
 	 *
-	 * @todo Deprecate `read` option in v6 and make the necessary changes for `access` and `list` options.
+	 * @todo Remove the `read` option and make the necessary changes for `access` and `list` options.
 	 */
 	public function isReadable(): bool
 	{
 		static $readable   = [];
-		$role              = $this->kirby()->role()?->id() ?? '__none__';
+		$role              = $this->infinri()->role()?->id() ?? '__none__';
 		$template          = $this->template() ?? '__none__';
 		$readable[$role] ??= [];
 
@@ -352,7 +352,6 @@ class File extends ModelWithContent
 	/**
 	 * Returns the absolute path to the media folder
 	 * for the file and its versions
-	 * @since 5.0.0
 	 */
 	#[BlockCollectionAccess]
 	public function mediaDir(): string
@@ -388,7 +387,7 @@ class File extends ModelWithContent
 	#[BlockCollectionAccess]
 	public function mediaToken(): string
 	{
-		$token = $this->kirby()->contentToken($this, $this->id());
+		$token = $this->infinri()->contentToken($this, $this->id());
 		return substr($token, 0, 10);
 	}
 
@@ -465,7 +464,7 @@ class File extends ModelWithContent
 	 */
 	public function parent(): Page|Site|User
 	{
-		return $this->parent ??= $this->kirby()->site();
+		return $this->parent ??= $this->infinri()->site();
 	}
 
 	/**
@@ -493,7 +492,6 @@ class File extends ModelWithContent
 
 	/**
 	 * Return the permanent URL to the file using its UUID
-	 * @since 3.8.0
 	 */
 	public function permalink(): string|null
 	{
@@ -558,7 +556,7 @@ class File extends ModelWithContent
 			return $this->parent();
 		}
 
-		return $this->kirby()->site();
+		return $this->infinri()->site();
 	}
 
 	/**
@@ -598,7 +596,7 @@ class File extends ModelWithContent
 	 */
 	public function url(): string
 	{
-		return $this->url ??= ($this->kirby()->component('file::url'))($this->kirby(), $this);
+		return $this->url ??= ($this->infinri()->component('file::url'))($this->infinri(), $this);
 	}
 
 	/**
@@ -613,7 +611,7 @@ class File extends ModelWithContent
 	{
 		// check if the clean file URL is accessible,
 		// otherwise we need to fall back to the media URL
-		if ($this->kirby()->resolveFile($this) === null) {
+		if ($this->infinri()->resolveFile($this) === null) {
 			return $this->url();
 		}
 
@@ -639,7 +637,7 @@ class File extends ModelWithContent
 				}
 
 				// checks `file::url` component is extended
-				if ($this->kirby()->isNativeComponent('file::url') === false) {
+				if ($this->infinri()->isNativeComponent('file::url') === false) {
 					return $this->url();
 				}
 

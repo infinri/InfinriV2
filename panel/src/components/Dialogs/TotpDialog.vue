@@ -6,16 +6,18 @@
 		@submit="$emit('submit')"
 	>
 		<k-dialog-text
-			:text="$t('login.totp.enable.intro')"
+			:text="$panel.t('login.totp.enable.intro')"
 			class="k-totp-dialog-intro"
 		/>
 
 		<div class="k-totp-dialog-grid">
 			<div class="k-totp-qrcode">
 				<k-info-field
-					:label="$t('login.totp.enable.qr.label')"
+					:label="$panel.t('login.totp.enable.qr.label')"
 					:text="qr"
-					:help="$t('login.totp.enable.qr.help', { secret: value.secret })"
+					:help="
+						$panel.t('login.totp.enable.qr.help', { secret: value.secret })
+					"
 					theme="passive"
 				/>
 			</div>
@@ -23,19 +25,19 @@
 			<k-dialog-fields
 				:fields="{
 					info: {
-						label: $t('login.totp.enable.confirm.headline'),
+						label: $panel.t('login.totp.enable.confirm.headline'),
 						type: 'info',
-						text: $t('login.totp.enable.confirm.text'),
+						text: $panel.t('login.totp.enable.confirm.text'),
 						theme: 'none'
 					},
 					confirm: {
-						label: $t('login.totp.enable.confirm.label'),
+						label: $panel.t('login.totp.enable.confirm.label'),
 						type: 'text',
 						counter: false,
 						font: 'monospace',
 						required: true,
-						placeholder: $t('login.code.placeholder.totp'),
-						help: $t('login.totp.enable.confirm.help')
+						placeholder: $panel.t('login.code.placeholder.totp'),
+						help: $panel.t('login.totp.enable.confirm.help')
 					},
 					secret: {
 						type: 'hidden'
@@ -60,7 +62,6 @@ export const props = {
 
 /**
  * Dialog to set up one-time time-based passwords for a user
- * @since 4.0.0
  */
 export default {
 	mixins: [props],

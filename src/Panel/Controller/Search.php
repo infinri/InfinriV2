@@ -14,15 +14,15 @@ class Search
 		int|null $limit = null,
 		int $page = 1
 	): array {
-		$kirby = App::instance();
-		$files = $kirby
+		$infinri = App::instance();
+		$files = $infinri
 			->site()
 			->index(true)
 			->filter('isListable', true)
 			->files();
 
 		// add site files which aren't considered by the index
-		$files = $files->add($kirby->site()->files());
+		$files = $files->add($infinri->site()->files());
 
 		// filter and search among those files
 		$files = $files->filter('isListable', true)->search($query);
@@ -42,8 +42,8 @@ class Search
 		int|null $limit = null,
 		int $page = 1
 	): array {
-		$kirby = App::instance();
-		$pages = $kirby
+		$infinri = App::instance();
+		$pages = $infinri
 			->site()
 			->index(true)
 			->filter('isListable', true)
@@ -64,8 +64,8 @@ class Search
 		int|null $limit = null,
 		int $page = 1
 	): array {
-		$kirby = App::instance();
-		$users = $kirby
+		$infinri = App::instance();
+		$users = $infinri
 			->users()
 			->filter('isListable', true)
 			->search($query);

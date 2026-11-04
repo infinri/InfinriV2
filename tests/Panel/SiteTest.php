@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class SiteTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Site';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Site';
 
 	protected function setUp(): void
 	{
@@ -48,24 +48,16 @@ class SiteTest extends TestCase
 		], array_column($this->panel()->buttons(), 'component'));
 	}
 
-	public function testDropdownOption(): void
+	public function testDropdownOptionIsNotOverridden(): void
 	{
-		$model = $this->panel([
-			'content' => [
-				'title' => 'Test site'
-			]
-		]);
+		$declaring = (new \ReflectionMethod(Site::class, 'dropdownOption'))->getDeclaringClass()->getName();
 
-		$option = $model->dropdownOption();
-
-		$this->assertSame('home', $option['icon']);
-		$this->assertSame('Test site', $option['text']);
-		$this->assertSame('/site', $option['link']);
+		$this->assertNotSame(Site::class, $declaring);
 	}
 
 	public function testImage(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$panel = $this->panel([
 			'files' => [
@@ -88,7 +80,7 @@ class SiteTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$site = $app->site();
 
@@ -132,9 +124,8 @@ class SiteTest extends TestCase
 	{
 		$props = $this->panel()->props();
 
-		$this->assertArrayHasKey('model', $props);
-		$this->assertArrayHasKey('previewUrl', $props['model']);
-		$this->assertArrayHasKey('title', $props['model']);
+		$this->assertArrayNotHasKey('model', $props);
+		$this->assertArrayHasKey('title', $props);
 
 		// inherited props
 		$this->assertArrayHasKey('blueprint', $props);
@@ -147,9 +138,12 @@ class SiteTest extends TestCase
 
 	public function testPreviewPermissionsWithoutHomePage(): void
 	{
-		$props = $this->panel()->props();
+		$this->app->impersonate('infinri');
 
-		$this->assertFalse($props['permissions']['preview']);
+		$props = $this->app->site()->panel()->props();
+
+		// only `site.preview` is consulted
+		$this->assertTrue($props['permissions']['preview']);
 	}
 
 	public function testPreviewPermissionsWithHomePage(): void
@@ -168,7 +162,7 @@ class SiteTest extends TestCase
 		$this->assertFalse($props['permissions']['preview']);
 
 		// with logged in user
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$props = $this->app->site()->panel()->props();
 
@@ -186,7 +180,7 @@ class SiteTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -203,10 +197,9 @@ class SiteTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
-		// the home page still allows `pages.preview`,
-		// but the site's own `site.preview` is disabled
+		// the site's own `site.preview` is disabled
 		$props = $this->app->site()->panel()->props();
 
 		$this->assertFalse($props['permissions']['preview']);

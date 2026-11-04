@@ -91,15 +91,15 @@ class RoleTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'author@getkirby.com',
+					'email' => 'author@infinri.com',
 					'role'  => 'author'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
@@ -109,22 +109,22 @@ class RoleTest extends TestCase
 		$authorRole = $app->role('author');
 
 		// admin can always access roles (users.access granted)
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$this->assertTrue($editorRole->isAccessible());
 
 		// editor checks own role: delegates to user.access (default true)
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$this->assertTrue($editorRole->isAccessible());
 
 		// editor checks a different role: uses users.access (false)
 		$this->assertFalse($authorRole->isAccessible());
 
 		// author checks own role: delegates to user.access (false)
-		$app->impersonate('author@getkirby.com');
+		$app->impersonate('author@infinri.com');
 		$this->assertFalse($authorRole->isAccessible());
 
-		// almighty kirby user can always access roles
-		$app->impersonate('kirby');
+		// almighty infinri user can always access roles
+		$app->impersonate('infinri');
 		$this->assertTrue($editorRole->isAccessible());
 	}
 
@@ -164,8 +164,8 @@ class RoleTest extends TestCase
 		$app->impersonate('restricted@test.com');
 		$this->assertFalse($restrictedRole->isAccessible());
 
-		// almighty kirby user bypasses blueprint options
-		$app->impersonate('kirby');
+		// almighty infinri user bypasses blueprint options
+		$app->impersonate('infinri');
 		$this->assertTrue($restrictedRole->isAccessible());
 	}
 

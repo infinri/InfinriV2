@@ -13,16 +13,16 @@ return [
 			return App::instance()->option('languages.variables', true) !== false;
 		},
 		'action'  => function (string $code) {
-			$kirby        = App::instance();
+			$infinri        = App::instance();
 			$language     = Find::language($code);
 			$link         = '/languages/' . $language->code();
 			$strings      = [];
-			$foundation   = $kirby->defaultLanguage()->translations();
+			$foundation   = $infinri->defaultLanguage()->translations();
 			$translations = $language->translations();
 
 			// TODO: update following line and adapt for update and
 			// delete options when `languageVariables.*` permissions available
-			$canUpdate = $kirby->role()?->permissions()->for('languages', 'update') === true;
+			$canUpdate = $infinri->role()?->permissions()->for('languages', 'update') === true;
 
 			ksort($foundation);
 
@@ -113,7 +113,7 @@ return [
 	'languages' => [
 		'pattern' => 'languages',
 		'action'  => function () {
-			$kirby = App::instance();
+			$infinri = App::instance();
 
 			return [
 				'component' => 'k-languages-view',
@@ -122,14 +122,14 @@ return [
 						ViewButtons::view('languages')
 							->defaults('create')
 							->render(),
-					'languages' => $kirby->languages()->values(fn ($language) => [
+					'languages' => $infinri->languages()->values(fn ($language) => [
 						'deletable' => $language->isDeletable(),
 						'default'   => $language->isDefault(),
 						'id'        => $language->code(),
 						'info'      => Escape::html($language->code()),
 						'text'      => Escape::html($language->name()),
 					]),
-					'variables' => $kirby->option('languages.variables', true)
+					'variables' => $infinri->option('languages.variables', true)
 				]
 			];
 		}

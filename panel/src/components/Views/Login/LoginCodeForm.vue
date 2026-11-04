@@ -5,9 +5,9 @@
 		<k-text-field
 			:autofocus="true"
 			:counter="false"
-			:help="$t('login.code.text.' + pending.challenge)"
-			:label="$t('login.code.label.' + mode)"
-			:placeholder="$t('login.code.placeholder.' + pending.challenge)"
+			:help="$panel.t('login.code.text.' + pending.challenge)"
+			:label="$panel.t('login.code.label.' + mode)"
+			:placeholder="$panel.t('login.code.placeholder.' + pending.challenge)"
 			:required="true"
 			:value="code"
 			autocomplete="one-time-code"
@@ -18,7 +18,7 @@
 
 		<footer class="k-login-buttons">
 			<k-button
-				:text="$t('back')"
+				:text="$panel.t('back')"
 				icon="angle-left"
 				link="/logout"
 				size="lg"
@@ -83,10 +83,10 @@ export default {
 			const suffix = this.isLoading ? " …" : "";
 
 			if (this.mode === "password-reset") {
-				return this.$t("login.reset") + suffix;
+				return this.$panel.t("login.reset") + suffix;
 			}
 
-			return this.$t("login") + suffix;
+			return this.$panel.t("login") + suffix;
 		}
 	},
 	methods: {
@@ -95,10 +95,10 @@ export default {
 			this.isLoading = true;
 
 			try {
-				await this.$api.auth.verifyCode(this.code);
+				await this.$panel.api.auth.verifyCode(this.code);
 
 				this.$panel.notification.success({
-					message: this.$t("welcome") + "!",
+					message: this.$panel.t("welcome") + "!",
 					icon: "smile"
 				});
 
@@ -107,9 +107,9 @@ export default {
 				const globals = ["$system", "$translation"];
 
 				if (this.mode === "password-reset") {
-					this.$go("reset-password", { globals });
+					this.$panel.view.open("reset-password", { globals });
 				} else {
-					this.$reload({ globals });
+					this.$panel.reload({ globals });
 				}
 			} catch (error) {
 				this.$emit("error", error);

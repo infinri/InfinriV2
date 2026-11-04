@@ -1,0 +1,67 @@
+<?php
+
+namespace Infinri\Text;
+
+use Infinri\Cms\App;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
+
+class DateInfinriTagTest extends TestCase
+{
+	public const TMP = INFINRI_TMP_DIR . '/Text.DateInfinriTag';
+
+	protected function setUp(): void
+	{
+		$this->app = new App([
+			'roots' => [
+				'index' => static::TMP
+			]
+		]);
+
+		Dir::make(static::TMP);
+	}
+
+	protected function tearDown(): void
+	{
+		Dir::remove(static::TMP);
+	}
+
+	public function testDate(): void
+	{
+		$this->assertSame(date('d.m.Y'), $this->app->infinritags('(date: d.m.Y)'));
+		$this->assertSame(date('Y'), $this->app->infinritags('(date: year)'));
+	}
+
+	public function testDateWithHtml(): void
+	{
+		// HTML special characters in the format must be escaped
+		$this->assertSame('&lt;b&gt;', $this->app->infinritags('(date: <b>)'));
+	}
+
+	public function testDateYearSetsCacheExpiry(): void
+	{
+		$this->assertSame(date('Y'), $this->app->infinritags('(date: year)'));
+		$this->assertSame(
+			strtotime('first day of January next year'),
+			$this->app->response()->expires()
+		);
+	}
+
+	public function testDateYearWithCustomExpiry(): void
+	{
+		$this->assertSame(date('Y'), $this->app->infinritags('(date: year expiry: tomorrow)'));
+		$this->assertSame(strtotime('tomorrow'), $this->app->response()->expires());
+	}
+
+	public function testDateWithoutExpiry(): void
+	{
+		$this->assertSame(date('d.m.Y'), $this->app->infinritags('(date: d.m.Y)'));
+		$this->assertNull($this->app->response()->expires());
+	}
+
+	public function testDateWithCustomExpiry(): void
+	{
+		$this->assertSame(date('d.m.Y'), $this->app->infinritags('(date: d.m.Y expiry: tomorrow)'));
+		$this->assertSame(strtotime('tomorrow'), $this->app->response()->expires());
+	}
+}

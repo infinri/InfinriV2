@@ -152,7 +152,6 @@ abstract class Cache
 	 * or via the callback function which then is stored in
 	 * the cache for future retrieval. This method cannot be
 	 * used for `null` as value to be cached.
-	 * @since 3.8.0
 	 */
 	public function getOrSet(
 		string $key,

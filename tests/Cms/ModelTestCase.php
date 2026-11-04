@@ -28,7 +28,7 @@ class ModelTestCase extends TestCase
 		$this->setUpTmp();
 		$this->setUpSingleLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	protected function tearDown(): void

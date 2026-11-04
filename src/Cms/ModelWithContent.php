@@ -42,7 +42,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 */
 	public array|null $blueprints = null;
 
-	public static App $kirby;
+	public static App $infinri;
 	protected Site|null $site;
 	protected Storage $storage;
 
@@ -100,7 +100,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 	/**
 	 * Moves or copies the model to a new storage instance/type
-	 * @since 5.0.0
 	 * @unstable
 	 */
 	#[BlockCollectionAccess]
@@ -108,7 +107,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	{
 		if (is_string($toStorage) === true) {
 			if (is_subclass_of($toStorage, Storage::class) === false) {
-				throw new InvalidArgumentException('Invalid storage class');
+				throw new InvalidArgumentException(message: 'Invalid storage class');
 			}
 
 			$toStorage = new $toStorage($this);
@@ -223,10 +222,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 		// Moving the content would prematurely delete the old content storage entries.
 		// But we need to keep them until the new content is written.
 		$this->changeStorage(
-			toStorage: new ImmutableMemoryStorage(
-				model: $this,
-				nextModel: $new
-			),
+			toStorage: new ImmutableMemoryStorage(model: $this),
 			copy: true
 		);
 
@@ -305,8 +301,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 * Creates the content for a new model by merging the given
 	 * values with the defaults from the model's blueprint and
 	 * converting all of them to their storable values
-	 *
-	 * @since 5.6.0
 	 */
 	public function createContent(array $content = []): array
 	{
@@ -319,24 +313,9 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	}
 
 	/**
-	 * Creates default content for the model, by using our
-	 * Form class to generate the defaults, based on the
-	 * model's blueprint setup.
-	 *
-	 * @since 5.0.0
-	 * @deprecated 5.6.0 Use `::createContent()` instead
-	 */
-	public function createDefaultContent(): array
-	{
-		return $this->createContent();
-	}
-
-	/**
 	 * Converts the content of the given translations to the values
 	 * that will be stored by running each of them through the fields
 	 * of the model's blueprint
-	 *
-	 * @since 5.6.0
 	 */
 	public function createTranslations(array|null $translations = null): array|null
 	{
@@ -437,15 +416,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	}
 
 	/**
-	 * Checks if the model is locked for the current user
-	 * @deprecated 5.0.0 Use `->lock()->isLocked()` instead
-	 */
-	public function isLocked(): bool
-	{
-		return $this->lock()->isLocked() === true;
-	}
-
-	/**
 	 * Checks if the data has any errors
 	 */
 	public function isValid(): bool
@@ -454,11 +424,11 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	}
 
 	/**
-	 * Returns the parent Kirby instance
+	 * Returns the parent Infinri instance
 	 */
-	public function kirby(): App
+	public function infinri(): App
 	{
-		return static::$kirby ??= App::instance();
+		return static::$infinri ??= App::instance();
 	}
 
 	/**
@@ -471,7 +441,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 	/**
 	 * Returns the panel info of the model
-	 * @since 3.6.0
 	 */
 	abstract public function panel(): Model;
 
@@ -504,7 +473,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 		try {
 			$result = Str::query($query, [
-				'kirby'             => $this->kirby(),
+				'infinri'             => $this->infinri(),
 				'site'              => $this instanceof Site ? $this : $this->site(),
 				'model'             => $this,
 				static::CLASS_ALIAS => $this
@@ -518,17 +487,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 		}
 
 		return $result;
-	}
-
-	/**
-	 * Read the content from the content file
-	 * @internal
-	 * @deprecated 5.0.0 Use `->version()->read()` instead
-	 */
-	public function readContent(string|null $languageCode = null): array
-	{
-		Helpers::deprecated('$model->readContent() is deprecated. Use $model->version()->read() instead.', 'model-content-file'); // @codeCoverageIgnore
-		return $this->version()->read($languageCode ?? 'default') ?? [];
 	}
 
 	/**
@@ -551,10 +509,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 		// move the old model into memory
 		$this->changeStorage(
-			toStorage: new ImmutableMemoryStorage(
-				model: $this,
-				nextModel: $clone
-			),
+			toStorage: new ImmutableMemoryStorage(model: $this),
 			copy: true
 		);
 
@@ -572,29 +527,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 		);
 
 		return $clone;
-	}
-
-	/**
-	 * @deprecated 5.0.0 Use $model->save() instead
-	 */
-	protected function saveContent(
-		array|null $data = null,
-		bool $overwrite = false
-	): static {
-		Helpers::deprecated('$model->saveContent() is deprecated. Use $model->save() instead.', 'model-content-file');
-		return $this->save($data, 'default', $overwrite);
-	}
-
-	/**
-	 * @deprecated 5.0.0 Use $model->save() instead
-	 */
-	protected function saveTranslation(
-		array|null $data = null,
-		string|null $languageCode = null,
-		bool $overwrite = false
-	): static {
-		Helpers::deprecated('$model->saveTranslation() is deprecated. Use $model->save() instead.', 'model-content-file');
-		return $this->save($data, $languageCode ?? 'default', $overwrite);
 	}
 
 	/**
@@ -641,7 +573,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 */
 	public function site(): Site
 	{
-		return $this->site ??= $this->kirby()->site();
+		return $this->site ??= $this->infinri()->site();
 	}
 
 	/**
@@ -649,7 +581,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 	 */
 	public function storage(): Storage
 	{
-		return $this->storage ??= $this->kirby()->storage($this);
+		return $this->storage ??= $this->infinri()->storage($this);
 	}
 
 	/**
@@ -665,7 +597,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 	/**
 	 * String template builder with automatic HTML escaping
-	 * @since 3.6.0
 	 *
 	 * @param string|null $template Template string or `null` to use the model ID
 	 * @param string|null $fallback Fallback for tokens in the template that cannot be replaced
@@ -702,7 +633,7 @@ abstract class ModelWithContent implements Identifiable, Stringable
 		}
 
 		$result = Str::$handler($template, array_replace([
-			'kirby'             => $this->kirby(),
+			'infinri'             => $this->infinri(),
 			'site'              => $this instanceof Site ? $this : $this->site(),
 			'model'             => $this,
 			static::CLASS_ALIAS => $this,
@@ -789,7 +720,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 	/**
 	 * Returns the model's UUID
-	 * @since 3.8.0
 	 */
 	public function uuid(): Uuid|null
 	{
@@ -798,7 +728,6 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 	/**
 	 * Returns a content version instance
-	 * @since 5.0.0
 	 */
 	public function version(VersionId|string|null $versionId = null): Version
 	{
@@ -810,24 +739,9 @@ abstract class ModelWithContent implements Identifiable, Stringable
 
 	/**
 	 * Returns a versions collection
-	 * @since 5.0.0
 	 */
 	public function versions(): Versions
 	{
 		return Versions::load($this);
-	}
-
-	/**
-	 * Low level data writer method
-	 * to store the given data on disk or anywhere else
-	 * @internal
-	 * @deprecated 5.0.0 Use `->version()->save()` instead
-	 */
-	#[BlockCollectionAccess]
-	public function writeContent(array $data, string|null $languageCode = null): bool
-	{
-		Helpers::deprecated('$model->writeContent() is deprecated. Use $model->version()->save() instead.', 'model-content-file'); // @codeCoverageIgnore
-		$this->version()->save($data, $languageCode ?? 'default', true);
-		return true;
 	}
 }

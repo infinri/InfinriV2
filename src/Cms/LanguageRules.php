@@ -74,13 +74,13 @@ class LanguageRules
 		static::validLanguageName($newLanguage);
 		static::validLanguageVariables($newLanguage, $oldLanguage);
 
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// if language was the default language and got demoted…
 		if (
 			$oldLanguage?->isDefault() === true &&
 			$newLanguage->isDefault() === false &&
-			$kirby->defaultLanguage()->code() === $oldLanguage?->code()
+			$infinri->defaultLanguage()->code() === $oldLanguage?->code()
 		) {
 			// ensure another language has already been set as default
 			throw new LogicException(
@@ -137,7 +137,6 @@ class LanguageRules
 	 * is already stored never blocks an unrelated update.
 	 *
 	 * @throws \Infinri\Exception\InvalidArgumentException If a variable key is invalid
-	 * @since 5.6.0
 	 */
 	public static function validLanguageVariables(
 		Language $newLanguage,

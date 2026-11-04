@@ -12,18 +12,24 @@ class TranslationTest extends TestCase
 	public function testProps(): void
 	{
 		$translation = new Translation('en', [
-			'translation.author'    => 'Kirby',
+			'translation.author'    => 'Infinri',
 			'translation.name'      => 'English',
 			'translation.direction' => 'ltr',
 			'translation.locale'    => 'en_GB',
 			'test'                  => 'Test'
 		]);
 
-		$this->assertSame('Kirby', $translation->author());
+		$this->assertSame('Infinri', $translation->author());
 		$this->assertSame('English', $translation->name());
 		$this->assertSame('ltr', $translation->direction());
 		$this->assertSame('en_GB', $translation->locale());
 		$this->assertSame('Test', $translation->get('test'));
+	}
+
+	public function testAuthorDefault(): void
+	{
+		$translation = new Translation('en', []);
+		$this->assertSame('Infinri', $translation->author());
 	}
 
 	public function testLoad(): void
@@ -49,11 +55,11 @@ class TranslationTest extends TestCase
 			'data' => [
 				'translation.direction' => 'ltr',
 				'translation.name' => 'Deutsch',
-				'translation.author' => 'Kirby Team',
+				'translation.author' => 'Infinri Team',
 				'error.test' => 'Dies ist ein Testfehler',
 			],
 			'name' => 'Deutsch',
-			'author' => 'Kirby Team',
+			'author' => 'Infinri Team',
 		], $translation->toArray());
 	}
 }

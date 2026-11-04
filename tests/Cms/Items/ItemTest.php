@@ -27,7 +27,7 @@ class ItemTest extends TestCase
 		$item = new Item();
 
 		$this->assertNotNull($item->id());
-		$this->assertSame($this->app, $item->kirby());
+		$this->assertSame($this->app, $item->infinri());
 		$this->assertIsSite($item->parent());
 		$this->assertInstanceOf(Items::class, $item->siblings());
 	}

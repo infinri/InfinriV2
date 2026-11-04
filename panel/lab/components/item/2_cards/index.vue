@@ -19,7 +19,7 @@
 				:image="{ src: 'https://picsum.photos/800/600' }"
 				info="With some info"
 				layout="cards"
-				link="https://getkirby.com"
+				link="https://infinri.com"
 				text="This is a nice item"
 				target="_blank"
 			/>

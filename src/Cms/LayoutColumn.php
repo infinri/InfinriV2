@@ -55,7 +55,6 @@ class LayoutColumn extends Item
 
 	/**
 	 * Checks if the column is empty
-	 * @since 3.5.2
 	 */
 	public function isEmpty(): bool
 	{
@@ -67,7 +66,6 @@ class LayoutColumn extends Item
 
 	/**
 	 * Checks if the column is not empty
-	 * @since 3.5.2
 	 */
 	public function isNotEmpty(): bool
 	{

@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Menu::class)]
 class MenuTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Menu';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Menu';
 
 	protected function setUp(): void
 	{
@@ -128,8 +128,8 @@ class MenuTest extends TestCase
 		$this->app->clone([
 			'options' => [
 				'panel' => [
-					'menu' => function ($kirby) use ($test) {
-						$test->assertInstanceOf(App::class, $kirby);
+					'menu' => function ($infinri) use ($test) {
+						$test->assertInstanceOf(App::class, $infinri);
 						return [];
 					}
 				]

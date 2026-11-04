@@ -51,7 +51,7 @@ class Remote
 		// one has been configured in php.ini
 		$cainfo = ini_get('curl.cainfo');
 
-		// Suppress warnings e.g. if system CA is outside of open_basedir (See: issue #6236)
+		// Suppress warnings e.g. if system CA is outside of open_basedir
 		if (empty($cainfo) === false && @is_file($cainfo) === true) {
 			$defaults['ca'] = self::CA_SYSTEM;
 		}

@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Site::class)]
 class SitePreviewUrlTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SitePreviewUrl';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SitePreviewUrl';
 
 	public static function previewUrlProvider(): array
 	{
@@ -34,7 +34,7 @@ class SitePreviewUrlTest extends ModelTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -48,7 +48,7 @@ class SitePreviewUrlTest extends ModelTestCase
 
 		// authenticate
 		if ($authenticated) {
-			$this->app->impersonate('test@getkirby.com');
+			$this->app->impersonate('test@infinri.com');
 		}
 
 		$options = [];
@@ -73,20 +73,23 @@ class SitePreviewUrlTest extends ModelTestCase
 		$this->assertSame($expected, $site->previewUrl());
 	}
 
-	public function testPreviewUrlMissingHomePage(): void
+	public function testPreviewUrlWithoutHomePage(): void
 	{
+		$this->app->impersonate('infinri');
+
 		$site = new Site();
 
-		$this->assertNull($site->previewUrl());
+		// only `site.preview` is consulted, not the home page
+		$this->assertNotNull($site->previewUrl());
 	}
 
-	public function testPreviewUrlMissingPermission(): void
+	public function testPreviewUrlIgnoresHomePagePermission(): void
 	{
 		$this->app = $this->app->clone([
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -103,7 +106,7 @@ class SitePreviewUrlTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$site = new Site([
 			'children' => [
@@ -111,9 +114,10 @@ class SitePreviewUrlTest extends ModelTestCase
 			]
 		]);
 
-		$this->assertNull($site->previewUrl());
-		$this->assertNull($site->previewUrl('latest'));
-		$this->assertNull($site->previewUrl('changes'));
+		// `pages.preview` of the home page no longer affects the site
+		$this->assertNotNull($site->previewUrl());
+		$this->assertNotNull($site->previewUrl('latest'));
+		$this->assertNotNull($site->previewUrl('changes'));
 	}
 
 	public function testPreviewUrlMissingSitePermission(): void
@@ -122,7 +126,7 @@ class SitePreviewUrlTest extends ModelTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -139,7 +143,7 @@ class SitePreviewUrlTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$site = new Site([
 			'children' => [
@@ -158,7 +162,7 @@ class SitePreviewUrlTest extends ModelTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -170,7 +174,7 @@ class SitePreviewUrlTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		// disabling the whole options block also disables preview
 		$site = new Site([

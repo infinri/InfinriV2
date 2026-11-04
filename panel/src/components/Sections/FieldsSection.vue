@@ -2,7 +2,7 @@
 	<k-section
 		v-if="!isLoading"
 		:class="['k-fields-section', $attrs.class]"
-		:headline="issue ? $t('error') : null"
+		:headline="issue ? $panel.t('error') : null"
 		:style="$attrs.style"
 	>
 		<k-box

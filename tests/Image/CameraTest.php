@@ -11,7 +11,7 @@ class CameraTest extends TestCase
 	protected function _exif(): array
 	{
 		return [
-			'Make'  => 'Kirby Kamera Inc.',
+			'Make'  => 'Infinri Kamera Inc.',
 			'Model' => 'Deluxe Snap 3000'
 		];
 	}
@@ -36,6 +36,6 @@ class CameraTest extends TestCase
 	{
 		$exif   = $this->_exif();
 		$camera = new Camera($exif);
-		$this->assertSame('Kirby Kamera Inc. Deluxe Snap 3000', (string)$camera);
+		$this->assertSame('Infinri Kamera Inc. Deluxe Snap 3000', (string)$camera);
 	}
 }

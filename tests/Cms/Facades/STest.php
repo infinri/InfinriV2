@@ -6,7 +6,7 @@ use Infinri\Filesystem\Dir;
 
 class STest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.STest';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.STest';
 
 	protected function setUp(): void
 	{

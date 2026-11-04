@@ -16,43 +16,17 @@ export const props = {
 			type: [Boolean, String, Object]
 		},
 		/**
-		 * Whether to disable the submit button
-		 * @deprecated 4.0.0 use the `submit-button` prop instead
-		 */
-		disabled: {
-			default: false,
-			type: Boolean
-		},
-		/**
-		 * The icon type for the submit button
-		 * @deprecated 4.0.0 use the `submit-button` prop instead
-		 */
-		icon: {
-			default: "check",
-			type: String
-		},
-		/**
 		 * Options for the submit button
 		 */
 		submitButton: {
 			type: [Boolean, String, Object],
 			default: true
-		},
-		/**
-		 * The theme of the submit button
-		 * @values "positive", "negative"
-		 * @deprecated 4.0.0 use the `submit-button` prop instead
-		 */
-		theme: {
-			default: "positive",
-			type: String
 		}
 	}
 };
 
 /**
  * @displayName DialogButtons
- * @since 4.0.0
  */
 export default {
 	mixins: [props],
@@ -63,20 +37,33 @@ export default {
 				click: () => this.$emit("cancel"),
 				class: "k-dialog-button-cancel",
 				icon: "cancel",
-				text: this.$t("cancel"),
+				text: this.$panel.t("cancel"),
 				variant: "filled"
 			});
 		},
 		submit() {
-			return this.button(this.submitButton, {
+			const button = this.button(this.submitButton, {
 				class: "k-dialog-button-submit",
-				disabled: this.disabled || this.$panel.dialog.isLoading,
-				icon: this.$panel.dialog.isLoading ? "loader" : this.icon,
-				text: this.$t("confirm"),
-				theme: this.theme,
+				icon: "check",
+				text: this.$panel.t("confirm"),
+				theme: "positive",
 				type: "submit",
 				variant: "filled"
 			});
+
+			if (button === false) {
+				return false;
+			}
+
+			if (this.$panel.dialog.isLoading) {
+				return {
+					...button,
+					disabled: true,
+					icon: "loader"
+				};
+			}
+
+			return button;
 		}
 	},
 	methods: {

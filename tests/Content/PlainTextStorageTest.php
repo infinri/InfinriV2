@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(PlainTextStorage::class)]
 class PlainTextStorageTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Content.PlainTextStorage';
+	public const TMP = INFINRI_TMP_DIR . '/Content.PlainTextStorage';
 
 	protected $storage;
 
@@ -608,7 +608,7 @@ class PlainTextStorageTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Data::write($this->app->page('a')->root() . '/article.txt', []);
 		Data::write($this->app->page('b')->root() . '/article.txt', []);
@@ -726,13 +726,13 @@ class PlainTextStorageTest extends TestCase
 				'filename' => 'image.jpg'
 			]),
 			'page' => new Page([
-				'kirby'    => $this->app,
+				'infinri'    => $this->app,
 				'slug'     => 'a-page',
 				'template' => 'article'
 			]),
 			'site' => $site,
 			'user' => new User([
-				'kirby' => $this->app,
+				'infinri' => $this->app,
 				'id'    => 'abcdefgh'
 			])
 		};
@@ -768,13 +768,13 @@ class PlainTextStorageTest extends TestCase
 				'filename' => 'image.jpg'
 			]),
 			'page' => new Page([
-				'kirby'    => $this->app,
+				'infinri'    => $this->app,
 				'slug'     => 'a-page',
 				'template' => 'article'
 			]),
 			'site' => $site,
 			'user' => new User([
-				'kirby' => $this->app,
+				'infinri' => $this->app,
 				'id'    => 'abcdefgh'
 			])
 		};
@@ -802,7 +802,7 @@ class PlainTextStorageTest extends TestCase
 		$this->setUpSingleLanguage();
 
 		$model = new Page([
-			'kirby' => $this->app,
+			'infinri' => $this->app,
 			'isDraft' => true,
 			'slug' => 'a-page',
 			'template' => 'article'

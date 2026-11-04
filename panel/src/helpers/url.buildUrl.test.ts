@@ -3,28 +3,28 @@ import url from "./url";
 
 describe("$helper.url.buildUrl", () => {
 	it("should build Url", () => {
-		const input = "https://getkirby.com/";
+		const input = "https://infinri.com/";
 		const result = url.buildUrl(input);
 
 		expect(result.toString()).toStrictEqual(input);
 	});
 
 	it("should build Url with path", () => {
-		const input = "https://getkirby.com/foo";
+		const input = "https://infinri.com/foo";
 		const result = url.buildUrl(input);
 
 		expect(result.toString()).toStrictEqual(input);
 	});
 
 	it("should build Url with path with trailing slash", () => {
-		const input = "https://getkirby.com/foo/";
+		const input = "https://infinri.com/foo/";
 		const result = url.buildUrl(input);
 
 		expect(result.toString()).toStrictEqual(input);
 	});
 
 	it("should build Url with query", () => {
-		const input = "https://getkirby.com/";
+		const input = "https://infinri.com/";
 		const result = url.buildUrl(input, {
 			search: "test"
 		});
@@ -33,14 +33,14 @@ describe("$helper.url.buildUrl", () => {
 	});
 
 	it("should build Url with query in input", () => {
-		const input = "https://getkirby.com/?search=test";
+		const input = "https://infinri.com/?search=test";
 		const result = url.buildUrl(input);
 
 		expect(result.toString()).toStrictEqual(input);
 	});
 
 	it("should build Url with query combination", () => {
-		const input = "https://getkirby.com/?search=test";
+		const input = "https://infinri.com/?search=test";
 		const result = url.buildUrl(input, {
 			page: "2"
 		});
@@ -49,7 +49,7 @@ describe("$helper.url.buildUrl", () => {
 	});
 
 	it("should build Url based on origin", () => {
-		const origin = "https://getkirby.com/";
+		const origin = "https://infinri.com/";
 		const result = url.buildUrl(
 			"/foo",
 			{

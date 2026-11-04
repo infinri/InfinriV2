@@ -13,7 +13,7 @@ use Infinri\Toolkit\I18n;
 
 class ApiTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Api';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Api';
 
 	protected Api $api;
 	protected string $locale;
@@ -66,7 +66,7 @@ class ApiTest extends TestCase
 			],
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$this->api = $this->app->api();
 
 		$this->locale = setlocale(LC_ALL, 0);
@@ -313,7 +313,7 @@ class ApiTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						['filename' => 'test.jpg']
 					]
@@ -321,13 +321,13 @@ class ApiTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$api = $app->api();
 
 		$this->assertSame('test.jpg', $api->file('site', 'test.jpg')->filename());
 		$this->assertSame('test.jpg', $api->file('pages/a', 'test.jpg')->filename());
 		$this->assertSame('test.jpg', $api->file('pages/a+a', 'test.jpg')->filename());
-		$this->assertSame('test.jpg', $api->file('users/test@getkirby.com', 'test.jpg')->filename());
+		$this->assertSame('test.jpg', $api->file('users/test@infinri.com', 'test.jpg')->filename());
 	}
 
 	public function testFileNotFound(): void
@@ -356,13 +356,13 @@ class ApiTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			]
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$this->api->file('site', 'protected.jpg');
 	}
 
@@ -421,25 +421,25 @@ class ApiTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'current@getkirby.com',
+					'email' => 'current@infinri.com',
 					'role'  => 'admin',
 				],
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 				]
 			],
 		]);
 
-		$app->impersonate('current@getkirby.com');
+		$app->impersonate('current@infinri.com');
 		$api = $app->api();
 
-		$this->assertSame('current@getkirby.com', $api->user()->email());
-		$this->assertSame('test@getkirby.com', $api->user('test@getkirby.com')->email());
+		$this->assertSame('current@infinri.com', $api->user()->email());
+		$this->assertSame('test@infinri.com', $api->user('test@infinri.com')->email());
 
 		$this->expectException(NotFoundException::class);
-		$this->expectExceptionMessage('The user "nope@getkirby.com" cannot be found');
-		$this->api->user('nope@getkirby.com');
+		$this->expectExceptionMessage('The user "nope@infinri.com" cannot be found');
+		$this->api->user('nope@infinri.com');
 	}
 
 	public function testUserNotAccessible(): void
@@ -456,29 +456,29 @@ class ApiTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'current@getkirby.com',
+					'email' => 'current@infinri.com',
 					'role'  => 'editor'
 				],
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			],
 		]);
 
-		$app->impersonate('current@getkirby.com');
+		$app->impersonate('current@infinri.com');
 		$api = $app->api();
 
-		$this->assertSame('current@getkirby.com', $api->user()->email());
-		$this->assertSame('editor@getkirby.com', $api->user('editor@getkirby.com')->email());
+		$this->assertSame('current@infinri.com', $api->user()->email());
+		$this->assertSame('editor@infinri.com', $api->user('editor@infinri.com')->email());
 
 		$this->expectException(NotFoundException::class);
-		$this->expectExceptionMessage('The user "admin@getkirby.com" cannot be found');
-		$this->api->user('admin@getkirby.com');
+		$this->expectExceptionMessage('The user "admin@infinri.com" cannot be found');
+		$this->api->user('admin@infinri.com');
 	}
 
 	public function testUsers(): void
@@ -507,16 +507,16 @@ class ApiTest extends TestCase
 		$auth->method('type')->willReturn('session');
 		$auth->method('csrf')->willReturn(false);
 
-		$kirby = $this->createMock(App::class);
-		$kirby->method('auth')->willReturn($auth);
+		$infinri = $this->createMock(App::class);
+		$infinri->method('auth')->willReturn($auth);
 
 		$this->expectException(AuthException::class);
 		$this->expectExceptionMessage('Unauthenticated');
 
-		$function = require $this->app->root('kirby') . '/config/api/authentication.php';
+		$function = require $this->app->root('infinri') . '/config/api/authentication.php';
 
 		$api = new Api([
-			'kirby' => $kirby
+			'infinri' => $infinri
 		]);
 
 		$function->call($api);
@@ -527,16 +527,16 @@ class ApiTest extends TestCase
 		$auth = $this->createMock(Auth::class);
 		$auth->method('user')->willReturn(null);
 
-		$kirby = $this->createMock(App::class);
-		$kirby->method('auth')->willReturn($auth);
+		$infinri = $this->createMock(App::class);
+		$infinri->method('auth')->willReturn($auth);
 
 		$this->expectException(AuthException::class);
 		$this->expectExceptionMessage('Unauthenticated');
 
-		$function = require $this->app->root('kirby') . '/config/api/authentication.php';
+		$function = require $this->app->root('infinri') . '/config/api/authentication.php';
 
 		$api = new Api([
-			'kirby' => $kirby
+			'infinri' => $infinri
 		]);
 
 		$function->call($api);
@@ -552,11 +552,11 @@ class ApiTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'current@getkirby.com',
+					'email' => 'current@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						['filename' => 'userfile.jpg']
 					]
@@ -564,17 +564,17 @@ class ApiTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('current@getkirby.com');
+		$app->impersonate('current@infinri.com');
 
 		$api = $app->api();
 
 		$this->assertIsUser($api->parent('account'));
-		$this->assertIsUser($api->parent('users/test@getkirby.com'));
+		$this->assertIsUser($api->parent('users/test@infinri.com'));
 		$this->assertIsSite($api->parent('site'));
 		$this->assertIsPage($api->parent('pages/a+aa'));
 		$this->assertIsFile($api->parent('site/files/sitefile.jpg'));
 		$this->assertIsFile($api->parent('pages/a/files/a-regular-file.jpg'));
-		$this->assertIsFile($api->parent('users/test@getkirby.com/files/userfile.jpg'));
+		$this->assertIsFile($api->parent('users/test@infinri.com/files/userfile.jpg'));
 
 		// model type is not recognized
 		$this->expectException(InvalidArgumentException::class);
@@ -617,7 +617,7 @@ class ApiTest extends TestCase
 				]
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = $app->page('test');
 		$response = $app->api()->fieldApi($page, 'cover');
@@ -675,7 +675,7 @@ class ApiTest extends TestCase
 
 		$api = new Api([
 			'debug' => true,
-			'kirby' => $app,
+			'infinri' => $app,
 			'routes' => [
 				[
 					'pattern' => 'test',
@@ -708,7 +708,7 @@ class ApiTest extends TestCase
 	public function testRenderExceptionWithoutDebugging(): void
 	{
 		$api = new Api([
-			'kirby' => $this->app,
+			'infinri' => $this->app,
 			'routes' => [
 				[
 					'pattern' => 'test',
@@ -727,7 +727,7 @@ class ApiTest extends TestCase
 		// (and the leaked path) is replaced by a generic message
 		$expected = [
 			'status'  => 'error',
-			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://getkirby.com/docs/reference/system/options/debug',
+			'message' => 'An unexpected error occurred! Enable debug mode for more info: https://infinri.com/docs/reference/system/options/debug',
 			'code'    => 500,
 			'key'     => null,
 			'details' => []
@@ -749,7 +749,7 @@ class ApiTest extends TestCase
 
 		$api = new Api([
 			'debug' => true,
-			'kirby' => $app,
+			'infinri' => $app,
 			'routes' => [
 				[
 					'pattern' => 'test',
@@ -772,7 +772,7 @@ class ApiTest extends TestCase
 			$body['message']
 		);
 		$this->assertStringNotContainsString($app->root('index'), $body['message']);
-		$this->assertStringContainsString('{kirby}', $body['message']);
+		$this->assertStringContainsString('{infinri}', $body['message']);
 	}
 
 	public function testSectionApi(): void
@@ -811,7 +811,7 @@ class ApiTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$page = $app->page('test');
 
 		$response = $app->api()->sectionApi($page, 'test', 'message');
@@ -853,13 +853,13 @@ class ApiTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 
 		$this->expectException(NotFoundException::class);
 		$this->expectExceptionMessage('The site is not accessible');
@@ -869,7 +869,7 @@ class ApiTest extends TestCase
 
 	public function testValidateAccess(): void
 	{
-		// kirby (superuser) always has access to all areas
+		// infinri (superuser) always has access to all areas
 		$this->api->validateAreaAccess('users');
 		$this->expectNotToPerformAssertions();
 	}
@@ -892,13 +892,13 @@ class ApiTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 
 		$this->expectException(PermissionException::class);
 

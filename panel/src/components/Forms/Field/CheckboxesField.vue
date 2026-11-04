@@ -23,7 +23,7 @@
 					variant="filled"
 					@click="deselectAll"
 				>
-					{{ $t("deselect.all") }}
+					{{ $panel.t("deselect.all") }}
 				</k-button>
 				<k-button
 					:disabled="value.length >= options.length"
@@ -33,14 +33,14 @@
 					variant="filled"
 					@click="selectAll"
 				>
-					{{ $t("select.all") }}
+					{{ $panel.t("select.all") }}
 				</k-button>
 			</k-button-group>
 		</template>
 
 		<k-empty
 			v-if="!options?.length"
-			:text="$t('options.none')"
+			:text="$panel.t('options.none')"
 			icon="checklist"
 		/>
 		<k-checkboxes-input

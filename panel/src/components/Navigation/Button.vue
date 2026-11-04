@@ -46,7 +46,6 @@ export const props = {
 		 * Display a (colored) badge on the top-right of the button
 		 * @value { text, theme }
 		 * @example { text: 5, theme: "positive" }
-		 * @since 5.0.0
 		 */
 		badge: Object,
 		/**
@@ -106,7 +105,6 @@ export const props = {
 		selected: [String, Boolean],
 		/**
 		 * Specific sizes for button styling
-		 * @since 4.0.0
 		 * @values "xs", "sm"
 		 */
 		size: String,
@@ -128,7 +126,6 @@ export const props = {
 		},
 		/**
 		 * Styling variants for the button
-		 * @since 4.0.0
 		 * @values "filled", "dimmed"
 		 */
 		variant: String

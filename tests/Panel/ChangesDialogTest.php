@@ -53,7 +53,7 @@ class ChangesDialogTest extends AreaTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Uuids::populate();
 	}
@@ -116,13 +116,13 @@ class ChangesDialogTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		Uuids::populate();
 
 		$this->app->file('file://file-public')->version('latest')->save(['alt' => 'Public']);
@@ -130,12 +130,12 @@ class ChangesDialogTest extends AreaTestCase
 		$this->app->file('file://file-secret')->version('latest')->save(['alt' => 'Secret']);
 		$this->app->file('file://file-secret')->version('changes')->save(['alt' => 'Secret']);
 
-		// kirby sees all files
+		// infinri sees all files
 		$files = (new ChangesDialog())->files();
 		$this->assertCount(2, $files);
 
 		// editor cannot list the secret file
-		$this->app->impersonate('editor@getkirby.com');
+		$this->app->impersonate('editor@infinri.com');
 		$files = (new ChangesDialog())->files();
 		$this->assertCount(1, $files);
 		$this->assertSame('public.jpg', $files[0]['text']);
@@ -241,13 +241,13 @@ class ChangesDialogTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		Uuids::populate();
 
 		$this->app->page('page://page-public')->version('latest')->save([]);
@@ -255,12 +255,12 @@ class ChangesDialogTest extends AreaTestCase
 		$this->app->page('page://page-secret')->version('latest')->save([]);
 		$this->app->page('page://page-secret')->version('changes')->save([]);
 
-		// kirby sees all pages
+		// infinri sees all pages
 		$pages = (new ChangesDialog())->pages();
 		$this->assertCount(2, $pages);
 
 		// editor cannot list the secret page
-		$this->app->impersonate('editor@getkirby.com');
+		$this->app->impersonate('editor@infinri.com');
 		$pages = (new ChangesDialog())->pages();
 		$this->assertCount(1, $pages);
 		$this->assertSame('public', $pages[0]['text']);
@@ -283,7 +283,7 @@ class ChangesDialogTest extends AreaTestCase
 		$users  = $dialog->users();
 
 		$this->assertCount(1, $users);
-		$this->assertSame('test@getkirby.com', $users[0]['text']);
+		$this->assertSame('test@infinri.com', $users[0]['text']);
 		$this->assertSame('/users/test', $users[0]['link']);
 	}
 
@@ -309,18 +309,18 @@ class ChangesDialogTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
 					'id'    => 'restricted',
-					'email' => 'restricted@getkirby.com',
+					'email' => 'restricted@infinri.com',
 					'role'  => 'restricted-' . $uuid
 				]
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		Uuids::populate();
 
 		$this->app->user('user://editor')->version('latest')->save([]);
@@ -328,15 +328,15 @@ class ChangesDialogTest extends AreaTestCase
 		$this->app->user('user://restricted')->version('latest')->save([]);
 		$this->app->user('user://restricted')->version('changes')->save([]);
 
-		// kirby sees all users
+		// infinri sees all users
 		$users = (new ChangesDialog())->users();
 		$this->assertCount(2, $users);
 
 		// editor cannot list the restricted user
-		$this->app->impersonate('editor@getkirby.com');
+		$this->app->impersonate('editor@infinri.com');
 		$users = (new ChangesDialog())->users();
 		$this->assertCount(1, $users);
-		$this->assertSame('editor@getkirby.com', $users[0]['text']);
+		$this->assertSame('editor@infinri.com', $users[0]['text']);
 	}
 
 	public function testUsersWithoutChanges(): void

@@ -8,7 +8,9 @@
 		<k-dropdown-content
 			v-if="hasDropdown"
 			ref="dropdown"
-			:options="Array.isArray(options) ? options : $dropdown(options)"
+			:options="
+				Array.isArray(options) ? options : $panel.dropdown.openAsync(options)
+			"
 			align-x="end"
 			@action="$emit('action', $event)"
 		/>
@@ -20,7 +22,6 @@ import Button from "@/components/Navigation/Button.vue";
 
 /**
  * @displayName ViewButton
- * @since 5.0.0
  */
 export default {
 	extends: Button,

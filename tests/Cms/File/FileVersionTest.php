@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class FileVersionTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/files';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.FileVersion';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.FileVersion';
 
 	public function testConstruct(): void
 	{
@@ -26,7 +26,7 @@ class FileVersionTest extends ModelTestCase
 
 		$version = new FileVersion([
 			'original'      => $original,
-			'url'           => $url = 'https://assets.getkirby.com/test-200x200.jpg',
+			'url'           => $url = 'https://assets.infinri.com/test-200x200.jpg',
 			'modifications' => $mods = [
 				'width' => 200,
 				'height' => 200
@@ -37,7 +37,7 @@ class FileVersionTest extends ModelTestCase
 		$this->assertSame('Test Title', $version->title()->value());
 		$this->assertSame($mods, $version->modifications());
 		$this->assertSame($original, $version->original());
-		$this->assertSame($original->kirby(), $version->kirby());
+		$this->assertSame($original->infinri(), $version->infinri());
 	}
 
 	public function testExists(): void
@@ -130,7 +130,7 @@ class FileVersionTest extends ModelTestCase
 		$version  = new FileVersion([
 			'original' => $original,
 			'root'     => static::FIXTURES . '/test.txt',
-			'url'      => $url = 'https://assets.getkirby.com/test-200x200.txt',
+			'url'      => $url = 'https://assets.infinri.com/test-200x200.txt',
 		]);
 
 		$this->assertSame($url, (string)$version);
@@ -138,7 +138,7 @@ class FileVersionTest extends ModelTestCase
 		$version  = new FileVersion([
 			'original' => $original,
 			'root'     => static::FIXTURES . '/test.jpg',
-			'url'      => $url = 'https://assets.getkirby.com/test-200x200.jpg',
+			'url'      => $url = 'https://assets.infinri.com/test-200x200.jpg',
 		]);
 
 		$this->assertSame('<img alt="Test text" src="' . $url . '">', (string)$version);

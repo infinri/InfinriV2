@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserMethodsTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserMethods';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserMethods';
 
 	public function testUserMethods(): void
 	{
@@ -16,7 +16,7 @@ class UserMethodsTest extends ModelTestCase
 		];
 
 		$user = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'name'  => 'Test User'
 		]);
 

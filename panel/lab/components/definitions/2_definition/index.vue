@@ -12,19 +12,19 @@
 				<k-definition>
 					<template #term><em>Term</em></template>
 					<p class="k-text">
-						<a href="https://getkirby.com">Description</a>
+						<a href="https://infinri.com">Description</a>
 					</p>
 				</k-definition>
 				<k-definition>
 					<template #term><em>Term</em></template>
 					<p class="k-text">
-						<a href="https://getkirby.com">Description</a>
+						<a href="https://infinri.com">Description</a>
 					</p>
 				</k-definition>
 				<k-definition>
 					<template #term><em>Term</em></template>
 					<p class="k-text">
-						<a href="https://getkirby.com">Description</a>
+						<a href="https://infinri.com">Description</a>
 					</p>
 				</k-definition>
 			</k-definitions>
@@ -33,17 +33,17 @@
 			<k-definitions>
 				<k-definition term="Term">
 					<p class="k-text">
-						<a href="https://getkirby.com">Description</a>
+						<a href="https://infinri.com">Description</a>
 					</p>
 				</k-definition>
 				<k-definition term="Term">
 					<p class="k-text">
-						<a href="https://getkirby.com">Description</a>
+						<a href="https://infinri.com">Description</a>
 					</p>
 				</k-definition>
 				<k-definition term="Term">
 					<p class="k-text">
-						<a href="https://getkirby.com">Description</a>
+						<a href="https://infinri.com">Description</a>
 					</p>
 				</k-definition>
 			</k-definitions>

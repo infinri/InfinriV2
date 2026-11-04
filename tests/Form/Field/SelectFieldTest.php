@@ -15,7 +15,7 @@ class SelectFieldTest extends TestCase
 		$this->assertSame('', $field->value());
 		$this->assertNull($field->icon());
 		$this->assertSame([], $field->options());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testOptionsQuery(): void

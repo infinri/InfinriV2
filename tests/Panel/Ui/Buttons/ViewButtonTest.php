@@ -74,7 +74,7 @@ class ViewButtonTest extends AreaTestCase
 		]);
 
 		// simulate a logged in user
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$button = ViewButton::factory(name: 'test');
 		$this->assertInstanceOf(ViewButton::class, $button);
@@ -135,7 +135,7 @@ class ViewButtonTest extends AreaTestCase
 		]);
 
 		// simulate a logged in user
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		// view-prefixed name
 		$result = ViewButton::find('a', view: 'test');
@@ -211,14 +211,14 @@ class ViewButtonTest extends AreaTestCase
 		$component = new ViewButton(
 			model: new Language(['code' => 'en']),
 			icon: 'book',
-			link: 'https://getkirby.com',
+			link: 'https://infinri.com',
 			options: 'my/options',
 			text: 'Docs'
 		);
 
 		$props = $component->props();
 		$this->assertSame('book', $props['icon']);
-		$this->assertSame('https://getkirby.com', $props['link']);
+		$this->assertSame('https://infinri.com', $props['link']);
 		$this->assertSame('my/options', $props['options']);
 		$this->assertSame('Docs', $props['text']);
 	}
@@ -245,13 +245,13 @@ class ViewButtonTest extends AreaTestCase
 		$component = new ViewButton(
 			model: $model,
 			text: 'Page: {{ page.url }}',
-			link: 'https://getkirby.com/{{ page.slug }}',
+			link: 'https://infinri.com/{{ page.slug }}',
 			options: 'my/options/{{ page.slug }}'
 		);
 
 		$props = $component->props();
 		$this->assertSame('Page: /test', $props['text']);
-		$this->assertSame('https://getkirby.com/test', $props['link']);
+		$this->assertSame('https://infinri.com/test', $props['link']);
 		$this->assertSame('my/options/test', $props['options']);
 	}
 
@@ -260,10 +260,10 @@ class ViewButtonTest extends AreaTestCase
 		$test   = $this;
 		$model  = new Page(['slug' => 'test']);
 		$result = ViewButton::resolve(
-			button: function (string $b, bool $a, App $kirby, Page $page) use ($test) {
+			button: function (string $b, bool $a, App $infinri, Page $page) use ($test) {
 				$test->assertFalse($a);
 				$test->assertSame('foo', $b);
-				$test->assertInstanceOf(App::class, $kirby);
+				$test->assertInstanceOf(App::class, $infinri);
 				$test->assertInstanceOf(Page::class, $page);
 				return ['component' => 'k-test-view-button'];
 			},

@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class RouterTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Router';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Router';
 
 	public function testHomeRoute(): void
 	{
@@ -286,7 +286,7 @@ class RouterTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'files' => [
 						[
 							'filename' => 'test.jpg'
@@ -470,8 +470,8 @@ class RouterTest extends TestCase
 	public static function multiDomainProvider(): array
 	{
 		return [
-			['https://getkirby.fr', 'fr'],
-			['https://getkirby.com', 'en'],
+			['https://infinri.fr', 'fr'],
+			['https://infinri.com', 'en'],
 		];
 	}
 
@@ -496,11 +496,11 @@ class RouterTest extends TestCase
 				[
 					'code'    => 'fr',
 					'default' => true,
-					'url'     => 'https://getkirby.fr'
+					'url'     => 'https://infinri.fr'
 				],
 				[
 					'code' => 'en',
-					'url'  => 'https://getkirby.com'
+					'url'  => 'https://infinri.com'
 				]
 			]
 		]);
@@ -535,11 +535,11 @@ class RouterTest extends TestCase
 				[
 					'code'    => 'fr',
 					'default' => true,
-					'url'     => 'https://getkirby.fr/subfolder'
+					'url'     => 'https://infinri.fr/subfolder'
 				],
 				[
 					'code' => 'en',
-					'url'  => 'https://getkirby.com/subfolder'
+					'url'  => 'https://infinri.com/subfolder'
 				]
 			]
 		]);
@@ -854,8 +854,8 @@ class RouterTest extends TestCase
 				'index' => '/dev/null'
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com',
-				'media' => $media = 'https://getkirby.com/thumbs'
+				'index' => 'https://infinri.com',
+				'media' => $media = 'https://infinri.com/thumbs'
 			]
 		]);
 
@@ -868,7 +868,7 @@ class RouterTest extends TestCase
 		$route = $app->router()->find('thumbs/site/1234-5678/test.jpg', 'GET');
 		$this->assertStringContainsString('thumbs/site/([a-z', $route->pattern());
 
-		$route = $app->router()->find('thumbs/users/test@getkirby.com/1234-5678/test.jpg', 'GET');
+		$route = $app->router()->find('thumbs/users/test@infinri.com/1234-5678/test.jpg', 'GET');
 		$this->assertStringContainsString('thumbs/users/([a-z', $route->pattern());
 
 		// default media route should result in the fallback route
@@ -878,7 +878,7 @@ class RouterTest extends TestCase
 		$route = $app->router()->find('media/site/1234-5678/test.jpg', 'GET');
 		$this->assertSame('(.*)', $route->pattern());
 
-		$route = $app->router()->find('media/users/test@getkirby.com/1234-5678/test.jpg', 'GET');
+		$route = $app->router()->find('media/users/test@infinri.com/1234-5678/test.jpg', 'GET');
 		$this->assertSame('(.*)', $route->pattern());
 	}
 

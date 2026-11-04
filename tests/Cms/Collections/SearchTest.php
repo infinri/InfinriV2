@@ -148,11 +148,11 @@ class SearchTest extends TestCase
 				]
 			],
 			'users' => [
-				['email' => 'admin@getkirby.com'],
-				['email' => 'editor@getkirby.com'],
-				['email' => 'user1@getkirby.com'],
-				['email' => 'user2@getkirby.com'],
-				['email' => 'user3@getkirby.com']
+				['email' => 'admin@infinri.com'],
+				['email' => 'editor@infinri.com'],
+				['email' => 'user1@infinri.com'],
+				['email' => 'user2@infinri.com'],
+				['email' => 'user3@infinri.com']
 			],
 		]);
 	}

@@ -34,16 +34,14 @@ class SiteTest extends AreaTestCase
 
 		$view  = $this->view('pages/test');
 		$props = $view['props'];
-		$model = $props['model'];
 
 		$this->assertSame('default', $props['blueprint']);
 		$this->assertSame([
-			'isLegacy' => false,
 			'isLocked' => false,
 			'modified' => null,
 			'user'     => [
 				'id'    => 'test',
-				'email' => 'test@getkirby.com'
+				'email' => 'test@infinri.com'
 			]
 		], $props['lock']);
 		$this->assertArrayNotHasKey('tab', $props);
@@ -52,10 +50,9 @@ class SiteTest extends AreaTestCase
 		$this->assertSame('Test', $props['versions']['latest']['title']);
 		$this->assertSame('Test', $props['versions']['changes']['title']);
 
-		// model
-		$this->assertSame('test', $model['id']);
-		$this->assertSame('draft', $model['status']);
-		$this->assertSame('Test', $model['title']);
+		$this->assertArrayNotHasKey('model', $props);
+		$this->assertSame('test', $props['id']);
+		$this->assertSame('Test', $props['title']);
 
 		$this->assertNull($props['next']);
 		$this->assertNull($props['prev']);
@@ -94,16 +91,14 @@ class SiteTest extends AreaTestCase
 
 		$view  = $this->view('pages/test/files/test.jpg');
 		$props = $view['props'];
-		$model = $props['model'];
 
 		$this->assertSame('image', $props['blueprint']);
 		$this->assertSame([
-			'isLegacy' => false,
 			'isLocked' => false,
 			'modified' => null,
 			'user'     => [
 				'id'    => 'test',
-				'email' => 'test@getkirby.com'
+				'email' => 'test@infinri.com'
 			]
 		], $props['lock']);
 		$this->assertArrayNotHasKey('tab', $props);
@@ -111,14 +106,12 @@ class SiteTest extends AreaTestCase
 		$this->assertSame([], $props['versions']['changes']);
 		$this->assertSame([], $props['versions']['latest']);
 
-		// model
-		$this->assertSame('jpg', $model['extension']);
-		$this->assertSame('test.jpg', $model['filename']);
-		$this->assertSame('test/test.jpg', $model['id']);
-		$this->assertSame('image/jpeg', $model['mime']);
-		$this->assertSame('0 KB', $model['niceSize']);
-		$this->assertSame('pages/test', $model['parent']);
-		$this->assertSame('image', $model['type']);
+		$this->assertArrayNotHasKey('model', $props);
+		$this->assertSame('jpg', $props['extension']);
+		$this->assertSame('test.jpg', $props['filename']);
+		$this->assertSame('test/test.jpg', $props['id']);
+		$this->assertSame('image/jpeg', $props['mime']);
+		$this->assertSame('image', $props['type']);
 
 		$this->assertNull($props['next']);
 		$this->assertNull($props['prev']);
@@ -176,9 +169,9 @@ class SiteTest extends AreaTestCase
 		$this->assertSame('k-site-view', $view['component']);
 
 		$this->assertSame('site', $props['blueprint']);
-		$this->assertSame('/site', $props['model']['link']);
-		$this->assertSame('/', $props['model']['previewUrl']);
-		$this->assertSame('', $props['model']['title']);
+		$this->assertArrayNotHasKey('model', $props);
+		$this->assertSame('/site', $props['link']);
+		$this->assertSame('', $props['title']);
 	}
 
 	public function testSiteNotAccessible(): void
@@ -195,13 +188,13 @@ class SiteTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 		$this->assertErrorView('site', 'The site is not accessible');
 	}
 
@@ -219,13 +212,13 @@ class SiteTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 		$this->assertErrorView('site/preview/changes', 'The site is not accessible');
 	}
 
@@ -246,31 +239,27 @@ class SiteTest extends AreaTestCase
 
 		$view  = $this->view('site/files/test.jpg');
 		$props = $view['props'];
-		$model = $props['model'];
 
 		$this->assertSame('image', $props['blueprint']);
 		$this->assertSame([
-			'isLegacy' => false,
 			'isLocked' => false,
 			'modified' => null,
 			'user'     => [
 				'id'    => 'test',
-				'email' => 'test@getkirby.com'
+				'email' => 'test@infinri.com'
 			]
 		], $props['lock']);
 		$this->assertArrayNotHasKey('tab', $props);
 		$this->assertSame([], $props['tabs']);
 
-		// model
 		$this->assertSame([], $props['versions']['changes']);
 		$this->assertSame([], $props['versions']['latest']);
-		$this->assertSame('jpg', $model['extension']);
-		$this->assertSame('test.jpg', $model['filename']);
-		$this->assertSame('test.jpg', $model['id']);
-		$this->assertSame('image/jpeg', $model['mime']);
-		$this->assertSame('0 KB', $model['niceSize']);
-		$this->assertSame('site', $model['parent']);
-		$this->assertSame('image', $model['type']);
+		$this->assertArrayNotHasKey('model', $props);
+		$this->assertSame('jpg', $props['extension']);
+		$this->assertSame('test.jpg', $props['filename']);
+		$this->assertSame('test.jpg', $props['id']);
+		$this->assertSame('image/jpeg', $props['mime']);
+		$this->assertSame('image', $props['type']);
 
 		$this->assertNull($props['next']);
 		$this->assertNull($props['prev']);

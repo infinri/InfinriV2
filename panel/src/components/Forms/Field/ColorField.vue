@@ -64,9 +64,6 @@ import { props as Field } from "../Field.vue";
 import { props as Input } from "../Input.vue";
 import { props as ColornameInput } from "../Input/ColornameInput.vue";
 
-/**
- * @since 4.0.0
- */
 export default {
 	mixins: [Field, Input, ColornameInput],
 	inheritAttrs: false,

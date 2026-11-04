@@ -246,7 +246,7 @@ class OptionsQueryTest extends TestCase
 		]);
 
 		$options = new OptionsQuery(
-			query: 'kirby.users',
+			query: 'infinri.users',
 		);
 		$options = $options->render($app->site());
 

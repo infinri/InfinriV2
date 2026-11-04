@@ -19,8 +19,8 @@ class Search
 		string|null $query = null,
 		string|array $params = []
 	): Collection {
-		$kirby = App::instance();
-		return ($kirby->component('search'))($kirby, $collection, $query, $params);
+		$infinri = App::instance();
+		return ($infinri->component('search'))($infinri, $collection, $query, $params);
 	}
 
 	public static function pages(

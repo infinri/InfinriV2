@@ -128,4 +128,14 @@ class IteratorTest extends TestCase
 		$iterator = new Iterator($array);
 		$this->assertSame($array, $iterator->__debugInfo());
 	}
+
+	public function testRemovedCursorMethods(): void
+	{
+		foreach (['key', 'current', 'prev', 'next', 'rewind', 'valid'] as $method) {
+			$this->assertFalse(
+				method_exists(Iterator::class, $method),
+				'Iterator::' . $method . '() should be removed'
+			);
+		}
+	}
 }

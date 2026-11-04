@@ -11,7 +11,6 @@ import FiberDialog from "./FiberDialog.vue";
 import FilesDialog from "./FilesDialog.vue";
 import FormDialog from "./FormDialog.vue";
 import LanguageDialog from "./LanguageDialog.vue";
-import LicenseDialog from "./LicenseDialog.vue";
 import LockAlertDialog from "./LockAlertDialog.vue";
 import LinkDialog from "./LinkDialog.vue";
 import ModelsDialog from "./ModelsDialog.vue";
@@ -37,7 +36,6 @@ export default {
 		app.component("k-fiber-dialog", FiberDialog);
 		app.component("k-files-dialog", FilesDialog);
 		app.component("k-form-dialog", FormDialog);
-		app.component("k-license-dialog", LicenseDialog);
 		app.component("k-link-dialog", LinkDialog);
 		app.component("k-lock-alert-dialog", LockAlertDialog);
 		app.component("k-language-dialog", LanguageDialog);

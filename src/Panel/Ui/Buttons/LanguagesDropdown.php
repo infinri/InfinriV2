@@ -10,12 +10,12 @@ use Infinri\Toolkit\Str;
 
 class LanguagesDropdown extends ViewButton
 {
-	protected App $kirby;
+	protected App $infinri;
 
 	public function __construct(
 		ModelWithContent $model
 	) {
-		$this->kirby = $model->kirby();
+		$this->infinri = $model->infinri();
 
 		parent::__construct(
 			component: 'k-languages-dropdown',
@@ -26,7 +26,7 @@ class LanguagesDropdown extends ViewButton
 			// only when dropdown is opened
 			options: $model->panel()->url(true) . '/languages',
 			responsive: 'text',
-			text: Str::upper($this->kirby->language()?->code())
+			text: Str::upper($this->infinri->language()?->code())
 		);
 	}
 
@@ -38,7 +38,7 @@ class LanguagesDropdown extends ViewButton
 	public function hasDiff(): bool
 	{
 		foreach (Languages::ensure() as $language) {
-			if ($this->kirby->language()?->code() !== $language->code()) {
+			if ($this->infinri->language()?->code() !== $language->code()) {
 				if ($this->model->version('changes')->exists($language) === true) {
 					return true;
 				}
@@ -55,7 +55,7 @@ class LanguagesDropdown extends ViewButton
 		return [
 			'text'    => $language->name(),
 			'code'    => $language->code(),
-			'current' => $language->code() === $this->kirby->language()?->code(),
+			'current' => $language->code() === $this->infinri->language()?->code(),
 			'default' => $language->isDefault(),
 			'changes' => $changes->exists($language),
 			'lock'    => $changes->isLocked('*')
@@ -67,10 +67,10 @@ class LanguagesDropdown extends ViewButton
 	 */
 	public function options(): array
 	{
-		$languages = $this->kirby->languages();
+		$languages = $this->infinri->languages();
 		$options   = [];
 
-		if ($this->kirby->multilang() === false) {
+		if ($this->infinri->multilang() === false) {
 			return $options;
 		}
 
@@ -100,7 +100,7 @@ class LanguagesDropdown extends ViewButton
 	public function render(): array|null
 	{
 		// hides the language selector when there are less than 2 languages
-		if ($this->kirby->languages()->count() < 2) {
+		if ($this->infinri->languages()->count() < 2) {
 			return null;
 		}
 

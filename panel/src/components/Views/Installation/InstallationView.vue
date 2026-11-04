@@ -4,20 +4,20 @@
 			<k-dialog-body>
 				<!-- installation complete -->
 				<k-text v-if="isComplete">
-					<k-headline>{{ $t("installation.completed") }}</k-headline>
+					<k-headline>{{ $panel.t("installation.completed") }}</k-headline>
 					<k-link to="/login">
-						{{ $t("login") }}
+						{{ $panel.t("login") }}
 					</k-link>
 				</k-text>
 
 				<!-- ready to be installed -->
 				<form v-else-if="isReady" @submit.prevent="install">
 					<h1 class="sr-only">
-						{{ $t("installation") }}
+						{{ $panel.t("installation") }}
 					</h1>
 					<k-fieldset :fields="fields" :value="user" @input="user = $event" />
 					<k-button
-						:text="$t('install')"
+						:text="$panel.t('install')"
 						icon="check"
 						size="lg"
 						theme="positive"
@@ -29,72 +29,72 @@
 				<!-- not meeting requirements -->
 				<div v-else>
 					<k-headline>
-						{{ $t("installation.issues.headline") }}
+						{{ $panel.t("installation.issues.headline") }}
 					</k-headline>
 
 					<ul class="k-installation-issues" data-theme="negative">
 						<li v-if="isInstallable === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.disabled')" />
+							<span v-html="$panel.t('installation.disabled')" />
 						</li>
 
 						<li v-if="requirements.php === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.issues.php')" />
+							<span v-html="$panel.t('installation.issues.php')" />
 						</li>
 
 						<li v-if="requirements.server === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.issues.server')" />
+							<span v-html="$panel.t('installation.issues.server')" />
 						</li>
 
 						<li v-if="requirements.mbstring === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.issues.mbstring')" />
+							<span v-html="$panel.t('installation.issues.mbstring')" />
 						</li>
 
 						<li v-if="requirements.curl === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.issues.curl')" />
+							<span v-html="$panel.t('installation.issues.curl')" />
 						</li>
 
 						<li v-if="requirements.accounts === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.issues.accounts')" />
+							<span v-html="$panel.t('installation.issues.accounts')" />
 						</li>
 
 						<li v-if="requirements.content === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.issues.content')" />
+							<span v-html="$panel.t('installation.issues.content')" />
 						</li>
 
 						<li v-if="requirements.media === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.issues.media')" />
+							<span v-html="$panel.t('installation.issues.media')" />
 						</li>
 
 						<li v-if="requirements.sessions === false">
 							<k-icon type="alert" />
 							<!-- eslint-disable-next-line vue/no-v-html -->
-							<span v-html="$t('installation.issues.sessions')" />
+							<span v-html="$panel.t('installation.issues.sessions')" />
 						</li>
 					</ul>
 
 					<k-button
-						:text="$t('retry')"
+						:text="$panel.t('retry')"
 						icon="refresh"
 						size="lg"
 						theme="positive"
 						variant="filled"
-						@click="$reload"
+						@click="$panel.reload"
 					/>
 				</div>
 			</k-dialog-body>
@@ -129,20 +129,20 @@ export default {
 		fields() {
 			return {
 				email: {
-					label: this.$t("email"),
+					label: this.$panel.t("email"),
 					type: "email",
 					link: false,
 					autofocus: true,
 					required: true
 				},
 				password: {
-					label: this.$t("password"),
+					label: this.$panel.t("password"),
 					type: "password",
-					placeholder: this.$t("password") + " …",
+					placeholder: this.$panel.t("password") + " …",
 					required: true
 				},
 				language: {
-					label: this.$t("language"),
+					label: this.$panel.t("language"),
 					type: "select",
 					options: this.translations,
 					icon: "translate",
@@ -161,13 +161,13 @@ export default {
 	methods: {
 		async install() {
 			try {
-				await this.$api.system.install(this.user);
-				await this.$reload({
+				await this.$panel.api.system.install(this.user);
+				await this.$panel.reload({
 					globals: ["$system", "$translation"]
 				});
 
 				this.$panel.notification.success({
-					message: this.$t("welcome") + "!",
+					message: this.$panel.t("welcome") + "!",
 					icon: "smile"
 				});
 			} catch (error) {
@@ -190,7 +190,7 @@ export default {
 	width: 100%;
 }
 .k-installation-view form .k-button {
-	margin-top: var(--spacing-10);
+	margin-top: 2.5rem;
 }
 .k-installation-view .k-headline {
 	font-weight: var(--font-semi);

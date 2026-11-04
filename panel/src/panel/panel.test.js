@@ -4,7 +4,7 @@ import Panel from "./panel.js";
 import Vue from "vue";
 
 describe("panel", () => {
-	window.location = new URL("https://getkirby.com");
+	window.location = new URL("https://infinri.com");
 
 	it("should have a default state", async () => {
 		const panel = Panel.create(Vue);
@@ -12,8 +12,16 @@ describe("panel", () => {
 		expect(panel.debug).toStrictEqual(false);
 		expect(panel.direction).toStrictEqual("ltr");
 		expect(panel.isLoading).toStrictEqual(false);
-		expect(panel.license).toStrictEqual("missing");
 		expect(panel.title).toStrictEqual("");
+		expect(panel).not.toHaveProperty("license");
+		expect(panel).not.toHaveProperty("activation");
+	});
+
+	it("should not have a deprecated() method", () => {
+		const panel = Panel.create(Vue);
+
+		expect(panel.deprecated).toBeUndefined();
+		expect(panel.notification.deprecated).toBeUndefined();
 	});
 
 	it("should get a full state", async () => {
@@ -23,7 +31,7 @@ describe("panel", () => {
 		expect(state.config).toStrictEqual({});
 		expect(state.language).toStrictEqual(panel.language.state());
 		expect(state.languages).toStrictEqual([]);
-		expect(state.license).toStrictEqual("missing");
+		expect(state).not.toHaveProperty("license");
 		expect(state.menu).toStrictEqual(panel.menu.state());
 		expect(state.multilang).toStrictEqual(false);
 		expect(state.notification).toStrictEqual(panel.notification.state());
@@ -38,13 +46,13 @@ describe("panel", () => {
 	it("should replace $ in state keys", async () => {
 		const panel = Panel.create(Vue);
 
-		expect(panel.license).toStrictEqual("missing");
+		expect(panel.multilang).toStrictEqual(false);
 
 		panel.set({
-			$license: "valid"
+			$multilang: true
 		});
 
-		expect(panel.license).toStrictEqual("valid");
+		expect(panel.multilang).toStrictEqual(true);
 	});
 
 	it("should return the correct debug mode", async () => {
@@ -85,13 +93,13 @@ describe("panel", () => {
 		panel.error(
 			new AuthError("Unauthenticated", {
 				request: new Request(
-					"https://getkirby.com/api/pages/test/changes/save"
+					"https://infinri.com/api/pages/test/changes/save"
 				),
 				response: { json: {}, status: 401 }
 			})
 		);
 
-		expect(window.location.href).toStrictEqual("https://getkirby.com/logout");
+		expect(window.location.href).toStrictEqual("https://infinri.com/logout");
 	});
 
 	it("should set the correct title without system title", async () => {
@@ -107,16 +115,16 @@ describe("panel", () => {
 		const panel = Panel.create(Vue);
 
 		// set a system title
-		panel.system.title = "Kirby";
+		panel.system.title = "Infinri";
 		panel.title = "Page";
 
-		expect(panel.title).toStrictEqual("Page | Kirby");
+		expect(panel.title).toStrictEqual("Page | Infinri");
 	});
 
 	it("should build a URL", async () => {
 		const panel = Panel.create(Vue);
 		expect(panel.url("/path")).toStrictEqual(
-			new URL("https://getkirby.com/path")
+			new URL("https://infinri.com/path")
 		);
 	});
 

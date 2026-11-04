@@ -10,11 +10,11 @@ trait Model
 	protected ModelWithContent $model;
 
 	/**
-	 * Returns the Kirby instance
+	 * Returns the Infinri instance
 	 */
-	public function kirby(): App
+	public function infinri(): App
 	{
-		return $this->model->kirby();
+		return $this->model->infinri();
 	}
 
 	/**

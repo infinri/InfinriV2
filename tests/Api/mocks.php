@@ -15,7 +15,7 @@ class IniStore
  */
 function ini_get(string $option): string|false
 {
-	if (defined('KIRBY_TESTING') !== true || KIRBY_TESTING !== true) {
+	if (defined('INFINRI_TESTING') !== true || INFINRI_TESTING !== true) {
 		throw new Exception('Mock ini_get() function was loaded outside of the test environment. This should never happen.');
 	}
 
@@ -27,7 +27,7 @@ function ini_get(string $option): string|false
  */
 function ini_set(string $option, string $value): void
 {
-	if (defined('KIRBY_TESTING') !== true || KIRBY_TESTING !== true) {
+	if (defined('INFINRI_TESTING') !== true || INFINRI_TESTING !== true) {
 		throw new Exception('Mock ini_set() function was loaded outside of the test environment. This should never happen.');
 	}
 
@@ -39,7 +39,7 @@ function ini_set(string $option, string $value): void
  */
 function ini_restore(string $option): void
 {
-	if (defined('KIRBY_TESTING') !== true || KIRBY_TESTING !== true) {
+	if (defined('INFINRI_TESTING') !== true || INFINRI_TESTING !== true) {
 		throw new Exception('Mock ini_restore() function was loaded outside of the test environment. This should never happen.');
 	}
 

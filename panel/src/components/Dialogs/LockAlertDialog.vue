@@ -8,7 +8,7 @@
 		@cancel="$emit('cancel')"
 		@submit="$emit('submit')"
 	>
-		<k-dialog-text :text="$t('form.locked')" />
+		<k-dialog-text :text="$panel.t('form.locked')" />
 
 		<dl>
 			<div>
@@ -50,7 +50,7 @@ export default {
 }
 .k-lock-alert-dialog dl div {
 	padding: var(--spacing-1) 0;
-	line-height: var(--leading-normal);
+	line-height: 1.5;
 	display: flex;
 	align-items: center;
 	gap: 0.75rem;

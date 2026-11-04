@@ -110,7 +110,6 @@ trait UserActions
 
 	/**
 	 * Changes the user's TOTP secret
-	 * @since 4.0.0
 	 */
 	#[BlockCollectionAccess]
 	public function changeTotp(
@@ -147,9 +146,9 @@ trait UserActions
 		array $arguments,
 		Closure $callback
 	): mixed {
-		if ($this->isKirby() === true) {
+		if ($this->isInfinri() === true) {
 			throw new PermissionException(
-				message: 'The Kirby user cannot be changed'
+				message: 'The Infinri user cannot be changed'
 			);
 		}
 
@@ -359,7 +358,6 @@ trait UserActions
 
 	/**
 	 * Reads the secrets from the user secrets file on disk
-	 * @since 4.0.0
 	 */
 	protected function readSecrets(): array
 	{
@@ -441,7 +439,7 @@ trait UserActions
 
 		// set auth user data only if the current user is this user
 		if ($user->isLoggedIn() === true) {
-			$this->kirby()->auth()->setUser($user);
+			$this->infinri()->auth()->setUser($user);
 
 			ModelState::update(
 				method: 'set',
@@ -490,7 +488,6 @@ trait UserActions
 	/**
 	 * Writes a specific secret to the user secrets file on disk;
 	 * `password` is the first line, the rest is stored as JSON
-	 * @since 4.0.0
 	 */
 	protected function writeSecret(
 		string $key,

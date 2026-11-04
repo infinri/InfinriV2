@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Site::class)]
 class SiteChangeTitleTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SiteChangeTitle';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SiteChangeTitle';
 
 	public function testChangeTitle(): void
 	{
@@ -61,7 +61,7 @@ class SiteChangeTitleTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = new Site();
 		$site->changeTitle('New Title');
@@ -96,7 +96,7 @@ class SiteChangeTitleTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = new Site();
 		$site->changeTitle('New Title');
@@ -131,7 +131,7 @@ class SiteChangeTitleTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = new Site();
 		$site->changeTitle('New Title', 'de');

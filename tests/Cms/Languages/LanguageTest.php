@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Language::class)]
 class LanguageTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Language';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Language';
 
 	protected function setUp(): void
 	{
@@ -44,26 +44,26 @@ class LanguageTest extends TestCase
 	public static function baseUrlProvider(): array
 	{
 		return [
-			['https://getkirby.com', null, 'https://getkirby.com'],
-			['https://getkirby.com', '/en', 'https://getkirby.com'],
-			['https://getkirby.com', 'https://getkirby.de', 'https://getkirby.de'],
-			['https://getkirby.com', 'https://getkirby.de/en', 'https://getkirby.de'],
+			['https://infinri.com', null, 'https://infinri.com'],
+			['https://infinri.com', '/en', 'https://infinri.com'],
+			['https://infinri.com', 'https://infinri.de', 'https://infinri.de'],
+			['https://infinri.com', 'https://infinri.de/en', 'https://infinri.de'],
 			['http://localhost/example.com', null, 'http://localhost/example.com'],
 			['http://localhost/example.com', '/en', 'http://localhost/example.com'],
-			['http://localhost/example.com', 'http://getkirby.com', 'http://getkirby.com'],
-			['http://localhost/example.com', 'http://getkirby.com/en', 'http://getkirby.com'],
+			['http://localhost/example.com', 'http://infinri.com', 'http://infinri.com'],
+			['http://localhost/example.com', 'http://infinri.com/en', 'http://infinri.com'],
 		];
 	}
 
 	#[DataProvider('baseUrlProvider')]
-	public function testBaseUrl($kirbyUrl, $url, $expected): void
+	public function testBaseUrl($infinriUrl, $url, $expected): void
 	{
 		new App([
 			'roots' => [
 				'index' => '/dev/null'
 			],
 			'urls' => [
-				'index' => $kirbyUrl
+				'index' => $infinriUrl
 			]
 		]);
 
@@ -78,7 +78,7 @@ class LanguageTest extends TestCase
 
 	public function testCreate(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$language = Language::create([
 			'code' => 'en'
@@ -105,14 +105,14 @@ class LanguageTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 
 		$this->expectException(PermissionException::class);
 		$this->expectExceptionMessage('You are not allowed to create a language');
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 		Language::create([
 			'code' => 'en'
 		]);
@@ -150,7 +150,7 @@ class LanguageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		Language::create([
 			'code' => 'de'
@@ -168,7 +168,7 @@ class LanguageTest extends TestCase
 
 	public function testDelete(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$language = Language::create(['code' => 'en']);
 		$this->assertTrue($language->delete());
@@ -189,21 +189,21 @@ class LanguageTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 
 		$this->expectException(PermissionException::class);
 		$this->expectExceptionMessage('You are not allowed to delete the language');
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 		$language = Language::create(['code' => 'en']);
 		$language->delete();
 	}
 
 	public function testDeleteWithoutLoggedUser(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$language = Language::create(['code' => 'en']);
 
 		$this->expectException(PermissionException::class);
@@ -239,7 +239,7 @@ class LanguageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$language = Language::create([
 			'code' => 'en',
@@ -540,10 +540,10 @@ class LanguageTest extends TestCase
 			['/', ''],
 			['/en', 'en'],
 			['/en/', 'en'],
-			['https://getkirby.com/en', 'en'],
-			['https://getkirby.com/en/', 'en'],
-			['https://getkirby.com/sub/sub', 'sub/sub'],
-			['https://getkirby.com/sub/sub/', 'sub/sub'],
+			['https://infinri.com/en', 'en'],
+			['https://infinri.com/en/', 'en'],
+			['https://infinri.com/sub/sub', 'sub/sub'],
+			['https://infinri.com/sub/sub/', 'sub/sub'],
 		];
 	}
 
@@ -565,12 +565,12 @@ class LanguageTest extends TestCase
 			['/', '(:all)'],
 			['/en', 'en/(:all?)'],
 			['/en/', 'en/(:all?)'],
-			['https://getkirby.com', '(:all)'],
-			['https://getkirby.com/', '(:all)'],
-			['https://getkirby.com/en', 'en/(:all?)'],
-			['https://getkirby.com/en/', 'en/(:all?)'],
-			['https://getkirby.com/sub/sub', 'sub/sub/(:all?)'],
-			['https://getkirby.com/sub/sub/', 'sub/sub/(:all?)'],
+			['https://infinri.com', '(:all)'],
+			['https://infinri.com/', '(:all)'],
+			['https://infinri.com/en', 'en/(:all?)'],
+			['https://infinri.com/en/', 'en/(:all?)'],
+			['https://infinri.com/sub/sub', 'sub/sub/(:all?)'],
+			['https://infinri.com/sub/sub/', 'sub/sub/(:all?)'],
 		];
 	}
 
@@ -725,10 +725,10 @@ class LanguageTest extends TestCase
 	{
 		$language = new Language([
 			'code' => 'en',
-			'url'  => 'https://en.getkirby.com'
+			'url'  => 'https://en.infinri.com'
 		]);
 
-		$this->assertSame('https://en.getkirby.com', $language->url());
+		$this->assertSame('https://en.infinri.com', $language->url());
 	}
 
 	public function testUrlWithDash(): void
@@ -798,7 +798,7 @@ class LanguageTest extends TestCase
 	{
 		Dir::make(static::TMP . '/content');
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$language = Language::create([
 			'code' => 'en'
@@ -817,7 +817,7 @@ class LanguageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$this->assertFalse($app->multilang());
 		$this->assertNull($app->defaultLanguage());
@@ -892,7 +892,7 @@ class LanguageTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$language = Language::create(['code' => 'en']);
 		$language->update(['name' => 'English']);
@@ -915,14 +915,14 @@ class LanguageTest extends TestCase
 				],
 			],
 			'users'      => [
-				['email' => 'test@getkirby.com', 'role' => 'editor']
+				['email' => 'test@infinri.com', 'role' => 'editor']
 			]
 		]);
 
 		$this->expectException(PermissionException::class);
 		$this->expectExceptionMessage('You are not allowed to update the language');
 
-		$app->impersonate('test@getkirby.com');
+		$app->impersonate('test@infinri.com');
 
 		$language = Language::create(['code' => 'en']);
 		$language->update(['name' => 'English']);
@@ -930,7 +930,7 @@ class LanguageTest extends TestCase
 
 	public function testUpdateWithoutLoggedUser(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$language = Language::create(['code' => 'en']);
 
 		$this->expectException(PermissionException::class);

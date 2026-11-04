@@ -275,7 +275,6 @@ class Mime
 	/**
 	 * Tests if a MIME wildcard pattern from an `Accept` header
 	 * matches a given type
-	 * @since 3.3.0
 	 */
 	public static function matches(string $test, string $wildcard): bool
 	{

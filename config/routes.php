@@ -11,11 +11,11 @@ use Infinri\Plugin\Assets;
 use Infinri\Toolkit\Str;
 use Infinri\Uuid\Uuid;
 
-return function (App $kirby) {
-	$api   = $kirby->option('api.slug', 'api');
-	$panel = $kirby->option('panel.slug', 'panel');
-	$index = $kirby->url('index');
-	$media = $kirby->url('media');
+return function (App $infinri) {
+	$api   = $infinri->option('api.slug', 'api');
+	$panel = $infinri->option('panel.slug', 'panel');
+	$index = $infinri->url('index');
+	$media = $infinri->url('media');
 
 	if (Str::startsWith($media, $index) === true) {
 		$media = Str::after($media, $index);
@@ -35,8 +35,8 @@ return function (App $kirby) {
 		[
 			'pattern' => '(:all)',
 			'method'  => 'OPTIONS',
-			'action'  => function () use ($kirby) {
-				$request = $kirby->request();
+			'action'  => function () use ($infinri) {
+				$request = $infinri->request();
 
 				// skip if no CORS request
 				if ($request->header('Access-Control-Request-Method') === null) {
@@ -45,7 +45,7 @@ return function (App $kirby) {
 				}
 
 				// skip if CORS is disabled
-				if ($kirby->isCorsEnabled() === false) {
+				if ($infinri->isCorsEnabled() === false) {
 					/** @var \Infinri\Http\Route $this */
 					$this->next();
 				}
@@ -64,14 +64,14 @@ return function (App $kirby) {
 			'pattern' => $api . '/(:all)',
 			'method'  => 'ALL',
 			'env'     => 'api',
-			'action'  => function (string|null $path = null) use ($kirby) {
-				if ($kirby->option('api') === false) {
+			'action'  => function (string|null $path = null) use ($infinri) {
+				if ($infinri->option('api') === false) {
 					return null;
 				}
 
-				$request = $kirby->request();
+				$request = $infinri->request();
 
-				return $kirby->api()->render($path, $this->method(), [
+				return $infinri->api()->render($path, $this->method(), [
 					'body'    => $request->body()->toArray(),
 					'files'   => $request->files()->toArray(),
 					'headers' => $request->headers(),
@@ -82,10 +82,10 @@ return function (App $kirby) {
 		[
 			'pattern' => $media . '/plugins/index.(css|js)',
 			'env'     => 'media',
-			'action'  => function (string $type) use ($kirby) {
+			'action'  => function (string $type) use ($infinri) {
 				$plugins = new Plugins();
 
-				return $kirby
+				return $infinri
 					->response()
 					->type($type)
 					->body($plugins->read($type));
@@ -116,8 +116,8 @@ return function (App $kirby) {
 				string $path,
 				string $hash,
 				string $filename
-			) use ($kirby) {
-				return Media::link($kirby->page($path), $hash, $filename);
+			) use ($infinri) {
+				return Media::link($infinri->page($path), $hash, $filename);
 			}
 		],
 		[
@@ -126,8 +126,8 @@ return function (App $kirby) {
 			'action'  => function (
 				string $hash,
 				string $filename
-			) use ($kirby) {
-				return Media::link($kirby->site(), $hash, $filename);
+			) use ($infinri) {
+				return Media::link($infinri->site(), $hash, $filename);
 			}
 		],
 		[
@@ -137,8 +137,8 @@ return function (App $kirby) {
 				string $id,
 				string $hash,
 				string $filename
-			) use ($kirby) {
-				return Media::link($kirby->user($id), $hash, $filename);
+			) use ($infinri) {
+				return Media::link($infinri->user($id), $hash, $filename);
 			}
 		],
 		[
@@ -165,13 +165,13 @@ return function (App $kirby) {
 			'pattern' => '@/(page|file)/(:all)',
 			'method'  => 'ALL',
 			'env'     => 'site',
-			'action'  => function (string $type, string $id) use ($kirby) {
+			'action'  => function (string $type, string $id) use ($infinri) {
 				// try to resolve to model, but only from UUID cache;
 				// this ensures that only existing UUIDs can be queried
-				// and attackers can't force Kirby to go through the whole
+				// and attackers can't force Infinri to go through the whole
 				// site index with a non-existing UUID
 				if ($model = Uuid::for($type . '://' . $id)?->model(true)) {
-					return $kirby
+					return $infinri
 						->response()
 						->redirect($model->url());
 				}
@@ -183,28 +183,28 @@ return function (App $kirby) {
 	];
 
 	// Multi-language setup
-	if ($kirby->multilang() === true) {
-		$after = LanguageRoutes::create($kirby);
+	if ($infinri->multilang() === true) {
+		$after = LanguageRoutes::create($infinri);
 	} else {
 		// Single-language home
 		$after[] = [
 			'pattern' => '',
 			'method'  => 'ALL',
 			'env'     => 'site',
-			'action'  => function () use ($kirby) {
-				return $kirby->resolve();
+			'action'  => function () use ($infinri) {
+				return $infinri->resolve();
 			}
 		];
 
 		// redirect the home page folder to the real homepage
 		$after[] = [
-			'pattern' => $kirby->option('home', 'home'),
+			'pattern' => $infinri->option('home', 'home'),
 			'method'  => 'ALL',
 			'env'     => 'site',
-			'action'  => function () use ($kirby) {
-				return $kirby
+			'action'  => function () use ($infinri) {
+				return $infinri
 					->response()
-					->redirect($kirby->site()->url());
+					->redirect($infinri->site()->url());
 			}
 		];
 
@@ -213,8 +213,8 @@ return function (App $kirby) {
 			'pattern' => '(:all)',
 			'method'  => 'ALL',
 			'env'     => 'site',
-			'action'  => function (string $path) use ($kirby) {
-				return $kirby->resolve($path);
+			'action'  => function (string $path) use ($infinri) {
+				return $infinri->resolve($path);
 			}
 		];
 	}

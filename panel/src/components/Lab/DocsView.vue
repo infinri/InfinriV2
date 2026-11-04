@@ -30,7 +30,7 @@ export default {
 		lab: String
 	},
 	mounted() {
-		import.meta.hot?.on("kirby:docs:" + this.component, this.reloadDocs);
+		import.meta.hot?.on("infinri:docs:" + this.component, this.reloadDocs);
 	},
 	methods: {
 		reloadDocs() {

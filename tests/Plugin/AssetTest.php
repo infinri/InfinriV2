@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class AssetTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/plugin-assets';
-	public const TMP      = KIRBY_TMP_DIR . '/Plugin.Asset';
+	public const TMP      = INFINRI_TMP_DIR . '/Plugin.Asset';
 
 	protected Plugin $plugin;
 
@@ -20,11 +20,17 @@ class AssetTest extends TestCase
 
 		Dir::copy(static::FIXTURES, static::TMP . '/test-plugin');
 
-		$this->plugin = new Plugin('getkirby/test-plugin', [
-			'root' => static::TMP . '/test-plugin'
-		]);
+		$this->plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			root: static::TMP . '/test-plugin'
+		);
 
 		touch(static::TMP . '/test-plugin/assets/test.css', 1337000000);
+	}
+
+	public function testPublishAtIsRemoved(): void
+	{
+		$this->assertFalse(method_exists(Asset::class, 'publishAt'));
 	}
 
 	public function testExtension(): void
@@ -59,7 +65,7 @@ class AssetTest extends TestCase
 
 		$this->assertSame('3526409702-1337000000', $asset->mediaHash());
 		$this->assertSame($this->plugin->mediaRoot() . '/3526409702-1337000000/test.css', $asset->mediaRoot());
-		$this->assertSame($url = '/media/plugins/getkirby/test-plugin/3526409702-1337000000/test.css', $asset->mediaUrl());
+		$this->assertSame($url = '/media/plugins/infinri/test-plugin/3526409702-1337000000/test.css', $asset->mediaUrl());
 		$this->assertSame($url, $asset->url());
 		$this->assertSame($url, (string)$asset);
 	}

@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Xml::class)]
 class XmlTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Sane.Xml';
+	public const TMP = INFINRI_TMP_DIR . '/Sane.Xml';
 
 	protected static string $type = 'xml';
 
@@ -36,7 +36,7 @@ class XmlTest extends TestCase
 
 	public function testAllowedCustomDomainAllowlist(): void
 	{
-		Xml::$allowedDomains = ['getkirby.com'];
+		Xml::$allowedDomains = ['infinri.com'];
 
 		$fixture = $this->fixture('allowed/allowed-external-source.xml');
 
@@ -76,7 +76,6 @@ class XmlTest extends TestCase
 	{
 		/**
 		 * Test fixture inspired by DOMPurify
-		 * @link https://github.com/cure53/DOMPurify
 		 * @copyright 2015 Mario Heiderich
 		 * @license https://www.apache.org/licenses/LICENSE-2.0
 		 */
@@ -110,7 +109,7 @@ class XmlTest extends TestCase
 		$this->assertStringEqualsFile($sanitized, Xml::sanitize(file_get_contents($fixture)));
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The URL is not allowed in attribute "style" (line 7): Invalid data URI');
+		$this->expectExceptionMessage('The URL is not allowed in attribute "style" (line 6): Invalid data URI');
 		Xml::validateFile($fixture);
 	}
 
@@ -122,7 +121,7 @@ class XmlTest extends TestCase
 		$this->assertStringEqualsFile($sanitized, Xml::sanitize(file_get_contents($fixture)));
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The URL is not allowed in attribute "filter" (line 7): Invalid data URI');
+		$this->expectExceptionMessage('The URL is not allowed in attribute "filter" (line 6): Invalid data URI');
 		Xml::validateFile($fixture);
 	}
 
@@ -151,7 +150,7 @@ class XmlTest extends TestCase
 		$this->assertStringEqualsFile($sanitized1, Xml::sanitize(file_get_contents($fixture)));
 
 		// with custom allowlist
-		Xml::$allowedDomains = ['getkirby.com'];
+		Xml::$allowedDomains = ['infinri.com'];
 
 		$this->assertStringEqualsFile($sanitized2, Xml::sanitize(file_get_contents($fixture)));
 
@@ -172,7 +171,7 @@ class XmlTest extends TestCase
 		$this->assertStringEqualsFile($sanitized1, Xml::sanitize(file_get_contents($fixture)));
 
 		// with custom allowlist
-		Xml::$allowedDomains = ['getkirby.com'];
+		Xml::$allowedDomains = ['infinri.com'];
 
 		$this->assertStringEqualsFile($sanitized2, Xml::sanitize(file_get_contents($fixture)));
 
@@ -285,7 +284,7 @@ class XmlTest extends TestCase
 		$this->assertStringEqualsFile($sanitized, Xml::sanitize(file_get_contents($fixture)));
 
 		$this->expectException(InvalidArgumentException::class);
-		$this->expectExceptionMessage('The "xml-stylesheet" processing instruction (line 6) is not allowed');
+		$this->expectExceptionMessage('The "xml-stylesheet" processing instruction (line 5) is not allowed');
 		Xml::validateFile($fixture);
 	}
 }

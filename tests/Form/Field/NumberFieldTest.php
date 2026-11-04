@@ -17,7 +17,7 @@ class NumberFieldTest extends TestCase
 		$this->assertNull($field->min());
 		$this->assertNull($field->max());
 		$this->assertSame('', $field->step());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public static function valueProvider(): array

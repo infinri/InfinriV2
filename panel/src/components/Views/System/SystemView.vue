@@ -1,7 +1,7 @@
 <template>
 	<k-panel-inside class="k-system-view">
 		<k-header>
-			{{ $t("view.system") }}
+			{{ $panel.t("view.system") }}
 
 			<template #buttons>
 				<k-view-buttons :buttons="buttons" />
@@ -9,10 +9,10 @@
 		</k-header>
 
 		<k-section
-			:headline="$t('environment')"
+			:headline="$panel.t('environment')"
 			:buttons="[
 				{
-					text: $t('system.info.copy'),
+					text: $panel.t('system.info.copy'),
 					icon: 'copy',
 					responsive: true,
 					click: copy
@@ -53,7 +53,7 @@ export default {
 		// to console for debugging
 		if (this.exceptions.length > 0) {
 			console.info(
-				"The following errors occurred during the update check of Kirby and/or plugins:"
+				"The following errors occurred during the update check of Infinri and/or plugins:"
 			);
 			this.exceptions.map((exception) => console.warn(exception));
 			console.info("End of errors from the update check.");
@@ -76,7 +76,7 @@ export default {
 
 			this.$helper.clipboard.write(info);
 			this.$panel.notification.success({
-				message: this.$t("system.info.copied")
+				message: this.$panel.t("system.info.copied")
 			});
 		}
 	}

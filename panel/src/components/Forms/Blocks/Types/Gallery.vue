@@ -68,7 +68,7 @@ export default {
 	},
 	methods: {
 		onBack(value) {
-			const id = `kirby.galleryBlock.${this.endpoints.field}.${this.id}`;
+			const id = `infinri.galleryBlock.${this.endpoints.field}.${this.id}`;
 
 			if (value !== undefined) {
 				this.back = value;

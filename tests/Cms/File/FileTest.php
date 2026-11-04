@@ -10,13 +10,13 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(File::class)]
 class FileTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.File';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.File';
 
 	public function testApiUrl(): void
 	{
 		$this->app = $this->app->clone([
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			]
 		]);
 
@@ -25,7 +25,7 @@ class FileTest extends ModelTestCase
 			'filename' => 'site-file.jpg',
 			'parent'   => $this->app->site()
 		]);
-		$this->assertSame('https://getkirby.com/api/site/files/site-file.jpg', $file->apiUrl());
+		$this->assertSame('https://infinri.com/api/site/files/site-file.jpg', $file->apiUrl());
 		$this->assertSame('site/files/site-file.jpg', $file->apiUrl(true));
 
 		// page file
@@ -40,7 +40,7 @@ class FileTest extends ModelTestCase
 			'parent'   => $child
 		]);
 
-		$this->assertSame('https://getkirby.com/api/pages/mother+child/files/page-file.jpg', $file->apiUrl());
+		$this->assertSame('https://infinri.com/api/pages/mother+child/files/page-file.jpg', $file->apiUrl());
 		$this->assertSame('pages/mother+child/files/page-file.jpg', $file->apiUrl(true));
 
 		// user file
@@ -50,7 +50,7 @@ class FileTest extends ModelTestCase
 			'parent'   => $user
 		]);
 
-		$this->assertSame('https://getkirby.com/api/users/test/files/user-file.jpg', $file->apiUrl());
+		$this->assertSame('https://infinri.com/api/users/test/files/user-file.jpg', $file->apiUrl());
 		$this->assertSame('users/test/files/user-file.jpg', $file->apiUrl(true));
 	}
 
@@ -60,12 +60,12 @@ class FileTest extends ModelTestCase
 		$file = new File([
 			'filename' => 'test.jpg',
 			'parent'   => $page,
-			'url'      => 'https://getkirby.com/projects/project-a/cover.jpg'
+			'url'      => 'https://infinri.com/projects/project-a/cover.jpg'
 		]);
 
 		$this->assertInstanceOf(BaseFile::class, $file->asset());
 		$this->assertSame(
-			'https://getkirby.com/projects/project-a/cover.jpg',
+			'https://infinri.com/projects/project-a/cover.jpg',
 			$file->asset()->url()
 		);
 	}

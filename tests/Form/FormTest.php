@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Form::class)]
 class FormTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Form.Form';
+	public const TMP = INFINRI_TMP_DIR . '/Form.Form';
 
 	protected ModelWithContent $model;
 
@@ -38,73 +38,38 @@ class FormTest extends TestCase
 		$this->tearDownTmp();
 	}
 
-	public function testContent(): void
-	{
-		$form = new Form([
-			'fields' => [],
-			'values' => $values = [
-				'a' => 'A',
-				'b' => 'B'
-			]
-		]);
-
-		$this->assertSame($values, $form->content());
-	}
-
-	public function testContentAndDataFromUnsaveableFields(): void
-	{
-		$form = new Form([
-			'fields' => [
-				'info' => [
-					'type' => 'info',
-				]
-			],
-			'model' => $this->model,
-			'values' => [
-				'info' => 'Yay'
-			]
-		]);
-
-		$this->assertCount(0, $form->content());
-		$this->assertArrayNotHasKey('info', $form->content());
-		$this->assertCount(1, $form->data());
-		$this->assertArrayHasKey('info', $form->data());
-	}
-
 	public function testDataWithoutFields(): void
 	{
-		$form = new Form([
-			'fields' => [],
-			'values' => $values = [
-				'a' => 'A',
-				'b' => 'B'
-			]
+		$form = (new Form(
+			fields: []
+		))->fill(input: $values = [
+			'a' => 'A',
+			'b' => 'B'
 		]);
 
-		$this->assertSame($values, $form->data());
+		$this->assertSame($values, $form->toStoredValues());
 	}
 
 	public function testDataFromUnsaveableFields(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = (new Form(
+			fields: [
 				'info' => [
 					'type' => 'info',
 				]
 			],
-			'model' => $this->model,
-			'values' => [
-				'info' => 'Yay'
-			]
+			model: $this->model
+		))->fill(input: [
+			'info' => 'Yay'
 		]);
 
-		$this->assertNull($form->data()['info']);
+		$this->assertArrayNotHasKey('info', $form->toStoredValues());
 	}
 
 	public function testDataFromNestedFields(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = (new Form(
+			fields: [
 				'structure' => [
 					'type'   => 'structure',
 					'fields' => [
@@ -114,23 +79,22 @@ class FormTest extends TestCase
 					]
 				]
 			],
-			'model' => $this->model,
-			'values' => $values = [
-				'structure' => [
-					[
-						'tags' => 'a, b'
-					]
+			model: $this->model
+		))->fill(input: $values = [
+			'structure' => [
+				[
+					'tags' => 'a, b'
 				]
 			]
 		]);
 
-		$this->assertSame('a, b', $form->data()['structure'][0]['tags']);
+		$this->assertSame('a, b', $form->toStoredValues()['structure'][0]['tags']);
 	}
 
 	public function testDataWithCorrectFieldOrder(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = (new Form(
+			fields: [
 				'a' => [
 					'type' => 'text',
 				],
@@ -138,25 +102,23 @@ class FormTest extends TestCase
 					'type' => 'text',
 				]
 			],
-			'input' => [
-				'b' => 'B modified'
-			],
-			'model' => $this->model,
-			'values' => [
-				'c' => 'C',
-				'b' => 'B',
-				'a' => 'A',
-			],
+			model: $this->model
+		))->fill(input: [
+			'c' => 'C',
+			'b' => 'B',
+			'a' => 'A',
+		])->submit(input: [
+			'b' => 'B modified'
 		]);
 
-		$this->assertTrue(['a' => 'A', 'b' => 'B modified', 'c' => 'C'] === $form->data());
-		$this->assertTrue(['a' => 'A', 'b' => 'B modified', 'c' => 'C'] === $form->values());
+		$this->assertTrue(['a' => 'A', 'b' => 'B modified', 'c' => 'C'] === $form->toStoredValues());
+		$this->assertTrue(['a' => 'A', 'b' => 'B modified', 'c' => 'C'] === $form->toFormValues());
 	}
 
 	public function testDataWithStrictMode(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = (new Form(
+			fields: [
 				'a' => [
 					'type' => 'text',
 				],
@@ -164,19 +126,16 @@ class FormTest extends TestCase
 					'type' => 'text',
 				]
 			],
-			'input' => [
-				'c' => 'C'
-			],
-			'model' => $this->model,
-			'strict' => true,
-			'values' => [
-				'b' => 'B',
-				'a' => 'A'
-			],
-		]);
+			model: $this->model
+		))->fill(input: [
+			'b' => 'B',
+			'a' => 'A'
+		], passthrough: false)->submit(input: [
+			'c' => 'C'
+		], passthrough: false);
 
-		$this->assertTrue(['a' => 'A', 'b' => 'B'] === $form->data());
-		$this->assertTrue(['a' => 'A', 'b' => 'B'] === $form->values());
+		$this->assertTrue(['a' => 'A', 'b' => 'B'] === $form->toStoredValues());
+		$this->assertTrue(['a' => 'A', 'b' => 'B'] === $form->toFormValues());
 	}
 
 	public function testDataWithUntranslatedFields(): void
@@ -199,11 +158,11 @@ class FormTest extends TestCase
 		]);
 
 		// default language
-		$form = Form::for($this->model, [
-			'input' => [
-				'a' => 'A',
-				'b' => 'B'
-			]
+		$form = Form::for(
+			model: $this->model
+		)->submit(input: [
+			'a' => 'A',
+			'b' => 'B'
 		]);
 
 		$expected = [
@@ -211,15 +170,15 @@ class FormTest extends TestCase
 			'b' => 'B'
 		];
 
-		$this->assertSame($expected, $form->values());
+		$this->assertSame($expected, $form->toFormValues());
 
 		// secondary language
-		$form = Form::for($this->model, [
-			'language' => 'de',
-			'input' => [
-				'a' => 'A',
-				'b' => 'B'
-			]
+		$form = Form::for(
+			model: $this->model,
+			language: 'de'
+		)->submit(input: [
+			'a' => 'A',
+			'b' => 'B'
 		]);
 
 		$expected = [
@@ -227,27 +186,27 @@ class FormTest extends TestCase
 			'b' => ''
 		];
 
-		$this->assertSame($expected, $form->values());
+		$this->assertSame($expected, $form->toFormValues());
 	}
 
 	public function testDefaults(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = new Form(
+			fields: [
 				'test' => [
 					'type' => 'text',
 					'default' => 'Test Value'
 				]
 			]
-		]);
+		);
 
 		$this->assertSame(['test' => 'Test Value'], $form->defaults());
 	}
 
 	public function testErrors(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = (new Form(
+			fields: [
 				'a' => [
 					'label' => 'Email',
 					'type' => 'email',
@@ -257,11 +216,10 @@ class FormTest extends TestCase
 					'type' => 'url',
 				]
 			],
-			'model' => $this->model,
-			'values' => [
-				'a' => 'A',
-				'b' => 'B',
-			]
+			model: $this->model
+		))->fill(input: [
+			'a' => 'A',
+			'b' => 'B',
 		]);
 
 		$this->assertTrue($form->isInvalid());
@@ -293,25 +251,25 @@ class FormTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Field "test": The field type "does-not-exist" does not exist');
 
-		new Form([
-			'fields' => [
+		new Form(
+			fields: [
 				'test' => [
 					'type'  => 'does-not-exist',
 					'model' => $this->model
 				]
 			]
-		]);
+		);
 	}
 
 	public function testFill(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = new Form(
+			fields: [
 				'test' => [
 					'type' => 'text',
 				]
-			],
-		]);
+			]
+		);
 
 		$response = $form->fill([
 			'test' => 'Test Value'
@@ -329,11 +287,38 @@ class FormTest extends TestCase
 			'content'  => []
 		]);
 
-		$form = Form::for($file, [
-			'values' => ['a' => 'A', 'b' => 'B']
-		]);
+		$form = Form::for($file);
 
-		$this->assertSame(['a' => 'A', 'b' => 'B'], $form->data());
+		$this->assertSame([], $form->toStoredValues());
+	}
+
+	public function testForWithPropsArray(): void
+	{
+		$this->expectException(\TypeError::class);
+
+		Form::for($this->model, ['values' => ['a' => 'A']]);
+	}
+
+	public function testConstructorHasNoPropsParameter(): void
+	{
+		$names = array_map(
+			fn ($parameter) => $parameter->getName(),
+			(new \ReflectionMethod(Form::class, '__construct'))->getParameters()
+		);
+
+		$this->assertSame(['fields', 'model', 'language'], $names);
+		$this->assertFalse(method_exists(Form::class, 'legacyConstruct'));
+		$this->assertFalse(method_exists(Form::class, 'legacyFor'));
+	}
+
+	public function testDeprecatedMethodsAreRemoved(): void
+	{
+		foreach (['content', 'data', 'strings', 'values'] as $method) {
+			$this->assertFalse(
+				method_exists(Form::class, $method),
+				'Form::' . $method . '() should be removed'
+			);
+		}
 	}
 
 	public function testForPage(): void
@@ -355,14 +340,14 @@ class FormTest extends TestCase
 			]
 		]);
 
-		$form = Form::for($page, [
-			'values' => [
-				'title' => 'Updated Title',
-				'date'  => null
-			]
+		$form = Form::for(
+			model: $page
+		)->fill(input: [
+			'title' => 'Updated Title',
+			'date'  => null
 		]);
 
-		$values = $form->values();
+		$values = $form->toFormValues();
 
 		// the title must always be transfered, even if not in the blueprint
 		$this->assertSame('Updated Title', $values['title']);
@@ -380,14 +365,14 @@ class FormTest extends TestCase
 			]
 		]);
 
-		$form = Form::for($page, [
-			'values' => [
-				'a' => fn ($value) => $value . 'A',
-				'b' => fn ($value) => $value . 'B'
-			]
+		$form = Form::for(
+			model: $page
+		)->fill(input: [
+			'a' => fn ($value) => $value . 'A',
+			'b' => fn ($value) => $value . 'B'
 		]);
 
-		$values = $form->values();
+		$values = $form->toFormValues();
 
 		$this->assertSame('AA', $values['a']);
 		$this->assertSame('B', $values['b']);
@@ -395,20 +380,20 @@ class FormTest extends TestCase
 
 	public function testLanguage(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = new Form(
+			fields: [
 				'test' => [
 					'type' => 'text',
 				]
-			],
-		]);
+			]
+		);
 
 		$this->assertInstanceOf(Language::class, $form->language());
 	}
 
 	public function testPassthrough(): void
 	{
-		$form = new Form([]);
+		$form = new Form();
 
 		$response = $form->passthrough([
 			'test' => 'Test Value'
@@ -421,13 +406,13 @@ class FormTest extends TestCase
 
 	public function testReset(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = new Form(
+			fields: [
 				'test' => [
 					'type' => 'text',
 				]
-			],
-		]);
+			]
+		);
 
 		$this->assertSame(['test' => ''], $form->toFormValues());
 
@@ -443,36 +428,15 @@ class FormTest extends TestCase
 		$this->assertSame(['test' => ''], $form->toFormValues());
 	}
 
-	public function testStrings(): void
-	{
-		$form = new Form([
-			'fields' => [],
-			'values' => [
-				'a' => 'A',
-				'b' => 'B',
-				'c' => [
-					'd' => 'D',
-					'e' => 'E'
-				]
-			]
-		]);
-
-		$this->assertSame([
-			'a' => 'A',
-			'b' => 'B',
-			'c' => "d: D\ne: E\n"
-		], $form->strings());
-	}
-
 	public function testSubmit(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = new Form(
+			fields: [
 				'test' => [
 					'type' => 'text',
 				]
-			],
-		]);
+			]
+		);
 
 		$response = $form->submit([
 			'test' => 'Test Value'
@@ -484,8 +448,8 @@ class FormTest extends TestCase
 
 	public function testToArray(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = (new Form(
+			fields: [
 				'a' => [
 					'label' => 'A',
 					'type'  => 'text',
@@ -495,11 +459,10 @@ class FormTest extends TestCase
 					'type'  => 'text',
 				]
 			],
-			'model' => $this->model,
-			'values' => [
-				'a' => 'A',
-				'b' => 'B',
-			]
+			model: $this->model
+		))->fill(input: [
+			'a' => 'A',
+			'b' => 'B',
 		]);
 
 		$this->assertSame([], $form->toArray()['errors']);
@@ -511,19 +474,18 @@ class FormTest extends TestCase
 
 	public function testToFormValues(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = (new Form(
+			fields: [
 				'a' => [
 					'type' => 'text',
 				],
 				'b' => [
 					'type' => 'text',
 				]
-			],
-			'values' => $values = [
-				'a' => 'A',
-				'b' => 'B',
 			]
+		))->fill(input: $values = [
+			'a' => 'A',
+			'b' => 'B',
 		]);
 
 		$this->assertSame($values, $form->toFormValues());
@@ -531,14 +493,14 @@ class FormTest extends TestCase
 
 	public function testToProps(): void
 	{
-		$form = new Form([
-			'fields' => [
+		$form = new Form(
+			fields: [
 				'test' => [
 					'label' => 'Test',
 					'type'  => 'text',
 				],
 			]
-		]);
+		);
 
 		$this->assertSame($form->fields()->toProps(), $form->toProps());
 	}
@@ -551,19 +513,18 @@ class FormTest extends TestCase
 			}
 		];
 
-		$form = new Form([
-			'fields' => [
+		$form = (new Form(
+			fields: [
 				'a' => [
 					'type' => 'test',
 				],
 				'b' => [
 					'type' => 'test',
 				]
-			],
-			'values' => [
-				'a' => 'A',
-				'b' => 'B',
 			]
+		))->fill(input: [
+			'a' => 'A',
+			'b' => 'B',
 		]);
 
 		$expected = [
@@ -576,14 +537,13 @@ class FormTest extends TestCase
 
 	public function testValuesWithoutFields(): void
 	{
-		$form = new Form([
-			'fields' => [],
-			'values' => $values = [
-				'a' => 'A',
-				'b' => 'B'
-			]
+		$form = (new Form(
+			fields: []
+		))->fill(input: $values = [
+			'a' => 'A',
+			'b' => 'B'
 		]);
 
-		$this->assertSame($values, $form->values());
+		$this->assertSame($values, $form->toFormValues());
 	}
 }

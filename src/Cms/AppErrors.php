@@ -30,17 +30,16 @@ trait AppErrors
 
 	/**
 	 * Replaces absolute file paths with placeholders such as
-	 * {kirby_folder}, {site_folder} or {index_folder} to avoid
+	 * {infinri_folder}, {site_folder} or {index_folder} to avoid
 	 * exposing too many details about the filesystem and keeping
 	 * error responses short and readable in debug mode.
 	 *
-	 * @since 5.3.0
 	 * @internal
 	 */
 	public function disguiseFilePath(string $file): string
 	{
 		$disguise = [
-			$this->root('kirby') => '{kirby}',
+			$this->root('infinri') => '{infinri}',
 			$this->root('site')  => '{site}',
 			$this->root('index') => '{index}'
 		];
@@ -96,7 +95,7 @@ trait AppErrors
 		if ($this->option('debug') === true) {
 			if ($this->option('whoops', true) !== false) {
 				$handler = new PrettyPageHandler();
-				$handler->setPageTitle('Kirby CMS Debugger');
+				$handler->setPageTitle('Infinri CMS Debugger');
 				$handler->addResourcePath(dirname(__DIR__, 2) . '/assets');
 				$handler->addCustomCss('whoops.css');
 
@@ -119,7 +118,7 @@ trait AppErrors
 				if ($fatal instanceof Closure) {
 					echo $fatal($this, $exception);
 				} else {
-					include $this->root('kirby') . '/views/fatal.php';
+					include $this->root('infinri') . '/views/fatal.php';
 				}
 
 				return Handler::QUIT;

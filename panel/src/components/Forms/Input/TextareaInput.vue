@@ -280,7 +280,7 @@ export default {
 			}
 
 			let regex;
-			if (this.$panel.config.kirbytext) {
+			if (this.$panel.config.infinritext) {
 				regex = /^\(link:\s*(?<url>.*?)(?:\s*text:\s*(?<text>.*?))?\)$/is;
 			} else {
 				regex = /^(\[(?<text>.*?)\]\((?<url>.*?)\))|(<(?<link>.*?)>)$/is;
@@ -312,20 +312,6 @@ export default {
 			}
 
 			await this.$nextTick();
-		},
-		/**
-		 * @deprecated 5.0.0 Use `restoreSelection` instead
-		 */
-		restoreSelectionCallback() {
-			// restore selection as `insert` method
-			// depends on it
-			return async (callback) => {
-				await this.restoreSelection();
-
-				if (callback) {
-					callback();
-				}
-			};
 		},
 		select() {
 			this.$refs.input.select();

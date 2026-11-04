@@ -18,20 +18,16 @@ class Doc
 
 	public function __construct(
 		public string $name,
-		public string $source,
 		public string|null $description = null,
-		public string|null $deprecated = null,
 		public string|null $docBlock = null,
 		public array $events = [],
 		public array $examples = [],
 		public bool $isUnstable = false,
 		public array $methods = [],
 		public array $props = [],
-		public string|null $since = null,
 		public array $slots = [],
 	) {
 		$this->description = Doc::kt($this->description ?? '');
-		$this->deprecated  = Doc::kt($this->deprecated ?? '');
 		$this->docBlock    = Doc::kt($this->docBlock ?? '');
 	}
 
@@ -84,16 +80,13 @@ class Doc
 
 		return new static(
 			name:        $name,
-			source:      $data['sourceFile'],
 			description: $data['description'] ?? null,
-			deprecated:  $data['tags']['deprecated'][0]['description'] ?? null,
 			docBlock:    $data['docsBlocks'][0] ?? null,
 			examples:    $data['tags']['examples'] ?? [],
 			events:      $gather('events', Event::class),
 			isUnstable:  isset($data['tags']['unstable']) === true,
 			methods:     $gather('methods', Method::class),
 			props:       $gather('props', Prop::class),
-			since:       $data['tags']['since'][0]['description'] ?? null,
 			slots:       $gather('slots', Slot::class)
 		);
 	}
@@ -114,11 +107,11 @@ class Doc
 	}
 
 	/**
-	 * Helper to resolve KirbyText
+	 * Helper to resolve InfinriText
 	 */
 	public static function kt(string $text, bool $inline = false): string
 	{
-		return App::instance()->kirbytext($text, [
+		return App::instance()->infinritext($text, [
 			'markdown' => [
 				'breaks' => false,
 				'inline' => $inline,
@@ -144,11 +137,6 @@ class Doc
 		return null;
 	}
 
-	public function source(): string
-	{
-		return 'https://github.com/getkirby/kirby/tree/main/panel/' . $this->source;
-	}
-
 	/**
 	 * Returns the data for this documentation
 	 */
@@ -156,7 +144,6 @@ class Doc
 	{
 		return [
 			'component'   => $this->name,
-			'deprecated'  => $this->deprecated,
 			'description' => $this->description,
 			'docBlock'    => $this->docBlock,
 			'events'      => $this->events,
@@ -164,9 +151,7 @@ class Doc
 			'isUnstable'  => $this->isUnstable,
 			'methods'     => $this->methods,
 			'props'       => $this->props,
-			'since'       => $this->since,
 			'slots'       => $this->slots,
-			'source'      => $this->source(),
 		];
 	}
 

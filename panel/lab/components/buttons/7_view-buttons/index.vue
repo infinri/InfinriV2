@@ -8,7 +8,7 @@
 						<template #after>
 							<k-form-controls
 								:has-diff="true"
-								editor="editor@getkirby.com"
+								editor="editor@infinri.com"
 								modified="2024-10-01T17:00:00"
 								@discard="log('discard')"
 								@submit="log('submit')"
@@ -26,7 +26,7 @@
 						<template #after>
 							<k-form-controls
 								:has-diff="true"
-								editor="editor@getkirby.com"
+								editor="editor@infinri.com"
 								modified="2024-10-01T17:00:00"
 								@discard="log('discard')"
 								@submit="log('submit')"

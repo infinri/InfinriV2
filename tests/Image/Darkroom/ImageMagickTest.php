@@ -3,9 +3,8 @@
 namespace Infinri\Image\Darkroom;
 
 use Infinri\Filesystem\Dir;
-use Infinri\Filesystem\F as FilesystemF;
+use Infinri\Filesystem\F;
 use Infinri\TestCase;
-use Infinri\Toolkit\F;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionMethod;
@@ -14,7 +13,7 @@ use ReflectionMethod;
 class ImageMagickTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/../fixtures/image';
-	public const TMP      = KIRBY_TMP_DIR . '/Image.Darkroom.ImageMagick';
+	public const TMP      = INFINRI_TMP_DIR . '/Image.Darkroom.ImageMagick';
 
 	protected function setUp(): void
 	{
@@ -232,7 +231,7 @@ class ImageMagickTest extends TestCase
 		$this->assertSame('JPEG', $format);
 
 		$im->process($file);
-		$this->assertTrue(FilesystemF::exists($file));
+		$this->assertTrue(F::exists($file));
 		$format = shell_exec('identify -format "%m" ' . escapeshellarg($file) . ' 2>/dev/null');
 		$this->assertSame('WEBP', $format);
 	}

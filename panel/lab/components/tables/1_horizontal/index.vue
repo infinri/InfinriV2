@@ -53,7 +53,7 @@
 					</thead>
 					<tbody>
 						<tr v-for="i in 2" :key="i">
-							<td>Kirby</td>
+							<td>Infinri</td>
 							<td>2023-09-25</td>
 						</tr>
 					</tbody>
@@ -72,7 +72,7 @@
 					</thead>
 					<tbody>
 						<tr v-for="i in 2" :key="i">
-							<td>Kirby</td>
+							<td>Infinri</td>
 							<td>2023-09-25</td>
 							<td class="k-table-options-column">
 								<k-options-dropdown :options="options" />
@@ -98,7 +98,7 @@
 							<td class="k-table-index-column">
 								<span class="k-table-index">{{ i }}</span>
 							</td>
-							<td>Kirby</td>
+							<td>Infinri</td>
 							<td>2023-09-25</td>
 							<td class="k-table-options-column">
 								<k-options-dropdown :options="options" />
@@ -139,9 +139,9 @@
 								<span class="k-table-index">{{ i }}</span>
 								<k-sort-handle class="k-table-sort-handle" />
 							</td>
-							<td>Kirby</td>
-							<td>mail@getkirby.com</td>
-							<td>https://getkirby.com</td>
+							<td>Infinri</td>
+							<td>mail@infinri.com</td>
+							<td>https://infinri.com</td>
 							<td>2023-09-25</td>
 							<td class="k-table-options-column">
 								<k-options-dropdown :options="options" />
@@ -167,7 +167,7 @@
 							<td class="k-table-index-column">
 								<span class="k-table-index">{{ i }}</span>
 							</td>
-							<td>Kirby</td>
+							<td>Infinri</td>
 							<td>2023-09-25</td>
 							<td class="k-table-options-column">
 								<k-options-dropdown :disabled="true" :options="options" />
@@ -193,7 +193,7 @@
 							<td class="k-table-index-column">
 								<span class="k-table-index">{{ i }}</span>
 							</td>
-							<td>Kirby</td>
+							<td>Infinri</td>
 							<td>2023-09-25</td>
 							<td class="k-table-options-column">
 								<k-options-dropdown :disabled="true" :options="options" />

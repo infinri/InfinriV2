@@ -11,8 +11,8 @@ export default {
 				text:
 					this.empty ??
 					(this.multiple && this.max !== 1
-						? this.$t("field.pages.empty")
-						: this.$t("field.pages.empty.single"))
+						? this.$panel.t("field.pages.empty")
+						: this.$panel.t("field.pages.empty.single"))
 			};
 		}
 	}

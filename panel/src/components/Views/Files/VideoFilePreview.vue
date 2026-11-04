@@ -11,7 +11,6 @@
 <script>
 /**
  * File view preview for video files
- * @since 5.0.0
  */
 export default {
 	props: {
@@ -23,7 +22,7 @@ export default {
 			return [
 				{
 					icon: "download",
-					text: this.$t("download"),
+					text: this.$panel.t("download"),
 					link: this.url,
 					download: true
 				}

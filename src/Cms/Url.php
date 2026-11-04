@@ -45,12 +45,12 @@ class Url extends BaseUrl
 		string $assetPath,
 		string $extension
 	): string|null {
-		$kirby = App::instance();
-		$page  = $kirby->site()->page();
+		$infinri = App::instance();
+		$page  = $infinri->site()->page();
 		$path  = $assetPath . '/' . $page->template() . '.' . $extension;
-		$root  = $kirby->root('assets');
+		$root  = $infinri->root('assets');
 		$file  = $root . '/' . $path;
-		$url   = $kirby->url('assets') . '/' . $path;
+		$url   = $infinri->url('assets') . '/' . $path;
 
 		return F::exists($file, $root) === true ? $url : null;
 	}
@@ -64,7 +64,7 @@ class Url extends BaseUrl
 		string|null $path = null,
 		array|string|null $options = null
 	): string {
-		$kirby = App::instance();
-		return ($kirby->component('url'))($kirby, $path, $options);
+		$infinri = App::instance();
+		return ($infinri->component('url'))($infinri, $path, $options);
 	}
 }

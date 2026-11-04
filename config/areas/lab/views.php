@@ -109,14 +109,6 @@ return [
 				];
 			}
 
-			$buttons[] = [
-				'props' => [
-					'icon'   => 'github',
-					'link'   => $doc->source(),
-					'target' => '_blank'
-				]
-			];
-
 			return [
 				'component'  => 'k-lab-docs-view',
 				'title'      => $component,
@@ -164,12 +156,6 @@ return [
 				$doc = Doc::factory($doc);
 			}
 
-			$github = $doc?->source();
-
-			if ($source = $props['source'] ?? null) {
-				$github ??= 'https://github.com/getkirby/kirby/tree/main/' . $source;
-			}
-
 			// header buttons
 			$buttons = [];
 
@@ -179,16 +165,6 @@ return [
 						'text'   => $doc->name,
 						'icon'   => 'book',
 						'drawer' => 'lab/docs/' . $doc->name
-					]
-				];
-			}
-
-			if ($github) {
-				$buttons[] = [
-					'props' => [
-						'icon'   => 'github',
-						'link'   => $github,
-						'target' => '_blank'
 					]
 				];
 			}
@@ -210,7 +186,6 @@ return [
 					'docs'     => $doc?->name,
 					'examples' => $vue['examples'],
 					'file'     => $example->module(),
-					'github'   => $github,
 					'props'    => $props,
 					'styles'   => $vue['style'],
 					'tab'      => $example->tab(),

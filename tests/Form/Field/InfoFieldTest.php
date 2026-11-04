@@ -15,7 +15,7 @@ class InfoFieldTest extends TestCase
 		$this->assertNull($field->value());
 		$this->assertNull($field->label());
 		$this->assertNull($field->text());
-		$this->assertFalse($field->save());
+		$this->assertFalse($field->hasValue());
 	}
 
 	public function testText(): void

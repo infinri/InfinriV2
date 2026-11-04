@@ -2,12 +2,11 @@
 
 namespace Infinri\Cms;
 
-use Infinri\Exception\PermissionException;
 use Infinri\TestCase;
 
 class SystemRoutesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SystemRoutes';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SystemRoutes';
 
 	protected function assertUserWithAuthView(array $user): void
 	{
@@ -41,7 +40,7 @@ class SystemRoutesTest extends TestCase
 	protected function createUser(string $role = 'admin'): User
 	{
 		return $this->app->users()->create([
-			'email'    => 'test@getkirby.com',
+			'email'    => 'test@infinri.com',
 			'role'     => $role,
 			'password' => '12345678'
 		]);
@@ -123,9 +122,9 @@ class SystemRoutesTest extends TestCase
 		$this->assertArrayHasKey('ascii', $data);
 		$this->assertSame('en', $data['defaultLanguage']);
 		$this->assertFalse($data['isLocal']);
-		$this->assertTrue($data['kirbytext']);
+		$this->assertTrue($data['infinritext']);
 		$this->assertSame([], $data['languages']);
-		$this->assertArrayHasKey('license', $data);
+		$this->assertArrayNotHasKey('license', $data);
 		$this->assertArrayHasKey('locales', $data);
 		$this->assertFalse($data['multilang']);
 		$this->assertArrayHasKey('requirements', $data);
@@ -174,21 +173,36 @@ class SystemRoutesTest extends TestCase
 		$this->assertArrayNotHasKey('user', $data);
 	}
 
-	public function testRegisterWithoutSystemAccess(): void
+	public function testRegisterRouteDoesNotExist(): void
 	{
 		$this->createValidInstallation();
-		$user = $this->createUser('editor');
+		$user = $this->createUser();
 
 		$this->app->impersonate($user);
 
-		$this->expectException(PermissionException::class);
-		$this->expectExceptionMessage('No access');
+		$this->expectException(\Exception::class);
+		$this->expectExceptionCode(404);
+		$this->expectExceptionMessage('No route found for path: "system/register" and request method: "POST"');
 
 		$this->app->api()->call('system/register', 'POST', [
 			'body' => [
 				'license' => 'K-TEST-1234',
-				'email'   => 'test@getkirby.com'
+				'email'   => 'test@infinri.com'
 			]
 		]);
+	}
+
+	public function testLicenseModelIsNotRegistered(): void
+	{
+		$this->createValidInstallation();
+		$user = $this->createUser();
+
+		$this->app->impersonate($user);
+
+		$models = $this->app->api()->models();
+
+		// model names are stored lowercased
+		$this->assertArrayHasKey('system', $models);
+		$this->assertArrayNotHasKey('license', $models);
 	}
 }

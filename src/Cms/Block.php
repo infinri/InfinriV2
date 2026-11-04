@@ -43,21 +43,14 @@ class Block extends Item implements Stringable
 	{
 		parent::__construct($params);
 
-		// @deprecated import old builder format
-		// @todo block.converter remove eventually
-		// @codeCoverageIgnoreStart
-		$params = BlockConverter::builderBlock($params);
-		$params = BlockConverter::editorBlock($params);
-		// @codeCoverageIgnoreEnd
-
 		if (isset($params['type']) === false) {
 			throw new InvalidArgumentException(
 				message: 'The block type is missing'
 			);
 		}
 
-		// make sure the content is always defined as array to keep
-		// at least a bit of backward compatibility with older fields
+		// blocks may omit their content; make sure
+		// the content is always defined as array
 		if (is_array($params['content'] ?? null) === false) {
 			$params['content'] = [];
 		}
@@ -94,8 +87,6 @@ class Block extends Item implements Stringable
 		return [
 			'block'   => $this,
 			'content' => $this->content(),
-			// deprecated block data
-			'data'    => $this,
 			'id'      => $this->id(),
 			'prev'    => $this->prev(),
 			'next'    => $this->next()
@@ -196,14 +187,14 @@ class Block extends Item implements Stringable
 	public function toHtml(): string
 	{
 		try {
-			$kirby = $this->parent()->kirby();
-			return (string)$kirby->snippet(
+			$infinri = $this->parent()->infinri();
+			return (string)$infinri->snippet(
 				'blocks/' . $this->type(),
 				$this->controller(),
 				true
 			);
 		} catch (Throwable $e) {
-			if ($kirby->option('debug') === true) {
+			if ($infinri->option('debug') === true) {
 				throw $e;
 			}
 

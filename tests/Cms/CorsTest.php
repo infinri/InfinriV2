@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Cors::class)]
 class CorsTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Cors';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Cors';
 
 	protected function tearDown(): void
 	{
@@ -30,7 +30,7 @@ class CorsTest extends TestCase
 
 	public function testWildcardOrigin(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => true
 			]
@@ -49,7 +49,7 @@ class CorsTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Cannot allow credentials when using wildcard origin (*)');
 
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'      => '*',
@@ -63,7 +63,7 @@ class CorsTest extends TestCase
 
 	public function testSingleOriginMatch(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => 'https://example.com'
@@ -82,7 +82,7 @@ class CorsTest extends TestCase
 
 	public function testSingleOriginNoMatch(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => 'https://example.com'
@@ -100,7 +100,7 @@ class CorsTest extends TestCase
 
 	public function testMultipleOriginsMatch(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com', 'https://app2.com', 'https://staging.com']
@@ -119,7 +119,7 @@ class CorsTest extends TestCase
 
 	public function testMultipleOriginsNoMatch(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com', 'https://app2.com']
@@ -137,7 +137,7 @@ class CorsTest extends TestCase
 
 	public function testMultipleOriginsCaseInsensitive(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com', 'https://App2.COM']
@@ -156,7 +156,7 @@ class CorsTest extends TestCase
 
 	public function testOriginMatchingIgnoresReferer(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com']
@@ -174,7 +174,7 @@ class CorsTest extends TestCase
 
 	public function testOriginMatchingRejectsEmptyOrigin(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com']
@@ -192,7 +192,7 @@ class CorsTest extends TestCase
 
 	public function testOriginMatchingRequiresOriginHeader(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com']
@@ -207,7 +207,7 @@ class CorsTest extends TestCase
 
 	public function testPreflightDefaultAllowMethods(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => true
 			]
@@ -220,7 +220,7 @@ class CorsTest extends TestCase
 
 	public function testPreflightCustomAllowMethods(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'  => 'https://example.com',
@@ -239,7 +239,7 @@ class CorsTest extends TestCase
 
 	public function testPreflightReflectsRequestHeaders(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowHeaders' => true
@@ -258,7 +258,7 @@ class CorsTest extends TestCase
 
 	public function testPreflightDoesNotReflectRequestHeadersByDefault(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => true
 			],
@@ -275,7 +275,7 @@ class CorsTest extends TestCase
 
 	public function testPreflightCustomAllowHeaders(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'  => 'https://example.com',
@@ -295,7 +295,7 @@ class CorsTest extends TestCase
 
 	public function testPreflightMaxAgeNotSetByDefault(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => true
 			]
@@ -308,7 +308,7 @@ class CorsTest extends TestCase
 
 	public function testPreflightCustomMaxAge(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => 'https://example.com',
@@ -327,7 +327,7 @@ class CorsTest extends TestCase
 
 	public function testPreflightNotIncludedInNormalRequests(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowMethods' => 'GET, POST',
@@ -345,7 +345,7 @@ class CorsTest extends TestCase
 
 	public function testCredentials(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'      => 'https://example.com',
@@ -365,7 +365,7 @@ class CorsTest extends TestCase
 
 	public function testCredentialsWithMultipleOrigins(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'      => ['https://app1.com', 'https://app2.com'],
@@ -386,7 +386,7 @@ class CorsTest extends TestCase
 
 	public function testExposeHeaders(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'   => 'https://example.com',
@@ -405,7 +405,7 @@ class CorsTest extends TestCase
 
 	public function testArrayFormats(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'   => 'https://example.com',
@@ -428,7 +428,7 @@ class CorsTest extends TestCase
 
 	public function testEmptyValues(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'      => 'https://example.com',
@@ -450,7 +450,7 @@ class CorsTest extends TestCase
 
 	public function testCompleteConfiguration(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin'      => 'https://example.com',
@@ -478,7 +478,7 @@ class CorsTest extends TestCase
 
 	public function testHeadersWithInjection(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => true
 			]
@@ -492,7 +492,7 @@ class CorsTest extends TestCase
 
 	public function testHeadersWithCustomHeadersNotOverridden(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => 'https://example.com'
@@ -511,7 +511,7 @@ class CorsTest extends TestCase
 	{
 		$_COOKIE['foo'] = 'bar';
 
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => 'https://example.com'
@@ -532,7 +532,7 @@ class CorsTest extends TestCase
 
 	public function testHeadersWithVaryMerging(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com', 'https://app2.com']
@@ -554,7 +554,7 @@ class CorsTest extends TestCase
 
 	public function testHeadersWithExistingVaryNotOverridden(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => [
 					'allowOrigin' => ['https://app1.com']
@@ -575,7 +575,7 @@ class CorsTest extends TestCase
 
 	public function testEmptyArrayEquivalentToTrue(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
 				'cors' => []
 			]

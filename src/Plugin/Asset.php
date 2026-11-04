@@ -79,22 +79,6 @@ class Asset implements Stringable
 		F::link($this->root(), $this->mediaRoot(), 'symlink');
 	}
 
-	/**
-	 * @internal
-	 * @since 4.0.0
-	 * @deprecated 4.0.0
-	 * @codeCoverageIgnore
-	 */
-	#[BlockCollectionAccess]
-	public function publishAt(string $path): void
-	{
-		F::link(
-			$this->root(),
-			$this->plugin()->mediaRoot() . '/' . $path,
-			'symlink'
-		);
-	}
-
 	#[BlockCollectionAccess]
 	public function root(): string
 	{

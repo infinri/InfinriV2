@@ -114,12 +114,10 @@ export default {
 		},
 		/**
 		 * If `true`, the item will be selectable via a checkbox
-		 * @since 5.0.0
 		 */
 		selecting: Boolean,
 		/**
 		 * If `false`, the select checkbox will be disabled
-		 * @since 5.0.0
 		 */
 		selectable: Boolean,
 		/**
@@ -233,7 +231,7 @@ export default {
 /** List */
 .k-item[data-layout="list"] {
 	--item-height: var(
-		--field-input-height
+		--input-height
 	); /* TODO: change back to --height-md after input refactoring */
 	--item-button-height: var(--item-height);
 	--item-button-width: auto;

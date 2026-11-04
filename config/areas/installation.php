@@ -3,7 +3,7 @@
 use Infinri\Panel\Panel;
 use Infinri\Toolkit\I18n;
 
-return function ($kirby) {
+return function ($infinri) {
 	return [
 		'icon'  => 'settings',
 		'label' => I18n::translate('view.installation'),
@@ -11,8 +11,8 @@ return function ($kirby) {
 			'installation' => [
 				'pattern' => 'installation',
 				'auth'    => false,
-				'action'  => function () use ($kirby) {
-					$system = $kirby->system();
+				'action'  => function () use ($infinri) {
+					$system = $infinri->system();
 					return [
 						'component' => 'k-installation-view',
 						'props'     => [
@@ -20,7 +20,7 @@ return function ($kirby) {
 							'isInstalled'   => $system->isInstalled(),
 							'isOk'          => $system->isOk(),
 							'requirements'  => $system->status(),
-							'translations'  => $kirby->translations()->values(function ($translation) {
+							'translations'  => $infinri->translations()->values(function ($translation) {
 								return [
 									'text'  => $translation->name(),
 									'value' => $translation->code(),

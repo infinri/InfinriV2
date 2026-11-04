@@ -18,11 +18,11 @@ return [
 	'user.create' => [
 		'pattern' => 'users/create',
 		'load' => function () {
-			$kirby = App::instance();
-			$roles = $kirby->roles()->canBeCreated();
+			$infinri = App::instance();
+			$roles = $infinri->roles()->canBeCreated();
 
 			// get default value for role
-			if ($role = $kirby->request()->get('role')) {
+			if ($role = $infinri->request()->get('role')) {
 				$role = $roles->find($role)?->id();
 			}
 
@@ -54,21 +54,21 @@ return [
 						'name'        => '',
 						'email'       => '',
 						'password'    => '',
-						'translation' => $kirby->panelLanguage(),
+						'translation' => $infinri->panelLanguage(),
 						'role'        => $role ?: $roles['options'][0]['value'] ?? null
 					]
 				]
 			];
 		},
 		'submit' => function () {
-			$kirby = App::instance();
+			$infinri = App::instance();
 
-			$kirby->users()->create([
-				'name'     => $kirby->request()->get('name'),
-				'email'    => $kirby->request()->get('email'),
-				'password' => $kirby->request()->get('password'),
-				'language' => $kirby->request()->get('translation'),
-				'role'     => $kirby->request()->get('role')
+			$infinri->users()->create([
+				'name'     => $infinri->request()->get('name'),
+				'email'    => $infinri->request()->get('email'),
+				'password' => $infinri->request()->get('password'),
+				'language' => $infinri->request()->get('translation'),
+				'role'     => $infinri->request()->get('role')
 			]);
 
 			return [
@@ -177,12 +177,12 @@ return [
 	'user.changePassword' => [
 		'pattern' => 'users/(:any)/changePassword',
 		'load' => function (string $id) {
-			$kirby = App::instance();
+			$infinri = App::instance();
 			$user  = Find::user($id);
 
 			$fields = [
 				'currentPassword' => Field::password([
-					'label'        => I18n::translate('user.changePassword.' . ($kirby->user()->is($user) ? 'current' : 'own')),
+					'label'        => I18n::translate('user.changePassword.' . ($infinri->user()->is($user) ? 'current' : 'own')),
 					'autocomplete' => 'current-password',
 					'help'         => I18n::translate('account') . ': ' . App::instance()->user()->email(),
 				]),
@@ -215,8 +215,8 @@ return [
 			];
 		},
 		'submit' => function (string $id) {
-			$kirby                = App::instance();
-			$request              = $kirby->request();
+			$infinri                = App::instance();
+			$request              = $infinri->request();
 			$user                 = Find::user($id);
 			$currentPassword      = $request->get('currentPassword');
 			$password             = $request->get('password');
@@ -229,14 +229,14 @@ return [
 			// validate the current password of the acting user
 			try {
 				if ($canSkipConfirmation === false) {
-					$kirby->user()->validatePassword($currentPassword);
+					$infinri->user()->validatePassword($currentPassword);
 				}
 			} catch (Exception) {
 				// catching and re-throwing exception to avoid automatic
 				// sign-out of current user from the Panel
-				throw new InvalidArgumentException([
-					'key' => 'user.password.wrong'
-				]);
+				throw new InvalidArgumentException(
+					key: 'user.password.wrong'
+				);
 			}
 
 			// validate the new password

@@ -59,7 +59,7 @@ class UsersDialogsTest extends AreaTestCase
 	{
 		$this->submit([
 			'name'  => 'Peter',
-			'email' => 'test2@getkirby.com',
+			'email' => 'test2@infinri.com',
 			'role'  => 'admin'
 		]);
 
@@ -68,7 +68,7 @@ class UsersDialogsTest extends AreaTestCase
 		$this->assertSame('user.create', $dialog['event']);
 		$this->assertSame(200, $dialog['code']);
 
-		$user = $this->app->user('test2@getkirby.com');
+		$user = $this->app->user('test2@infinri.com');
 
 		$this->assertSame('Peter', $user->name()->value());
 		$this->assertSame('admin', $user->role()->name());
@@ -83,13 +83,13 @@ class UsersDialogsTest extends AreaTestCase
 
 		$this->assertSame('Email', $props['fields']['email']['label']);
 		$this->assertSame('Change', $props['submitButton']);
-		$this->assertSame('test@getkirby.com', $props['value']['email']);
+		$this->assertSame('test@infinri.com', $props['value']['email']);
 	}
 
 	public function testChangeEmailOnSubmit(): void
 	{
 		$this->submit([
-			'email' => 'test2@getkirby.com'
+			'email' => 'test2@infinri.com'
 		]);
 
 		$dialog = $this->dialog('users/test/changeEmail');
@@ -97,7 +97,7 @@ class UsersDialogsTest extends AreaTestCase
 		$this->assertSame('user.changeEmail', $dialog['event']);
 		$this->assertSame(200, $dialog['code']);
 
-		$this->assertSame('test2@getkirby.com', $this->app->user('test')->email());
+		$this->assertSame('test2@infinri.com', $this->app->user('test')->email());
 	}
 
 	public function testChangeLanguage(): void
@@ -291,7 +291,7 @@ class UsersDialogsTest extends AreaTestCase
 		// create a second user to be deleted
 		$this->app->users()->create([
 			'id'    => 'editor',
-			'email' => 'editor@getkirby.com',
+			'email' => 'editor@infinri.com',
 			'role'  => 'editor'
 		]);
 
@@ -299,7 +299,7 @@ class UsersDialogsTest extends AreaTestCase
 		$props  = $dialog['props'];
 
 		$this->assertRemoveDialog($dialog);
-		$this->assertSame('Do you really want to delete <br><strong>editor@getkirby.com</strong>?', $props['text']);
+		$this->assertSame('Do you really want to delete <br><strong>editor@infinri.com</strong>?', $props['text']);
 	}
 
 	public function testDeleteOnSubmit(): void
@@ -309,7 +309,7 @@ class UsersDialogsTest extends AreaTestCase
 		// create a second user to be deleted
 		$this->app->users()->create([
 			'id'    => 'editor',
-			'email' => 'editor@getkirby.com',
+			'email' => 'editor@infinri.com',
 			'role'  => 'editor'
 		]);
 
@@ -332,7 +332,7 @@ class UsersDialogsTest extends AreaTestCase
 		// create a second user to be deleted
 		$this->app->users()->create([
 			'id'    => 'editor',
-			'email' => 'editor@getkirby.com',
+			'email' => 'editor@infinri.com',
 			'role'  => 'editor'
 		]);
 
@@ -350,7 +350,7 @@ class UsersDialogsTest extends AreaTestCase
 		// create a second user to be deleted
 		$this->app->users()->create([
 			'id'    => 'editor',
-			'email' => 'editor@getkirby.com',
+			'email' => 'editor@infinri.com',
 			'role'  => 'admin'
 		]);
 

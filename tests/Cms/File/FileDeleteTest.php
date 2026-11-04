@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(File::class)]
 class FileDeleteTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileDelete';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileDelete';
 
 	protected function createDummyFile(): File
 	{
@@ -68,7 +68,7 @@ class FileDeleteTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$file = $this->createDummyFile();
 		$file->delete();
@@ -89,7 +89,7 @@ class FileDeleteTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$file        = $this->createDummyFile();
 		$uuid        = $file->uuid()->id();

@@ -6,7 +6,6 @@ trait HasUuids
 {
 	/**
 	 * Find a single element by global UUID
-	 * @since 3.8.0
 	 */
 	protected function findByUuid(
 		string $uuid,

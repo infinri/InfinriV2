@@ -36,7 +36,7 @@ export function camelToKebab(string: unknown): string {
  * @example
  * escapeHTML('<b>bold</b>') // "&lt;b&gt;bold&lt;&#x2F;b&gt;"
  *
- * Source: https://github.com/janl/mustache.js/blob/v4.2.0/mustache.js#L60-L75
+ * Source: mustache.js
  *
  * The MIT License
  *
@@ -89,12 +89,10 @@ export function hasEmoji(string: unknown): boolean {
  * Checks if a string is shaped like an email address.
  *
  * @example
- * isEmail("foo@getkirby.com") // true
- * isEmpty("foo@getkirby") // false
- * isEmpty("foo@getkirby.com?subject=bar", true) // false
- * isEmpty("foo@getkirby.com?subject=bar", false) // true
- *
- * @since 5.4.4
+ * isEmail("foo@infinri.com") // true
+ * isEmpty("foo@infinri") // false
+ * isEmpty("foo@infinri.com?subject=bar", true) // false
+ * isEmpty("foo@infinri.com?subject=bar", false) // true
  */
 export function isEmail(string: unknown, strict = false): boolean {
 	if (typeof string !== "string") {
@@ -115,8 +113,6 @@ export function isEmail(string: unknown, strict = false): boolean {
  * isEmpty("") // true
  * isEmpty("hello") // false
  * isEmpty(null) // true
- *
- * @since 4.0.0
  */
 export function isEmpty(string: unknown): boolean {
 	if (!string) {

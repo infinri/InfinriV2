@@ -63,14 +63,14 @@ return [
 		},
 		'toPages' => function ($value = null) {
 			$pages = [];
-			$kirby = App::instance();
+			$infinri = App::instance();
 
 			foreach (Data::decode($value, 'yaml') as $id) {
 				if (is_array($id) === true) {
 					$id =  $id['uuid'] ?? $id['id'] ?? null;
 				}
 
-				if ($id !== null && ($page = $kirby->page($id))) {
+				if ($id !== null && ($page = $infinri->page($id))) {
 					// never disclose a page the current user must not list,
 					// but keep its ID to not drop it from the value on save
 					$pages[] = match ($page->isListable()) {

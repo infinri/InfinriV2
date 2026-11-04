@@ -1,0 +1,252 @@
+<?php
+
+namespace Infinri\Text;
+
+use Infinri\Cms\App;
+use Infinri\Filesystem\Dir;
+use Infinri\TestCase;
+
+class VideoInfinriTagTest extends TestCase
+{
+	public const TMP = INFINRI_TMP_DIR . '/Text.VideoInfinriTag';
+
+	protected function setUp(): void
+	{
+		$this->app = new App([
+			'roots' => [
+				'index' => static::TMP
+			]
+		]);
+
+		Dir::make(static::TMP);
+	}
+
+	protected function tearDown(): void
+	{
+		Dir::remove(static::TMP);
+	}
+
+	public function testLocal(): void
+	{
+		$infinri = $this->app->clone([
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'test',
+						'content' => [
+							'text' => '(video: sample.mp4)'
+						],
+						'files' => [
+							['filename' => 'sample.mp4']
+						]
+					]
+				]
+			]
+		]);
+
+		$page  = $infinri->page('test');
+		$image = $page->file('sample.mp4');
+
+		$expected = '<figure class="video"><video controls><source src="' . $image->url() . '" type="video/mp4"></video></figure>';
+
+		$this->assertSame($expected, $page->text()->kt()->value());
+	}
+
+	public function testInlineAttrs(): void
+	{
+		$infinri = $this->app->clone([
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'test',
+						'content' => [
+							'text' => '(video: sample.mp4
+                                autoplay: true
+                                caption: Lorem ipsum
+                                controls: false
+                                class: video-class
+                                disablepictureinpicture: true
+                                height: 350
+                                loop: true
+                                muted: true
+                                playsinline: true
+                                poster: sample.jpg
+                                preload: auto
+                                style: border: none
+                                width: 500)'
+						],
+						'files' => [
+							['filename' => 'sample.mp4'],
+							['filename' => 'sample.jpg']
+						]
+					]
+				]
+			]
+		]);
+
+		$page  = $infinri->page('test');
+
+		$image = $page->file('sample.jpg');
+		$video = $page->file('sample.mp4');
+
+		$expected = '<figure class="video-class" style="border: none"><video autoplay disablepictureinpicture height="350" loop muted playsinline poster="' . $image->url() . '" preload="auto" width="500"><source src="' . $video->url() . '" type="video/mp4"></video><figcaption>Lorem ipsum</figcaption></figure>';
+		$this->assertSame($expected, $page->text()->kt()->value());
+	}
+
+	public function testPredefinedAttrs(): void
+	{
+		$infinri = $this->app->clone([
+			'options' => [
+				'infinritext' => [
+					'video' => [
+						'autoplay'    => true,
+						'caption'     => 'Lorem ipsum',
+						'controls'    => false,
+						'class'       => 'video-class',
+						'height'      => 350,
+						'loop'        => true,
+						'muted'       => true,
+						'playsinline' => true,
+						'poster'      => 'sample.jpg',
+						'preload'     => 'auto',
+						'style'       => 'border: none',
+						'width'       => 500
+					]
+				]
+			],
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'test',
+						'content' => [
+							'text' => '(video: sample.mp4)'
+						],
+						'files' => [
+							['filename' => 'sample.mp4'],
+							['filename' => 'sample.jpg']
+						]
+					]
+				]
+			]
+		]);
+
+		$page  = $infinri->page('test');
+
+		$image = $page->file('sample.jpg');
+		$video = $page->file('sample.mp4');
+
+		$expected = '<figure class="video-class" style="border: none"><video autoplay height="350" loop muted playsinline poster="' . $image->url() . '" preload="auto" width="500"><source src="' . $video->url() . '" type="video/mp4"></video><figcaption>Lorem ipsum</figcaption></figure>';
+		$this->assertSame($expected, $page->text()->kt()->value());
+	}
+
+	public function testAutoplayRelatedAttrs(): void
+	{
+		$infinri = new App([
+			'roots' => [
+				'index' => '/dev/null',
+			],
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'test',
+						'content' => [
+							'text' => '(video: sample.mp4 autoplay: true)'
+						],
+						'files' => [
+							['filename' => 'sample.mp4']
+						]
+					]
+				]
+			]
+		]);
+
+		$page  = $infinri->page('test');
+		$video = $page->file('sample.mp4');
+
+		$expected = '<figure class="video"><video autoplay controls muted playsinline><source src="' . $video->url() . '" type="video/mp4"></video></figure>';
+
+		$this->assertSame($expected, $page->text()->kt()->value());
+	}
+
+	public function testAutoplayAttrsOverride(): void
+	{
+		$infinri = new App([
+			'roots' => [
+				'index' => '/dev/null',
+			],
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'test',
+						'content' => [
+							'text' => '(video: sample.mp4 autoplay: true muted: false playsinline: false)'
+						],
+						'files' => [
+							['filename' => 'sample.mp4']
+						]
+					]
+				]
+			]
+		]);
+
+		$page  = $infinri->page('test');
+		$image = $page->file('sample.mp4');
+
+		$expected = '<figure class="video"><video autoplay controls><source src="' . $image->url() . '" type="video/mp4"></video></figure>';
+
+		$this->assertSame($expected, $page->text()->kt()->value());
+	}
+
+	public function testOptions(): void
+	{
+		$infinri = $this->app->clone([
+			'options' => [
+				'infinritext' => [
+					'video' => [
+						'options'  => [
+							'youtube' => [
+								'controls' => 0
+							]
+						]
+					]
+				]
+			],
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'test',
+						'content' => [
+							'text' => '(video: https://www.youtube.com/watch?v=VhP7ZzZysQg)'
+						]
+					]
+				]
+			]
+		]);
+
+		$page  = $infinri->page('test');
+
+		$expected = '<figure class="video"><iframe allow="fullscreen" allowfullscreen src="https://www.youtube.com/embed/VhP7ZzZysQg?controls=0"></iframe></figure>';
+		$this->assertSame($expected, $page->text()->kt()->value());
+	}
+
+	public function testRemote(): void
+	{
+		$infinri = $this->app->clone([
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'test',
+						'content' => [
+							'text' => '(video: https://infinri.com/sample.mp4)'
+						]
+					]
+				]
+			]
+		]);
+
+		$page  = $infinri->page('test');
+
+		$expected = '<figure class="video"><video controls><source src="https://infinri.com/sample.mp4" type="video/mp4"></video></figure>';
+		$this->assertSame($expected, $page->text()->kt()->value());
+	}
+}

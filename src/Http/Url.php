@@ -58,7 +58,6 @@ class Url
 	/**
 	 * Use Whoops to create an editor URL to open
 	 * a file at the given line number
-	 * @since 5.3.0
 	 */
 	public static function editor(string|false $editor, string|null $file, int $line = 0): string|null
 	{
@@ -106,7 +105,6 @@ class Url
 	 * Checks if a URL starts with a dangerous URI scheme
 	 * (e.g. javascript:) that must never appear in rendered href
 	 * or src attributes.
-	 * @since 5.4.1
 	 */
 	public static function hasDangerousScheme(string|null $url = null): bool
 	{
@@ -183,7 +181,6 @@ class Url
 	 * trimmed and a leading run of slashes is folded to forward slashes
 	 *
 	 * @see https://url.spec.whatwg.org/#url-parsing
-	 * @since 5.6.0
 	 */
 	public static function normalize(string $url): string
 	{
@@ -277,34 +274,6 @@ class Url
 	public static function stripFragment(string|null $url = null): string
 	{
 		return static::toObject($url)->setFragment(null)->toString();
-	}
-
-	/**
-	 * Smart resolver for internal and external urls
-	 * @deprecated 5.3.0 Use `Infinri\Cms\Url::to()` instead
-	 */
-	public static function to(
-		string|null $path = null,
-		array|null $options = null
-	): string {
-		// make sure $path is string
-		$path ??= '';
-
-		// keep relative urls
-		if (
-			str_starts_with($path, './') === true ||
-			str_starts_with($path, '../') === true
-		) {
-			return $path;
-		}
-
-		$url = static::makeAbsolute($path);
-
-		if ($options === null) {
-			return $url;
-		}
-
-		return (new Uri($url, $options))->toString();
 	}
 
 	/**

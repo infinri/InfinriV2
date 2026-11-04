@@ -17,9 +17,6 @@
 							<k-text>
 								<code>{{ prop.name }}</code>
 								<abbr v-if="prop.required" class="k-lab-docs-required">✶</abbr>
-								<div v-if="prop.since?.length" class="k-lab-docs-since">
-									since {{ prop.since }}
-								</div>
 							</k-text>
 						</td>
 						<td>
@@ -31,8 +28,6 @@
 							</k-text>
 						</td>
 						<td class="k-lab-docs-description">
-							<k-lab-docs-warning title="Deprecated" :text="prop.deprecated" />
-
 							<k-text
 								v-if="prop.description?.length"
 								:html="prop.description"

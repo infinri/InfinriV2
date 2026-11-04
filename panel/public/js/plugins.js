@@ -54,8 +54,8 @@ import Vue, {
 // Assign Vue to the global window object
 window.Vue = Vue;
 
-// Keep named exports on the Vue constructor (like UMD build in Kirby 4)
-// TODO: Remove this when Panel plugins are loaded as ES modules (Kirby 6)
+// Keep named exports on the Vue constructor (like the UMD build)
+// TODO: Remove this when Panel plugins are loaded as ES modules
 Object.assign(Vue, {
 	computed,
 	customRef,

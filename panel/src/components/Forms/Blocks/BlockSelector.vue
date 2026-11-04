@@ -35,7 +35,7 @@
 		<!-- eslint-disable vue/no-v-html -->
 		<p
 			class="k-clipboard-hint"
-			v-html="$t('field.blocks.fieldsets.paste', { shortcut })"
+			v-html="$panel.t('field.blocks.fieldsets.paste', { shortcut })"
 		/>
 		<!-- eslint-enable -->
 	</k-dialog>
@@ -80,7 +80,7 @@ export default {
 
 			const fieldsetGroups = this.fieldsetGroups ?? {
 				blocks: {
-					label: this.$t("field.blocks.fieldsets.label"),
+					label: this.$panel.t("field.blocks.fieldsets.label"),
 					sets: Object.keys(this.fieldsets)
 				}
 			};
@@ -114,10 +114,10 @@ export default {
 		}
 	},
 	mounted() {
-		this.$events.on("paste", this.paste);
+		this.$panel.events.on("paste", this.paste);
 	},
 	destroyed() {
-		this.$events.off("paste", this.paste);
+		this.$panel.events.off("paste", this.paste);
 	},
 	methods: {
 		paste(e) {
@@ -171,7 +171,7 @@ export default {
 }
 .k-clipboard-hint {
 	padding-top: 1.5rem;
-	line-height: var(--leading-normal);
+	line-height: 1.5;
 	font-size: var(--text-xs);
 	color: var(--color-text-dimmed);
 }

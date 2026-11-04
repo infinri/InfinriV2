@@ -15,7 +15,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Version::class)]
 class VersionTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Content.Version';
+	public const TMP = INFINRI_TMP_DIR . '/Content.Version';
 
 	public function testContentMultiLanguage(): void
 	{
@@ -938,7 +938,7 @@ class VersionTest extends TestCase
 	public function testPublish(): void
 	{
 		$this->setUpSingleLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$version = new Version(
 			model: $this->model,
@@ -983,7 +983,7 @@ class VersionTest extends TestCase
 	public function testPublishEmptyChanges(): void
 	{
 		$this->setUpSingleLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$version = new Version(
 			model: $this->model,
@@ -1014,7 +1014,7 @@ class VersionTest extends TestCase
 	{
 		$this->setUpSingleLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$latest = $this->model->version('latest');
 
@@ -1485,7 +1485,7 @@ class VersionTest extends TestCase
 	{
 		$this->setUpSingleLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$version = new Version(
 			model: $this->model,
@@ -1495,7 +1495,7 @@ class VersionTest extends TestCase
 		$file = $this->contentFile(versionId: VersionId::changes());
 		Data::write($file, [
 			'title' => 'Test',
-			'lock'  => 'kirby'
+			'lock'  => 'infinri'
 		]);
 
 		$version->unlock();
@@ -1507,7 +1507,7 @@ class VersionTest extends TestCase
 	{
 		$this->setUpSingleLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$version = new Version(
 			model: $this->model,
@@ -1666,7 +1666,7 @@ class VersionTest extends TestCase
 		$this->setUpSingleLanguage();
 
 		// authenticate
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$version = new Version(
 			model: $this->model,
@@ -1746,7 +1746,7 @@ class VersionTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -1760,7 +1760,7 @@ class VersionTest extends TestCase
 
 		// authenticate
 		if ($authenticated === true) {
-			$app->impersonate('test@getkirby.com');
+			$app->impersonate('test@infinri.com');
 		}
 
 		$options = [];
@@ -1785,7 +1785,7 @@ class VersionTest extends TestCase
 				hash_hmac(
 					'sha1',
 					'{"url":"' . $expectedUrl . '","versionId":"' . $versionId . '"}',
-					$page->kirby()->root('content')
+					$page->infinri()->root('content')
 				),
 				0,
 				10
@@ -1810,7 +1810,7 @@ class VersionTest extends TestCase
 		$this->setUpSingleLanguage();
 
 		// authenticate
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$version = new Version(
 			model: $this->app->site(),
@@ -1873,7 +1873,7 @@ class VersionTest extends TestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -1893,7 +1893,7 @@ class VersionTest extends TestCase
 
 		// authenticate
 		if ($authenticated === true) {
-			$app->impersonate('test@getkirby.com');
+			$app->impersonate('test@infinri.com');
 		}
 
 		$site = $app->site();
@@ -1903,7 +1903,7 @@ class VersionTest extends TestCase
 				hash_hmac(
 					'sha1',
 					'{"url":"' . $expectedUrl . '","versionId":"' . $versionId . '"}',
-					$site->kirby()->root('content')
+					$site->infinri()->root('content')
 				),
 				0,
 				10

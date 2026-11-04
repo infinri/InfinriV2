@@ -30,7 +30,7 @@ class Category
 
 	public static function all(): array
 	{
-		// all core lab examples from `kirby/panel/lab`
+		// all core lab examples from `infinri/panel/lab`
 		$examples = A::map(
 			Inventory::for(static::base())['children'],
 			fn ($props) => (new static($props['dirname']))->toArray()

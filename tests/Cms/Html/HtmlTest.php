@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class HtmlTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.Html';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.Html';
 
 	protected function setUp(): void
 	{
@@ -21,7 +21,7 @@ class HtmlTest extends TestCase
 				'index' => static::TMP
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			]
 		]);
 	}
@@ -29,7 +29,7 @@ class HtmlTest extends TestCase
 	public function testCss(): void
 	{
 		$result   = Html::css('assets/css/index.css');
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" rel="stylesheet">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -37,7 +37,7 @@ class HtmlTest extends TestCase
 	public function testCssWithMediaOption(): void
 	{
 		$result   = Html::css('assets/css/index.css', 'print');
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" media="print" rel="stylesheet">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" media="print" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -45,7 +45,7 @@ class HtmlTest extends TestCase
 	public function testCssWithAttrs(): void
 	{
 		$result   = Html::css('assets/css/index.css', ['integrity' => 'nope']);
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" integrity="nope" rel="stylesheet">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" integrity="nope" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -53,7 +53,7 @@ class HtmlTest extends TestCase
 	public function testCssWithValidRelAttr(): void
 	{
 		$result   = Html::css('assets/css/index.css', ['rel' => 'alternate stylesheet', 'title' => 'High contrast']);
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" rel="alternate stylesheet" title="High contrast">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" rel="alternate stylesheet" title="High contrast">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -61,7 +61,7 @@ class HtmlTest extends TestCase
 	public function testCssWithInvalidRelAttr(): void
 	{
 		$result   = Html::css('assets/css/index.css', ['rel' => 'alternate', 'title' => 'High contrast']);
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" rel="stylesheet" title="High contrast">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" rel="stylesheet" title="High contrast">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -69,7 +69,7 @@ class HtmlTest extends TestCase
 	public function testCssWithRelAttrButNoTitle(): void
 	{
 		$result   = Html::css('assets/css/index.css', ['rel' => 'alternate stylesheet']);
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" rel="stylesheet">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -81,21 +81,22 @@ class HtmlTest extends TestCase
 			'assets/css/b.css'
 		]);
 
-		$expected  = '<link href="https://getkirby.com/assets/css/a.css" rel="stylesheet">' . PHP_EOL;
-		$expected .= '<link href="https://getkirby.com/assets/css/b.css" rel="stylesheet">';
+		$expected  = '<link href="https://infinri.com/assets/css/a.css" rel="stylesheet">' . PHP_EOL;
+		$expected .= '<link href="https://infinri.com/assets/css/b.css" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
 
 	public function testCssWithPluginAssets(): void
 	{
-		$plugin = new Plugin('getkirby/test-plugin', [
-			'root' => $root = static::TMP . '/plugin'
-		]);
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			root: $root = static::TMP . '/plugin'
+		);
 		touch($root . '/assets/styles.css', 1337000000);
 		$result = Html::css($plugin);
 
-		$expected  = '<link href="https://getkirby.com/media/plugins/getkirby/test-plugin/2375797551-1337000000/styles.css" rel="stylesheet">';
+		$expected  = '<link href="https://infinri.com/media/plugins/infinri/test-plugin/2375797551-1337000000/styles.css" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -103,7 +104,7 @@ class HtmlTest extends TestCase
 	public function testJs(): void
 	{
 		$result   = Html::js('assets/js/index.js');
-		$expected = '<script src="https://getkirby.com/assets/js/index.js"></script>';
+		$expected = '<script src="https://infinri.com/assets/js/index.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}
@@ -111,7 +112,7 @@ class HtmlTest extends TestCase
 	public function testJsWithAsyncOption(): void
 	{
 		$result   = Html::js('assets/js/index.js', true);
-		$expected = '<script async src="https://getkirby.com/assets/js/index.js"></script>';
+		$expected = '<script async src="https://infinri.com/assets/js/index.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}
@@ -119,7 +120,7 @@ class HtmlTest extends TestCase
 	public function testJsWithAttrs(): void
 	{
 		$result   = Html::js('assets/js/index.js', ['integrity' => 'nope']);
-		$expected = '<script integrity="nope" src="https://getkirby.com/assets/js/index.js"></script>';
+		$expected = '<script integrity="nope" src="https://infinri.com/assets/js/index.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}
@@ -131,21 +132,22 @@ class HtmlTest extends TestCase
 			'assets/js/b.js'
 		]);
 
-		$expected  = '<script src="https://getkirby.com/assets/js/a.js"></script>' . PHP_EOL;
-		$expected .= '<script src="https://getkirby.com/assets/js/b.js"></script>';
+		$expected  = '<script src="https://infinri.com/assets/js/a.js"></script>' . PHP_EOL;
+		$expected .= '<script src="https://infinri.com/assets/js/b.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}
 
 	public function testJsWithPluginAssets(): void
 	{
-		$plugin = new Plugin('getkirby/test-plugin', [
-			'root' => $root = static::TMP . '/plugin'
-		]);
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			root: $root = static::TMP . '/plugin'
+		);
 		touch($root . '/assets/scripts.js', 1337000000);
 		$result = Html::js($plugin);
 
-		$expected  = '<script src="https://getkirby.com/media/plugins/getkirby/test-plugin/1903622314-1337000000/scripts.js"></script>';
+		$expected  = '<script src="https://infinri.com/media/plugins/infinri/test-plugin/1903622314-1337000000/scripts.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}

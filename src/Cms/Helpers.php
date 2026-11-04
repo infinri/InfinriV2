@@ -9,84 +9,15 @@ use Infinri\Toolkit\Str;
 class Helpers
 {
 	/**
-	 * Allows to disable specific deprecation warnings
-	 * by setting them to `false`.
-	 * You can do this by putting the following code in
-	 * `site/config/config.php`:
-	 *
-	 * ```php
-	 * Helpers::$deprecations['<deprecation-key>'] = false;
-	 * ```
-	 */
-	public static array $deprecations = [
-		// The internal `$model->contentFile*()` methods have been deprecated
-		'model-content-file' => true,
-
-		// Passing `$category = null` to `Permissions::for()` is not supported
-		'permissions-for-category-null' => true,
-
-		// Setting undefined permission categories or actions is deprecated
-		// and will be ignored in a future version. Custom permissions should
-		// be registered via the `permissions` extension instead.
-		// The warning is disabled by default for now, as it is triggered
-		// while loading roles and would thus break the Panel on every request
-		// even though the permission is still applied.
-		// TODO: switch to true in v6
-		'permissions-undefined' => false,
-
-		// Passing an `info` array inside the `extends` array
-		// has been deprecated. Pass the individual entries (e.g. root, version)
-		// directly as named arguments.
-		// TODO: switch to true in v6
-		'plugin-extends-root' => false,
-
-		// The `Content\Translation` class keeps a set of methods from the old
-		// `ContentTranslation` class for compatibility that should no longer be used.
-		// Some of them can be replaced by using `Version` class methods instead
-		// (see method comments). `Content\Translation::contentFile` should be avoided
-		//  entirely and has no recommended replacement.
-		'translation-methods' => true
-	];
-
-	/**
-	 * Triggers a deprecation warning if debug mode is active
-	 * and warning has not been suppressed via `Helpers::$deprecations`
-	 *
-	 * @param string|null $key If given, the key will be checked against the static array
-	 * @return bool Whether the warning was triggered
-	 */
-	public static function deprecated(
-		string $message,
-		string|null $key = null
-	): bool {
-		// only trigger warning in debug mode or when running PHPUnit tests
-		// @codeCoverageIgnoreStart
-		if (
-			App::instance()->option('debug') !== true &&
-			(defined('KIRBY_TESTING') !== true || KIRBY_TESTING !== true)
-		) {
-			return false;
-		}
-		// @codeCoverageIgnoreEnd
-
-		// don't trigger the warning if disabled by default or by the dev
-		if ($key !== null && (static::$deprecations[$key] ?? true) === false) {
-			return false;
-		}
-
-		return trigger_error($message, E_USER_DEPRECATED) === true;
-	}
-
-	/**
 	 * Simple object and variable dumper
 	 * to help with debugging.
 	 */
 	public static function dump(mixed $variable, bool $echo = true): string
 	{
-		$kirby  = App::instance();
+		$infinri  = App::instance();
 		$output = print_r($variable, true);
 
-		if ($kirby->environment()->cli() === true) {
+		if ($infinri->environment()->cli() === true) {
 			$output .= PHP_EOL;
 		} else {
 			$output = Str::wrap($output, '<pre>', '</pre>');
@@ -102,7 +33,6 @@ class Helpers
 	/**
 	 * Performs an action with custom handling
 	 * for all PHP errors and warnings
-	 * @since 3.7.4
 	 *
 	 * @param \Closure $action Any action that may cause an error or warning
 	 * @param \Closure $condition Closure that returns bool to determine if to
@@ -179,13 +109,13 @@ class Helpers
 
 	/**
 	 * Checks if a helper was overridden by the user
-	 * by setting the `KIRBY_HELPER_*` constant
+	 * by setting the `INFINRI_HELPER_*` constant
 	 *
 	 * @param string $name Name of the helper
 	 */
 	public static function hasOverride(string $name): bool
 	{
-		$name = 'KIRBY_HELPER_' . strtoupper($name);
+		$name = 'INFINRI_HELPER_' . strtoupper($name);
 		return defined($name) === true && constant($name) === false;
 	}
 

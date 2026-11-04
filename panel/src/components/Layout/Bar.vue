@@ -2,7 +2,6 @@
 	<div :data-align="align" class="k-bar">
 		<!--
 			@slot Contents of the bar
-			@since 4.0.0
 		-->
 		<slot />
 	</div>

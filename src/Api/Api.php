@@ -149,7 +149,7 @@ class Api
 				$language = $user->language();
 
 				// get the locale from the translation
-				$locale = $user->kirby()->translation($language)->locale();
+				$locale = $user->infinri()->translation($language)->locale();
 
 				// provide some variants as fallbacks to be
 				// compatible with as many systems as possible
@@ -403,7 +403,7 @@ class Api
 	}
 
 	/**
-	 * Turns a Kirby object into an
+	 * Turns an Infinri object into an
 	 * API model or collection representation
 	 *
 	 * @throws \Infinri\Exception\NotFoundException If `$object` cannot be resolved
@@ -521,13 +521,13 @@ class Api
 
 	/**
 	 * Creates the response array for
-	 * an exception. Kirby exceptions will
+	 * an exception. Infinri exceptions will
 	 * have more information
 	 */
 	public function responseForException(Throwable $e): array
 	{
-		if (isset($this->kirby) === true) {
-			$docRoot = $this->kirby->environment()->get('DOCUMENT_ROOT');
+		if (isset($this->infinri) === true) {
+			$docRoot = $this->infinri->environment()->get('DOCUMENT_ROOT');
 		} else {
 			$docRoot = $_SERVER['DOCUMENT_ROOT'] ?? null;
 		}
@@ -535,7 +535,7 @@ class Api
 		// determine which message to expose to avoid leaking
 		// internal details (e.g. file paths) from PHP errors
 		if ($e instanceof ExceptionException) {
-			// Kirby exceptions carry safe, intentional messages
+			// Infinri exceptions carry safe, intentional messages
 			// that can be returned as-is whether debugging or not
 			$message = $e->getMessage();
 
@@ -544,8 +544,8 @@ class Api
 			// but disguise absolute file paths in it
 			$message = $e->getMessage();
 
-			if (isset($this->kirby) === true) {
-				$message = $this->kirby->disguiseFilePath($message);
+			if (isset($this->infinri) === true) {
+				$message = $this->infinri->disguiseFilePath($message);
 			}
 
 		} else {
@@ -567,7 +567,7 @@ class Api
 			'route'     => $this->route?->pattern()
 		];
 
-		// extend the information for Kirby Exceptions
+		// extend the information for Infinri Exceptions
 		if ($e instanceof ExceptionException) {
 			$result['key']     = $e->getKey();
 			$result['details'] = $e->getDetails();

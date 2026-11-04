@@ -7,7 +7,7 @@ use Infinri\Data\Data;
 class RolesTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.Roles';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.Roles';
 
 	public function testFactory(): void
 	{
@@ -126,11 +126,11 @@ class RolesTest extends TestCase
 		$app = new App([
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -150,11 +150,11 @@ class RolesTest extends TestCase
 		$this->assertInstanceOf(Roles::class, $roles);
 		$this->assertCount(2, $roles);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$canBeChanged = $roles->canBeChanged();
 		$this->assertCount(1, $canBeChanged);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$canBeChanged = $roles->canBeChanged();
 		$this->assertCount(2, $canBeChanged);
 	}
@@ -167,11 +167,11 @@ class RolesTest extends TestCase
 			'roots' => ['index' => '/dev/null'],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
@@ -189,12 +189,12 @@ class RolesTest extends TestCase
 		$roles = $app->roles();
 
 		// editor cannot see the inaccessible role
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$canBeChanged = $roles->canBeChanged();
 		$this->assertNull($canBeChanged->find('restricted-' . $uuid));
 
 		// admin bypasses the accessibility filter and sees all roles
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$canBeChanged = $roles->canBeChanged();
 		$this->assertNotNull($canBeChanged->find('restricted-' . $uuid));
 	}
@@ -204,11 +204,11 @@ class RolesTest extends TestCase
 		$app = new App([
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -228,11 +228,11 @@ class RolesTest extends TestCase
 		$this->assertInstanceOf(Roles::class, $roles);
 		$this->assertCount(2, $roles);
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$canBeCreated = $roles->canBeCreated();
 		$this->assertCount(1, $canBeCreated);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$canBeCreated = $roles->canBeCreated();
 		$this->assertCount(2, $canBeCreated);
 	}
@@ -245,11 +245,11 @@ class RolesTest extends TestCase
 			'roots' => ['index' => '/dev/null'],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
@@ -267,12 +267,12 @@ class RolesTest extends TestCase
 		$roles = $app->roles();
 
 		// editor cannot see the inaccessible role
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$canBeCreated = $roles->canBeCreated();
 		$this->assertNull($canBeCreated->find('restricted-' . $uuid));
 
 		// admin bypasses the accessibility filter and sees all roles
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 		$canBeCreated = $roles->canBeCreated();
 		$this->assertNotNull($canBeCreated->find('restricted-' . $uuid));
 	}

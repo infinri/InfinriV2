@@ -11,7 +11,7 @@
 				label="Pages"
 				value="123"
 				info="Last week"
-				link="https://getkirby.com"
+				link="https://infinri.com"
 			/>
 		</k-lab-example>
 	</k-lab-examples>

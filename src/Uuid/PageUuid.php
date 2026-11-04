@@ -97,21 +97,13 @@ class PageUuid extends ModelUuid
 			$this->populate();
 		}
 
-		$kirby = App::instance();
-		$url   = $kirby->url();
+		$infinri = App::instance();
+		$url   = $infinri->url();
 
-		if ($language = $kirby->language('current')) {
+		if ($language = $infinri->language('current')) {
 			$url = $language->url();
 		}
 
 		return $url . '/@/' . static::TYPE . '/' . $this->id();
-	}
-
-	/**
-	 * @deprecated 5.1.0 Use `::toPermalink()` instead
-	 */
-	public function url(): string
-	{
-		return $this->toPermalink();
 	}
 }

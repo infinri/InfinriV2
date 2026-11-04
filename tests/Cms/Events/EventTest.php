@@ -219,7 +219,7 @@ class EventTest extends TestCase
 		$this->assertSame('Arg1', $event->argument('arg1'));
 	}
 
-	public function testUpdateArgumentWithNextModel(): void
+	public function testUpdateArgumentWithImmutableModelIsNotReplaced(): void
 	{
 		$mutablePage = new Page(['slug' => 'test']);
 
@@ -227,21 +227,19 @@ class EventTest extends TestCase
 		// to simulate the result of a mutating model action
 		$immutablePage = $mutablePage->clone();
 		$immutablePage->changeStorage(new ImmutableMemoryStorage(
-			model: $immutablePage,
-			nextModel: $mutablePage
+			model: $immutablePage
 		));
 
 		$event = new Event('page.create:after', ['page' => $immutablePage]);
 
-		// to support legacy model modification, the updateArgument method
-		// will replace the immutable model with the next model, referenced
-		// in the storage class
+		// an apply hook without a return value leaves the argument unchanged
 		$event->updateArgument('page', null);
 
-		$this->assertSame($mutablePage, $event->argument('page'));
+		$this->assertSame($immutablePage, $event->argument('page'));
+		$this->assertNotSame($mutablePage, $event->argument('page'));
 	}
 
-	public function testUpdateArgumentWithNextModelChain(): void
+	public function testUpdateArgumentWithChainedImmutableModelsIsNotReplaced(): void
 	{
 		$mutablePage = new Page(['slug' => 'test']);
 
@@ -249,19 +247,17 @@ class EventTest extends TestCase
 		// without the hook returning the result
 		$secondPage = $mutablePage->clone();
 		$secondPage->changeStorage(new ImmutableMemoryStorage(
-			model: $secondPage,
-			nextModel: $mutablePage
+			model: $secondPage
 		));
 
-		$firstPage = $mutablePage->clone();
+		$firstPage = $secondPage->clone();
 		$firstPage->changeStorage(new ImmutableMemoryStorage(
-			model: $firstPage,
-			nextModel: $secondPage
+			model: $firstPage
 		));
 
 		$event = new Event('page.create:after', ['page' => $firstPage]);
 		$event->updateArgument('page', null);
 
-		$this->assertSame($mutablePage, $event->argument('page'));
+		$this->assertSame($firstPage, $event->argument('page'));
 	}
 }

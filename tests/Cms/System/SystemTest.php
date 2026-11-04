@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class SystemTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/SystemTest';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.System';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.System';
 
 	protected static string $updateStatusHost;
 	protected string|null $subTmp = null;
@@ -52,9 +52,9 @@ class SystemTest extends TestCase
 	public static function providerForIndexUrls(): array
 	{
 		return [
-			['http://getkirby.com', 'getkirby.com'],
-			['https://getkirby.com', 'getkirby.com'],
-			['https://getkirby.com/test', 'getkirby.com/test'],
+			['http://infinri.com', 'infinri.com'],
+			['https://infinri.com', 'infinri.com'],
+			['https://infinri.com/test', 'infinri.com/test'],
 			['/', '/'],
 			['/test', '/test']
 		];
@@ -189,24 +189,24 @@ class SystemTest extends TestCase
 		$this->assertNull($system->exposedFileUrl('media'));
 	}
 
-	public function testFolderUrlForKirbyFolder(): void
+	public function testFolderUrlForInfinriFolder(): void
 	{
 		$system = new System($this->app->clone([
 			'roots' => [
-				'kirby' => static::TMP . '/kirby',
+				'infinri' => static::TMP . '/infinri',
 				'index' => static::TMP
 			]
 		]));
 
-		Dir::remove(static::TMP . '/kirby');
+		Dir::remove(static::TMP . '/infinri');
 
-		$this->assertNull($system->folderUrl('kirby'));
-		$this->assertNull($system->exposedFileUrl('kirby'));
+		$this->assertNull($system->folderUrl('infinri'));
+		$this->assertNull($system->exposedFileUrl('infinri'));
 
-		Dir::make(static::TMP . '/kirby');
+		Dir::make(static::TMP . '/infinri');
 
-		$this->assertSame('/kirby', $system->folderUrl('kirby'));
-		$this->assertSame('/kirby/LICENSE.md', $system->exposedFileUrl('kirby'));
+		$this->assertSame('/infinri', $system->folderUrl('infinri'));
+		$this->assertSame('/infinri/LICENSE.md', $system->exposedFileUrl('infinri'));
 	}
 
 	public function testFolderUrlForSiteFolder(): void
@@ -419,7 +419,7 @@ class SystemTest extends TestCase
 		$this->assertFalse($system->isInstalled());
 
 		$this->app->users()->create([
-			'email'    => 'test@getkirby.com',
+			'email'    => 'test@infinri.com',
 			'password' => 'test123456'
 		]);
 
@@ -477,45 +477,26 @@ class SystemTest extends TestCase
 		$this->assertFalse($system->isOk());
 	}
 
-	public function testLicense(): void
+	public function testLicenseApiIsRemoved(): void
 	{
-		$system = new System($this->app);
-		$this->assertInstanceOf(License::class, $system->license());
+		$this->assertFalse(method_exists(System::class, 'license'));
+		$this->assertFalse(method_exists(System::class, 'register'));
+		$this->assertFalse(property_exists(System::class, 'license'));
 	}
 
-	public function testLicenseTriggersReissue(): void
+	public function testLicenseClassesAreRemoved(): void
 	{
-		$root = static::TMP . '/license/.license';
+		$this->assertFalse(class_exists(__NAMESPACE__ . '\\License'));
+		$this->assertFalse(class_exists(__NAMESPACE__ . '\\LicenseType'));
+		$this->assertFalse(class_exists(__NAMESPACE__ . '\\LicenseStatus'));
+	}
 
-		Dir::make(dirname($root));
-		F::write($root, json_encode([
-			'code'    => LicenseType::Free->prefix(),
-			'domain'  => 'sandbox.test',
-			'expires' => '2000-01-01 00:00:00',
-		]));
+	public function testInfoKeys(): void
+	{
+		$info = (new System($this->app))->info();
 
-		$app = $this->app->clone([
-			'options' => [
-				'url' => 'https://sandbox.test',
-			],
-			'server' => [
-				'REMOTE_ADDR' => '127.0.0.1',
-			],
-			'roots' => [
-				'index'   => static::TMP,
-				'license' => $root
-			]
-		]);
-
-		$this->subTmp = dirname($root);
-
-		// the stored license is expired before it is loaded
-		$this->assertTrue(License::read()->isExpired());
-
-		// loading it triggers the reissue (here a free + local
-		// self-sign), so it is no longer expired afterwards
-		$license = (new System($app))->license();
-		$this->assertFalse($license->isExpired());
+		$this->assertSame(['infinri', 'php', 'server', 'languages'], array_keys($info));
+		$this->assertArrayNotHasKey('license', $info);
 	}
 
 	public function testLoginMethods(): void
@@ -718,7 +699,7 @@ class SystemTest extends TestCase
 		$app = $this->app->clone([
 			'options' => [
 				'updates' => [
-					'kirby' => false
+					'infinri' => false
 				]
 			]
 		]);
@@ -748,7 +729,7 @@ class SystemTest extends TestCase
 		$app = $this->app->clone([
 			'options' => [
 				'updates' => [
-					'kirby' => 'security'
+					'infinri' => 'security'
 				]
 			]
 		]);

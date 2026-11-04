@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(PageCopy::class)]
 class PageCopyTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageCopy';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageCopy';
 
 	public function testConvertUuids(): void
 	{
@@ -205,7 +205,7 @@ class PageCopyTest extends ModelTestCase
 	public function testLanguagesInMultiLanguageMode(): void
 	{
 		$this->setupMultiLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -259,7 +259,7 @@ class PageCopyTest extends ModelTestCase
 
 	public function testProcessKeepsUuidOfOriginal(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		F::write($source = static::TMP . '/source.md', '');
 

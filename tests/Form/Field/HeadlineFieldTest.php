@@ -12,6 +12,6 @@ class HeadlineFieldTest extends TestCase
 		$this->assertSame('headline', $field->name());
 		$this->assertNull($field->value());
 		$this->assertNull($field->label());
-		$this->assertFalse($field->save());
+		$this->assertFalse($field->hasValue());
 	}
 }

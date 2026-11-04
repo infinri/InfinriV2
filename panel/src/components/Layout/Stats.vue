@@ -2,7 +2,7 @@
 	<dl v-if="reports.length > 0" class="k-stats" :data-size="size">
 		<k-stat v-for="(report, id) in reports" :key="id" v-bind="report" />
 	</dl>
-	<k-empty v-else icon="chart">{{ $t("stats.empty") }}</k-empty>
+	<k-empty v-else icon="chart">{{ $panel.t("stats.empty") }}</k-empty>
 </template>
 
 <script>
@@ -41,7 +41,7 @@ export default {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
 	grid-auto-rows: 1fr;
-	grid-gap: var(--spacing-2px);
+	grid-gap: 2px;
 }
 
 .k-stats[data-size="small"] {

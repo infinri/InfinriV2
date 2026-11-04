@@ -8,7 +8,7 @@ use Infinri\TestCase;
 
 class LanguageRouterTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.LanguageRouter';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.LanguageRouter';
 
 	protected function setUp(): void
 	{

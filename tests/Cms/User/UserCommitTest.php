@@ -9,7 +9,7 @@ use ReflectionClass;
 #[CoversClass(User::class)]
 class UserCommitTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserCommit';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserCommit';
 
 	public function testCommit(): void
 	{
@@ -54,7 +54,7 @@ class UserCommitTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$user   = new User(['name' => 'original']);
 		$class  = new ReflectionClass($user);
@@ -74,12 +74,12 @@ class UserCommitTest extends ModelTestCase
 		$this->assertSame('d', $result->name()->value());
 	}
 
-	public function testCommitForTheKirbyUser(): void
+	public function testCommitForTheInfinriUser(): void
 	{
-		$user = $this->app->impersonate('kirby');
+		$user = $this->app->impersonate('infinri');
 
 		$this->expectException(PermissionException::class);
-		$this->expectExceptionMessage('The Kirby user cannot be changed');
+		$this->expectExceptionMessage('The Infinri user cannot be changed');
 
 		$class = new ReflectionClass($user);
 		$class->getMethod('commit')->invokeArgs($user, [

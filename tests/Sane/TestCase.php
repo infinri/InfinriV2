@@ -20,7 +20,7 @@ class TestCase extends BaseTestCase
 	{
 		new App([
 			'urls' => [
-				'index' => 'https://getkirby.com/subfolder'
+				'index' => 'https://infinri.com/subfolder'
 			]
 		]);
 	}

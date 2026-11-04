@@ -10,12 +10,9 @@ class Event
 	public function __construct(
 		public string $name,
 		public string|null $description = null,
-		public string|null $deprecated = null,
-		public string|null $since = null,
 		public array $properties = [],
 	) {
 		$this->description = Doc::kt($this->description ?? '');
-		$this->deprecated  = Doc::kt($this->deprecated ?? '');
 	}
 
 	public static function factory(array $data): static
@@ -23,8 +20,6 @@ class Event
 		return new static(
 			name:        $data['name'],
 			description: $data['description'] ?? null,
-			deprecated:  $data['tags']['deprecated'][0]['description'] ?? null,
-			since:       $data['tags']['since'][0]['description'] ?? null,
 			properties:  A::map(
 				$data['properties'] ?? [],
 				fn ($property) => Argument::factory($property)
@@ -37,9 +32,7 @@ class Event
 		return [
 			'name'        => $this->name,
 			'description' => $this->description,
-			'deprecated'  => $this->deprecated,
 			'properties'  => $this->properties,
-			'since'       => $this->since,
 		];
 	}
 }

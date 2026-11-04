@@ -113,7 +113,7 @@ class Pages extends Collection
 	public function delete(array $ids): void
 	{
 		$exceptions = [];
-		$kirby      = App::instance();
+		$infinri      = App::instance();
 
 		// delete all pages and collect errors
 		foreach ($ids as $id) {
@@ -126,7 +126,7 @@ class Pages extends Collection
 				//
 				// TODO: We can remove this part as soon
 				// as we move away from our immutable object architecture.
-				$page = $kirby->page($id);
+				$page = $infinri->page($id);
 
 				if ($page === null || $this->get($id) instanceof Page === false) {
 					throw new NotFoundException(
@@ -256,8 +256,8 @@ class Pages extends Collection
 			return $page;
 		}
 
-		$kirby     = App::instance();
-		$multiLang = $kirby->multilang();
+		$infinri     = App::instance();
+		$multiLang = $infinri->multilang();
 
 		// try to find the page by its (translated) URI
 		// by stepping through the page tree
@@ -270,7 +270,7 @@ class Pages extends Collection
 		// (for collections without parent that won't have a result above)
 		if (
 			$multiLang === true &&
-			$kirby->language()->isDefault() === false &&
+			$infinri->language()->isDefault() === false &&
 			$page = $this->findBy('uri', $key)
 		) {
 			return $page;
@@ -462,7 +462,6 @@ class Pages extends Collection
 
 	/**
 	 * Filter all pages by excluding the given template
-	 * @since 3.3.0
 	 *
 	 * @return $this|static
 	 */

@@ -137,8 +137,6 @@ class Darkroom
 	/**
 	 * Checks if the output format can keep
 	 * all frames of an animated image
-	 *
-	 * @since 5.6.2
 	 */
 	protected function isAnimatable(string $file, array $options): bool
 	{
@@ -154,7 +152,7 @@ class Darkroom
 	public function preprocess(string $file, array $options = []): array
 	{
 		$options = $this->options($options);
-		$image   = new Image($file);
+		$image   = new Image(['root' => $file]);
 
 		$options['sourceWidth']  = $image->width();
 		$options['sourceHeight'] = $image->height();

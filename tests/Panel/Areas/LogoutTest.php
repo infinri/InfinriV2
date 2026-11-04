@@ -19,8 +19,8 @@ class LogoutTest extends AreaTestCase
 
 	public function testLogoutUser(): void
 	{
-		$this->login('test@getkirby.com');
-		$this->assertSame('test@getkirby.com', $this->app->user()->email());
+		$this->login('test@infinri.com');
+		$this->assertSame('test@infinri.com', $this->app->user()->email());
 
 		$this->assertRedirect('logout', static::LOGIN);
 
@@ -29,11 +29,11 @@ class LogoutTest extends AreaTestCase
 
 	public function testLogoutChallenge(): void
 	{
-		$this->app->session()->set('kirby.challenge.code', '123456');
+		$this->app->session()->set('infinri.challenge.code', '123456');
 
 		$this->assertRedirect('logout', static::LOGIN);
 
-		$this->assertNull($this->app->session()->get('kirby.challenge.code'));
+		$this->assertNull($this->app->session()->get('infinri.challenge.code'));
 	}
 
 	public function testLogoutCsrf(): void
@@ -49,12 +49,12 @@ class LogoutTest extends AreaTestCase
 			]
 		]);
 
-		$this->login('test@getkirby.com');
+		$this->login('test@infinri.com');
 
 		$token = $this->app->auth()->csrfFromSession();
 
 		$this->assertRedirect('logout', static::LOGIN);
-		$this->assertNull($this->app->session()->get('kirby.csrf'));
+		$this->assertNull($this->app->session()->get('infinri.csrf'));
 
 		$login = $this->response('login', true);
 

@@ -75,7 +75,7 @@ class PHPMailer extends Email
 						break;
 					default:
 						throw new InvalidArgumentException(
-							'Could not automatically detect the "security" protocol from the ' .
+							message: 'Could not automatically detect the "security" protocol from the ' .
 							'"port" option, please set it explicitly to "tls" or "ssl".'
 						);
 				}

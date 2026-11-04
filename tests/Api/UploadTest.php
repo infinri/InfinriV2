@@ -18,7 +18,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Upload::class)]
 class UploadTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Api.Upload';
+	public const TMP = INFINRI_TMP_DIR . '/Api.Upload';
 
 	protected function setUp(): void
 	{
@@ -30,7 +30,7 @@ class UploadTest extends TestCase
 			],
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	protected function tearDown(): void

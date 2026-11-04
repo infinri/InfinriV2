@@ -14,7 +14,7 @@ use Throwable;
 #[CoversClass(Auth::class)]
 class AuthTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Auth';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Auth';
 
 	protected Auth $auth;
 
@@ -45,8 +45,8 @@ class AuthTest extends TestCase
 					'password' => $hash = password_hash('springfield123', PASSWORD_DEFAULT)
 				],
 				[
-					'email'    => 'kirby@getkirby.com',
-					'id'       => 'kirby',
+					'email'    => 'infinri@infinri.com',
+					'id'       => 'infinri',
 					'password' => password_hash('somewhere-in-japan', PASSWORD_DEFAULT)
 				],
 			]
@@ -69,17 +69,17 @@ class AuthTest extends TestCase
 	{
 		$this->assertNull($this->auth->user());
 
-		$user = $this->auth->impersonate('kirby');
+		$user = $this->auth->impersonate('infinri');
 		$this->assertSame([
 			'challenge' => null,
-			'email'     => 'kirby@getkirby.com',
+			'email'     => 'infinri@infinri.com',
 			'mode'      => null,
 			'status'    => 'impersonated'
 		], $this->auth->status()->toArray());
 		$this->assertIsUser($user, $this->auth->user());
 		$this->assertIsUser($user, $this->auth->currentUserFromImpersonation());
-		$this->assertIsUser('kirby', $user);
-		$this->assertSame('kirby@getkirby.com', $user->email());
+		$this->assertIsUser('infinri', $user);
+		$this->assertSame('infinri@infinri.com', $user->email());
 		$this->assertSame('admin', $user->role()->name());
 		$this->assertNull($this->auth->user(null, false));
 
@@ -117,14 +117,14 @@ class AuthTest extends TestCase
 		$impersonated = $this->auth->impersonate('nobody');
 		$this->assertSame([
 			'challenge' => null,
-			'email'     => 'nobody@getkirby.com',
+			'email'     => 'nobody@infinri.com',
 			'mode'      => null,
 			'status'    => 'impersonated'
 		], $this->auth->status()->toArray());
 		$this->assertSame($impersonated, $this->auth->user());
 		$this->assertSame($impersonated, $this->auth->currentUserFromImpersonation());
 		$this->assertSame('nobody', $impersonated->id());
-		$this->assertSame('nobody@getkirby.com', $impersonated->email());
+		$this->assertSame('nobody@infinri.com', $impersonated->email());
 		$this->assertSame('nobody', $impersonated->role()->name());
 		$this->assertSame($actual, $this->auth->user(null, false));
 
@@ -156,7 +156,7 @@ class AuthTest extends TestCase
 		$this->app->user('marge@simpsons.com')->loginPasswordless();
 		$this->assertFalse($this->auth->isResettingPassword());
 
-		$session->set('kirby.resetPassword', 'marge');
+		$session->set('infinri.resetPassword', 'marge');
 		$this->assertTrue($this->auth->isResettingPassword());
 	}
 
@@ -167,17 +167,17 @@ class AuthTest extends TestCase
 		// marge logged in via a password reset challenge, but homer
 		// took over the same session without a logout in between
 		$this->app->user('marge@simpsons.com')->loginPasswordless();
-		$session->set('kirby.resetPassword', 'marge');
+		$session->set('infinri.resetPassword', 'marge');
 
 		$this->auth->login('homer@simpsons.com', 'springfield123');
 
-		$this->assertSame('marge', $session->get('kirby.resetPassword'));
+		$this->assertSame('marge', $session->get('infinri.resetPassword'));
 		$this->assertFalse($this->auth->isResettingPassword());
 	}
 
 	public function testIsResettingPasswordWithoutUser(): void
 	{
-		$this->app->session()->set('kirby.resetPassword', 'marge');
+		$this->app->session()->set('infinri.resetPassword', 'marge');
 
 		$this->assertNull($this->app->user());
 		$this->assertFalse($this->auth->isResettingPassword());
@@ -231,15 +231,15 @@ class AuthTest extends TestCase
 		$this->auth->login('marge@simpsons.com', 'springfield456');
 	}
 
-	public function testLoginKirby(): void
+	public function testLoginInfinri(): void
 	{
 		$this->expectException(PermissionException::class);
 		$this->expectExceptionMessage(
-			'The almighty user "kirby" cannot be used for login, ' .
-			'only for raising permissions in code via `$kirby->impersonate()`'
+			'The almighty user "infinri" cannot be used for login, ' .
+			'only for raising permissions in code via `$infinri->impersonate()`'
 		);
 
-		$this->auth->login('kirby@getkirby.com', 'somewhere-in-japan');
+		$this->auth->login('infinri@infinri.com', 'somewhere-in-japan');
 	}
 
 	public function testLogoutActive(): void
@@ -249,11 +249,11 @@ class AuthTest extends TestCase
 		$this->app->user('marge@simpsons.com')->loginPasswordless();
 		$this->app->impersonate('homer@simpsons.com');
 
-		$this->assertSame('marge', $session->get('kirby.userId'));
+		$this->assertSame('marge', $session->get('infinri.userId'));
 
 		$this->auth->logout();
 
-		$this->assertNull($session->get('kirby.userId'));
+		$this->assertNull($session->get('infinri.userId'));
 
 		$this->assertSame([
 			'challenge' => null,
@@ -272,12 +272,12 @@ class AuthTest extends TestCase
 		// the Panel stores a CSRF token in the session on every request
 		$this->app->csrf();
 
-		$this->assertTrue(Cookie::exists('kirby_session'));
+		$this->assertTrue(Cookie::exists('infinri_session'));
 
 		$this->auth->logout();
 
 		$this->assertSame([], $session->data()->get());
-		$this->assertFalse(Cookie::exists('kirby_session'));
+		$this->assertFalse(Cookie::exists('infinri_session'));
 	}
 
 	public function testLogoutPending(): void
@@ -286,13 +286,13 @@ class AuthTest extends TestCase
 
 		$this->auth->createChallenge('marge@simpsons.com');
 
-		$this->assertSame('marge@simpsons.com', $session->get('kirby.challenge.email'));
-		$this->assertSame('login', $session->get('kirby.challenge.mode'));
+		$this->assertSame('marge@simpsons.com', $session->get('infinri.challenge.email'));
+		$this->assertSame('login', $session->get('infinri.challenge.mode'));
 
 		$this->auth->logout();
 
-		$this->assertNull($session->get('kirby.userId'));
-		$this->assertNull($session->get('kirby.challenge.mode'));
+		$this->assertNull($session->get('infinri.userId'));
+		$this->assertNull($session->get('infinri.challenge.mode'));
 
 		$this->assertSame([
 			'challenge' => null,
@@ -318,13 +318,13 @@ class AuthTest extends TestCase
 		$session = $this->app->session();
 
 		$this->app->user('marge@simpsons.com')->loginPasswordless();
-		$session->set('kirby.resetPassword', 'marge');
+		$session->set('infinri.resetPassword', 'marge');
 
-		$this->assertSame('marge', $session->get('kirby.resetPassword'));
+		$this->assertSame('marge', $session->get('infinri.resetPassword'));
 
 		$this->app->auth()->logout();
 
-		$this->assertNull($session->get('kirby.resetPassword'));
+		$this->assertNull($session->get('infinri.resetPassword'));
 
 		// the flag must be cleared before the user is logged out,
 		// otherwise the session cannot be destroyed
@@ -341,7 +341,7 @@ class AuthTest extends TestCase
 
 		// existing basic auth should be preferred
 		// over impersonation
-		$app->auth()->impersonate('kirby');
+		$app->auth()->impersonate('infinri');
 
 		$this->assertSame('basic', $app->auth()->type());
 
@@ -353,7 +353,7 @@ class AuthTest extends TestCase
 	{
 		// non-existing basic auth should
 		// fall back to impersonation
-		$this->auth->impersonate('kirby');
+		$this->auth->impersonate('infinri');
 
 		$this->assertSame('impersonate', $this->auth->type());
 
@@ -401,7 +401,7 @@ class AuthTest extends TestCase
 			]
 		]);
 
-		$app->auth()->impersonate('kirby');
+		$app->auth()->impersonate('infinri');
 
 		$this->assertSame('impersonate', $app->auth()->type());
 	}
@@ -422,7 +422,7 @@ class AuthTest extends TestCase
 	public function testUserSession(): void
 	{
 		$session = $this->app->session();
-		$session->set('kirby.userId', 'marge');
+		$session->set('infinri.userId', 'marge');
 
 		$user = $this->auth->user();
 		$this->assertSame('marge@simpsons.com', $user->email());
@@ -438,7 +438,7 @@ class AuthTest extends TestCase
 		$this->assertNull($this->auth->currentUserFromImpersonation());
 
 		// value is cached
-		$session->set('kirby.userId', 'homer');
+		$session->set('infinri.userId', 'homer');
 		$user = $this->auth->user();
 		$this->assertSame('marge@simpsons.com', $user->email());
 		$this->assertSame([
@@ -452,8 +452,8 @@ class AuthTest extends TestCase
 	public function testUserSessionManualSession(): void
 	{
 		$session = (new AutoSession($this->app->root('sessions')))->createManually();
-		$session->set('kirby.userId', 'homer');
-		$session->set('kirby.loginTimestamp', 1337000000);
+		$session->set('infinri.userId', 'homer');
+		$session->set('infinri.loginTimestamp', 1337000000);
 
 		$user = $this->auth->user($session);
 		$this->assertSame('homer@simpsons.com', $user->email());
@@ -468,8 +468,8 @@ class AuthTest extends TestCase
 	public function testUserSessionOldTimestamp(): void
 	{
 		$session = $this->app->session();
-		$session->set('kirby.userId', 'homer');
-		$session->set('kirby.loginTimestamp', 1000000000);
+		$session->set('infinri.userId', 'homer');
+		$session->set('infinri.loginTimestamp', 1000000000);
 
 		$this->assertNull($this->auth->user());
 		$this->assertSame([
@@ -486,7 +486,7 @@ class AuthTest extends TestCase
 	public function testUserSessionNoTimestamp(): void
 	{
 		$session = $this->app->session();
-		$session->set('kirby.userId', 'homer');
+		$session->set('infinri.userId', 'homer');
 
 		$this->assertNull($this->auth->user());
 		$this->assertSame([

@@ -21,11 +21,11 @@ class Menu
 	public function areas(): array
 	{
 		// get from config option which areas should be listed in the menu
-		$kirby = App::instance();
-		$areas = $kirby->option('panel.menu');
+		$infinri = App::instance();
+		$areas = $infinri->option('panel.menu');
 
 		if ($areas instanceof Closure) {
-			$areas = $areas($kirby);
+			$areas = $areas($infinri);
 		}
 
 		// if no config is defined…

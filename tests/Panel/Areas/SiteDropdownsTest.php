@@ -161,13 +161,13 @@ class SiteDropdownsTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 
 		$dropdown = $this->dropdown('site/languages');
 		$this->assertSame('The site is not accessible', $dropdown['error']);

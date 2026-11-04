@@ -22,7 +22,7 @@ class StructureFieldTest extends TestCase
 		$this->assertNull($field->limit());
 		$this->assertIsArray($field->fields());
 		$this->assertSame([], $field->value());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testFillWithEmptyValue(): void
@@ -74,8 +74,8 @@ class StructureFieldTest extends TestCase
 			]
 		];
 
-		$this->assertSame($expected, $field->data());
-		$this->assertSame('a, b', $field->data()[0]['tags']);
+		$this->assertSame($expected, $field->toStoredValue());
+		$this->assertSame('a, b', $field->toStoredValue()[0]['tags']);
 		$this->assertSame(['a', 'b'], $field->value()[0]['tags']);
 	}
 
@@ -266,11 +266,11 @@ class StructureFieldTest extends TestCase
 		]);
 
 		$this->assertEquals($value, $field->value()); // cannot use strict assertion (array order)
-		$this->assertEquals($value, $field->data()); // cannot use strict assertion (array order)
+		$this->assertEquals($value, $field->toStoredValue()); // cannot use strict assertion (array order)
 
 		// empty mother form
 		$motherForm = $field->form();
-		$data       = $motherForm->data();
+		$data       = $motherForm->toStoredValues();
 
 		$expected = [
 			'name'     => '',
@@ -285,7 +285,7 @@ class StructureFieldTest extends TestCase
 		$motherForm = $field->form()->fill(input: $value[0], passthrough: true);
 		$expected   = $value[0];
 
-		$this->assertEquals($expected, $motherForm->data()); // cannot use strict assertion (array order)
+		$this->assertEquals($expected, $motherForm->toStoredValues()); // cannot use strict assertion (array order)
 
 		$childrenField = $motherForm->fields()->children();
 
@@ -295,19 +295,19 @@ class StructureFieldTest extends TestCase
 		// empty children form
 		$childrenForm = $childrenField->form();
 
-		$this->assertSame('', $childrenForm->data()['name']);
+		$this->assertSame('', $childrenForm->toStoredValues()['name']);
 
 		// filled children form
 		$childrenForm = $childrenField->form()->fill(input: ['name' => 'Test'], passthrough: true);
 
-		$this->assertSame('Test', $childrenForm->data()['name']);
+		$this->assertSame('Test', $childrenForm->toStoredValues()['name']);
 
 		// children name field
 		$childrenNameField = $childrenField->form()->fields()->name();
 
 		$this->assertSame('text', $childrenNameField->type());
 		$this->assertSame($model, $childrenNameField->model());
-		$this->assertSame('', $childrenNameField->data());
+		$this->assertSame('', $childrenNameField->toStoredValue());
 	}
 
 	public function testFloatsWithNonUsLocale(): void
@@ -325,7 +325,7 @@ class StructureFieldTest extends TestCase
 			]
 		]);
 
-		$this->assertIsFloat($field->data()[0]['number']);
+		$this->assertIsFloat($field->toStoredValue()[0]['number']);
 	}
 
 	public function testEmpty(): void
@@ -378,7 +378,7 @@ class StructureFieldTest extends TestCase
 
 		// we need an authenticated user to make sure
 		// that the fields are not disabled by default
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$fields = [
 			'a' => [
@@ -432,8 +432,10 @@ class StructureFieldTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('A', $field->data(true)[0]['a']);
-		$this->assertSame('B', $field->data(true)[0]['b']);
+		$value = $field->fill($field->default())->toStoredValue();
+
+		$this->assertSame('A', $value[0]['a']);
+		$this->assertSame('B', $value[0]['b']);
 	}
 
 	public function testRequiredProps(): void

@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class PagesSectionTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PagesSection';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PagesSection';
 
 	protected function setUp(): void
 	{
@@ -24,7 +24,7 @@ class PagesSectionTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	protected function tearDown(): void
@@ -169,7 +169,7 @@ class PagesSectionTest extends TestCase
 		new Section('pages', [
 			'name'  => 'test',
 			'model' => $parent,
-			'parent' => 'kirby.user'
+			'parent' => 'infinri.user'
 		]);
 	}
 
@@ -1022,7 +1022,7 @@ class PagesSectionTest extends TestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$parent = new Page([
 			'slug'     => 'test',

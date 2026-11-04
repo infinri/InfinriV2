@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Dropdown::class)]
 class DropdownTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Dropdown';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Dropdown';
 
 	protected function setUp(): void
 	{
@@ -108,7 +108,7 @@ class DropdownTest extends TestCase
 		$this->assertSame($expected, json_decode($response->body(), true));
 	}
 
-	public function testResponseFromKirbyException(): void
+	public function testResponseFromInfinriException(): void
 	{
 		$exception = new NotFoundException(message: 'Test');
 		$response  = Dropdown::response($exception);

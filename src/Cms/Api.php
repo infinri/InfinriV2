@@ -10,11 +10,11 @@ use Infinri\Session\Session;
 
 class Api extends BaseApi
 {
-	protected App $kirby;
+	protected App $infinri;
 
 	public function __construct(array $props)
 	{
-		$this->kirby = $props['kirby'];
+		$this->infinri = $props['infinri'];
 		parent::__construct($props);
 	}
 
@@ -30,13 +30,13 @@ class Api extends BaseApi
 		$this->setRequestMethod($method);
 		$this->setRequestData($requestData);
 
-		$this->kirby->setCurrentLanguage($this->language());
+		$this->infinri->setCurrentLanguage($this->language());
 
-		$allowImpersonation = $this->kirby()->option('api.allowImpersonation', false);
+		$allowImpersonation = $this->infinri()->option('api.allowImpersonation', false);
 
-		$translation   = $this->kirby->user(null, $allowImpersonation)?->language();
-		$translation ??= $this->kirby->panelLanguage();
-		$this->kirby->setCurrentTranslation($translation);
+		$translation   = $this->infinri->user(null, $allowImpersonation)?->language();
+		$translation ??= $this->infinri->panelLanguage();
+		$this->infinri->setCurrentTranslation($translation);
 
 		return parent::call($path, $method, $requestData);
 	}
@@ -48,7 +48,7 @@ class Api extends BaseApi
 	public function clone(array $props = []): static
 	{
 		return parent::clone([
-			'kirby' => $this->kirby,
+			'infinri' => $this->infinri,
 			...$props
 		]);
 	}
@@ -113,11 +113,11 @@ class Api extends BaseApi
 	}
 
 	/**
-	 * Returns the Kirby instance
+	 * Returns the Infinri instance
 	 */
-	public function kirby(): App
+	public function infinri(): App
 	{
-		return $this->kirby;
+		return $this->infinri;
 	}
 
 	/**
@@ -216,14 +216,13 @@ class Api extends BaseApi
 	 */
 	public function session(array $options = []): Session
 	{
-		return $this->kirby->session(['detect' => true, ...$options]);
+		return $this->infinri->session(['detect' => true, ...$options]);
 	}
 
 	/**
 	 * Returns the site object
 	 *
 	 * @throws \Infinri\Exception\NotFoundException if the site cannot be accessed
-	 * @since 5.4.0
 	 */
 	public function site(): Site
 	{
@@ -265,8 +264,8 @@ class Api extends BaseApi
 	 */
 	public function validateAreaAccess(string $area): void
 	{
-		if ($this->kirby->user()?->role()->permissions()->for('access', $area) !== true) {
-			throw new PermissionException('No access');
+		if ($this->infinri->user()?->role()->permissions()->for('access', $area) !== true) {
+			throw new PermissionException(message: 'No access');
 		}
 	}
 }

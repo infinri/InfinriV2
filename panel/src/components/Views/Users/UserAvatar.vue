@@ -1,7 +1,7 @@
 <template>
 	<k-button
 		:disabled="isLocked"
-		:title="$t('avatar')"
+		:title="$panel.t('avatar')"
 		class="k-user-view-image"
 		@click="open"
 	>
@@ -12,12 +12,12 @@
 				:options="[
 					{
 						icon: 'upload',
-						text: $t('change'),
+						text: $panel.t('change'),
 						click: upload
 					},
 					{
 						icon: 'trash',
-						text: $t('delete'),
+						text: $panel.t('delete'),
 						click: remove
 					}
 				]"
@@ -29,7 +29,6 @@
 
 <script>
 /**
- * @since 4.0.0
  * @unstable
  */
 export default {
@@ -48,9 +47,9 @@ export default {
 			}
 		},
 		async remove() {
-			await this.$api.users.deleteAvatar(this.id);
+			await this.$panel.api.users.deleteAvatar(this.id);
 			this.$panel.notification.success();
-			this.$reload();
+			this.$panel.reload();
 		},
 		upload() {
 			this.$panel.upload.pick({

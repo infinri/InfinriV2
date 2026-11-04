@@ -2,7 +2,7 @@
 	<k-panel-inside class="k-password-reset-view">
 		<form @submit.prevent="submit">
 			<k-header>
-				{{ $t("view.resetPassword") }}
+				{{ $panel.t("view.resetPassword") }}
 
 				<template #buttons>
 					<k-button
@@ -12,7 +12,7 @@
 						variant="filled"
 						size="sm"
 					>
-						{{ $t("change") }} <template v-if="isLoading"> … </template>
+						{{ $panel.t("change") }} <template v-if="isLoading"> … </template>
 					</k-button>
 				</template>
 			</k-header>
@@ -54,7 +54,7 @@ export default {
 				fields = {
 					currentPassword: {
 						autofocus: true,
-						label: this.$t("user.changePassword.current"),
+						label: this.$panel.t("user.changePassword.current"),
 						icon: "key",
 						type: "password",
 						width: "1/2"
@@ -70,13 +70,13 @@ export default {
 				...fields,
 				password: {
 					autofocus: this.requirePassword === false,
-					label: this.$t("user.changePassword.new"),
+					label: this.$panel.t("user.changePassword.new"),
 					icon: "key",
 					type: "password",
 					width: "1/2"
 				},
 				passwordConfirmation: {
-					label: this.$t("user.changePassword.new.confirm"),
+					label: this.$panel.t("user.changePassword.new.confirm"),
 					icon: "key",
 					type: "password",
 					width: "1/2"
@@ -85,33 +85,33 @@ export default {
 		}
 	},
 	mounted() {
-		this.$panel.title = this.$t("view.resetPassword");
+		this.$panel.title = this.$panel.t("view.resetPassword");
 	},
 	methods: {
 		async submit() {
 			if (!this.values.password || this.values.password.length < 8) {
 				return this.$panel.notification.error(
-					this.$t("error.user.password.invalid")
+					this.$panel.t("error.user.password.invalid")
 				);
 			}
 
 			if (this.values.password !== this.values.passwordConfirmation) {
 				return this.$panel.notification.error(
-					this.$t("error.user.password.notSame")
+					this.$panel.t("error.user.password.notSame")
 				);
 			}
 
 			this.isLoading = true;
 
 			try {
-				await this.$api.users.changePassword(
+				await this.$panel.api.users.changePassword(
 					this.$panel.user.id,
 					this.values.password,
 					this.values.currentPassword
 				);
 
 				this.$panel.notification.success();
-				this.$go("/");
+				this.$panel.view.open("/");
 			} catch (error) {
 				this.$panel.notification.error(error);
 			} finally {

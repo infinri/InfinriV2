@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Page::class)]
 class PageCreateNumTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageCreateNum';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageCreateNum';
 
 	public function testCreateDateBasedNum(): void
 	{
@@ -39,7 +39,7 @@ class PageCreateNumTest extends ModelTestCase
 	public function testCreateDateBasedNumInMultiLanguageMode(): void
 	{
 		$this->setupMultiLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug' => 'test',
@@ -193,7 +193,7 @@ class PageCreateNumTest extends ModelTestCase
 				'pages/query-num' => ['num' => '{{ page.year }}']
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',
@@ -211,7 +211,7 @@ class PageCreateNumTest extends ModelTestCase
 				'pages/query-num' => ['num' => '{{ page.year }}']
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',
@@ -224,7 +224,7 @@ class PageCreateNumTest extends ModelTestCase
 	public function testCreateQueryBasedNumInMultiLanguageMode(): void
 	{
 		$this->setupMultiLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug' => 'test',

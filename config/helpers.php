@@ -55,7 +55,7 @@ if (Helpers::hasOverride('collection') === false) { // @codeCoverageIgnore
 	 * Returns the result of a collection by name
 	 *
 	 * @return \Infinri\Toolkit\Collection|null
-	 * @todo 6.0 Add return type declaration
+	 * @todo Add return type declaration
 	 */
 	function collection(string $name, array $options = [])
 	{
@@ -95,19 +95,6 @@ if (Helpers::hasOverride('css') === false) { // @codeCoverageIgnore
 		string|array|null $options = null
 	): string|null {
 		return Html::css($url, $options);
-	}
-}
-
-if (Helpers::hasOverride('deprecated') === false) { // @codeCoverageIgnore
-	/**
-	 * Triggers a deprecation warning if debug mode is active
-	 * @since 3.3.0
-	 *
-	 * @return bool Whether the warning was triggered
-	 */
-	function deprecated(string $message): bool
-	{
-		return Helpers::deprecated($message);
 	}
 }
 
@@ -171,7 +158,7 @@ if (Helpers::hasOverride('esc') === false) { // @codeCoverageIgnore
 
 if (Helpers::hasOverride('get') === false) { // @codeCoverageIgnore
 	/**
-	 * Shortcut for $kirby->request()->get()
+	 * Shortcut for $infinri->request()->get()
 	 *
 	 * @param mixed $key The key to look for. Pass false or null to return the entire request array.
 	 * @param mixed $default Optional default value, which should be returned if no element has been found
@@ -184,11 +171,11 @@ if (Helpers::hasOverride('get') === false) { // @codeCoverageIgnore
 
 if (Helpers::hasOverride('gist') === false) { // @codeCoverageIgnore
 	/**
-	 * Embeds a Github Gist
+	 * Embeds a Gist from an allowed gist host
 	 */
 	function gist(string $url, string|null $file = null): string
 	{
-		return App::instance()->kirbytag([
+		return App::instance()->infinritag([
 			'gist' => $url,
 			'file' => $file,
 		]);
@@ -269,84 +256,82 @@ if (Helpers::hasOverride('js') === false) { // @codeCoverageIgnore
 	}
 }
 
-if (Helpers::hasOverride('kirby') === false) { // @codeCoverageIgnore
+if (Helpers::hasOverride('infinri') === false) { // @codeCoverageIgnore
 	/**
-	 * Returns the Kirby object in any situation
+	 * Returns the Infinri object in any situation
 	 */
-	function kirby(): App
+	function infinri(): App
 	{
 		return App::instance();
 	}
 }
 
-if (Helpers::hasOverride('kirbytag') === false) { // @codeCoverageIgnore
+if (Helpers::hasOverride('infinritag') === false) { // @codeCoverageIgnore
 	/**
-	 * Makes it possible to use any defined Kirbytag as standalone function
+	 * Makes it possible to use any defined Infinritag as standalone function
 	 */
-	function kirbytag(
+	function infinritag(
 		string|array $type,
 		string|null $value = null,
 		array $attr = [],
 		array $data = []
 	): string {
-		return App::instance()->kirbytag($type, $value, $attr, $data);
+		return App::instance()->infinritag($type, $value, $attr, $data);
 	}
 }
 
-if (Helpers::hasOverride('kirbytags') === false) { // @codeCoverageIgnore
+if (Helpers::hasOverride('infinritags') === false) { // @codeCoverageIgnore
 	/**
-	 * Parses KirbyTags in the given string. Shortcut
-	 * for `$kirby->kirbytags($text, $data)`
+	 * Parses InfinriTags in the given string. Shortcut
+	 * for `$infinri->infinritags($text, $data)`
 	 */
-	function kirbytags(string|null $text = null, array $data = []): string
+	function infinritags(string|null $text = null, array $data = []): string
 	{
-		return App::instance()->kirbytags($text, $data);
+		return App::instance()->infinritags($text, $data);
 	}
 }
 
-if (Helpers::hasOverride('kirbytext') === false) { // @codeCoverageIgnore
+if (Helpers::hasOverride('infinritext') === false) { // @codeCoverageIgnore
 	/**
-	 * Parses KirbyTags and Markdown in the
-	 * given string. Shortcut for `$kirby->kirbytext()`
+	 * Parses InfinriTags and Markdown in the
+	 * given string. Shortcut for `$infinri->infinritext()`
 	 */
-	function kirbytext(string|null $text = null, array $data = []): string
+	function infinritext(string|null $text = null, array $data = []): string
 	{
-		return App::instance()->kirbytext($text, $data);
+		return App::instance()->infinritext($text, $data);
 	}
 }
 
-if (Helpers::hasOverride('kirbytextinline') === false) { // @codeCoverageIgnore
+if (Helpers::hasOverride('infinritextinline') === false) { // @codeCoverageIgnore
 	/**
-	 * Parses KirbyTags and inline Markdown in the
+	 * Parses InfinriTags and inline Markdown in the
 	 * given string.
-	 * @since 3.1.0
 	 */
-	function kirbytextinline(string|null $text = null, array $options = []): string
+	function infinritextinline(string|null $text = null, array $options = []): string
 	{
 		$options['markdown']['inline'] = true;
-		return App::instance()->kirbytext($text, $options);
+		return App::instance()->infinritext($text, $options);
 	}
 }
 
 if (Helpers::hasOverride('kt') === false) { // @codeCoverageIgnore
 	/**
-	 * Shortcut for `kirbytext()` helper
+	 * Shortcut for `infinritext()` helper
 	 */
 	function kt(string|null $text = null, array $data = []): string
 	{
-		return App::instance()->kirbytext($text, $data);
+		return App::instance()->infinritext($text, $data);
 	}
 }
 
 if (Helpers::hasOverride('kti') === false) { // @codeCoverageIgnore
 	/**
-	 * Shortcut for `kirbytextinline()` helper
-	 * @since 3.1.0
+	 * Shortcut for `infinritextinline()` helper
 	 */
 	function kti(string|null $text = null, array $options = []): string
 	{
 		$options['markdown']['inline'] = true;
-		return App::instance()->kirbytext($text, $options);
+		return App::instance()->infinritext($text, $options);
 	}
 }
 
@@ -363,7 +348,7 @@ if (Helpers::hasOverride('load') === false) { // @codeCoverageIgnore
 if (Helpers::hasOverride('markdown') === false) { // @codeCoverageIgnore
 	/**
 	 * Parses markdown in the given string. Shortcut for
-	 * `$kirby->markdown($text)`
+	 * `$infinri->markdown($text)`
 	 */
 	function markdown(string|null $text = null, array $options = []): string
 	{
@@ -373,7 +358,7 @@ if (Helpers::hasOverride('markdown') === false) { // @codeCoverageIgnore
 
 if (Helpers::hasOverride('option') === false) { // @codeCoverageIgnore
 	/**
-	 * Shortcut for `$kirby->option($key, $default)`
+	 * Shortcut for `$infinri->option($key, $default)`
 	 */
 	function option(string $key, mixed $default = null): mixed
 	{
@@ -467,7 +452,6 @@ if (Helpers::hasOverride('router') === false) { // @codeCoverageIgnore
 	/**
 	 * Creates a micro-router and executes
 	 * the routing action immediately
-	 * @since 3.6.0
 	 */
 	function router(
 		string|null $path = null,
@@ -512,7 +496,7 @@ if (Helpers::hasOverride('slot') === false) { // @codeCoverageIgnore
 if (Helpers::hasOverride('smartypants') === false) { // @codeCoverageIgnore
 	/**
 	 * Enhances the given string with
-	 * smartypants. Shortcut for `$kirby->smartypants($text)`
+	 * smartypants. Shortcut for `$infinri->smartypants($text)`
 	 */
 	function smartypants(string|null $text = null): string
 	{

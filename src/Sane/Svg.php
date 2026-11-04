@@ -397,7 +397,7 @@ class Svg extends Xml
 				$target->getElementsByTagName('use')->count() > 0
 			) {
 				$errors[] = new InvalidArgumentException(
-					'Nested "use" elements are not allowed' .
+					message: 'Nested "use" elements are not allowed' .
 					' (used in line ' . $element->getLineNo() . ')'
 				);
 				$element->removeAttributeNode($attr);
@@ -424,7 +424,7 @@ class Svg extends Xml
 			foreach (Dom::extractUrls($element->textContent) as $url) {
 				if (Dom::isAllowedUrl($url, $options) !== true) {
 					$errors[] = new InvalidArgumentException(
-						'The URL is not allowed in the "style" element' .
+						message: 'The URL is not allowed in the "style" element' .
 						' (around line ' . $element->getLineNo() . ')'
 					);
 					Dom::remove($element);

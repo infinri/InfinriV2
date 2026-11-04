@@ -1,6 +1,6 @@
 <template>
 	<k-button
-		:title="$t('sort.drag')"
+		:title="$panel.t('sort.drag')"
 		icon="sort"
 		class="k-sort-handle k-sort-button"
 		aria-hidden="true"

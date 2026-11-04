@@ -154,7 +154,7 @@ class ViewButton extends Button
 
 	public function props(): array
 	{
-		// helper for props that support Kirby queries,
+		// helper for props that support Infinri queries,
 		// only content models can resolve them, not languages
 		$resolve = fn (string|null $value) =>
 			$value ?
@@ -194,7 +194,7 @@ class ViewButton extends Button
 		ModelWithContent|Language|null $model = null,
 		array $data = []
 	): static|array|null {
-		$kirby      = App::instance();
+		$infinri      = App::instance();
 		$controller = new Controller($button);
 
 		if (
@@ -209,9 +209,9 @@ class ViewButton extends Button
 		}
 
 		return $controller->call(data: [
-			'kirby' => $kirby,
-			'site'  => $kirby->site(),
-			'user'  => $kirby->user(),
+			'infinri' => $infinri,
+			'site'  => $infinri->site(),
+			'user'  => $infinri->user(),
 			...$data
 		]);
 	}

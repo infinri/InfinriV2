@@ -31,13 +31,13 @@ class JsonTest extends TestCase
 
 	public function testResponseRedirect(): void
 	{
-		$redirect = new Redirect('https://getkirby.com');
+		$redirect = new Redirect('https://infinri.com');
 		$response = Json::response($redirect);
 		$body     = json_decode($response->body(), true);
 
 		$this->assertSame(200, $response->code());
 		$this->assertSame(200, $body['$response']['code']);
-		$this->assertSame('https://getkirby.com', $body['$response']['redirect']);
+		$this->assertSame('https://infinri.com', $body['$response']['redirect']);
 	}
 
 	public function testResponseThrowable(): void

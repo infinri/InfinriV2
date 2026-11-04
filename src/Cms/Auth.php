@@ -52,14 +52,13 @@ class Auth
 	 * @codeCoverageIgnore
 	 */
 	public function __construct(
-		protected App $kirby
+		protected App $infinri
 	) {
 	}
 
 	/**
 	 * Creates an authentication challenge
 	 * (one-time auth code)
-	 * @since 3.5.0
 	 *
 	 * @param bool $long If `true`, a long session will be created
 	 * @param 'login'|'password-reset'|'2fa' $mode Purpose of the code
@@ -75,16 +74,16 @@ class Auth
 	): Status {
 		$email = Idn::decodeEmail($email);
 
-		$session = $this->kirby->session([
+		$session = $this->infinri->session([
 			'createMode' => 'cookie',
 			'long'       => $long === true
 		]);
 
-		$timeout = $this->kirby->option('auth.challenge.timeout', 10 * 60);
+		$timeout = $this->infinri->option('auth.challenge.timeout', 10 * 60);
 
 		// discard any previously issued challenge before starting a new one
-		$session->remove('kirby.challenge.type');
-		$session->remove('kirby.challenge.code');
+		$session->remove('infinri.challenge.type');
+		$session->remove('infinri.challenge.code');
 
 		// catch every exception to hide them from attackers
 		// unless auth debugging is enabled
@@ -95,9 +94,9 @@ class Auth
 			$this->track($email, false);
 
 			// try to find the provided user
-			$user = $this->kirby->users()->find($email);
+			$user = $this->infinri->users()->find($email);
 			if ($user === null) {
-				$this->kirby->trigger('user.login:failed', compact('email'));
+				$this->infinri->trigger('user.login:failed', compact('email'));
 
 				throw new NotFoundException(
 					key: 'user.notFound',
@@ -118,11 +117,11 @@ class Auth
 					$challenge = $name;
 					$code = $class::create($user, compact('mode', 'timeout'));
 
-					$session->set('kirby.challenge.type', $challenge);
+					$session->set('infinri.challenge.type', $challenge);
 
 					if ($code !== null) {
 						$session->set(
-							'kirby.challenge.code',
+							'infinri.challenge.code',
 							password_hash($code, PASSWORD_DEFAULT)
 						);
 					}
@@ -134,7 +133,7 @@ class Auth
 			// if no suitable challenge was found, `$challenge === null` at this point
 			if ($challenge === null) {
 				throw new LogicException(
-					'Could not find a suitable authentication challenge'
+					message: 'Could not find a suitable authentication challenge'
 				);
 			}
 		} catch (Throwable $e) {
@@ -144,9 +143,9 @@ class Auth
 
 		// always set the email, mode and timeout, even if the challenge
 		// won't be created; this avoids leaking whether the user exists
-		$session->set('kirby.challenge.email', $email);
-		$session->set('kirby.challenge.mode', $mode);
-		$session->set('kirby.challenge.timeout', time() + $timeout);
+		$session->set('infinri.challenge.email', $email);
+		$session->set('infinri.challenge.mode', $mode);
+		$session->set('infinri.challenge.timeout', time() + $timeout);
 
 		// sleep for a random amount of milliseconds
 		// to make automated attacks harder and to
@@ -165,7 +164,7 @@ class Auth
 	public function csrf(): string|false
 	{
 		// get the csrf from the header
-		$fromHeader = $this->kirby->request()->csrf();
+		$fromHeader = $this->infinri->request()->csrf();
 
 		// check for a predefined csrf or use the one from session
 		$fromSession = $this->csrfFromSession();
@@ -180,13 +179,12 @@ class Auth
 
 	/**
 	 * Returns either predefined csrf or the one from session
-	 * @since 3.6.0
 	 */
 	public function csrfFromSession(): string
 	{
-		$isDev    = $this->kirby->option('panel.dev', false) !== false;
-		$fallback = $isDev ? 'dev' : $this->kirby->csrf();
-		return $this->kirby->option('api.csrf', $fallback);
+		$isDev    = $this->infinri->option('panel.dev', false) !== false;
+		$fallback = $isDev ? 'dev' : $this->infinri->csrf();
+		return $this->infinri->option('api.csrf', $fallback);
 	}
 
 	/**
@@ -199,17 +197,17 @@ class Auth
 	 */
 	public function currentUserFromBasicAuth(BasicAuth|null $auth = null): User|null
 	{
-		if ($this->kirby->option('api.basicAuth', false) !== true) {
+		if ($this->infinri->option('api.basicAuth', false) !== true) {
 			throw new PermissionException(
-				'Basic authentication is not activated'
+				message: 'Basic authentication is not activated'
 			);
 		}
 
 		// if logging in with password is disabled, basic auth cannot be possible either
-		$loginMethods = $this->kirby->system()->loginMethods();
+		$loginMethods = $this->infinri->system()->loginMethods();
 		if (isset($loginMethods['password']) !== true) {
 			throw new PermissionException(
-				'Login with password is not enabled'
+				message: 'Login with password is not enabled'
 			);
 		}
 
@@ -217,17 +215,17 @@ class Auth
 		foreach ($loginMethods as $method) {
 			if (isset($method['2fa']) === true && $method['2fa'] === true) {
 				throw new PermissionException(
-					'Basic authentication cannot be used with 2FA'
+					message: 'Basic authentication cannot be used with 2FA'
 				);
 			}
 		}
 
-		$request = $this->kirby->request();
+		$request = $this->infinri->request();
 		$auth  ??= $request->auth();
 
 		if (!$auth || $auth->type() !== 'basic') {
 			throw new InvalidArgumentException(
-				'Invalid authorization header'
+				message: 'Invalid authorization header'
 			);
 		}
 
@@ -235,10 +233,10 @@ class Auth
 		// insecure requests permitted
 		if (
 			$request->ssl() === false &&
-			$this->kirby->option('api.allowInsecure', false) !== true
+			$this->infinri->option('api.allowInsecure', false) !== true
 		) {
 			throw new PermissionException(
-				'Basic authentication is only allowed over HTTPS'
+				message: 'Basic authentication is only allowed over HTTPS'
 			);
 		}
 
@@ -263,7 +261,7 @@ class Auth
 	): User|null {
 		$session = $this->session($session);
 
-		$id = $session->data()->get('kirby.userId');
+		$id = $session->data()->get('infinri.userId');
 
 		// if no user is logged in, return immediately
 		if (is_string($id) !== true) {
@@ -271,16 +269,16 @@ class Auth
 		}
 
 		// a user is logged in, ensure it exists
-		$user = $this->kirby->users()->find($id);
+		$user = $this->infinri->users()->find($id);
 		if ($user === null) {
 			return null;
 		}
 
 		if ($passwordTimestamp = $user->passwordTimestamp()) {
-			$loginTimestamp = $session->data()->get('kirby.loginTimestamp');
+			$loginTimestamp = $session->data()->get('infinri.loginTimestamp');
 
 			if (is_int($loginTimestamp) !== true) {
-				// session that was created before Kirby
+				// session that was created before Infinri
 				// 3.5.8.3, 3.6.6.3, 3.7.5.2, 3.8.4.1 or 3.9.6
 				// or when the user didn't have a password set
 				$user->logout();
@@ -304,12 +302,11 @@ class Auth
 	/**
 	 * Returns the list of enabled challenges in the
 	 * configured order
-	 * @since 3.5.1
 	 */
 	public function enabledChallenges(): array
 	{
 		return A::wrap(
-			$this->kirby->option('auth.challenges', ['totp', 'email'])
+			$this->infinri->option('auth.challenges', ['totp', 'email'])
 		);
 	}
 
@@ -318,7 +315,7 @@ class Auth
 	 *
 	 * @param string|null $who User ID or email address,
 	 *                         `null` to use the actual user again,
-	 *                         `'kirby'` for a virtual admin user or
+	 *                         `'infinri'` for a virtual admin user or
 	 *                         `'nobody'` to disable the actual user
 	 * @throws \Infinri\Exception\NotFoundException if the given user cannot be found
 	 */
@@ -329,31 +326,18 @@ class Auth
 
 		return $this->impersonate = match ($who) {
 			null     => null,
-			'kirby'  => new User([
-				'email' => 'kirby@getkirby.com',
-				'id'    => 'kirby',
+			'infinri'  => new User([
+				'email' => 'infinri@infinri.com',
+				'id'    => 'infinri',
 				'role'  => 'admin',
 			]),
 			'nobody' => new User([
-				'email' => 'nobody@getkirby.com',
+				'email' => 'nobody@infinri.com',
 				'id'    => 'nobody',
 				'role'  => 'nobody',
 			]),
-			default => $this->kirby->users()->find($who) ?? throw new NotFoundException(message: 'The user "' . $who . '" cannot be found'),
+			default => $this->infinri->users()->find($who) ?? throw new NotFoundException(message: 'The user "' . $who . '" cannot be found'),
 		};
-	}
-
-	/**
-	 * Returns the hashed ip of the visitor
-	 * which is used to track invalid logins
-	 * @deprecated 5.3.0 Use `$visitor->ip(hash: true)` instead. Will be removed in Kirby 6.
-	 */
-	public function ipHash(): string
-	{
-		$hash = hash('sha256', $this->kirby->visitor()->ip());
-
-		// only use the first 50 chars to ensure privacy
-		return substr($hash, 0, 50);
 	}
 
 	/**
@@ -361,9 +345,9 @@ class Auth
 	 */
 	public function isBlocked(string $email): bool
 	{
-		$ip     = $this->kirby->visitor()->ip(hash: true);
+		$ip     = $this->infinri->visitor()->ip(hash: true);
 		$log    = $this->log();
-		$trials = $this->kirby->option('auth.trials', 10);
+		$trials = $this->infinri->option('auth.trials', 10);
 
 		if ($entry = ($log['by-ip'][$ip] ?? null)) {
 			if ($entry['trials'] >= $trials) {
@@ -371,7 +355,7 @@ class Auth
 			}
 		}
 
-		if ($this->kirby->users()->find($email)) {
+		if ($this->infinri->users()->find($email)) {
 			if ($entry = ($log['by-email'][$email] ?? null)) {
 				if ($entry['trials'] >= $trials) {
 					return true;
@@ -386,7 +370,6 @@ class Auth
 	 * Checks if the currently logged in user was authenticated
 	 * by a password reset challenge and may therefore set a new
 	 * password without knowing the previous one.
-	 * @since 5.5.4
 	 */
 	public function isResettingPassword(
 		Session|array|null $session = null
@@ -397,7 +380,7 @@ class Auth
 			return false;
 		}
 
-		$flag = $this->session($session)->get('kirby.resetPassword');
+		$flag = $this->session($session)->get('infinri.resetPassword');
 
 		return $flag === $user->id();
 	}
@@ -433,7 +416,6 @@ class Auth
 
 	/**
 	 * Login a user by email, password and auth challenge
-	 * @since 3.5.0
 	 *
 	 * @throws \Infinri\Exception\PermissionException If the rate limit was exceeded or if any other error occurred with debug mode off
 	 * @throws \Infinri\Exception\NotFoundException If the email was invalid
@@ -465,7 +447,6 @@ class Auth
 
 	/**
 	 * Returns the authentication status object
-	 * @since 3.5.1
 	 *
 	 * @param bool $allowImpersonation If set to false, only the actually
 	 *                                 logged in user will be returned
@@ -485,7 +466,7 @@ class Auth
 
 		$sessionObj = $this->session($session);
 
-		$props = ['kirby' => $this->kirby];
+		$props = ['infinri' => $this->infinri];
 		if ($user = $this->user($sessionObj, $allowImpersonation)) {
 			// a user is currently logged in
 			$props['email']  = $user->email();
@@ -495,12 +476,12 @@ class Auth
 				default                      => 'active'
 			};
 
-		} elseif ($email = $sessionObj->get('kirby.challenge.email')) {
+		} elseif ($email = $sessionObj->get('infinri.challenge.email')) {
 			// a challenge is currently pending
 			$props['status']            = 'pending';
 			$props['email']             = $email;
-			$props['mode']              = $sessionObj->get('kirby.challenge.mode');
-			$props['challenge']         = $sessionObj->get('kirby.challenge.type');
+			$props['mode']              = $sessionObj->get('infinri.challenge.mode');
+			$props['challenge']         = $sessionObj->get('infinri.challenge.type');
 			$props['challengeFallback'] = A::last($this->enabledChallenges());
 		} else {
 			// no active authentication
@@ -526,7 +507,7 @@ class Auth
 	{
 		// check for blocked ips
 		if ($this->isBlocked($email) === true) {
-			$this->kirby->trigger('user.login:failed', compact('email'));
+			$this->infinri->trigger('user.login:failed', compact('email'));
 
 			throw new PermissionException(
 				details: ['reason' => 'rate-limited'],
@@ -554,7 +535,7 @@ class Auth
 			$this->checkRateLimit($email);
 
 			// validate the user and its password
-			if ($user = $this->kirby->users()->find($email)) {
+			if ($user = $this->infinri->users()->find($email)) {
 				if ($user->validatePassword($password) === true) {
 					return $user;
 				}
@@ -592,7 +573,7 @@ class Auth
 	 */
 	public function logfile(): string
 	{
-		return $this->kirby->root('accounts') . '/.logins';
+		return $this->infinri->root('accounts') . '/.logins';
 	}
 
 	/**
@@ -617,7 +598,7 @@ class Auth
 
 		// remove entries that are no longer needed
 		$originalLog = $log;
-		$time        = time() - $this->kirby->option('auth.timeout', 3600);
+		$time        = time() - $this->infinri->option('auth.timeout', 3600);
 
 		foreach ($log as $category => $entries) {
 			$log[$category] = array_filter(
@@ -651,16 +632,16 @@ class Auth
 		// is logged out; otherwise this leftover data would keep the session
 		// alive and its cookie would block the pages cache;
 		// a new CSRF token is generated on next use
-		$session = $this->kirby->session();
-		$session->remove('kirby.challenge.code');
-		$session->remove('kirby.challenge.email');
-		$session->remove('kirby.challenge.mode');
-		$session->remove('kirby.challenge.timeout');
-		$session->remove('kirby.challenge.type');
-		$session->remove('kirby.csrf');
+		$session = $this->infinri->session();
+		$session->remove('infinri.challenge.code');
+		$session->remove('infinri.challenge.email');
+		$session->remove('infinri.challenge.mode');
+		$session->remove('infinri.challenge.timeout');
+		$session->remove('infinri.challenge.type');
+		$session->remove('infinri.csrf');
 
 		// clear the password reset flag
-		$session->remove('kirby.resetPassword');
+		$session->remove('infinri.resetPassword');
 
 		// logout the current user if it exists;
 		// run after clearing the session so `::logout()`
@@ -691,10 +672,10 @@ class Auth
 		bool $triggerHook = true
 	): bool {
 		if ($triggerHook === true) {
-			$this->kirby->trigger('user.login:failed', compact('email'));
+			$this->infinri->trigger('user.login:failed', compact('email'));
 		}
 
-		$ip   = $this->kirby->visitor()->ip(hash: true);
+		$ip   = $this->infinri->visitor()->ip(hash: true);
 		$log  = $this->log();
 		$time = time();
 
@@ -710,7 +691,7 @@ class Auth
 			];
 		}
 
-		if ($email !== null && $this->kirby->users()->find($email)) {
+		if ($email !== null && $this->infinri->users()->find($email)) {
 			if (isset($log['by-email'][$email]) === true) {
 				$log['by-email'][$email] = [
 					'time'   => $time,
@@ -736,8 +717,8 @@ class Auth
 	 */
 	public function type(bool $allowImpersonation = true): string
 	{
-		$basicAuth = $this->kirby->option('api.basicAuth', false);
-		$request   = $this->kirby->request();
+		$basicAuth = $this->infinri->option('api.basicAuth', false);
+		$request   = $this->infinri->request();
 
 		if (
 			$basicAuth === true &&
@@ -808,7 +789,6 @@ class Auth
 	 * Verifies an authentication code that was
 	 * requested with the `createChallenge()` method;
 	 * if successful, the user is automatically logged in
-	 * @since 3.5.0
 	 *
 	 * @param string $code User-provided auth code to verify
 	 * @return \Infinri\Cms\User User object of the logged-in user
@@ -824,12 +804,12 @@ class Auth
 		string $code
 	): User {
 		try {
-			$session = $this->kirby->session();
+			$session = $this->infinri->session();
 
 			// time-limiting; check this early so that we can
 			// destroy the session no matter if the user exists
 			// (avoids leaking user information to attackers)
-			$timeout = $session->get('kirby.challenge.timeout');
+			$timeout = $session->get('infinri.challenge.timeout');
 
 			if ($timeout !== null && time() > $timeout) {
 				// this challenge can never be completed,
@@ -843,8 +823,8 @@ class Auth
 			}
 
 			// check if we have an active challenge
-			$email     = $session->get('kirby.challenge.email');
-			$challenge = $session->get('kirby.challenge.type');
+			$email     = $session->get('infinri.challenge.email');
+			$challenge = $session->get('infinri.challenge.type');
 			if (is_string($email) !== true || is_string($challenge) !== true) {
 				// if the challenge timed out on the previous request, the
 				// challenge data was already deleted from the session, so we can
@@ -859,7 +839,7 @@ class Auth
 				);
 			}
 
-			$user = $this->kirby->users()->find($email);
+			$user = $this->infinri->users()->find($email);
 			if ($user === null) {
 				throw new NotFoundException(
 					key: 'user.notFound',
@@ -877,7 +857,7 @@ class Auth
 			) {
 				$class = static::$challenges[$challenge];
 				if ($class::verify($user, $code) === true) {
-					$mode = $session->get('kirby.challenge.mode');
+					$mode = $session->get('infinri.challenge.mode');
 
 					$this->logout();
 					$user->loginPasswordless();
@@ -887,7 +867,7 @@ class Auth
 					// issued for, so that no other user of the same session
 					// can make use of the flag
 					if ($mode === 'password-reset') {
-						$session->set('kirby.resetPassword', $user->id());
+						$session->set('infinri.resetPassword', $user->id());
 					}
 
 					// clear the status cache
@@ -900,7 +880,7 @@ class Auth
 			}
 
 			throw new LogicException(
-				'Invalid authentication challenge: ' . $challenge
+				message: 'Invalid authentication challenge: ' . $challenge
 			);
 		} catch (Throwable $e) {
 			$details = $e instanceof Exception ? $e->getDetails() : [];
@@ -943,7 +923,7 @@ class Auth
 		Throwable $exception,
 		Throwable|null $fallback = null
 	): void {
-		$debug = $this->kirby->option('auth.debug', 'log');
+		$debug = $this->infinri->option('auth.debug', 'log');
 
 		// throw the original exception only in debug mode
 		if ($debug === true) {
@@ -969,12 +949,12 @@ class Auth
 	{
 		// use passed session options or session object if set
 		if (is_array($session) === true) {
-			return $this->kirby->session($session);
+			return $this->infinri->session($session);
 		}
 
 		// try session in header or cookie
 		if ($session instanceof Session === false) {
-			return $this->kirby->session(['detect' => true]);
+			return $this->infinri->session(['detect' => true]);
 		}
 
 		return $session;

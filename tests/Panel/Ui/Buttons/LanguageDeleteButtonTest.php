@@ -40,8 +40,8 @@ class LanguageDeleteButtonTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'editor@getkirby.com', 'role' => 'editor'],
-				['email' => 'user@getkirby.com', 'role' => 'user']
+				['email' => 'editor@infinri.com', 'role' => 'editor'],
+				['email' => 'user@infinri.com', 'role' => 'user']
 			]
 		]);
 
@@ -52,13 +52,13 @@ class LanguageDeleteButtonTest extends TestCase
 		$this->assertTrue($button->disabled);
 
 		// with permission
-		$app->impersonate('editor@getkirby.com', function () use ($language) {
+		$app->impersonate('editor@infinri.com', function () use ($language) {
 			$button = new LanguageDeleteButton($language);
 			$this->assertFalse($button->disabled);
 		});
 
 		// without permission
-		$app->impersonate('user@getkirby.com', function () use ($language) {
+		$app->impersonate('user@infinri.com', function () use ($language) {
 			$button = new LanguageDeleteButton($language);
 			$this->assertTrue($button->disabled);
 		});

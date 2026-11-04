@@ -7,13 +7,13 @@ use Infinri\Exception\InvalidArgumentException;
 
 class LanguageVariable
 {
-	protected App $kirby;
+	protected App $infinri;
 
 	public function __construct(
 		protected Language $language,
 		protected string $key
 	) {
-		$this->kirby = App::instance();
+		$this->infinri = App::instance();
 	}
 
 	/**
@@ -37,8 +37,8 @@ class LanguageVariable
 			);
 		}
 
-		$kirby        = App::instance();
-		$language     = $kirby->defaultLanguage();
+		$infinri        = App::instance();
+		$language     = $infinri->defaultLanguage();
 		$translations = $language->translations();
 
 		if (isset($translations[$key]) === true) {
@@ -48,7 +48,7 @@ class LanguageVariable
 			);
 		}
 
-		if (isset($kirby->coreI18nStrings($language->code())[$key]) === true) {
+		if (isset($infinri->coreI18nStrings($language->code())[$key]) === true) {
 			throw new DuplicateException(
 				key: 'language.variable.core',
 				data: ['key' => $key]
@@ -70,7 +70,7 @@ class LanguageVariable
 	public function delete(): bool
 	{
 		// go through all languages and remove the variable
-		foreach ($this->kirby->languages() as $language) {
+		foreach ($this->infinri->languages() as $language) {
 			$variables = $language->translations();
 
 			unset($variables[$this->key]);
@@ -86,13 +86,12 @@ class LanguageVariable
 	 */
 	public function exists(): bool
 	{
-		$language = $this->kirby->defaultLanguage();
+		$language = $this->infinri->defaultLanguage();
 		return isset($language->translations()[$this->key]) === true;
 	}
 
 	/**
 	 * Checks if the value is an array
-	 * @since 5.0.0
 	 */
 	public function hasMultipleValues(): bool
 	{
@@ -109,7 +108,6 @@ class LanguageVariable
 
 	/**
 	 * Returns the parent language
-	 * @since 5.1.0
 	 */
 	public function language(): Language
 	{

@@ -32,7 +32,6 @@ class DarkroomTest extends TestCase
 		$instance = Darkroom::factory('imagick');
 		$this->assertInstanceOf(Imagick::class, $instance);
 
-		// TODO: remove in v7
 		$instance = Darkroom::factory('im');
 		$this->assertInstanceOf(ImageMagick::class, $instance);
 	}

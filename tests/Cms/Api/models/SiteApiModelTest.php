@@ -6,7 +6,7 @@ use Infinri\Cms\Api\ApiModelTestCase;
 
 class SiteApiModelTest extends ApiModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SiteApiModel';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SiteApiModel';
 
 	public function testBlueprint(): void
 	{
@@ -26,7 +26,7 @@ class SiteApiModelTest extends ApiModelTestCase
 
 	public function testChildren(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = new Site([
 			'children' => [
@@ -91,7 +91,7 @@ class SiteApiModelTest extends ApiModelTestCase
 
 	public function testDrafts(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = new Site([
 			'drafts' => [
@@ -144,7 +144,7 @@ class SiteApiModelTest extends ApiModelTestCase
 
 	public function testFiles(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$site = new Site([
 			'files' => [
@@ -209,9 +209,9 @@ class SiteApiModelTest extends ApiModelTestCase
 	public function testUrl(): void
 	{
 		$site = new Site([
-			'url' => 'https://getkirby.com'
+			'url' => 'https://infinri.com'
 		]);
 
-		$this->assertAttr($site, 'url', 'https://getkirby.com');
+		$this->assertAttr($site, 'url', 'https://infinri.com');
 	}
 }

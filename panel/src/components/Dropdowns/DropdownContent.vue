@@ -43,20 +43,12 @@ let OpenDropdown = null;
 /**
  * Dropdowns are constructed with two elements: `<k-dropdown-content>` holds any content shown when opening the dropdown: any number of `<k-dropdown-item>` elements or any other HTML; typically a `<k-button>` then is used to call the `toggle()` method on `<k-dropdown-content>`.
  *
- * @todo rename to `k-dropdown` in v6 (with alias to old name)
+ * @todo rename to `k-dropdown`
  */
 export default {
 	props: {
 		/**
-		 * @deprecated 4.0.0 Use `align-x` instead
-		 * @todo rename `axis` data to `align` when removed
-		 */
-		align: {
-			type: String
-		},
-		/**
 		 * Default horizontal alignment of the dropdown
-		 * @since 4.0.0
 		 * @values "start", "end", "center"
 		 */
 		alignX: {
@@ -65,23 +57,16 @@ export default {
 		},
 		/**
 		 * Default vertical alignment of the dropdown
-		 * @since 4.0.0
 		 * @values "top", "bottom"
 		 */
 		alignY: {
 			type: String,
 			default: "bottom"
 		},
-		/**
-		 * @since 4.0.0
-		 */
 		disabled: {
 			type: Boolean,
 			default: false
 		},
-		/**
-		 * @since 4.0.0
-		 */
 		navigate: {
 			default: true,
 			type: Boolean
@@ -124,13 +109,6 @@ export default {
 			opener: null
 		};
 	},
-	mounted() {
-		if (this.align) {
-			window.panel.deprecated(
-				"<k-dropdown-content>: `align` prop will be removed in a future version. Use the `alignX` prop instead."
-			);
-		}
-	},
 	methods: {
 		/**
 		 * Closes the dropdown
@@ -146,7 +124,7 @@ export default {
 
 			// resolve a dropdown URL
 			if (typeof this.options === "string") {
-				return this.$dropdown(this.options)(ready);
+				return this.$panel.dropdown.openAsync(this.options)(ready);
 			}
 
 			// resolve a callback function
@@ -214,7 +192,7 @@ export default {
 				}
 
 				if (option.click.global) {
-					this.$events.emit(option.click.global, option.click.payload);
+					this.$panel.events.emit(option.click.global, option.click.payload);
 				}
 			}
 		},
@@ -249,7 +227,7 @@ export default {
 			// reset to the alignment defaults
 			// before running position calculation
 			this.axis = {
-				x: this.alignX ?? this.align,
+				x: this.alignX,
 				y: this.alignY
 			};
 

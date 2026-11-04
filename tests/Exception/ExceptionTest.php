@@ -24,25 +24,19 @@ class ExceptionTest extends TestCase
 		App::destroy();
 	}
 
-	public function testException(): void
+	public function testExceptionWithArgsArray(): void
 	{
-		$exception = new Exception([
-			'key' => 'page.slug.invalid',
-			'fallback' => 'The page slug "{ slug }" is invalid',
-			'data' => $data = ['slug' => 'project/(c'],
-			'details' => $details = ['some' => 'details'],
-			'httpCode' => $http = 500,
-			'translate' => false
-		]);
+		$this->expectException(\TypeError::class);
 
-		$this->assertInstanceOf(Exception::class, $exception);
-		$this->assertSame('error.page.slug.invalid', $exception->getKey());
-		$this->assertSame('error.page.slug.invalid', $exception->getCode());
-		$this->assertSame('The page slug "project/(c" is invalid', $exception->getMessage());
-		$this->assertSame($http, $exception->getHttpCode());
-		$this->assertSame($data, $exception->getData());
-		$this->assertSame($details, $exception->getDetails());
-		$this->assertFalse($exception->isTranslated());
+		new Exception(['key' => 'page.slug.invalid']);
+	}
+
+	public function testConstructorHasNoArgsParameter(): void
+	{
+		$parameters = (new \ReflectionMethod(Exception::class, '__construct'))->getParameters();
+
+		$this->assertSame('key', $parameters[0]->getName());
+		$this->assertNotContains('args', array_map(fn ($p) => $p->getName(), $parameters));
 	}
 
 	public function testExceptionWithNamedArguments(): void
@@ -110,17 +104,6 @@ class ExceptionTest extends TestCase
 		$this->assertSame($expected, $exception->getDetails());
 	}
 
-	public function testJustMessage(): void
-	{
-		$exception = new Exception('Another error occurred');
-
-		$this->assertSame('error.general', $exception->getKey());
-		$this->assertSame('Another error occurred', $exception->getMessage());
-		$this->assertSame(500, $exception->getHttpCode());
-		$this->assertFalse($exception->isTranslated());
-		$this->assertSame([], $exception->getData());
-	}
-
 	public function testJustMessageWithNamedArgument(): void
 	{
 		$exception = new Exception(message: 'Another error occurred');
@@ -170,25 +153,25 @@ class ExceptionTest extends TestCase
 		];
 
 		// scenario 1: translation for provided key in current language
-		$exception = new Exception([
-			'key'      => 'translatable',
-			'fallback' => 'Some fallback'
-		]);
+		$exception = new Exception(
+			key: 'translatable',
+			fallback: 'Some fallback'
+		);
 		$this->assertSame('Some other translatable error', $exception->getMessage());
 		$this->assertTrue($exception->isTranslated());
 
 		// scenario 3: provided fallback message
-		$exception = new Exception([
-			'key'      => 'not-translated',
-			'fallback' => 'Some fallback'
-		]);
+		$exception = new Exception(
+			key: 'not-translated',
+			fallback: 'Some fallback'
+		);
 		$this->assertSame('Some fallback', $exception->getMessage());
 		$this->assertFalse($exception->isTranslated());
 
 		// scenario 4: translation for default key in current language
-		$exception = new Exception([
-			'key' => 'not-translated'
-		]);
+		$exception = new Exception(
+			key: 'not-translated'
+		);
 		$this->assertSame('Some general error', $exception->getMessage());
 		$this->assertTrue($exception->isTranslated());
 
@@ -200,17 +183,17 @@ class ExceptionTest extends TestCase
 		];
 
 		// scenario 2: translation for provided key in default language
-		$exception = new Exception([
-			'key'      => 'translatable',
-			'fallback' => 'Some fallback'
-		]);
+		$exception = new Exception(
+			key: 'translatable',
+			fallback: 'Some fallback'
+		);
 		$this->assertSame('Some other translatable fallback', $exception->getMessage());
 		$this->assertTrue($exception->isTranslated());
 
 		// scenario 5: translation for default key in default language
-		$exception = new Exception([
-			'key' => 'not-translated'
-		]);
+		$exception = new Exception(
+			key: 'not-translated'
+		);
 		$this->assertSame('Some general fallback', $exception->getMessage());
 		$this->assertTrue($exception->isTranslated());
 
@@ -218,9 +201,9 @@ class ExceptionTest extends TestCase
 		I18n::$translations = [];
 
 		// scenario 6: default fallback message
-		$exception = new Exception([
-			'key' => 'translatable'
-		]);
+		$exception = new Exception(
+			key: 'translatable'
+		);
 		$this->assertSame('An error occurred', $exception->getMessage());
 		$this->assertFalse($exception->isTranslated());
 	}

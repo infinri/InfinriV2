@@ -13,7 +13,6 @@
 <script>
 /**
  * Wrapper for file view previews
- * @since 5.0.0
  */
 export default {
 	props: {

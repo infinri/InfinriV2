@@ -15,19 +15,19 @@
 
 		<k-file-preview-details :details="details">
 			<div v-if="image.src" class="k-image-file-preview-focus">
-				<dt>{{ $t("file.focus.title") }}</dt>
+				<dt>{{ $panel.t("file.focus.title") }}</dt>
 				<dd>
 					<k-button
 						v-if="isFocusable"
 						ref="focus"
 						:icon="focus ? 'cancel-small' : 'preview'"
-						:title="focus ? $t('file.focus.reset') : undefined"
+						:title="focus ? $panel.t('file.focus.reset') : undefined"
 						size="xs"
 						variant="filled"
 						@click="focus ? setFocus(undefined) : setFocus({ x: 50, y: 50 })"
 					>
 						<template v-if="hasFocus">{{ focus.x }}% {{ focus.y }}%</template>
-						<template v-else>{{ $t("file.focus.placeholder") }}</template>
+						<template v-else>{{ $panel.t("file.focus.placeholder") }}</template>
 					</k-button>
 					<template v-else-if="hasFocus">
 						{{ focus.x }}% {{ focus.y }}%
@@ -42,7 +42,6 @@
 <script>
 /**
  * File view preview for image files
- * @since 5.0.0
  */
 export default {
 	props: {
@@ -59,7 +58,6 @@ export default {
 		isLocked: Boolean,
 		/**
 		 * Aspect ratio for SVGs without their own size
-		 * @since 5.6.2
 		 */
 		ratio: Number,
 		url: String
@@ -87,19 +85,19 @@ export default {
 			return [
 				{
 					icon: "open",
-					text: this.$t("open"),
+					text: this.$panel.t("open"),
 					link: this.url,
 					target: "_blank"
 				},
 				{
 					icon: "cancel",
-					text: this.$t("file.focus.reset"),
+					text: this.$panel.t("file.focus.reset"),
 					click: () => this.setFocus(undefined),
 					when: this.isFocusable && this.hasFocus
 				},
 				{
 					icon: "preview",
-					text: this.$t("file.focus.placeholder"),
+					text: this.$panel.t("file.focus.placeholder"),
 					click: () => this.setFocus({ x: 50, y: 50 }),
 					when: this.isFocusable && !this.hasFocus
 				}

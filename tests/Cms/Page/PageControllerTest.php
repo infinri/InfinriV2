@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Page::class)]
 class PageControllerTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageController';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageController';
 
 	public function testControllerForACustomTemplate(): void
 	{
@@ -38,7 +38,7 @@ class PageControllerTest extends ModelTestCase
 
 		$data = $page->controller();
 
-		$this->assertSame($this->app, $data['kirby']);
+		$this->assertSame($this->app, $data['infinri']);
 		$this->assertSame($this->app->site(), $data['site']);
 		$this->assertSame($this->app->site()->pages(), $data['pages']);
 		$this->assertSame($page, $data['page']);

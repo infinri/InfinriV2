@@ -70,10 +70,10 @@ class Languages extends Collection
 	 */
 	public static function ensure(): static
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
-		if ($kirby->multilang() === true) {
-			return $kirby->languages();
+		if ($infinri->multilang() === true) {
+			return $infinri->languages();
 		}
 
 		return new static([Language::single()]);

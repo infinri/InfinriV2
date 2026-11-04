@@ -2,8 +2,8 @@
 
 if (
 	(
-		defined('KIRBY_PHP_VERSION_CHECK') !== true ||
-		KIRBY_PHP_VERSION_CHECK !== false
+		defined('INFINRI_PHP_VERSION_CHECK') !== true ||
+		INFINRI_PHP_VERSION_CHECK !== false
 	) && (
 		version_compare(PHP_VERSION, '8.2.0', '>=') === false ||
 		version_compare(PHP_VERSION, '8.6.0', '<')  === false

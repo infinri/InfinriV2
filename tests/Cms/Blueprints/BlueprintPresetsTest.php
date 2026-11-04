@@ -15,7 +15,7 @@ class BlueprintPresetsTest extends TestCase
 
 	public function load($preset)
 	{
-		return include $this->app->root('kirby') . '/config/presets/' . $preset . '.php';
+		return include $this->app->root('infinri') . '/config/presets/' . $preset . '.php';
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Taken from: https://github.com/atlassian/prosemirror-utils
+ * Taken from: prosemirror-utils
  */
 import { NodeSelection } from "prosemirror-state";
 

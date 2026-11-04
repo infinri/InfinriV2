@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Lock::class)]
 class LockTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Content.LockTest';
+	public const TMP = INFINRI_TMP_DIR . '/Content.LockTest';
 
 	protected function createChangesVersion(
 		Language|string $language = 'default'
@@ -58,11 +58,11 @@ class LockTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'id'    => 'admin',
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'id'    => 'editor',
 				]
 			]
@@ -182,7 +182,7 @@ class LockTest extends TestCase
 		$this->assertNull($lock->modified());
 	}
 
-	public function testForWithLegacyLock(): void
+	public function testForIgnoresLegacyLockFile(): void
 	{
 		$page = $this->app->page('test');
 		$file = $page->root() . '/.lock';
@@ -191,14 +191,25 @@ class LockTest extends TestCase
 			'/' . $page->id() => [
 				'lock' => [
 					'user' => 'editor',
-					'time' => $time = time()
+					'time' => time()
 				]
 			]
 		], 'yml');
 
 		$lock = Lock::for($page->version('changes'));
 		$this->assertInstanceOf(Lock::class, $lock);
-		$this->assertTrue($lock->isLocked());
+		$this->assertFalse($lock->isLocked());
+		$this->assertNull($lock->user());
+		$this->assertFileExists($file);
+	}
+
+	public function testLegacyMembersAreRemoved(): void
+	{
+		$this->assertFalse(method_exists(Lock::class, 'legacy'));
+		$this->assertFalse(method_exists(Lock::class, 'legacyFile'));
+		$this->assertFalse(method_exists(Lock::class, 'isLegacy'));
+		$this->assertFalse((new \ReflectionClass(Lock::class))->hasProperty('legacy'));
+		$this->assertArrayNotHasKey('isLegacy', (new Lock())->toArray());
 	}
 
 	public function testIsActive(): void
@@ -244,15 +255,6 @@ class LockTest extends TestCase
 		]);
 
 		$this->assertFalse(Lock::isEnabled());
-	}
-
-	public function testIsLegacy(): void
-	{
-		$lock = new Lock();
-		$this->assertFalse($lock->isLegacy());
-
-		$lock = new Lock(legacy: true);
-		$this->assertTrue($lock->isLegacy());
 	}
 
 	public function testIsLocked(): void
@@ -317,87 +319,6 @@ class LockTest extends TestCase
 		$this->assertFalse($lock->isLocked());
 	}
 
-	public function testLegacy(): void
-	{
-		$page = $this->app->page('test');
-		$file = $page->root() . '/.lock';
-
-		Data::write($file, [
-			'/' . $page->id() => [
-				'lock' => [
-					'user' => 'editor',
-					'time' => $time = time()
-				]
-			]
-		], 'yml');
-
-		$lock = Lock::legacy($page);
-
-		$this->assertInstanceOf(Lock::class, $lock);
-		$this->assertTrue($lock->isLocked());
-		$this->assertTrue($lock->isLegacy());
-		$this->assertSame($this->app->user('editor'), $lock->user());
-		$this->assertSame($time, $lock->modified());
-	}
-
-	public function testLegacyWithoutLockInfo(): void
-	{
-		$page = $this->app->page('test');
-		$file = $page->root() . '/.lock';
-
-		Data::write($file, [], 'yml');
-
-		$lock = Lock::legacy($page);
-		$this->assertNull($lock);
-	}
-
-	public function testLegacyWithOutdatedFile(): void
-	{
-		$page = $this->app->page('test');
-		$file = $page->root() . '/.lock';
-
-		Data::write($file, [
-			'/' . $page->id() => [
-				'lock' => [
-					'user' => 'editor',
-					'time' => time() - 60 * 60 * 24
-				],
-			]
-		], 'yml');
-
-		$lock = Lock::legacy($page);
-
-		$this->assertInstanceOf(Lock::class, $lock);
-		$this->assertFalse($lock->isLocked());
-	}
-
-	public function testLegacyWithUnlockedFile(): void
-	{
-		$page = $this->app->page('test');
-		$file = $page->root() . '/.lock';
-
-		Data::write($file, [
-			'/' . $page->id() => [
-				'lock' => [
-					'user' => 'editor',
-					'time' => time()
-				],
-				'unlock' => ['admin']
-			]
-		], 'yml');
-
-		$lock = Lock::legacy($page);
-		$this->assertNull($lock);
-	}
-
-	public function testLegacyFile(): void
-	{
-		$page = $this->app->page('test');
-		$expected = $page->root() . '/.lock';
-
-		$this->assertSame($expected, Lock::legacyFile($page));
-	}
-
 	public function testModified(): void
 	{
 		$lock = new Lock(
@@ -410,7 +331,7 @@ class LockTest extends TestCase
 
 	public function testToArray(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$lock = new Lock(
 			user: $this->app->user('editor'),
@@ -418,12 +339,11 @@ class LockTest extends TestCase
 		);
 
 		$this->assertSame([
-			'isLegacy' => false,
 			'isLocked' => true,
 			'modified' => date('c', $modified),
 			'user'     => [
 				'id'    => 'editor',
-				'email' => 'editor@getkirby.com'
+				'email' => 'editor@infinri.com'
 			]
 		], $lock->toArray());
 	}
@@ -441,11 +361,11 @@ class LockTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'id'    => 'admin',
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'id'    => 'editor',
 					'role'  => 'restricted',
 				],
@@ -460,7 +380,6 @@ class LockTest extends TestCase
 		);
 
 		$this->assertSame([
-			'isLegacy' => false,
 			'isLocked' => true,
 			'modified' => date('c', $modified),
 			'user'     => [

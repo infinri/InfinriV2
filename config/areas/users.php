@@ -2,7 +2,7 @@
 
 use Infinri\Toolkit\I18n;
 
-return function ($kirby) {
+return function ($infinri) {
 	return [
 		'icon'      => 'users',
 		'label'     => I18n::translate('view.users'),

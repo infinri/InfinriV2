@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(View::class)]
 class ViewTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.View';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.View';
 
 	protected function setUp(): void
 	{
@@ -230,7 +230,7 @@ class ViewTest extends TestCase
 		$this->assertInstanceOf('Closure', $data['$language']);
 		$this->assertInstanceOf('Closure', $data['$languages']);
 		$this->assertSame([], $data['$permissions']);
-		$this->assertSame('missing', $data['$license']);
+		$this->assertArrayNotHasKey('$license', $data);
 		$this->assertFalse($data['$multilang']);
 		$this->assertSame('/', $data['$url']);
 		$this->assertInstanceOf('Closure', $data['$user']);
@@ -367,7 +367,7 @@ class ViewTest extends TestCase
 		$this->app->setCurrentLanguage('ar');
 
 		// authenticate pseudo user
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// without custom data
 		$data = View::data();
@@ -382,7 +382,7 @@ class ViewTest extends TestCase
 	public function testDataWithAuthenticatedUser(): void
 	{
 		// authenticate pseudo user
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// without custom data
 		$data = View::data();
@@ -392,11 +392,11 @@ class ViewTest extends TestCase
 
 		// user
 		$expected = [
-			'email'    => 'kirby@getkirby.com',
-			'id'       => 'kirby',
+			'email'    => 'infinri@infinri.com',
+			'id'       => 'infinri',
 			'language' => 'en',
 			'role'     => 'admin',
-			'username' => 'kirby@getkirby.com'
+			'username' => 'infinri@infinri.com'
 		];
 
 		$this->assertSame($expected, $data['$user']);
@@ -422,7 +422,7 @@ class ViewTest extends TestCase
 		$this->assertSame($expected, $error);
 
 		// with user
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$error = View::error('Test');
 
 		$this->assertSame('inside', $error['props']['layout']);
@@ -460,7 +460,7 @@ class ViewTest extends TestCase
 
 		// $config
 		$this->assertFalse($config['debug']);
-		$this->assertTrue($config['kirbytext']);
+		$this->assertTrue($config['infinritext']);
 		$this->assertSame('en', $config['translation']);
 		$this->assertSame(3, $config['uploads']);
 
@@ -504,14 +504,14 @@ class ViewTest extends TestCase
 		$this->app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'language' => 'de',
 					'role' => 'admin'
 				]
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 		$globals = View::globals();
 		$globals = A::apply($globals);
 		$this->assertSame('de', $globals['$translation']['code']);
@@ -564,13 +564,13 @@ class ViewTest extends TestCase
 			]
 		]);
 
-		$redirect = new Redirect('https://getkirby.com');
+		$redirect = new Redirect('https://infinri.com');
 		$response = View::response($redirect);
 
 		$this->assertInstanceOf(Response::class, $response);
 
 		$this->assertSame(302, $response->code());
-		$this->assertSame('https://getkirby.com', $response->header('Location'));
+		$this->assertSame('https://infinri.com', $response->header('Location'));
 	}
 
 	public function testResponseFromRedirectRefresh(): void
@@ -584,16 +584,16 @@ class ViewTest extends TestCase
 			]
 		]);
 
-		$redirect = new Redirect('https://getkirby.com', refresh: 5);
+		$redirect = new Redirect('https://infinri.com', refresh: 5);
 		$response = View::response($redirect);
 
 		$this->assertInstanceOf(Response::class, $response);
 
 		$this->assertSame(302, $response->code());
-		$this->assertSame('5; url=https://getkirby.com', $response->header('Refresh'));
+		$this->assertSame('5; url=https://infinri.com', $response->header('Refresh'));
 	}
 
-	public function testResponseFromKirbyException()
+	public function testResponseFromInfinriException()
 	{
 		// fake json request for easier assertions
 		$this->app = $this->app->clone([

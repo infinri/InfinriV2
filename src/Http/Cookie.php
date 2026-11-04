@@ -11,7 +11,7 @@ class Cookie
 	 * Key to use for cookie signing
 	 *
 	 * A hardcoded default is used intentionally: there is no install step
-	 * during which a random key could be generated and persisted. Kirby goes
+	 * during which a random key could be generated and persisted. Infinri goes
 	 * live the moment files are present on the server, so there is no defined
 	 * point at which to write a one-time secret. Config files are typically
 	 * kept in version control and cannot be written by the system without
@@ -20,7 +20,7 @@ class Cookie
 	 * key. Sites with security requirements must override this property with
 	 * a secret random value before the first cookie is set.
 	 */
-	public static string $key = 'KirbyHttpCookieKey';
+	public static string $key = 'InfinriHttpCookieKey';
 
 	/**
 	 * Set a new cookie
@@ -221,8 +221,7 @@ class Cookie
 	 * Tells the CMS responder that the response relies on a cookie and
 	 * its value (even if the cookie isn't set in the current request);
 	 * this ensures that the response is only cached for visitors who don't
-	 * have this cookie set;
-	 * https://github.com/getkirby/kirby/issues/4423#issuecomment-1166300526
+	 * have this cookie set
 	 */
 	protected static function trackUsage(string $key): void
 	{

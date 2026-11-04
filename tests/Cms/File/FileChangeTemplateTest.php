@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class FileChangeTemplateTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/files';
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileChangeTemplate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileChangeTemplate';
 
 	public function testChangeTemplate(): void
 	{
@@ -83,7 +83,7 @@ class FileChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = $app->page('test');
 		$file = $page->createFile([
@@ -184,7 +184,7 @@ class FileChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'     => 'test',
@@ -286,7 +286,7 @@ class FileChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'     => 'test',
@@ -348,7 +348,7 @@ class FileChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'     => 'test',
@@ -399,7 +399,7 @@ class FileChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'     => 'test',
@@ -470,7 +470,7 @@ class FileChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug'     => 'test',
@@ -535,7 +535,7 @@ class FileChangeTemplateTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$file = $app->page('test')->createFile([
 			'filename' => 'test.jpg',

@@ -92,8 +92,8 @@ class PlainTextStorage extends Storage
 	 */
 	protected function contentFilename(string $name, Language $language): string
 	{
-		$kirby     = $this->model->kirby();
-		$extension = $kirby->contentExtension();
+		$infinri     = $this->model->infinri();
+		$extension = $infinri->contentExtension();
 
 		if ($language->isSingle() === false) {
 			return $name . '.' . $language->code() . '.' . $extension;
@@ -108,8 +108,8 @@ class PlainTextStorage extends Storage
 	 */
 	public function contentFiles(VersionId $versionId): array
 	{
-		if ($this->model->kirby()->multilang() === true) {
-			return $this->model->kirby()->languages()->values(
+		if ($this->model->infinri()->multilang() === true) {
+			return $this->model->infinri()->languages()->values(
 				fn ($language) => $this->contentFile($versionId, $language)
 			);
 		}
@@ -278,7 +278,7 @@ class PlainTextStorage extends Storage
 
 		// `$this->model` may still point to a stale root after a concurrent move,
 		// so we re-resolve the page from the current app state.
-		$currentPage = $this->model->kirby()->page($this->model->id());
+		$currentPage = $this->model->infinri()->page($this->model->id());
 
 		if (
 			$currentPage !== null &&

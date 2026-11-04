@@ -32,11 +32,11 @@ class Asset
 		// whether the requested file exists on the server;
 		// `../` and `..\` sequences are fishy enough to to prevent them entirely
 		if (Str::contains(Str::replace($path, '\\', '/'), '../') === true) {
-			throw new InvalidArgumentException('Received unexpected asset path');
+			throw new InvalidArgumentException(message: 'Received unexpected asset path');
 		}
 
-		$this->root = $this->kirby()->root('index') . '/' . $path;
-		$this->url  = $this->kirby()->url('base') . '/' . $path;
+		$this->root = $this->infinri()->root('index') . '/' . $path;
+		$this->url  = $this->infinri()->url('base') . '/' . $path;
 
 		// set relative file path
 		$this->path = dirname($path);
@@ -84,7 +84,6 @@ class Asset
 	/**
 	 * Returns the absolute path to the media folder
 	 * for the file and its versions
-	 * @since 5.0.0
 	 */
 	public function mediaDir(): string
 	{
@@ -113,7 +112,7 @@ class Asset
 	 */
 	public function mediaRoot(string|null $filename = null): string
 	{
-		return $this->kirby()->root('media') . '/' . $this->mediaPath($filename);
+		return $this->infinri()->root('media') . '/' . $this->mediaPath($filename);
 	}
 
 	/**
@@ -121,7 +120,7 @@ class Asset
 	 */
 	public function mediaUrl(string|null $filename = null): string
 	{
-		return $this->kirby()->url('media') . '/' . $this->mediaPath($filename);
+		return $this->infinri()->url('media') . '/' . $this->mediaPath($filename);
 	}
 
 	/**

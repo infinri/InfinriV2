@@ -6,7 +6,11 @@
 		:input="id"
 		:style="$attrs.style"
 	>
-		<k-empty v-if="hasNoOptions" :icon="icon" :text="$t('options.none')" />
+		<k-empty
+			v-if="hasNoOptions"
+			:icon="icon"
+			:text="$panel.t('options.none')"
+		/>
 		<k-input
 			v-else
 			v-bind="$props"

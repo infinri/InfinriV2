@@ -46,7 +46,6 @@ export const props = {
 };
 
 /**
- * @since 4.0.0
  * @example <k-colorname-input :value="value" @input="value = $event" />
  */
 export default {
@@ -117,7 +116,7 @@ export default {
 			let error = "";
 
 			if (this.$library.colors.parse(this.value) === null) {
-				error = this.$t("error.validation.color", {
+				error = this.$panel.t("error.validation.color", {
 					format: this.format
 				});
 			}

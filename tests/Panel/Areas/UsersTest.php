@@ -58,7 +58,7 @@ class UsersTest extends AreaTestCase
 
 		$this->assertSame('users', $view['id']);
 		$this->assertSame('k-user-view', $view['component']);
-		$this->assertSame('test@getkirby.com', $view['title']);
+		$this->assertSame('test@infinri.com', $view['title']);
 	}
 
 	public function testUserWithMissingModel(): void
@@ -73,7 +73,7 @@ class UsersTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 					'files' => [
 						['filename' => 'test.jpg']
@@ -121,13 +121,13 @@ class UsersTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 
 		$view  = $this->view('users');
 		$props = $view['props'];
@@ -144,12 +144,12 @@ class UsersTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 				],
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			],

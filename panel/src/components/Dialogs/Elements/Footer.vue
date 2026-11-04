@@ -7,7 +7,6 @@
 <script>
 /**
  * @displayName DialogFooter
- * @since 4.0.0
  */
 export default {};
 </script>

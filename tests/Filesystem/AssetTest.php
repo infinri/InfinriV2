@@ -18,7 +18,7 @@ class AssetTest extends TestCase
 				'index' => '/dev/null'
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			],
 			'assetMethods' => [
 				'test' => fn () => 'asset method'
@@ -37,7 +37,7 @@ class AssetTest extends TestCase
 
 		$this->assertSame('/dev/null/' . $file, $asset->root());
 		$this->assertSame('/dev/null/' . $file, $asset->id());
-		$this->assertSame('https://getkirby.com/' . $file, $asset->url());
+		$this->assertSame('https://infinri.com/' . $file, $asset->url());
 		$this->assertSame('images', $asset->path());
 
 		$this->app->clone([
@@ -113,7 +113,7 @@ class AssetTest extends TestCase
 	public function testToString(): void
 	{
 		$asset = $this->_asset();
-		$this->assertSame('<img alt="" src="https://getkirby.com/images/logo.svg">', $asset->__toString());
+		$this->assertSame('<img alt="" src="https://infinri.com/images/logo.svg">', $asset->__toString());
 	}
 
 	public function testNonExistingMethod(): void

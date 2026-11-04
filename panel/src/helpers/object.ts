@@ -17,7 +17,6 @@ export function clone<T>(value?: T): T | undefined {
 
 /**
  * Filters the object via a predicate callback
- * @since 5.0.0
  *
  * @example
  * filter({ a: 1, b: 2, c: 3 }, (value) => value > 1) // => { b: 2, c: 3 }
@@ -78,7 +77,6 @@ export function isObject(input: unknown): input is Record<string, unknown> {
 
 /**
  * Counts all keys in the object
- * @since 4.0.0
  *
  * @example
  * length({ a: 1, b: 2 }) // => 2

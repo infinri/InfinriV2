@@ -20,7 +20,6 @@ class A
 	 * Recursively loops through the array and
 	 * resolves any item defined as `Closure`,
 	 * applying the passed parameters
-	 * @since 3.5.6
 	 *
 	 * @param mixed ...$args Parameters to pass to the closures
 	 */
@@ -97,7 +96,6 @@ class A
 	 * // output: 'true'
 	 * ```
 	 *
-	 * @since 3.9.8
 	 * @param callable(mixed $value, int|string $key, array $array):bool $test
 	 */
 	public static function every(array $array, callable $test): bool
@@ -155,7 +153,6 @@ class A
 	/**
 	 * Filter the array using the given callback
 	 * using both value and key
-	 * @since 3.6.5
 	 */
 	public static function filter(array $array, callable $callback): array
 	{
@@ -186,7 +183,6 @@ class A
 	 * // output: 'wuff'
 	 * ```
 	 *
-	 * @since 3.9.8
 	 * @param callable(mixed $value, int|string $key, array $array):bool $callback
 	 */
 	public static function find(array $array, callable $callback): mixed
@@ -245,8 +241,6 @@ class A
 	 * //   'yellow' => ['banana'],
 	 * // ]
 	 * ```
-	 *
-	 * @since 5.5.0
 	 */
 	public static function flip(array $array): array
 	{
@@ -495,7 +489,6 @@ class A
 	/**
 	 * A simple wrapper around array_map
 	 * with a sane argument order
-	 * @since 3.6.0
 	 */
 	public static function map(array $array, callable $map): array
 	{
@@ -859,7 +852,6 @@ class A
 	 * // output: 'true'
 	 * ```
 	 *
-	 * @since 3.9.8
 	 * @param callable(mixed $value, int|string $key, array $array):bool $test
 	 */
 	public static function some(array $array, callable $test): bool
@@ -1000,8 +992,6 @@ class A
 	 * Keys are matched using PHP's array-key semantics, so integer-like
 	 * string keys (e.g. `'1'`) and their integer counterparts (`1`) are
 	 * treated as equivalent.
-	 *
-	 * @since 3.6.5
 	 */
 	public static function without(array $array, int|string|array $keys): array
 	{

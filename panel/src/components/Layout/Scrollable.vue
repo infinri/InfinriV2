@@ -19,8 +19,6 @@
  *
  * @example
  * <k-scrollable><!-- long content --></k-scrollable>
- *
- * @since 5.6.0
  */
 export default {
 	props: {

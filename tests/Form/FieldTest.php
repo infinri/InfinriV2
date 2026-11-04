@@ -213,7 +213,7 @@ class FieldTest extends TestCase
 		]);
 
 		$this->assertSame('test', $field->default());
-		$this->assertSame('test', $field->data(true));
+		$this->assertSame('test', $field->fill($field->default())->toStoredValue());
 
 		// don't overwrite existing values
 		$field = new Field('test', [
@@ -224,7 +224,7 @@ class FieldTest extends TestCase
 
 		$this->assertSame('test', $field->default());
 		$this->assertSame('something', $field->value());
-		$this->assertSame('something', $field->data(true));
+		$this->assertSame('something', $field->toStoredValue());
 
 		// with query
 		$field = new Field('test', [
@@ -233,7 +233,7 @@ class FieldTest extends TestCase
 		]);
 
 		$this->assertSame('blog', $field->default());
-		$this->assertSame('blog', $field->data(true));
+		$this->assertSame('blog', $field->fill($field->default())->toStoredValue());
 	}
 
 	public function testDialogs(): void
@@ -697,17 +697,15 @@ class FieldTest extends TestCase
 		]);
 
 		$this->assertTrue($a->hasValue());
-		$this->assertTrue($a->save());
 
 		$b = new Field('dont-store-me', [
 			'model' => $page
 		]);
 
 		$this->assertFalse($b->hasValue());
-		$this->assertFalse($b->save());
 	}
 
-	public function testKirby(): void
+	public function testInfinri(): void
 	{
 		Field::$types = [
 			'test' => []
@@ -717,7 +715,7 @@ class FieldTest extends TestCase
 			'model' => $model = new Page(['slug' => 'test'])
 		]);
 
-		$this->assertSame($model->kirby(), $field->kirby());
+		$this->assertSame($model->infinri(), $field->infinri());
 	}
 
 	public function testLabel(): void
@@ -761,7 +759,7 @@ class FieldTest extends TestCase
 
 	public function testMixinMin(): void
 	{
-		Field::$mixins['min'] = include kirby()->root('kirby') . '/config/fields/mixins/min.php';
+		Field::$mixins['min'] = include infinri()->root('infinri') . '/config/fields/mixins/min.php';
 
 		Field::$types = [
 			'test' => ['mixins' => ['min']]
@@ -1018,6 +1016,11 @@ class FieldTest extends TestCase
 		$this->assertSame('a', $siblings->last()->prev()->name());
 	}
 
+	public function testFormFieldsIsRemoved(): void
+	{
+		$this->assertFalse(method_exists(Field::class, 'formFields'));
+	}
+
 	public function testSiblings(): void
 	{
 		Field::$types = [
@@ -1031,11 +1034,8 @@ class FieldTest extends TestCase
 		]);
 
 		$this->assertInstanceOf(Fields::class, $field->siblings());
-		$this->assertInstanceOf(Fields::class, $field->formFields());
 		$this->assertCount(1, $field->siblings());
-		$this->assertCount(1, $field->formFields());
 		$this->assertSame($field, $field->siblings()->first());
-		$this->assertSame($field, $field->formFields()->first());
 
 		$field = new Field(
 			type: 'test',
@@ -1055,11 +1055,8 @@ class FieldTest extends TestCase
 		);
 
 		$this->assertCount(2, $field->siblings());
-		$this->assertCount(2, $field->formFields());
 		$this->assertSame('a', $field->siblings()->first()->name());
-		$this->assertSame('a', $field->formFields()->first()->name());
 		$this->assertSame('b', $field->siblings()->last()->name());
-		$this->assertSame('b', $field->formFields()->last()->name());
 	}
 
 	public function testSubmit(): void
@@ -1151,7 +1148,6 @@ class FieldTest extends TestCase
 		]);
 
 		$this->assertSame('a, b, c', $field->toStoredValue());
-		$this->assertSame('a, b, c', $field->data());
 	}
 
 	public function testToStoredValueWhenUnsaveable(): void
@@ -1170,7 +1166,6 @@ class FieldTest extends TestCase
 		]);
 
 		$this->assertNull($field->toStoredValue());
-		$this->assertNull($field->data());
 	}
 
 	public function testValidate(): void
@@ -1234,7 +1229,7 @@ class FieldTest extends TestCase
 		// with simple string validation
 		$field = new Field('test', [
 			'model'    => $model,
-			'value'    => 'https://getkirby.com',
+			'value'    => 'https://infinri.com',
 			'validate' => 'url'
 		]);
 		$this->assertTrue($field->isValid());

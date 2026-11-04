@@ -83,7 +83,7 @@ class Uri implements Stringable
 			// make sure the URL parser works properly when there's a
 			// colon in the string but the string is a relative URL
 			if (Url::isAbsolute($props) === false) {
-				$props = 'https://getkirby.com/' . $props;
+				$props = 'https://infinri.com/' . $props;
 				$props = parse_url($props);
 				unset($props['scheme'], $props['host']);
 			} else {
@@ -300,7 +300,6 @@ class Uri implements Stringable
 
 	/**
 	 * Inherit query, params and fragment from a parent Uri
-	 * @since 5.2.0
 	 * @return $this
 	 */
 	public function inherit(Uri|string $parent): static
@@ -329,7 +328,6 @@ class Uri implements Stringable
 
 	/**
 	 * Returns the fragment after the hash
-	 * @since 5.1.0
 	 */
 	public function fragment(): string|null
 	{

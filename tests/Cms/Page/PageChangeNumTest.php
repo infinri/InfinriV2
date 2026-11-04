@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Page::class)]
 class PageChangeNumTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageChangeNum';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageChangeNum';
 
 	public function testChangeNum(): void
 	{
@@ -61,7 +61,7 @@ class PageChangeNumTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -90,7 +90,7 @@ class PageChangeNumTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',

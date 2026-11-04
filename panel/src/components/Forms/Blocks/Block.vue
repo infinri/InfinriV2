@@ -352,7 +352,7 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-remove-dialog",
 				props: {
-					text: this.$t("field.blocks.delete.confirm")
+					text: this.$panel.t("field.blocks.delete.confirm")
 				},
 				on: {
 					submit: () => {

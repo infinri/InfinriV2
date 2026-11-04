@@ -4,7 +4,7 @@ namespace Infinri\Cms;
 
 abstract class Picker
 {
-	protected App $kirby;
+	protected App $infinri;
 	protected array $options;
 	protected Site $site;
 
@@ -14,8 +14,8 @@ abstract class Picker
 	public function __construct(array $params = [])
 	{
 		$this->options = [...$this->defaults(), ...$params];
-		$this->kirby   = $this->options['model']->kirby();
-		$this->site    = $this->kirby->site();
+		$this->infinri   = $this->options['model']->infinri();
+		$this->site    = $this->infinri->site();
 	}
 
 	/**

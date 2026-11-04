@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(FilePermissions::class)]
 class FilePermissionsTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FilePermissions';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FilePermissions';
 
 	protected function setUp(): void
 	{
@@ -40,7 +40,7 @@ class FilePermissionsTest extends ModelTestCase
 	#[DataProvider('actionProvider')]
 	public function testWithAdmin(string $action): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page([
 			'slug' => 'test'
@@ -103,7 +103,7 @@ class FilePermissionsTest extends ModelTestCase
 
 	public function testCannotChangeTemplate(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page(['slug' => 'test']);
 		$file  = new File(['filename' => 'test.jpg', 'parent' => $page]);
@@ -136,7 +136,7 @@ class FilePermissionsTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page(['slug' => 'test', 'template' => 'test']);
 		$file = new File(['filename' => 'test.jpg', 'parent' => $page]);
@@ -168,7 +168,7 @@ class FilePermissionsTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = new Page(['slug' => 'test', 'template' => 'test']);
 		$file = new File(['filename' => 'test.jpg', 'parent' => $page]);

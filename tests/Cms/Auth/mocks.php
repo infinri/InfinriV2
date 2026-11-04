@@ -9,7 +9,7 @@ class ErrorneousChallenge extends Challenge
 {
 	public static function isAvailable(User $user, string $mode): bool
 	{
-		return $user->email() === 'error@getkirby.com';
+		return $user->email() === 'error@infinri.com';
 	}
 
 	public static function create(User $user, array $options): string|null

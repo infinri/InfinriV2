@@ -17,7 +17,7 @@ class FieldOptionsTest extends TestCase
 	{
 		$options = FieldOptions::factory([
 			'type' => 'api',
-			'url' => $url = 'https://api.getkirby.com'
+			'url' => $url = 'https://api.infinri.com'
 		]);
 		$this->assertInstanceOf(OptionsApi::class, $options->options);
 		$this->assertTrue($options->safeMode);
@@ -53,8 +53,8 @@ class FieldOptionsTest extends TestCase
 		$props = FieldOptions::polyfill(['options' => 'site.children']);
 		$this->assertSame(['type' => 'query', 'query' => 'site.children'], $props['options']);
 
-		$props = FieldOptions::polyfill(['options' => 'api', 'api' => 'https://api.getkirby.com']);
-		$this->assertSame(['options' => ['type' => 'api', 'url' => 'https://api.getkirby.com']], $props);
+		$props = FieldOptions::polyfill(['options' => 'api', 'api' => 'https://api.infinri.com']);
+		$this->assertSame(['options' => ['type' => 'api', 'url' => 'https://api.infinri.com']], $props);
 
 		$props = FieldOptions::polyfill(['options' => 'query', 'query' => 'site.children']);
 		$this->assertSame(['options' => ['type' => 'query', 'query' => 'site.children']], $props);

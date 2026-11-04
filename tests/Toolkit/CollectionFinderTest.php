@@ -9,18 +9,18 @@ class CollectionFinderTest extends TestCase
 		$collection = new Collection([
 			[
 				'name' => 'Bastian',
-				'email' => 'bastian@getkirby.com'
+				'email' => 'bastian@infinri.com'
 			],
 			[
 				'name' => 'Nico',
-				'email' => 'nico@getkirby.com'
+				'email' => 'nico@infinri.com'
 			]
 		]);
 
 		$this->assertSame([
 			'name' => 'Bastian',
-			'email' => 'bastian@getkirby.com'
-		], $collection->findBy('email', 'bastian@getkirby.com'));
+			'email' => 'bastian@infinri.com'
+		], $collection->findBy('email', 'bastian@infinri.com'));
 	}
 
 	public function testFindKey(): void

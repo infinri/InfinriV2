@@ -43,21 +43,21 @@ class EmailChallenge extends Challenge
 			default => $options['mode']
 		};
 
-		$kirby = $user->kirby();
-		$from  = $kirby->option(
+		$infinri = $user->infinri();
+		$from  = $infinri->option(
 			'auth.challenge.email.from',
-			'noreply@' . $kirby->url('index', true)->host()
+			'noreply@' . $infinri->url('index', true)->host()
 		);
-		$name  = $kirby->option(
+		$name  = $infinri->option(
 			'auth.challenge.email.fromName',
-			$kirby->site()->title()
+			$infinri->site()->title()
 		);
-		$subject = $kirby->option(
+		$subject = $infinri->option(
 			'auth.challenge.email.subject',
 			I18n::translate('login.email.' . $mode . '.subject', null, $user->language())
 		);
 
-		$kirby->email([
+		$infinri->email([
 			'from'     => $from,
 			'fromName' => $name,
 			'to'       => $user,
@@ -65,7 +65,7 @@ class EmailChallenge extends Challenge
 			'template' => 'auth/' . $mode,
 			'data' => [
 				'user'    => $user,
-				'site'    => $kirby->system()->title(),
+				'site'    => $infinri->system()->title(),
 				'code'    => $formatted,
 				'timeout' => round($options['timeout'] / 60)
 			]

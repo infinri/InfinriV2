@@ -16,7 +16,7 @@
 					v-if="link"
 					:icon="icon"
 					:link="mailto"
-					:title="$t('open')"
+					:title="$panel.t('open')"
 					class="k-input-icon-button"
 					tabindex="-1"
 					target="_blank"

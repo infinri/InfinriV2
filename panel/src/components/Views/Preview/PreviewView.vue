@@ -5,7 +5,7 @@
 				<k-button
 					:link="back"
 					:responsive="true"
-					:title="$t('back')"
+					:title="$panel.t('back')"
 					icon="angle-left"
 					size="sm"
 					variant="filled"
@@ -66,7 +66,7 @@ export default {
 		title: String
 	},
 	data() {
-		const scroll = localStorage.getItem("kirby$preview$scroll", "true");
+		const scroll = localStorage.getItem("infinri$preview$scroll", "true");
 
 		return {
 			isScrollSyncing: scroll === "true"
@@ -82,7 +82,7 @@ export default {
 						ariaChecked: this.isScrollSyncing,
 						icon: "scroll-to-bottom",
 						theme: this.isScrollSyncing ? "info-icon" : "passive",
-						title: this.$t("preview.browser.scroll"),
+						title: this.$panel.t("preview.browser.scroll"),
 						role: "switch",
 						class: "k-preview-scroll-sync",
 						click: () => this.onScrollSyncing()
@@ -94,10 +94,10 @@ export default {
 		}
 	},
 	mounted() {
-		this.$events.on("keydown.esc", this.exit);
+		this.$panel.events.on("keydown.esc", this.exit);
 	},
 	destroyed() {
-		this.$events.off("keydown.esc", this.exit);
+		this.$panel.events.off("keydown.esc", this.exit);
 	},
 	methods: {
 		browserProps(versionId) {
@@ -106,7 +106,7 @@ export default {
 				hasDiff: this.hasDiff,
 				isLocked: this.isLocked,
 				modified: this.modified,
-				label: this.$t("version." + versionId),
+				label: this.$panel.t("version." + versionId),
 				src: this.src[versionId],
 				versionId: versionId
 			};
@@ -129,7 +129,10 @@ export default {
 				return this.$panel.view.open("site/preview/" + this.versionId);
 			}
 
-			const url = this.$api.pages.url(page.id, "preview/" + this.versionId);
+			const url = this.$panel.api.pages.url(
+				page.id,
+				"preview/" + this.versionId
+			);
 			this.$panel.view.open(url);
 		},
 		onScroll(source, target) {
@@ -142,7 +145,7 @@ export default {
 		},
 		onScrollSyncing() {
 			this.isScrollSyncing = !this.isScrollSyncing;
-			localStorage.setItem("kirby$preview$scroll", this.isScrollSyncing);
+			localStorage.setItem("infinri$preview$scroll", this.isScrollSyncing);
 		}
 	}
 };

@@ -124,15 +124,15 @@ class EnvironmentTest extends TestCase
 	{
 		$env = new Environment([
 			'allowed' => [
-				'http://getkirby.com/',
+				'http://infinri.com/',
 			]
 		], [
-			'SERVER_NAME' => 'getkirby.com',
+			'SERVER_NAME' => 'infinri.com',
 			'SCRIPT_NAME' => '/index.php'
 		]);
 
-		$this->assertSame('http://getkirby.com', $env->baseUrl());
-		$this->assertSame('getkirby.com', $env->host());
+		$this->assertSame('http://infinri.com', $env->baseUrl());
+		$this->assertSame('infinri.com', $env->host());
 	}
 
 	public function testBaseUri(): void
@@ -150,10 +150,10 @@ class EnvironmentTest extends TestCase
 
 		// host only
 		$env = new Environment(['cli' => false], [
-			'SERVER_NAME' => 'getkirby.com'
+			'SERVER_NAME' => 'infinri.com'
 		]);
 
-		$this->assertSame('http://getkirby.com', $env->baseUrl());
+		$this->assertSame('http://infinri.com', $env->baseUrl());
 
 		// empty host in subfolder
 		$env = new Environment(['cli' => false], [
@@ -173,28 +173,28 @@ class EnvironmentTest extends TestCase
 		// all parts
 		$env = new Environment(['cli' => false], [
 			'HTTPS'       => true,
-			'SERVER_NAME' => 'getkirby.com',
+			'SERVER_NAME' => 'infinri.com',
 			'SERVER_PORT' => 8888,
 			'SCRIPT_NAME' => '/subfolder/index.php'
 		]);
 
-		$this->assertSame('https://getkirby.com:8888/subfolder', $env->baseUrl());
+		$this->assertSame('https://infinri.com:8888/subfolder', $env->baseUrl());
 
 		// proxy with Forwarded header
 		$env = new Environment(['cli' => false, 'allowed' => '*'], [
-			'HTTP_FORWARDED' => 'proto=https;host="getkirby.com:8888"'
+			'HTTP_FORWARDED' => 'proto=https;host="infinri.com:8888"'
 		]);
 
-		$this->assertSame('https://getkirby.com:8888', $env->baseUrl());
+		$this->assertSame('https://infinri.com:8888', $env->baseUrl());
 
 		// proxy with X-Forwarded-* headers
 		$env = new Environment(['cli' => false, 'allowed' => '*'], [
 			'HTTP_X_FORWARDED_SSL'  => true,
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com',
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com',
 			'HTTP_X_FORWARDED_PORT' => 8888,
 		]);
 
-		$this->assertSame('https://getkirby.com:8888', $env->baseUrl());
+		$this->assertSame('https://infinri.com:8888', $env->baseUrl());
 	}
 
 	public function testCli(): void
@@ -227,122 +227,122 @@ class EnvironmentTest extends TestCase
 	{
 		return [
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'host=getkirby.com'],
-				'http://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'host=infinri.com'],
+				'http://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'host=getkirby.com;proto=https'],
-				'https://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'host=infinri.com;proto=https'],
+				'https://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'host=getkirby.com:443;proto=https'],
-				'https://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'host=infinri.com:443;proto=https'],
+				'https://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'host=getkirby.com:8888'],
-				'http://getkirby.com:8888'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'host=infinri.com:8888'],
+				'http://infinri.com:8888'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'host=getkirby.com:abc'],
-				'http://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'host=infinri.com:abc'],
+				'http://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'host=getkirby.com:8888;proto=https'],
-				'https://getkirby.com:8888'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'host=infinri.com:8888;proto=https'],
+				'https://infinri.com:8888'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'host="getkirby.com";proto="https"'],
-				'https://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'host="infinri.com";proto="https"'],
+				'https://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'HOST="getkirby.com";PrOtO="https"'],
-				'https://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'HOST="infinri.com";PrOtO="https"'],
+				'https://infinri.com'
 			],
 			[
 				[
-					'SERVER_NAME' => 'trykirby.com',
-					'HTTP_FORWARDED' => 'host="getkirby.com";proto="https", host="backend.getkirby.com:8080";proto=http'
+					'SERVER_NAME' => 'tryinfinri.com',
+					'HTTP_FORWARDED' => 'host="infinri.com";proto="https", host="backend.infinri.com:8080";proto=http'
 				],
-				'https://getkirby.com'
+				'https://infinri.com'
 			],
 			[
 				[
-					'SERVER_NAME' => 'trykirby.com',
-					'HTTP_FORWARDED' => 'host="getkirby.com";field="with,comma";proto="https"'
+					'SERVER_NAME' => 'tryinfinri.com',
+					'HTTP_FORWARDED' => 'host="infinri.com";field="with,comma";proto="https"'
 				],
-				'https://getkirby.com'
+				'https://infinri.com'
 			],
 			[
 				[
-					'SERVER_NAME' => 'trykirby.com',
-					'HTTP_FORWARDED' => 'host="getkirby.com";proto="https";field="with;proto=http;"'
+					'SERVER_NAME' => 'tryinfinri.com',
+					'HTTP_FORWARDED' => 'host="infinri.com";proto="https";field="with;proto=http;"'
 				],
-				'https://getkirby.com'
+				'https://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_FORWARDED' => 'proto=https'],
-				'https://trykirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_FORWARDED' => 'proto=https'],
+				'https://tryinfinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com'],
-				'http://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com'],
+				'http://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com', 'HTTP_X_FORWARDED_PROTO' => 'https'],
-				'https://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com', 'HTTP_X_FORWARDED_PROTO' => 'https'],
+				'https://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com', 'HTTP_X_FORWARDED_PROTO' => 'http'],
-				'http://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com', 'HTTP_X_FORWARDED_PROTO' => 'http'],
+				'http://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com', 'HTTP_X_FORWARDED_PROTO' => 'https, http'],
-				'https://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com', 'HTTP_X_FORWARDED_PROTO' => 'https, http'],
+				'https://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com', 'HTTP_X_FORWARDED_SSL' => 'on'],
-				'https://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com', 'HTTP_X_FORWARDED_SSL' => 'on'],
+				'https://infinri.com'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com', 'HTTP_X_FORWARDED_PORT' => '8888'],
-				'http://getkirby.com:8888'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com', 'HTTP_X_FORWARDED_PORT' => '8888'],
+				'http://infinri.com:8888'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com:8888'],
-				'http://getkirby.com:8888'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com:8888'],
+				'http://infinri.com:8888'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com:8888', 'HTTP_X_FORWARDED_SSL' => 'on'],
-				'https://getkirby.com:8888'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com:8888', 'HTTP_X_FORWARDED_SSL' => 'on'],
+				'https://infinri.com:8888'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_HOST' => 'getkirby.com:abc', 'HTTP_X_FORWARDED_SSL' => 'on'],
-				'https://getkirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_HOST' => 'infinri.com:abc', 'HTTP_X_FORWARDED_SSL' => 'on'],
+				'https://infinri.com'
 			],
 			[
 				[
-					'SERVER_NAME'            => 'trykirby.com',
-					'HTTP_X_FORWARDED_HOST'  => 'getkirby.com',
+					'SERVER_NAME'            => 'tryinfinri.com',
+					'HTTP_X_FORWARDED_HOST'  => 'infinri.com',
 					'HTTP_X_FORWARDED_PORT'  => '8888',
 					'HTTP_X_FORWARDED_PROTO' => 'https'
 				],
-				'https://getkirby.com:8888'
+				'https://infinri.com:8888'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_PORT' => '8888'],
-				'http://trykirby.com:8888'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_PORT' => '8888'],
+				'http://tryinfinri.com:8888'
 			],
 			[
-				['SERVER_NAME' => 'trykirby.com', 'HTTP_X_FORWARDED_PROTO' => 'https'],
-				'https://trykirby.com'
+				['SERVER_NAME' => 'tryinfinri.com', 'HTTP_X_FORWARDED_PROTO' => 'https'],
+				'https://tryinfinri.com'
 			],
 			[
 				[
-					'SERVER_NAME' => 'trykirby.com',
+					'SERVER_NAME' => 'tryinfinri.com',
 					'HTTP_X_FORWARDED_PORT' => '8888',
 					'HTTP_X_FORWARDED_PROTO' => 'https'
 				],
-				'https://trykirby.com:8888'
+				'https://tryinfinri.com:8888'
 			],
 		];
 	}
@@ -383,17 +383,17 @@ class EnvironmentTest extends TestCase
 	public function testGet(): void
 	{
 		$env = new Environment(null, $info = [
-			'HTTP_HOST'        => 'something/GETKIRBY.COM',
+			'HTTP_HOST'        => 'something/INFINRI.COM',
 			'HTTP_K_SOMETHING' => 'custom value',
 			'argv'             => 'lower case stuff'
 		]);
-		$info['HTTP_HOST'] = 'getkirby.com';
+		$info['HTTP_HOST'] = 'infinri.com';
 
 		$this->assertSame($info, $env->get());
 		$this->assertSame($info, $env->get(false));
 		$this->assertSame($info, $env->get(null));
-		$this->assertSame('getkirby.com', $env->get('HTTP_HOST'));
-		$this->assertSame('getkirby.com', $env->get('http_host'));
+		$this->assertSame('infinri.com', $env->get('HTTP_HOST'));
+		$this->assertSame('infinri.com', $env->get('http_host'));
 		$this->assertSame('custom value', $env->get('HTTP_K_SOMETHING'));
 		$this->assertSame('custom value', $env->get('http_k_something'));
 		$this->assertSame('fallback', $env->get('http_does_not_exist', 'fallback'));
@@ -404,18 +404,18 @@ class EnvironmentTest extends TestCase
 	public function testGetGlobally(): void
 	{
 		$_SERVER = [
-			'HTTP_HOST'        => 'something/GETKIRBY.COM',
+			'HTTP_HOST'        => 'something/INFINRI.COM',
 			'HTTP_K_SOMETHING' => 'custom value ($_SERVER)',
 			'argv'             => 'lower case stuff ($_SERVER)'
 		];
 		$sanitized = $_SERVER;
-		$sanitized['HTTP_HOST'] = 'getkirby.com';
+		$sanitized['HTTP_HOST'] = 'infinri.com';
 
 		$this->assertSame($sanitized, Environment::getGlobally());
 		$this->assertSame($sanitized, Environment::getGlobally(false));
 		$this->assertSame($sanitized, Environment::getGlobally(null));
-		$this->assertSame('getkirby.com', Environment::getGlobally('HTTP_HOST'));
-		$this->assertSame('getkirby.com', Environment::getGlobally('http_host'));
+		$this->assertSame('infinri.com', Environment::getGlobally('HTTP_HOST'));
+		$this->assertSame('infinri.com', Environment::getGlobally('http_host'));
 		$this->assertSame('custom value ($_SERVER)', Environment::getGlobally('HTTP_K_SOMETHING'));
 		$this->assertSame('custom value ($_SERVER)', Environment::getGlobally('http_k_something'));
 		$this->assertSame('fallback', Environment::getGlobally('http_does_not_exist', 'fallback'));
@@ -423,18 +423,18 @@ class EnvironmentTest extends TestCase
 
 		new App([
 			'server' => $info = [
-				'HTTP_HOST'        => 'something/TRYKIRBY.COM',
+				'HTTP_HOST'        => 'something/TRYINFINRI.COM',
 				'HTTP_K_SOMETHING' => 'custom value (app)',
 				'argv'             => 'lower case stuff (app)'
 			]
 		]);
-		$info['HTTP_HOST'] = 'trykirby.com';
+		$info['HTTP_HOST'] = 'tryinfinri.com';
 
 		$this->assertSame($info, Environment::getGlobally());
 		$this->assertSame($info, Environment::getGlobally(false));
 		$this->assertSame($info, Environment::getGlobally(null));
-		$this->assertSame('trykirby.com', Environment::getGlobally('HTTP_HOST'));
-		$this->assertSame('trykirby.com', Environment::getGlobally('http_host'));
+		$this->assertSame('tryinfinri.com', Environment::getGlobally('HTTP_HOST'));
+		$this->assertSame('tryinfinri.com', Environment::getGlobally('http_host'));
 		$this->assertSame('custom value (app)', Environment::getGlobally('HTTP_K_SOMETHING'));
 		$this->assertSame('custom value (app)', Environment::getGlobally('http_k_something'));
 		$this->assertSame('fallback', Environment::getGlobally('http_does_not_exist', 'fallback'));
@@ -445,10 +445,10 @@ class EnvironmentTest extends TestCase
 	{
 		// via server name
 		$env = new Environment(null, [
-			'SERVER_NAME' => 'getkirby.com'
+			'SERVER_NAME' => 'infinri.com'
 		]);
 
-		$this->assertSame('getkirby.com', $env->host());
+		$this->assertSame('infinri.com', $env->host());
 
 		// via server addr
 		$env = new Environment(null, [
@@ -460,47 +460,47 @@ class EnvironmentTest extends TestCase
 
 	public function testHostAllowedSingle(): void
 	{
-		$env = new Environment(['allowed' => 'https://getkirby.com']);
+		$env = new Environment(['allowed' => 'https://infinri.com']);
 
-		$this->assertSame('getkirby.com', $env->host());
+		$this->assertSame('infinri.com', $env->host());
 	}
 
 	public function testHostAllowedMultiple(): void
 	{
 		$options = [
 			'allowed' => [
-				'https://getkirby.com',
-				'http://test.getkirby.com'
+				'https://infinri.com',
+				'http://test.infinri.com'
 			]
 		];
 
 		// via server name
 		$env = new Environment($options, [
-			'SERVER_NAME' => 'test.getkirby.com'
+			'SERVER_NAME' => 'test.infinri.com'
 		]);
 
-		$this->assertSame('test.getkirby.com', $env->host());
+		$this->assertSame('test.infinri.com', $env->host());
 
 		// via insecure host is fine in this case
 		$env = new Environment($options, [
-			'HTTP_HOST' => 'test.getkirby.com'
+			'HTTP_HOST' => 'test.infinri.com'
 		]);
 
-		$this->assertSame('test.getkirby.com', $env->host());
+		$this->assertSame('test.infinri.com', $env->host());
 
 		// via insecure forwarded host is also fine
 		$env = new Environment($options, [
-			'HTTP_FORWARDED' => 'host="test.getkirby.com"'
+			'HTTP_FORWARDED' => 'host="test.infinri.com"'
 		]);
 
-		$this->assertSame('test.getkirby.com', $env->host());
+		$this->assertSame('test.infinri.com', $env->host());
 
 		// also with the X-Forwarded-Host header
 		$env = new Environment($options, [
-			'HTTP_X_FORWARDED_HOST' => 'test.getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'test.infinri.com'
 		]);
 
-		$this->assertSame('test.getkirby.com', $env->host());
+		$this->assertSame('test.infinri.com', $env->host());
 	}
 
 	public function testHostForbidden(): void
@@ -511,8 +511,8 @@ class EnvironmentTest extends TestCase
 		new Environment(
 			[
 				'allowed' => [
-					'https://getkirby.com',
-					'https://test.getkirby.com'
+					'https://infinri.com',
+					'https://test.infinri.com'
 				]
 			],
 			[
@@ -525,20 +525,20 @@ class EnvironmentTest extends TestCase
 	{
 		// not possible via insecure header
 		$env = new Environment(null, [
-			'HTTP_HOST' => 'getkirby.com'
+			'HTTP_HOST' => 'infinri.com'
 		]);
 
 		$this->assertNull($env->host());
 
 		// not possible via insecure forwarded header
 		$env = new Environment(null, [
-			'HTTP_FORWARDED' => 'host=getkirby.com'
+			'HTTP_FORWARDED' => 'host=infinri.com'
 		]);
 
 		$this->assertNull($env->host());
 
 		$env = new Environment(null, [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
 		$this->assertNull($env->host());
@@ -548,24 +548,24 @@ class EnvironmentTest extends TestCase
 	{
 		// insecure host header
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_HOST' => 'getkirby.com'
+			'HTTP_HOST' => 'infinri.com'
 		]);
 
-		$this->assertSame('getkirby.com', $env->host());
+		$this->assertSame('infinri.com', $env->host());
 
 		// insecure Forwarded header
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_FORWARDED' => 'host=getkirby.com'
+			'HTTP_FORWARDED' => 'host=infinri.com'
 		]);
 
-		$this->assertSame('getkirby.com', $env->host());
+		$this->assertSame('infinri.com', $env->host());
 
 		// insecure forwarded host header
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
-		$this->assertSame('getkirby.com', $env->host());
+		$this->assertSame('infinri.com', $env->host());
 	}
 
 	public static function httpsProvider(): array
@@ -602,10 +602,10 @@ class EnvironmentTest extends TestCase
 
 	public function testHttpsAllowedSingle(): void
 	{
-		$env = new Environment(['allowed' => 'http://getkirby.com']);
+		$env = new Environment(['allowed' => 'http://infinri.com']);
 		$this->assertFalse($env->https());
 
-		$env = new Environment(['allowed' => 'https://getkirby.com']);
+		$env = new Environment(['allowed' => 'https://infinri.com']);
 		$this->assertTrue($env->https());
 	}
 
@@ -613,14 +613,14 @@ class EnvironmentTest extends TestCase
 	{
 		$options = [
 			'allowed' => [
-				'http://a.getkirby.com',
-				'https://b.getkirby.com',
+				'http://a.infinri.com',
+				'https://b.infinri.com',
 			]
 		];
 
 		// via server name: https off
 		$env = new Environment($options, [
-			'SERVER_NAME' => 'a.getkirby.com'
+			'SERVER_NAME' => 'a.infinri.com'
 		]);
 
 		$this->assertFalse($env->https());
@@ -628,35 +628,35 @@ class EnvironmentTest extends TestCase
 		// via server name: https on
 		$env = new Environment($options, [
 			'HTTPS'       => 'on',
-			'SERVER_NAME' => 'b.getkirby.com'
+			'SERVER_NAME' => 'b.infinri.com'
 		]);
 
 		$this->assertTrue($env->https());
 
 		// via Forwarded: no proto
 		$env = new Environment($options, [
-			'HTTP_FORWARDED' => 'host="a.getkirby.com"'
+			'HTTP_FORWARDED' => 'host="a.infinri.com"'
 		]);
 
 		$this->assertFalse($env->https());
 
 		// via Forwarded: https off
 		$env = new Environment($options, [
-			'HTTP_FORWARDED' => 'host="a.getkirby.com";proto=http'
+			'HTTP_FORWARDED' => 'host="a.infinri.com";proto=http'
 		]);
 
 		$this->assertFalse($env->https());
 
 		// via Forwarded: https on
 		$env = new Environment($options, [
-			'HTTP_FORWARDED' => 'host="b.getkirby.com";proto=https'
+			'HTTP_FORWARDED' => 'host="b.infinri.com";proto=https'
 		]);
 
 		$this->assertTrue($env->https());
 
 		// via forwarded ssl: https off
 		$env = new Environment($options, [
-			'HTTP_X_FORWARDED_HOST' => 'a.getkirby.com',
+			'HTTP_X_FORWARDED_HOST' => 'a.infinri.com',
 			'HTTP_X_FORWARDED_SSL'  => false
 		]);
 
@@ -664,7 +664,7 @@ class EnvironmentTest extends TestCase
 
 		// via forwarded ssl: https on
 		$env = new Environment($options, [
-			'HTTP_X_FORWARDED_HOST' => 'b.getkirby.com',
+			'HTTP_X_FORWARDED_HOST' => 'b.infinri.com',
 			'HTTP_X_FORWARDED_SSL'  => true
 		]);
 
@@ -672,7 +672,7 @@ class EnvironmentTest extends TestCase
 
 		// via forwarded proto: https off
 		$env = new Environment($options, [
-			'HTTP_X_FORWARDED_HOST'  => 'a.getkirby.com',
+			'HTTP_X_FORWARDED_HOST'  => 'a.infinri.com',
 			'HTTP_X_FORWARDED_PROTO' => 'http'
 		]);
 
@@ -680,7 +680,7 @@ class EnvironmentTest extends TestCase
 
 		// via forwarded proto: https on
 		$env = new Environment($options, [
-			'HTTP_X_FORWARDED_HOST'  => 'b.getkirby.com',
+			'HTTP_X_FORWARDED_HOST'  => 'b.infinri.com',
 			'HTTP_X_FORWARDED_PROTO' => 'https'
 		]);
 
@@ -695,13 +695,13 @@ class EnvironmentTest extends TestCase
 		new Environment(
 			[
 				'allowed' => [
-					'https://getkirby.com',
-					'https://test.getkirby.com'
+					'https://infinri.com',
+					'https://test.infinri.com'
 				]
 			],
 			[
 				'HTTPS'       => 'off',
-				'SERVER_NAME' => 'getkirby.com'
+				'SERVER_NAME' => 'infinri.com'
 			]
 		);
 	}
@@ -722,13 +722,13 @@ class EnvironmentTest extends TestCase
 	public function testHttpsFromProtocol($value, $expected): void
 	{
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_FORWARDED' => 'host=getkirby.com;proto="' . $value . '"',
+			'HTTP_FORWARDED' => 'host=infinri.com;proto="' . $value . '"',
 		]);
 
 		$this->assertSame($expected, $env->https());
 
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_X_FORWARDED_HOST'  => 'getkirby.com',
+			'HTTP_X_FORWARDED_HOST'  => 'infinri.com',
 			'HTTP_X_FORWARDED_PROTO' => $value
 		]);
 
@@ -754,7 +754,7 @@ class EnvironmentTest extends TestCase
 	{
 		// insecure forwarded https header
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_FORWARDED' => 'host=getkirby.com;proto=https'
+			'HTTP_FORWARDED' => 'host=infinri.com;proto=https'
 		]);
 
 		$this->assertTrue($env->https());
@@ -762,7 +762,7 @@ class EnvironmentTest extends TestCase
 		// insecure forwarded https header
 		$env = new Environment(['allowed' => '*'], [
 			'HTTP_X_FORWARDED_SSL'  => 'on',
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
 		$this->assertTrue($env->https());
@@ -800,7 +800,7 @@ class EnvironmentTest extends TestCase
 		// custom info
 		$env = new Environment(null, $info = [
 			'HTTP_X_FORWARDED_SSL'  => 'on',
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
 		$this->assertSame($info, $env->info());
@@ -843,50 +843,50 @@ class EnvironmentTest extends TestCase
 
 		// given host but with secure checking 1
 		$env = new Environment(null, [
-			'HTTP_FORWARDED' => 'host=getkirby.com'
+			'HTTP_FORWARDED' => 'host=infinri.com'
 		]);
 
 		$this->assertFalse($env->isBehindProxy());
 
 		// given host but with secure checking 2
 		$env = new Environment(null, [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
 		$this->assertFalse($env->isBehindProxy());
 
 		// given host with allowlist 1
 		$env = new Environment([
-			'allowed' => ['http://getkirby.com', 'http://trykirby.com']
+			'allowed' => ['http://infinri.com', 'http://tryinfinri.com']
 		], [
-			'HTTP_FORWARDED' => 'host=getkirby.com'
+			'HTTP_FORWARDED' => 'host=infinri.com'
 		]);
 
 		$this->assertTrue($env->isBehindProxy());
 
 		// given host with allowlist 2
 		$env = new Environment([
-			'allowed' => ['http://getkirby.com', 'http://trykirby.com']
+			'allowed' => ['http://infinri.com', 'http://tryinfinri.com']
 		], [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
 		$this->assertTrue($env->isBehindProxy());
 
 		// given host with fixed host 1
 		$env = new Environment([
-			'allowed' => 'http://getkirby.com'
+			'allowed' => 'http://infinri.com'
 		], [
-			'HTTP_FORWARDED' => 'host=getkirby.com'
+			'HTTP_FORWARDED' => 'host=infinri.com'
 		]);
 
 		$this->assertNull($env->isBehindProxy());
 
 		// given host with fixed host 2
 		$env = new Environment([
-			'allowed' => 'http://getkirby.com'
+			'allowed' => 'http://infinri.com'
 		], [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
 		$this->assertNull($env->isBehindProxy());
@@ -895,7 +895,7 @@ class EnvironmentTest extends TestCase
 		$env = new Environment([
 			'allowed' => '*'
 		], [
-			'HTTP_FORWARDED' => 'host=getkirby.com'
+			'HTTP_FORWARDED' => 'host=infinri.com'
 		]);
 
 		$this->assertTrue($env->isBehindProxy());
@@ -904,7 +904,7 @@ class EnvironmentTest extends TestCase
 		$env = new Environment([
 			'allowed' => '*'
 		], [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
 		$this->assertTrue($env->isBehindProxy());
@@ -1099,7 +1099,7 @@ class EnvironmentTest extends TestCase
 		// When there's a single allowed URL, the path is extracted from the URL
 		$env = new Environment([
 			'allowed' => [
-				'https://getkirby.com/subfolder'
+				'https://infinri.com/subfolder'
 			]
 		]);
 
@@ -1121,7 +1121,7 @@ class EnvironmentTest extends TestCase
 
 		// via detected host
 		$env = new Environment(null, [
-			'SERVER_NAME' => 'getkirby.com:8888'
+			'SERVER_NAME' => 'infinri.com:8888'
 		]);
 
 		$this->assertSame(8888, $env->port());
@@ -1135,21 +1135,21 @@ class EnvironmentTest extends TestCase
 
 		// via Forwarded with port
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_FORWARDED' => 'host=getkirby.com:8888'
+			'HTTP_FORWARDED' => 'host=infinri.com:8888'
 		]);
 
 		$this->assertSame(8888, $env->port());
 
 		// via Forwarded with proto
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_FORWARDED' => 'host=getkirby.com;proto=https'
+			'HTTP_FORWARDED' => 'host=infinri.com;proto=https'
 		]);
 
 		$this->assertSame(443, $env->port());
 
 		// via forwarded port
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com',
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com',
 			'HTTP_X_FORWARDED_PORT' => 8888
 		]);
 
@@ -1157,14 +1157,14 @@ class EnvironmentTest extends TestCase
 
 		// via forwarded host
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com:8888'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com:8888'
 		]);
 
 		$this->assertSame(8888, $env->port());
 
 		// via forwarded proto
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_X_FORWARDED_HOST'  => 'getkirby.com',
+			'HTTP_X_FORWARDED_HOST'  => 'infinri.com',
 			'HTTP_X_FORWARDED_PROTO' => 'https'
 		]);
 
@@ -1173,10 +1173,10 @@ class EnvironmentTest extends TestCase
 
 	public function testPortAllowedSingle(): void
 	{
-		$env = new Environment(['allowed' => 'http://getkirby.com']);
+		$env = new Environment(['allowed' => 'http://infinri.com']);
 		$this->assertNull($env->port());
 
-		$env = new Environment(['allowed' => 'http://getkirby.com:9999']);
+		$env = new Environment(['allowed' => 'http://infinri.com:9999']);
 		$this->assertSame(9999, $env->port());
 	}
 
@@ -1184,14 +1184,14 @@ class EnvironmentTest extends TestCase
 	{
 		$options = [
 			'allowed' => [
-				'http://getkirby.com',
-				'http://getkirby.com:9999',
+				'http://infinri.com',
+				'http://infinri.com:9999',
 			]
 		];
 
 		// via server name: no port
 		$env = new Environment($options, [
-			'SERVER_NAME' => 'getkirby.com'
+			'SERVER_NAME' => 'infinri.com'
 		]);
 
 		$this->assertNull($env->port());
@@ -1199,28 +1199,28 @@ class EnvironmentTest extends TestCase
 		// via server name: port
 		$env = new Environment($options, [
 			'SERVER_PORT' => 9999,
-			'SERVER_NAME' => 'getkirby.com'
+			'SERVER_NAME' => 'infinri.com'
 		]);
 
 		$this->assertSame(9999, $env->port());
 
 		// via proxy: no port 1
 		$env = new Environment($options, [
-			'HTTP_FORWARDED' => 'host=getkirby.com',
+			'HTTP_FORWARDED' => 'host=infinri.com',
 		]);
 
 		$this->assertNull($env->port());
 
 		// via proxy: no port 2
 		$env = new Environment($options, [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com',
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com',
 		]);
 
 		$this->assertNull($env->port());
 
 		// via proxy: port
 		$env = new Environment($options, [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com',
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com',
 			'HTTP_X_FORWARDED_PORT' => 9999
 		]);
 
@@ -1228,14 +1228,14 @@ class EnvironmentTest extends TestCase
 
 		// via proxy: port in host 1
 		$env = new Environment($options, [
-			'HTTP_FORWARDED' => 'host=getkirby.com:9999'
+			'HTTP_FORWARDED' => 'host=infinri.com:9999'
 		]);
 
 		$this->assertSame(9999, $env->port());
 
 		// via proxy: port in host 2
 		$env = new Environment($options, [
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com:9999',
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com:9999',
 		]);
 
 		$this->assertSame(9999, $env->port());
@@ -1249,12 +1249,12 @@ class EnvironmentTest extends TestCase
 		new Environment(
 			[
 				'allowed' => [
-					'http://getkirby.com:8888',
-					'http://getkirby.com:1234'
+					'http://infinri.com:8888',
+					'http://infinri.com:1234'
 				]
 			],
 			[
-				'SERVER_NAME' => 'getkirby.com'
+				'SERVER_NAME' => 'infinri.com'
 			]
 		);
 	}
@@ -1262,7 +1262,7 @@ class EnvironmentTest extends TestCase
 	public function testPortIgnoreInsecure(): void
 	{
 		$env = new Environment(null, [
-			'HTTP_FORWARDED' => 'host=getkirby.com:8888'
+			'HTTP_FORWARDED' => 'host=infinri.com:8888'
 		]);
 
 		$this->assertNull($env->port());
@@ -1277,14 +1277,14 @@ class EnvironmentTest extends TestCase
 	public function testPortInsecure(): void
 	{
 		$env = new Environment(['allowed' => '*'], [
-			'HTTP_FORWARDED' => 'host=getkirby.com:9999'
+			'HTTP_FORWARDED' => 'host=infinri.com:9999'
 		]);
 
 		$this->assertSame(9999, $env->port());
 
 		$env = new Environment(['allowed' => '*'], [
 			'HTTP_X_FORWARDED_PORT'  => 9999,
-			'HTTP_X_FORWARDED_HOST' => 'getkirby.com'
+			'HTTP_X_FORWARDED_HOST' => 'infinri.com'
 		]);
 
 		$this->assertSame(9999, $env->port());
@@ -1299,27 +1299,27 @@ class EnvironmentTest extends TestCase
 
 		// with server name
 		$env = new Environment(['cli' => false], [
-			'SERVER_NAME' => 'getkirby.com'
+			'SERVER_NAME' => 'infinri.com'
 		]);
 
-		$this->assertSame('http://getkirby.com', $env->requestUrl());
+		$this->assertSame('http://infinri.com', $env->requestUrl());
 
 		// with request path
 		$env = new Environment(['cli' => false], [
-			'SERVER_NAME' => 'getkirby.com',
+			'SERVER_NAME' => 'infinri.com',
 			'REQUEST_URI' => '/blog/article-a',
 		]);
 
-		$this->assertSame('http://getkirby.com/blog/article-a', $env->requestUrl());
+		$this->assertSame('http://infinri.com/blog/article-a', $env->requestUrl());
 
 		// with subfolder path
 		$env = new Environment(['cli' => false], [
-			'SERVER_NAME' => 'getkirby.com',
+			'SERVER_NAME' => 'infinri.com',
 			'REQUEST_URI' => '/subfolder/blog/article-a',
 			'SCRIPT_NAME' => '/subfolder/index.php',
 		]);
 
-		$this->assertSame('http://getkirby.com/subfolder/blog/article-a', $env->requestUrl());
+		$this->assertSame('http://infinri.com/subfolder/blog/article-a', $env->requestUrl());
 	}
 
 	public static function requestUriProvider(): array
@@ -1368,7 +1368,7 @@ class EnvironmentTest extends TestCase
 				]
 			],
 			[
-				'https://getkirby.com/foo/bar?foo=bar',
+				'https://infinri.com/foo/bar?foo=bar',
 				[
 					'path'  => 'foo/bar',
 					'query' => 'foo=bar'
@@ -1394,8 +1394,8 @@ class EnvironmentTest extends TestCase
 			// needs no sanitizing
 			[
 				'HTTP_HOST',
-				'getkirby.com',
-				'getkirby.com'
+				'infinri.com',
+				'infinri.com'
 			],
 			[
 				'HTTP_HOST',

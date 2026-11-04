@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Site::class)]
 class SiteTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Site';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Site';
 
 	public function testApiUrl(): void
 	{
@@ -60,7 +60,7 @@ class SiteTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -68,10 +68,10 @@ class SiteTest extends ModelTestCase
 
 		$site = $app->site();
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$this->assertFalse($site->isAccessible());
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$this->assertTrue($site->isAccessible());
 	}
 
@@ -93,7 +93,7 @@ class SiteTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -101,10 +101,10 @@ class SiteTest extends ModelTestCase
 
 		$site = $app->site();
 
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$this->assertFalse($site->isAccessible());
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$this->assertTrue($site->isAccessible());
 	}
 
@@ -144,9 +144,9 @@ class SiteTest extends ModelTestCase
 
 	public function testToString(): void
 	{
-		$site   = new Site(['url' => 'https://getkirby.com']);
+		$site   = new Site(['url' => 'https://infinri.com']);
 		$string = $site->toString('{{ site.url }}');
-		$this->assertSame('https://getkirby.com', $string);
+		$this->assertSame('https://infinri.com', $string);
 	}
 
 	public function testPanel(): void

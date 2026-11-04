@@ -16,7 +16,7 @@ class Options extends Collection
 	}
 
 	/**
-	 * The Kirby Collection class only shows the key to
+	 * The Infinri Collection class only shows the key to
 	 * avoid huge trees when dumping, but for the options
 	 * collections this is really not useful
 	 *
@@ -28,7 +28,7 @@ class Options extends Collection
 	}
 
 	/**
-	 * @param bool $resolve Deprecated, will be removed in v6
+	 * @param bool $resolve Whether query templates in the text and info get resolved
 	 */
 	public static function factory(
 		array $items = [],

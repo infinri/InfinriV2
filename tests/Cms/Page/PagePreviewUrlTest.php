@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Page::class)]
 class PagePreviewUrlTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PagePreviewUrl';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PagePreviewUrl';
 
 	public static function providerForBlueprintSettings(): array
 	{
@@ -49,7 +49,7 @@ class PagePreviewUrlTest extends ModelTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -63,7 +63,7 @@ class PagePreviewUrlTest extends ModelTestCase
 
 		// authenticate
 		if ($authenticated) {
-			$this->app->impersonate('test@getkirby.com');
+			$this->app->impersonate('test@infinri.com');
 		}
 
 		$options = [];
@@ -85,7 +85,7 @@ class PagePreviewUrlTest extends ModelTestCase
 		]);
 
 		if ($draft === true && $expected !== null) {
-			$expectedToken = substr(hash_hmac('sha1', '{"url":"' . $expectedUrl . '","versionId":"latest"}', $page->kirby()->root('content')), 0, 10);
+			$expectedToken = substr(hash_hmac('sha1', '{"url":"' . $expectedUrl . '","versionId":"latest"}', $page->infinri()->root('content')), 0, 10);
 			$expected = str_replace(
 				'{token}',
 				'_token=' . $expectedToken,
@@ -102,7 +102,7 @@ class PagePreviewUrlTest extends ModelTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'editor'
 				]
 			],
@@ -119,7 +119,7 @@ class PagePreviewUrlTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('test@getkirby.com');
+		$this->app->impersonate('test@infinri.com');
 
 		$page = new Page([
 			'slug' => 'test'

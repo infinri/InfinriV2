@@ -68,11 +68,11 @@ class Item
 	}
 
 	/**
-	 * Returns the Kirby instance
+	 * Returns the Infinri instance
 	 */
-	public function kirby(): App
+	public function infinri(): App
 	{
-		return $this->parent()->kirby();
+		return $this->parent()->infinri();
 	}
 
 	/**

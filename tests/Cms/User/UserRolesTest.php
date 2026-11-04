@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserRolesTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserRoles';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserRoles';
 
 	private function roleIds(string $email): array
 	{
@@ -26,34 +26,34 @@ class UserRolesTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
-					'email' => 'guest@getkirby.com',
+					'email' => 'guest@infinri.com',
 					'role'  => 'guest-' . $uuid
 				]
 			],
 		]);
 
 		// no authenticated user: permissions cannot be evaluated
-		$this->assertSame([], $this->roleIds('editor@getkirby.com'));
+		$this->assertSame([], $this->roleIds('editor@infinri.com'));
 
 		// non-admin cannot assign the admin role to another user or to themselves
-		$this->app->impersonate('editor@getkirby.com');
-		$this->assertSame(['editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('guest@getkirby.com'));
-		$this->assertSame(['editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@getkirby.com'));
+		$this->app->impersonate('editor@infinri.com');
+		$this->assertSame(['editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('guest@infinri.com'));
+		$this->assertSame(['editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@infinri.com'));
 
 		// admin can assign any role including admin
-		$this->app->impersonate('admin@getkirby.com');
-		$this->assertSame(['admin', 'editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@getkirby.com'));
+		$this->app->impersonate('admin@infinri.com');
+		$this->assertSame(['admin', 'editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@infinri.com'));
 
 		// last admin cannot be demoted, so only the admin role is returned
-		$this->assertSame(['admin'], $this->roleIds('admin@getkirby.com'));
+		$this->assertSame(['admin'], $this->roleIds('admin@infinri.com'));
 	}
 
 	public function testRolesWithChangeRoleOption(): void
@@ -67,11 +67,11 @@ class UserRolesTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
-					'email' => 'guest@getkirby.com',
+					'email' => 'guest@infinri.com',
 					'role'  => 'guest-' . $uuid
 				]
 			],
@@ -92,11 +92,11 @@ class UserRolesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('editor@getkirby.com');
+		$this->app->impersonate('editor@infinri.com');
 
 		// the guest blueprint denies changeRole for the editor role,
 		// so the editor cannot change the guest's role at all
-		$this->assertSame(['guest-' . $uuid], $this->roleIds('guest@getkirby.com'));
+		$this->assertSame(['guest-' . $uuid], $this->roleIds('guest@infinri.com'));
 	}
 
 	public function testRolesWithCreateOption(): void
@@ -111,11 +111,11 @@ class UserRolesTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
-					'email' => 'guest@getkirby.com',
+					'email' => 'guest@infinri.com',
 					'role'  => 'guest-' . $uuid
 				]
 			],
@@ -136,11 +136,11 @@ class UserRolesTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('editor@getkirby.com');
+		$this->app->impersonate('editor@infinri.com');
 
 		// the manager blueprint denies create for the editor role,
 		// so manager is excluded from the available roles for the editor
-		$this->assertSame(['editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@getkirby.com'));
+		$this->assertSame(['editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@infinri.com'));
 	}
 
 	public function testRolesWithInaccessibleRole(): void
@@ -161,15 +161,15 @@ class UserRolesTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
-					'email' => 'guest@getkirby.com',
+					'email' => 'guest@infinri.com',
 					'role'  => 'guest-' . $uuid
 				]
 			]
@@ -177,15 +177,15 @@ class UserRolesTest extends ModelTestCase
 
 		// user.access: false and users.access: false block all roles from passing
 		// the isAccessible filter, so no roles are available even for the editor's own role
-		$this->app->impersonate('editor@getkirby.com');
-		$this->assertSame([], $this->roleIds('editor@getkirby.com'));
+		$this->app->impersonate('editor@infinri.com');
+		$this->assertSame([], $this->roleIds('editor@infinri.com'));
 
 		// the same applies when the editor acts on another user
-		$this->assertSame([], $this->roleIds('guest@getkirby.com'));
+		$this->assertSame([], $this->roleIds('guest@infinri.com'));
 
 		// admin bypasses access restrictions and can assign all roles
-		$this->app->impersonate('admin@getkirby.com');
-		$this->assertSame(['admin', 'editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@getkirby.com'));
+		$this->app->impersonate('admin@infinri.com');
+		$this->assertSame(['admin', 'editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@infinri.com'));
 	}
 
 	public function testRolesWithPermissions(): void
@@ -205,23 +205,23 @@ class UserRolesTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
-					'email' => 'guest@getkirby.com',
+					'email' => 'guest@infinri.com',
 					'role'  => 'guest-' . $uuid
 				]
 			]
 		]);
 
-		$this->app->impersonate('editor@getkirby.com');
+		$this->app->impersonate('editor@infinri.com');
 
 		// user.changeRole: true allows the editor to change their own role
-		$this->assertSame(['editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@getkirby.com'));
+		$this->assertSame(['editor-' . $uuid, 'guest-' . $uuid], $this->roleIds('editor@infinri.com'));
 
 		// users.changeRole: false prevents the editor from changing another user's role,
 		// so only that user's current role is returned
-		$this->assertSame(['guest-' . $uuid], $this->roleIds('guest@getkirby.com'));
+		$this->assertSame(['guest-' . $uuid], $this->roleIds('guest@infinri.com'));
 	}
 }

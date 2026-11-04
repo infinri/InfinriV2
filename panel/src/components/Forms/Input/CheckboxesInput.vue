@@ -4,7 +4,7 @@
 		:class="['k-checkboxes-input', $attrs.class]"
 		:style="$attrs.style"
 	>
-		<legend class="sr-only">{{ $t("options") }}</legend>
+		<legend class="sr-only">{{ $panel.t("options") }}</legend>
 
 		<k-input-validator
 			v-bind="{ min, max, required }"

@@ -189,7 +189,7 @@ class OptionsQuery extends OptionsProvider
 			return compact('text', 'value', 'icon', 'info');
 		});
 
-		// ensure not to resolve Kirby queries again
+		// ensure not to resolve Infinri queries again
 		// to prevent double-resolution of user-controlled content
 		return $this->options = Options::factory($options, resolve: false);
 	}

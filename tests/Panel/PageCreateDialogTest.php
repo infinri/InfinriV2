@@ -546,7 +546,7 @@ class PageCreateDialogTest extends AreaTestCase
 				]
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$dialog = new PageCreateDialog(
 			null,
@@ -577,7 +577,7 @@ class PageCreateDialogTest extends AreaTestCase
 				]
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$dialog = new PageCreateDialog(
 			null,
@@ -611,7 +611,7 @@ class PageCreateDialogTest extends AreaTestCase
 				]
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$dialog = new PageCreateDialog(
 			null,
@@ -645,7 +645,7 @@ class PageCreateDialogTest extends AreaTestCase
 				]
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$dialog = new PageCreateDialog(
 			null,
@@ -678,7 +678,7 @@ class PageCreateDialogTest extends AreaTestCase
 				]
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$dialog = new PageCreateDialog(
 			null,
@@ -714,7 +714,7 @@ class PageCreateDialogTest extends AreaTestCase
 				]
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		Page::create([
 			'slug'     => 'parent',

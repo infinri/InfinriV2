@@ -4,7 +4,7 @@
 		:disabled="disabled"
 		:style="$attrs.style"
 	>
-		<legend class="sr-only">{{ $t("options") }}</legend>
+		<legend class="sr-only">{{ $panel.t("options") }}</legend>
 
 		<k-input-validator :required="required" :value="JSON.stringify(value)">
 			<ul

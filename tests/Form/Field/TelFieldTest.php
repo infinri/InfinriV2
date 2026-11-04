@@ -15,6 +15,6 @@ class TelFieldTest extends TestCase
 		$this->assertNull($field->placeholder());
 		$this->assertNull($field->counter());
 		$this->assertSame('tel', $field->autocomplete());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 }

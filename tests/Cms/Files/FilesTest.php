@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Files::class)]
 class FilesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Files';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Files';
 
 	public function testAddFile(): void
 	{
@@ -131,7 +131,7 @@ class FilesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$files = $app->site()->files();
 
@@ -172,7 +172,7 @@ class FilesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$files = $app->site()->files();
 

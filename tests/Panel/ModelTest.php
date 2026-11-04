@@ -48,7 +48,7 @@ class ModelSiteWithImageMethod extends ModelSite
 class ModelTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Model';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Model';
 
 	protected function setUp(): void
 	{
@@ -72,15 +72,9 @@ class ModelTest extends TestCase
 		return new CustomPanelModel($site);
 	}
 
-	public function testContent(): void
+	public function testContentIsRemoved(): void
 	{
-		$panel = $this->panel([
-			'content' => $content = [
-				'foo' => 'bar'
-			]
-		]);
-
-		$this->assertSame($content, $panel->content());
+		$this->assertFalse(method_exists(CustomPanelModel::class, 'content'));
 	}
 
 	public function testContentWithChanges(): void
@@ -99,7 +93,7 @@ class ModelTest extends TestCase
 
 		$this->assertSame([
 			'foo' => 'foobar',
-		], $panel->content());
+		], $panel->versions()['changes']);
 	}
 
 	public function testDragTextFromCallbackMarkdown(): void
@@ -142,12 +136,12 @@ class ModelTest extends TestCase
 		$this->assertSame('![](test/test.heic)', $panel->dragTextFromCallback('markdown', $file, $file->filename()));
 	}
 
-	public function testDragTextFromCallbackKirbytext(): void
+	public function testDragTextFromCallbackInfinritext(): void
 	{
 		$app = $this->app->clone([
 			'options' => [
 				'panel' => [
-					'kirbytext' => [
+					'infinritext' => [
 						'fileDragText' => function (ModelFile $file, string $url) {
 							if ($file->extension() === 'heic') {
 								return sprintf('(image: %s)', $file->id());
@@ -174,12 +168,12 @@ class ModelTest extends TestCase
 		// Custom function does not match and returns null, default case
 		$file  = $app->page('test')->file('test.jpg');
 		$panel = new CustomPanelModel($file);
-		$this->assertNull($panel->dragTextFromCallback('kirbytext', $file, $file->filename()));
+		$this->assertNull($panel->dragTextFromCallback('infinritext', $file, $file->filename()));
 
 		// Custom function should return image tag for heic
 		$file  = $app->page('test')->file('test.heic');
 		$panel = new CustomPanelModel($file);
-		$this->assertSame('(image: test/test.heic)', $panel->dragTextFromCallback('kirbytext', $file, $file->filename()));
+		$this->assertSame('(image: test/test.heic)', $panel->dragTextFromCallback('infinritext', $file, $file->filename()));
 	}
 
 	public function testDragTextType(): void
@@ -188,14 +182,14 @@ class ModelTest extends TestCase
 
 		// with passed value
 		$this->assertSame('markdown', $panel->dragTextType('markdown'));
-		$this->assertSame('kirbytext', $panel->dragTextType('kirbytext'));
-		$this->assertSame('kirbytext', $panel->dragTextType('foo'));
+		$this->assertSame('infinritext', $panel->dragTextType('infinritext'));
+		$this->assertSame('infinritext', $panel->dragTextType('foo'));
 
 		// auto
-		$this->assertSame('kirbytext', $panel->dragTextType());
+		$this->assertSame('infinritext', $panel->dragTextType());
 
 		$app = $this->app->clone([
-			'options' => ['panel' => ['kirbytext' => false]]
+			'options' => ['panel' => ['infinritext' => false]]
 		]);
 		$this->assertSame('markdown', $panel->dragTextType());
 
@@ -224,7 +218,7 @@ class ModelTest extends TestCase
 
 	public function testImage(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$panel = $this->panel([
 			'files' => [
@@ -417,7 +411,7 @@ class ModelTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$panel = $app->page('test')->panel();
 		$image = $panel->image([]);
@@ -434,7 +428,7 @@ class ModelTest extends TestCase
 
 	public function testImageWithRatioQuery(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$panel = $this->panel([
 			'content' => ['ratio' => '3/2'],
@@ -527,7 +521,7 @@ class ModelTest extends TestCase
 		];
 
 		$app = $this->app->clone();
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$props = $this->panel($site)->props();
 		$this->assertSame('main', $props['tabs'][0]['name']);
@@ -539,7 +533,7 @@ class ModelTest extends TestCase
 				'query' => 'tab=foo'
 			]
 		]);
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$props = $this->panel($site)->props();
 		$this->assertSame('foo', get('tab'));
@@ -550,7 +544,7 @@ class ModelTest extends TestCase
 	{
 		$panel = $this->panel([
 			'content' => [
-				'title'  => $title = 'Kirby Kirby Kirby',
+				'title'  => $title = 'Infinri Infinri Infinri',
 				'author' => $author = 'Bastian Allgeier'
 			]
 		]);
@@ -620,7 +614,7 @@ class ModelTest extends TestCase
 		]);
 
 		Data::write($panel->model()->version('changes')->contentFile(), [
-			'lock' => 'kirby'
+			'lock' => 'infinri'
 		]);
 
 		$versions = $panel->versions();

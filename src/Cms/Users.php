@@ -136,7 +136,7 @@ class Users extends LazyCollection
 	protected function hydrateElement(string $key): User|null
 	{
 		if ($this->root === null) {
-			throw new LogicException('Cannot hydrate user "' . $key . '" with missing root'); // @codeCoverageIgnore
+			throw new LogicException(message: 'Cannot hydrate user "' . $key . '" with missing root'); // @codeCoverageIgnore
 		}
 
 		// ignore empty keys to avoid matching the `accounts` root
@@ -187,7 +187,7 @@ class Users extends LazyCollection
 		}
 
 		if ($this->root === null) {
-			throw new LogicException('Cannot initialize users with missing root'); // @codeCoverageIgnore
+			throw new LogicException(message: 'Cannot initialize users with missing root'); // @codeCoverageIgnore
 		}
 
 		// ensure the order matches the filesystem, even if

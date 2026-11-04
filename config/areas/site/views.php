@@ -27,7 +27,7 @@ return [
 			];
 
 			if ($src['latest'] === null) {
-				throw new PermissionException('The preview is not available');
+				throw new PermissionException(message: 'The preview is not available');
 			}
 
 			return [
@@ -71,7 +71,7 @@ return [
 			];
 
 			if ($src['latest'] === null) {
-				throw new PermissionException('The preview is not available');
+				throw new PermissionException(message: 'The preview is not available');
 			}
 
 			return [

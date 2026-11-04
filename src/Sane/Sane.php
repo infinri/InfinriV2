@@ -66,7 +66,6 @@ class Sane
 
 	/**
 	 * Sanitizes the given string with the specified handler
-	 * @since 3.6.0
 	 *
 	 * @param bool $isExternal Whether the string is from an external file
 	 *                         that may be accessed directly
@@ -84,7 +83,6 @@ class Sane
 	 * the file with the sanitized version;
 	 * the sane handlers are automatically chosen by
 	 * the extension and MIME type if not specified
-	 * @since 3.6.0
 	 *
 	 * @param string|bool $typeLazy Explicit handler type string,
 	 *                              `true` for lazy autodetection or
@@ -117,7 +115,7 @@ class Sane
 				// more than one matching handler;
 				// sanitizing with all handlers will not leave much in the output
 				throw new LogicException(
-					'Cannot sanitize file as more than one handler applies: ' .
+					message: 'Cannot sanitize file as more than one handler applies: ' .
 					implode(', ', A::map($handlers, fn ($handler) => $handler::class))
 				);
 		}
@@ -125,7 +123,6 @@ class Sane
 
 	/**
 	 * Sanitizes the given string from ProseMirror-backed fields
-	 * @since 5.4.1
 	 */
 	public static function sanitizeProseMirrorFields(
 		string $string

@@ -9,7 +9,7 @@ use TypeError;
 #[CoversClass(Page::class)]
 class PageSlugTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageSlug';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageSlug';
 
 	public function testSlugInSingleLanguageMode(): void
 	{
@@ -60,7 +60,7 @@ class PageSlugTest extends ModelTestCase
 	{
 		$this->setUpMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test'

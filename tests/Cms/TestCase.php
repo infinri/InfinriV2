@@ -41,14 +41,14 @@ class TestCase extends BaseTestCase
 		ErrorLog::$log = '';
 	}
 
-	public function kirby($props = [])
+	public function infinri($props = [])
 	{
 		return new App($props);
 	}
 
 	public function site()
 	{
-		return $this->kirby()->site();
+		return $this->infinri()->site();
 	}
 
 	public function pages()
@@ -89,10 +89,10 @@ class TestCase extends BaseTestCase
 		$app = new App([
 			'hooks' => $hooks,
 			'roots' => ['index' => '/dev/null'],
-			'user'  => 'test@getkirby.com',
+			'user'  => 'test@infinri.com',
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin'
 				]
 			],

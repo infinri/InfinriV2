@@ -4,7 +4,7 @@ namespace Infinri\Uuid;
 
 class HasUuidsTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Uuid.HasUuids';
+	public const TMP = INFINRI_TMP_DIR . '/Uuid.HasUuids';
 
 	public function testfindByUuid(): void
 	{

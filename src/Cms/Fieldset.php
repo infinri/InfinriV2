@@ -53,8 +53,8 @@ class Fieldset extends Item
 
 		if (
 			$this->translate === false &&
-			$this->kirby()->multilang() === true &&
-			$this->kirby()->language()->isDefault() === false
+			$this->infinri()->multilang() === true &&
+			$this->infinri()->language()->isDefault() === false
 		) {
 			// disable and unset the fieldset if it's not translatable
 			$this->unset    = true;

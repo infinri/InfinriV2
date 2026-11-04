@@ -11,7 +11,7 @@ use Infinri\TestCase;
 class UsersRoutesTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.UsersRoutes';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.UsersRoutes';
 
 	protected function setUp(): void
 	{
@@ -35,20 +35,20 @@ class UsersRoutesTest extends TestCase
 			'users' => [
 				[
 					'name'     => 'Bastian',
-					'email'    => 'admin@getkirby.com',
+					'email'    => 'admin@infinri.com',
 					'role'     => 'admin',
 					'password' => password_hash('12345678', PASSWORD_DEFAULT)
 				],
 				[
 					'name'     => 'Sonja',
-					'email'    => 'editor@getkirby.com',
+					'email'    => 'editor@infinri.com',
 					'role'     => 'admin',
 					'password' => password_hash('87654321', PASSWORD_DEFAULT)
 				]
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	protected function tearDown(): void
@@ -77,18 +77,18 @@ class UsersRoutesTest extends TestCase
 			'users' => [
 				[
 					'name'  => 'Admin',
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				],
 				[
 					'name'  => 'Restricted',
-					'email' => 'restricted@getkirby.com',
+					'email' => 'restricted@infinri.com',
 					'role'  => 'restricted'
 				]
 			]
 		]);
 
-		$app->impersonate('admin@getkirby.com');
+		$app->impersonate('admin@infinri.com');
 
 		return $app;
 	}
@@ -96,13 +96,13 @@ class UsersRoutesTest extends TestCase
 	public function testAvatar(): void
 	{
 		// create an avatar for the user
-		$this->app->user('admin@getkirby.com')->createFile([
+		$this->app->user('admin@infinri.com')->createFile([
 			'filename' => 'profile.jpg',
 			'source'   => static::FIXTURES . '/avatar.jpg',
 			'template' => 'avatar',
 		]);
 
-		$response = $this->app->api()->call('users/admin@getkirby.com/avatar');
+		$response = $this->app->api()->call('users/admin@infinri.com/avatar');
 
 		$this->assertSame('profile.jpg', $response['data']['filename']);
 	}
@@ -110,13 +110,13 @@ class UsersRoutesTest extends TestCase
 	public function testAvatarDelete(): void
 	{
 		// create an avatar for the user
-		$this->app->user('admin@getkirby.com')->createFile([
+		$this->app->user('admin@infinri.com')->createFile([
 			'filename' => 'profile.jpg',
 			'source'   => static::FIXTURES . '/avatar.jpg',
 			'template' => 'avatar',
 		]);
 
-		$response = $this->app->api()->call('users/admin@getkirby.com/avatar', 'DELETE');
+		$response = $this->app->api()->call('users/admin@infinri.com/avatar', 'DELETE');
 
 		$this->assertTrue($response);
 	}
@@ -132,9 +132,9 @@ class UsersRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$response = $app->api()->call('users/admin@getkirby.com/blueprint');
+		$response = $app->api()->call('users/admin@infinri.com/blueprint');
 
 		$this->assertSame(200, $response['code']);
 		$this->assertSame('Test', $response['data']['title']);
@@ -166,9 +166,9 @@ class UsersRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$response = $app->api()->call('users/admin@getkirby.com/blueprints');
+		$response = $app->api()->call('users/admin@infinri.com/blueprints');
 
 		$this->assertCount(2, $response);
 		$this->assertSame('Foo', $response[0]['title']);
@@ -181,7 +181,7 @@ class UsersRoutesTest extends TestCase
 
 		$response = $app->api()->call('users', 'POST', [
 			'body' => [
-				'email' => 'test@getkirby.com',
+				'email' => 'test@infinri.com',
 				'role'  => 'admin'
 			]
 		]);
@@ -189,24 +189,24 @@ class UsersRoutesTest extends TestCase
 		$this->assertSame('ok', $response['status']);
 		$this->assertSame('model', $response['type']);
 		$this->assertSame('admin', $response['data']['role']['name']);
-		$this->assertSame('test@getkirby.com', $response['data']['username']);
+		$this->assertSame('test@infinri.com', $response['data']['username']);
 	}
 
 	public function testChangeEmail(): void
 	{
-		$response = $this->app->api()->call('users/admin@getkirby.com/email', 'PATCH', [
+		$response = $this->app->api()->call('users/admin@infinri.com/email', 'PATCH', [
 			'body' => [
-				'email' => 'admin@getkirby.de'
+				'email' => 'admin@infinri.de'
 			]
 		]);
 
 		$this->assertSame('ok', $response['status']);
-		$this->assertSame('admin@getkirby.de', $response['data']['email']);
+		$this->assertSame('admin@infinri.de', $response['data']['email']);
 	}
 
 	public function testChangeLanguage(): void
 	{
-		$response = $this->app->api()->call('users/admin@getkirby.com/language', 'PATCH', [
+		$response = $this->app->api()->call('users/admin@infinri.com/language', 'PATCH', [
 			'body' => [
 				'language' => 'de'
 			]
@@ -218,7 +218,7 @@ class UsersRoutesTest extends TestCase
 
 	public function testChangeName(): void
 	{
-		$response = $this->app->api()->call('users/admin@getkirby.com/name', 'PATCH', [
+		$response = $this->app->api()->call('users/admin@infinri.com/name', 'PATCH', [
 			'body' => [
 				'name' => 'Test user'
 			]
@@ -230,9 +230,9 @@ class UsersRoutesTest extends TestCase
 
 	public function testChangePassword(): void
 	{
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
-		$response = $this->app->api()->call('users/editor@getkirby.com/password', 'PATCH', [
+		$response = $this->app->api()->call('users/editor@infinri.com/password', 'PATCH', [
 			'body' => [
 				'currentPassword' => '12345678',
 				'password'        => 'super-secure-new-password'
@@ -240,7 +240,7 @@ class UsersRoutesTest extends TestCase
 		]);
 
 		$this->assertSame('ok', $response['status']);
-		$this->assertTrue($this->app->user('editor@getkirby.com')->validatePassword('super-secure-new-password'));
+		$this->assertTrue($this->app->user('editor@infinri.com')->validatePassword('super-secure-new-password'));
 	}
 
 	public function testChangePasswordMissingCurrentPassword(): void
@@ -248,9 +248,9 @@ class UsersRoutesTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Please enter a valid password. Passwords must be at least 8 characters long.');
 
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
-		$this->app->api()->call('users/editor@getkirby.com/password', 'PATCH', [
+		$this->app->api()->call('users/editor@infinri.com/password', 'PATCH', [
 			'body' => [
 				'password' => 'super-secure-new-password'
 			]
@@ -262,9 +262,9 @@ class UsersRoutesTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Wrong password');
 
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 
-		$this->app->api()->call('users/editor@getkirby.com/password', 'PATCH', [
+		$this->app->api()->call('users/editor@infinri.com/password', 'PATCH', [
 			'body' => [
 				'currentPassword' => 'definitely-not-correct',
 				'password'        => 'super-secure-new-password'
@@ -280,13 +280,13 @@ class UsersRoutesTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Please enter a valid password. Passwords must be at least 8 characters long.');
 
-		$this->app->impersonate('admin@getkirby.com');
+		$this->app->impersonate('admin@infinri.com');
 		$this->app->session()->set(
-			'kirby.resetPassword',
+			'infinri.resetPassword',
 			$this->app->user()->id()
 		);
 
-		$this->app->api()->call('users/editor@getkirby.com/password', 'PATCH', [
+		$this->app->api()->call('users/editor@infinri.com/password', 'PATCH', [
 			'body' => [
 				'password' => 'super-secure-new-password'
 			]
@@ -295,7 +295,7 @@ class UsersRoutesTest extends TestCase
 
 	public function testChangeRole(): void
 	{
-		$response = $this->app->api()->call('users/editor@getkirby.com/role', 'PATCH', [
+		$response = $this->app->api()->call('users/editor@infinri.com/role', 'PATCH', [
 			'body' => [
 				'role' => 'editor'
 			]
@@ -307,7 +307,7 @@ class UsersRoutesTest extends TestCase
 
 	public function testDelete(): void
 	{
-		$response = $this->app->api()->call('users/admin@getkirby.com', 'DELETE');
+		$response = $this->app->api()->call('users/admin@infinri.com', 'DELETE');
 		$this->assertTrue($response);
 	}
 
@@ -316,9 +316,9 @@ class UsersRoutesTest extends TestCase
 		$app = $this->setUpAppWithoutUserAccess();
 
 		$this->expectException(NotFoundException::class);
-		$this->expectExceptionMessage('The user "restricted@getkirby.com" cannot be found');
+		$this->expectExceptionMessage('The user "restricted@infinri.com" cannot be found');
 
-		$app->api()->call('users/restricted@getkirby.com', 'DELETE');
+		$app->api()->call('users/restricted@infinri.com', 'DELETE');
 	}
 
 	public function testFields(): void
@@ -349,13 +349,13 @@ class UsersRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$response = $app->api()->call('users/admin@getkirby.com/fields/test');
+		$response = $app->api()->call('users/admin@infinri.com/fields/test');
 
 		$this->assertSame('Test home route', $response);
 
-		$response = $app->api()->call('users/admin@getkirby.com/fields/test/nested');
+		$response = $app->api()->call('users/admin@infinri.com/fields/test/nested');
 
 		$this->assertSame('Test nested route', $response);
 	}
@@ -365,7 +365,7 @@ class UsersRoutesTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						[
 							'filename' => 'a.jpg',
@@ -375,9 +375,9 @@ class UsersRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$response = $app->api()->call('users/test@getkirby.com/files/a.jpg');
+		$response = $app->api()->call('users/test@infinri.com/files/a.jpg');
 
 		$this->assertSame('a.jpg', $response['data']['filename']);
 	}
@@ -387,7 +387,7 @@ class UsersRoutesTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						[
 							'filename' => 'c.jpg',
@@ -403,9 +403,9 @@ class UsersRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$response = $app->api()->call('users/test@getkirby.com/files');
+		$response = $app->api()->call('users/test@infinri.com/files');
 
 		$this->assertCount(3, $response['data']);
 		$this->assertSame('a.jpg', $response['data'][0]['filename']);
@@ -418,7 +418,7 @@ class UsersRoutesTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'files' => [
 						[
 							'filename' => 'a.jpg',
@@ -437,9 +437,9 @@ class UsersRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$response = $app->api()->call('users/test@getkirby.com/files');
+		$response = $app->api()->call('users/test@infinri.com/files');
 
 		$this->assertSame('b.jpg', $response['data'][0]['filename']);
 		$this->assertSame('a.jpg', $response['data'][1]['filename']);
@@ -449,9 +449,9 @@ class UsersRoutesTest extends TestCase
 	{
 		$app = $this->app;
 
-		$response = $app->api()->call('users/admin@getkirby.com');
+		$response = $app->api()->call('users/admin@infinri.com');
 
-		$this->assertSame('admin@getkirby.com', $response['data']['email']);
+		$this->assertSame('admin@infinri.com', $response['data']['email']);
 	}
 
 	public function testGetWithoutAccess(): void
@@ -459,16 +459,16 @@ class UsersRoutesTest extends TestCase
 		$app = $this->setUpAppWithoutUserAccess();
 
 		$this->expectException(NotFoundException::class);
-		$this->expectExceptionMessage('The user "restricted@getkirby.com" cannot be found');
+		$this->expectExceptionMessage('The user "restricted@infinri.com" cannot be found');
 
-		$app->api()->call('users/restricted@getkirby.com');
+		$app->api()->call('users/restricted@infinri.com');
 	}
 
 	public function testRoles(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
-		$response = $this->app->api()->call('users/admin@getkirby.com/roles');
+		$response = $this->app->api()->call('users/admin@infinri.com/roles');
 
 		$this->assertSame(200, $response['code']);
 
@@ -488,7 +488,7 @@ class UsersRoutesTest extends TestCase
 		]);
 
 		$this->assertCount(1, $response['data']);
-		$this->assertSame('admin@getkirby.com', $response['data'][0]['email']);
+		$this->assertSame('admin@infinri.com', $response['data'][0]['email']);
 	}
 
 	public function testSearchWithGetRequest(): void
@@ -502,7 +502,7 @@ class UsersRoutesTest extends TestCase
 		]);
 
 		$this->assertCount(1, $response['data']);
-		$this->assertSame('editor@getkirby.com', $response['data'][0]['email']);
+		$this->assertSame('editor@infinri.com', $response['data'][0]['email']);
 	}
 
 	public function testSearchWithGetRequestWithoutAccess(): void
@@ -529,7 +529,7 @@ class UsersRoutesTest extends TestCase
 		]);
 
 		$this->assertCount(1, $response['data']);
-		$this->assertSame('editor@getkirby.com', $response['data'][0]['email']);
+		$this->assertSame('editor@infinri.com', $response['data'][0]['email']);
 	}
 
 	public function testSearchWithPostRequestIgnoresFilterBy(): void
@@ -557,8 +557,8 @@ class UsersRoutesTest extends TestCase
 		]);
 
 		$this->assertCount(2, $response['data']);
-		$this->assertSame('admin@getkirby.com', $response['data'][0]['email']);
-		$this->assertSame('editor@getkirby.com', $response['data'][1]['email']);
+		$this->assertSame('admin@infinri.com', $response['data'][0]['email']);
+		$this->assertSame('editor@infinri.com', $response['data'][1]['email']);
 	}
 
 	public function testSearchWithPostRequestWithoutAccess(): void
@@ -602,7 +602,7 @@ class UsersRoutesTest extends TestCase
 		// the 'not' key is stripped; both users are returned
 		$response = $this->app->api()->call('users/search', 'POST', [
 			'body' => [
-				'not' => ['admin@getkirby.com'],
+				'not' => ['admin@infinri.com'],
 			]
 		]);
 
@@ -630,9 +630,9 @@ class UsersRoutesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
-		$response = $app->api()->call('users/admin@getkirby.com/sections/test');
+		$response = $app->api()->call('users/admin@infinri.com/sections/test');
 		$expected = [
 			'status' => 'ok',
 			'code'   => 200,
@@ -646,7 +646,7 @@ class UsersRoutesTest extends TestCase
 
 	public function testUpdate(): void
 	{
-		$response = $this->app->api()->call('users/admin@getkirby.com', 'PATCH', [
+		$response = $this->app->api()->call('users/admin@infinri.com', 'PATCH', [
 			'body' => [
 				'position' => 'Admin'
 			]
@@ -661,9 +661,9 @@ class UsersRoutesTest extends TestCase
 		$app = $this->setUpAppWithoutUserAccess();
 
 		$this->expectException(NotFoundException::class);
-		$this->expectExceptionMessage('The user "restricted@getkirby.com" cannot be found');
+		$this->expectExceptionMessage('The user "restricted@infinri.com" cannot be found');
 
-		$app->api()->call('users/restricted@getkirby.com', 'PATCH', [
+		$app->api()->call('users/restricted@infinri.com', 'PATCH', [
 			'body' => [
 				'position' => 'Restricted'
 			]
@@ -674,8 +674,8 @@ class UsersRoutesTest extends TestCase
 	{
 		$response = $this->app->api()->call('users');
 
-		$this->assertSame('admin@getkirby.com', $response['data'][0]['email']);
-		$this->assertSame('editor@getkirby.com', $response['data'][1]['email']);
+		$this->assertSame('admin@infinri.com', $response['data'][0]['email']);
+		$this->assertSame('editor@infinri.com', $response['data'][1]['email']);
 	}
 
 	public function testUsersWithoutAccess(): void
@@ -685,6 +685,6 @@ class UsersRoutesTest extends TestCase
 		$response = $app->api()->call('users');
 
 		$this->assertCount(1, $response['data']);
-		$this->assertSame('admin@getkirby.com', $response['data'][0]['email']);
+		$this->assertSame('admin@infinri.com', $response['data'][0]['email']);
 	}
 }

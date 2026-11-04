@@ -24,7 +24,6 @@ export const props = {
 		isHidden: Boolean,
 		/**
 		 * Block can be merged with all other selected blocks
-		 * @since 4.0.0
 		 */
 		isMergable: Boolean
 	}
@@ -45,7 +44,6 @@ export default {
 		isEditable: Boolean,
 		/**
 		 * Block can be split into multiple blocks
-		 * @since 4.0.0
 		 */
 		isSplitable: Boolean
 	},
@@ -72,18 +70,18 @@ export default {
 				return [
 					{
 						icon: "template",
-						title: this.$t("copy"),
+						title: this.$panel.t("copy"),
 						click: () => this.$emit("copy")
 					},
 					{
 						when: this.isMergable,
 						icon: "merge",
-						title: this.$t("merge"),
+						title: this.$panel.t("merge"),
 						click: () => this.$emit("merge")
 					},
 					{
 						icon: "trash",
-						title: this.$t("remove"),
+						title: this.$panel.t("remove"),
 						click: () => this.$emit("removeSelected")
 					}
 				];
@@ -93,39 +91,39 @@ export default {
 				{
 					when: this.isEditable,
 					icon: "edit",
-					title: this.$t("edit"),
+					title: this.$panel.t("edit"),
 					click: () => this.$emit("open")
 				},
 				{
 					icon: "add",
-					title: this.$t("insert.after"),
+					title: this.$panel.t("insert.after"),
 					disabled: this.isFull,
 					click: () => this.$emit("chooseToAppend")
 				},
 				{
 					icon: "trash",
-					title: this.$t("delete"),
+					title: this.$panel.t("delete"),
 					click: () => this.$emit("remove")
 				},
 				{
 					icon: "sort",
-					title: this.$t("sort.drag"),
+					title: this.$panel.t("sort.drag"),
 					class: "k-sort-handle",
 					key: (e) => this.sort(e)
 				},
 				{
 					icon: "dots",
-					title: this.$t("more"),
+					title: this.$panel.t("more"),
 					dropdown: [
 						{
 							icon: "angle-up",
-							label: this.$t("insert.before"),
+							label: this.$panel.t("insert.before"),
 							disabled: this.isFull,
 							click: () => this.$emit("chooseToPrepend")
 						},
 						{
 							icon: "angle-down",
-							label: this.$t("insert.after"),
+							label: this.$panel.t("insert.after"),
 							disabled: this.isFull,
 							click: () => this.$emit("chooseToAppend")
 						},
@@ -133,47 +131,49 @@ export default {
 						{
 							when: this.isEditable,
 							icon: "edit",
-							label: this.$t("edit"),
+							label: this.$panel.t("edit"),
 							click: () => this.$emit("open")
 						},
 						{
 							icon: "refresh",
-							label: this.$t("field.blocks.changeType"),
+							label: this.$panel.t("field.blocks.changeType"),
 							click: () => this.$emit("chooseToConvert")
 						},
 						{
 							when: this.isSplitable,
 							icon: "split",
-							label: this.$t("split"),
+							label: this.$panel.t("split"),
 							click: () => this.$emit("split")
 						},
 						"-",
 						{
 							icon: "template",
-							label: this.$t("copy"),
+							label: this.$panel.t("copy"),
 							click: () => this.$emit("copy")
 						},
 						{
 							icon: "download",
-							label: this.$t("paste.after"),
+							label: this.$panel.t("paste.after"),
 							disabled: this.isFull,
 							click: () => this.$emit("paste")
 						},
 						"-",
 						{
 							icon: this.isHidden ? "preview" : "hidden",
-							label: this.isHidden ? this.$t("show") : this.$t("hide"),
+							label: this.isHidden
+								? this.$panel.t("show")
+								: this.$panel.t("hide"),
 							click: () => this.$emit(this.isHidden ? "show" : "hide")
 						},
 						{
 							icon: "copy",
-							label: this.$t("duplicate"),
+							label: this.$panel.t("duplicate"),
 							click: () => this.$emit("duplicate")
 						},
 						"-",
 						{
 							icon: "trash",
-							label: this.$t("delete"),
+							label: this.$panel.t("delete"),
 							click: () => this.$emit("remove")
 						}
 					]

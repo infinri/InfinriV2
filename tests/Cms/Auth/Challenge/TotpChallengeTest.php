@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(TotpChallenge::class)]
 class TotpChallengeTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Auth.TotpChallenge';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Auth.TotpChallenge';
 
 	protected function setUp(): void
 	{
@@ -39,7 +39,7 @@ class TotpChallengeTest extends TestCase
 	{
 		$user = $this->app->user('homer@simpsons.com');
 		$this->assertFalse(TotpChallenge::isAvailable($user, 'login'));
-		$this->app->impersonate('kirby', fn () => $user->changeTotp('ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'));
+		$this->app->impersonate('infinri', fn () => $user->changeTotp('ABCDEFGHIJKLMNOPQRSTUVWXYZ234567'));
 		$this->assertTrue(TotpChallenge::isAvailable($user, 'login'));
 	}
 
@@ -53,7 +53,7 @@ class TotpChallengeTest extends TestCase
 	{
 		$user = $this->app->user('homer@simpsons.com');
 		$totp = new Totp();
-		$this->app->impersonate('kirby', fn () => $user->changeTotp($totp->secret()));
+		$this->app->impersonate('infinri', fn () => $user->changeTotp($totp->secret()));
 
 		$this->assertTrue(TotpChallenge::verify($user, $totp->generate()));
 		$this->assertFalse(TotpChallenge::verify($user, 'a23456'));

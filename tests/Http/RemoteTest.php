@@ -12,7 +12,7 @@ use stdClass;
 #[CoversClass(Remote::class)]
 class RemoteTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Http.Remote';
+	public const TMP = INFINRI_TMP_DIR . '/Http.Remote';
 
 	protected string|false $cwd;
 	protected array $defaults;
@@ -45,7 +45,7 @@ class RemoteTest extends TestCase
 
 	public function testOptionsHeaders(): void
 	{
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'headers' => [
 				'Accept' => 'application/json',
 				'Accept-Charset: utf8'
@@ -59,7 +59,7 @@ class RemoteTest extends TestCase
 
 	public function testOptionsBasicAuth(): void
 	{
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'basicAuth' => 'user:pw'
 		]);
 		$this->assertSame('user:pw', $request->curlopt[CURLOPT_USERPWD]);
@@ -68,28 +68,28 @@ class RemoteTest extends TestCase
 	public function testOptionsCa(): void
 	{
 		// default: internal CA
-		$request = Remote::get('https://getkirby.com');
+		$request = Remote::get('https://infinri.com');
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
 		$this->assertSame(dirname(__DIR__, 2) . '/cacert.pem', $request->curlopt[CURLOPT_CAINFO]);
 		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $request->curlopt);
 
 		// default with php.ini setting (invalid): internal CA
 		ini_set('curl.cainfo', __DIR__ . '/does-not-exist.pem');
-		$request = Remote::get('https://getkirby.com');
+		$request = Remote::get('https://infinri.com');
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
 		$this->assertSame(dirname(__DIR__, 2) . '/cacert.pem', $request->curlopt[CURLOPT_CAINFO]);
 		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $request->curlopt);
 
 		// default with php.ini setting (valid): system CA
 		ini_set('curl.cainfo', __FILE__);
-		$request = Remote::get('https://getkirby.com');
+		$request = Remote::get('https://infinri.com');
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
 		$this->assertArrayNotHasKey(CURLOPT_CAINFO, $request->curlopt);
 		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $request->curlopt);
 		ini_restore('curl.cainfo');
 
 		// explicit internal CA
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => Remote::CA_INTERNAL
 		]);
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
@@ -98,7 +98,7 @@ class RemoteTest extends TestCase
 
 		// explicit internal CA with php.ini setting
 		ini_set('curl.cainfo', __FILE__);
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => Remote::CA_INTERNAL
 		]);
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
@@ -109,7 +109,7 @@ class RemoteTest extends TestCase
 		// explicit internal CA with an existing file named like the constant
 		chdir(static::TMP);
 		touch(Remote::CA_INTERNAL);
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => Remote::CA_INTERNAL
 		]);
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
@@ -117,7 +117,7 @@ class RemoteTest extends TestCase
 		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $request->curlopt);
 
 		// CA file
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => __FILE__
 		]);
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
@@ -125,7 +125,7 @@ class RemoteTest extends TestCase
 		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $request->curlopt);
 
 		// CA directory
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => __DIR__
 		]);
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
@@ -133,7 +133,7 @@ class RemoteTest extends TestCase
 		$this->assertSame(__DIR__, $request->curlopt[CURLOPT_CAPATH]);
 
 		// system CA
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => Remote::CA_SYSTEM
 		]);
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
@@ -143,7 +143,7 @@ class RemoteTest extends TestCase
 		// system CA with an existing file named like the constant
 		chdir(static::TMP);
 		touch(Remote::CA_SYSTEM);
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => Remote::CA_SYSTEM
 		]);
 		$this->assertTrue($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
@@ -151,7 +151,7 @@ class RemoteTest extends TestCase
 		$this->assertArrayNotHasKey(CURLOPT_CAPATH, $request->curlopt);
 
 		// disabled
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => false
 		]);
 		$this->assertFalse($request->curlopt[CURLOPT_SSL_VERIFYPEER]);
@@ -160,7 +160,7 @@ class RemoteTest extends TestCase
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid "ca" option for the Remote class');
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'ca' => 'does-not-exist'
 		]);
 	}
@@ -176,7 +176,7 @@ class RemoteTest extends TestCase
 			]
 		]);
 
-		$request = Remote::get('https://getkirby.com');
+		$request = Remote::get('https://infinri.com');
 
 		$options = $request->options();
 		$this->assertSame('different-value', $options['key']);
@@ -194,25 +194,25 @@ class RemoteTest extends TestCase
 
 	public function testContent(): void
 	{
-		$request = Remote::put('https://getkirby.com');
+		$request = Remote::put('https://infinri.com');
 		$this->assertNull($request->content());
 	}
 
 	public function testCode(): void
 	{
-		$request = Remote::put('https://getkirby.com');
+		$request = Remote::put('https://infinri.com');
 		$this->assertNull($request->code());
 	}
 
 	public function testDelete(): void
 	{
-		$request = Remote::delete('https://getkirby.com');
+		$request = Remote::delete('https://infinri.com');
 		$this->assertSame('DELETE', $request->method());
 	}
 
 	public function testFetchStripsCRLFFromHeaders(): void
 	{
-		$request = Remote::get('https://getkirby.com', [
+		$request = Remote::get('https://infinri.com', [
 			'headers' => [
 				// associative form: "X-Foo: bar\r\nX-Injected: evil"
 				'X-Foo' => "bar\r\nX-Injected: evil",
@@ -230,79 +230,79 @@ class RemoteTest extends TestCase
 	public function testGet(): void
 	{
 		// default
-		$request = Remote::get('https://getkirby.com');
+		$request = Remote::get('https://infinri.com');
 		$this->assertSame('GET', $request->method());
 
 		// url without query string + query options
-		$request = Remote::get('https://getkirby.com/a', ['data' => ['b' => 'foo']]);
+		$request = Remote::get('https://infinri.com/a', ['data' => ['b' => 'foo']]);
 		$this->assertSame('GET', $request->method());
-		$this->assertSame('https://getkirby.com/a?b=foo', $request->url());
+		$this->assertSame('https://infinri.com/a?b=foo', $request->url());
 
 		// url with query string + query options
-		$request = Remote::get('https://getkirby.com/a?b=c', ['data' => ['d' => 'foo']]);
+		$request = Remote::get('https://infinri.com/a?b=c', ['data' => ['d' => 'foo']]);
 		$this->assertSame('GET', $request->method());
-		$this->assertSame('https://getkirby.com/a?b=c&d=foo', $request->url());
+		$this->assertSame('https://infinri.com/a?b=c&d=foo', $request->url());
 	}
 
 	public function testHead(): void
 	{
-		$request = Remote::head('https://getkirby.com');
+		$request = Remote::head('https://infinri.com');
 		$this->assertSame('HEAD', $request->method());
 	}
 
 	public function testHeaders(): void
 	{
-		$request = new Remote('https://getkirby.com');
+		$request = new Remote('https://infinri.com');
 		$this->assertSame([], $request->headers());
 	}
 
 	public function testInfo(): void
 	{
-		$request = new Remote('https://getkirby.com');
+		$request = new Remote('https://infinri.com');
 		$this->assertSame([], $request->info());
 	}
 
 	public function testJson(): void
 	{
-		$request = new Remote('https://getkirby.com');
+		$request = new Remote('https://infinri.com');
 		$this->assertNull($request->json());
 
-		$request = new Remote('https://getkirby.com');
+		$request = new Remote('https://infinri.com');
 		$request->content = '{"foo":"bar"}';
 		$this->assertSame(['foo' => 'bar'], $request->json(array: true));
 
-		$request = new Remote('https://getkirby.com');
+		$request = new Remote('https://infinri.com');
 		$request->content = '{"foo":"bar"}';
 		$json = $request->json(array: false);
 		$this->assertInstanceOf(stdClass::class, $json);
 		$this->assertSame('bar', $json->foo);
 
-		$request = new Remote('https://getkirby.com');
+		$request = new Remote('https://infinri.com');
 		$request->content = '5';
 		$this->assertNull($request->json());
 	}
 
 	public function testPatch(): void
 	{
-		$request = Remote::patch('https://getkirby.com');
+		$request = Remote::patch('https://infinri.com');
 		$this->assertSame('PATCH', $request->method());
 	}
 
 	public function testPost(): void
 	{
-		$request = Remote::post('https://getkirby.com');
+		$request = Remote::post('https://infinri.com');
 		$this->assertSame('POST', $request->method());
 	}
 
 	public function testPut(): void
 	{
-		$request = Remote::put('https://getkirby.com');
+		$request = Remote::put('https://infinri.com');
 		$this->assertSame('PUT', $request->method());
 	}
 
 	public function testRequest(): void
 	{
-		$request = new Remote($url = 'https://getkirby.com');
+		$request = new Remote($url = 'https://infinri.com');
 
 		$this->assertSame($url, $request->url());
 		$this->assertSame('GET', $request->method());

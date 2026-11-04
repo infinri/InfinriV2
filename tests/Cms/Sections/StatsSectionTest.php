@@ -22,7 +22,7 @@ class MockPageForStatsSection extends Page
 				'icon'   => 'heart',
 				'info'   => 'Info A',
 				'label'  => 'A',
-				'link'   => 'https://getkirby.com',
+				'link'   => 'https://infinri.com',
 				'theme'  => null,
 				'value'  => 'Value A',
 			],

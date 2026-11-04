@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(SiteRules::class)]
 class SiteRulesTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.SiteRules';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.SiteRules';
 
 	public function testChangeTitleWithoutPermissions(): void
 	{
@@ -27,7 +27,7 @@ class SiteRulesTest extends ModelTestCase
 	public function testUpdate(): void
 	{
 		$app = new App();
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$this->expectNotToPerformAssertions();
 

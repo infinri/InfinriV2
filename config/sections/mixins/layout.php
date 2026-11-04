@@ -22,7 +22,7 @@ return [
 			return in_array($layout, $layouts, true) ? $layout : 'list';
 		},
 		/**
-		 * Whether the raw content file values should be used for the table column previews. Should not be used unless it eases performance issues in your setup introduced with Kirby 4.2
+		 * Whether the raw content file values should be used for the table column previews. Should not be used unless it eases performance issues in your setup
 		 *
 		 * @todo remove when Form classes have been refactored
 		 */
@@ -160,7 +160,7 @@ return [
 			// @codeCoverageIgnoreEnd
 
 			// Use form to get the proper values for the columns
-			$form = Form::for($model)->values();
+			$form = Form::for($model)->toFormValues();
 
 			foreach ($this->columns as $columnName => $column) {
 				$item[$columnName] = match (empty($column['value'])) {

@@ -50,7 +50,6 @@ export default {
 		docs: String,
 		examples: [Object, Array],
 		file: String,
-		github: String,
 		props: [Object, Array],
 		styles: String,
 		tab: String,
@@ -76,8 +75,8 @@ export default {
 	},
 	mounted() {
 		const path = this.$panel.view.path.replace(/lab\//, "");
-		import.meta.hot?.on("kirby:example:" + path, this.reloadComponent);
-		import.meta.hot?.on("kirby:docs:" + this.docs, this.reloadDocs);
+		import.meta.hot?.on("infinri:example:" + path, this.reloadComponent);
+		import.meta.hot?.on("infinri:docs:" + this.docs, this.reloadDocs);
 	},
 	methods: {
 		async createComponent() {

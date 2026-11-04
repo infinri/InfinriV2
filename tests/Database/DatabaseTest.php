@@ -321,15 +321,15 @@ class DatabaseTest extends TestCase
 		$database = new Database([
 			'database' => ':memory:',
 			'type'     => 'sqlite',
-			'prefix'   => 'kirby_'
+			'prefix'   => 'infinri_'
 		]);
 
-		$database->execute('CREATE TABLE "kirby_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE)');
+		$database->execute('CREATE TABLE "infinri_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE)');
 
-		$this->assertSame('kirby_', $database->prefix());
+		$this->assertSame('infinri_', $database->prefix());
 		$this->assertInstanceOf(\Infinri\Database\Sql\Sqlite::class, $database->sql());
 		$this->assertSame(
-			'SELECT * FROM "kirby_users"',
+			'SELECT * FROM "infinri_users"',
 			$database->table('users')->build('select')['query']
 		);
 	}
@@ -369,13 +369,13 @@ class DatabaseTest extends TestCase
 		// valid
 		$connectionString = $dsn([
 			'host' => 'localhost',
-			'database' => 'kirby',
+			'database' => 'infinri',
 			'charset' => 'iso-8859-1',
 			'socket' => '/tmp/mysql.sock',
 			'port' => 3306,
 		]);
 
-		$expected = 'mysql:host=localhost;port=3306;unix_socket=/tmp/mysql.sock;dbname=kirby;charset=iso-8859-1';
+		$expected = 'mysql:host=localhost;port=3306;unix_socket=/tmp/mysql.sock;dbname=infinri;charset=iso-8859-1';
 		$this->assertSame($expected, $connectionString);
 	}
 
@@ -406,10 +406,10 @@ class DatabaseTest extends TestCase
 
 		// valid
 		$connectionString = $dsn([
-			'database' => 'kirby'
+			'database' => 'infinri'
 		]);
 
-		$this->assertSame('sqlite:kirby', $connectionString);
+		$this->assertSame('sqlite:infinri', $connectionString);
 
 		// no database
 		$this->expectException(InvalidArgumentException::class);

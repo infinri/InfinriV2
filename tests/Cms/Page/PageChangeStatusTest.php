@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Page::class)]
 class PageChangeStatusTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageChangeStatus';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageChangeStatus';
 
 	public function testChangeStatusFromDraftToListed(): void
 	{
@@ -358,7 +358,7 @@ class PageChangeStatusTest extends ModelTestCase
 			],
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'  => 'test',
@@ -392,7 +392,7 @@ class PageChangeStatusTest extends ModelTestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',
@@ -431,7 +431,7 @@ class PageChangeStatusTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$pageA = Page::create(['slug' => 'test-a', 'num' => null]);
 		$pageB = Page::create(['slug' => 'test-b', 'num' => null]);
@@ -470,7 +470,7 @@ class PageChangeStatusTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = Page::create(['slug' => 'test']);
 

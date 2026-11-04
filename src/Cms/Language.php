@@ -22,9 +22,9 @@ class Language implements Stringable
 	public const CLASS_ALIAS = 'language';
 
 	/**
-	 * The parent Kirby instance
+	 * The parent Infinri instance
 	 */
-	public static App|null $kirby;
+	public static App|null $infinri;
 
 	protected string $code;
 	protected bool $default;
@@ -48,7 +48,7 @@ class Language implements Stringable
 			);
 		}
 
-		static::$kirby      = $props['kirby'] ?? null;
+		static::$infinri      = $props['infinri'] ?? null;
 		$this->code         = basename(trim($props['code'])); // prevent path traversal
 		$this->default      = ($props['default'] ?? false) === true;
 		$this->direction    = ($props['direction'] ?? null) === 'rtl' ? 'rtl' : 'ltr';
@@ -90,18 +90,18 @@ class Language implements Stringable
 	 */
 	public function baseUrl(): string
 	{
-		$kirbyUrl    = $this->kirby()->url();
+		$infinriUrl    = $this->infinri()->url();
 		$languageUrl = $this->url();
 
 		if (empty($this->url)) {
-			return $kirbyUrl;
+			return $infinriUrl;
 		}
 
-		if (Str::startsWith($languageUrl, $kirbyUrl) === true) {
-			return $kirbyUrl;
+		if (Str::startsWith($languageUrl, $infinriUrl) === true) {
+			return $infinriUrl;
 		}
 
-		return Url::base($languageUrl) ?? $kirbyUrl;
+		return Url::base($languageUrl) ?? $infinriUrl;
 	}
 
 	/**
@@ -139,8 +139,8 @@ class Language implements Stringable
 	#[BlockCollectionAccess]
 	public static function create(array $props): static
 	{
-		$kirby         = App::instance();
-		$languages     = $kirby->languages();
+		$infinri         = App::instance();
+		$languages     = $infinri->languages();
 		$props['code'] = Str::slug($props['code'] ?? null);
 
 		// make the first language the default language
@@ -154,7 +154,7 @@ class Language implements Stringable
 		LanguageRules::create($language);
 
 		// apply before hook
-		$language = $kirby->apply(
+		$language = $infinri->apply(
 			'language.create:before',
 			[
 				'input'    => $props,
@@ -170,7 +170,7 @@ class Language implements Stringable
 
 		// convert content storage to multilang
 		if ($languages->count() === 0) {
-			foreach ($kirby->models() as $model) {
+			foreach ($infinri->models() as $model) {
 				$model->storage()->moveLanguage(
 					Language::single(),
 					$language
@@ -179,10 +179,10 @@ class Language implements Stringable
 		}
 
 		// update the main languages collection in the app instance
-		$kirby->languages(false)->append($language->code(), $language);
+		$infinri->languages(false)->append($language->code(), $language);
 
 		// apply after hook
-		$language = $kirby->apply(
+		$language = $infinri->apply(
 			'language.create:after',
 			[
 				'input'    => $props,
@@ -203,14 +203,14 @@ class Language implements Stringable
 	#[BlockCollectionAccess]
 	public function delete(): bool
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 		$code  = $this->code();
 
 		// validate the language rules
 		LanguageRules::delete($this);
 
 		// apply before hook
-		$language = $kirby->apply(
+		$language = $infinri->apply(
 			'language.delete:before',
 			['language' => $this]
 		);
@@ -223,7 +223,7 @@ class Language implements Stringable
 		}
 
 		// if needed, convert content storage to single lang
-		foreach ($kirby->models() as $model) {
+		foreach ($infinri->models() as $model) {
 			if ($language->isLast() === true) {
 				$model->storage()->moveLanguage($this, Language::single());
 			} else {
@@ -232,10 +232,10 @@ class Language implements Stringable
 		}
 
 		// get the original language collection and remove the current language
-		$kirby->languages(false)->remove($code);
+		$infinri->languages(false)->remove($code);
 
 		// trigger after hook
-		$kirby->trigger('language.delete:after', [
+		$infinri->trigger('language.delete:after', [
 			'language' => $language
 		]);
 
@@ -262,15 +262,15 @@ class Language implements Stringable
 			return $code;
 		}
 
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// single language
-		if ($kirby->multilang() === false) {
+		if ($infinri->multilang() === false) {
 			return static::single();
 		}
 
 		// look up the actual language object if possible
-		if ($language = $kirby->language($code)) {
+		if ($language = $infinri->language($code)) {
 			return $language;
 		}
 
@@ -297,7 +297,6 @@ class Language implements Stringable
 	/**
 	 * Checks if the language is the same
 	 * as the given language or language code
-	 * @since 5.0.0
 	 */
 	public function is(self|string $language): bool
 	{
@@ -357,11 +356,11 @@ class Language implements Stringable
 	}
 
 	/**
-	 * Returns the parent Kirby instance
+	 * Returns the parent Infinri instance
 	 */
-	public function kirby(): App
+	public function infinri(): App
 	{
-		return static::$kirby ??= App::instance();
+		return static::$infinri ??= App::instance();
 	}
 
 	/**
@@ -369,13 +368,13 @@ class Language implements Stringable
 	 */
 	public static function loadRules(string $code): array
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 		$code  = basename($code); // prevent path traversal
 		$code  = Str::contains($code, '.') ? Str::before($code, '.') : $code;
-		$file  = $kirby->root('i18n:rules') . '/' . $code . '.json';
+		$file  = $infinri->root('i18n:rules') . '/' . $code . '.json';
 
 		if (F::exists($file) === false) {
-			$file = $kirby->root('i18n:rules') . '/' . Str::before($code, '_') . '.json';
+			$file = $infinri->root('i18n:rules') . '/' . Str::before($code, '_') . '.json';
 		}
 
 		return Data::read($file, fail: false);
@@ -568,7 +567,7 @@ class Language implements Stringable
 	{
 		$url   = $this->url;
 		$url ??= '/' . $this->code;
-		return Url::makeAbsolute($url, $this->kirby()->url());
+		return Url::makeAbsolute($url, $this->infinri()->url());
 	}
 
 	/**
@@ -577,7 +576,7 @@ class Language implements Stringable
 	#[BlockCollectionAccess]
 	public function update(array|null $props = null): static
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// don't change the language code
 		unset($props['code']);
@@ -586,7 +585,7 @@ class Language implements Stringable
 		$props['slug'] = Str::slug($props['slug'] ?? null);
 
 		// trigger before hook
-		$language = $kirby->apply(
+		$language = $infinri->apply(
 			'language.update:before',
 			[
 				'language' => $this,
@@ -607,10 +606,10 @@ class Language implements Stringable
 		// if language just got promoted to be the new default language…
 		if ($this->isDefault() === false && $language->isDefault() === true) {
 			// convert the current default to a non-default language
-			$previous = $kirby->defaultLanguage()?->clone(['default' => false])->save();
-			$kirby->languages(false)->set($previous->code(), $previous);
+			$previous = $infinri->defaultLanguage()?->clone(['default' => false])->save();
+			$infinri->languages(false)->set($previous->code(), $previous);
 
-			foreach ($kirby->models() as $model) {
+			foreach ($infinri->models() as $model) {
 				$model->storage()->touchLanguage($this);
 			}
 		}
@@ -618,10 +617,10 @@ class Language implements Stringable
 		$language = $language->save();
 
 		// make sure the language is also updated in the languages collection
-		$kirby->languages(false)->set($language->code(), $language);
+		$infinri->languages(false)->set($language->code(), $language);
 
 		// trigger after hook
-		$language = $kirby->apply(
+		$language = $infinri->apply(
 			'language.update:after',
 			[
 				'newLanguage' => $language,

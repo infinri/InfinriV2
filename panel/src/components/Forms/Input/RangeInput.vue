@@ -145,15 +145,15 @@ export default {
 			const errors = [];
 
 			if (this.required && this.isEmpty === true) {
-				errors.push(this.$t("error.validation.required"));
+				errors.push(this.$panel.t("error.validation.required"));
 			}
 
 			if (this.isEmpty === false && this.min && this.value < this.min) {
-				errors.push(this.$t("error.validation.min", { min: this.min }));
+				errors.push(this.$panel.t("error.validation.min", { min: this.min }));
 			}
 
 			if (this.isEmpty === false && this.max && this.value > this.max) {
-				errors.push(this.$t("error.validation.max", { max: this.max }));
+				errors.push(this.$panel.t("error.validation.max", { max: this.max }));
 			}
 
 			this.$refs.range?.setCustomValidity(errors.join(", "));

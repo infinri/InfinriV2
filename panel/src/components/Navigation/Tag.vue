@@ -60,7 +60,6 @@ export const props = {
 		removable: Boolean,
 		/**
 		 * @values "dark"|"light"
-		 * @since 5.0.0
 		 */
 		theme: {
 			type: String,
@@ -181,7 +180,7 @@ button.k-tag:not([aria-disabled="true"]) {
 
 .k-tag-text {
 	padding-inline: var(--spacing-2);
-	line-height: var(--leading-tight);
+	line-height: 1.25;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;

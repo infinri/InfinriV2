@@ -10,20 +10,11 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Permissions::class)]
 class PermissionsTest extends TestCase
 {
-	protected array $deprecations = [];
-
-	protected function setUp(): void
-	{
-		parent::setUp();
-		$this->deprecations = Helpers::$deprecations;
-	}
-
 	protected function tearDown(): void
 	{
 		parent::tearDown();
 		Permissions::$extendedActions = [];
 		Permissions::$extendedAreas = [];
-		Helpers::$deprecations = $this->deprecations;
 	}
 
 	public static function actionsProvider(): array
@@ -256,25 +247,11 @@ class PermissionsTest extends TestCase
 
 	public function testForNullCategory(): void
 	{
-		$p       = new Permissions();
-		$message = null;
+		$p = new Permissions();
 
-		set_error_handler(function (int $errno, string $errstr) use (&$message) {
-			$message = $errstr;
-			return true;
-		}, E_USER_DEPRECATED);
+		$this->expectException(\TypeError::class);
 
-		// returns false default and triggers deprecation
-		$this->assertFalse($p->for(null));
-		$this->assertSame(
-			'Passing `$category = null` to `Permissions::for()` is not supported',
-			$message
-		);
-
-		// returns custom default
-		$this->assertTrue($p->for(null, default: true));
-
-		restore_error_handler();
+		$p->for(null);
 	}
 
 	public function testForWithNonBoolValueThrowsException(): void
@@ -356,64 +333,43 @@ class PermissionsTest extends TestCase
 		$this->assertTrue($array['pages']['read']);
 	}
 
-	public function testUnknownCategoryDeprecated(): void
+	public function testUnknownCategoryIsIgnored(): void
 	{
-		Helpers::$deprecations['permissions-undefined'] = true;
+		$p = new Permissions(['nonexistent' => false]);
 
-		$this->assertError(
-			E_USER_DEPRECATED,
-			'Setting undefined permission category "nonexistent" is deprecated and will be ignored in a future version. Please use https://getkirby.com/docs/reference/plugins/extensions/permissions to register custom permissions.',
-			function () {
-				$p = new Permissions(['nonexistent' => false]);
-				$this->assertTrue($p->for('pages', 'read'));
-				$this->assertTrue($p->for('files', 'update'));
-			}
-		);
+		$this->assertTrue($p->for('pages', 'read'));
+		$this->assertTrue($p->for('files', 'update'));
+		$this->assertTrue($p->for('nonexistent', 'foo', default: true));
+		$this->assertArrayNotHasKey('nonexistent', $p->toArray());
 	}
 
-	public function testUnknownCategoryNotDeprecatedByDefault(): void
+	public function testUnknownCategoryWithActionsIsIgnored(): void
 	{
-		$this->assertError(
-			E_USER_DEPRECATED,
-			'Setting undefined permission category "nonexistent" is deprecated and will be ignored in a future version. Please use https://getkirby.com/docs/reference/plugins/extensions/permissions to register custom permissions.',
-			function () {
-				$p = new Permissions(['nonexistent' => ['foo' => false]]);
+		$p = new Permissions(['nonexistent' => ['foo' => false]]);
 
-				// the undefined permission is still applied
-				$this->assertFalse($p->for('nonexistent', 'foo'));
-				$this->assertTrue($p->for('pages', 'read'));
-			},
-			expectedFailure: false
-		);
+		$this->assertFalse($p->for('nonexistent', 'foo'));
+		$this->assertTrue($p->for('nonexistent', 'foo', default: true));
+		$this->assertArrayNotHasKey('nonexistent', $p->toArray());
+		$this->assertTrue($p->for('pages', 'read'));
 	}
 
-	public function testUnknownActionDeprecated(): void
+	public function testUnknownActionIsIgnored(): void
 	{
-		Helpers::$deprecations['permissions-undefined'] = true;
+		$p = new Permissions(['pages' => ['nonexistent' => false]]);
 
-		$this->assertError(
-			E_USER_DEPRECATED,
-			'Setting undefined permission "pages.nonexistent" is deprecated and will be ignored in a future version. Please use https://getkirby.com/docs/reference/plugins/extensions/permissions to register custom permissions.',
-			function () {
-				$p = new Permissions(['pages' => ['nonexistent' => false]]);
-				$this->assertTrue($p->for('pages', 'read'));
-				$this->assertTrue($p->for('pages', 'update'));
-				$this->assertFalse($p->for('pages', 'nonexistent'));
-			}
-		);
+		$this->assertTrue($p->for('pages', 'read'));
+		$this->assertTrue($p->for('pages', 'update'));
+		$this->assertTrue($p->for('pages', 'nonexistent', default: true));
+		$this->assertArrayNotHasKey('nonexistent', $p->toArray()['pages']);
 	}
 
-	public function testUnknownActionNotDeprecatedByDefault(): void
+	public function testUnknownPermissionsTriggerNoDeprecation(): void
 	{
 		$this->assertError(
 			E_USER_DEPRECATED,
-			'Setting undefined permission "pages.nonexistent" is deprecated and will be ignored in a future version. Please use https://getkirby.com/docs/reference/plugins/extensions/permissions to register custom permissions.',
+			'Setting undefined permission',
 			function () {
-				$p = new Permissions(['pages' => ['nonexistent' => false]]);
-
-				// the undefined permission is still applied
-				$this->assertFalse($p->for('pages', 'nonexistent'));
-				$this->assertTrue($p->for('pages', 'read'));
+				new Permissions(['nonexistent' => false, 'pages' => ['nonexistent' => false]]);
 			},
 			expectedFailure: false
 		);

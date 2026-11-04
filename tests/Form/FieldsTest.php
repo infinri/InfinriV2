@@ -16,7 +16,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Fields::class)]
 class FieldsTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Form.Fields';
+	public const TMP = INFINRI_TMP_DIR . '/Form.Fields';
 
 	protected App $app;
 	protected Page $model;
@@ -275,14 +275,14 @@ class FieldsTest extends TestCase
 		Field::$types['test'] = [
 			'methods' => [
 				'form' => function () {
-					return new Form([
-						'fields' => [
+					return new Form(
+						fields: [
 							'child' => [
 								'type'  => 'text',
 							],
 						],
-						'model' => $this->model
-					]);
+						model: $this->model
+					);
 				}
 			]
 		];
@@ -836,7 +836,7 @@ class FieldsTest extends TestCase
 	public function testToProps(): void
 	{
 		$this->setUpSingleLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$fields = new Fields(
 			fields: [
@@ -871,7 +871,7 @@ class FieldsTest extends TestCase
 		return [
 			[new Page(['slug' => 'test']), true],
 			[new Site(), true],
-			[new User(['email' => 'test@getkirby.com']), false],
+			[new User(['email' => 'test@infinri.com']), false],
 			[new File(['filename' => 'test.jpg', 'parent' => new Site()]), false],
 		];
 	}
@@ -896,7 +896,7 @@ class FieldsTest extends TestCase
 	public function testToPropsForNonTranslatableField(): void
 	{
 		$this->setUpMultiLanguage();
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$fields = new Fields(
 			fields: [

@@ -40,7 +40,7 @@ return [
 
 			if (
 				$this->default === true &&
-				$user = $this->kirby()->user()
+				$user = $this->infinri()->user()
 			) {
 				return [
 					$this->userResponse($user)
@@ -61,14 +61,14 @@ return [
 		},
 		'toUsers' => function ($value = null): array {
 			$users = [];
-			$kirby = App::instance();
+			$infinri = App::instance();
 
 			foreach (Data::decode($value, 'yaml') as $id) {
 				if (is_array($id) === true) {
 					$id =  $id['uuid'] ?? $id['id'] ?? $id['email'] ?? null;
 				}
 
-				if ($id !== null && ($user = $kirby->user($id))) {
+				if ($id !== null && ($user = $infinri->user($id))) {
 					// never disclose a user the current user must not list,
 					// but keep its ID to not drop it from the value on save
 					$users[] = match ($user->isListable()) {

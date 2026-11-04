@@ -142,19 +142,6 @@
 				/>
 			</k-text>
 		</k-lab-example>
-		<k-lab-example label="deprecated" :code="false">
-			<k-text>
-				<k-code language="js"
-					>window.panel.notification.deprecated(notification);</k-code
-				>
-				<p>Used to show a deprecation warning in the console.</p>
-				<k-button
-					icon="megaphone"
-					variant="filled"
-					@click="$panel.notification.deprecated('Don`t use this anymore')"
-				/>
-			</k-text>
-		</k-lab-example>
 		<k-lab-example label="error" :code="false">
 			<k-text>
 				<k-code language="js"

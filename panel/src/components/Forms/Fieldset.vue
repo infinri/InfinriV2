@@ -27,7 +27,7 @@
 					<k-box v-else theme="negative">
 						<k-text size="small">
 							{{
-								$t("error.field.type.missing", {
+								$panel.t("error.field.type.missing", {
 									name: fieldName,
 									type: field.type
 								})

@@ -440,7 +440,7 @@ export default {
 			const errors = [];
 
 			if (this.required && !this.dt) {
-				errors.push(this.$t("error.validation.required"));
+				errors.push(this.$panel.t("error.validation.required"));
 			}
 
 			if (
@@ -448,7 +448,7 @@ export default {
 				this.dt?.validate(this.min, "min", this.rounding.unit) === false
 			) {
 				errors.push(
-					this.$t("error.validation.date.after", {
+					this.$panel.t("error.validation.date.after", {
 						date: this.min
 					})
 				);
@@ -459,7 +459,7 @@ export default {
 				this.dt?.validate(this.max, "max", this.rounding.unit) === false
 			) {
 				errors.push(
-					this.$t("error.validation.date.before", {
+					this.$panel.t("error.validation.date.before", {
 						date: this.max
 					})
 				);

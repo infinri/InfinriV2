@@ -28,8 +28,6 @@ export const defaults = () => {
  * pick   ‾\                      /‾ done
  *          -- (open) -- submit --
  * select  _/                     \_ cancel
- *
- * @since 4.0.0
  */
 export default (panel) => {
 	const parent = State("upload", defaults());

@@ -12,13 +12,13 @@ use Infinri\Toolkit\Totp;
 
 class UserTotpEnableDialog
 {
-	public App $kirby;
+	public App $infinri;
 	public Totp $totp;
 	public User $user;
 
 	public function __construct()
 	{
-		$this->kirby = App::instance();
+		$this->infinri = App::instance();
 		$this->user  = Find::user();
 	}
 
@@ -41,7 +41,7 @@ class UserTotpEnableDialog
 	 */
 	public function qr(): QrCode
 	{
-		$issuer = $this->kirby->site()->title();
+		$issuer = $this->infinri->site()->title();
 		$label  = $this->user->email();
 		$uri    = $this->totp()->uri($issuer, $label);
 		return new QrCode($uri);
@@ -57,18 +57,18 @@ class UserTotpEnableDialog
 	 */
 	public function submit(): array
 	{
-		$secret  = $this->kirby->request()->get('secret');
-		$confirm = $this->kirby->request()->get('confirm');
+		$secret  = $this->infinri->request()->get('secret');
+		$confirm = $this->infinri->request()->get('confirm');
 
 		if ($confirm === null) {
 			throw new InvalidArgumentException(
-				['key' => 'login.totp.confirm.missing']
+				key: 'login.totp.confirm.missing'
 			);
 		}
 
 		if ($this->totp($secret)->verify($confirm) === false) {
 			throw new InvalidArgumentException(
-				['key' => 'login.totp.confirm.invalid']
+				key: 'login.totp.confirm.invalid'
 			);
 		}
 

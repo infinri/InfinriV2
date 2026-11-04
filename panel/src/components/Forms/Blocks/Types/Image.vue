@@ -3,7 +3,7 @@
 		:back="back"
 		:caption="content.caption"
 		:caption-marks="captionMarks"
-		:empty-text="$t('field.blocks.image.placeholder') + ' …'"
+		:empty-text="$panel.t('field.blocks.image.placeholder') + ' …'"
 		:disabled="disabled"
 		:is-empty="!src"
 		empty-icon="image"
@@ -67,7 +67,7 @@ export default {
 	},
 	methods: {
 		onBack(value) {
-			const id = `kirby.imageBlock.${this.endpoints.field}.${this.id}`;
+			const id = `infinri.imageBlock.${this.endpoints.field}.${this.id}`;
 
 			if (value !== undefined) {
 				this.back = value;

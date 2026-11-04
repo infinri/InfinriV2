@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 #[CoversClass(Page::class)]
 class PageUpdateTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageUpdate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageUpdate';
 
 	public function assertCorrectlyUpdatedPage(
 		Page $modified,
@@ -40,7 +40,7 @@ class PageUpdateTest extends ModelTestCase
 	{
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		if ($languageCode !== null) {
 			$this->app->setCurrentLanguage($languageCode);
@@ -63,7 +63,7 @@ class PageUpdateTest extends ModelTestCase
 	{
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test'
@@ -161,7 +161,7 @@ class PageUpdateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = Page::create([
 			'slug'  => 'test',
@@ -196,7 +196,7 @@ class PageUpdateTest extends ModelTestCase
 				'pages/test' => ['title' => 'Test', 'num' => 'date']
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug'     => 'test',

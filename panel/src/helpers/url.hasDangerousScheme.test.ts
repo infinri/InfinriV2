@@ -23,10 +23,10 @@ describe("$helper.url.hasDangerousScheme", () => {
 	});
 
 	it.each([
-		"https://getkirby.com",
-		"http://getkirby.com",
-		"ftp://getkirby.com",
-		"mailto:hello@getkirby.com",
+		"https://infinri.com",
+		"http://infinri.com",
+		"ftp://infinri.com",
+		"mailto:hello@infinri.com",
 		"tel:+1234567890",
 		"/relative/path",
 		"#anchor",

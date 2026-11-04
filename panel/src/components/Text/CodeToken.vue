@@ -5,9 +5,6 @@
 </template>
 
 <script>
-/**
- * @since 5.3.0
- */
 export default {
 	props: {
 		type: String

@@ -39,8 +39,8 @@ class LanguageCreateButtonTest extends TestCase
 				],
 			],
 			'users' => [
-				['email' => 'editor@getkirby.com', 'role' => 'editor'],
-				['email' => 'user@getkirby.com', 'role' => 'user']
+				['email' => 'editor@infinri.com', 'role' => 'editor'],
+				['email' => 'user@infinri.com', 'role' => 'user']
 			]
 		]);
 
@@ -49,13 +49,13 @@ class LanguageCreateButtonTest extends TestCase
 		$this->assertTrue($button->disabled);
 
 		// with permission
-		$app->impersonate('editor@getkirby.com', function () {
+		$app->impersonate('editor@infinri.com', function () {
 			$button = new LanguageCreateButton();
 			$this->assertFalse($button->disabled);
 		});
 
 		// without permission
-		$app->impersonate('user@getkirby.com', function () {
+		$app->impersonate('user@infinri.com', function () {
 			$button = new LanguageCreateButton();
 			$this->assertTrue($button->disabled);
 		});

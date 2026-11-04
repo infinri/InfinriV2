@@ -2,7 +2,7 @@
 
 namespace Infinri\Cms;
 
-use Infinri\Cms\App as Kirby;
+use Infinri\Cms\App as Infinri;
 use Infinri\Filesystem\Asset;
 use Infinri\Filesystem\Dir;
 use Infinri\Image\QrCode;
@@ -12,18 +12,18 @@ use Infinri\Toolkit\Obj;
 class HelperFunctionsTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/HelpersTest';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.HelperFunctions';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.HelperFunctions';
 
 	protected function setUp(): void
 	{
 		Dir::copy(static::FIXTURES, static::TMP);
 
-		$this->app = new Kirby([
+		$this->app = new Infinri([
 			'roots' => [
 				'index' => static::TMP
 			],
 			'urls' => [
-				'index' => 'https://getkirby.com'
+				'index' => 'https://infinri.com'
 			]
 		]);
 
@@ -87,30 +87,30 @@ class HelperFunctionsTest extends TestCase
 		$session = $this->app->session();
 
 		// should generate token
-		$session->remove('kirby.csrf');
+		$session->remove('infinri.csrf');
 		$token = csrf();
 		$this->assertIsString($token);
 		$this->assertStringMatchesFormat('%x', $token);
 		$this->assertSame(64, strlen($token));
-		$this->assertSame($session->get('kirby.csrf'), $token);
+		$this->assertSame($session->get('infinri.csrf'), $token);
 
 		// should not regenerate when a param is passed
 		$this->assertFalse(csrf(null));
 		$this->assertFalse(csrf(false));
 		$this->assertFalse(csrf(123));
 		$this->assertFalse(csrf('some invalid string'));
-		$this->assertSame($token, $session->get('kirby.csrf'));
+		$this->assertSame($token, $session->get('infinri.csrf'));
 
 		// should not regenerate if there is already a token
 		$token2 = csrf();
 		$this->assertSame($token, $token2);
 
 		// should regenerate if there is an invalid token
-		$session->set('kirby.csrf', 123);
+		$session->set('infinri.csrf', 123);
 		$token3 = csrf();
 		$this->assertNotEquals($token, $token3);
 		$this->assertSame(64, strlen($token3));
-		$this->assertSame($session->get('kirby.csrf'), $token3);
+		$this->assertSame($session->get('infinri.csrf'), $token3);
 
 		// should verify token
 		$this->assertTrue(csrf($token3));
@@ -126,7 +126,7 @@ class HelperFunctionsTest extends TestCase
 	public function testCss(): void
 	{
 		$result   = css('assets/css/index.css');
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" rel="stylesheet">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -134,7 +134,7 @@ class HelperFunctionsTest extends TestCase
 	public function testCssWithMediaOption(): void
 	{
 		$result   = css('assets/css/index.css', 'print');
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" media="print" rel="stylesheet">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" media="print" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -142,7 +142,7 @@ class HelperFunctionsTest extends TestCase
 	public function testCssWithAttrs(): void
 	{
 		$result   = css('assets/css/index.css', ['integrity' => 'nope']);
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" integrity="nope" rel="stylesheet">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" integrity="nope" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -150,7 +150,7 @@ class HelperFunctionsTest extends TestCase
 	public function testCssWithValidRelAttr(): void
 	{
 		$result   = css('assets/css/index.css', ['rel' => 'alternate stylesheet', 'title' => 'High contrast']);
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" rel="alternate stylesheet" title="High contrast">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" rel="alternate stylesheet" title="High contrast">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -158,7 +158,7 @@ class HelperFunctionsTest extends TestCase
 	public function testCssWithInvalidRelAttr(): void
 	{
 		$result   = css('assets/css/index.css', ['rel' => 'alternate', 'title' => 'High contrast']);
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" rel="stylesheet" title="High contrast">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" rel="stylesheet" title="High contrast">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -166,7 +166,7 @@ class HelperFunctionsTest extends TestCase
 	public function testCssWithRelAttrButNoTitle(): void
 	{
 		$result   = css('assets/css/index.css', ['rel' => 'alternate stylesheet']);
-		$expected = '<link href="https://getkirby.com/assets/css/index.css" rel="stylesheet">';
+		$expected = '<link href="https://infinri.com/assets/css/index.css" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
@@ -178,24 +178,20 @@ class HelperFunctionsTest extends TestCase
 			'assets/css/b.css'
 		]);
 
-		$expected  = '<link href="https://getkirby.com/assets/css/a.css" rel="stylesheet">' . PHP_EOL;
-		$expected .= '<link href="https://getkirby.com/assets/css/b.css" rel="stylesheet">';
+		$expected  = '<link href="https://infinri.com/assets/css/a.css" rel="stylesheet">' . PHP_EOL;
+		$expected .= '<link href="https://infinri.com/assets/css/b.css" rel="stylesheet">';
 
 		$this->assertSame($expected, $result);
 	}
 
-	public function testDeprecated(): void
+	public function testDeprecatedHelperIsRemoved(): void
 	{
-		$this->assertError(
-			E_USER_DEPRECATED,
-			'The xyz method is deprecated.',
-			fn () => deprecated('The xyz method is deprecated.')
-		);
+		$this->assertFalse(function_exists('deprecated'));
 	}
 
 	public function testDumpOnCli(): void
 	{
-		if (KIRBY_DUMP_OVERRIDDEN === true) {
+		if (INFINRI_DUMP_OVERRIDDEN === true) {
 			$this->markTestSkipped('The dump() helper was externally overridden.');
 		}
 
@@ -208,7 +204,7 @@ class HelperFunctionsTest extends TestCase
 
 	public function testDumpOnServer(): void
 	{
-		if (KIRBY_DUMP_OVERRIDDEN === true) {
+		if (INFINRI_DUMP_OVERRIDDEN === true) {
 			$this->markTestSkipped('The dump() helper was externally overridden.');
 		}
 
@@ -240,10 +236,29 @@ class HelperFunctionsTest extends TestCase
 
 	public function testGist(): void
 	{
-		$gist     = gist('https://gist.github.com/bastianallgeier/d61ab782cd5c2cc02b6f6fec54fd1985', 'static.php');
-		$expected = '<script src="https://gist.github.com/bastianallgeier/d61ab782cd5c2cc02b6f6fec54fd1985.js?file=static.php"></script>';
+		$domains = \Infinri\Toolkit\Html::$gistDomains;
+		\Infinri\Toolkit\Html::$gistDomains = ['gist.example.com'];
 
-		$this->assertSame($gist, $expected);
+		try {
+			$gist     = gist('https://gist.example.com/user/abc123', 'static.php');
+			$expected = '<script src="https://gist.example.com/user/abc123.js?file=static.php"></script>';
+
+			$this->assertSame($expected, $gist);
+		} finally {
+			\Infinri\Toolkit\Html::$gistDomains = $domains;
+		}
+	}
+
+	public function testGistWithoutConfiguredDomain(): void
+	{
+		$domains = \Infinri\Toolkit\Html::$gistDomains;
+		\Infinri\Toolkit\Html::$gistDomains = [];
+
+		try {
+			$this->assertSame('', gist('https://gist.example.com/user/abc123', 'static.php'));
+		} finally {
+			\Infinri\Toolkit\Html::$gistDomains = $domains;
+		}
 	}
 
 	public function testGet(): void
@@ -458,7 +473,7 @@ class HelperFunctionsTest extends TestCase
 	public function testJs(): void
 	{
 		$result   = js('assets/js/index.js');
-		$expected = '<script src="https://getkirby.com/assets/js/index.js"></script>';
+		$expected = '<script src="https://infinri.com/assets/js/index.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}
@@ -466,7 +481,7 @@ class HelperFunctionsTest extends TestCase
 	public function testJsWithAsyncOption(): void
 	{
 		$result   = js('assets/js/index.js', true);
-		$expected = '<script async src="https://getkirby.com/assets/js/index.js"></script>';
+		$expected = '<script async src="https://infinri.com/assets/js/index.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}
@@ -474,7 +489,7 @@ class HelperFunctionsTest extends TestCase
 	public function testJsWithAttrs(): void
 	{
 		$result   = js('assets/js/index.js', ['integrity' => 'nope']);
-		$expected = '<script integrity="nope" src="https://getkirby.com/assets/js/index.js"></script>';
+		$expected = '<script integrity="nope" src="https://infinri.com/assets/js/index.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}
@@ -486,66 +501,66 @@ class HelperFunctionsTest extends TestCase
 			'assets/js/b.js'
 		]);
 
-		$expected  = '<script src="https://getkirby.com/assets/js/a.js"></script>' . PHP_EOL;
-		$expected .= '<script src="https://getkirby.com/assets/js/b.js"></script>';
+		$expected  = '<script src="https://infinri.com/assets/js/a.js"></script>' . PHP_EOL;
+		$expected .= '<script src="https://infinri.com/assets/js/b.js"></script>';
 
 		$this->assertSame($expected, $result);
 	}
 
-	public function testKirby(): void
+	public function testInfinri(): void
 	{
-		$this->assertSame($this->app, kirby());
+		$this->assertSame($this->app, infinri());
 	}
 
-	public function testKirbyTag(): void
+	public function testInfinriTag(): void
 	{
-		$tag = kirbytag('link', 'https://getkirby.com', ['text' => 'Kirby']);
-		$expected = '<a href="https://getkirby.com">Kirby</a>';
+		$tag = infinritag('link', 'https://infinri.com', ['text' => 'Infinri']);
+		$expected = '<a href="https://infinri.com">Infinri</a>';
 
 		$this->assertSame($expected, $tag);
 	}
 
-	public function testKirbyTags(): void
+	public function testInfinriTags(): void
 	{
-		$tag = kirbytags('(link: https://getkirby.com text: Kirby)');
-		$expected = '<a href="https://getkirby.com">Kirby</a>';
+		$tag = infinritags('(link: https://infinri.com text: Infinri)');
+		$expected = '<a href="https://infinri.com">Infinri</a>';
 
 		$this->assertSame($expected, $tag);
 	}
 
-	public function testKirbyText(): void
+	public function testInfinriText(): void
 	{
 		$text     = 'This is **just** a text.';
 		$expected = '<p>This is <strong>just</strong> a text.</p>';
 
-		$this->assertSame($expected, kirbytext($text));
+		$this->assertSame($expected, infinritext($text));
 		$this->assertSame($expected, kt($text));
 	}
 
-	public function testKirbyTextWithSafeMode(): void
+	public function testInfinriTextWithSafeMode(): void
 	{
-		$text     = '<h1>Kirby</h1>';
-		$expected = '<p>&lt;h1&gt;Kirby&lt;/h1&gt;</p>';
+		$text     = '<h1>Infinri</h1>';
+		$expected = '<p>&lt;h1&gt;Infinri&lt;/h1&gt;</p>';
 
-		$this->assertSame($expected, kirbytext($text, ['markdown' => ['safe' => true]]));
+		$this->assertSame($expected, infinritext($text, ['markdown' => ['safe' => true]]));
 		$this->assertSame($expected, kt($text, ['markdown' => ['safe' => true]]));
 	}
 
-	public function testKirbyTextInline(): void
+	public function testInfinriTextInline(): void
 	{
 		$text     = 'This is **just** a text.';
 		$expected = 'This is <strong>just</strong> a text.';
 
-		$this->assertSame($expected, kirbytextinline($text));
+		$this->assertSame($expected, infinritextinline($text));
 		$this->assertSame($expected, kti($text));
 	}
 
-	public function testKirbyTextInlineWithSafeMode(): void
+	public function testInfinriTextInlineWithSafeMode(): void
 	{
 		$text     = 'This is <b>just</b> a text.';
 		$expected = 'This is &lt;b&gt;just&lt;/b&gt; a text.';
 
-		$this->assertSame($expected, kirbytextinline($text, ['markdown' => ['safe' => true]]));
+		$this->assertSame($expected, infinritextinline($text, ['markdown' => ['safe' => true]]));
 		$this->assertSame($expected, kti($text, ['markdown' => ['safe' => true]]));
 	}
 
@@ -566,16 +581,16 @@ class HelperFunctionsTest extends TestCase
 
 	public function testMarkdown(): void
 	{
-		$tag = markdown('# Kirby');
-		$expected = '<h1>Kirby</h1>';
+		$tag = markdown('# Infinri');
+		$expected = '<h1>Infinri</h1>';
 
 		$this->assertSame($expected, $tag);
 	}
 
 	public function testMarkdownWithSafeMode(): void
 	{
-		$tag = markdown('<h1>Kirby</h1>', ['safe' => true]);
-		$expected = '<p>&lt;h1&gt;Kirby&lt;/h1&gt;</p>';
+		$tag = markdown('<h1>Infinri</h1>', ['safe' => true]);
+		$expected = '<p>&lt;h1&gt;Infinri&lt;/h1&gt;</p>';
 
 		$this->assertSame($expected, $tag);
 	}
@@ -668,7 +683,7 @@ class HelperFunctionsTest extends TestCase
 
 	public function testQr(): void
 	{
-		$url = 'https://getkirby.com';
+		$url = 'https://infinri.com';
 		$qr    = qr($url);
 
 		$this->assertInstanceOf(QrCode::class, $qr);
@@ -749,7 +764,7 @@ class HelperFunctionsTest extends TestCase
 		$this->assertSame($expected, $text);
 	}
 
-	public function testSmartypantsWithKirbytext(): void
+	public function testSmartypantsWithInfinritext(): void
 	{
 		$this->app->clone([
 			'roots' => [
@@ -760,7 +775,7 @@ class HelperFunctionsTest extends TestCase
 			]
 		]);
 
-		$text     = kirbytextinline('"Test"');
+		$text     = infinritextinline('"Test"');
 		$expected = '“Test”';
 
 		$this->assertSame($expected, $text);
@@ -979,15 +994,15 @@ class HelperFunctionsTest extends TestCase
 			]
 		]);
 
-		$this->assertSame('Welcome Kirby', tt('welcome', ['name' => 'Kirby']));
-		$this->assertSame('Hello Kirby', tt('does-not-exist', 'Hello {name}', ['name' => 'Kirby']));
+		$this->assertSame('Welcome Infinri', tt('welcome', ['name' => 'Infinri']));
+		$this->assertSame('Hello Infinri', tt('does-not-exist', 'Hello {name}', ['name' => 'Infinri']));
 	}
 
 	public function testUrl(): void
 	{
 		$this->app->clone([
 			'options' => [
-				'url' => $url = 'https://getkirby.com'
+				'url' => $url = 'https://infinri.com'
 			]
 		]);
 
@@ -999,7 +1014,7 @@ class HelperFunctionsTest extends TestCase
 	{
 		$this->app->clone([
 			'options' => [
-				'url' => $url = 'https://getkirby.com'
+				'url' => $url = 'https://infinri.com'
 			]
 		]);
 

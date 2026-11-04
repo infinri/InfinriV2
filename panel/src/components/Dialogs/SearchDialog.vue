@@ -17,7 +17,7 @@
 			:results="results"
 			:types="$panel.searches"
 			@close="close"
-			@more="$go('search', { query: $event })"
+			@more="$panel.view.open('search', { query: $event })"
 			@navigate="navigate"
 			@search="search"
 		/>
@@ -45,7 +45,7 @@ export default {
 		},
 		navigate(result) {
 			if (result) {
-				this.$go(result.link);
+				this.$panel.view.open(result.link);
 				this.close();
 			}
 		},

@@ -1,6 +1,5 @@
 /**
  * Formats a number in the interface language
- * @since 5.6.2
  *
  * @example
  * format(1234.5) // => "1,234.5" (en) or "1.234,5" (de)

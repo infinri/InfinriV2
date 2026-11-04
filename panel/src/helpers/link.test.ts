@@ -10,10 +10,10 @@ import {
 	types
 } from "./link";
 
-// mock $t() function
+// mock t() function
 // @ts-expect-error - window.panel has no type yet
 window.panel = {
-	$t: (value: string) => value
+	t: (value: string) => value
 };
 
 describe("$helper.link.detect()", () => {
@@ -24,11 +24,11 @@ describe("$helper.link.detect()", () => {
 		expect(detect("file://324hjk24")!.type).toStrictEqual("file");
 	});
 	it("should detect absolute URL", () => {
-		expect(detect("http://getkirby.com")!.type).toStrictEqual("url");
-		expect(detect("https://getkirby.com")!.type).toStrictEqual("url");
+		expect(detect("http://infinri.com")!.type).toStrictEqual("url");
+		expect(detect("https://infinri.com")!.type).toStrictEqual("url");
 	});
 	it("should detect email", () => {
-		expect(detect("mailto:test@getkirby.com")!.type).toStrictEqual("email");
+		expect(detect("mailto:test@infinri.com")!.type).toStrictEqual("email");
 	});
 	it("should detect tel", () => {
 		expect(detect("tel:12345678")!.type).toStrictEqual("tel");

@@ -2,7 +2,7 @@
 
 namespace Infinri\Panel\Areas;
 
-use Infinri\Toolkit\F;
+use Infinri\Filesystem\F;
 
 class FileDropdownsTest extends AreaTestCase
 {
@@ -72,7 +72,7 @@ class FileDropdownsTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 					'files' => [
 						['filename' => 'test.jpg']
@@ -80,7 +80,7 @@ class FileDropdownsTest extends AreaTestCase
 				],
 				[
 					'id'    => 'admin',
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin',
 				]
 			],
@@ -90,7 +90,7 @@ class FileDropdownsTest extends AreaTestCase
 		// pretend the file exists
 		F::write($this->app->user('test')->file('test.jpg')->root(), '');
 
-		$this->login('admin@getkirby.com');
+		$this->login('admin@infinri.com');
 	}
 
 	public function testFileDropdownInListView(): void

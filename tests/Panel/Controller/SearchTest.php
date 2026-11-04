@@ -9,7 +9,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Search::class)]
 class SearchTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Panel.Controller.Search';
+	public const TMP = INFINRI_TMP_DIR . '/Panel.Controller.Search';
 
 	protected function setUp(): void
 	{
@@ -51,7 +51,7 @@ class SearchTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	protected function tearDown(): void
@@ -131,7 +131,7 @@ class SearchTest extends TestCase
 			'blue-fish.jpg'
 		], array_column($result['results'], 'text'));
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$result = Search::files('fish');
 		$this->assertCount(2, $result['results']);
 		$this->assertEqualsCanonicalizing([
@@ -231,7 +231,7 @@ class SearchTest extends TestCase
 			'A friend'
 		], array_column($result['results'], 'text'));
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 		$result = Search::pages('friend');
 		$this->assertCount(2, $result['results']);
 		$this->assertEqualsCanonicalizing([
@@ -298,36 +298,36 @@ class SearchTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'a@getkirby.com',
+					'email' => 'a@infinri.com',
 					'role'  => 'editor-' . $uuid
 				],
 				[
-					'email' => 'b@getkirby.com',
+					'email' => 'b@infinri.com',
 					'role'  => 'restricted-' . $uuid
 				],
 				[
-					'email' => 'c@getkirby.com',
+					'email' => 'c@infinri.com',
 					'role'  => 'restricted-' . $uuid
 				]
 			]
 		]);
 
-		// the kirby superuser bypasses all blueprint restrictions
-		$this->app->impersonate('kirby');
-		$result = Search::users('getkirby.com');
+		// the infinri superuser bypasses all blueprint restrictions
+		$this->app->impersonate('infinri');
+		$result = Search::users('infinri.com');
 		$this->assertCount(3, $result['results']);
 		$this->assertEqualsCanonicalizing([
-			'a@getkirby.com',
-			'b@getkirby.com',
-			'c@getkirby.com'
+			'a@infinri.com',
+			'b@infinri.com',
+			'c@infinri.com'
 		], array_column($result['results'], 'text'));
 
 		// the editor can only access their own account
-		$this->app->impersonate('a@getkirby.com');
-		$result = Search::users('getkirby.com');
+		$this->app->impersonate('a@infinri.com');
+		$result = Search::users('infinri.com');
 		$this->assertCount(1, $result['results']);
 		$this->assertEqualsCanonicalizing([
-			'a@getkirby.com'
+			'a@infinri.com'
 		], array_column($result['results'], 'text'));
 	}
 

@@ -9,7 +9,7 @@ use Infinri\Filesystem\Dir;
 
 class AppCachesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.AppCaches';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.AppCaches';
 
 	public function app(array $props = [])
 	{
@@ -35,14 +35,14 @@ class AppCachesTest extends TestCase
 
 	public function testEnabledCacheWithoutOptions(): void
 	{
-		$kirby = $this->app([
+		$infinri = $this->app([
 			'options' => [
 				'cache.pages' => true
 			]
 		]);
 
-		$this->assertInstanceOf(FileCache::class, $kirby->cache('pages'));
-		$this->assertSame($kirby->root('cache'), $kirby->cache('pages')->options()['root']);
+		$this->assertInstanceOf(FileCache::class, $infinri->cache('pages'));
+		$this->assertSame($infinri->root('cache'), $infinri->cache('pages')->options()['root']);
 	}
 
 	public function testInvalidCacheType(): void
@@ -50,7 +50,7 @@ class AppCachesTest extends TestCase
 		$this->expectException(InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid cache type "not-exists"');
 
-		$kirby = $this->app([
+		$infinri = $this->app([
 			'options' => [
 				'cache.pages' => [
 					'type' => 'not-exists'
@@ -58,14 +58,14 @@ class AppCachesTest extends TestCase
 			]
 		]);
 
-		$kirby->cache('pages');
+		$infinri->cache('pages');
 	}
 
 	public function testEnabledCacheWithOptions(): void
 	{
-		$kirby = $this->app([
+		$infinri = $this->app([
 			'urls' => [
-				'index' => 'https://getkirby.com/test'
+				'index' => 'https://infinri.com/test'
 			],
 			'options' => [
 				'cache.pages' => [
@@ -75,16 +75,16 @@ class AppCachesTest extends TestCase
 			]
 		]);
 
-		$this->assertInstanceOf(FileCache::class, $kirby->cache('pages'));
-		$this->assertSame($root, $kirby->cache('pages')->options()['root']);
+		$this->assertInstanceOf(FileCache::class, $infinri->cache('pages'));
+		$this->assertSame($root, $infinri->cache('pages')->options()['root']);
 
-		$kirby->cache('pages')->set('home', 'test');
-		$this->assertFileExists($root . '/getkirby.com_test/pages/home.cache');
+		$infinri->cache('pages')->set('home', 'test');
+		$this->assertFileExists($root . '/infinri.com_test/pages/home.cache');
 	}
 
 	public function testEnabledCacheWithOptionsAndPortPrefix(): void
 	{
-		$kirby = $this->app([
+		$infinri = $this->app([
 			'urls' => [
 				'index' => 'http://127.0.0.1:8000'
 			],
@@ -96,10 +96,10 @@ class AppCachesTest extends TestCase
 			]
 		]);
 
-		$this->assertInstanceOf(FileCache::class, $kirby->cache('pages'));
-		$this->assertSame($root, $kirby->cache('pages')->options()['root']);
+		$this->assertInstanceOf(FileCache::class, $infinri->cache('pages'));
+		$this->assertSame($root, $infinri->cache('pages')->options()['root']);
 
-		$kirby->cache('pages')->set('home', 'test');
+		$infinri->cache('pages')->set('home', 'test');
 		$this->assertFileExists($root . '/127.0.0.1_8000/pages/home.cache');
 	}
 

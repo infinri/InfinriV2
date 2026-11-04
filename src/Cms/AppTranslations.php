@@ -11,11 +11,10 @@ trait AppTranslations
 	protected Translations|null $translations = null;
 
 	/**
-	 * Returns the translation strings that Kirby itself defines for
+	 * Returns the translation strings that Infinri itself defines for
 	 * the given code. Every shipped translation is generated from the
 	 * English one, so that is always the complete set, plus whatever
 	 * plugins register for English and for the code itself.
-	 * @since 5.6.0
 	 */
 	public function coreI18nStrings(string $code): array
 	{
@@ -31,7 +30,7 @@ trait AppTranslations
 
 	/**
 	 * Returns the translation strings that the custom variables of a
-	 * language contribute. A variable must never shadow one of Kirby's
+	 * language contribute. A variable must never shadow one of Infinri's
 	 * own strings, as the Panel renders some of them as HTML.
 	 */
 	protected function customI18nStrings(Language $language): array

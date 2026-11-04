@@ -125,10 +125,10 @@ class AppCorsTest extends TestCase
 
 	public function testDynamicConfigWithClosure(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
-				'cors' => function ($kirby) {
-					$origin = $kirby->request()->header('Origin');
+				'cors' => function ($infinri) {
+					$origin = $infinri->request()->header('Origin');
 
 					if (in_array($origin, ['https://app1.com', 'https://app2.com'])) {
 						return [
@@ -155,10 +155,10 @@ class AppCorsTest extends TestCase
 
 	public function testDynamicConfigWithClosureFallback(): void
 	{
-		$this->kirby([
+		$this->infinri([
 			'options' => [
-				'cors' => function ($kirby) {
-					$origin = $kirby->request()->header('Origin');
+				'cors' => function ($infinri) {
+					$origin = $infinri->request()->header('Origin');
 
 					if (in_array($origin, ['https://app1.com', 'https://app2.com'])) {
 						return [

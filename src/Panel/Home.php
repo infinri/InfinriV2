@@ -115,7 +115,7 @@ class Home
 
 	/**
 	 * Checks if the given Uri has the same domain
-	 * as the index URL of the Kirby installation.
+	 * as the index URL of the Infinri installation.
 	 * This is used to block external URLs to third-party
 	 * domains as redirect options.
 	 */

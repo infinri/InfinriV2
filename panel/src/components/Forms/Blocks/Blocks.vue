@@ -58,13 +58,13 @@
 
 			<!-- No blocks -->
 			<k-empty class="k-blocks-empty" icon="box" @click="choose(blocks.length)">
-				{{ empty ?? $t("field.blocks.empty") }}
+				{{ empty ?? $panel.t("field.blocks.empty") }}
 			</k-empty>
 		</template>
 
 		<!-- No fieldsets -->
 		<k-empty v-else icon="box">
-			{{ $t("field.blocks.fieldsets.empty") }}
+			{{ $panel.t("field.blocks.fieldsets.empty") }}
 		</k-empty>
 	</div>
 </template>
@@ -161,26 +161,26 @@ export default {
 			setTimeout(this.focus, 100);
 		}
 
-		this.$events.on("blur", this.onBlur);
-		this.$events.on("click", this.onClickGlobal);
-		this.$events.on("focus", this.onFocusGlobal);
-		this.$events.on("copy", this.onCopy);
-		this.$events.on("keydown", this.onKey);
-		this.$events.on("keyup", this.onKey);
-		this.$events.on("paste", this.onPaste);
+		this.$panel.events.on("blur", this.onBlur);
+		this.$panel.events.on("click", this.onClickGlobal);
+		this.$panel.events.on("focus", this.onFocusGlobal);
+		this.$panel.events.on("copy", this.onCopy);
+		this.$panel.events.on("keydown", this.onKey);
+		this.$panel.events.on("keyup", this.onKey);
+		this.$panel.events.on("paste", this.onPaste);
 	},
 	destroyed() {
-		this.$events.off("blur", this.onBlur);
-		this.$events.off("click", this.onClickGlobal);
-		this.$events.off("focus", this.onFocusGlobal);
-		this.$events.off("copy", this.onCopy);
-		this.$events.off("keydown", this.onKey);
-		this.$events.off("keyup", this.onKey);
-		this.$events.off("paste", this.onPaste);
+		this.$panel.events.off("blur", this.onBlur);
+		this.$panel.events.off("click", this.onClickGlobal);
+		this.$panel.events.off("focus", this.onFocusGlobal);
+		this.$panel.events.off("copy", this.onCopy);
+		this.$panel.events.off("keydown", this.onKey);
+		this.$panel.events.off("keyup", this.onKey);
+		this.$panel.events.off("paste", this.onPaste);
 	},
 	methods: {
 		async add(type = "text", index) {
-			const block = await this.$api.get(
+			const block = await this.$panel.api.get(
 				this.endpoints.field + "/fieldsets/" + type
 			);
 			this.blocks.splice(index, 0, block);
@@ -218,7 +218,7 @@ export default {
 					disabledFieldsets: [block.type],
 					fieldsetGroups: this.fieldsetGroups,
 					fieldsets: this.fieldsets,
-					headline: this.$t("field.blocks.changeType")
+					headline: this.$panel.t("field.blocks.changeType")
 				},
 				on: {
 					submit: (type) => {
@@ -268,7 +268,9 @@ export default {
 
 			// a sign that it has been copied
 			this.$panel.notification.success({
-				message: this.$t("copy.success.multiple", { count: blocks.length }),
+				message: this.$panel.t("copy.success.multiple", {
+					count: blocks.length
+				}),
 				icon: "template"
 			});
 		},
@@ -298,7 +300,7 @@ export default {
 			};
 
 			const oldBlock = this.blocks[index];
-			const newBlock = await this.$api.get(
+			const newBlock = await this.$panel.api.get(
 				this.endpoints.field + "/fieldsets/" + type
 			);
 
@@ -596,7 +598,7 @@ export default {
 			const html = this.$helper.clipboard.read(e);
 
 			// pass html or plain text to the paste endpoint to convert it to blocks
-			let blocks = await this.$api.post(this.endpoints.field + "/paste", {
+			let blocks = await this.$panel.api.post(this.endpoints.field + "/paste", {
 				html: html
 			});
 
@@ -623,7 +625,7 @@ export default {
 
 			// a sign that it has been pasted
 			this.$panel.notification.success({
-				message: this.$t("paste.success", { count: blocks.length }),
+				message: this.$panel.t("paste.success", { count: blocks.length }),
 				icon: "download"
 			});
 		},
@@ -656,8 +658,8 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-remove-dialog",
 				props: {
-					text: this.$t("field.blocks.delete.confirm.all"),
-					submitButton: this.$t("delete.all")
+					text: this.$panel.t("field.blocks.delete.confirm.all"),
+					submitButton: this.$panel.t("delete.all")
 				},
 				on: {
 					submit: () => {
@@ -673,7 +675,7 @@ export default {
 			this.$panel.dialog.open({
 				component: "k-remove-dialog",
 				props: {
-					text: this.$t("field.blocks.delete.confirm.selected")
+					text: this.$panel.t("field.blocks.delete.confirm.selected")
 				},
 				on: {
 					submit: () => {
@@ -742,7 +744,7 @@ export default {
 
 			// create a new block and merge in default contents as
 			// well as the newly splitted content chunk
-			const newBlock = await this.$api.get(
+			const newBlock = await this.$panel.api.get(
 				this.endpoints.field + "/fieldsets/" + block.type
 			);
 			newBlock.content = {

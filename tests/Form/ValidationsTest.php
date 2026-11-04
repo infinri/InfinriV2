@@ -69,7 +69,7 @@ class ValidationsTest extends TestCase
 	{
 		$page  = new Page(['slug' => 'test']);
 		$field = new Field('test', ['model' => $page]);
-		$this->assertTrue(Validations::email($field, 'test@getkirby.com'));
+		$this->assertTrue(Validations::email($field, 'test@infinri.com'));
 	}
 
 	public function testEmailInvalid(): void
@@ -79,7 +79,7 @@ class ValidationsTest extends TestCase
 
 		$page  = new Page(['slug' => 'test']);
 		$field = new Field('test', ['model' => $page]);
-		Validations::email($field, 'test[at]getkirby.com');
+		Validations::email($field, 'test[at]infinri.com');
 	}
 
 	public function testMaxValid(): void

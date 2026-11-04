@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserUpdateTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserUpdate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserUpdate';
 
 	public function testUpdate(): void
 	{
@@ -24,7 +24,7 @@ class UserUpdateTest extends ModelTestCase
 		$user = new User(['email' => 'admin@domain.com', 'role' => 'admin']);
 		$user->loginPasswordless();
 		$user->update([
-			'website' => $url = 'https://getkirby.com'
+			'website' => $url = 'https://infinri.com'
 		]);
 		$this->assertSame($url, $this->app->user()->website()->value());
 		$user->logout();
@@ -35,7 +35,7 @@ class UserUpdateTest extends ModelTestCase
 		$calls = 0;
 		$phpunit = $this;
 		$input = [
-			'website' => 'https://getkirby.com'
+			'website' => 'https://infinri.com'
 		];
 
 		$this->app = $this->app->clone([
@@ -47,14 +47,14 @@ class UserUpdateTest extends ModelTestCase
 					$calls++;
 				},
 				'user.update:after' => function (User $newUser, User $oldUser) use ($phpunit, &$calls) {
-					$phpunit->assertSame('https://getkirby.com', $newUser->website()->value());
+					$phpunit->assertSame('https://infinri.com', $newUser->website()->value());
 					$phpunit->assertNull($oldUser->website()->value());
 					$calls++;
 				}
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = new User(['email' => 'editor@domain.com']);
 		$user->update($input);

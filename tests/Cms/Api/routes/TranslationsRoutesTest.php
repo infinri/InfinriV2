@@ -14,14 +14,14 @@ class TranslationsRoutesTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testList(): void
 	{
 		$app      = $this->app;
 		$response = $app->api()->call('translations');
-		$files    = glob($app->root('kirby') . '/i18n/translations/*.json');
+		$files    = glob($app->root('infinri') . '/i18n/translations/*.json');
 
 		$this->assertCount(count($files), $response['data']);
 	}

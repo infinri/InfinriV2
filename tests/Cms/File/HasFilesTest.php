@@ -25,7 +25,7 @@ class NewHasFileTraitUser
 #[CoversClass(HasFiles::class)]
 class NewHasFilesTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.NewHasFiles';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.NewHasFiles';
 
 	public static function fileProvider(): array
 	{

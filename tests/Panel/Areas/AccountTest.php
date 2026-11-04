@@ -23,7 +23,7 @@ class AccountTest extends AreaTestCase
 		$view = $this->view('account');
 		$this->assertSame('account', $view['id']);
 		$this->assertSame('k-account-view', $view['component']);
-		$this->assertSame('test@getkirby.com', $view['props']['model']['email']);
+		$this->assertSame('test@infinri.com', $view['props']['email']);
 	}
 
 	public function testAccountFiles(): void
@@ -32,7 +32,7 @@ class AccountTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'test',
-					'email' => 'test@getkirby.com',
+					'email' => 'test@infinri.com',
 					'role'  => 'admin',
 					'files' => [
 						['filename' => 'test.jpg']
@@ -76,13 +76,13 @@ class AccountTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 		$this->assertErrorView('account', 'The user cannot be found');
 	}
 
@@ -90,7 +90,7 @@ class AccountTest extends AreaTestCase
 	{
 		$this->install();
 		$this->login();
-		$this->app->session()->set('kirby.resetPassword', 'test');
+		$this->app->session()->set('infinri.resetPassword', 'test');
 
 		$view = $this->view('reset-password');
 		$this->assertSame('k-reset-password-view', $view['component']);

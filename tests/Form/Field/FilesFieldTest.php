@@ -48,7 +48,7 @@ class FilesFieldTestPage extends Page
 
 class FilesFieldTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Form.Fields.Languages';
+	public const TMP = INFINRI_TMP_DIR . '/Form.Fields.Languages';
 
 	protected function setUp(): void
 	{
@@ -94,7 +94,7 @@ class FilesFieldTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function model()
@@ -115,7 +115,7 @@ class FilesFieldTest extends TestCase
 		$this->assertSame('list', $field->layout());
 		$this->assertNull($field->max());
 		$this->assertTrue($field->multiple());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 		$this->assertSame('uuid', $field->store());
 	}
 
@@ -177,11 +177,11 @@ class FilesFieldTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor-' . $uuid
 				]
 			],
-			'user' => 'editor@getkirby.com'
+			'user' => 'editor@infinri.com'
 		]);
 
 		$field = $this->field('files', [
@@ -284,7 +284,7 @@ class FilesFieldTest extends TestCase
 	public function testQueryWithUserParent(): void
 	{
 		$field = $this->field('files', [
-			'model' => new User(['email' => 'test@getkirby.com']),
+			'model' => new User(['email' => 'test@infinri.com']),
 		]);
 
 		$this->assertSame('user.files', $field->query());
@@ -374,7 +374,7 @@ class FilesFieldTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$api = $app->api()->call('pages/test/fields/gallery');
 
 		$this->assertCount(2, $api);
@@ -396,7 +396,7 @@ class FilesFieldTest extends TestCase
 				]
 			]
 		]);
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = new FilesFieldTestPage(['slug' => 'test']);
 
@@ -406,7 +406,7 @@ class FilesFieldTest extends TestCase
 		]);
 		$this->assertSame('.txt', $field->uploads()['accept']);
 
-		$api = new FilesFieldTestApi(['kirby' => $this->app]);
+		$api = new FilesFieldTestApi(['infinri' => $this->app]);
 
 		$result = $field->upload(
 			$api,

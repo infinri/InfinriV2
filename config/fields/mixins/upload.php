@@ -9,7 +9,7 @@ use Infinri\Exception\PermissionException;
 return [
 	'props' => [
 		/**
-		 * Sets the upload options for linked files (since 3.2.0)
+		 * Sets the upload options for linked files
 		 */
 		'uploads' => function ($uploads = []) {
 			if ($uploads === false) {

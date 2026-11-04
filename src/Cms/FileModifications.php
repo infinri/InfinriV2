@@ -117,17 +117,16 @@ trait FileModifications
 	 * Create a srcset definition for the given sizes
 	 * Sizes can be defined as a simple array. They can
 	 * also be set up in the config with the thumbs.srcsets option.
-	 * @since 3.1.0
 	 */
 	#[BlockCollectionAccess]
 	public function srcset(array|string|null $sizes = null): string|null
 	{
 		if (empty($sizes) === true) {
-			$sizes = $this->kirby()->option('thumbs.srcsets.default', []);
+			$sizes = $this->infinri()->option('thumbs.srcsets.default', []);
 		}
 
 		if (is_string($sizes) === true) {
-			$sizes = $this->kirby()->option('thumbs.srcsets.' . $sizes, []);
+			$sizes = $this->infinri()->option('thumbs.srcsets.' . $sizes, []);
 		}
 
 		if (is_array($sizes) === false || $sizes === []) {
@@ -175,9 +174,9 @@ trait FileModifications
 	): FileVersion|File|Asset {
 		// thumb presets
 		if (empty($options) === true) {
-			$options = $this->kirby()->option('thumbs.presets.default');
+			$options = $this->infinri()->option('thumbs.presets.default');
 		} elseif (is_string($options) === true) {
-			$options = $this->kirby()->option('thumbs.presets.' . $options);
+			$options = $this->infinri()->option('thumbs.presets.' . $options);
 		}
 
 		if (empty($options) === true || is_array($options) === false) {
@@ -196,13 +195,13 @@ trait FileModifications
 
 		// fallback to global config options
 		if (isset($options['format']) === false) {
-			if ($format = $this->kirby()->option('thumbs.format')) {
+			if ($format = $this->infinri()->option('thumbs.format')) {
 				$options['format'] = $format;
 			}
 		}
 
-		$component = $this->kirby()->component('file::version');
-		$result    = $component($this->kirby(), $this, $options);
+		$component = $this->infinri()->component('file::version');
+		$result    = $component($this->infinri(), $this, $options);
 
 		if (
 			$result instanceof FileVersion === false &&

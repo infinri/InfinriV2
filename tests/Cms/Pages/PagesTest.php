@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Pages::class)]
 class PagesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Pages';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Pages';
 
 	public function pages()
 	{
@@ -197,7 +197,7 @@ class PagesTest extends TestCase
 
 	public function testDelete(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$a = Page::create([
 			'slug'  => 'a',
@@ -236,7 +236,7 @@ class PagesTest extends TestCase
 
 	public function testDeleteSortedAndFiltered(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$a = Page::create([
 			'slug'  => 'a',
@@ -315,7 +315,7 @@ class PagesTest extends TestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$pages = $app->site()->children();
 

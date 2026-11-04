@@ -22,9 +22,6 @@
 </template>
 
 <script>
-/**
- * @since 5.0.0
- */
 export default {
 	props: {
 		options: {
@@ -46,7 +43,7 @@ export default {
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	padding: var(--spacing-10);
+	padding: 2.5rem;
 	container-type: size;
 }
 .k-file-preview-frame :where(img, audio, video) {

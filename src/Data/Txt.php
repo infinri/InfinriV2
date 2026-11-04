@@ -9,7 +9,7 @@ use Infinri\Toolkit\Str;
 class Txt extends Handler
 {
 	/**
-	 * Converts an array to an encoded Kirby txt string
+	 * Converts an array to an encoded Infinri txt string
 	 */
 	public static function encode($data): string
 	{
@@ -67,7 +67,7 @@ class Txt extends Handler
 	}
 
 	/**
-	 * Parses a Kirby txt string and returns a multi-dimensional array
+	 * Parses an Infinri txt string and returns a multi-dimensional array
 	 */
 	public static function decode($string): array
 	{

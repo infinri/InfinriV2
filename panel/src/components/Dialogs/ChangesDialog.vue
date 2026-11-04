@@ -1,23 +1,23 @@
 <template>
 	<k-dialog v-bind="$props" class="k-changes-dialog">
 		<section v-if="pages.length">
-			<k-headline>{{ $t("lock.unsaved.pages") }}</k-headline>
+			<k-headline>{{ $panel.t("lock.unsaved.pages") }}</k-headline>
 			<k-items :items="pages" layout="list" />
 		</section>
 
 		<section v-if="files.length">
-			<k-headline>{{ $t("lock.unsaved.files") }}</k-headline>
+			<k-headline>{{ $panel.t("lock.unsaved.files") }}</k-headline>
 			<k-items :items="files" layout="list" />
 		</section>
 
 		<section v-if="users.length">
-			<k-headline>{{ $t("lock.unsaved.users") }}</k-headline>
+			<k-headline>{{ $panel.t("lock.unsaved.users") }}</k-headline>
 			<k-items :items="users" layout="list" />
 		</section>
 
 		<section v-if="!pages.length && !files.length && !users.length">
-			<k-headline>{{ $t("lock.unsaved") }}</k-headline>
-			<k-empty icon="edit-line">{{ $t("lock.unsaved.empty") }}</k-empty>
+			<k-headline>{{ $panel.t("lock.unsaved") }}</k-headline>
+			<k-empty icon="edit-line">{{ $panel.t("lock.unsaved.empty") }}</k-empty>
 		</section>
 	</k-dialog>
 </template>
@@ -25,9 +25,6 @@
 <script>
 import Dialog from "@/mixins/dialog.js";
 
-/**
- * @since 4.0.0
- */
 export default {
 	mixins: [Dialog],
 	props: {

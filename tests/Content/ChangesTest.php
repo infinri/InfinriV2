@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Changes::class)]
 class ChangesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Content.Changes';
+	public const TMP = INFINRI_TMP_DIR . '/Content.Changes';
 
 	protected function setUp(): void
 	{
@@ -46,7 +46,7 @@ class ChangesTest extends TestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		Uuids::populate();
 	}

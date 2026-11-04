@@ -39,13 +39,13 @@ class SiteDialogsTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 
 		$dialog = $this->dialog('site/changeTitle');
 		$this->assertSame('The site is not accessible', $dialog['error']);
@@ -79,7 +79,7 @@ class SiteDialogsTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			],
@@ -89,7 +89,7 @@ class SiteDialogsTest extends AreaTestCase
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 
 		$dialog = $this->dialog('site/changeTitle');
 		$this->assertSame('The site is not accessible', $dialog['error']);
@@ -137,7 +137,7 @@ class SiteDialogsTest extends AreaTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$parent = Page::create(['slug' => 'parent', 'template' => 'default']);
 		Page::create(['parent' => $parent, 'slug' => 'child', 'template' => 'default']);
@@ -170,7 +170,7 @@ class SiteDialogsTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			],
@@ -180,7 +180,7 @@ class SiteDialogsTest extends AreaTestCase
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 
 		$dialog = $this->dialog('pages/test/move');
 		$this->assertSame('The site is not accessible', $dialog['error']);
@@ -205,7 +205,7 @@ class SiteDialogsTest extends AreaTestCase
 			'users' => [
 				[
 					'id'    => 'editor',
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor',
 				]
 			],
@@ -215,7 +215,7 @@ class SiteDialogsTest extends AreaTestCase
 			]
 		]);
 
-		$this->login('editor@getkirby.com');
+		$this->login('editor@infinri.com');
 
 		$dialog = $this->dialog('pages/test/move');
 		$this->assertSame('The site is not accessible', $dialog['error']);

@@ -47,7 +47,6 @@ class ImageFilePreview extends FilePreview
 	/**
 	 * Aspect ratio for SVGs without their own size,
 	 * which the preview cannot fit by a natural size
-	 * @since 5.6.2
 	 */
 	public function ratio(): float|null
 	{

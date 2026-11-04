@@ -9,7 +9,7 @@
 		<k-select-field
 			v-if="templates.length > 1"
 			:empty="false"
-			:label="$t('template')"
+			:label="$panel.t('template')"
 			:options="templates"
 			:required="true"
 			:value="template"

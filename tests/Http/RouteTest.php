@@ -116,7 +116,7 @@ class RouteTest extends TestCase
 			// invalid number
 			[':num', 'a', false],
 			// invalid pattern
-			[':kirby', 'kirby', false]
+			[':infinri', 'infinri', false]
 		];
 	}
 

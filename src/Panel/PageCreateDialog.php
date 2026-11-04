@@ -336,8 +336,14 @@ class PageCreateDialog
 		// and add default values
 		$form = Form::for($this->model())->fill(input: $content);
 
+		foreach ($form->fields() as $field) {
+			if ($field->isEmpty() === true) {
+				$field->fill($field->default());
+			}
+		}
+
 		return [
-			'content'  => $form->strings(true),
+			'content'  => $form->toStoredValues(),
 			'slug'     => $input['slug'],
 			'template' => $this->template,
 		];
@@ -359,8 +365,8 @@ class PageCreateDialog
 		if ($status !== 'draft') {
 			// grant all permissions as the status is set in the blueprint and
 			// should not be treated as if the user would try to change it
-			$page->kirby()->impersonate(
-				'kirby',
+			$page->infinri()->impersonate(
+				'infinri',
 				fn () => $page->changeStatus($status)
 			);
 		}

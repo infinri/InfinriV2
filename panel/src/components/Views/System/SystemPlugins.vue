@@ -1,30 +1,22 @@
 <template>
 	<k-section
 		v-if="plugins.length"
-		:headline="$t('plugins')"
-		link="https://getkirby.com/plugins"
+		:headline="$panel.t('plugins')"
+		link="https://infinri.com/plugins"
 	>
 		<k-table
 			:index="false"
 			:columns="{
 				name: {
-					label: $t('name'),
+					label: $panel.t('name'),
 					type: 'url',
 					mobile: true
 				},
 				author: {
-					label: $t('author')
-				},
-				license: {
-					label: $t('license'),
-					type: 'license'
-				},
-				status: {
-					label: $t('license.status'),
-					type: 'license-status'
+					label: $panel.t('author')
 				},
 				version: {
-					label: $t('version'),
+					label: $panel.t('version'),
 					type: 'update-status',
 					mobile: true,
 					width: '10rem'
@@ -38,7 +30,6 @@
 <script>
 /**
  * @internal
- * @since 4.0.0
  */
 export default {
 	props: {

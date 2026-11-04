@@ -7,7 +7,7 @@ use Infinri\Filesystem\Dir;
 
 class UsersApiCollectionTest extends ApiCollectionTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UsersApiCollection';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UsersApiCollection';
 
 	protected function setUp(): void
 	{
@@ -16,15 +16,15 @@ class UsersApiCollectionTest extends ApiCollectionTestCase
 				'index' => static::TMP
 			],
 			'users' => [
-				['email' => 'a@getkirby.com'],
-				['email' => 'b@getkirby.com']
+				['email' => 'a@infinri.com'],
+				['email' => 'b@infinri.com']
 			]
 		]);
 
 		$this->api = $this->app->api();
 		Dir::make(static::TMP);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 	}
 
 	public function testDefaultCollection(): void
@@ -33,8 +33,8 @@ class UsersApiCollectionTest extends ApiCollectionTestCase
 		$result     = $collection->toArray();
 
 		$this->assertCount(2, $result);
-		$this->assertSame('a@getkirby.com', $result[0]['email']);
-		$this->assertSame('b@getkirby.com', $result[1]['email']);
+		$this->assertSame('a@infinri.com', $result[0]['email']);
+		$this->assertSame('b@infinri.com', $result[1]['email']);
 	}
 
 	public function testPassedCollection(): void
@@ -43,6 +43,6 @@ class UsersApiCollectionTest extends ApiCollectionTestCase
 		$result     = $collection->toArray();
 
 		$this->assertCount(1, $result);
-		$this->assertSame('b@getkirby.com', $result[0]['email']);
+		$this->assertSame('b@infinri.com', $result[0]['email']);
 	}
 }

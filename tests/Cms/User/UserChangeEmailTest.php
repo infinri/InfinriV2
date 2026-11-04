@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserChangeEmailTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserChangeEmail';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserChangeEmail';
 
 	public function testChangeEmail(): void
 	{
@@ -34,7 +34,7 @@ class UserChangeEmailTest extends ModelTestCase
 		$user = $app->user($user->id());
 		$this->assertSame('test@exämple.com', $user->email());
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		// with Punycode email
 		$user = $user->changeEmail('test@xn--tst-qla.com');
@@ -77,7 +77,7 @@ class UserChangeEmailTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user = new User(['email' => 'editor@domain.com']);
 		$user = $user->changeEmail('another@domain.com');

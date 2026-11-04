@@ -14,7 +14,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class PluginTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Plugin';
+	public const TMP      = INFINRI_TMP_DIR . '/Plugin';
 
 	protected static ClassLoader $classLoader;
 	protected static string $updateStatusHost;
@@ -57,18 +57,18 @@ class PluginTest extends TestCase
 	public function test__call(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin'
 		);
 
-		$this->assertSame('https://getkirby.com', $plugin->homepage());
+		$this->assertSame('https://infinri.com', $plugin->homepage());
 	}
 
 	public function testAsset(): void
 	{
 		$root   = static::FIXTURES . '/plugin-assets';
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			extends: [
 				'assets' => [
 					'c.css' => $a = $root . '/a.css',
@@ -87,7 +87,7 @@ class PluginTest extends TestCase
 
 		// assets defined in plugin config
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: $root,
 			extends: [
 				'assets' => [
@@ -103,18 +103,18 @@ class PluginTest extends TestCase
 	public function testAuthors(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root:  static::FIXTURES . '/plugin'
 		);
 
 		$authors = [
 			[
 				'name'  => 'A',
-				'email' => 'a@getkirby.com'
+				'email' => 'a@infinri.com'
 			],
 			[
 				'name'  => 'B',
-				'email' => 'b@getkirby.com'
+				'email' => 'b@infinri.com'
 			]
 		];
 
@@ -124,7 +124,7 @@ class PluginTest extends TestCase
 	public function testAuthorsNames(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin'
 		);
 
@@ -134,7 +134,7 @@ class PluginTest extends TestCase
 	public function testExtends(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			extends: $extends = [
 				'fields' => [
 					'test' => []
@@ -143,6 +143,34 @@ class PluginTest extends TestCase
 		);
 
 		$this->assertSame($extends, $plugin->extends());
+	}
+
+	public function testExtendsRootIsIgnored(): void
+	{
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			extends: [
+				'root' => static::FIXTURES . '/plugin'
+			]
+		);
+
+		$this->assertSame(__DIR__, $plugin->root());
+		$this->assertNotSame(static::FIXTURES . '/plugin', $plugin->root());
+	}
+
+	public function testExtendsInfoIsIgnored(): void
+	{
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			root: static::FIXTURES . '/plugin',
+			extends: [
+				'info' => [
+					'custom' => 'value'
+				]
+			]
+		);
+
+		$this->assertArrayNotHasKey('custom', $plugin->info());
 	}
 
 	public function testId(): void
@@ -154,22 +182,22 @@ class PluginTest extends TestCase
 	public function testInfo(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin-version'
 		);
 
 		$authors = [
 			[
 				'name'  => 'A',
-				'email' => 'a@getkirby.com'
+				'email' => 'a@infinri.com'
 			],
 			[
 				'name'  => 'B',
-				'email' => 'b@getkirby.com'
+				'email' => 'b@infinri.com'
 			]
 		];
 
-		$this->assertSame('getkirby/test-plugin', $plugin->info()['name']);
+		$this->assertSame('infinri/test-plugin', $plugin->info()['name']);
 		$this->assertSame('MIT', $plugin->info()['license']);
 		$this->assertSame('1.0.0', $plugin->info()['version']);
 		$this->assertSame('plugin', $plugin->info()['type']);
@@ -180,17 +208,17 @@ class PluginTest extends TestCase
 	public function testInfoFromProps(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			info: [
 				'license' => 'MIT',
 				'authors' => [
 					[
 						'name'  => 'A',
-						'email' => 'a@getkirby.com'
+						'email' => 'a@infinri.com'
 					],
 					[
 						'name'  => 'B',
-						'email' => 'b@getkirby.com'
+						'email' => 'b@infinri.com'
 					]
 				]
 			]
@@ -203,7 +231,7 @@ class PluginTest extends TestCase
 	public function testInfoFromPropAndManifest(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin-version',
 			info: [
 				'version' => '2.1.0'
@@ -219,42 +247,68 @@ class PluginTest extends TestCase
 	public function testInfoWhenEmpty(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: __DIR__
 		);
 
 		$this->assertSame([], $plugin->info());
 	}
 
-	public function testLicense(): void
+	public function testLicenseMethodIsNotDeclared(): void
 	{
-		$plugin = new Plugin(name: 'getkirby/test-plugin');
-		$this->assertInstanceOf(License::class, $license = $plugin->license());
+		$this->assertFalse(method_exists(Plugin::class, 'license'));
 	}
 
-	public function testLicenseFromString(): void
+	public function testLicenseClassesDoNotExist(): void
 	{
-		$plugin = new Plugin(name: 'getkirby/test-plugin', license: 'mit');
-		$this->assertInstanceOf(License::class, $plugin->license());
-		$this->assertSame('mit', $plugin->license()->name());
+		$this->assertFalse(class_exists(__NAMESPACE__ . '\\License'));
+		$this->assertFalse(class_exists(__NAMESPACE__ . '\\LicenseStatus'));
+	}
+
+	public function testLicenseConstructorArgumentIsUnknown(): void
+	{
+		$this->expectException(\Error::class);
+		$this->expectExceptionMessage('Unknown named parameter $license');
+
+		new Plugin(name: 'infinri/test-plugin', license: 'mit');
+	}
+
+	public function testLicenseArgumentOfAppPluginIsUnknown(): void
+	{
+		$this->expectException(\Error::class);
+		$this->expectExceptionMessage('Unknown named parameter $license');
+
+		App::plugin(name: 'developer/plugin', license: 'mit');
+	}
+
+	public function testLicenseCallFallsThroughToRawInfo(): void
+	{
+		$plugin = new Plugin(
+			name: 'infinri/test-plugin',
+			root: static::FIXTURES . '/plugin-version'
+		);
+
+		// no declared method: the magic __call returns the raw composer.json value
+		$this->assertSame('MIT', $plugin->license());
+		$this->assertSame('MIT', $plugin->info()['license']);
 	}
 
 	public function testLinkFromHomepage(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			info: [
-				'homepage' => 'https://getkirby.com'
+				'homepage' => 'https://infinri.com'
 			]
 		);
 
-		$this->assertSame('https://getkirby.com', $plugin->link());
+		$this->assertSame('https://infinri.com', $plugin->link());
 	}
 
 	public function testLinkFromInvalidHomepage(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			info: [
 				'homepage' => 'test'
 			]
@@ -266,34 +320,34 @@ class PluginTest extends TestCase
 	public function testLinkFromSupportDocs(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			info: [
 				'support' => [
-					'docs' => 'https://getkirby.com'
+					'docs' => 'https://infinri.com'
 				]
 			]
 		);
 
-		$this->assertSame('https://getkirby.com', $plugin->link());
+		$this->assertSame('https://infinri.com', $plugin->link());
 	}
 
 	public function testLinkFromSupportSource(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			info: [
 				'support' => [
-					'source' => 'https://getkirby.com'
+					'source' => 'https://infinri.com'
 				]
 			]
 		);
 
-		$this->assertSame('https://getkirby.com', $plugin->link());
+		$this->assertSame('https://infinri.com', $plugin->link());
 	}
 
 	public function testLinkWhenEmpty(): void
 	{
-		$plugin = new Plugin('getkirby/test-plugin');
+		$plugin = new Plugin('infinri/test-plugin');
 		$this->assertNull($plugin->link());
 	}
 
@@ -305,9 +359,9 @@ class PluginTest extends TestCase
 			]
 		]);
 
-		$plugin = new Plugin('getkirby/test-plugin');
+		$plugin = new Plugin('infinri/test-plugin');
 
-		$this->assertSame($media . '/plugins/getkirby/test-plugin', $plugin->mediaRoot());
+		$this->assertSame($media . '/plugins/infinri/test-plugin', $plugin->mediaRoot());
 	}
 
 	public function testMediaUrl(): void
@@ -318,15 +372,15 @@ class PluginTest extends TestCase
 			]
 		]);
 
-		$plugin = new Plugin('getkirby/test-plugin');
+		$plugin = new Plugin('infinri/test-plugin');
 
-		$this->assertSame('/media/plugins/getkirby/test-plugin', $plugin->mediaUrl());
+		$this->assertSame('/media/plugins/infinri/test-plugin', $plugin->mediaUrl());
 	}
 
 	public function testManifest(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: __DIR__
 		);
 
@@ -364,20 +418,20 @@ class PluginTest extends TestCase
 
 	public function testPrefix(): void
 	{
-		$plugin = new Plugin('getkirby/test-plugin');
-		$this->assertSame('getkirby.test-plugin', $plugin->prefix());
+		$plugin = new Plugin('infinri/test-plugin');
+		$this->assertSame('infinri.test-plugin', $plugin->prefix());
 	}
 
 	public function testRoot(): void
 	{
-		$plugin = new Plugin('getkirby/test-plugin');
+		$plugin = new Plugin('infinri/test-plugin');
 		$this->assertSame(__DIR__, $plugin->root());
 	}
 
 	public function testRootWithCustomSetup(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: $custom = __DIR__ . '/test'
 		);
 
@@ -387,42 +441,30 @@ class PluginTest extends TestCase
 	public function testToArray(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: $root = static::FIXTURES . '/plugin-version'
 		);
 
 		$expected = [
 			'authors' => [
-				['name' => 'A', 'email' => 'a@getkirby.com'],
-				['name' => 'B', 'email' => 'b@getkirby.com']
+				['name' => 'A', 'email' => 'a@infinri.com'],
+				['name' => 'B', 'email' => 'b@infinri.com']
 			],
 			'description' => 'Some really nice description',
-			'name'        => 'getkirby/test-plugin',
-			'license'     => [
-				'link'   => null,
-				'name'   => 'MIT',
-				'status' => [
-					'dialog' => null,
-					'drawer' => null,
-					'icon'   => 'check',
-					'label'  => 'Valid license',
-					'link'   => null,
-					'theme'  => 'positive',
-					'value'  => 'active',
-				]
-			],
-			'link'        => 'https://getkirby.com',
+			'name'        => 'infinri/test-plugin',
+			'link'        => 'https://infinri.com',
 			'root'        => $root,
 			'version'     => '1.0.0'
 		];
 
 		$this->assertSame($expected, $plugin->toArray());
+		$this->assertArrayNotHasKey('license', $plugin->toArray());
 	}
 
 	public function testUpdateStatus(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'
 		);
 		$updateStatus = $plugin->updateStatus();
@@ -442,7 +484,7 @@ class PluginTest extends TestCase
 	public function testUpdateStatusWithPrefix(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version-prefix'
 		);
 		$updateStatus = $plugin->updateStatus();
@@ -462,7 +504,7 @@ class PluginTest extends TestCase
 	public function testUpdateStatusWithoutVersion(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin'
 		);
 
@@ -484,7 +526,7 @@ class PluginTest extends TestCase
 	public function testUpdateStatusUnknownPlugin(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/unknown',
+			name: 'infinri/unknown',
 			root: static::FIXTURES . '/plugin-version'
 		);
 
@@ -496,7 +538,7 @@ class PluginTest extends TestCase
 		$this->assertSame($updateStatus, $plugin->updateStatus());
 
 		// should use the requested data;
-		// error (because getkirby.com provides no data)
+		// error (because infinri.com provides no data)
 		$this->assertSame('error', $updateStatus->status());
 		$this->assertSame('1.0.0', $updateStatus->currentVersion());
 		$this->assertNull($updateStatus->targetVersion());
@@ -504,8 +546,8 @@ class PluginTest extends TestCase
 		// curl's wording for a missing local file differs between
 		// versions ("Couldn't open file" vs. "Could not open file")
 		$this->assertSame([
-			'Could not load update data for plugin getkirby/unknown: Couldn\'t open file ' .
-			static::FIXTURES . '/updateStatus/plugins/getkirby/unknown.json'
+			'Could not load update data for plugin infinri/unknown: Couldn\'t open file ' .
+			static::FIXTURES . '/updateStatus/plugins/infinri/unknown.json'
 		], str_replace(
 			'Could not open file',
 			'Couldn\'t open file',
@@ -524,7 +566,7 @@ class PluginTest extends TestCase
 		]);
 
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'
 		);
 		$updateStatus = $plugin->updateStatus();
@@ -539,16 +581,16 @@ class PluginTest extends TestCase
 				'updates' => [
 					'plugins' => [
 						'*' => true,
-						'getkirby/*' => true,
-						'getkirby/something' => true,
-						'getkirby/pub*' => false
+						'infinri/*' => true,
+						'infinri/something' => true,
+						'infinri/pub*' => false
 					]
 				]
 			]
 		]);
 
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'
 		);
 
@@ -566,7 +608,7 @@ class PluginTest extends TestCase
 		]);
 
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'
 		);
 
@@ -588,7 +630,7 @@ class PluginTest extends TestCase
 		]);
 
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'
 		);
 
@@ -603,14 +645,14 @@ class PluginTest extends TestCase
 			'options' => [
 				'updates' => [
 					'plugins' => [
-						'getkirby/something' => false
+						'infinri/something' => false
 					]
 				]
 			]
 		]);
 
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'
 		);
 		$updateStatus = $plugin->updateStatus();
@@ -630,7 +672,7 @@ class PluginTest extends TestCase
 	public function testUpdateStatusCustomData(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/public',
+			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'
 		);
 
@@ -666,7 +708,7 @@ class PluginTest extends TestCase
 	public function testVersion(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin-version'
 		);
 
@@ -676,7 +718,7 @@ class PluginTest extends TestCase
 	public function testVersionFromArgument(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin-version',
 			version: '1.2.0'
 		);
@@ -687,7 +729,7 @@ class PluginTest extends TestCase
 	public function testVersionFromInfo(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin-version',
 			info: [
 				'version' => '1.1.0'
@@ -700,7 +742,7 @@ class PluginTest extends TestCase
 	public function testVersionMissing(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin'
 		);
 
@@ -710,7 +752,7 @@ class PluginTest extends TestCase
 	public function testVersionPrefixed(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin-version-prefix'
 		);
 
@@ -720,7 +762,7 @@ class PluginTest extends TestCase
 	public function testVersionInvalid(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin-version-invalid'
 		);
 
@@ -730,7 +772,7 @@ class PluginTest extends TestCase
 	public function testVersionComposer(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin-composer',
+			name: 'infinri/test-plugin-composer',
 			root: static::FIXTURES . '/plugin-version-composer'
 		);
 
@@ -740,7 +782,7 @@ class PluginTest extends TestCase
 	public function testVersionComposerNoVersionSet(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin',
+			name: 'infinri/test-plugin',
 			root: static::FIXTURES . '/plugin-version-composer-noversionset'
 		);
 
@@ -750,7 +792,7 @@ class PluginTest extends TestCase
 	public function testVersionComposerOverride(): void
 	{
 		$plugin = new Plugin(
-			name: 'getkirby/test-plugin-composer',
+			name: 'infinri/test-plugin-composer',
 			root: static::FIXTURES . '/plugin-version-composer-override'
 		);
 

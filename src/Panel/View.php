@@ -120,25 +120,25 @@ class View
 	 */
 	public static function data(array $view = [], array $options = []): array
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		// multilang setup check
 		$multilang = Panel::multilang();
 
 		// get the authenticated user
-		$user = $kirby->user();
+		$user = $infinri->user();
 
 		// user permissions
 		$permissions = $user?->role()->permissions()->toArray() ?? [];
 
 		// current content language
-		$language = $kirby->language();
+		$language = $infinri->language();
 
 		// shared data for all requests
 		return [
-			'$direction' => function () use ($kirby, $multilang, $language, $user) {
+			'$direction' => function () use ($infinri, $multilang, $language, $user) {
 				if ($multilang === true && $language && $user) {
-					$default = $kirby->defaultLanguage();
+					$default = $infinri->defaultLanguage();
 
 					if (
 						$language->direction() !== $default->direction() &&
@@ -156,7 +156,7 @@ class View
 			},
 			'$languages' => fn (): array => match ($multilang) {
 				false => [],
-				true  => $kirby->languages()->values(
+				true  => $infinri->languages()->values(
 					fn ($language) => $language->toArray()
 				)
 			},
@@ -169,10 +169,9 @@ class View
 				return $menu->entries();
 			},
 			'$permissions' => $permissions,
-			'$license'     => $kirby->system()->license()->status()->value(),
 			'$multilang'   => $multilang,
 			'$searches'    => static::searches($options['areas'] ?? [], $permissions),
-			'$url'         => $kirby->request()->url()->toString(),
+			'$url'         => $infinri->request()->url()->toString(),
 			'$user'        => fn () => match ($user) {
 				null    => null,
 				default =>  [
@@ -183,20 +182,20 @@ class View
 					'username' => $user->username(),
 				]
 			},
-			'$view' => function () use ($kirby, $options, $view) {
+			'$view' => function () use ($infinri, $options, $view) {
 				$defaults = [
 					'breadcrumb' => [],
 					'code'       => 200,
-					'path'       => Str::after($kirby->path(), '/'),
+					'path'       => Str::after($infinri->path(), '/'),
 					'props'      => [],
 					// the State params are part of the transport and
 					// must not end up in the URL the Panel restores
 					'query'      => A::without(
-						$kirby->request()->query()->toArray(),
+						$infinri->request()->query()->toArray(),
 						['_globals', '_json', '_only', '_pretty']
 					),
 					'referrer'   => Panel::referrer(),
-					'search'     => $kirby->option('panel.search.type', 'pages'),
+					'search'     => $infinri->option('panel.search.type', 'pages'),
 					'timestamp'  => (int)(microtime(true) * 1000),
 				];
 
@@ -253,40 +252,40 @@ class View
 	 */
 	public static function globals(): array
 	{
-		$kirby = App::instance();
+		$infinri = App::instance();
 
 		return [
 			'$config' => fn () => [
 				'api'         => [
-					'methodOverride' => $kirby->option('api.methodOverride', true)
+					'methodOverride' => $infinri->option('api.methodOverride', true)
 				],
-				'debug'       => $kirby->option('debug', false),
-				'kirbytext'   => $kirby->option('panel.kirbytext', true),
-				'theme'       => $kirby->option('panel.theme', 'system'),
-				'translation' => $kirby->option('panel.language', 'en'),
+				'debug'       => $infinri->option('debug', false),
+				'infinritext'   => $infinri->option('panel.infinritext', true),
+				'theme'       => $infinri->option('panel.theme', 'system'),
+				'translation' => $infinri->option('panel.language', 'en'),
 				'upload'      => Upload::chunkSize(),
-				'uploads'     => $kirby->option('panel.uploads', 3),
+				'uploads'     => $infinri->option('panel.uploads', 3),
 			],
-			'$system' => function () use ($kirby) {
+			'$system' => function () use ($infinri) {
 				$locales = [];
 
-				foreach ($kirby->translations() as $translation) {
+				foreach ($infinri->translations() as $translation) {
 					$locales[$translation->code()] = $translation->locale();
 				}
 
 				return [
 					'ascii'   => Str::$ascii,
-					'csrf'    => $kirby->auth()->csrfFromSession(),
-					'isLocal' => $kirby->system()->isLocal(),
+					'csrf'    => $infinri->auth()->csrfFromSession(),
+					'isLocal' => $infinri->system()->isLocal(),
 					'locales' => $locales,
 					'slugs'   => Str::$language,
-					'title'   => $kirby->site()->title()->or('Infinri Admin')->toString()
+					'title'   => $infinri->site()->title()->or('Infinri Admin')->toString()
 				];
 			},
-			'$translation' => function () use ($kirby) {
-				$translation = match ($user = $kirby->user()) {
-					null    => $kirby->translation($kirby->panelLanguage()),
-					default => $kirby->translation($user->language())
+			'$translation' => function () use ($infinri) {
+				$translation = match ($user = $infinri->user()) {
+					null    => $infinri->translation($infinri->panelLanguage()),
+					default => $infinri->translation($user->language())
 				};
 
 				return [
@@ -298,8 +297,8 @@ class View
 				];
 			},
 			'$urls' => fn () => [
-				'api'  => $kirby->url('api'),
-				'site' => $kirby->url('index')
+				'api'  => $infinri->url('api'),
+				'site' => $infinri->url('index')
 			]
 		];
 	}
@@ -321,7 +320,7 @@ class View
 			return Response::redirect($data->location(), $data->code());
 		}
 
-		// handle Kirby exceptions
+		// handle Infinri exceptions
 		if ($data instanceof Exception) {
 			$data = static::error($data->getMessage(), $data->getHttpCode(), $data->getDetails());
 

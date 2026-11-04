@@ -34,7 +34,7 @@ return [
 		'text' => function () {
 			if ($text = $this->text) {
 				$text = $this->model()->toSafeString($text);
-				$text = $this->kirby()->kirbytext($text);
+				$text = $this->infinri()->infinritext($text);
 				return $text;
 			}
 		}

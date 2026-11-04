@@ -308,10 +308,10 @@ class ResponseTest extends TestCase
 
 	public function testRedirectWithLocation(): void
 	{
-		$response = Response::redirect('https://getkirby.com');
+		$response = Response::redirect('https://infinri.com');
 		$this->assertSame('', $response->body());
 		$this->assertSame(302, $response->code());
-		$this->assertEquals(['Location' => 'https://getkirby.com'], $response->headers()); // cannot use strict assertion (Uri object)
+		$this->assertEquals(['Location' => 'https://infinri.com'], $response->headers()); // cannot use strict assertion (Uri object)
 	}
 
 	public function testRedirectWithInternationalLocation(): void
@@ -340,18 +340,18 @@ class ResponseTest extends TestCase
 
 	public function testRefreshWithLocation(): void
 	{
-		$response = Response::refresh('https://getkirby.com');
+		$response = Response::refresh('https://infinri.com');
 		$this->assertSame('', $response->body());
 		$this->assertSame(302, $response->code());
-		$this->assertEquals(['Refresh' => '0; url=https://getkirby.com'], $response->headers());
+		$this->assertEquals(['Refresh' => '0; url=https://infinri.com'], $response->headers());
 	}
 
 	public function testRefreshWithTime(): void
 	{
-		$response = Response::refresh('https://getkirby.com', 302, 5);
+		$response = Response::refresh('https://infinri.com', 302, 5);
 		$this->assertSame('', $response->body());
 		$this->assertSame(302, $response->code());
-		$this->assertEquals(['Refresh' => '5; url=https://getkirby.com'], $response->headers());
+		$this->assertEquals(['Refresh' => '5; url=https://infinri.com'], $response->headers());
 	}
 
 	public function testSetHeaderFallbacks(): void

@@ -9,11 +9,11 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(Page::class)]
 class PageDuplicateTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageDuplicate';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageDuplicate';
 
 	public function testDuplicate(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -41,7 +41,7 @@ class PageDuplicateTest extends ModelTestCase
 	{
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -71,7 +71,7 @@ class PageDuplicateTest extends ModelTestCase
 	{
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -95,7 +95,7 @@ class PageDuplicateTest extends ModelTestCase
 
 	public function testDuplicateFiles(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -118,7 +118,7 @@ class PageDuplicateTest extends ModelTestCase
 	{
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -161,7 +161,7 @@ class PageDuplicateTest extends ModelTestCase
 	{
 		$this->setupMultiLanguage();
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -187,7 +187,7 @@ class PageDuplicateTest extends ModelTestCase
 	public function testDuplicateChildrenFiles(): void
 	{
 		$app = $this->app->clone();
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test',
@@ -238,7 +238,7 @@ class PageDuplicateTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$page = Page::create([
 			'slug' => 'test'

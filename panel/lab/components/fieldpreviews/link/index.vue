@@ -3,7 +3,7 @@
 		<k-lab-example label="URL">
 			<k-lab-table-cell>
 				<!-- @code -->
-				<k-link-field-preview value="https://getkirby.com" />
+				<k-link-field-preview value="https://infinri.com" />
 				<!-- @code-end -->
 			</k-lab-table-cell>
 		</k-lab-example>
@@ -11,7 +11,7 @@
 		<k-lab-example label="Email">
 			<k-lab-table-cell>
 				<!-- @code -->
-				<k-link-field-preview value="mailto:mail@getkirby.com" />
+				<k-link-field-preview value="mailto:mail@infinri.com" />
 				<!-- @code-end -->
 			</k-lab-table-cell>
 		</k-lab-example>
@@ -60,7 +60,7 @@
 			<k-lab-table-cell>
 				<!-- @code -->
 				<k-link-field-preview
-					value="https://getkirby.com/this-is-a-super-long-link-lahsdjkahskdjahskjdhaksjdhkajshdkashdjashdkahjsdkjahsdkjashdkjahskdjhaksjhdkashjdkahjsdajshkdhjahjkd"
+					value="https://infinri.com/this-is-a-super-long-link-lahsdjkahskdjahskjdhaksjdhkajshdkashdjashdkahjsdkjahsdkjashdkjahskdjhaksjhdkashjdkahjsdajshkdhjahjkd"
 				/>
 				<!-- @code-end -->
 			</k-lab-table-cell>

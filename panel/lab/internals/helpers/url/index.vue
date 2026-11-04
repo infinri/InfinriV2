@@ -170,7 +170,7 @@
 export const url = {
 	data() {
 		return {
-			url: "https://getkirby.com/docs"
+			url: "https://infinri.com/docs"
 		};
 	}
 };
@@ -180,7 +180,7 @@ export const url = {
 export const query = {
 	data() {
 		return {
-			origin: new URL("https://getkirby.com?search=kirby"),
+			origin: new URL("https://infinri.com?search=infinri"),
 			query: {
 				foo: "bar",
 				baz: ["qux", "quux"]

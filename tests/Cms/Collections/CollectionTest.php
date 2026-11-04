@@ -44,7 +44,7 @@ class MockObject
 #[CoversClass(Collection::class)]
 class CollectionTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Collection';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Collection';
 
 	public function tearDown(): void
 	{
@@ -54,7 +54,7 @@ class CollectionTest extends TestCase
 
 	public function testCollectionMethods(): void
 	{
-		$kirby = $this->kirby([
+		$infinri = $this->infinri([
 			'collectionMethods' => [
 				'test' => fn () => 'collection test'
 			],
@@ -64,12 +64,12 @@ class CollectionTest extends TestCase
 		]);
 
 		$this->assertSame('collection test', (new Collection())->test());
-		$this->assertSame('collection test', $kirby->site()->children()->test());
+		$this->assertSame('collection test', $infinri->site()->children()->test());
 
 		Pages::$methods['test'] = fn () => 'pages test';
 
 		$this->assertSame('collection test', (new Collection())->test());
-		$this->assertSame('pages test', $kirby->site()->children()->test());
+		$this->assertSame('pages test', $infinri->site()->children()->test());
 
 		Collection::$methods = [];
 		Pages::$methods = [];
@@ -130,7 +130,7 @@ class CollectionTest extends TestCase
 			return 'safe data';
 		};
 
-		$users = Users::factory([['email' => 'test@getkirby.com']]);
+		$users = Users::factory([['email' => 'test@infinri.com']]);
 		$user  = $users->first();
 
 		// closure with #[BlockCollectionAccess] must be blocked
@@ -144,7 +144,7 @@ class CollectionTest extends TestCase
 	{
 		$users = Users::factory([
 			[
-				'email'    => 'test@getkirby.com',
+				'email'    => 'test@infinri.com',
 				'password' => 'supersecret'
 			]
 		]);
@@ -165,7 +165,7 @@ class CollectionTest extends TestCase
 	{
 		$users = Users::factory([
 			[
-				'email'   => 'test@getkirby.com',
+				'email'   => 'test@infinri.com',
 				'content' => ['bio' => 'hello world']
 			]
 		]);
@@ -179,13 +179,13 @@ class CollectionTest extends TestCase
 	public function testGetAttributeFromObjectAllowsAccessibleField(): void
 	{
 		$users = Users::factory([
-			['email' => 'test@getkirby.com']
+			['email' => 'test@infinri.com']
 		]);
 
 		$user = $users->first();
 
 		// email() has no #[BlockCollectionAccess] - must be allowed
-		$this->assertSame('test@getkirby.com', $users->getAttribute($user, 'email'));
+		$this->assertSame('test@infinri.com', $users->getAttribute($user, 'email'));
 	}
 
 	public function testGetAttributeFromObjectBlockedInDebugMode(): void
@@ -196,7 +196,7 @@ class CollectionTest extends TestCase
 		]);
 
 		$users = Users::factory([
-			['email' => 'test@getkirby.com', 'password' => 'supersecret']
+			['email' => 'test@infinri.com', 'password' => 'supersecret']
 		]);
 
 		$user = $users->first();
@@ -220,11 +220,11 @@ class CollectionTest extends TestCase
 	{
 		$users = Users::factory([
 			[
-				'email'    => 'a@getkirby.com',
+				'email'    => 'a@infinri.com',
 				'password' => '$2y$10$abcdefghijklmnopqrstuvwxyABCDEFGHIJKLMNOPQRSTUVWXYZ01234'
 			],
 			[
-				'email'    => 'b@getkirby.com',
+				'email'    => 'b@infinri.com',
 				'password' => '$2y$10$zzzzzzzzzzzzzzzzzzzzzzzzABCDEFGHIJKLMNOPQRSTUVWXYZ01234'
 			]
 		]);

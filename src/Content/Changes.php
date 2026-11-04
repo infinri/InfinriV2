@@ -12,11 +12,11 @@ use Infinri\Toolkit\A;
 
 class Changes
 {
-	protected App $kirby;
+	protected App $infinri;
 
 	public function __construct()
 	{
-		$this->kirby = App::instance();
+		$this->infinri = App::instance();
 	}
 
 	/**
@@ -24,7 +24,7 @@ class Changes
 	 */
 	public function cache(): Cache
 	{
-		return $this->kirby->cache('changes');
+		return $this->infinri->cache('changes');
 	}
 
 	/**
@@ -71,7 +71,7 @@ class Changes
 		$files = new Files([]);
 
 		foreach ($this->read('files') as $id) {
-			if ($file = $this->kirby->file($id)) {
+			if ($file = $this->infinri->file($id)) {
 				$files->add($file);
 			}
 		}
@@ -90,7 +90,7 @@ class Changes
 			'users' => []
 		];
 
-		foreach ($this->kirby->models() as $model) {
+		foreach ($this->infinri->models() as $model) {
 			if ($model->version('changes')->exists('*') === true) {
 				$models[$this->cacheKey($model)][] = (string)($model->uuid() ?? $model->id());
 			}
@@ -113,7 +113,7 @@ class Changes
 		 * data is empty so that `$site->find()` always
 		 * returns a collection, not a single page
 		 */
-		$pages = $this->kirby->site()->find(
+		$pages = $this->infinri->site()->find(
 			false,
 			false,
 			...$this->read('pages')
@@ -184,7 +184,7 @@ class Changes
 		 * data is empty so that `$users->find()` always
 		 * returns a collection, not a single user
 		 */
-		$users = $this->kirby->users()->find(
+		$users = $this->infinri->users()->find(
 			false,
 			false,
 			...$this->read('users')

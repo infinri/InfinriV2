@@ -197,7 +197,7 @@ class PagePicker extends Picker
 			return $this->parent;
 		}
 
-		$page = $this->kirby->page($this->options['parent']);
+		$page = $this->infinri->page($this->options['parent']);
 
 		if ($page?->isAccessible() === true) {
 			return $this->parent = $page;

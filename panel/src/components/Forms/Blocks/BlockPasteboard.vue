@@ -13,7 +13,7 @@
 		<!-- eslint-disable vue/no-v-html -->
 		<label
 			for="pasteboard"
-			v-html="$t('field.blocks.fieldsets.paste', { shortcut })"
+			v-html="$panel.t('field.blocks.fieldsets.paste', { shortcut })"
 		/>
 		<!-- eslint-enable -->
 		<textarea id="pasteboard" @paste.prevent="paste" />
@@ -46,7 +46,7 @@ export default {
 	display: block;
 	padding: var(--spacing-6) var(--spacing-6) 0;
 	color: var(--color-text-dimmed);
-	line-height: var(--leading-normal);
+	line-height: 1.5;
 }
 .k-block-importer label small {
 	display: block;

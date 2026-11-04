@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(FilePermissions::class)]
 class FilesSectionTemplateChangeTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FilesSectionTemplateChange';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FilesSectionTemplateChange';
 
 	protected function setUp(): void
 	{

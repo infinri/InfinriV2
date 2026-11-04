@@ -7,10 +7,9 @@
  * into a PHP array.  It currently supports a very limited subsection of
  * the YAML spec.
  *
- * @version 0.6.4 (Kirby fork for PHP 8.5+)
+ * @version 0.6.4 (patched fork for PHP 8.5+)
  * @author Vlad Andersen <vlad.andersen@gmail.com>
  * @author Chris Wanstrath <chris@ozmm.org>
- * @link https://github.com/mustangostang/spyc/
  * @copyright Copyright 2005-2006 Chris Wanstrath, 2006-2011 Vlad Andersen
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  * @package Spyc

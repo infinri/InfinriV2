@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(LanguageVariable::class)]
 class LanguageVariableTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.LanguageVariable';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.LanguageVariable';
 
 	protected function setUp(): void
 	{
@@ -37,9 +37,9 @@ class LanguageVariableTest extends TestCase
 
 	public function testCreate(): void
 	{
-		// impersonate kirby to make sure the translation
+		// impersonate infinri to make sure the translation
 		// is created in the default language
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$variable = LanguageVariable::create('foo', 'bar');
 		$this->assertSame('bar', $variable->value());
@@ -47,9 +47,9 @@ class LanguageVariableTest extends TestCase
 
 	public function testCreateWithMultipleValues(): void
 	{
-		// impersonate kirby to make sure the translation
+		// impersonate infinri to make sure the translation
 		// is created in the default language
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$variable = LanguageVariable::create('foo', ['bar', 'baz']);
 		$this->assertSame(['bar', 'baz'], $variable->value());
@@ -73,7 +73,7 @@ class LanguageVariableTest extends TestCase
 
 	public function testCreateWithDuplicateKey(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectException(DuplicateException::class);
 		$this->expectExceptionMessage('A variable for "foo" already exists');
@@ -84,7 +84,7 @@ class LanguageVariableTest extends TestCase
 
 	public function testCreateWithCoreKey(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$this->expectException(DuplicateException::class);
 		$this->expectExceptionMessage('"date" is one of Infinri\'s own translation strings and cannot be overwritten by a language variable');
@@ -94,7 +94,7 @@ class LanguageVariableTest extends TestCase
 
 	public function testDelete(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$variable = LanguageVariable::create('foo', 'bar');
 		$this->assertTrue($variable->exists());
@@ -104,7 +104,7 @@ class LanguageVariableTest extends TestCase
 
 	public function testExists(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$variable = new LanguageVariable($this->app->defaultLanguage(), 'foo');
 		$this->assertFalse($variable->exists());
@@ -115,9 +115,9 @@ class LanguageVariableTest extends TestCase
 
 	public function testHasMultipleValues(): void
 	{
-		// impersonate kirby to make sure the translation
+		// impersonate infinri to make sure the translation
 		// is created in the default language
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$variable = LanguageVariable::create('foo', 'bar');
 		$this->assertFalse($variable->hasMultipleValues());
@@ -142,8 +142,8 @@ class LanguageVariableTest extends TestCase
 
 	public function testUpdate(): void
 	{
-		// impersonate kirby to allow updating the variable
-		$this->app->impersonate('kirby');
+		// impersonate infinri to allow updating the variable
+		$this->app->impersonate('infinri');
 
 		$variable = LanguageVariable::create('foo', 'bar');
 		$this->assertSame('bar', $variable->value());

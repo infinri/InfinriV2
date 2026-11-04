@@ -9,7 +9,7 @@ use Infinri\TestCase;
 
 class LanguagesTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.Languages';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.Languages';
 
 	protected Languages $languages;
 
@@ -174,7 +174,7 @@ class LanguagesTest extends TestCase
 
 	public function testCreate(): void
 	{
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$language = $this->app->languages()->create([
 			'code' => 'tr'

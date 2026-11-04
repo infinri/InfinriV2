@@ -14,14 +14,14 @@
 	},
 	"urls": {
 		"invalid constraint": {
-			"changes": "https://getkirby.com/releases/{{ version }}",
+			"changes": "https://infinri.com/releases/{{ version }}",
 			"download": "https://repoofthefuture.com/{{ version }}.zip",
-			"upgrade": "https://getkirby.com/releases/88888"
+			"upgrade": "https://infinri.com/releases/88888"
 		},
 		"*": {
-			"changes": "https://getkirby.com/old-releases/{{ version }}",
+			"changes": "https://infinri.com/old-releases/{{ version }}",
 			"download": "https://repoofthepast.com/{{ version }}.zip",
-			"upgrade": "https://getkirby.com/releases/88888"
+			"upgrade": "https://infinri.com/releases/88888"
 		}
 	},
 	"php": {},

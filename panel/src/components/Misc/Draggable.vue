@@ -15,7 +15,7 @@
 
 /**
  * The Draggable component implements the widespread
- * [Sortable.js](https://github.com/RubaXa/Sortable) library.
+ * Sortable.js library.
  *
  * @example
  * <k-draggable>

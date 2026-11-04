@@ -13,7 +13,7 @@ class ToggleFieldTest extends TestCase
 		$this->assertSame('toggle', $field->type());
 		$this->assertSame('toggle', $field->name());
 		$this->assertFalse($field->value());
-		$this->assertTrue($field->save());
+		$this->assertTrue($field->hasValue());
 	}
 
 	public function testEmptyValue(): void

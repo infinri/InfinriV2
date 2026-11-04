@@ -89,8 +89,6 @@ class Date extends DateTime implements Stringable
 	/**
 	 * Returns the first day of the week (0 = Sunday ... 6 = Saturday)
 	 * for the given locale (or as defined via config option)
-	 *
-	 * @since 4.5.0
 	 */
 	public static function firstWeekday(string $locale): int
 	{
@@ -384,7 +382,6 @@ class Date extends DateTime implements Stringable
 	/**
 	 * Rounds the minutes of the given date
 	 * by the defined step
-	 * @since 3.7.0
 	 *
 	 * @param int|array|null $step array of `unit` and `size` to round to nearest
 	 */

@@ -16,13 +16,13 @@
 		<k-header
 			:editable="canChangeName"
 			class="k-user-view-header"
-			@edit="$dialog(api + '/changeName')"
+			@edit="$panel.dialog.open(api + '/changeName')"
 		>
 			<span
 				v-if="!name || name.length === 0"
 				class="k-header-title-placeholder k-user-name-placeholder"
 			>
-				{{ $t("name") }} …
+				{{ $panel.t("name") }} …
 			</span>
 			<template v-else>
 				{{ name }}
@@ -64,7 +64,7 @@
 		<k-sections
 			:blueprint="blueprint"
 			:content="content"
-			:empty="$t('user.blueprint', { blueprint: $esc(blueprint) })"
+			:empty="$panel.t('user.blueprint', { blueprint: $esc(blueprint) })"
 			:lock="lock"
 			:parent="api"
 			:tab="tab"

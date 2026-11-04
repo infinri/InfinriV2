@@ -34,7 +34,6 @@ export type HsvColor = { h: number; s: number; v: number; a?: number };
 
 /**
  * Converts a color into another color space
- * @since 4.0.0
  */
 export function convert(color: Color, format: ColorFormat): Color {
 	if (isHex(color) === true) {
@@ -101,7 +100,6 @@ export function convert(color: Color, format: ColorFormat): Color {
 
 /**
  * Tries to parse a string as HEX, RGB or HSL color
- * @since 4.0.0
  */
 export function parse(string: string): Color | null | false {
 	let values;
@@ -168,7 +166,6 @@ export function parse(string: string): Color | null | false {
 /**
  * Parses the input string and coverts it
  * (if necessary) to the target color space
- * @since 4.0.0
  */
 export function parseAs(
 	string: string,
@@ -185,7 +182,6 @@ export function parseAs(
 
 /**
  * Formats color as CSS string
- * @since 4.0.0
  */
 export function toString(
 	color: Color,

@@ -11,7 +11,7 @@ use Infinri\Http\Request\Auth\BasicAuth;
 class AppUsersTest extends TestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures';
-	public const TMP      = KIRBY_TMP_DIR . '/Cms.AppUsers';
+	public const TMP      = INFINRI_TMP_DIR . '/Cms.AppUsers';
 
 	protected function setUp(): void
 	{
@@ -36,13 +36,13 @@ class AppUsersTest extends TestCase
 			]
 		]);
 
-		// impersonate as kirby
-		$user = $app->impersonate('kirby');
+		// impersonate as infinri
+		$user = $app->impersonate('infinri');
 		$this->assertIsUser($user, $app->user());
-		$this->assertIsUser('kirby', $user);
-		$this->assertSame('kirby@getkirby.com', $user->email());
+		$this->assertIsUser('infinri', $user);
+		$this->assertSame('infinri@infinri.com', $user->email());
 		$this->assertSame('admin', $user->role()->name());
-		$this->assertTrue($user->isKirby());
+		$this->assertTrue($user->isInfinri());
 		$this->assertNull($app->user(null, false));
 
 		// impersonate as existing user
@@ -57,7 +57,7 @@ class AppUsersTest extends TestCase
 		// impersonate as nobody
 		$user = $app->impersonate('nobody');
 		$this->assertIsUser('nobody', $user);
-		$this->assertSame('nobody@getkirby.com', $user->email());
+		$this->assertSame('nobody@infinri.com', $user->email());
 		$this->assertSame('nobody', $user->role()->name());
 		$this->assertTrue($user->isNobody());
 		$this->assertIsUser($user, $app->user());
@@ -82,7 +82,7 @@ class AppUsersTest extends TestCase
 		$this->assertNull($app->user(null, false));
 
 		// with Exception in the callback
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$caught = false;
 		try {
 			$app->impersonate('homer@simpsons.com', function ($user) use ($app, $self) {
@@ -98,7 +98,7 @@ class AppUsersTest extends TestCase
 			$this->assertSame('Something bad happened', $e->getMessage());
 
 			// the previous user should be restored
-			$this->assertSame('kirby@getkirby.com', $app->user()->email());
+			$this->assertSame('infinri@infinri.com', $app->user()->email());
 			$this->assertNull($app->user(null, false));
 		}
 		$this->assertTrue($caught);
@@ -163,13 +163,13 @@ class AppUsersTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'user@getkirby.com',
+					'email' => 'user@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$app->auth()->setUser($app->user('user@getkirby.com'));
+		$app->auth()->setUser($app->user('user@infinri.com'));
 
 		$this->assertSame('editor', $app->role()->name());
 		$this->assertSame('editor', $app->role(null, false)->name());
@@ -186,13 +186,13 @@ class AppUsersTest extends TestCase
 			],
 			'users' => [
 				[
-					'email' => 'user@getkirby.com',
+					'email' => 'user@infinri.com',
 					'role'  => 'editor'
 				]
 			]
 		]);
 
-		$app->impersonate('user@getkirby.com');
+		$app->impersonate('user@infinri.com');
 
 		$this->assertSame('editor', $app->role()->name());
 		$this->assertNull($app->role(null, false));
@@ -207,7 +207,7 @@ class AppUsersTest extends TestCase
 		]);
 
 		$this->assertCount(1, $app->users());
-		$this->assertSame('user@getkirby.com', $app->users()->first()->email());
+		$this->assertSame('user@infinri.com', $app->users()->first()->email());
 	}
 
 	public function testUsersSet(): void
@@ -215,13 +215,13 @@ class AppUsersTest extends TestCase
 		$app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'user@getkirby.com'
+					'email' => 'user@infinri.com'
 				]
 			]
 		]);
 
 		$this->assertCount(1, $app->users());
-		$this->assertSame('user@getkirby.com', $app->users()->first()->email());
+		$this->assertSame('user@infinri.com', $app->users()->first()->email());
 	}
 
 	public function basicAuthApp()
@@ -234,12 +234,12 @@ class AppUsersTest extends TestCase
 			],
 			'users' => [
 				[
-					'email'    => 'test@getkirby.com',
+					'email'    => 'test@infinri.com',
 					'password' => User::hashPassword('correct-horse-battery-staple')
 				]
 			],
 			'request' => [
-				'url' => 'https://getkirby.com/login'
+				'url' => 'https://infinri.com/login'
 			]
 		]);
 	}
@@ -247,11 +247,11 @@ class AppUsersTest extends TestCase
 	public function testUserFromBasicAuth(): void
 	{
 		$app  = $this->basicAuthApp();
-		$auth = new BasicAuth(base64_encode('test@getkirby.com:correct-horse-battery-staple'));
+		$auth = new BasicAuth(base64_encode('test@infinri.com:correct-horse-battery-staple'));
 		$user = $app->auth()->currentUserFromBasicAuth($auth);
 
 		$this->assertIsUser($user);
-		$this->assertSame('test@getkirby.com', $user->email());
+		$this->assertSame('test@infinri.com', $user->email());
 	}
 
 	public function testUserFromBasicAuthDisabled(): void
@@ -267,7 +267,7 @@ class AppUsersTest extends TestCase
 			]
 		]);
 
-		$auth = new BasicAuth(base64_encode('test@getkirby.com:correct-horse-battery-staple'));
+		$auth = new BasicAuth(base64_encode('test@infinri.com:correct-horse-battery-staple'));
 		$user = $app->auth()->currentUserFromBasicAuth($auth);
 	}
 
@@ -278,11 +278,11 @@ class AppUsersTest extends TestCase
 
 		$app = $this->basicAuthApp()->clone([
 			'request' => [
-				'url' => 'http://getkirby.com/login'
+				'url' => 'http://infinri.com/login'
 			]
 		]);
 
-		$auth = new BasicAuth(base64_encode('test@getkirby.com:correct-horse-battery-staple'));
+		$auth = new BasicAuth(base64_encode('test@infinri.com:correct-horse-battery-staple'));
 		$user = $app->auth()->currentUserFromBasicAuth($auth);
 	}
 
@@ -293,7 +293,7 @@ class AppUsersTest extends TestCase
 
 		$app = $this->basicAuthApp()->clone([
 			'request' => [
-				'url' => 'http://getkirby.com/login'
+				'url' => 'http://infinri.com/login'
 			]
 		]);
 

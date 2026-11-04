@@ -10,12 +10,9 @@ class Slot
 	public function __construct(
 		public string $name,
 		public string|null $description = null,
-		public string|null $deprecated = null,
-		public string|null $since = null,
 		public array $bindings = [],
 	) {
 		$this->description = Doc::kt($this->description ?? '');
-		$this->deprecated  = Doc::kt($this->deprecated ?? '');
 	}
 
 	public static function factory(array $data): static
@@ -23,8 +20,6 @@ class Slot
 		return new static(
 			name:        $data['name'],
 			description: $data['description'] ?? null,
-			deprecated:  $data['tags']['deprecated'][0]['description'] ?? null,
-			since:       $data['tags']['since'][0]['description'] ?? null,
 			bindings:    A::map(
 				$data['bindings'] ?? [],
 				fn ($binding) => Argument::factory($binding)
@@ -38,8 +33,6 @@ class Slot
 			'name'        => $this->name,
 			'bindings'    => $this->bindings,
 			'description' => $this->description,
-			'deprecated'  => $this->deprecated,
-			'since'       => $this->since,
 		];
 	}
 }

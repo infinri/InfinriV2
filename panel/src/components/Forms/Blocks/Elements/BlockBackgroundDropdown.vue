@@ -13,15 +13,15 @@
 			align-x="end"
 			:options="[
 				{
-					text: $t('field.blocks.figure.back.plain'),
+					text: $panel.t('field.blocks.figure.back.plain'),
 					click: 'var(--block-color-back)'
 				},
 				{
-					text: $t('field.blocks.figure.back.pattern.light'),
+					text: $panel.t('field.blocks.figure.back.pattern.light'),
 					click: 'var(--pattern-light)'
 				},
 				{
-					text: $t('field.blocks.figure.back.pattern.dark'),
+					text: $panel.t('field.blocks.figure.back.pattern.dark'),
 					click: 'var(--pattern)'
 				}
 			]"

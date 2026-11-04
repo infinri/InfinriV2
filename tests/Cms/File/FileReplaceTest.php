@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 class FileReplaceTest extends ModelTestCase
 {
 	public const FIXTURES = __DIR__ . '/fixtures/files';
-	public const TMP = KIRBY_TMP_DIR . '/Cms.FileReplace';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.FileReplace';
 
 	public function testReplace(): void
 	{
@@ -144,7 +144,7 @@ class FileReplaceTest extends ModelTestCase
 			]
 		]);
 
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		// create the dummy source
 		F::write($source = static::TMP . '/replace.csv', 'Replace');

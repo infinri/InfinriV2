@@ -4,7 +4,7 @@
 			<k-image-file-preview
 				:details="details"
 				:image="image"
-				url="https://getkirby.com"
+				url="https://infinri.com"
 				class="k-file-preview"
 			/>
 		</k-lab-example>
@@ -15,7 +15,7 @@
 					...image,
 					src: 'https://picsum.photos/800/1200'
 				}"
-				url="https://getkirby.com"
+				url="https://infinri.com"
 				class="k-file-preview"
 			/>
 		</k-lab-example>
@@ -26,7 +26,7 @@
 					...image,
 					src: 'https://picsum.photos/800/800'
 				}"
-				url="https://getkirby.com"
+				url="https://infinri.com"
 				class="k-file-preview"
 			/>
 		</k-lab-example>
@@ -38,7 +38,7 @@
 					...image,
 					src: 'https://picsum.photos/800/800'
 				}"
-				url="https://getkirby.com"
+				url="https://infinri.com"
 				class="k-file-preview"
 			/>
 		</k-lab-example>
@@ -52,7 +52,7 @@ export default {
 			return [
 				{ title: "Template", text: "custom-image" },
 				{ title: "Mime", text: "image/jpeg" },
-				{ title: "URL", text: "some-image.jpg", link: "https://getkirby.com" },
+				{ title: "URL", text: "some-image.jpg", link: "https://infinri.com" },
 				{ title: "Size", text: "1.2 MB" },
 				{ title: "Dimensions", text: "1220 × 800" },
 				{ title: "Orientation", text: "square" }

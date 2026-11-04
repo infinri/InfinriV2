@@ -1,5 +1,5 @@
 /**
- * Taken from: https://github.com/atlassian/prosemirror-utils
+ * Taken from: prosemirror-utils
  *
  * :: ($pos: ResolvedPos, predicate: (node: ProseMirrorNode) → boolean) → ?{pos: number, start: number, depth: number, node: ProseMirrorNode}
  * Iterates over parent nodes starting from the given `$pos`, returning the closest node and its start position `predicate` returns truthy for. `start` points to the start position of the node, `pos` points directly before the node.

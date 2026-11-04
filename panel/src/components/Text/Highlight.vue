@@ -15,7 +15,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{"class-name":[Prism.l
 Prism.manual = true;
 
 /**
- * @since 4.0.0
  * @unstable
  */
 export default {
@@ -66,7 +65,7 @@ export default {
 .token.this,
 .token.selector,
 .token.key,
-.token.kirbytag-bracket,
+.token.infinritag-bracket,
 .token.prolog,
 .token.delimiter {
 	color: var(--highlight-variable);
@@ -76,8 +75,8 @@ export default {
 .token.boolean,
 .token.boolean.important,
 .token.attr-name,
-.token.kirbytag-attr,
-.token.kirbytag-name,
+.token.infinritag-attr,
+.token.infinritag-name,
 .token.entity,
 .token.bold,
 .token.bold > .punctuation {
@@ -108,7 +107,7 @@ export default {
 	color: var(--highlight-scope);
 }
 .token.title,
-.token.kirbytag-bracket,
+.token.infinritag-bracket,
 .token.list.punctuation,
 .token.bold {
 	font-weight: var(--font-bold);

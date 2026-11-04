@@ -10,17 +10,17 @@ use Infinri\Form\Field;
 
 class FilePickerMixinTest extends TestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Form.Fields.FilePickerMixin';
+	public const TMP = INFINRI_TMP_DIR . '/Form.Fields.FilePickerMixin';
 
 	protected function setUp(): void
 	{
-		$kirby = new App([
+		$infinri = new App([
 			'roots' => [
 				'index' => static::TMP
 			]
 		]);
 
-		$kirby->impersonate('kirby');
+		$infinri->impersonate('infinri');
 	}
 
 	protected function tearDown(): void
@@ -104,7 +104,7 @@ class FilePickerMixinTest extends TestCase
 		];
 
 		$user = new User([
-			'email' => 'test@getkirby.com',
+			'email' => 'test@infinri.com',
 			'files' => [
 				['filename' => 'a.jpg'],
 				['filename' => 'b.jpg'],

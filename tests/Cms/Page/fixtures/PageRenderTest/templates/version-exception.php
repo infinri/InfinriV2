@@ -10,4 +10,4 @@ if (VersionId::$render?->value() !== 'changes') {
 }
 
 // this one is expected and used in the test
-throw new Exception('Something went wrong');
+throw new Exception(message: 'Something went wrong');

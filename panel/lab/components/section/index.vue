@@ -6,7 +6,7 @@
 			</k-section>
 		</k-lab-example>
 		<k-lab-example label="Label with link">
-			<k-section label="Label" link="https://getkirby.com">
+			<k-section label="Label" link="https://infinri.com">
 				<p>Nice Section</p>
 			</k-section>
 		</k-lab-example>

@@ -28,15 +28,15 @@ class CookieTest extends TestCase
 
 	public function testKey(): void
 	{
-		$this->assertSame('KirbyHttpCookieKey', Cookie::$key);
-		Cookie::$key = 'KirbyToolkitCookieKey';
-		$this->assertSame('KirbyToolkitCookieKey', Cookie::$key);
+		$this->assertSame('InfinriHttpCookieKey', Cookie::$key);
+		Cookie::$key = 'InfinriToolkitCookieKey';
+		$this->assertSame('InfinriToolkitCookieKey', Cookie::$key);
 	}
 
 	public function testKeyFromAppOption(): void
 	{
 		Cookie::set('foo', 'bar');
-		$this->assertSame('171fb1229817374e4110110384cb6be060d97351+bar', $_COOKIE['foo']);
+		$this->assertSame('d026bf2d530669ff634253a5a78787ea32ba6301+bar', $_COOKIE['foo']);
 
 		new App([
 			'roots' => [
@@ -63,13 +63,13 @@ class CookieTest extends TestCase
 	public function testSet(): void
 	{
 		Cookie::set('foo', 'bar');
-		$this->assertSame('171fb1229817374e4110110384cb6be060d97351+bar', $_COOKIE['foo']);
+		$this->assertSame('d026bf2d530669ff634253a5a78787ea32ba6301+bar', $_COOKIE['foo']);
 	}
 
 	public function testForever(): void
 	{
 		Cookie::forever('forever', 'bar');
-		$this->assertSame('171fb1229817374e4110110384cb6be060d97351+bar', $_COOKIE['forever']);
+		$this->assertSame('d026bf2d530669ff634253a5a78787ea32ba6301+bar', $_COOKIE['forever']);
 		$this->assertTrue(Cookie::exists('forever'));
 	}
 
@@ -118,29 +118,29 @@ class CookieTest extends TestCase
 	public function testParse(): void
 	{
 		// valid
-		$_COOKIE['foo'] = '171fb1229817374e4110110384cb6be060d97351+bar';
+		$_COOKIE['foo'] = 'd026bf2d530669ff634253a5a78787ea32ba6301+bar';
 		$this->assertSame('bar', Cookie::get('foo'));
 
 		// no value
-		$_COOKIE['foo'] = '11d325720298d99f538012e590502154905b56e1+';
+		$_COOKIE['foo'] = '4bbc74219f55dfec50ce984777742ee8c3b48e5f+';
 		$this->assertSame('', Cookie::get('foo'));
-		$_COOKIE['foo'] = '171fb1229817374e4110110384cb6be060d97351+bar';
+		$_COOKIE['foo'] = 'd026bf2d530669ff634253a5a78787ea32ba6301+bar';
 		$this->assertSame('bar', Cookie::get('foo'));
 
 		// value with a plus sign
-		$_COOKIE['foo'] = '04c23eb787bda27a65843cf7e474be5eb77f4807+bar+baz';
+		$_COOKIE['foo'] = 'f092351528a5044696c0faf64da08a34556ed81c+bar+baz';
 		$this->assertSame('bar+baz', Cookie::get('foo'));
 
 		// separator missing
-		$_COOKIE['foo'] = '171fb1229817374e4110110384cb6be060d97351';
+		$_COOKIE['foo'] = 'd026bf2d530669ff634253a5a78787ea32ba6301';
 		$this->assertNull(Cookie::get('foo'));
-		$_COOKIE['foo'] = '171fb1229817374e4110110384cb6be060d97351+bar';
+		$_COOKIE['foo'] = 'd026bf2d530669ff634253a5a78787ea32ba6301+bar';
 		$this->assertSame('bar', Cookie::get('foo'));
 
 		// no hash
 		$_COOKIE['foo'] = '+bar';
 		$this->assertNull(Cookie::get('foo'));
-		$_COOKIE['foo'] = '171fb1229817374e4110110384cb6be060d97351+bar';
+		$_COOKIE['foo'] = 'd026bf2d530669ff634253a5a78787ea32ba6301+bar';
 		$this->assertSame('bar', Cookie::get('foo'));
 
 		// wrong hash

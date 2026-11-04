@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserDeleteTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserDelete';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserDelete';
 
 	protected function setUp(): void
 	{
@@ -16,11 +16,11 @@ class UserDeleteTest extends ModelTestCase
 		$this->app = $this->app->clone([
 			'users' => [
 				[
-					'email' => 'admin@getkirby.com',
+					'email' => 'admin@infinri.com',
 					'role'  => 'admin'
 				]
 			],
-			'user' => 'admin@getkirby.com'
+			'user' => 'admin@infinri.com'
 		]);
 	}
 
@@ -86,7 +86,7 @@ class UserDeleteTest extends ModelTestCase
 		]);
 
 		// we need to authenticate again after the app has been cloned
-		$this->app->impersonate('kirby');
+		$this->app->impersonate('infinri');
 
 		$user        = User::create(['email' => 'editor@domain.com']);
 		$uuid        = $user->uuid()->id();

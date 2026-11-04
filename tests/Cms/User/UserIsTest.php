@@ -7,7 +7,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 #[CoversClass(User::class)]
 class UserIsTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.UserIs';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.UserIs';
 
 	public function testIsAccessibleUsersUser()
 	{
@@ -46,44 +46,44 @@ class UserIsTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor-global@getkirby.com',
+					'email' => 'editor-global@infinri.com',
 					'role'  => 'editor-global'
 				],
 				[
-					'email' => 'editor-own@getkirby.com',
+					'email' => 'editor-own@infinri.com',
 					'role'  => 'editor-own'
 				],
 				[
-					'email' => 'editor-both@getkirby.com',
+					'email' => 'editor-both@infinri.com',
 					'role'  => 'editor-both'
 				]
 			],
 		]);
 
-		$userGlobal = $app->user('editor-global@getkirby.com');
-		$userOwn    = $app->user('editor-own@getkirby.com');
-		$userBoth   = $app->user('editor-both@getkirby.com');
+		$userGlobal = $app->user('editor-global@infinri.com');
+		$userOwn    = $app->user('editor-own@infinri.com');
+		$userBoth   = $app->user('editor-both@infinri.com');
 
 		// user with only `users.access` disabled can access themselves
-		$app->impersonate('editor-global@getkirby.com');
+		$app->impersonate('editor-global@infinri.com');
 		$this->assertTrue($userGlobal->isAccessible());
 		$this->assertFalse($userOwn->isAccessible());
 		$this->assertFalse($userBoth->isAccessible());
 
 		// users with only `user.access` disabled can access everyone else
-		$app->impersonate('editor-own@getkirby.com');
+		$app->impersonate('editor-own@infinri.com');
 		$this->assertTrue($userGlobal->isAccessible());
 		$this->assertFalse($userOwn->isAccessible());
 		$this->assertTrue($userBoth->isAccessible());
 
 		// users with both disabled can't access anything
-		$app->impersonate('editor-both@getkirby.com');
+		$app->impersonate('editor-both@infinri.com');
 		$this->assertFalse($userGlobal->isAccessible());
 		$this->assertFalse($userOwn->isAccessible());
 		$this->assertFalse($userBoth->isAccessible());
 
-		// almighty Kirby user can access everything
-		$app->impersonate('kirby');
+		// almighty Infinri user can access everything
+		$app->impersonate('infinri');
 		$this->assertTrue($userGlobal->isAccessible());
 		$this->assertTrue($userOwn->isAccessible());
 		$this->assertTrue($userBoth->isAccessible());
@@ -110,26 +110,26 @@ class UserIsTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				],
 				[
-					'email' => 'editor-other@getkirby.com',
+					'email' => 'editor-other@infinri.com',
 					'role'  => 'editor-other'
 				]
 			],
 		]);
 
-		$user      = $app->user('editor@getkirby.com');
-		$userOther = $app->user('editor-other@getkirby.com');
+		$user      = $app->user('editor@infinri.com');
+		$userOther = $app->user('editor-other@infinri.com');
 
 		// no access to role that has the option disabled
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$this->assertTrue($user->isAccessible());
 		$this->assertFalse($userOther->isAccessible());
 
-		// almighty Kirby user can access everything
-		$app->impersonate('kirby');
+		// almighty Infinri user can access everything
+		$app->impersonate('infinri');
 		$this->assertTrue($user->isAccessible());
 		$this->assertTrue($userOther->isAccessible());
 	}
@@ -171,44 +171,44 @@ class UserIsTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor-global@getkirby.com',
+					'email' => 'editor-global@infinri.com',
 					'role'  => 'editor-global'
 				],
 				[
-					'email' => 'editor-own@getkirby.com',
+					'email' => 'editor-own@infinri.com',
 					'role'  => 'editor-own'
 				],
 				[
-					'email' => 'editor-both@getkirby.com',
+					'email' => 'editor-both@infinri.com',
 					'role'  => 'editor-both'
 				]
 			],
 		]);
 
-		$userGlobal = $app->user('editor-global@getkirby.com');
-		$userOwn    = $app->user('editor-own@getkirby.com');
-		$userBoth   = $app->user('editor-both@getkirby.com');
+		$userGlobal = $app->user('editor-global@infinri.com');
+		$userOwn    = $app->user('editor-own@infinri.com');
+		$userBoth   = $app->user('editor-both@infinri.com');
 
 		// user with only `users.list` disabled can list themselves
-		$app->impersonate('editor-global@getkirby.com');
+		$app->impersonate('editor-global@infinri.com');
 		$this->assertTrue($userGlobal->isListable());
 		$this->assertFalse($userOwn->isListable());
 		$this->assertFalse($userBoth->isListable());
 
 		// users with only `user.list` disabled can list everyone else
-		$app->impersonate('editor-own@getkirby.com');
+		$app->impersonate('editor-own@infinri.com');
 		$this->assertTrue($userGlobal->isListable());
 		$this->assertFalse($userOwn->isListable());
 		$this->assertTrue($userBoth->isListable());
 
 		// users with both disabled can't list anything
-		$app->impersonate('editor-both@getkirby.com');
+		$app->impersonate('editor-both@infinri.com');
 		$this->assertFalse($userGlobal->isListable());
 		$this->assertFalse($userOwn->isListable());
 		$this->assertFalse($userBoth->isListable());
 
-		// almighty Kirby user can list everything
-		$app->impersonate('kirby');
+		// almighty Infinri user can list everything
+		$app->impersonate('infinri');
 		$this->assertTrue($userGlobal->isListable());
 		$this->assertTrue($userOwn->isListable());
 		$this->assertTrue($userBoth->isListable());
@@ -235,26 +235,26 @@ class UserIsTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor@getkirby.com',
+					'email' => 'editor@infinri.com',
 					'role'  => 'editor'
 				],
 				[
-					'email' => 'editor-other@getkirby.com',
+					'email' => 'editor-other@infinri.com',
 					'role'  => 'editor-other'
 				]
 			],
 		]);
 
-		$user      = $app->user('editor@getkirby.com');
-		$userOther = $app->user('editor-other@getkirby.com');
+		$user      = $app->user('editor@infinri.com');
+		$userOther = $app->user('editor-other@infinri.com');
 
 		// no access to role that has the option disabled
-		$app->impersonate('editor@getkirby.com');
+		$app->impersonate('editor@infinri.com');
 		$this->assertTrue($user->isListable());
 		$this->assertFalse($userOther->isListable());
 
-		// almighty Kirby user can access everything
-		$app->impersonate('kirby');
+		// almighty Infinri user can access everything
+		$app->impersonate('infinri');
 		$this->assertTrue($user->isListable());
 		$this->assertTrue($userOther->isListable());
 	}
@@ -280,18 +280,18 @@ class UserIsTest extends ModelTestCase
 			],
 			'users' => [
 				[
-					'email' => 'editor-both@getkirby.com',
+					'email' => 'editor-both@infinri.com',
 					'role'  => 'editor-both'
 				]
 			],
 		]);
 
-		$user = $app->user('editor-both@getkirby.com');
+		$user = $app->user('editor-both@infinri.com');
 
-		$app->impersonate('editor-both@getkirby.com');
+		$app->impersonate('editor-both@infinri.com');
 		$this->assertFalse($user->isListable());
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 		$this->assertTrue($user->isListable());
 	}
 }

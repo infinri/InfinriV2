@@ -7,7 +7,7 @@
 	>
 		<k-empty
 			v-if="!options?.length"
-			:text="$t('options.none')"
+			:text="$panel.t('options.none')"
 			icon="checklist"
 		/>
 		<k-input

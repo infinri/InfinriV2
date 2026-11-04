@@ -8,7 +8,7 @@ use ReflectionClass;
 #[CoversClass(Page::class)]
 class PageCommitTest extends ModelTestCase
 {
-	public const TMP = KIRBY_TMP_DIR . '/Cms.PageCommit';
+	public const TMP = INFINRI_TMP_DIR . '/Cms.PageCommit';
 
 	public function testCommit(): void
 	{
@@ -53,7 +53,7 @@ class PageCommitTest extends ModelTestCase
 			]
 		]);
 
-		$app->impersonate('kirby');
+		$app->impersonate('infinri');
 
 		$page   = new Page(['slug' => 'original']);
 		$class  = new ReflectionClass($page);
