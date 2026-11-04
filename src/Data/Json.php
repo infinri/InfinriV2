@@ -4,15 +4,6 @@ namespace Kirby\Data;
 
 use Kirby\Exception\InvalidArgumentException;
 
-/**
- * Simple Wrapper around json_encode and json_decode
- *
- * @package   Kirby Data
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Json extends Handler
 {
 	/**

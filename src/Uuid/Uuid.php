@@ -16,35 +16,6 @@ use Kirby\Exception\NotFoundException;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use Stringable;
-
-/**
- * The `Uuid` classes provide an interface to connect
- * identifiable models (page, file, site, user, blocks,
- * structure entries) with a dedicated UUID string.
- * It also provides methods to cache these connections
- * for faster lookup.
- *
- * ```php
- * // get UUID string
- * $model->uuid()->toString();
- *
- * // get model from an UUID string
- * Uuid::for('page://HhX1YtRR2ImG6h4')->model();
- *
- * // cache actions
- * $model->uuid()->populate();
- * $model->uuid()->clear();
- * ```
- * @since 3.8.0
- *
- * @package   Kirby Uuid
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @template TModel of \Kirby\Uuid\Identifiable
- */
 abstract class Uuid implements Stringable
 {
 	protected const TYPE = 'uuid';

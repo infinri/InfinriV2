@@ -6,18 +6,6 @@ use Generator;
 use Kirby\Cms\App;
 use Kirby\Cms\Page;
 
-/**
- * UUID for $page
- *
- * @package   Kirby Uuid
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     3.8.0
- *
- * @extends \Kirby\Uuid\ModelUuid<\Kirby\Cms\Page>
- */
 class PageUuid extends ModelUuid
 {
 	protected const TYPE = 'page';

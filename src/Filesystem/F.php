@@ -11,18 +11,6 @@ use Kirby\Toolkit\Str;
 use Throwable;
 use ZipArchive;
 
-/**
- * The `F` class provides methods for
- * dealing with files on the file system
- * level, like creating, reading,
- * deleting, copying or validatings files.
- *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class F
 {
 	public static array $types = [

@@ -4,16 +4,6 @@ namespace Kirby\Query\AST;
 
 use Kirby\Query\Visitors\Visitor;
 
-/**
- * Represents a comparison operation between two values in the AST
- *
- * @package   Kirby Query
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @license   https://opensource.org/licenses/MIT
- * @since     5.1.0
- * @unstable
- */
 class ComparisonNode extends Node
 {
 	public function __construct(

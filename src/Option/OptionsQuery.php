@@ -14,18 +14,6 @@ use Kirby\Toolkit\A;
 use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
 
-/**
- * Options derived from running a query against
- * pages, files, users or structures to create
- * options out of them.
- *
- * @package   Kirby Option
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- * 			  Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class OptionsQuery extends OptionsProvider
 {
 	public function __construct(

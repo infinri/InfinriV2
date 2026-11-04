@@ -4,14 +4,6 @@ namespace Kirby\Cms;
 
 use Kirby\Filesystem\Dir;
 
-/**
- * Scans a directory for the contents of a page, site or user:
- * children, files, content files and the resolved template/model
- *
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.5.0
- */
 class Inventory
 {
 	/**

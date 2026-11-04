@@ -2,18 +2,6 @@
 
 namespace Kirby\Cms;
 
-/**
- * The ModelState class is used to update app-wide model states.
- * It's mainly used in the `ModelCommit` class to update the
- * state of the given model after the action has been
- * executed.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class ModelState
 {
 	/**

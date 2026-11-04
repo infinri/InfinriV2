@@ -7,20 +7,6 @@ use Kirby\Cms\Collection;
 use Kirby\Content\Field;
 use Kirby\Toolkit\A;
 
-/**
- * Base for UUIDs for models from content fields,
- * such as blocks and structure entries
- *
- * Not yet supported
- * @todo Finish for uuid-block-structure-support
- * @codeCoverageIgnore
- *
- * @package   Kirby Uuid
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 abstract class FieldUuid extends Uuid
 {
 	protected const FIELD = 'field';

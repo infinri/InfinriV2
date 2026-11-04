@@ -6,21 +6,6 @@ use Kirby\Filesystem\F;
 use Kirby\Http\Url as BaseUrl;
 use Kirby\Toolkit\Str;
 
-/**
- * The `Url` class extends the
- * `Kirby\Http\Url` class. In addition
- * to the methods of that class for dealing
- * with URLs, it provides a specific
- * `Url::home` method that always creates
- * the correct base URL and a template asset
- * URL builder.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Url extends BaseUrl
 {
 	public static string|null $home = null;

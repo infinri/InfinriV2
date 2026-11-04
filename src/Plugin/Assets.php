@@ -10,20 +10,6 @@ use Kirby\Filesystem\F;
 use Kirby\Http\Response;
 use Kirby\Toolkit\Str;
 
-/**
- * Plugin assets are automatically copied/linked
- * to the media folder, to make them publicly
- * available. This class handles the magic around that.
- *
- * @package   Kirby Plugin
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @extends \Kirby\Cms\Collection<\Kirby\Plugin\Asset>
- */
 class Assets extends Collection
 {
 	/**

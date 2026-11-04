@@ -10,21 +10,6 @@ use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
 use Kirby\Uuid\HasUuids;
 
-/**
- * The `$users` object refers to a collection
- * of users with or without Panel access. Like
- * all collections, you can filter, modify,
- * convert or check the users collection.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @template TUser of \Kirby\Cms\User
- * @extends \Kirby\Cms\LazyCollection<TUser>
- */
 class Users extends LazyCollection
 {
 	use HasUuids;

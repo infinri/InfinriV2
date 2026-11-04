@@ -6,14 +6,6 @@ use Kirby\Cms\ModelWithContent;
 use Kirby\Cms\Page;
 use Kirby\Panel\Model;
 
-/**
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.1.0
- */
 class PageItem extends ModelItem
 {
 	/**

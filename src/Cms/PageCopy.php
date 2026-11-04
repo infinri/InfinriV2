@@ -6,19 +6,6 @@ use Kirby\Uuid\ModelUuid;
 use Kirby\Uuid\Uuid;
 use Kirby\Uuid\Uuids;
 
-/**
- * Normalizes a newly generated copy of a page,
- * adapting page slugs, UUIDs etc.
- * (for single as well as multilang setups)
- *
- * @package   Kirby Cms
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.0.0
- * @unstable
- */
 class PageCopy
 {
 	public function __construct(

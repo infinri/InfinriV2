@@ -2,19 +2,6 @@
 
 namespace Kirby\Http\Request;
 
-/**
- * The Files object sanitizes
- * the input coming from the $_FILES
- * global. Especially for multiple uploads
- * for the same key, it will produce a more
- * usable array.
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Files
 {
 	use Data;

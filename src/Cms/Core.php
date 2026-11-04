@@ -18,23 +18,6 @@ use Kirby\Panel\Ui\FilePreviews\ImageFilePreview;
 use Kirby\Panel\Ui\FilePreviews\PdfFilePreview;
 use Kirby\Panel\Ui\FilePreviews\VideoFilePreview;
 
-/**
- * The Core class lists all parts of Kirby
- * that need to be loaded or initalized in order
- * to make the system work. Most core parts can
- * be overwritten by plugins.
- *
- * You can get such lists as kirbytags, components,
- * areas, etc. by accessing them through `$kirby->core()`
- *
- * I.e. `$kirby->core()->areas()`
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Core
 {
 	/**

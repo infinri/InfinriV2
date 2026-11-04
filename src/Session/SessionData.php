@@ -5,17 +5,6 @@ namespace Kirby\Session;
 use Kirby\Exception\LogicException;
 use Kirby\Toolkit\A;
 
-/**
- * The session object can be used to
- * store visitor preferences for your
- * site throughout various requests.
- *
- * @package   Kirby Session
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class SessionData
 {
 	/**

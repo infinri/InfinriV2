@@ -10,18 +10,6 @@ use Kirby\Cms\App;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Query\Query;
 use Throwable;
-
-/**
- * The String class provides a set
- * of handy methods for string
- * handling and manipulation.
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Str
 {
 	/**
@@ -1132,18 +1120,6 @@ class Str
 		return static::substr($string, 0, $length) . $appendix;
 	}
 
-	/**
-	 * Calculates the similarity between two strings with multibyte support
-	 * @since 3.5.2
-	 *
-	 * @author Based on the work of Antal Áron
-	 * @copyright Original Copyright (c) 2017, Antal Áron
-	 * @license https://github.com/antalaron/mb-similar-text/blob/master/LICENSE MIT License
-	 *
-	 * @param bool $caseInsensitive If `true`, strings are compared case-insensitively
-	 * @return array matches: Number of matching chars in both strings
-	 *               percent: Similarity in percent
-	 */
 	public static function similarity(
 		string $first,
 		string $second,

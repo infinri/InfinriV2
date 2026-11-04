@@ -5,16 +5,6 @@ namespace Kirby\Form\Field;
 use Kirby\Form\FieldClass;
 use Kirby\Panel\Ui\Stats;
 
-/**
- * Stats field
- *
- * @package   Kirby Field
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.1.0
- */
 class StatsField extends FieldClass
 {
 	/**

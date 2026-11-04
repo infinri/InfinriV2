@@ -13,17 +13,6 @@ use Kirby\Cms\App;
 use Kirby\Exception\InvalidArgumentException;
 use Stringable;
 
-/**
- * Extension for PHP's `DateTime` class
- * @since 3.6.2
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Date extends DateTime implements Stringable
 {
 	/**

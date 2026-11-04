@@ -39,19 +39,6 @@ use Kirby\Uuid\Uuid;
 use Kirby\Uuid\Uuids;
 use Throwable;
 
-/**
- * The `$kirby` object is the app instance of
- * your Kirby installation. It's the central
- * starting point to get all the different
- * aspects of your site, like the options, urls,
- * roots, languages, roles, etc.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class App
 {
 	use AppCaches;

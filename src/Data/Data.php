@@ -6,23 +6,6 @@ use Kirby\Exception\Exception;
 use Kirby\Filesystem\F;
 use Throwable;
 
-/**
- * The `Data` class provides readers and
- * writers for data. The class comes with
- * handlers for `json`, `php`, `txt`, `xml`
- * and `yaml` encoded data, but can be
- * extended and customized.
- *
- * The read and write methods automatically
- * detect which data handler to use in order
- * to correctly encode and decode passed data.
- *
- * @package   Kirby
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Data
 {
 	/**

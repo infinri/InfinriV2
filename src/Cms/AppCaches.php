@@ -6,15 +6,6 @@ use Kirby\Cache\Cache;
 use Kirby\Cache\NullCache;
 use Kirby\Exception\InvalidArgumentException;
 
-/**
- * AppCaches
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 trait AppCaches
 {
 	protected array $caches = [];

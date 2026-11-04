@@ -10,20 +10,6 @@ use Kirby\Cms\User;
 use Kirby\Data\Data;
 use Kirby\Toolkit\Str;
 
-/**
- * The Lock class provides information about the
- * locking state of a content version, depending
- * on the timestamp and locked user id
- *
- * @since 5.0.0
- * @unstable
- *
- * @package   Kirby Content
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Lock
 {
 	public function __construct(

@@ -8,24 +8,6 @@ use Kirby\Toolkit\Collection as BaseCollection;
 use Kirby\Toolkit\Str;
 use Kirby\Uuid\Uuid;
 
-/**
- * The Collection class serves as foundation
- * for the Pages, Files, Users and Structure
- * classes. It handles object validation and sets
- * the parent collection property for each object.
- * The `getAttribute` method is also adjusted to
- * handle values from Field objects correctly, so
- * those can be used in filters as well.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @template TValue
- * @extends \Kirby\Toolkit\Collection<TValue>
- */
 class Collection extends BaseCollection
 {
 	use HasMethods;

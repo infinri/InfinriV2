@@ -5,20 +5,6 @@ namespace Kirby\Cms;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 
-/**
- * A collection of all available Translations.
- * Provides a factory method to convert an array
- * to a collection of Translation objects and load
- * method to load all translations from disk
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @extends \Kirby\Cms\Collection<\Kirby\Cms\Translation>
- */
 class Translations extends Collection
 {
 	/**

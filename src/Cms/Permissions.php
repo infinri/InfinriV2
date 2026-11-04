@@ -5,17 +5,6 @@ namespace Kirby\Cms;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\LogicException;
 
-/**
- * Handles permission definition in each user
- * blueprint and wraps a couple useful methods
- * around it to check for available permissions.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Permissions
 {
 	public static array $extendedActions = [];

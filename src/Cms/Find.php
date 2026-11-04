@@ -6,17 +6,6 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Toolkit\Str;
 
-/**
- * The Find class is used in the API and
- * the Panel to find models and parents
- * based on request paths
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Find
 {
 	/**

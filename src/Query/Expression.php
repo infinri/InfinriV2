@@ -5,18 +5,6 @@ namespace Kirby\Query;
 use Kirby\Exception\LogicException;
 use Kirby\Toolkit\A;
 
-/**
- * The Expression class adds support for simple shorthand
- * comparisons (`a ? b : c`, `a ?: c` and `a ?? b`)
- *
- * @package   Kirby Query
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- *
- * @todo Deprecate in v6
- */
 class Expression
 {
 	public function __construct(

@@ -4,18 +4,6 @@ namespace Kirby\Panel\Lab\Doc;
 
 use Kirby\Panel\Lab\Doc;
 
-/**
- * Documentation for a single argument for an event, slot or method
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.0.0
- * @internal
- * @codeCoverageIgnore
- */
 class Argument
 {
 	public function __construct(

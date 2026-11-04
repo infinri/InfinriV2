@@ -6,18 +6,6 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 use Kirby\Template\Template;
 
-/**
- * Wrapper around our Email package, which
- * handles all the magic connections between Kirby
- * and sending emails, like email templates, file
- * attachments, etc.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Email
 {
 	/**

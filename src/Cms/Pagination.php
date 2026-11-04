@@ -5,21 +5,6 @@ namespace Kirby\Cms;
 use Kirby\Http\Uri;
 use Kirby\Toolkit\Pagination as BasePagination;
 
-/**
- * The `$pagination` object divides
- * a collection of pages, files etc.
- * into discrete pages consisting of
- * the number of defined items. The
- * pagination object can then be used
- * to navigate between these pages,
- * create a navigation etc.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Pagination extends BasePagination
 {
 	/**

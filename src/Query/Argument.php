@@ -6,18 +6,6 @@ use Closure;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\Str;
 
-/**
- * The Argument class represents a single
- * parameter passed to a method in a chained query
- *
- * @package   Kirby Query
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- *
- * @todo Deprecate in v6
- */
 class Argument
 {
 	public function __construct(

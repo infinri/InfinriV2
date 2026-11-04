@@ -6,17 +6,6 @@ use Kirby\Exception\DuplicateException;
 use Kirby\Filesystem\F;
 use Kirby\Toolkit\Str;
 
-/**
- * A collection of all defined site languages
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @extends \Kirby\Cms\Collection<\Kirby\Cms\Language>
- */
 class Languages extends Collection
 {
 	/**

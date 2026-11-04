@@ -8,18 +8,6 @@ use Kirby\Cms\ModelWithContent;
 use Kirby\Data\Data;
 use Kirby\Toolkit\A;
 
-/**
- * The main form class, that is being
- * used to create a list of form fields
- * and handles global form validation
- * and submission
- *
- * @package   Kirby Form
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Form
 {
 	/**

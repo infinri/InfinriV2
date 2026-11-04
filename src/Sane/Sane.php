@@ -7,19 +7,6 @@ use Kirby\Exception\NotFoundException;
 use Kirby\Filesystem\F;
 use Kirby\Toolkit\A;
 
-/**
- * The `Sane` class validates that files
- * don't contain potentially harmful contents.
- * The class comes with handlers for `svg`, `svgz` and `xml`
- * files for now, but can be extended and customized.
- * @since 3.5.4
- *
- * @package   Kirby Sane
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Sane
 {
 	/**

@@ -5,17 +5,6 @@ namespace Kirby\Cms;
 use Closure;
 use Kirby\Toolkit\Collection as BaseCollection;
 
-/**
- * NestCollection
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @extends \Kirby\Toolkit\Collection<\Kirby\Cms\NestObject|\Kirby\Content\Field>
- */
 class NestCollection extends BaseCollection
 {
 	/**

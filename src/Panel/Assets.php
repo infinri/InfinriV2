@@ -11,20 +11,6 @@ use Kirby\Filesystem\Asset;
 use Kirby\Filesystem\Dir;
 use Kirby\Filesystem\F;
 use Kirby\Toolkit\A;
-
-/**
- * The Assets class collects all js, css, icons and other
- * files for the Panel. It pushes them into the media folder
- * on demand and also makes sure to create proper asset URLs
- * depending on dev mode
- *
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     4.0.0
- */
 class Assets
 {
 	protected bool $isDev;

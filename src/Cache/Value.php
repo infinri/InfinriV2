@@ -4,17 +4,6 @@ namespace Kirby\Cache;
 
 use Throwable;
 
-/**
- * Cache Value
- * Stores the value, creation timestamp and expiration timestamp
- * and makes it possible to store all three with a single cache key
- *
- * @package   Kirby Cache
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Value
 {
 	/**

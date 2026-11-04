@@ -11,29 +11,6 @@ use Kirby\Panel\File as Panel;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\Str;
 
-/**
- * The `$file` object provides a set
- * of methods that can be used when
- * dealing with a single image or
- * other media file, like getting the
- * URL or resizing an image. It also
- * handles file meta data.
- *
- * The File class proxies the `Kirby\Filesystem\File`
- * or `Kirby\Image\Image` class, which
- * is used to handle all asset file methods.
- * In addition the File class handles
- * meta data via `Kirby\Cms\Content`.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @use \Kirby\Cms\HasSiblings<\Kirby\Cms\Files>
- * @method \Kirby\Uuid\FileUuid uuid()
- */
 class File extends ModelWithContent
 {
 	use FileActions;

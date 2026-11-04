@@ -9,21 +9,6 @@ use Kirby\Filesystem\Dir;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use Throwable;
-
-/**
- * The System class gathers all information
- * about the server, PHP and other environment
- * parameters and checks for a valid setup.
- *
- * This is mostly used by the panel installer
- * to check if the panel can be installed at all.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class System
 {
 	// cache

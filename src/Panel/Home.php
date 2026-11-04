@@ -11,24 +11,6 @@ use Kirby\Http\Uri;
 use Kirby\Toolkit\Str;
 use Throwable;
 
-/**
- * The Home class creates the secure redirect
- * URL after logins. The URL can either come
- * from the session to remember the last view
- * before the automatic logout, or from a user
- * blueprint to redirect to custom views.
- *
- * The Home class also makes sure to check access
- * before a redirect happens and avoids redirects
- * to inaccessible views.
- * @since 3.6.0
- *
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Home
 {
 	/**

@@ -11,17 +11,6 @@ use Kirby\Panel\Ui\Item\FileItem;
 use Kirby\Panel\Ui\Item\PageItem;
 use Kirby\Panel\Ui\Item\UserItem;
 
-/**
- * Manages the Panel dialog for content changes in
- * pages, users and files
- * @since 5.0.0
- *
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class ChangesDialog
 {
 	public function __construct(

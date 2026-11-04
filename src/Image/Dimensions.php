@@ -4,18 +4,6 @@ namespace Kirby\Image;
 
 use Stringable;
 
-/**
- * The Dimension class is used to provide additional
- * methods for images and possibly other objects with
- * width and height to recalculate the size,
- * get the ratio or just the width and height.
- *
- * @package   Kirby Image
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Dimensions implements Stringable
 {
 	public function __construct(

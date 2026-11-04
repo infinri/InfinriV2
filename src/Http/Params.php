@@ -6,17 +6,6 @@ use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Str;
 use Stringable;
 
-/**
- * A wrapper around a URL params
- * that converts it into a Kirby Obj for easier
- * access of each param.
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Params extends Obj implements Stringable
 {
 	public static string|null $separator = null;

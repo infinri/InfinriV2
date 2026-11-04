@@ -7,18 +7,6 @@ use Kirby\Cms\Helpers;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Str;
 
-/**
- * Parses and converts custom kirbytags in any
- * given string. KirbyTags are defined via
- * `KirbyTag::$types`. The default tags for the
- * Cms are located in `kirby/config/tags.php`
- *
- * @package   Kirby Text
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class KirbyTags
 {
 	public static function parse(

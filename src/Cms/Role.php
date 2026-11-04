@@ -9,16 +9,6 @@ use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 use Stringable;
 
-/**
- * Represents a User role with attached
- * permissions. Roles are defined by user blueprints.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Role implements Stringable
 {
 	protected string|null $description;

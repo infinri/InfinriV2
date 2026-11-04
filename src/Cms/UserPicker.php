@@ -4,17 +4,6 @@ namespace Kirby\Cms;
 
 use Kirby\Exception\InvalidArgumentException;
 
-/**
- * The UserPicker class helps to
- * fetch the right files for the API calls
- * for the user picker component in the panel.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class UserPicker extends Picker
 {
 	/**

@@ -5,16 +5,6 @@ namespace Kirby\Query\Runners;
 use Closure;
 use Exception;
 
-/**
- * Helper class to execute logic during runtime
- *
- * @package   Kirby Query
- * @author    Roman Steiner <roman@toastlab.ch>
- * @link      https://getkirby.com
- * @license   https://opensource.org/licenses/MIT
- * @since     5.1.0
- * @unstable
- */
 class Scope
 {
 	/**

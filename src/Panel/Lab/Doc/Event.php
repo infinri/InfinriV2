@@ -5,18 +5,6 @@ namespace Kirby\Panel\Lab\Doc;
 use Kirby\Panel\Lab\Doc;
 use Kirby\Toolkit\A;
 
-/**
- * Documentation for a single Vue emittable event
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.0.0
- * @internal
- * @codeCoverageIgnore
- */
 class Event
 {
 	public function __construct(

@@ -9,23 +9,6 @@ use Kirby\Filesystem\F;
 use Kirby\Uuid\HasUuids;
 use Throwable;
 
-/**
- * The `$files` object extends the general
- * `Collection` class and refers to a
- * collection of files, i.e. images, documents
- * etc. Files can be filtered, searched,
- * converted, modified or evaluated with the
- * following methods:
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @template TFile of \Kirby\Cms\File
- * @extends \Kirby\Cms\Collection<TFile>
- */
 class Files extends Collection
 {
 	use HasUuids;

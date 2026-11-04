@@ -18,21 +18,6 @@ use Kirby\Toolkit\LazyValue;
 use Kirby\Toolkit\Str;
 use Throwable;
 
-/**
- * The `$page` object is the heart and
- * soul of Kirby. It is used to construct
- * pages and all their dependencies like
- * children, files, content, etc.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @use \Kirby\Cms\HasSiblings<\Kirby\Cms\Pages>
- * @method \Kirby\Uuid\PageUuid uuid()
- */
 class Page extends ModelWithContent
 {
 	use HasChildren;

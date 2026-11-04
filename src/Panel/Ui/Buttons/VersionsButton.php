@@ -6,17 +6,6 @@ use Kirby\Cms\ModelWithContent;
 use Kirby\Content\VersionId;
 use Kirby\Toolkit\I18n;
 
-/**
- * Versions view button for models
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.0.0
- * @unstable
- */
 class VersionsButton extends ViewButton
 {
 	public function __construct(

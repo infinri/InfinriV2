@@ -11,26 +11,8 @@ use Kirby\Http\Url;
 use Kirby\Toolkit\Dom;
 use Kirby\Toolkit\Str;
 
-/**
- * Sane handler for SVG files
- * @since 3.5.4
- *
- * @package   Kirby Sane
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Svg extends Xml
 {
-	/**
-	 * Allow and block lists are inspired by DOMPurify
-	 *
-	 * @link https://github.com/cure53/DOMPurify
-	 * @copyright 2015 Mario Heiderich
-	 * @license https://www.apache.org/licenses/LICENSE-2.0
-	 */
 
 	/**
 	 * Global list of allowed attribute prefixes

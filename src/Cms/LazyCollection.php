@@ -6,32 +6,6 @@ use Closure;
 use Iterator;
 use Kirby\Exception\LogicException;
 
-/**
- * The LazyCollection class is a variant of the CMS
- * Collection that is only initialized with keys for
- * each collection element or without any data.
- * Collection elements and their values (= objects)
- * are loaded and initialized lazily when they are
- * first used.
- *
- * You can use LazyCollection in two ways:
- * 1. Initialize with keys only (values are `null`),
- *    define `hydrateElement` method that initializes
- *    an element dynamically.
- * 2. Option 1, but also don't initialize any keys,
- *    set `$initialized` prop to `false` and define
- *    `initialize` method that defines which keys
- *    are available.
- *
- * @package   Kirby Cms
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @template TValue
- * @extends \Kirby\Cms\Collection<TValue>
- */
 abstract class LazyCollection extends Collection
 {
 	/**

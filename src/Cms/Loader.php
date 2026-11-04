@@ -6,26 +6,6 @@ use Closure;
 use Kirby\Data\Data;
 use Kirby\Filesystem\F;
 
-/**
- * The Loader class is an internal loader for
- * core parts, like areas, components, sections, etc.
- *
- * It's exposed in the `$kirby->load()` and the
- * `$kirby->core()->load()` methods.
- *
- * With `$kirby->load()` you get access to core parts
- * that might be overwritten by plugins.
- *
- * With `$kirby->core()->load()` you get access to
- * untouched core parts. This is useful if you want to
- * reuse or fall back to core features in your plugins.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Loader
 {
 	public function __construct(

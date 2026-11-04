@@ -7,14 +7,6 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Http\Url;
 use Kirby\Toolkit\I18n;
 
-/**
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.1.0
- */
 class Stat extends Component
 {
 	public function __construct(

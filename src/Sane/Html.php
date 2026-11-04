@@ -2,17 +2,6 @@
 
 namespace Kirby\Sane;
 
-/**
- * Sane handler for HTML files
- * @since 3.5.8
- *
- * @package   Kirby Sane
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Html extends DomHandler
 {
 	/**

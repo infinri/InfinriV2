@@ -7,19 +7,6 @@ use Kirby\Exception\Exception;
 use Kirby\Http\Response;
 use Throwable;
 
-/**
- * The Json abstract response class provides
- * common framework for Fiber requests
- * to render the JSON object for, e.g.
- * Panel dialogs, dropdowns etc.
- * @since 3.6.0
- *
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 abstract class Json
 {
 	protected static string $key = '$response';

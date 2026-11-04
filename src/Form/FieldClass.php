@@ -6,19 +6,6 @@ use Kirby\Cms\HasSiblings;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\I18n;
 
-/**
- * Abstract field class to be used instead
- * of functional field components for more
- * control.
- *
- * @package   Kirby Form
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @use \Kirby\Cms\HasSiblings<\Kirby\Form\Fields>
- */
 abstract class FieldClass
 {
 	use HasSiblings;

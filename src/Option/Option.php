@@ -5,15 +5,6 @@ namespace Kirby\Option;
 use Kirby\Cms\ModelWithContent;
 use Kirby\Toolkit\I18n;
 
-/**
- * Option for select fields, radio fields, etc.
- *
- * @package   Kirby Option
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Option
 {
 	public string|array $text;

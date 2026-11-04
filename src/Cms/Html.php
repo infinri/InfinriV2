@@ -7,17 +7,6 @@ use Kirby\Plugin\Assets;
 use Kirby\Plugin\Plugin;
 use Kirby\Toolkit\A;
 
-/**
- * The `Html` class provides methods for building
- * common HTML tags and also contains some helper
- * methods.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Html extends \Kirby\Toolkit\Html
 {
 	/**

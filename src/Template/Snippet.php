@@ -9,18 +9,6 @@ use Kirby\Filesystem\F;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Tpl;
 
-/**
- * The Snippet class includes shared code parts
- * in templates and allows to pass data as well as to
- * optionally pass content to various predefined slots.
- *
- * @package   Kirby Template
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- * 			  Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Snippet extends Tpl
 {
 	/**

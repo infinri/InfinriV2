@@ -4,16 +4,6 @@ namespace Kirby\Image;
 
 use Stringable;
 
-/**
- * Returns the latitude and longitude values
- * for exif location data if available
- *
- * @package   Kirby Image
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Location implements Stringable
 {
 	protected float|null $lat = null;

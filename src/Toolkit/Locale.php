@@ -5,16 +5,6 @@ namespace Kirby\Toolkit;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 
-/**
- * PHP locale handling
- * @since 3.5.0
- *
- * @package   Kirby Toolkit
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Locale
 {
 	/**

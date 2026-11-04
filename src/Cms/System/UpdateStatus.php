@@ -11,16 +11,6 @@ use Kirby\Plugin\Plugin;
 use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 
-/**
- * Checks for updates and affected vulnerabilities
- * @since 3.8.0
- *
- * @package   Kirby Cms
- * @author    Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class UpdateStatus
 {
 	/**

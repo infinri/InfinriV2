@@ -6,20 +6,6 @@ use Closure;
 use Kirby\Exception\InvalidArgumentException;
 use Stringable;
 
-/**
- * The Version ID identifies a version of content.
- * This can be the currently latest version or changes
- * to the content. In the future, we also plan to use this
- * for older revisions of the content.
- *
- * @package   Kirby Content
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.0.0
- * @unstable
- */
 class VersionId implements Stringable
 {
 	/**

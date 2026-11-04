@@ -12,24 +12,6 @@ use Kirby\Toolkit\Locale;
 use Kirby\Toolkit\Str;
 use Stringable;
 
-/**
- * The `$language` object represents
- * a single language in a multi-language
- * Kirby setup. You can, for example,
- * use the methods of this class to get
- * the name or locale of a language,
- * check for the default language,
- * get translation strings and many
- * more things.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @use \Kirby\Cms\HasSiblings<\Kirby\Cms\Languages>
- */
 class Language implements Stringable
 {
 	use HasSiblings;

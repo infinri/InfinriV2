@@ -2,20 +2,6 @@
 
 namespace Kirby\Http\Request;
 
-/**
- * The Data Trait is being used in
- * Query, Files and Body classes to
- * provide unified get and data methods.
- * Especially the get method is a bit more
- * complex with the option to fetch single keys
- * or entire arrays.
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 trait Data
 {
 	/**

@@ -10,16 +10,6 @@ use Kirby\Http\Idn;
 use Kirby\Uuid\Uuid;
 use ReflectionFunction;
 use Stringable;
-
-/**
- * A set of validator methods
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class V
 {
 	/**

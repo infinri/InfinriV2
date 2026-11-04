@@ -9,16 +9,6 @@ use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 use Kirby\Uuid\Uuid;
 
-/**
- * The language router is used internally
- * to handle language-specific (scoped) routes
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class LanguageRouter
 {
 	protected Router $router;

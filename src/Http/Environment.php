@@ -8,19 +8,6 @@ use Kirby\Filesystem\F;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 
-/**
- * The environment object takes care of
- * secure host and base URL detection, as
- * well as loading the dedicated
- * environment options.
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- * @since     3.7.0
- */
 class Environment
 {
 	/**

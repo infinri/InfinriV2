@@ -5,15 +5,6 @@ namespace Kirby\Database;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Config;
 
-/**
- * Database shortcuts
- *
- * @package   Kirby Database
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Db
 {
 	/**

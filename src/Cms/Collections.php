@@ -7,20 +7,6 @@ use Kirby\Exception\NotFoundException;
 use Kirby\Filesystem\F;
 use Kirby\Toolkit\Controller;
 
-/**
- * Manages and loads all collections
- * in site/collections, which can then
- * be reused in controllers, templates, etc
- *
- * This class is mainly used in the `$kirby->collection()`
- * method to provide easy access to registered collections
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Collections
 {
 	/**

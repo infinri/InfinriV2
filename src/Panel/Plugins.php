@@ -8,17 +8,6 @@ use Kirby\Filesystem\F;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 
-/**
- * The Plugins class takes care of collecting
- * js and css plugin files for the panel and caches
- * them in the media folder
- *
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Plugins
 {
 	/**

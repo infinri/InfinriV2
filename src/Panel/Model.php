@@ -12,16 +12,6 @@ use Kirby\Http\Uri;
 use Kirby\Panel\Ui\Item\ModelItem;
 use Kirby\Toolkit\A;
 
-/**
- * Provides information about the model for the Panel
- * @since 3.6.0
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 abstract class Model
 {
 	public function __construct(

@@ -8,16 +8,6 @@ use Kirby\Exception\InvalidArgumentException;
 use Kirby\Panel\Ui\FilePreviews\DefaultFilePreview;
 use Kirby\Toolkit\I18n;
 
-/**
- * Defines a component that implements a file preview
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.0.0
- */
 abstract class FilePreview extends Component
 {
 	public function __construct(

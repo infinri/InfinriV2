@@ -2,21 +2,6 @@
 
 namespace Kirby\Data;
 
-/**
- * Reads and writes YAML frontmatter format:
- *
- * ---
- * title: My Title
- * uuid: abc123
- * ---
- * Optional body stored as `text` field
- *
- * @package   Kirby Data
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Frontmatter extends Handler
 {
 	/**

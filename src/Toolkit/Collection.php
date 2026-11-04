@@ -10,20 +10,6 @@ use ReflectionFunction;
 use ReflectionMethod;
 use Stringable;
 
-/**
- * The collection class provides a nicer
- * interface around arrays of arrays or objects,
- * with advanced filters, sorting, navigation and more.
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- *
- * @template TValue
- * @extends \Kirby\Toolkit\Iterator<string, TValue>
- */
 class Collection extends Iterator implements Stringable
 {
 	/**

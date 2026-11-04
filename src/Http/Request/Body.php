@@ -4,18 +4,6 @@ namespace Kirby\Http\Request;
 
 use Stringable;
 
-/**
- * The Body class parses the
- * request body and provides a nice
- * interface to get values from
- * structured bodies (json encoded or form data)
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Body implements Stringable
 {
 	use Data;

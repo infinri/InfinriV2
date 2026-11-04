@@ -7,18 +7,6 @@ use Exception;
 use Kirby\Toolkit\Collection as BaseCollection;
 use Kirby\Toolkit\Str;
 
-/**
- * The Collection class is a wrapper
- * around our Kirby Collections and handles
- * stuff like pagination and proper JSON output
- * for collections in REST calls.
- *
- * @package   Kirby Api
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Collection
 {
 	protected string|null $model;

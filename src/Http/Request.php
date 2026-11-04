@@ -13,17 +13,6 @@ use Kirby\Http\Request\Query;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 
-/**
- * The `Request` class provides
- * a simple API to inspect incoming
- * requests.
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Request
 {
 	public static array $authTypes = [

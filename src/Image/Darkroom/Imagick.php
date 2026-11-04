@@ -8,16 +8,6 @@ use Kirby\Filesystem\F;
 use Kirby\Image\Darkroom;
 use Kirby\Image\Focus;
 
-/**
- * Imagick darkroom driver
- *
- * @package   Kirby Image
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- * @since     5.1.0
- */
 class Imagick extends Darkroom
 {
 	// animated AVIF needs ImageMagick 7.1.2-19 with libheif 1.20,

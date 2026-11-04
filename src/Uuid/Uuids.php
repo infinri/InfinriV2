@@ -6,17 +6,6 @@ use Closure;
 use Kirby\Cache\Cache;
 use Kirby\Cms\App;
 use Kirby\Exception\LogicException;
-
-/**
- * Helper methods that deal with the entirety of UUIDs in the system
- * @since 3.8.0
- *
- * @package   Kirby Uuid
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Uuids
 {
 	/**

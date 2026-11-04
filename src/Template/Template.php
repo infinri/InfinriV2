@@ -9,16 +9,6 @@ use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Tpl;
 use Stringable;
 
-/**
- * Represents a Kirby template and takes care
- * of loading the correct file.
- *
- * @package   Kirby Template
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Template implements Stringable
 {
 	/**

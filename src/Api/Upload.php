@@ -17,19 +17,6 @@ use Kirby\Filesystem\F;
 use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 
-/**
- * The Upload class handles file uploads in the
- * context of the API. It adds support for chunked
- * uploads.
- *
- * @package   Kirby Api
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.0.0
- * @unstable
- */
 readonly class Upload
 {
 	public function __construct(

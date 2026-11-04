@@ -7,17 +7,6 @@ use Kirby\Toolkit\Collection;
 use Kirby\Toolkit\Obj;
 use Kirby\Toolkit\Str;
 
-/**
- * The Visitor class makes it easy to inspect information
- * like the ip address, language, user agent and more
- * of the current visitor
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Visitor
 {
 	protected string|null $ip = null;

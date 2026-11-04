@@ -6,14 +6,6 @@ use Kirby\Cms\ModelWithContent;
 use Kirby\Panel\Model as Panel;
 use Kirby\Panel\Ui\Component;
 
-/**
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.1.0
- */
 class ModelItem extends Component
 {
 	protected string $layout;

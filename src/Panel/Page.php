@@ -9,16 +9,6 @@ use Kirby\Panel\Ui\Buttons\ViewButtons;
 use Kirby\Panel\Ui\Item\PageItem;
 use Kirby\Toolkit\I18n;
 
-/**
- * Provides information about the page model for the Panel
- * @since 3.6.0
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Page extends Model
 {
 	/**

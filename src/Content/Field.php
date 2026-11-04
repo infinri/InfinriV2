@@ -6,26 +6,6 @@ use Closure;
 use Kirby\Cms\ModelWithContent;
 use Stringable;
 
-/**
- * Every field in a Kirby content text file
- * is being converted into such a Field object.
- *
- * Field methods can be registered for those Field
- * objects, which can then be used to transform or
- * convert the field value. This enables our
- * daisy-chaining API for templates and other components
- *
- * ```php
- * // Page field example with lowercase conversion
- * $page->myField()->lower();
- * ```
- *
- * @package   Kirby Content
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Field implements Stringable
 {
 	/**

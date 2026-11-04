@@ -8,15 +8,6 @@ use SensitiveParameter;
 use Stringable;
 use Throwable;
 
-/**
- * Uri builder class
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Uri implements Stringable
 {
 	/**

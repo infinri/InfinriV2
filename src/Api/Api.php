@@ -16,18 +16,6 @@ use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Pagination;
 use Throwable;
 
-/**
- * The API class is a generic container
- * for API routes, models and collections and is used
- * to run our REST API. You can find our API setup
- * in `kirby/config/api.php`.
- *
- * @package   Kirby Api
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Api
 {
 	/**

@@ -9,17 +9,6 @@ use Kirby\Exception\LogicException;
 use Kirby\Filesystem\F;
 use Stringable;
 
-/**
- * Representation of an Http response,
- * to simplify sending correct headers
- * and Http status codes.
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Response implements Stringable
 {
 	/**

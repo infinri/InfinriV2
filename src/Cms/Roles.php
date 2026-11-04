@@ -2,22 +2,6 @@
 
 namespace Kirby\Cms;
 
-/**
- * Extension of the Collection class that
- * introduces `Roles::factory()` to convert an
- * array of role definitions into a proper
- * collection with Role objects. It also has
- * a `Roles::load()` method that handles loading
- * role definitions from disk.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @extends \Kirby\Cms\Collection<\Kirby\Cms\Role>
- */
 class Roles extends Collection
 {
 	/**

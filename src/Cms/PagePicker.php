@@ -5,18 +5,6 @@ namespace Kirby\Cms;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\PermissionException;
 
-/**
- * The PagePicker class helps to
- * fetch the right pages and the parent
- * model for the API calls for the
- * page picker component in the panel.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class PagePicker extends Picker
 {
 	// TODO: null only due to our Properties setters,

@@ -7,14 +7,6 @@ use Kirby\Filesystem\F;
 use Kirby\Toolkit\Dom;
 use Kirby\Toolkit\Str;
 
-/**
- * Provides information about an SVG
- * based on its markup
- *
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- * @since     5.6.2
- */
 class Svg
 {
 	protected Dom|null $dom = null;

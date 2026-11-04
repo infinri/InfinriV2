@@ -11,17 +11,6 @@ use Kirby\Http\Remote;
 use Kirby\Http\Url;
 use Kirby\Query\Query;
 
-/**
- * Options fetched from any REST API
- * or local file with valid JSON data.
- *
- * @package   Kirby Option
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- * 			  Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class OptionsApi extends OptionsProvider
 {
 	public function __construct(

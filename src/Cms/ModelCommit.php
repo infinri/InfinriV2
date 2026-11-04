@@ -5,18 +5,6 @@ namespace Kirby\Cms;
 use Closure;
 use Kirby\Exception\Exception;
 
-/**
- * The ModelCommit class is used to commit a given model action
- * in the model action classes. It takes care of running
- * the `before` and `after` hooks and updating the state
- * of the given model.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class ModelCommit
 {
 	protected App $kirby;

@@ -5,20 +5,6 @@ namespace Kirby\Query;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Collection;
 
-/**
- * The Arguments class helps splitting a
- * parameter string into processable arguments
- *
- * @package   Kirby Query
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- *
- * @todo Deprecate in v6
- *
- * @extends \Kirby\Toolkit\Collection<\Kirby\Query\Argument>
- */
 class Arguments extends Collection
 {
 	// skip all matches inside of parantheses

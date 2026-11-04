@@ -4,15 +4,6 @@ namespace Kirby\Http\Request\Auth;
 
 use Kirby\Http\Request\Auth;
 
-/**
- * Bearer token authentication data
- *
- * @package   Kirby Http
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class BearerAuth extends Auth
 {
 	/**

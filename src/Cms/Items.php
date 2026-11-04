@@ -6,19 +6,6 @@ use Closure;
 use Kirby\Content\Field;
 use Kirby\Exception\InvalidArgumentException;
 
-/**
- * A collection of items
- * @since 3.5.0
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @template TValue of \Kirby\Cms\Item
- * @extends \Kirby\Cms\Collection<TValue>
- */
 class Items extends Collection
 {
 	public const ITEM_CLASS = Item::class;

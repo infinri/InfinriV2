@@ -5,17 +5,6 @@ namespace Kirby\Query\Parser;
 use Exception;
 use Generator;
 
-/**
- * Parses a query string into its individual tokens
- *
- * @package   Kirby Query
- * @author    Roman Steiner <roman@toastlab.ch>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @license   https://opensource.org/licenses/MIT
- * @since     5.1.0
- * @unstable
- */
 class Tokenizer
 {
 	private int $length = 0;

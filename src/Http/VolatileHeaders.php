@@ -5,17 +5,6 @@ namespace Kirby\Http;
 use Kirby\Cms\Cors;
 use Kirby\Toolkit\A;
 
-/**
- * Manages request-dependent headers that must not be
- * persisted in cached responses
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.3.0
- */
 class VolatileHeaders
 {
 	/**

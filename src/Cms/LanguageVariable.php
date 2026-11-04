@@ -5,17 +5,6 @@ namespace Kirby\Cms;
 use Kirby\Exception\DuplicateException;
 use Kirby\Exception\InvalidArgumentException;
 
-/**
- * A language variable is a custom translation string
- * Those are stored in /site/languages/$code.php in the
- * translations array
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class LanguageVariable
 {
 	protected App $kirby;

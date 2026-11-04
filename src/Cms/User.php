@@ -15,19 +15,6 @@ use Kirby\Toolkit\BlockCollectionAccess;
 use Kirby\Toolkit\Str;
 use SensitiveParameter;
 
-/**
- * The `$user` object represents a
- * single Panel or frontend user.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @use \Kirby\Cms\HasSiblings<\Kirby\Cms\Users>
- * @method \Kirby\Uuid\UserUuid uuid()
- */
 class User extends ModelWithContent
 {
 	use HasFiles;

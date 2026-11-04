@@ -10,16 +10,6 @@ use Kirby\Exception\PermissionException;
 use Kirby\Toolkit\Escape;
 use Kirby\Toolkit\I18n;
 
-/**
- * Manages the Panel dialog to disable TOTP auth for a user
- * @since 4.0.0
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class UserTotpDisableDialog
 {
 	public App $kirby;

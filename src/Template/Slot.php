@@ -5,18 +5,6 @@ namespace Kirby\Template;
 use Kirby\Exception\LogicException;
 use Stringable;
 
-/**
- * The slot class catches all content
- * between the beginning and the end of
- * a slot. Slot content is then stored
- * in the Slots collection.
- *
- * @package   Kirby Template
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Slot implements Stringable
 {
 	/**

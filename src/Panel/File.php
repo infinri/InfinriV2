@@ -11,16 +11,6 @@ use Kirby\Panel\Ui\Item\FileItem;
 use Kirby\Toolkit\I18n;
 use Throwable;
 
-/**
- * Provides information about the file model for the Panel
- * @since 3.6.0
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class File extends Model
 {
 	/**

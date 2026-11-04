@@ -15,17 +15,6 @@ use Kirby\Image\QrCode;
 use Kirby\Query\Runners\Runner;
 use Kirby\Toolkit\I18n;
 
-/**
- * The Query class can be used to run expressions on arrays and objects,
- * including their methods with a very simple string-based syntax
- *
- * @package   Kirby Query
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Query
 {
 	public static array $cache = [];

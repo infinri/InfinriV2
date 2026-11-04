@@ -7,15 +7,6 @@ use Kirby\Filesystem\Mime;
 use Kirby\Image\Darkroom;
 use Kirby\Image\Focus;
 
-/**
- * GdLib darkroom driver
- *
- * @package   Kirby Image
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class GdLib extends Darkroom
 {
 	/**

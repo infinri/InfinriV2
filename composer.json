@@ -1,7 +1,7 @@
 {
-	"name": "getkirby/cms",
+	"name": "infinri/infinri",
 	"description": "The Kirby core",
-	"license": "proprietary",
+	"license": "",
 	"type": "kirby-cms",
 	"version": "5.6.2",
 	"keywords": [
@@ -11,9 +11,9 @@
 	],
 	"authors": [
 		{
-			"name": "Kirby Team",
-			"email": "support@getkirby.com",
-			"homepage": "https://getkirby.com"
+			"name": "Lucio Saldivar",
+			"email": "infinri@gmail.com",
+			"homepage": "https://infinri.com"
 		}
 	],
 	"homepage": "https://getkirby.com",

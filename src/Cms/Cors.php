@@ -5,17 +5,6 @@ namespace Kirby\Cms;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Str;
 
-/**
- * Handles CORS (Cross-Origin Resource Sharing)
- * headers for HTTP responses
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.2.0
- */
 class Cors
 {
 	protected App $kirby;

@@ -8,25 +8,6 @@ use Kirby\Exception\NotFoundException;
 use Kirby\Uuid\HasUuids;
 use Throwable;
 
-/**
- * The `$pages` object refers to a
- * collection of pages. The pages in this
- * collection can have the same or different
- * parents, they can actually exist as
- * subfolders in the content folder or be
- * virtual pages created from a database,
- * an Excel sheet, any API or any other
- * source.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @template TPage of \Kirby\Cms\Page
- * @extends \Kirby\Cms\Collection<TPage>
- */
 class Pages extends Collection
 {
 	use HasUuids;

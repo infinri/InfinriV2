@@ -5,18 +5,6 @@ namespace Kirby\Panel;
 use Exception;
 use Throwable;
 
-/**
- * The Redirect exception can be thrown in all Fiber
- * routes to send a redirect response. It is
- * primarily used in `Panel::go($location)`
- * @since 3.6.0
- *
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Redirect extends Exception
 {
 	public function __construct(

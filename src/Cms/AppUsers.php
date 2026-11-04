@@ -5,15 +5,6 @@ namespace Kirby\Cms;
 use Closure;
 use Throwable;
 
-/**
- * AppUsers
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 trait AppUsers
 {
 	protected Auth|null $auth = null;

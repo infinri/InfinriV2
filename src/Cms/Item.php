@@ -5,25 +5,6 @@ namespace Kirby\Cms;
 use Kirby\Content\Field;
 use Kirby\Toolkit\Str;
 
-/**
- * The Item class is the foundation
- * for every object in context with
- * other objects. I.e.
- *
- * - a Block in a collection of Blocks
- * - a Layout in a collection of Layouts
- * - a Column in a collection of Columns
- * @since 3.5.0
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @template TCollection of \Kirby\Cms\Items
- * @use \Kirby\Cms\HasSiblings<TCollection>
- */
 class Item
 {
 	use HasSiblings;

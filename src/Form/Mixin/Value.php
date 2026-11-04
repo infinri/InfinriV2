@@ -6,13 +6,6 @@ use Kirby\Cms\Language;
 use Kirby\Toolkit\BlockCollectionAccess;
 use ReflectionProperty;
 
-/**
- * @package   Kirby Form
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 trait Value
 {
 	/**

@@ -5,17 +5,6 @@ namespace Kirby\Reflection;
 use ReflectionMethod;
 use ReflectionParameter;
 
-/**
- * Specialized Reflection Method class to
- * inspect a class constructor
- *
- * @package   Kirby Reflection
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- * @since     5.2.0
- */
 class Constructor extends ReflectionMethod
 {
 	public function __construct(object|string $objectOrClass)

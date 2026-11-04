@@ -6,15 +6,6 @@ use Kirby\Cms\Helpers;
 use Redis;
 use Throwable;
 
-/**
- * Redis Cache Driver
- *
- * @package   Kirby Cache
- * @author    Ahmet Bora <ahmet@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class RedisCache extends Cache
 {
 	/**

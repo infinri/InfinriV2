@@ -10,20 +10,6 @@ use Kirby\Panel\Site as Panel;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\BlockCollectionAccess;
 
-/**
- * The `$site` object is the root element
- * for any site with pages. It represents
- * the main content folder with its
- * `site.txt`.
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @method \Kirby\Uuid\SiteUuid uuid()
- */
 class Site extends ModelWithContent
 {
 	use HasChildren;

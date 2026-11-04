@@ -7,17 +7,6 @@ use Kirby\Panel\Ui\Item\FileItem;
 use Kirby\Panel\Ui\Item\PageItem;
 use Kirby\Panel\Ui\Item\UserItem;
 
-/**
- * The Search controller takes care of the logic
- * for delivering Panel search results
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @unstable
- */
 class Search
 {
 	public static function files(

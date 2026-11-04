@@ -18,19 +18,6 @@ use Kirby\Query\AST\Node;
 use Kirby\Query\AST\TernaryNode;
 use Kirby\Query\AST\VariableNode;
 
-/**
- * Parses query string by first splitting it into tokens
- * and then matching and consuming tokens to create
- * an abstract syntax tree (AST) of matching nodes
- *
- * @package   Kirby Query
- * @author    Roman Steiner <roman@toastlab.ch>,
- *            Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @license   https://opensource.org/licenses/MIT
- * @since     5.1.0
- * @unstable
- */
 class Parser
 {
 	protected Token $current;

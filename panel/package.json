@@ -1,6 +1,6 @@
 {
-	"name": "kirby",
-	"private": true,
+	"name": "infinri",
+	"private": false,
 	"type": "module",
 	"scripts": {
 		"build": "vite build",

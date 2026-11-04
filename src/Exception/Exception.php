@@ -7,19 +7,6 @@ use Kirby\Toolkit\I18n;
 use Kirby\Toolkit\Str;
 use Throwable;
 
-/**
- * Exception
- * Thrown for general exceptions and extended by
- * other exception classes
- *
- * @package   Kirby Exception
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- *
- * @todo remove $arg array once all exception throws have been refactored
- */
 class Exception extends \Exception
 {
 	/**

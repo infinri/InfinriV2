@@ -10,20 +10,6 @@ use Kirby\Toolkit\Str;
 use Stringable;
 use Throwable;
 
-/**
- * Represents a single block
- * which can be inspected further or
- * converted to HTML
- * @since 3.5.0
- *
- * @package   Kirby Cms
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- *
- * @extends \Kirby\Cms\Item<\Kirby\Cms\Blocks>
- */
 class Block extends Item implements Stringable
 {
 	use HasMethods;

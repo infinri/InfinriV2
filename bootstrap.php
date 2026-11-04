@@ -1,19 +1,5 @@
 <?php
 
-/**
- * Validate the PHP version to already
- * stop at older or too recent versions
- *
- * This check can be disabled by setting:
- * define('KIRBY_PHP_VERSION_CHECK', false);
- * in your `index.php`.
- *
- * ATTENTION: Set this constant at your own risk only.
- * PHP releases contain backward-incompatible changes that can
- * cause and have caused unexpected behavior and security impact.
- * We strongly advise against disabling the PHP version check
- * in production.
- */
 if (
 	(
 		defined('KIRBY_PHP_VERSION_CHECK') !== true ||

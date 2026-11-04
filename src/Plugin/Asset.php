@@ -6,17 +6,6 @@ use Kirby\Filesystem\F;
 use Kirby\Toolkit\BlockCollectionAccess;
 use Stringable;
 
-/**
- * Representing a plugin asset with methods
- * to manage the asset file between the plugin
- * and media folder
- *
- * @package   Kirby Plugin
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Asset implements Stringable
 {
 	public function __construct(

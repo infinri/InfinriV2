@@ -15,17 +15,6 @@ use Kirby\Toolkit\Str;
 use Kirby\Toolkit\V;
 use Throwable;
 
-/**
- * Represents a Plugin and handles parsing of
- * the composer.json. It also creates the prefix
- * and media url for the plugin.
- *
- * @package   Kirby Plugin
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Plugin
 {
 	protected Assets $assets;

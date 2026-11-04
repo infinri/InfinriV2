@@ -8,18 +8,6 @@ use Kirby\Exception\BadMethodCallException;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\Str;
 
-/**
- * Anything in your public path can be converted
- * to an Asset object to use the same handy file
- * methods as for any other Kirby files. Pass a
- * relative path to the class to create the asset.
- *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Asset
 {
 	use IsFile;

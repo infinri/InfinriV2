@@ -5,18 +5,6 @@ namespace Kirby\Filesystem;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Str;
 
-/**
- * The `Mime` class provides method
- * for MIME type detection or guessing
- * from different criteria like
- * extensions etc.
- *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Mime
 {
 	/**

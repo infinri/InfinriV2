@@ -8,21 +8,6 @@ use Kirby\Exception\LogicException;
 use Kirby\Filesystem\File;
 use Kirby\Toolkit\Html;
 
-/**
- * A representation of an image file
- * with dimensions, optional exif data and
- * a connection to our darkroom classes to resize/crop
- * images.
- *
- * Extends the `Kirby\Filesystem\File` class with
- * those image-specific methods.
- *
- * @package   Kirby Image
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Image extends File
 {
 	protected Exif|null $exif = null;

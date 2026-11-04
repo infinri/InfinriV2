@@ -6,15 +6,6 @@ use Kirby\Filesystem\F;
 use Kirby\Http\Uri;
 use Kirby\Http\Url;
 
-/**
- * HTML builder for the most common elements
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Html extends Xml
 {
 	/**

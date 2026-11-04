@@ -5,20 +5,6 @@ namespace Kirby\Query;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\Collection;
 
-/**
- * The Segments class helps splitting a
- * query string into processable segments
- *
- * @package   Kirby Query
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- *
- * @todo Deprecate in v6
- *
- * @extends \Kirby\Toolkit\Collection<\Kirby\Query\Segment>
- */
 class Segments extends Collection
 {
 	public function __construct(

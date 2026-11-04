@@ -8,16 +8,6 @@ use Kirby\Cms\Page;
 use Kirby\Cms\Site;
 use Kirby\Toolkit\I18n;
 
-/**
- * The PageTree controller takes care of the request logic
- * for the `k-page-tree` component and similar
- *
- * @package   Kirby Panel
- * @author    Nico Hoffmann <nico@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class PageTree
 {
 	protected Site $site;

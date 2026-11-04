@@ -4,18 +4,6 @@ namespace Kirby\Text;
 
 use Michelf\SmartyPantsTypographer;
 
-/**
- * Wrapper for Michelf's SmartyPants
- * parser, to improve the configurability
- * of the parser with default options and
- * a simple way to set your own options.
- *
- * @package   Kirby Text
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class SmartyPants
 {
 	/**

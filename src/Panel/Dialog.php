@@ -4,18 +4,6 @@ namespace Kirby\Panel;
 
 use Kirby\Http\Response;
 
-/**
- * The Dialog response class handles Fiber
- * requests to render the JSON object for
- * Panel dialogs and creates the routes
- * @since 3.6.0
- *
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class Dialog extends Json
 {
 	protected static string $key = '$dialog';

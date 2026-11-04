@@ -16,26 +16,8 @@ use Kirby\Cms\App;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Http\Url;
 
-/**
- * Helper class for DOM handling using the DOMDocument class
- * @since 3.5.8
- *
- * @package   Kirby Toolkit
- * @author    Bastian Allgeier <bastian@getkirby.com>,
- *            Lukas Bestle <lukas@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Dom
 {
-	/**
-	 * HTML elements that make an HTML parser leave foreign content
-	 * (SVG/MathML) and continue in the HTML namespace,
-	 * `<font>` is conditional and lives in `::isBreakout()`
-	 *
-	 * @link https://html.spec.whatwg.org/multipage/parsing.html#parsing-main-inforeign
-	 */
 	protected const BREAKOUT = [
 		'b', 'big', 'blockquote', 'body', 'br', 'center', 'code', 'dd',
 		'div', 'dl', 'dt', 'em', 'embed', 'h1', 'h2', 'h3', 'h4', 'h5',
@@ -44,14 +26,6 @@ class Dom
 		'strong', 'sub', 'sup', 'table', 'tt', 'u', 'ul', 'var'
 	];
 
-	/**
-	 * Elements inside foreign content whose child elements an HTML parser
-	 * creates in the HTML namespace again, per foreign root: the MathML
-	 * text integration points and the HTML integration points
-	 *
-	 * @link https://html.spec.whatwg.org/multipage/parsing.html#mathml-text-integration-point
-	 * @link https://html.spec.whatwg.org/multipage/parsing.html#html-integration-point
-	 */
 	protected const INTEGRATION = [
 		'math' => ['annotation-xml', 'mi', 'mn', 'mo', 'ms', 'mtext'],
 		'svg'  => ['desc', 'foreignobject', 'title']

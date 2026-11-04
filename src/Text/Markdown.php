@@ -5,19 +5,6 @@ namespace Kirby\Text;
 use Parsedown;
 use ParsedownExtra;
 
-/**
- * The Markdown class is a wrapper around all sorts of Markdown
- * parser libraries and is meant to standardize the Markdown parser
- * API for all Kirby packages.
- *
- * It uses Parsedown and ParsedownExtra by default.
- *
- * @package   Kirby Text
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Markdown
 {
 	/**

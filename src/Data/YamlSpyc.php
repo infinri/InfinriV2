@@ -5,15 +5,6 @@ namespace Kirby\Data;
 use Kirby\Exception\InvalidArgumentException;
 use Spyc;
 
-/**
- * Simple Wrapper around the Spyc YAML class
- *
- * @package   Kirby Data
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class YamlSpyc
 {
 	/**

@@ -9,24 +9,6 @@ use Kirby\Cms\Page;
 use Kirby\Toolkit\Str;
 use Throwable;
 
-/**
- * The `Dir` class provides methods
- * for dealing with directories on the
- * file system level, like creating,
- * listing, moving, copying or
- * evaluating directories etc.
- *
- * For the Cms, it includes methods,
- * that handle scanning directories
- * and converting the results into
- * children, files and other page stuff.
- *
- * @package   Kirby Filesystem
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Dir
 {
 	/**

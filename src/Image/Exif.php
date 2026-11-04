@@ -5,15 +5,6 @@ namespace Kirby\Image;
 use Kirby\Toolkit\A;
 use Kirby\Toolkit\V;
 
-/**
- * Reads exif data from a given image object
- *
- * @package   Kirby Image
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://opensource.org/licenses/MIT
- */
 class Exif
 {
 	/**

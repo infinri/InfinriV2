@@ -5,19 +5,6 @@ namespace Kirby\Content;
 use Kirby\Cms\Language;
 use WeakMap;
 
-/**
- * The Version cache class keeps content fields
- * to avoid multiple storage reads for the same
- * content.
- *
- * @package   Kirby Content
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- * @since     5.0.0
- * @unstable
- */
 class VersionCache
 {
 	/**

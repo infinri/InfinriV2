@@ -9,13 +9,6 @@ use Kirby\Cms\Site;
 use Kirby\Cms\User;
 use Kirby\Cms\Users;
 
-/**
- * @package   Kirby Panel
- * @author    Bastian Allgeier <bastian@getkirby.com>
- * @link      https://getkirby.com
- * @copyright Bastian Allgeier
- * @license   https://getkirby.com/license
- */
 class PagesCollector extends ModelsCollector
 {
 	public function __construct(
