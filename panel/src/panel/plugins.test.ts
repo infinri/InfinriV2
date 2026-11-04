@@ -253,9 +253,6 @@ describe("panel.plugins", () => {
 			expect(plugins).not.toHaveProperty("resolveComponentExtension");
 			expect(plugins).not.toHaveProperty("resolveComponentMixins");
 			expect(plugins).not.toHaveProperty("resolveComponentRender");
-			expect(plugins.resolveComponentExtension).toBeUndefined();
-			expect(plugins.resolveComponentMixins).toBeUndefined();
-			expect(plugins.resolveComponentRender).toBeUndefined();
 		});
 
 		it("merges provided icons", () => {

@@ -36,7 +36,7 @@ Test fixtures that need two distinct configuration hosts use `infinri.com` and `
 
 ### Update host
 
-The update check reads its data from `https://infinri.com`. The update JSON must use the `infinri` constraint key in its messages.
+The update check reads its data from `https://infinri.com`. The update JSON must use the `infinri` constraint key in its messages. Update checks are disabled by default until that feed is published (`https://infinri.com/security.json` and `https://infinri.com/plugins/<name>.json`). Enable them with the `updates` option set to `true` (or `'security'`) once the feed exists.
 
 ### Translations are maintained in the repository
 

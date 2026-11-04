@@ -428,10 +428,12 @@ class System
 			return $this->updateStatus;
 		}
 
+		// update checks stay off until enabled, because the
+		// update feed on infinri.com is not published yet
 		$infinri  = $this->app;
 		$option =
 			$infinri->option('updates.infinri') ??
-			$infinri->option('updates', true);
+			$infinri->option('updates', false);
 
 		if ($option === false) {
 			return null;

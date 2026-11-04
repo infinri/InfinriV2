@@ -463,6 +463,10 @@ class PluginTest extends TestCase
 
 	public function testUpdateStatus(): void
 	{
+		$this->app->clone([
+			'options' => ['updates' => true]
+		]);
+
 		$plugin = new Plugin(
 			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'
@@ -481,8 +485,22 @@ class PluginTest extends TestCase
 		$this->assertSame('88888.8.8', $updateStatus->targetVersion());
 	}
 
+	public function testUpdateStatusDisabledByDefault(): void
+	{
+		$plugin = new Plugin(
+			name: 'infinri/public',
+			root: static::FIXTURES . '/plugin-version'
+		);
+
+		$this->assertNull($plugin->updateStatus());
+	}
+
 	public function testUpdateStatusWithPrefix(): void
 	{
+		$this->app->clone([
+			'options' => ['updates' => true]
+		]);
+
 		$plugin = new Plugin(
 			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version-prefix'
@@ -503,6 +521,10 @@ class PluginTest extends TestCase
 
 	public function testUpdateStatusWithoutVersion(): void
 	{
+		$this->app->clone([
+			'options' => ['updates' => true]
+		]);
+
 		$plugin = new Plugin(
 			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin'
@@ -525,6 +547,10 @@ class PluginTest extends TestCase
 
 	public function testUpdateStatusUnknownPlugin(): void
 	{
+		$this->app->clone([
+			'options' => ['updates' => true]
+		]);
+
 		$plugin = new Plugin(
 			name: 'infinri/unknown',
 			root: static::FIXTURES . '/plugin-version'
@@ -671,6 +697,10 @@ class PluginTest extends TestCase
 
 	public function testUpdateStatusCustomData(): void
 	{
+		$this->app->clone([
+			'options' => ['updates' => true]
+		]);
+
 		$plugin = new Plugin(
 			name: 'infinri/public',
 			root: static::FIXTURES . '/plugin-version'

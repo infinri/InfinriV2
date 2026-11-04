@@ -680,7 +680,9 @@ class SystemTest extends TestCase
 
 	public function testUpdateStatus(): void
 	{
-		$system       = new System($this->app);
+		$system       = new System($this->app->clone([
+			'options' => ['updates' => true]
+		]));
 		$updateStatus = $system->updateStatus();
 
 		$this->assertInstanceOf(UpdateStatus::class, $updateStatus);
@@ -692,6 +694,13 @@ class SystemTest extends TestCase
 		// suggest feature updates by default
 		$this->assertSame('update', $updateStatus->status());
 		$this->assertSame('88888.8.8', $updateStatus->targetVersion());
+	}
+
+	public function testUpdateStatusDisabledByDefault(): void
+	{
+		$system = new System($this->app);
+
+		$this->assertNull($system->updateStatus());
 	}
 
 	public function testUpdateStatusDisabled1(): void
@@ -772,7 +781,9 @@ class SystemTest extends TestCase
 
 	public function testUpdateStatusCustomData(): void
 	{
-		$system       = new System($this->app);
+		$system       = new System($this->app->clone([
+			'options' => ['updates' => true]
+		]));
 		$updateStatus = $system->updateStatus([
 			'latest' => '87654.3.2',
 			'versions' => [

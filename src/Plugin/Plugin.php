@@ -247,12 +247,14 @@ class Plugin
 				// use the first and therefore longest key (= most specific match)
 				$option = reset($option);
 			} else {
-				// fallback to the default option value
+				// a per-plugin map enables checks for unmatched plugins
 				$option = true;
 			}
 		}
 
-		$option ??= $infinri->option('updates') ?? true;
+		// update checks stay off until enabled, because the
+		// update feed on infinri.com is not published yet
+		$option ??= $infinri->option('updates') ?? false;
 
 		if ($option !== true) {
 			return null;

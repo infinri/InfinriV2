@@ -29,7 +29,8 @@ class SystemTest extends AreaTestCase
 
 		$this->app([
 			'options' => [
-				'url' => 'https://example.com'
+				'updates' => true,
+				'url'     => 'https://example.com'
 			]
 		]);
 		$this->install();

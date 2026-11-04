@@ -113,12 +113,18 @@ describe("removed panel APIs", () => {
 	});
 
 	it("should not register deleted components or aliases", async () => {
-		window.panel = window.panel ?? { plugins: {} };
+		const original = window.panel;
+		window.panel = { plugins: { components: {} } };
 
-		const { default: Components } = await import("./components/index.js");
-		Vue.use(Components);
+		let registered;
 
-		const registered = Vue.options.components;
+		try {
+			const { default: Components } = await import("./components/index.js");
+			Vue.use(Components);
+			registered = Vue.options.components;
+		} finally {
+			window.panel = original;
+		}
 
 		for (const name of [
 			"k-bubble",
